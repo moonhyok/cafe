@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:HSlider xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:tmg="com.themorphicgroup.controls.*"
+ 	sliderThumbClass="com.opinion.components.core.StateDeptThumbClass"
+    width="100%"
+    allowTrackClick="true"
+	showDataTip="false"
+	liveDragging="true"
+    buttonMode="true"
+    sliderDataTipClass="com.opinion.components.core.CustomSliderDataTip"
+    dataTipStyleName="sliderDataTip"
+    dataTipOffset="-2"
+    dataTipFormatFunction="formatDataTip"
+	minimum="{Constants.MIN_RATING}"
+	maximum="{Constants.MAX_RATING}"
+    styleName="opinionSlider">
+	<mx:Script>
+		<![CDATA[
+			import com.opinion.settings.Constants;
+			import com.opinion.settings.Configuration;
+			
+			private function formatDataTip(item:Number):String {
+				return int(item * 100).toString() + Configuration.RATING_TOOLTIP_POSTTEXT; 
+			}
+		]]>
+    </mx:Script>
+</mx:HSlider>
+

@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml" 
+				width="375"
+				height="250"
+				title="Sign In / Join" 
+				close="closeLogin()"
+				layout="absolute"
+				showCloseButton="true" xmlns:controls="assets.qs.controls.*">
+	<!--
+	/*
+	* The contents of this file are subject to the Mozilla Public License Version
+	* 1.1 (the "License"); you may not use this file except in compliance with
+	* the License. You may obtain a copy of the License at
+	* http://www.mozilla.org/MPL/
+	*
+	* Software distributed under the License is distributed on an "AS IS" basis,
+	* WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+	* for the specific language governing rights and limitations under the
+	* License.
+	*
+	* The Original Code is the Flex OpenID Login Component.
+	*
+	* The Initial Developer of the Original Code is
+	* Anirudh Sasikumar (http://anirudhs.chaosnet.org/).
+	* Portions created by the Initial Developer are Copyright (C) 2008
+	* the Initial Developer. All Rights Reserved.
+	*
+	* Contributor(s):
+	*
+	*/
+	-->	
+	<mx:states>
+		<mx:State name="progress">
+			<mx:SetProperty target="{helptext}" name="visible" value="false"/>
+			<mx:SetProperty target="{loginButton}" name="visible" value="false"/>
+			<mx:SetProperty target="{theProgress}" name="visible" value="true"/>
+			<mx:SetProperty target="{openidurl}" name="enabled" value="false"/>
+			<mx:SetProperty target="{openidpicker}" name="visible" value="false"/>
+		</mx:State>
+		<mx:State name="signin">
+			<mx:SetProperty target="{signintext}" name="visible" value="true"/>
+			<mx:SetProperty target="{signinlabel}" name="visible" value="true"/>
+			<mx:SetProperty target="{signintext}" name="x" value="61"/>
+			<mx:SetProperty target="{signintext}" name="y" value="166"/>
+			<mx:SetStyle target="{loginButton}" name="horizontalCenter" value="92"/>
+			<mx:SetProperty target="{loginButton}" name="label" value="Sign-In"/>
+			<mx:SetStyle target="{loginButton}" name="bottom" value="23"/>
+			<mx:SetStyle target="{helptext}" name="right" value="37"/>
+			<mx:SetStyle target="{helptext}" name="left" value="58"/>
+		</mx:State>
+	</mx:states>
+	<mx:Script>
+		<![CDATA[
+			import flash.net.navigateToURL;
+			
+			import mx.collections.ArrayCollection;
+			import mx.managers.PopUpManager;
+			import mx.validators.ValidationResult;
+			import mx.controls.Alert;
+			
+			private var urlerror:Boolean = false;
+			
+			/* data flicked from http://code.google.com/p/openid-selector/ */
+			private var filterChoices:Array = [ {
+				name: 'Google',
+				url: 'https://www.google.com/accounts/o8/ud'
+			},
+				{
+					name: 'Yahoo',      
+					url: 'http://yahoo.com/'
+				},    
+				{
+					name: 'AOL',     
+					label: 'Enter your AOL screenname.',
+					url: 'http://openid.aol.com/{username}'
+				},
+				
+				{
+					name: 'MyOpenID',
+					label: 'Enter your MyOpenID username.',
+					url: 'http://{username}.myopenid.com/'
+				},
+				{
+					name: 'LiveJournal',
+					label: 'Enter your Livejournal username.',
+					url: 'http://{username}.livejournal.com/'
+				},
+				{
+					name: 'Flickr',        
+					label: 'Enter your Flickr username.',
+					url: 'http://flickr.com/{username}/'
+				},
+				{
+					name: 'Technorati',
+					label: 'Enter your Technorati username.',
+					url: 'http://technorati.com/people/technorati/{username}/'
+				},
+				{
+					name: 'Wordpress',
+					label: 'Enter your Wordpress.com username.',
+					url: 'http://{username}.wordpress.com/'
+				},
+				{
+					name: 'Blogger',
+					label: 'Your Blogger account',
+					url: 'http://{username}.blogspot.com/'
+				},
+				{
+					name: 'Verisign',
+					label: 'Your Verisign username',
+					url: 'http://{username}.pip.verisignlabs.com/'
+				},
+				{
+					name: 'Vidoop',
+					label: 'Your Vidoop username',
+					url: 'http://{username}.myvidoop.com/'
+				},
+				{
+					name: 'ClaimID',
+					label: 'Your ClaimID username',
+					url: 'http://claimid.com/{username}'
+				}];
+			
+			[Bindable]
+			private var openidChoices:ArrayCollection = new ArrayCollection(filterChoices);
+			
+			private function handleProvPick():void
+			{
+				if ( openidpicker.selectedIndex != -1 )
+				{
+					var url:String =  openidpicker.selectedItem.url;
+					if ( url.indexOf("{username}") != -1 )
+					{
+						currentState = 'signin';						
+						signinlabel.text = openidpicker.selectedItem.label;
+						signintext.setFocus();
+						handleSign();
+						loginButton.enabled = false;
+					}
+					else
+					{
+						loginButton.enabled = true;
+						openidurl.text = url;
+						currentState = '';
+					}
+				}
+				
+				
+			}
+			
+			private function onLogIn():void
+			{
+				if ( openidurl.text.length > 0 )
+				{
+					currentState = 'progress';
+					
+					urlerror = false;
+					openidurl.errorString = "";
+					
+					dispatchEvent(new OpenIDLoginEvent(OpenIDLoginEvent.EVENT_OPENID_WINDOW_LOGIN, false, false, openidurl.text));				
+					var parameters:Object = new Object();
+					parameters['realm'] = openidurl.text;
+					grantAuthTicket.send(parameters);
+				}
+				else
+				{
+					urlerror = true;
+					openidurl.errorString = "An OpenID URL is required";
+				}
+			}
+			
+			private function handleSign():void
+			{
+				if ( openidpicker.selectedIndex > 0 )
+				{
+					openidurl.text = openidpicker.selectedItem.url.replace("{username}", signintext.text);
+					if ( signintext.text.length > 0 && !loginButton.enabled )
+					{
+						loginButton.enabled = true;
+					}
+					else if ( signintext.text.length == 0 && loginButton.enabled )
+					{
+						loginButton.enabled = false;
+					}
+				}
+			}
+			
+			public function closeLogin():void
+			{
+				openidpicker.selectedIndex = -1;
+				currentState = '';
+				openidurl.text = "";
+				openidurl.errorString = "";
+				
+				urlerror = false;
+				PopUpManager.removePopUp(this);
+				dispatchEvent(new OpenIDLoginEvent(OpenIDLoginEvent.EVENT_OPENID_WINDOW_CLOSE));
+			}
+			
+			private function onURLChange():void
+			{
+				if ( urlerror )
+				{
+					urlerror = false;
+					openidurl.errorString = "";					
+				}
+			}
+			
+			private function help():void
+			{
+				navigateToURL(new URLRequest("http://openid.net/get/"));
+			}
+			
+			private function handleGrantAuthTicket():void
+			{
+				var result:String = grantAuthTicket.lastResult.toString();
+				if(result.indexOf("error") >= 0)
+					Alert.show("Error Granting Opinion Space Server Authentication Ticket");		
+			}
+			
+		]]>
+	</mx:Script>
+	
+	<mx:HTTPService id="grantAuthTicket" url="{this.parentApplication.httpUtils.getServiceUrl('security/grant/')}" useProxy="false" method="POST" resultFormat="text" result="handleGrantAuthTicket()"/>
+	<mx:Text text="If you'd like to register or you are already registered, enter your OpenID URL:" left="20" y="9" right="20" height="35"/>
+	
+	<mx:TextInput id="openidurl" left="20" right="20" 
+				  paddingLeft="18"
+				  top="52"
+				  change="onURLChange()"
+				  enter="onLogIn()"
+				  
+				  />
+	<mx:Button label="Login"
+			   id="loginButton" 		
+			   bottom="14" 
+			   horizontalCenter="0" 
+			   click="onLogIn()"
+			   />
+	<mx:ProgressBar id="theProgress"  horizontalCenter="0" 
+					indeterminate="true"
+					visible="false"
+					bottom="37" label="PROCESSING OPENID"/>
+	<mx:Label id="helptext" text="(you will be redirected back after you login)" top="82" left="38" right="20" alpha="0.6"/>
+	<!--<mx:Label x="20" y="108" text="Alternatively, pick your provider:"/>-->
+	<mx:ComboBox 
+		id="openidpicker"
+		textInputStyleName="openidchoices" 
+		horizontalCenter="0" y="103"
+		width="240" 
+		dataProvider="{openidChoices}"
+		labelField="name"
+		prompt="Alternatively, pick your provider:"
+		editable="false"
+		change="handleProvPick()"		
+		enabled="true">
+		<mx:itemRenderer>
+			<mx:Component>
+				<mx:HBox horizontalAlign="center" verticalAlign="middle" height="40">            		
+					<mx:Script>
+						<![CDATA[
+							override public function set data(obj:Object):void
+							{
+									super.data = obj;
+									labl.visible = true;
+									labl.includeInLayout = true;            						 
+							} 
+						]]>
+					</mx:Script>
+					<!-- Ideally, all real world apps should use SuperImage instead -->
+					<mx:Label id="labl" x="32" toolTip="{data.label}" text="{data.name}" width="90%" />
+				</mx:HBox>
+			</mx:Component>
+		</mx:itemRenderer>
+		
+	</mx:ComboBox>
+	<mx:Label x="61" y="142" text="Username" id="signinlabel" visible="false"/>
+	<mx:TextInput x="131" y="141" id="signintext" visible="false" change="handleSign()"/>
+	
+</mx:TitleWindow>

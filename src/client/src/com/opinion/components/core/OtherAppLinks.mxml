@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Module xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute">
+	<mx:Script>
+		<![CDATA[
+			import com.opinion.utils.HTTPUtils;
+		]]>
+	</mx:Script>
+	
+	<mx:VBox>
+		<mx:LinkButton styleName="link" label="Jester: The Online Joke Recommender" click="HTTPUtils.openLinkNewWindow('http://eigentaste.berkeley.edu')"/>
+		<mx:LinkButton styleName="link" label="Donation Dashboard: Customizing Your Charitable Donations with Collaborative Filtering" click="HTTPUtils.openLinkNewWindow('http://dd.berkeley.edu')"/>
+	</mx:VBox>
+</mx:Module>

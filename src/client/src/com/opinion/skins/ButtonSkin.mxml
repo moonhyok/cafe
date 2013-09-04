@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GraphicBorderSkin xmlns:mx="http://www.adobe.com/2006/mxml"   
+    xmlns="http://www.degrafa.com/2007">
+
+    <mx:Script>
+        <![CDATA[
+            
+            //////////////////////////////////////////////////////////////////////
+            //
+            // PRIVATE VARIABLES
+            //
+            //////////////////////////////////////////////////////////////////////
+            
+            [Bindable]
+            private var awidth:Number=0;
+            
+            [Bindable]
+            private var aheight:Number=0;
+            
+            //////////////////////////////////////////////////////////////////////
+            //
+            // PROTECTED METHODS
+            //
+            //////////////////////////////////////////////////////////////////////
+            
+            override protected function updateDisplayList( unscaledWidth:Number, unscaledHeight:Number ):void
+            {
+                super.updateDisplayList( unscaledWidth, unscaledHeight );
+                
+                awidth = unscaledWidth;
+                aheight = unscaledHeight;
+                
+                // drop shadow is actually a black 'glow'
+                var glow:GlowFilter = new GlowFilter();
+                glow.color = 0x000000;
+                glow.alpha = 1;
+                glow.strength = .75;
+                glow.quality = BitmapFilterQuality.MEDIUM;
+                
+                // which skin state?
+                switch ( name )
+                {
+                    case "upSkin":
+                        buttonRect.fill = upFill;
+                        buttonRect.stroke = upStroke;
+                        glow.blurX = 4;
+                        glow.blurY = 4;
+                        break;
+                        
+                    case "overSkin":
+                        buttonRect.fill = overFill;
+                        buttonRect.stroke = overStroke;
+                        glow.blurX = 5;
+                        glow.blurY = 5;
+                        break;
+                        
+                    case "downSkin":
+                        buttonRect.fill = downFill;
+                        buttonRect.stroke = downStroke;
+                        glow.blurX = 3;
+                        glow.blurY = 3;
+                        break;
+                }
+                
+                // apply filter
+                this.filters = [glow];
+            }
+
+        ]]>
+    </mx:Script>
+    
+    <!-- FILLS -->
+    <fills>
+    
+        <!-- UP -->
+        <LinearGradientFill id="upFill" angle="90" >
+            <GradientStop ratio="0" alpha="1" color="#666666" />
+            <GradientStop ratio=".5" alpha="1" color="#333333" />
+        </LinearGradientFill>
+        
+        <!-- OVER -->
+        <LinearGradientFill id="overFill" angle="90" >
+            <GradientStop ratio="0" alpha="1" color="#666666" />
+            <GradientStop ratio=".5" alpha="1" color="#333333" />
+        </LinearGradientFill>
+        
+        <!-- DOWN -->
+        <LinearGradientFill id="downFill" angle="90" >
+            <GradientStop ratio="0" alpha="1" color="#000000" />
+            <GradientStop ratio=".5" alpha="1" color="#333333" />
+        </LinearGradientFill>
+        
+    </fills>
+    
+    <!-- STROKES --> 
+    <strokes>
+        
+        <!-- UP -->
+        <SolidStroke id="upStroke" color="#ffffff" alpha="1" weight="1.5" />
+        
+        <!-- OVER -->
+        <LinearGradientStroke id="overStroke" angle="90" weight="1.5">
+            <GradientStop alpha="1" ratio="0" color="#4499FF"/>
+            <GradientStop alpha="1" ratio="1" color="#4499FF"/>
+        </LinearGradientStroke>
+        
+        <!-- DOWN -->
+        <SolidStroke id="downStroke" color="#f4f4f4" alpha="1" weight="1.5" />
+        
+    </strokes>
+    
+    <!-- GEOMETRY -->
+    <geometry>
+        <RoundedRectangleComplex id="buttonRect" height="{aheight}" width="{awidth}" 
+            bottomLeftRadius="4" bottomRightRadius="4" topLeftRadius="4" topRightRadius="4" />         
+    </geometry>     
+       
+</GraphicBorderSkin>

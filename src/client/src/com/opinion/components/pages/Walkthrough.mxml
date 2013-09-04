@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Module xmlns:mx="http://www.adobe.com/2006/mxml" 
+			xmlns:utils="com.opinion.utils.*" layout="absolute" width="100%" height="100%" creationComplete="init()">
+	
+	<mx:Script>
+		<![CDATA[
+			import com.opinion.settings.Configuration;
+			[Embed(source="/assets/images/step1.jpg")] private var CLICK_IMAGE:Class;
+			[Embed(source="/assets/images/step1a.jpg")] private var RATE_IMAGE:Class;
+			private function init():void
+			{
+				if (Configuration.VERTICAL_ORIENTATION)
+				{
+					walkthroughContent.percentWidth = 100;
+					insightBox.clearStyle('left');
+					insightBox.setStyle('left', 50); // agreeBox.width/2 - insightBox.width/2, so 330/2 - 230/2
+					insightBox.setStyle('top', agreeBox.height + 30);
+				}
+				
+				drawLegend();
+			}
+			
+			private function drawLegend():void
+	        {
+	        	var arr:Array = this.parentApplication.PointDrawer.colorLegend(18);
+				
+				for (var i:int = 0; i < arr.length; i++)
+				{
+					var spr:Sprite = arr[i];
+					spr.x = i * 42 + 40;
+					legendBox.rawChildren.addChild(spr);
+				}
+				
+				var ar:Array = this.parentApplication.PointDrawer.sizeLegend(18);
+				for (var x:int = 0; x < ar.length; x++)
+				{
+					var spr:Sprite = ar[x];
+					spr.x = x * 70;
+					
+					if (Configuration.VERTICAL_ORIENTATION)
+					{
+						spr.y = agreeBox.height + 30;
+						spr.x += 90;
+					}
+					else
+					{
+						spr.x += 170 + arr.length*30;
+					}
+					
+					legendBox.rawChildren.addChild(spr);	
+				}
+	        }
+			
+			private function finish():void
+			{
+				//if (Configuration.NO_STATEMENTS)
+				//{
+				walkthrough1.visible = false;
+				walkthrough1.includeInLayout = false;
+				this.parentApplication.opinionMap.mapOverlay.doneButtonClick();
+				
+				/*if (walkthrough1.visible && walkthrough1.includeInLayout)
+					{
+						
+						walkthrough1.visible = false;
+						walkthrough1.includeInLayout = false;
+						walkthrough2.visible = true;
+						walkthrough2.includeInLayout = true;
+					}
+					else
+					{
+						this.parentApplication.opinionMap.mapOverlay.doneButtonClick();
+						walkthrough1.visible = true;
+						walkthrough1.includeInLayout = true;
+						walkthrough2.visible = false;
+						walkthrough2.includeInLayout = false;	
+					}
+				*/	
+				//} else
+				//{
+					//this.parentApplication.opinionMap.mapOverlay.doneButtonClick();
+			//	}
+				
+			}
+			
+		]]>
+	</mx:Script>
+	
+	<mx:VBox width="100%" height="100%" verticalAlign="middle" horizontalAlign="center">
+		<mx:VBox id="walkthroughContent" width="700" styleName="mapLeftPanelSubBox" horizontalAlign="center" textAlign="center">
+			<mx:VBox id="walkthrough1" width="100%"  horizontalAlign="center" textAlign="center">
+				<mx:Text width="100%" htmlText="{Configuration.WALKTHROUGH_INTRO_TEXT}" fontWeight="bold" fontSize="30" paddingTop="20"/>
+				<mx:Text width="100%" fontSize="17" htmlText="{Configuration.WALKTHROUGH_SEARCH_DESCRIPTION}" fontFamily="Arial" paddingTop="20"/>
+				<mx:Text width="100%" fontSize="17" htmlText="{Configuration.WALKTHROUGH_TOP_TEXT}" fontFamily="Arial" paddingBottom="40" paddingTop="20"/>
+				
+				<mx:Canvas id="legendBox" >
+					<mx:HBox id="agreeBox" width="330">
+						<mx:HBox width="50%" horizontalAlign="left" paddingTop="35">
+							<mx:Text fontSize="14" width="80" textAlign="center" text="{Configuration.LEGEND_AGREEMENT_LEFT}" fontWeight="bold" fontFamily="Arial" />	
+						</mx:HBox>
+						<mx:HBox width="50%" horizontalAlign="right" paddingTop="35">
+							<mx:Text fontSize="14" width="80" textAlign="center" text="{Configuration.LEGEND_AGREEMENT_RIGHT}" fontWeight="bold" fontFamily="Arial" />	
+						</mx:HBox>	
+					</mx:HBox>
+					<mx:HBox id="insightBox" left="345" width="230" paddingBottom="20">
+						<mx:HBox width="50%" horizontalAlign="left" paddingTop="35">
+							<mx:Text fontSize="14" width="80" textAlign="center" text="{Configuration.LEGEND_INSIGHT_LEFT}" fontWeight="bold" fontFamily="Arial" />	
+						</mx:HBox>
+						<mx:HBox width="50%" horizontalAlign="right" paddingTop="35">
+							<mx:Text fontSize="14" width="80" textAlign="center" text="{Configuration.LEGEND_INSIGHT_RIGHT}" fontWeight="bold" fontFamily="Arial" />	
+						</mx:HBox>	
+					</mx:HBox>
+				</mx:Canvas>
+				
+			</mx:VBox>
+			<mx:VBox id="walkthrough2" width="100%" horizontalAlign="center" textAlign="center" visible="false" includeInLayout="false" paddingTop="10" paddingBottom="40">
+				<mx:Text width="90%" text="{Configuration.WALKTHROUGH_INTRO2_TEXT}" fontWeight="bold" fontSize="20" />
+				<mx:HBox width="100%" horizontalAlign="center" horizontalGap="50">
+					<mx:VBox horizontalAlign="center">
+						<mx:Text text="Click" fontWeight="bold" fontSize="16"/>
+						<mx:Image source="{CLICK_IMAGE}"/>
+					</mx:VBox>	
+					
+					<mx:VBox horizontalAlign="center">
+						<mx:Text text="Rate" fontWeight="bold" fontSize="16"/>
+						<mx:Image source="{RATE_IMAGE}"/>
+					</mx:VBox>	
+					
+				</mx:HBox>
+				
+			</mx:VBox>
+
+			<utils:LoggedButton name="walkthrough-continue" styleName="blueButtonLarge" label="{Configuration.WALKTHROUGH_TEXT}" click="finish()" />				
+		</mx:VBox>
+		
+		
+		
+	</mx:VBox>
+	
+</mx:Module>

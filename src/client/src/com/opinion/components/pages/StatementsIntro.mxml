@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Module xmlns:mx="http://www.adobe.com/2006/mxml" 
+			xmlns:utils="com.opinion.utils.*" layout="absolute" width="100%" height="100%" creationComplete="init()">
+	
+	<mx:Script>
+		<![CDATA[
+			import com.opinion.settings.Configuration;
+			[Embed(source="/assets/images/step2.jpg")] private var STATEMENTS_IMAGE:Class;
+			private function init():void
+			{
+								
+			}
+			
+			
+			
+			private function finish():void
+			{			
+				this.parentApplication.opinionMap.mapOverlay.doneButtonClick()
+			}
+			
+		]]>
+	</mx:Script>
+	
+	<mx:VBox width="100%" height="100%" verticalAlign="middle" horizontalAlign="center">
+		<mx:VBox id="walkthroughContent" width="700" styleName="mapLeftPanelSubBox" horizontalAlign="center" textAlign="center">
+			<mx:Text width="100%" text="{Configuration.STATEMENTS_INTRO_TEXT}" fontWeight="bold" fontSize="20" paddingTop="20"/>
+			<mx:Image source="{STATEMENTS_IMAGE}"/>
+			<utils:LoggedButton name="walkthrough-continue" styleName="blueButtonLarge" label="{Configuration.WALKTHROUGH_TEXT}" click="finish()" />				
+		</mx:VBox>
+		
+		
+		
+	</mx:VBox>
+	
+</mx:Module>

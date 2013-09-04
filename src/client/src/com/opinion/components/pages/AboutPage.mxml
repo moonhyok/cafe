@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Module xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" 
+	xmlns:controls="com.fxcomponents.controls.*" 
+	xmlns:controls1="com.asfusion.controls.*" 
+	xmlns:core="com.opinion.components.core.*"
+	xmlns:pages="com.opinion.components.pages.*" horizontalScrollPolicy="off" creationComplete="init()" resize="resize()" hide="hideAll()">
+	<mx:Script>
+		<![CDATA[
+			import mx.controls.Text;
+			import mx.events.ListEvent;
+			import mx.events.ItemClickEvent;
+			import mx.collections.ArrayCollection;
+			import com.opinion.utils.HTTPUtils;
+			import com.opinion.utils.DisplayUtils;
+			import com.opinion.settings.Configuration;
+			import mx.controls.Alert;
+			import mx.core.ByteArrayAsset;
+			
+			//public var sfGateUrl:String = "http://www.sfgate.com/cgi-bin/blogs/techchron/detail?blogid=19&entry_id=38849";
+			//public var fromRegistration:Boolean = false;
+			public var priorParentState:String = "";
+			public var textFieldList:Object;
+			
+			[Bindable] public static var NAVIGATION_LIST:ArrayCollection = new ArrayCollection();
+			[Embed(source="/assets/text/intro.html", mimeType="application/octet-stream")] public static const INTRO_FILE:Class;
+			[Embed(source="/assets/text/welcome.html", mimeType="application/octet-stream")] public static const HOW_FILE:Class;
+			[Embed(source="/assets/text/faq.html", mimeType="application/octet-stream")] public static const FAQ_FILE:Class;
+			[Embed(source="/assets/text/contact.html", mimeType="application/octet-stream")] public static const SUPPORT_FILE:Class;
+			[Embed(source="/assets/text/privacy.html", mimeType="application/octet-stream")] public static const PRIVACY_FILE:Class;
+			[Embed(source="/assets/text/misc.html", mimeType="application/octet-stream")] public static const MISC_FILE:Class;
+			
+            
+            public function init():void
+            {
+				NAVIGATION_LIST = new ArrayCollection();
+				
+				if(Configuration.HELP_LOCATION != "")
+				{
+					iFrame.source=Configuration.HELP_LOCATION;
+					iFrame.visible = true;
+					iFrame.includeInLayout = true;
+				}
+				else
+				{
+					iFrame.visible= false;
+					iFrame.includeInLayout = false;
+				}
+				
+				
+				if(Configuration.ABOUT_INTRO_ENABLED)
+				{
+					NAVIGATION_LIST.addItem({'label': Configuration.ABOUT_INTRO_TITLE, 'box': 'intro'});
+					
+					if(Configuration.ABOUT_INTRO_CONTENT != "")
+						introContent.htmlText = Configuration.ABOUT_INTRO_CONTENT;
+					else
+					{
+						var embeddedFileByteArray:ByteArrayAsset = ByteArrayAsset(new INTRO_FILE());
+						var buffer:String = embeddedFileByteArray.readUTFBytes(embeddedFileByteArray.length);
+						introContent.htmlText = buffer
+					}
+				}
+				
+				if(Configuration.ABOUT_HOW_ENABLED)
+				{
+					NAVIGATION_LIST.addItem({'label': Configuration.ABOUT_HOW_TITLE, 'box': 'how'});
+					
+					if(Configuration.ABOUT_HOW_CONTENT != "")
+						howContent.htmlText = Configuration.ABOUT_HOW_CONTENT;
+					else
+					{
+						var embeddedFileByteArray:ByteArrayAsset = ByteArrayAsset(new HOW_FILE());
+						var buffer:String = embeddedFileByteArray.readUTFBytes(embeddedFileByteArray.length);
+						howContent.htmlText = buffer
+					}
+				}
+				
+				if(Configuration.ABOUT_VIS_ENABLED)
+				{
+					NAVIGATION_LIST.addItem({'label': Configuration.ABOUT_VIS_TITLE, 'box': 'vis'});
+				}
+				
+				if(Configuration.ABOUT_FAQ_ENABLED)
+				{
+					NAVIGATION_LIST.addItem({'label': Configuration.ABOUT_FAQ_TITLE, 'box': 'faq'});
+					
+					if(Configuration.ABOUT_FAQ_CONTENT != "")
+						faqContent.htmlText = Configuration.ABOUT_FAQ_CONTENT;
+					else
+					{
+						var embeddedFileByteArray:ByteArrayAsset = ByteArrayAsset(new  FAQ_FILE());
+						var buffer:String = embeddedFileByteArray.readUTFBytes(embeddedFileByteArray.length);
+						faqContent.htmlText = buffer
+					}
+				}
+				if(Configuration.ABOUT_MISC_ENABLED)
+				{
+					NAVIGATION_LIST.addItem({'label': Configuration.ABOUT_MISC_TITLE, 'box': 'misc'});
+					
+					if(Configuration.ABOUT_MISC_CONTENT != "")
+						miscContent.htmlText = Configuration.ABOUT_MISC_CONTENT;
+					else
+					{
+						var embeddedFileByteArray:ByteArrayAsset = ByteArrayAsset(new  MISC_FILE());
+						var buffer:String = embeddedFileByteArray.readUTFBytes(embeddedFileByteArray.length);
+						miscContent.htmlText = buffer
+					}
+				}
+				
+				if(Configuration.ABOUT_SUPPORT_ENABLED)
+				{
+					NAVIGATION_LIST.addItem({'label': Configuration.ABOUT_SUPPORT_TITLE, 'box': 'support'});
+					
+					if(Configuration.ABOUT_SUPPORT_CONTENT != "")
+						supportContent.htmlText = Configuration.ABOUT_SUPPORT_CONTENT;
+					else
+					{
+						var embeddedFileByteArray:ByteArrayAsset = ByteArrayAsset(new  SUPPORT_FILE());
+						var buffer:String = embeddedFileByteArray.readUTFBytes(embeddedFileByteArray.length);
+						supportContent.htmlText = buffer
+					}
+				}
+				
+				if(Configuration.ABOUT_PRIVACY_ENABLED)
+				{
+					NAVIGATION_LIST.addItem({'label': Configuration.ABOUT_PRIVACY_TITLE, 'box': 'privacy'});
+					
+					if(Configuration.ABOUT_PRIVACY_CONTENT != "")
+						privacyContent.htmlText = Configuration.ABOUT_PRIVACY_CONTENT;
+					else
+					{
+						var embeddedFileByteArray:ByteArrayAsset = ByteArrayAsset(new  PRIVACY_FILE());
+						var buffer:String = embeddedFileByteArray.readUTFBytes(embeddedFileByteArray.length);
+						privacyContent.htmlText = buffer
+					}
+				}
+				
+				//NAVIGATION_LIST.addItem({'label': "Go Back", 'box': 'back'});
+				
+				navList.selectedIndex = 0;
+				selectPage(NAVIGATION_LIST.getItemAt(0)['box']);
+            }
+			
+			private function resize():void
+			{
+				//this.parentApplication.about_page_iframe.x= this.width*.2;
+				//this.parentApplication.iFrame.moveIFrame();
+			}
+			
+			public function hideAll():void
+			{
+				introVBox.visible = false;
+				introVBox.includeInLayout = false;
+				howVBox.visible = false;
+				howVBox.includeInLayout = false;
+				faqVBox.visible = false;
+				faqVBox.includeInLayout = false;
+				supportVBox.visible = false;
+				supportVBox.includeInLayout = false;
+				privacyVBox.visible = false;
+				privacyVBox.includeInLayout = false;
+				miscVBox.visible = false;
+				miscVBox.includeInLayout = false;
+				//this.parentApplication.iFrame.visible=false;
+				//this.parentApplication.about_page_iframe.visible=false;
+			}
+            
+            private function loadComplete(event:Event):void
+            {
+            
+            }
+            
+			private function handleClick(event:ListEvent):void {
+				selectPage(event.target.selectedItem.box);
+			}
+			
+			private function selectIFrame(url:String):void
+			{
+				//this.parentApplication.about_page_iframe.x= this.width*.2;
+				//this.parentApplication.iFrame.source=url;
+				//this.parentApplication.iFrame.visible=true;
+				//this.parentApplication.about_page_iframe.visible=true;
+			}
+			
+			private function selectPage(page:String):void{
+				
+				switch(page)
+				{
+					case 'intro':
+						hideAll();
+						if(Configuration.ABOUT_INTRO_URL != "")
+						{
+							//selectIFrame(Configuration.ABOUT_INTRO_URL);
+							break;
+						}
+						introVBox.includeInLayout = true;
+						introVBox.visible = true;
+						break;
+					case 'how':
+						hideAll();
+						if(Configuration.ABOUT_HOW_URL != "")
+						{
+							//selectIFrame(Configuration.ABOUT_HOW_URL);
+							break;
+						}
+						howVBox.includeInLayout = true;
+						howVBox.visible = true;
+						break;	
+					case 'vis':
+						DisplayUtils.displayPopup(this.parentApplication, 'tutorial');
+						break;
+					case 'faq':
+						hideAll();
+						if(Configuration.ABOUT_FAQ_URL != "")
+						{
+							//selectIFrame(Configuration.ABOUT_FAQ_URL);
+							break;
+						}
+						faqVBox.includeInLayout = true;
+						faqVBox.visible = true;
+						break;	
+					case 'support':
+						hideAll();
+						if(Configuration.ABOUT_SUPPORT_URL != "")
+						{
+							//selectIFrame(Configuration.ABOUT_SUPPORT_URL);
+							break;
+						}
+						supportVBox.includeInLayout = true;
+						supportVBox.visible = true;
+						break;
+					case 'privacy':
+						hideAll();
+						if(Configuration.ABOUT_PRIVACY_URL != "")
+						{
+							//selectIFrame(Configuration.ABOUT_PRIVACY_URL);
+							break;
+						}
+						privacyVBox.includeInLayout = true;
+						privacyVBox.visible = true;
+						break;
+					case 'misc':
+						hideAll();
+						if(Configuration.ABOUT_MISC_URL != "")
+						{
+							//selectIFrame(Configuration.ABOUT_MISC_URL);
+							break;
+						}
+						miscVBox.includeInLayout = true;
+						miscVBox.visible = true;
+						break;
+					case 'back':
+						this.parentApplication.currentState = priorParentState;
+						break;
+				}
+			}
+			          
+        ]]>
+    </mx:Script>
+	<mx:Fade id="fadeIn" duration="300" alphaFrom="0.0" alphaTo="1.0"/>
+	<mx:VBox width="100%" height="100%" styleName="nonMapPageStyle">
+		<mx:Button name="go-back" id="back" styleName="blueButtonLarge" label="Go Back" click="{this.parentApplication.currentState = priorParentState;iFrame.visible= false;iFrame.includeInLayout = false;}"/>
+		<core:IFrame id="iFrame" source="http://www.adobe.com/devnet/flex/" width="100%" height="100%"/>
+		<mx:HBox visible="{Configuration.HELP_LOCATION == ''}" includeInLayout="{Configuration.HELP_LOCATION == ''}" width="100%" height="100%" horizontalAlign="left" verticalScrollPolicy="auto" horizontalScrollPolicy="off">
+			
+			<mx:VBox id="navBar" styleName="aboutPageNavigationBorder" height="100%" width="20%">
+				<mx:List id="navList" width="100%" height="100%" dataProvider="{NAVIGATION_LIST}" rowCount="{NAVIGATION_LIST.length}" itemClick="handleClick(event);" styleName="aboutPageNavigation"  variableRowHeight="true" wordWrap="true"/>
+			</mx:VBox>
+			
+			<mx:VBox id="mainVBox" width="75%">	
+				<mx:VBox id="introVBox" visible="false" includeInLayout="false" width="100%" showEffect="fadeIn" >	
+					<mx:Text id="introContent" width="100%" fontSize="16"/>
+				</mx:VBox> 
+				
+				<mx:VBox id="howVBox" visible="false" includeInLayout="false" width="100%" showEffect="fadeIn">	
+					<mx:Text id="howContent" width="100%"/>
+				</mx:VBox> 
+				
+				<mx:VBox id="faqVBox" visible="false" includeInLayout="false" width="100%" showEffect="fadeIn">	
+					<mx:Text id="faqContent" width="100%"/>
+				</mx:VBox>
+				
+				<mx:VBox id="supportVBox" visible="false" includeInLayout="false" width="100%" showEffect="fadeIn">	
+					<mx:Text id="supportContent" width="100%" fontSize="16"/>					
+				</mx:VBox>
+				
+				<mx:VBox id="privacyVBox" visible="false" includeInLayout="false" width="100%" showEffect="fadeIn">	
+					<mx:Text id="privacyContent" width="100%"/>
+				</mx:VBox> 	
+				<mx:VBox id="miscVBox" visible="false" includeInLayout="false" width="100%" showEffect="fadeIn" >	
+					<mx:Text id="miscContent" width="100%"/>				
+				</mx:VBox>
+				
+			</mx:VBox> 
+
+		</mx:HBox>
+	</mx:VBox>
+</mx:Module>

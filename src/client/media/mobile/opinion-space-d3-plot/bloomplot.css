@@ -1,0 +1,26 @@
+@charset "utf-8";
+/* CSS Document */
+
+p{
+	font-size: 150%;
+	color: #FFF;
+	font-style: bold
+}
+
+.circle{
+	width:50px;
+	height:50px;
+	border-radius:25px;
+	color:#fff;
+	line-height:100px;
+	background:#000
+}
+
+.circle:hover{
+	width:100px;
+	height:100px;
+	border-radius:50px;
+	color:#fff;
+	line-height:100px;
+	background:#000
+}

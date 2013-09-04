@@ -1,0 +1,511 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Module xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:utils="com.opinion.utils.*" xmlns:spinner="com.opinion.components.spinner.*">
+	<mx:Script>
+		<![CDATA[
+			import mx.controls.Alert;
+			import com.opinion.settings.Configuration;
+			
+			import mx.collections.ArrayCollection;
+			
+			[Bindable] private var userAgreementBuckets:ArrayCollection = null;
+			[Bindable] private var userInsightBuckets:ArrayCollection = null;
+			[Bindable] private var otherAgreementBuckets:ArrayCollection = null;
+			[Bindable] private var otherInsightBuckets:ArrayCollection = null;
+			
+			[Bindable] private var maxUserAxis:Number = 10;
+			[Bindable] private var maxOtherAxis:Number = 10;
+			
+			[Embed(source="assets/ratingmodule/received.png")] public static const RECEIVED:Class;
+			[Embed(source="assets/ratingmodule/received-down.png")] public static const RECEIVED_DOWN:Class;
+			[Embed(source="assets/ratingmodule/given.png")] public static const GIVEN:Class;
+			[Embed(source="assets/ratingmodule/given-down.png")] public static const GIVEN_DOWN:Class;
+			[Embed(source="assets/ratingmodule/new_responses.png")] public static const NEWCOMMENTS:Class;
+			[Embed(source="assets/ratingmodule/new_responses-down.png")] public static const NEWCOMMENTS_DOWN:Class;
+			[Embed(source="assets/ratingmodule/updated-comments.png")] public static const UPDATED:Class;
+			[Embed(source="assets/ratingmodule/updated-comments-down.png")] public static const UPDATED_DOWN:Class;
+			[Embed(source="assets/img/tweet-icon.png")] public static const TWITTER_BUTTON:Class;
+			[Embed(source="assets/img/facebook-share.png")] public static const FACEBOOK_BUTTON:Class;
+			
+			[Bindable] public var loading:Boolean = false; 
+			
+			public function loadStats():void
+			{
+				// Update text
+				
+				if(Configuration.UNIFIED_SCORE)
+					authorText.htmlText = updateScoreLabel((this.parentApplication.userCommentNormalizedScore*100+this.parentApplication.opinionMap.numFullyRatedResponses)*Configuration.SCORE_SCALE_FACTOR, Configuration.AUTHOR_RATINGS_THRESHOLDS, Configuration.AUTHOR_LEVELS, authorScoreBar, Configuration.STATS_RESPONSE_TERM.toUpperCase(), false);
+				else
+					authorText.htmlText = updateScoreLabel((this.parentApplication.userCommentNormalizedScore*100)*Configuration.SCORE_SCALE_FACTOR, Configuration.AUTHOR_RATINGS_THRESHOLDS, Configuration.AUTHOR_LEVELS, authorScoreBar, Configuration.STATS_RESPONSE_TERM.toUpperCase(), false);
+				
+				if (Configuration.SUGGESTION_RATING_SLIDERS)
+				{
+					suggesterText.htmlText = "<b>COLLABORATOR SCORE: </b>" + this.parentApplication.userSuggesterScore + " Points";//updateScoreLabel(this.parentApplication.userSuggesterScore, Configuration.SUGGESTER_SCORE_THRESHOLDS, Configuration.SUGGESTER_LEVELS, suggesterScoreBar,'COLLABORATOR', false);
+					suggesterText.toolTip = 'The collaborator score reflects how other participants have rated your suggestions';
+				}
+				else
+				{
+					suggesterText.htmlText = "<b>COLLABORATOR SCORE: </b>" + this.parentApplication.userSuggesterScore + " Comments Given";
+					suggesterText.toolTip = 'The collaborator score reflects how many comments you have given other participants';
+				}
+					
+				explorerText.htmlText = updateScoreLabel(this.parentApplication.opinionMap.numFullyRatedResponses, Configuration.EXPLORE_SCORE_THRESHOLDS, Configuration.EXPLORER_LEVELS, explorerScoreBar,'EXPLORER');
+				
+				// Check if user's point has received the threshold ratings but does not have confidence
+				if (this.parentApplication.commentRank != -1 && this.parentApplication.commentRankTotal != -1)
+					rankText.htmlText = "<b>"+Configuration.STATS_RESPONSE_TERM.toUpperCase()+" RANK: </b>" + this.parentApplication.commentRank + " out of " + this.parentApplication.commentRankTotal + " Total "+Configuration.STATS_RESPONSE_TERM+"s";
+				else
+					rankText.htmlText = "";
+				
+				// For now only show the ratings of me graphs
+				showRatingsOfMeGraph();
+				
+				userAgreementBuckets = new ArrayCollection();
+				for (var i:int = 0; i<10; i++){
+					var tmp:Object = new Object();
+					tmp['label'] = (i+0.0)/10 + "-" + (i+1.0)/10;
+					tmp['data'] = this.parentApplication.userAgreementBuckets[i];
+					if(tmp['data'] > maxUserAxis)
+					{
+						maxUserAxis = tmp['data'];
+					}
+					userAgreementBuckets.addItem(tmp);
+				}
+				
+				userInsightBuckets = new ArrayCollection();
+				for (var j:int = 0; j<10; j++){
+					var tmp1:Object = new Object();
+					tmp1['label'] = (j+0.0)/10 + "-" + (j+1.0)/10;
+					tmp1['data'] = this.parentApplication.userInsightBuckets[j];
+					if(tmp['data'] > maxUserAxis)
+					{
+						maxUserAxis = tmp['data'];
+					}
+					userInsightBuckets.addItem(tmp1);
+				}
+				
+				otherInsightBuckets = new ArrayCollection();
+				for (var k:int = 0; k<10; k++){
+					var tmp2:Object = new Object();
+					tmp2['label'] = (k+0.0)/10 + "-" + (k+1.0)/10;
+					tmp2['data'] = this.parentApplication.otherInsightBuckets[k];
+					if(tmp['data'] > maxOtherAxis)
+					{
+						maxOtherAxis = tmp['data'];
+					}
+					otherInsightBuckets.addItem(tmp2);
+				}
+				
+				otherAgreementBuckets = new ArrayCollection();
+				for (var l:int = 0; l<10; l++){
+					var tmp3:Object = new Object();
+					tmp3['label'] = (l+0.0)/10 + "-" + (l+1.0)/10;
+					tmp3['data'] = this.parentApplication.otherAgreementBuckets[l];
+					if(tmp['data'] > maxOtherAxis)
+					{
+						maxOtherAxis = tmp['data'];
+					}
+					otherAgreementBuckets.addItem(tmp3);
+				}
+				
+				while(maxUserAxis % 10 != 0)
+					maxUserAxis++;
+				
+				while(maxOtherAxis % 10 != 0)
+					maxOtherAxis++;
+			}
+			
+			private function updateScoreLabel(score:int, thresholds:Array, levels:Array, box:HBox, prefix:String, stage:Boolean=true):String
+			{
+				var level:int = getScoreLevel(score, thresholds);
+				
+				// HACKY fix later
+				if (prefix == Configuration.STATS_RESPONSE_TERM.toUpperCase())
+					level = getScoreLevel(this.parentApplication.numUserRatedBy, thresholds);
+				
+				var txt:String;
+				
+				if (stage) 
+					txt = "<b>"+prefix+" STAGE:</b>  "+levels[level]+"\n<b>"+prefix+" SCORE:</b>  "+score+" Points";
+				else
+				{
+					if(Configuration.UNIFIED_SCORE)
+						txt = "<b>SCORE:</b>  "+score+" Points";
+					else
+						txt = "<b>AUTHOR SCORE:</b>  "+score+" Points";
+				}
+				
+				if (prefix == Configuration.STATS_RESPONSE_TERM.toUpperCase())
+				{
+					// Add the appropriate flower icon for that stage
+					if (stageIcon.rawChildren.numChildren == 1)
+						stageIcon.rawChildren.removeChildAt(0);
+					//var arr:Array = this.parentApplication.PointDrawer.ideaProgression();
+					stageIcon.rawChildren.addChild(this.parentApplication.PointDrawer.drawDisc(0x15abd7,0,0,20/7,20,true));
+					
+					txt += "\n<b>"+Configuration.STATS_RESPONSE_TERM.toUpperCase()+" RATED BY:</b>  " + this.parentApplication.numUserRatedBy + ' Participants'
+				}
+				
+				if (level < levels.length-1)
+				{
+					//txt = txt + " ( "+(thresholds[level]-score)+" points needed for next level )";//+levels[level+1];
+					HBox(box.parent).toolTip = (thresholds[level]-score)+" points needed for next level";
+				}
+				box.percentWidth = calculateProgress(score, level, thresholds);
+				return txt;
+			}
+			
+			private function getScoreLevel(score:int, thresholds:Array):int
+			{
+				var level:int = thresholds.length;
+				for (var i:int = 0; i<thresholds.length; i++)
+				{
+					if(thresholds[i]>score)
+					{
+						level = i;
+						break;
+					}
+				}
+				return level;
+			}
+			private function calculateProgress(score:int, index:int, thresholds:Array):int
+			{
+				var min:int = 0;
+				if(index>0)
+				{
+					min = thresholds[index-1];	
+				}
+				var max:int = thresholds[index];
+				return int((score-min)/(max-min)*100);
+			}
+			
+			private function showRatingsOfOthersGraph():void
+			{
+				if(ratingsOfOthersGraphs.visible)
+				{
+					ratingsOfOthersGraphs.visible = false;
+					ratingsOfOthersGraphs.includeInLayout = false;
+					
+					newComments.visible = true;
+					newComments.includeInLayout = true;
+					updatedComments.visible = true;
+					updatedComments.includeInLayout = true;
+					ratingsOfMe.visible = true;
+					ratingsOfMe.includeInLayout = true;
+					
+					//ratingsOfOthersGraphButton.label = "See Graph"
+				}
+				else
+				{
+					// run query
+					this.parentApplication.opinionMap.sendGetRatedUsers();
+					
+					ratingsOfOthersGraphs.visible = true;
+					ratingsOfOthersGraphs.includeInLayout = true;
+					
+					newComments.visible = false;
+					newComments.includeInLayout = false;
+					updatedComments.visible = false;
+					updatedComments.includeInLayout = false;
+					ratingsOfMe.visible = false;
+					ratingsOfMe.includeInLayout = false;
+					
+					//ratingsOfOthersGraphButton.label = "Hide Graph"
+				}
+			}
+			
+			private function showRatingsOfMeGraph():void
+			{
+				/*
+				if(ratingsOfMeGraphs.visible)
+				{
+					ratingsOfMeGraphs.visible = false;
+					ratingsOfMeGraphs.includeInLayout = false;
+					
+					newComments.visible = true;
+					newComments.includeInLayout = true;
+					updatedComments.visible = true;
+					updatedComments.includeInLayout = true;
+					ratingsOfOthers.visible = true;
+					ratingsOfOthers.includeInLayout = true;
+					
+					//ratingsOfMeGraphButton.label = "See Graph"
+				}
+				else
+				{*/
+					// run query
+					//this.parentApplication.opinionMap.sendGetRatedByUsers();
+					
+					ratingsOfMeGraphs.visible = true;
+					ratingsOfMeGraphs.includeInLayout = true;
+					
+					newComments.visible = false;
+					newComments.includeInLayout = false;
+					updatedComments.visible = false;
+					updatedComments.includeInLayout = false;
+					ratingsOfOthers.visible = false;
+					ratingsOfOthers.includeInLayout = false;
+					
+					//ratingsOfMeGraphButton.label = "Hide Graph"
+				//}
+			}
+			
+			private function getNewComments():void 
+			{
+				this.parentApplication.opinionMap.sendGetNeverSeenComments();
+			}
+			
+			private function getUpdatedComments():void
+			{
+				this.parentApplication.opinionMap.sendGetRatedUpdatedComments();
+			}
+		]]>
+	</mx:Script>
+	<mx:WipeUp id="wipeUp" duration="300"/>
+	
+	<!-- <spinner:Spinner visible="{loading}" includeInLayout="{loading}" /> -->
+		
+	<mx:VBox id="stats_box" width="100%" height="100%" horizontalAlign="left" verticalGap="10">
+		
+		<mx:VBox id="scoresDisplay" width="100%" paddingTop="10">
+			<mx:VBox width="100%" visible="{Configuration.AUTHOR_SCORE_ON}" includeInLayout="{Configuration.AUTHOR_SCORE_ON}">
+				<mx:HBox width="100%" verticalAlign="middle" horizontalGap="33">
+					<mx:Text id="authorText" toolTip="{'The '+Configuration.STATS_RESPONSE_TERM.toLowerCase()+' score reflects how people have rated your '+Configuration.STATS_RESPONSE_TERM.toLowerCase()}"/>
+					<mx:VBox id="stageIcon" />
+				</mx:HBox>
+				
+				<mx:HBox visible="false" includeInLayout="false" height="16" width="100%" verticalAlign="middle" backgroundColor="0xC4BF94" cornerRadius="8" borderStyle="solid" borderThickness="0">
+					<mx:HBox id="authorScoreBar" height="16" verticalAlign="middle" backgroundColor="0x93C1C9" cornerRadius="8" borderStyle="solid" borderThickness="0"/>
+				</mx:HBox>
+			</mx:VBox>
+			
+			<mx:VBox width="100%" verticalAlign="middle" visible="{!(!Configuration.RANK_ON || !(this.parentApplication.numUserRatedBy >= Configuration.VIEW_RANK_THRESHOLD))}" includeInLayout="{!(!Configuration.RANK_ON || !(this.parentApplication.numUserRatedBy >= Configuration.VIEW_RANK_THRESHOLD)) }">
+				<mx:Text id="rankText" width="100%" toolTip="{'The rank reflects your '+Configuration.STATS_RESPONSE_TERM.toLowerCase()+'\'s score compared to others in the space'}"/>
+			</mx:VBox>
+			
+			<mx:VBox width="100%" verticalAlign="middle" visible="{Configuration.SUGGESTER_SCORE_ON}" includeInLayout="{Configuration.SUGGESTER_SCORE_ON}">
+				<mx:Text id="suggesterText" width="100%" />
+				<mx:HBox visible="false" includeInLayout="false" height="16" width="100%" verticalAlign="middle" backgroundColor="0xC4BF94" cornerRadius="8" borderStyle="solid" borderThickness="0">
+					<mx:HBox id="suggesterScoreBar" height="16" verticalAlign="middle" backgroundColor="0x93C1C9" cornerRadius="8" borderStyle="solid" borderThickness="0"/>
+				</mx:HBox>
+			</mx:VBox>
+			
+			<mx:VBox width="100%" verticalAlign="middle" visible="{Configuration.EXPLORE_SCORE_ON}" includeInLayout="{Configuration.EXPLORE_SCORE_ON}">
+				<mx:Text id="explorerText" width="100%" />
+				<mx:HBox height="16" width="100%" verticalAlign="middle" backgroundColor="0xC4BF94" cornerRadius="8" borderStyle="solid" borderThickness="0">
+					<mx:HBox id="explorerScoreBar" height="16" verticalAlign="middle" backgroundColor="0x93C1C9" cornerRadius="8" borderStyle="solid" borderThickness="0"/>
+				</mx:HBox>
+			</mx:VBox>
+		</mx:VBox>
+		
+		<mx:HBox>
+			<mx:Image source="{TWITTER_BUTTON}" visible="{Configuration.ALLOW_TWITTER_FB_POST}" includeInLayout="{Configuration.ALLOW_TWITTER_FB_POST}" click="{this.parentApplication.OSTweet()}" buttonMode="true"/>
+			<mx:Image source="{FACEBOOK_BUTTON}" visible="{Configuration.ALLOW_TWITTER_FB_POST}" includeInLayout="{Configuration.ALLOW_TWITTER_FB_POST}" click="{this.parentApplication.FBPost()}" buttonMode="true"/>
+		</mx:HBox>
+		
+		
+		<!-- ideas you've never seen -->
+		<mx:HBox id="newComments" width="100%" verticalAlign="middle">
+			<utils:LoggedButton id="newCommentsButton" width="57" label="New" name="new-comments-query" buttonMode="true" toolTip="{Configuration.SHUFFLE_TOOLTIP}" click="{getNewComments()}"/>
+			<mx:Text width="100%" text="{this.parentApplication.numNewComments + ' New Participant Responses'}"/> 
+		</mx:HBox>
+		
+		<!-- Updated ideas TODO -->
+		<mx:HBox id="updatedComments" width="100%" verticalAlign="middle">
+			<utils:LoggedButton id="updatedCommentsButton" width="57" label="Updated" name="updated-comments-query" buttonMode="true" toolTip="{Configuration.UPDATED_TOOLTIP}" click="{getUpdatedComments()}"/>
+			<mx:Text width="100%" text="{this.parentApplication.numRatedUpdatedComments + ' Updated Participant Ideas'}"/> 
+		</mx:HBox>
+		
+		<mx:VBox id="ratingsOfOthers" visible="true" includeInLayout="true" width="100%">
+			
+			<mx:HBox verticalAlign="middle" width="100%">
+				
+				<utils:LoggedButton id="ratedButton" width="57" buttonMode="true" label="Rated" name="rated-comments-query" toolTip="{Configuration.RATED_TOOLTIP}" click="showRatingsOfOthersGraph()" visible="{!ratingsOfOthersGraphs.visible}" includeInLayout="{!ratingsOfOthersGraphs.visible}"/>
+				<mx:Text width="100%" text="{'You\'ve Rated ' + this.parentApplication.numUserRatings + ' Participant Ideas'}"/> 
+				
+				<!--
+				<mx:HBox>
+					<utils:LoggedButton name="query_rated" fontSize="10" label="{Configuration.RATED_LABEL}" visible="{Configuration.RATED_ENABLED}" includeInLayout="{Configuration.RATED_ENABLED}" click="this.parentApplication.opinionMap.sendGetRatedUsers()"  toolTip="{Configuration.RATED_TOOLTIP}"/>
+					<utils:LoggedButton id="ratingsOfOthersGraphButton" fontSize="10" label="See Graph" click="showRatingsOfOthersGraph()"/>
+				</mx:HBox>-->
+				
+			</mx:HBox>
+			
+			<mx:VBox id="ratingsOfOthersGraphs" visible="false" includeInLayout="false" width="100%" height="300" showEffect="wipeUp">
+				<mx:ColumnChart dataProvider="{otherAgreementBuckets}"  width="100%" height="50%">
+					<mx:verticalAxis>
+						<mx:LinearAxis 
+							minimum="0"
+							maximum="{maxOtherAxis}"
+							/>
+					</mx:verticalAxis>
+					<mx:horizontalAxis>
+						<mx:CategoryAxis 
+							id="otherAgreementLabels"
+							dataProvider="{otherAgreementBuckets}"
+							categoryField="label"
+							title="My Agreement Ratings of others"
+							/>
+					</mx:horizontalAxis>
+					
+					<mx:horizontalAxisRenderers>
+						<mx:AxisRenderer showLabels="false" axis="{otherAgreementLabels}" />
+					</mx:horizontalAxisRenderers>
+					
+					<mx:series>
+						<mx:ColumnSeries 
+							xField="label"
+							yField="data" 
+							displayName="My Agreement Ratings of others"
+							/>
+					</mx:series>
+				</mx:ColumnChart>		
+				<mx:ColumnChart dataProvider="{otherInsightBuckets}"  width="100%" height="50%">
+					<mx:verticalAxis>
+						<mx:LinearAxis 
+							minimum="0"
+							maximum="{maxOtherAxis}"
+							/>
+					</mx:verticalAxis>
+					<mx:horizontalAxis>
+						<mx:CategoryAxis 
+							dataProvider="{otherInsightBuckets}"
+							categoryField="label"
+							id="otherInsightLabels"
+							title="My Insight Ratings of others"
+							/>
+					</mx:horizontalAxis>
+					
+					<mx:horizontalAxisRenderers>
+						<mx:AxisRenderer showLabels="false" axis="{otherInsightLabels}" />
+					</mx:horizontalAxisRenderers>
+					
+					<mx:series>
+						<mx:ColumnSeries 
+							xField="label"
+							yField="data" 
+							displayName="My Insight Ratings of others"
+							/>
+					</mx:series>
+				</mx:ColumnChart>	
+				
+				<mx:Button label="Back" click="showRatingsOfOthersGraph()"/>
+			</mx:VBox>
+		</mx:VBox>
+		<mx:Text width="100%" fontSize="18" text="{'You can see a graph of the ratings you\'ve received after you have been rated by ' + (Configuration.VIEW_HISTOGRAMS_THRESHOLD) + ' people.\n\nNow please rate more blooms to earn more points.  Just click any bloom on the left...'}" visible="{!(this.parentApplication.numUserRatedBy >= Configuration.VIEW_HISTOGRAMS_THRESHOLD)}" includeInLayout="{!(this.parentApplication.numUserRatedBy >= Configuration.VIEW_HISTOGRAMS_THRESHOLD)}"/>
+		<mx:VBox id="ratingsOfMe" width="100%" visible="{this.parentApplication.numUserRatedBy >= Configuration.VIEW_HISTOGRAMS_THRESHOLD}" includeInLayout="{this.parentApplication.numUserRatedBy >= Configuration.VIEW_HISTOGRAMS_THRESHOLD}">
+			
+			<mx:VBox width="100%" horizontalAlign="center">
+				<mx:VBox styleName="mapLeftPanelHorizontalBoxLine" width="97%" height="1"/>	
+			</mx:VBox>
+			
+			<mx:HBox verticalAlign="middle" horizontalAlign="center" width="100%">
+			
+				<!-- TODO: Configuration flags that allow or disallow these queries are not supported -->
+				<utils:LoggedButton id="ratedByButton" width="57" name="rated-by-comments-query" label="Rated By" buttonMode="true" toolTip="{Configuration.RATED_BY_TOOLTIP}" click="showRatingsOfMeGraph()" visible="{!ratingsOfMeGraphs.visible}" includeInLayout="{!ratingsOfMeGraphs.visible}"/>
+				<mx:Text text="Ratings Received" fontFamily="Arial" fontSize="13"/> 
+				
+				<!-- 2011.08.22 Only show the number who have comments
+					<mx:Text text="{'- You have been rated by ' + this.parentApplication.numUserRatedBy + ' participants, ' + this.parentApplication.numUserRatedByWithComments + ' have comments' }" />
+				-->
+				<!--
+				<mx:HBox>
+					<utils:LoggedButton name="query_rated-by" fontSize="10" label="{Configuration.RATED_BY_LABEL}" visible="{Configuration.RATED_BY_ENABLED}" includeInLayout="{Configuration.RATED_BY_ENABLED}" click="this.parentApplication.opinionMap.sendGetRatedByUsers()" toolTip="{Configuration.RATED_BY_TOOLTIP}" />
+					<utils:LoggedButton id="ratingsOfMeGraphButton" fontSize="10" label="See Graph" click="showRatingsOfMeGraph()"/>
+				</mx:HBox>-->
+				
+			</mx:HBox>
+			
+			<mx:VBox id="ratingsOfMeGraphs" visible="false" includeInLayout="false" width="100%" height="300" showEffect="wipeUp">
+			
+				<mx:Canvas width="100%" height="50%">
+					<mx:ColumnChart dataProvider="{userAgreementBuckets}"  width="100%" height="100%">
+						<mx:verticalAxis>
+							<mx:LinearAxis 
+								minimum="0"
+								maximum="{maxUserAxis}"
+								/>
+						</mx:verticalAxis>
+						<mx:horizontalAxis>
+							<mx:CategoryAxis 
+								id="userAgreementLabels"
+								dataProvider="{userAgreementBuckets}"
+								categoryField="label"
+								title="{Configuration.AGREEMENT_HISTOGRAM_TEXT}"
+								/>
+						</mx:horizontalAxis>
+	
+						<mx:horizontalAxisRenderers>
+							<mx:AxisRenderer showLabels="false" axis="{userAgreementLabels}" />
+						</mx:horizontalAxisRenderers>
+	
+						<mx:series>
+							<mx:ColumnSeries 
+								xField="label"
+								yField="data" 
+								displayName="Agreement Ratings"
+								/>
+						</mx:series>
+					</mx:ColumnChart>
+					
+					<mx:HBox width="100%"  bottom="15" fontSize="10">
+						<mx:HBox width="50%" horizontalAlign="left" paddingLeft="10">
+							<mx:Text text="{Configuration.AGREEMENT_LEFT_TEXT}"/>
+						</mx:HBox>
+						<mx:HBox width="50%" horizontalAlign="right" paddingRight="5">
+							<mx:Text text="{Configuration.AGREEMENT_RIGHT_TEXT}"/>
+						</mx:HBox>
+					</mx:HBox>					
+				</mx:Canvas>
+
+				<mx:Canvas width="100%" height="50%">
+					<mx:ColumnChart dataProvider="{userInsightBuckets}"  width="100%" height="100%">
+						<mx:verticalAxis>
+							<mx:LinearAxis 
+								minimum="0"
+								maximum="{maxUserAxis}"
+								/>
+						</mx:verticalAxis>
+						<mx:horizontalAxis>
+							<mx:CategoryAxis 
+								id="userInsightLabels"
+								dataProvider="{userInsightBuckets}"
+								categoryField="label"
+								title="{Configuration.INSIGHT_HISTOGRAM_TEXT}"
+								/>
+						</mx:horizontalAxis>
+	
+						<mx:horizontalAxisRenderers>
+							<mx:AxisRenderer showLabels="false" axis="{userInsightLabels}"/>
+						</mx:horizontalAxisRenderers>
+	
+						<mx:series>
+							<mx:ColumnSeries 
+								xField="label"
+								yField="data" 
+								displayName="Insight Ratings"
+								/>
+						</mx:series>
+					</mx:ColumnChart>
+					
+					<mx:HBox width="100%" bottom="15" fontSize="10">
+						<mx:HBox width="50%" horizontalAlign="left" paddingLeft="10">
+							<mx:Text text="{Configuration.INSIGHT_LEFT_TEXT}"/>
+						</mx:HBox>
+						<mx:HBox width="50%" horizontalAlign="right" paddingRight="5">
+							<mx:Text text="{Configuration.INSIGHT_RIGHT_TEXT}"/>
+						</mx:HBox>	
+					</mx:HBox>					
+				</mx:Canvas>		
+
+				
+				<mx:Button label="Back" click="showRatingsOfMeGraph()" visible="false" includeInLayout="false"/>	
+			</mx:VBox>
+		</mx:VBox>
+		
+		<!--
+		<mx:HBox id="newSuggestions">
+			<mx:Text text="{'- You have made ' + this.parentApplication.numSuggestions + ' suggestions'}"/> 
+		</mx:HBox>-->
+		
+	</mx:VBox>
+</mx:Module>

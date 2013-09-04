@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Module xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:utils="com.opinion.utils.*">
+    
+    <mx:states>
+        <mx:State name="postregistration" />
+        <mx:State name="postleaveresponse"/> 
+    </mx:states>
+
+
+	
+	<mx:Script>
+		<![CDATA[
+			import com.opinion.settings.Configuration;
+			
+			public function init(titleText:String, bodyText:String, state:String):void
+			{
+				this.titleText.htmlText = titleText;
+				this.bodyText.htmlText = bodyText;
+				this.currentState = state;
+			}
+			
+			/**
+			 * Handles cleanup for all instances
+			 */ 
+			private function click():void
+			{
+				this.parentApplication.opinionMap.mapOverlay.clearState();
+				
+				// Custom functionality here
+				if (this.currentState == 'postregistration')
+					this.parentApplication.opinionMap.mapOverlay.showCommentsPage();
+				
+			}
+		]]>
+	</mx:Script>
+
+	<mx:VBox width="100%" height="100%" verticalAlign="middle" horizontalAlign="center">
+		<mx:VBox width="60%" styleName="mapLeftPanelSubBox" horizontalAlign="center" textAlign="center">
+			<mx:Text id="titleText" width="100%" fontWeight="bold" fontSize="30" />
+			<mx:Text id="bodyText" width="100%" fontFamily="Arial" fontSize="16" paddingBottom="50"/>
+			<utils:LoggedButton name="welcome-serialized" styleName="blueButtonLarge" label="{(currentState == 'postregistration')?'Next':'Finish'}" click="click()" textWrap="false"/>	
+		</mx:VBox>
+		
+	</mx:VBox>
+	
+</mx:Module>

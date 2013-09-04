@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Module xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" xmlns:utils="com.opinion.utils.*">
+	<mx:Script>
+		<![CDATA[
+			import com.adobe.serialization.json.JSON;
+			import com.opinion.utils.HTTPUtils;	
+			import com.opinion.utils.ExtendedHTTPService;
+		
+			public static const SUGGESTIONS_PAGE_FORM_WIDTH:int = 215;
+			public static const SUGGESTIONS_PAGE_PROP_WIDTH:int = 262;
+			public static const SUGGESTIONS_PAGE_LEFTBOX_WIDTH:int = 400;
+			public static const SUGGESTIONS_PAGE_RIGHTBOX_WIDTH:int = 650;
+			
+			private function submit():void {
+				if(_name.text == "" || _p1.text == "" || _p2.text == "" || _p3.text == "" || _disc.text == "") {
+					showErrorStatusText();
+					return;
+				}
+				
+				submitStatusText.text = "Submitting...";
+				submitStatusText.visible = true;
+				
+				var parameters:Object = new Object();
+				parameters['opinionspace_name'] = _name.text;
+				parameters['proposition1'] = _p1.text;
+				parameters['proposition2'] = _p2.text;
+				if (_p3.text != "") parameters['proposition3'] = _p3.text;
+				if (_p4.text != "") parameters['proposition4'] = _p4.text;
+				if (_p5.text != "") parameters['proposition5'] = _p5.text;
+				parameters['discussionstatement1'] = _disc.text;
+				if (_landmark.text != "") parameters['landmarknames'] = _landmark.text;
+				
+				// TODO: Add the length checking in the flex code
+				trace('length of disc statement: ' + _disc.text.length);
+				
+				// comment this out just in case
+				//sendSuggestion.send(parameters);
+			}
+			
+			private function handleSendSuggestion():void {
+				var decodedResult:Object = JSON.decode(sendSuggestion.lastResult.toString());
+				
+				if (decodedResult['success']) {
+					submitStatusText.text = "Submitted.";
+					setTimeout(hideStatusText, 3500);
+				} else {
+					if (decodedResult['error']) {
+						submitStatusText.text = "Error: " + decodedResult['error'];
+						setTimeout(hideStatusText, 3500);
+					}
+				}
+			}
+			
+			private function showErrorStatusText():void {
+				submitStatusText.text = "You are missing a required field."
+				submitStatusText.visible = true;
+				setTimeout(hideStatusText, 3500);
+			}
+			
+			private function hideStatusText():void {
+				submitStatusText.visible = false;
+				submitStatusText.text = "";
+			}
+		]]>
+	</mx:Script>
+
+	<utils:ExtendedHTTPService id="sendSuggestion" url="{this.parentApplication.httpUtils.getServiceUrl('suggestion/')}" useProxy="false" method="POST" resultFormat="text" result="handleSendSuggestion()" />
+ 
+	<!-- the statementsPagePanel has an alpha of .8 with a background color of #FFFFFF
+	the emptyPaddedPage has a background color of #000000. These mix to make grey -->
+	<mx:VBox styleName="emptyPaddedPage" backgroundColor="#000000" height="100%" width="100%">
+		<mx:Text width="100%" paddingTop="5" paddingBottom="5" paddingLeft="15" styleName="suggestionsPageInstructionsText">
+			<mx:htmlText><![CDATA[Have an idea for a new Opinion Space? Share it with us!]]></mx:htmlText>
+		</mx:Text>	
+	
+		<mx:VBox styleName="suggestionsPagePanel" height="420" width="100%" horizontalAlign="left">
+			<mx:Form id="suggestionsForm" width="100%">
+				<mx:HBox width="100%" height="100%">
+					<mx:VBox width="{SUGGESTIONS_PAGE_LEFTBOX_WIDTH}" horizontalAlign="left">
+						<mx:Text width="100%" styleName="suggestionsPageText" text="1) First, give your new opinion space a name. Please limit the name to two or three words."/>
+						<mx:FormItem label="Opinion Space Name" required="true" paddingBottom="30">
+							<mx:TextInput id="_name" width="{SUGGESTIONS_PAGE_FORM_WIDTH}" />
+						</mx:FormItem>
+						
+						<mx:Text width="100%" styleName="suggestionsPageText" text="2) Next, compose at least three propositions for your opinion space. Please limit each proposition to 256 characters/50 words. Your propositions will determine where your users are located in the space."/>
+						<mx:FormItem label="Proposition 1" required="true" paddingBottom="5">
+							<mx:TextInput id="_p1" width="{SUGGESTIONS_PAGE_PROP_WIDTH}" />
+						</mx:FormItem>
+						<mx:FormItem label="Proposition 2" required="true" paddingBottom="5" >
+							<mx:TextInput id="_p2" width="{SUGGESTIONS_PAGE_PROP_WIDTH}" />
+						</mx:FormItem>
+						<mx:FormItem label="Proposition 3" required="true" paddingBottom="5">
+							<mx:TextInput id="_p3" width="{SUGGESTIONS_PAGE_PROP_WIDTH}" />
+						</mx:FormItem>
+						<mx:FormItem id="p4" label="Proposition 4" required="false" paddingBottom="5" >
+							<mx:TextInput id="_p4" width="{SUGGESTIONS_PAGE_PROP_WIDTH}" />
+						</mx:FormItem>
+						<mx:FormItem id="p5" label="Proposition 5" required="false" paddingBottom="5" >
+							<mx:TextInput id="_p5" width="{SUGGESTIONS_PAGE_PROP_WIDTH}" />
+						</mx:FormItem>
+					</mx:VBox>
+					
+					<mx:VBox paddingLeft="35" width="100%" height="100%" horizontalAlign="right">
+						<mx:Text width="100%" styleName="suggestionsPageText" text="3) Finally, compose a discussion question for your Opinion Space. We’ve found that good discussion questions often refer to an event or specific data as well as ask how a user's knowledge or personal experiences inform their opinions. Please limit your discussion question to 512 characters/100 words."/>
+						<mx:FormItem label="Discussion Question" width="100%" required="true">
+							<mx:TextArea id="_disc" width="100%" height="100" />
+						</mx:FormItem>
+						<mx:Text width="100%" styleName="suggestionsPageText" text="4) Optional: Suggest some landmark users (up to three) for your Opinion Space. We will do our best to determine the landmark's views on the propositions."/>
+						<mx:FormItem label="Landmark Names" width="100%"  paddingTop="3" paddingBottom="5">
+							<mx:TextArea id="_landmark" width="100%" height="100" />
+						</mx:FormItem>
+						<mx:HBox>
+							<mx:Text visible="false" id="submitStatusText" text="" />
+							<mx:Button id="submitButton" label="Submit Idea!" styleName="bigButton" click="submit()"/>
+						</mx:HBox>	
+					</mx:VBox>
+				</mx:HBox>
+			</mx:Form>
+		</mx:VBox>
+	</mx:VBox>
+</mx:Module>

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Module xmlns:mx="http://www.adobe.com/2006/mxml" 
+			xmlns:utils="com.opinion.utils.*" layout="absolute" width="100%" height="100%"
+			initialize="init()">
+	
+	<mx:Script>
+		<![CDATA[
+			import mx.controls.Text;
+			import com.opinion.settings.Configuration;
+			
+			private function init():void
+			{
+				/*
+				var arr:Array = this.parentApplication.PointDrawer.ideaProgression();
+				
+				for (var i:int = 0; i < arr.length; i++)
+				{
+					var spr:Sprite = arr[i];
+					spr.x = i * 80;
+					flowerBox.rawChildren.addChild(spr);
+				}
+				/*				
+				for (var i:int = 0; i < arr.length; i++)
+				{
+					var spr:Sprite = arr[i];
+					spr.x = i * 90+15;
+					flowerBox.rawChildren.addChild(spr);
+					
+					var textBox:HBox = new HBox();
+					textBox.width = 70;
+					textBox.setStyle('horizontalAlign', 'center');
+					textBox.x = i*90;
+					textBox.y = 20;
+					var stageTitle:Text = new Text();
+					stageTitle.text = Configuration.AUTHOR_LEVELS[i];
+					stageTitle.setStyle('fontFamily', 'Arial');
+					stageTitle.setStyle('fontWeight', 'bold');
+					textBox.addChild(stageTitle); 
+					flowerBoxTitles.addChild(textBox);
+				}*/
+				drawLegend();
+			}
+			
+			private function drawLegend():void
+	        {
+	        	var arr:Array = this.parentApplication.PointDrawer.colorLegend(18);
+				
+				for (var i:int = 0; i < arr.length; i++)
+				{
+					var spr:Sprite = arr[i];
+					spr.x = i * 42 + 40;
+					legendBox.rawChildren.addChild(spr);
+				}
+				
+				var ar:Array = this.parentApplication.PointDrawer.sizeLegend(18);
+				for (var x:int = 0; x < ar.length; x++)
+				{
+					var spr:Sprite = ar[x];
+					spr.x = x * 70 + 170 + arr.length*30;
+					legendBox.rawChildren.addChild(spr);	
+				}
+	        }
+			
+			private function click():void
+			{
+				this.parentApplication.opinionMap.mapOverlay.doneButtonClick();
+			}
+		]]>
+	</mx:Script>
+	<mx:VBox width="100%" height="100%" verticalAlign="middle" horizontalAlign="center">
+		<mx:VBox width="700" styleName="mapLeftPanelSubBox" horizontalAlign="center" textAlign="center">
+			<mx:Text width="100%" text="{Configuration.SERIALIZED_WELCOME_TITLE}" fontWeight="bold" fontSize="30" paddingTop="20"/>
+			<!--
+			<mx:Text width="100%" text="The current discussion topic is:" fontSize="25" fontWeight="normal" paddingBottom="20" />
+			<mx:Text width="100%" text="{this.parentApplication.discussionStatementShortDecoded}" paddingBottom="50"/>-->
+			
+			<mx:Text width="100%" fontSize="16" text="{Configuration.SERIALIZED_WELCOME_TOP_TEXT}" fontFamily="Arial" paddingBottom="60" paddingTop="20"/>
+			
+			<!--
+			<mx:HBox id="flowerBox" width="300" />
+			<mx:Canvas id="flowerBoxTitles" paddingBottom="60"/>
+			
+			
+			<mx:HBox id="flowerBox" width="550" paddingBottom="40"/>
+			<mx:HBox width="100%">
+				<mx:HBox width="50%" horizontalAlign="left">
+					<mx:Text fontSize="16" text="Less Agreeable" fontWeight="bold" fontFamily="Arial" paddingLeft="90"/>	
+				</mx:HBox>
+				<mx:HBox width="50%" horizontalAlign="right">
+					<mx:Text fontSize="16" text="More Agreeable" fontWeight="bold" fontFamily="Arial" paddingRight="160"/>	
+				</mx:HBox>
+			</mx:HBox>-->
+			
+			<mx:HBox id="legendBox" width="580" paddingBottom="20">
+				<mx:HBox width="330">
+					<mx:HBox width="50%" horizontalAlign="left" paddingTop="35">
+						<mx:Text fontSize="14" width="75" textAlign="center" text="Less Agreeable" fontWeight="bold" fontFamily="Arial" />	
+					</mx:HBox>
+					<mx:HBox width="50%" horizontalAlign="right" paddingTop="35">
+						<mx:Text fontSize="14" width="75" textAlign="center" text="More Agreeable" fontWeight="bold" fontFamily="Arial" />	
+					</mx:HBox>	
+				</mx:HBox>
+				<mx:HBox width="230">
+					<mx:HBox width="50%" horizontalAlign="left" paddingTop="35" paddingLeft="10">
+						<mx:Text fontSize="14" width="75" textAlign="center" text="Less Insightful" fontWeight="bold" fontFamily="Arial" />	
+					</mx:HBox>
+					<mx:HBox width="50%" horizontalAlign="right" paddingTop="35">
+						<mx:Text fontSize="14" width="75" textAlign="center" text="More Insightful" fontWeight="bold" fontFamily="Arial" />	
+					</mx:HBox>	
+				</mx:HBox>
+			</mx:HBox>
+			
+			<mx:Text width="100%" text="{Configuration.SERIALIZED_WELCOME_TEXT}" fontFamily="Arial" fontWeight="bold" fontSize="16" paddingTop="30" paddingBottom="30"/>
+			<utils:LoggedButton name="welcome-serialized" styleName="blueButtonLarge" label="{Configuration.SERIALIZED_WELCOME_CONTINUE_BUTTON}" click="click()" textWrap="false"/>	
+		</mx:VBox>
+		
+	</mx:VBox>
+	
+</mx:Module>

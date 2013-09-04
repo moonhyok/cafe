@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Module xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:registration="com.opinion.components.registration.*" xmlns:utils="com.opinion.utils.*">
+	<mx:Script>
+		<![CDATA[
+			import mx.rpc.Fault;
+			import com.adobe.serialization.json.JSON;
+			import com.opinion.utils.HTTPUtils;
+			import com.opinion.utils.AuthenticationUtils;
+			import com.opinion.settings.Constants;
+			
+			public static const RESET_PASSWORD_FORM_WIDTH:int = 400;
+
+			private function resetPassword():void {
+				sendReset.url = this.parentApplication.httpUtils.getServiceUrl('accountsjson/password/reset/confirm/' + _key.text + '/');
+				var parameters:Object = new Object();
+				parameters['new_password1'] = _new_password1.text;
+				parameters['new_password2'] = _new_password2.text;
+				sendReset.send(parameters);
+			}
+			
+			private function resetKeyErrorHandler():void {
+				_error___all__.visible = true;
+				_error___all__.text = "Your password reset code is invalid or your new passwords don't match!";
+			}
+			
+			private function handleSendReset():void {
+				var decodedResult:Object = JSON.decode(sendReset.lastResult.toString());
+				var success:Boolean = AuthenticationUtils.handleErrorsNoFields(decodedResult, this);
+					
+				if (success) {
+					// If the user is logged in, then they created the password *while* logged in, so just confirm
+					// that they did this
+					if (this.parentApplication.isUserAuthenticated) {
+						this.parentApplication.popup.currentState = 'changePasswordConfirm';
+					}
+					// Otherwise, the user reset the password while logged out, so they need to login
+					else {					
+						this.parentApplication.popup.currentState = 'loginAfterResetForm';
+					}
+				}
+				else {
+					resetKeyErrorHandler();
+				}
+			}
+			
+			private function resendPassword():void {
+				resendButton.label = "Email Resending...";
+				var parameters:Object = new Object();
+				if (this.parentApplication.isUserAuthenticated) {
+					parameters['email'] = "null"; // This needs to have a value so that sendCreatePassword is considered to be POST (vs. GET)
+					sendCreatePassword.send(parameters);
+				}
+			}
+			
+			private function handleSendCreatePassword():void {
+				resendButton.label = "Email Resent. Send Again?";
+			}
+		]]>
+	</mx:Script>
+
+	<utils:ExtendedHTTPService id="sendReset" useProxy="false" method="POST" resultFormat="text" result="handleSendReset()" fault="resetKeyErrorHandler()"/>
+	<utils:ExtendedHTTPService id="sendCreatePassword" url="{this.parentApplication.httpUtils.getServiceUrl('accountsjson/password/create/')}" useProxy="false" method="POST" resultFormat="text" result="handleSendCreatePassword()"/>
+
+	<mx:Form xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%">
+		<mx:Button id="resendButton" label="Resend Email" click="resendPassword()" visible="{this.parentApplication.isUserAuthenticated}" includeInLayout="{this.parentApplication.isUserAuthenticated}"/>
+		<mx:Text id="_error___all__" width="100%" styleName="error" visible="false" text=""/>
+		<mx:FormItem label="Password Reset Code" required="true">
+			<mx:HBox width="{RESET_PASSWORD_FORM_WIDTH}">
+				<mx:TextInput id="_key" width="300" text="{this.parentApplication.resetPasswordKey}"/>
+			</mx:HBox>
+		</mx:FormItem>
+		<mx:FormItem label="New Password" required="true">
+			<mx:HBox width="{RESET_PASSWORD_FORM_WIDTH}">
+				<mx:TextInput id="_new_password1" width="{Constants.DEFAULT_FIELD_WIDTH}" text="" displayAsPassword="true"/>
+				<mx:Text id="_error_new_password1" width="100%" styleName="error" visible="false" text=""/>
+			</mx:HBox>
+		</mx:FormItem>
+		<mx:FormItem label="Confirm New Password" required="true">
+			<mx:HBox width="{RESET_PASSWORD_FORM_WIDTH}">
+				<mx:TextInput id="_new_password2" width="{Constants.DEFAULT_FIELD_WIDTH}" text="" displayAsPassword="true"/>
+				<mx:Text id="_error_new_password2" width="100%" styleName="error" visible="false" text=""/>
+			</mx:HBox>
+		</mx:FormItem>
+		<mx:Button label="Reset Password" click="resetPassword()"/>
+	</mx:Form>
+	<registration:ContactSupport/>
+</mx:Module>

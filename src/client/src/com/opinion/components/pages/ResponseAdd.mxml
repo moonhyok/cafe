@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Module xmlns:mx="http://www.adobe.com/2006/mxml">
+	<mx:Script>
+		<![CDATA[
+			import com.opinion.settings.Configuration;
+			
+			private function click():void {
+				this.parentApplication.popup.removeMe();
+			}
+			
+			private function saveComment():void {
+				this.parentApplication.ratingModule.commentInput.text = this.commentInput.text;
+				this.parentApplication.ratingModule.saveOrEditComment();
+				click();
+			}
+			
+		]]>
+	</mx:Script>
+	<mx:VBox width="100%" height="100%" horizontalAlign="center" verticalAlign="middle" verticalGap="0" styleName="notificationPopup">
+		<mx:HBox horizontalGap="0" width="100%" verticalAlign="top">
+			<mx:Text width="100%" text="Welcome back! The current discussion question is: "/>
+		</mx:HBox>
+		<mx:Text width="100%" text="{this.parentApplication.discussionStatementDecoded}" fontWeight="bold" paddingTop="5"/>
+		<mx:Text width="100%" text="Please enter your response below, or just click Okay to go to the space to read and rate the responses of other participants.  You can enter or change your own comment at any time by clicking on your own viewpoint (in yellow), and you can always read the full discussion question by hovering on it with your mouse." paddingTop="10" paddingBottom="10"/>
+		<mx:TextArea id="commentInput" styleName="ratingModuleCommentInputText" height="110" width="100%" maxChars="{Configuration.MAX_COMMENT_LENGTH}"/>
+		<mx:HBox width="100%" horizontalAlign="right" paddingTop="5">
+			<mx:Button id="saveEditButton" label="Save Response" click="saveComment();"/>
+		</mx:HBox>
+		<mx:HBox paddingTop="10">
+			<mx:Button id="_submit_button" styleName="yellowButton" label="Okay" click="click()"/>	
+		</mx:HBox>
+	</mx:VBox>
+</mx:Module>

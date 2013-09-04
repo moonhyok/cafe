@@ -1,0 +1,20 @@
+{% extends "admin_base.html" %}
+
+{% block mainContent %}
+<div style='padding:15px'>
+{% if saved	 %}
+Comment Updated!
+{% endif %}
+<p/>
+	<form method="POST" action="."><table>
+			{% for field in form %}
+					<tr>
+	        			<td>Comment Text:</td>
+						<td>{{ field }}</td>
+	      			</tr>
+			{% endfor %}
+  	</table>
+  	<input type=submit value='Save Changes'>
+	</form>
+</div>
+{% endblock %}

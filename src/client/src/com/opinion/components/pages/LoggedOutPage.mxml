@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Module xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns:registration="com.opinion.components.registration.*"
+	xmlns:core="com.opinion.components.core.*"
+	xmlns:utils="com.opinion.utils.*"
+	layout="absolute"
+	creationComplete="init()">
+	<mx:Script>
+		<![CDATA[
+			import com.opinion.utils.DisplayUtils;
+			import com.opinion.utils.HTTPUtils;
+			import com.opinion.settings.Configuration;
+			
+			[Embed(source="assets/images/stats-teaser.jpg")] public static const STATS_TEASER:Class;
+			
+			private function OSTweet():void {
+				this.parentApplication.OSTweet(this.parentApplication.justLoggedInUsername);
+			}
+			
+			private function init():void{
+				//mainPanel.setStyle("backgroundImage", "http://opinion.berkeley.edu/assets/Background.jpg");
+				//mainPanel.setStyle("backgroundAttachment", "fixed");
+			}
+        ]]>
+    </mx:Script>
+	
+	<mx:Glow id="glowPanel" duration="0" alphaFrom="0" alphaTo=".17" blurXFrom="0.0" blurXTo="12.0" blurYFrom="0.0" blurYTo="12.0"  strength="3" color="0x000000" target="{loggedOutTop}"/>
+	<mx:Glow id="glowPanel1" duration="0" alphaFrom="0" alphaTo=".17" blurXFrom="0.0" blurXTo="12.0" blurYFrom="0.0" blurYTo="12.0"  strength="3" color="0x000000" target="{loggedOutBack}"/>
+	
+	<mx:Canvas id="mainPanel" width="100%" height="100%" horizontalScrollPolicy="off" verticalScrollPolicy="off">
+		<!-- Background -->
+		<mx:Image width="100%" height="100%" source="{this.parentApplication.opinionMap.MAP_BACKGROUND}" scaleContent="true" maintainAspectRatio="false"/>	
+	
+		<mx:VBox top="40" left="0" horizontalAlign="center" width="100%" height="100%">
+			<mx:VBox id="loggedOutBack" styleName="loggedOutBack" verticalGap="0" textAlign="center" horizontalAlign="center" creationCompleteEffect="{glowPanel1}">
+				<mx:Text width="90%" fontSize="16" color="0x646462" text="{Configuration.LOGGED_OUT_PAGE_TEXT_2}"/>
+				<mx:Image source="{STATS_TEASER}"/>
+				
+				<mx:VBox width="100%" horizontalAlign="center" paddingTop="10" paddingBottom="15">
+					<mx:VBox styleName="mapLeftPanelHorizontalBoxLine" width="97%" height="1"/>	
+				</mx:VBox>
+				
+				<mx:HBox horizontalGap="10">
+					<utils:LoggedButton name="logged_out_go_home" styleName="grayButtonLarge" label="Start Over" click="{this.parentApplication.clickOpinionSpace('logged_out_page_return')}"/>
+					<utils:LoggedButton name="logged_out_signin" styleName="blueButtonLarge" label="Want to login again?" click="{DisplayUtils.displayPopup(this.parentApplication, 'loginForm')}"/>
+				</mx:HBox>
+			</mx:VBox>
+		</mx:VBox>
+		
+		<mx:VBox top="55" left="0" horizontalAlign="center" width="100%">
+			<mx:VBox id="loggedOutTop" styleName="loggedOutTop" verticalGap="0" textAlign="center" horizontalAlign="center" verticalAlign="middle" creationCompleteEffect="{glowPanel}">
+				<mx:Text fontSize="39" color="0x646462" text="{Configuration.LOGGED_OUT_PAGE_TEXT_1}"/>
+				<mx:Text fontSize="21" color="0x999898" text="{Configuration.LOGGED_OUT_PAGE_TEXT_1_SUB}"/>
+			</mx:VBox>	
+		</mx:VBox>
+		
+		<mx:HBox verticalAlign="middle" paddingTop="10" visible="false" includeInLayout="false">
+			<mx:LinkButton paddingTop="4" label="Show your friends where you stand using Twitter!" styleName="link" click="OSTweet();"/>
+			<mx:Image id="tweetIcon" toolTip="Show your friends where you stand using Twitter!" buttonMode="true" useHandCursor="true" click="OSTweet();"/>
+		</mx:HBox>
+		
+	</mx:Canvas>
+</mx:Module>

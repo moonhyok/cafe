@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Module xmlns:mx="http://www.adobe.com/2006/mxml" creationComplete="init()" xmlns:spinner="com.opinion.components.spinner.*">
+	<mx:Script>
+		<![CDATA[
+			
+			import mx.containers.HBox;
+			import mx.effects.Glow;
+			import mx.controls.Text;
+			import mx.controls.Alert;
+			import com.opinion.settings.Configuration;
+			
+			//private var usernameFilterMap:Object;
+			//private var usernameUIDMap:Object;
+			[Bindable] public var loading:Boolean = false; 
+			
+			private function init():void
+			{
+				this.addEventListener('hide',onModuleHide);
+				
+			//	usernameFilterMap = new Object();
+				//usernameUIDMap = new Object();
+			}
+			
+			private function onModuleHide(e:Event):void
+			{
+				//remove new notification icon
+				this.parentApplication.ratingModule.newNotifications = false;
+				this.parentApplication.ratingModule.newNotificationsCount.text = "";
+				logNotificationSession(e);
+			}
+			
+			private function updateRedNotificationText(notificationList:Array):void
+			{
+				var count:int = 0;
+				for(var i:int = 0; i< this.parentApplication.notificationDictArray.length; i++)
+				{
+					if(this.parentApplication.notificationDictArray[i]['label'] == 'New')
+						count ++;
+				}
+				
+				if(count != 0)
+				{
+					//this.parentApplication.opinionMenu.setNotificationsText("You have " + count + " new notifications");
+					
+					this.parentApplication.ratingModule.newNotifications = true;
+					//this.parentApplication.ratingModule.newNotificationsCount.text = count.toString();
+					this.parentApplication.ratingModule.notificationsButton.label = "Notifications ("+count.toString()+")";
+					
+				} 
+				else
+				{
+					//this.parentApplication.opinionMenu.setNotificationsText("");
+					
+					this.parentApplication.ratingModule.newNotifications = false;
+					//this.parentApplication.ratingModule.newNotificationsCount.text = "";
+					this.parentApplication.ratingModule.notificationsButton.label = "Notifications";
+				}
+					
+				
+			}	
+			
+			public function updateNotificationsHistory():void
+			{
+				var sessionGroupObject:Object = new Object();
+				var prevGroupNumber:int = -1;//unused group number
+				var notificationsList:Array = new Array();
+				
+				notifications_history_box.removeAllChildren();
+				
+				if (this.parentApplication.notificationDictArray.length == 0)
+				{
+					var notificationHist:Text = new Text();
+					notificationHist.text = "You currently have no notifications.";
+					notificationHist.percentWidth = 100;
+					
+					var notificationHistBox:VBox = new VBox();
+					notificationHistBox.percentWidth = 100;
+					notificationHistBox.setStyle('textAlign', 'center');
+					notificationHistBox.setStyle('paddingTop', 10);
+					notificationHistBox.addChild(notificationHist);
+					notifications_history_box.addChild(notificationHistBox);
+					return;
+				}
+				
+				updateRedNotificationText(this.parentApplication.notificationDictArray);
+				for(var i:int = 0; i < this.parentApplication.notificationDictArray.length; i++)
+				{
+					var notification:Object = this.parentApplication.notificationDictArray[i];
+					var groupNumber:int = notification['session_group'];
+					
+					if(prevGroupNumber == -1 || groupNumber == prevGroupNumber)
+					{
+						notificationsList.push(notification);
+					}
+					else //create a new group
+					{			
+						notifications_history_box.addChild(createNotificationsVBox(notificationsList));
+						notificationsList = new Array();
+						notificationsList.push(notification);
+					}
+					
+					prevGroupNumber = groupNumber;
+				}
+				
+				if( notificationsList.length != 0)
+					notifications_history_box.addChild(createNotificationsVBox(notificationsList));
+			}
+			
+			private function createNotificationsVBox(notificationsList:Array):HBox
+			{
+				var ratings_with_comments:int = 0;
+				var ratings_user_list:Array = new Array();
+				var suggestions_user_list:Array = new Array();
+				var suggestion_ratings_user_list:Array = new Array();
+				var suggestion_update_user_list:Array = new Array();
+				var suggestion_id:int = 0;
+				var suggestion_rating_id:int = 0;
+				var suggestion_update_id:int = 0;
+				var response_update_user_list:Array = new Array();
+				var response_id:int = 0;
+				var label:String = "";
+				
+				var extraArg:String = "";
+				
+				for(var i:int =0; i<notificationsList.length; i++)
+				{
+					var notification:Object = notificationsList[i];
+					if(notification['type'] == 'rating')
+					{
+						ratings_user_list.push(notification['username']);
+						if(notification['has_comment'])
+							ratings_with_comments++;
+					}
+					else if (notification['type'] == 'suggestion')
+					{
+						suggestions_user_list.push(notification['username']);
+						suggestion_id = notification['id'];
+					}
+					else if (notification['type'] == 'suggestion_rating')
+					{
+						suggestion_ratings_user_list.push(notification['username']);
+						suggestion_rating_id = notification['id'];
+					}
+					else if (notification['type'] == 'suggestion_update')
+					{
+						suggestion_update_user_list.push(notification['username']);
+						suggestion_update_id = notification['id'];
+					}
+					else if (notification['type'] == 'response')
+					{
+						response_update_user_list.push(notification['username']);
+						response_id = notification['id'];
+						
+						extraArg = notification['extra_arg'];
+					}
+					label = notification['label']
+				}
+				
+				var container:HBox = new HBox();
+				var rating_group:HBox = makeGroupedButton(ratings_user_list, "rated your "+Configuration.STATS_RESPONSE_TERM.toLowerCase(), "RATING");
+				rating_group.addEventListener("click",showNewRatings);
+				rating_group.addEventListener("rollOver",buttonOver);
+				
+				suggestions_user_list = suggestions_user_list.filter(function(e:*, i:int, a:Array):Boolean {return a.indexOf(e) == i;}); //remove duplicates
+				var suggestion_group:HBox = makeGroupedButton(suggestions_user_list, "commented on your "+Configuration.STATS_RESPONSE_TERM.toLowerCase(), "SUGGESTION");
+				suggestion_group.name = suggestion_id + '';
+				suggestion_group.addEventListener("click",showSuggestion);
+				suggestion_group.addEventListener("rollOver",buttonOver);
+				
+				var suggestion_rating_group:HBox = makeGroupedButton(suggestion_ratings_user_list, "rated your response", "SUGGESTION");
+				suggestion_rating_group.addEventListener("click",showGivenSuggestion);
+				suggestion_rating_group.addEventListener("rollOver",buttonOver);
+				suggestion_rating_group.name = suggestion_rating_id + '';
+				
+				var suggestion_update_group:HBox = makeGroupedButton(suggestion_update_user_list, "updated his/her comment", "UPDATE");
+				suggestion_update_group.addEventListener("click",showUpdatedComments);
+				suggestion_update_group.addEventListener("rollOver",buttonOver);
+				suggestion_update_group.name = suggestion_update_id + '';
+				
+				if (extraArg == response_update_user_list[0])
+					extraArg = "his/her own ";
+				else
+					extraArg += "'s ";
+				
+				var response_update_group:HBox = makeGroupedButton(response_update_user_list, "commented on " + extraArg +Configuration.STATS_RESPONSE_TERM.toLowerCase(), "RESPONSE");
+				response_update_group.addEventListener("click",showUpdatedComments);
+				response_update_group.addEventListener("rollOver",buttonOver);
+				response_update_group.name = response_id + '';
+				
+				var labelBox:VBox = new VBox();
+				labelBox.percentWidth = 20;
+				labelBox.styleName = 'notificationsLabelBox'
+				var labelText:Text = new Text();
+				labelText.text = label;
+				labelText.percentWidth = 100;
+				labelBox.addChild(labelText);
+				
+				if(ratings_user_list.length != 0)
+					container.addChild(rating_group);
+				
+				if(suggestions_user_list.length != 0)
+					container.addChild(suggestion_group);
+				
+				if(suggestion_ratings_user_list.length != 0)
+					container.addChild(suggestion_rating_group);
+				
+				if(suggestion_update_user_list.length != 0)
+					container.addChild(suggestion_update_group);
+				
+				if(response_update_user_list.length != 0)
+					container.addChild(response_update_group);
+				
+				if(notificationsList.length > 0)
+				{
+					container.addChild(labelBox);
+				}
+				
+				if(label == 'New')
+				{
+					rating_group.setStyle('fontWeight', 'bold');
+					suggestion_group.setStyle('fontWeight', 'bold');
+					suggestion_rating_group.setStyle('fontWeight', 'bold');
+					suggestion_update_group.setStyle('fontWeight', 'bold');
+					response_update_group.setStyle('fontWeight', 'bold');
+					labelBox.setStyle('fontWeight', 'bold');
+				}
+				
+				container.styleName = 'notificationsBox';
+				container.percentWidth=100;
+				
+				return container;
+			}
+			
+			private function makeGroupedButton(user_list:Array, suffix:String, type:String):HBox
+			{
+				var box:HBox = new HBox();
+				var prefix:String = "";
+				
+				if(user_list.length > 2)
+				{
+					prefix = user_list[0] + ", " + user_list[1] + ", and " + (user_list.length - 2) + " others ";
+				}
+				else if(user_list.length == 2)
+				{
+					prefix = user_list[0] + " and " + user_list[1];
+				}
+				else if(user_list.length > 0)
+				{
+					prefix = user_list[0];
+				}
+				
+				var username:Text = new Text();
+				username.text = prefix;
+				username.setStyle('color','#000000');
+				var suffixBox:Text = new Text();
+				suffixBox.text = suffix;
+				box.addChild(username);
+				box.addChild(suffixBox);
+				box.percentWidth = 80;
+				box.styleName ="notificationsButtonBox";
+				box.buttonMode = true;
+				box.mouseChildren = false;
+				
+				switch(type)
+				{
+					case "RATING":
+						box.setStyle('backgroundColor', 0xd6c7e8);
+						break;
+					case "SUGGESTION":
+						box.setStyle('backgroundColor', 0xd2ece1);
+						break;
+					case "RESPONSE":
+						box.setStyle('backgroundColor', 0xd2ece1);
+						break;
+					case "UPDATE":
+						box.setStyle('backgroundColor', 0xdae3e6);
+						break;
+				}
+				
+				return box;
+			}
+			
+			private function buttonOver(event:Event):void
+			{
+				var glowInEffect:Glow = new Glow();
+				glowInEffect.inner = true;
+				glowInEffect.strength = 20;
+				glowInEffect.duration = 750;
+				glowInEffect.color = 0xFFD700;
+				glowInEffect.play([event.currentTarget]);
+			}
+		
+			private function logNotificationSession(e:Event):void
+			{
+				this.parentApplication.log.logUserEvent(Configuration.OPINION_SPACE_ID,8,this.parentApplication.lastNotification + "");
+			}	
+			
+			private function showNewRatings(event:Event):void
+			{
+				this.parentApplication.ratingModule.switchToState('stats');
+			}
+		
+			private function showUpdatedComments(event:Event):void
+			{
+				var tmp:Array = new Array();
+				tmp.push(event.currentTarget.name)
+				this.parentApplication.opinionMap.focusPointOnCallback(event.currentTarget.name);
+				this.parentApplication.opinionMap.sendGetUsersByList(tmp);
+			}
+			
+			private function showSuggestion(event:Event):void
+			{
+				this.parentApplication.ratingModule.switchToState('suggestions');
+				this.parentApplication.ratingModule.suggestionModule.switchState('received');
+				//this.parentApplication.ratingModule.suggestionModule.delayedFocusId = event.currentTarget.name;
+			}
+			
+			private function showGivenSuggestion(event:Event):void
+			{
+				this.parentApplication.ratingModule.switchToState('suggestions');
+				this.parentApplication.ratingModule.suggestionModule.switchState('given'); 
+				this.parentApplication.ratingModule.suggestionModule.delayedFocusId = event.currentTarget.name;
+			}
+		]]>
+	</mx:Script>
+	<spinner:Spinner visible="{loading}" includeInLayout="{loading}" />	
+	
+	<mx:VBox id="notifications_box" width="100%"  visible="{!loading}" includeInLayout="{!loading}">
+		<mx:VBox id="notifications_history_box" width="100%" verticalGap="0"/>	
+	</mx:VBox>
+</mx:Module>

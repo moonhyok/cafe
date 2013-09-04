@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Module xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" currentState="loggedOut" initialize="init()">
+
+	<mx:states>
+		<mx:State name="loggedOut" enterState="initState()"/>
+		<mx:State name="loggedIn" enterState="initState()"/>
+	</mx:states>
+	
+	<mx:Script>
+		<![CDATA[
+			import mx.events.ItemClickEvent;
+			import com.adobe.serialization.json.JSON;
+			import com.opinion.components.registration.LoginForm;
+			import mx.controls.Alert;
+			import mx.collections.*;
+			import com.opinion.utils.DisplayUtils;
+			import com.opinion.utils.AuthenticationUtils;
+			import com.opinion.utils.HTTPUtils;
+			import mx.managers.PopUpManager;
+			import mx.core.IFlexDisplayObject;
+			import mx.containers.TitleWindow;
+			import flash.events.Event;
+			import com.opinion.utils.Log;
+			import mx.rpc.events.FaultEvent;
+			import com.opinion.settings.Configuration;
+
+			[Bindable] private var LOGGED_IN:ArrayCollection = new ArrayCollection();
+            
+            [Bindable] private var LOGGED_OUT:ArrayCollection = new ArrayCollection();
+			
+			[Bindable] private var notificationsText:String = "";
+            
+            private function init():void
+            {
+            	// Creates the array collections with menu labels
+            	if (Configuration.SHOW_FEEDBACK)
+            	{
+            		LOGGED_IN.addItem({label:Configuration.FEEDBACK_TEXT});
+            		LOGGED_OUT.addItem({label:Configuration.FEEDBACK_TEXT});
+            	}
+            	
+            	if (Configuration.SHOW_HELP)
+            	{
+            		LOGGED_IN.addItem({label:Configuration.HELP_TEXT});
+            		LOGGED_OUT.addItem({label:Configuration.HELP_TEXT});	
+            	}
+            	
+            	
+//            	if (Configuration.SHOW_TWITTER) 
+  //          		LOGGED_IN.addItem({label:"Tweet"});
+            	
+            	if (Configuration.SPLASH_PAGE_RETURN)
+            		LOGGED_IN.addItem({label:"RETURN TO HIVE"});
+            	
+            	LOGGED_IN.addItem({label:"SIGN OUT"});
+            	LOGGED_OUT.addItem({label:"SIGN IN"});
+            }
+            			
+            /**
+			 * Performs an appropriate action upon entering a given state
+			 */
+			private function initState():void {
+				switch (currentState) {
+					case 'loggedOut':
+						linkBar.dataProvider = LOGGED_OUT;
+	    				break;
+	    			case 'loggedIn':
+						linkBar.dataProvider = LOGGED_IN;
+	    				break;
+	    			default:
+	    				// TODO: log error (default shouldn't happen)
+	    				break;
+				}
+			}    
+			
+			private function clickSuggest():void {
+				this.parentApplication.currentState = 'suggest';
+			}
+			
+            private function clickWelcome():void {
+            	this.parentApplication.currentState = 'welcome';
+            }
+            
+            private function clickFeedback():void {
+            	DisplayUtils.displayPopup(this.parentApplication, 'feedbackForm');
+            }
+                        
+            private function clickFAQ():void {
+            	this.parentApplication.currentState = 'faq';
+            }
+            
+            private function clickAbout():void {
+            	this.parentApplication.currentState = 'about';
+            }
+            
+ 			private function clickTutorial():void {
+            	DisplayUtils.displayPopup(this.parentApplication, 'tutorial');
+            }
+            
+            private function clickLogin():void {
+            	DisplayUtils.displayPopup(this.parentApplication, 'loginForm');
+            }
+            
+            private function clickRegister():void {
+            	DisplayUtils.displayPopup(this.parentApplication, 'registerForm');
+            }
+            
+            private function clickChangePassword():void {
+            	DisplayUtils.displayPopup(this.parentApplication, 'changePasswordForm');
+            }
+            
+            private function clickSettings():void {
+                DisplayUtils.displayPopup(this.parentApplication, 'settingsForm');
+            }
+            
+			private function clickLogout():void {
+				var parameters:Object = new Object();
+				parameters['os_id'] = this.parentApplication.opinionSpaceId;
+				sendLogout.send(parameters);
+			}
+			
+			private function handleSendLogout():void {
+				var decodedResult:Object = JSON.decode(sendLogout.lastResult.toString());
+				sendLogout.disconnect();
+				var success:Boolean = AuthenticationUtils.handleErrorsNoFields(decodedResult, this);
+				
+				if (success) {
+					// Refresh the OS to reflect the non-logged-in ratngs, change the state
+					// of the OpinionMenu, etc. 
+					this.parentApplication.logout();
+					
+					this.parentApplication.currentState = 'loggedOut';
+				}
+			}
+			
+			private function handleFaultOrTimeout(event:FaultEvent):void{
+				//this.parentApplication.log.log(Log.ERROR, this.parentApplication.opinionSpaceId, "HTTPServiceError: " + event.fault.faultString);
+				Alert.show(Configuration.HTTP_ERROR_USER_STRING);
+				
+				this.parentApplication.logout();
+				this.parentApplication.currentState = 'loggedOut';
+				
+				//force a logout messily
+			}
+			
+			private function handleClick(event:ItemClickEvent):void {
+				switch (event.label) {
+					case Configuration.FEEDBACK_TEXT:
+						this.parentApplication.log.logUserEvent(this.parentApplication.opinionSpaceId,
+							Log.USER_BUTTONCLICK, "menu_feedback");
+						DisplayUtils.displayPopup(this.parentApplication, 'feedbackForm');
+						break;
+					case 'SIGN OUT':
+						this.parentApplication.log.logUserEvent(this.parentApplication.opinionSpaceId,
+							Log.USER_BUTTONCLICK, "menu_signout");
+							var parameters:Object = new Object();
+							parameters['os_id'] = this.parentApplication.opinionSpaceId;
+							sendLogout.send(parameters);
+						break;
+					case 'SIGN IN':
+						this.parentApplication.log.logUserEvent(this.parentApplication.opinionSpaceId,
+							Log.USER_BUTTONCLICK, "menu_signin");
+						DisplayUtils.displayPopup(this.parentApplication, 'loginForm');
+						break;
+					case 'HOME':
+						this.parentApplication.log.logUserEvent(this.parentApplication.opinionSpaceId,
+							Log.USER_BUTTONCLICK, "menu_home");
+						clickHome();
+						break;
+					case Configuration.HELP_TEXT:
+						this.parentApplication.log.logUserEvent(this.parentApplication.opinionSpaceId,
+							Log.USER_BUTTONCLICK, "menu_help");
+						if (this.parentApplication.currentState != 'about')
+						{
+							var oldState:String = this.parentApplication.currentState;  
+							this.parentApplication.currentState = 'about';
+							this.parentApplication.aboutPage.priorParentState = oldState;
+						}
+						break;
+					case 'Tweet':
+						this.parentApplication.log.logUserEvent(this.parentApplication.opinionSpaceId,
+							Log.USER_BUTTONCLICK, "menu_tweet");
+						this.parentApplication.OSTweet();
+						break;
+					case "RETURN TO HIVE":
+						this.parentApplication.clickOpinionSpace();
+					default:
+						break;
+				}
+			}
+			
+			private function clickHome():void {
+            	this.parentApplication.currentState = 'welcome';
+			}
+			
+			public function setNotificationsText(text:String):void
+			{
+				notificationsText = text;
+			}
+        ]]>
+    </mx:Script>
+
+	<mx:HTTPService id="sendLogout" url="{this.parentApplication.httpUtils.getServiceUrl('accountsjson/logout/')}" useProxy="false" method="POST" resultFormat="text" result="handleSendLogout()" fault="handleFaultOrTimeout(event)" requestTimeout="{Configuration.HTTP_REQUEST_TIMEOUT}"/>
+	
+	<mx:HBox id="menuBar" height="100%" verticalAlign="middle">
+	    <mx:Text styleName="redNotificationText" text="{notificationsText}" visible="false" includeInLayout="false"/>
+		<mx:LinkBar id="linkBar" linkButtonStyleName="menuLinkButton" itemClick="handleClick(event);"/>
+ 
+		<!-- Unused, but kept in case needed later 
+		<mx:LinkButton styleName="menuLink" height="20" id="suggestionsLink" label="Suggest an Opinion Space" click="clickSuggest()" visible="false" includeInLayout="false"/>
+		<mx:LinkButton styleName="menuLink" height="20" id="welcomeLink" label="Intro" click="clickWelcome()" visible="false" includeInLayout="false"/>
+		<mx:LinkButton styleName="menuLink" height="20" id="homeLink" label="Space" click="clickHome()" visible="false" includeInLayout="false"/>
+		<mx:LinkButton styleName="menuLink" height="20" id="faqLink" label="FAQ" click="clickFAQ()" visible="false" includeInLayout="false"/>
+		<mx:LinkButton styleName="menuLink" height="20" label="Feedback" click="DisplayUtils.displayPopup(this.parentApplication, 'feedbackForm')" visible="false" includeInLayout="false"/>
+		<mx:LinkButton styleName="menuLink" height="20" label="Legend" click="DisplayUtils.displayPopup(this.parentApplication, 'legend')" visible="false" includeInLayout="false"/>
+		<mx:LinkButton styleName="menuLink" height="20" id="tutorialLink" label="How it Works" click="clickTutorial()" visible="false" includeInLayout="false"/>
+		<mx:LinkButton styleName="menuLink" height="20" id="aboutLink" label="About" click="clickAbout()" visible="false" includeInLayout="false"/>
+		<mx:LinkButton styleName="menuLink" height="20" id="loginLink" label="Sign In" click="clickLogin()" visible="false" includeInLayout="false"/>
+		<mx:LinkButton styleName="menuLink" height="20" id="registerLink" label="Sign Up" click="clickRegister()" visible="false" includeInLayout="false"/>
+		<mx:LinkButton styleName="menuLink" height="20" id="changePasswordLink" label="Change Password" click="clickChangePassword()" visible="false" includeInLayout="false"/>
+        <mx:LinkButton styleName="menuLink" height="20" id="settingsLink" label="Settings" click="clickSettings()" visible="false" includeInLayout="false"/>
+		<mx:LinkButton styleName="menuLink" height="20" id="logoutLink" label="Sign Out" click="clickLogout()" visible="false" includeInLayout="false"/>
+		-->
+	</mx:HBox>
+	
+</mx:Module>

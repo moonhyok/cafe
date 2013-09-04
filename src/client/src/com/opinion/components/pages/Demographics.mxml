@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Module xmlns:mx="http://www.adobe.com/2006/mxml" initialize="init()" 
+		   xmlns:core="com.opinion.components.core.*"
+		   xmlns:registration="com.opinion.components.registration.*" 
+		   xmlns:utils="com.opinion.utils.*" 
+		   show="onShow()" 
+		   creationComplete="getAddOns()">
+	
+	<mx:Script>
+		<![CDATA[
+			import com.adobe.serialization.json.JSON;
+			import com.opinion.settings.Constants;
+			import com.opinion.utils.AuthenticationUtils;
+			import com.opinion.utils.DisplayUtils;
+			import com.opinion.utils.HTTPUtils;
+			import com.opinion.utils.ExtendedHTTPService;
+			import com.opinion.settings.Configuration;
+			
+			import mx.controls.Alert;
+			import mx.core.IFlexDisplayObject;
+			import mx.managers.PopUpManager;
+			import mx.rpc.events.FaultEvent;
+			import com.opinion.utils.Log;
+			import mx.rpc.http.HTTPService
+			
+			[Bindable] public var completed:Boolean = false;
+				
+			private function init():void{
+			_locationsDropDown.dataProvider = Constants.COUNTRIES;
+			_locationsDropDown.selectedIndex = Constants.COUNTRIES.indexOf("United States of America");
+			_ageGroupDropDown.prompt = "- Select your Age Group -";
+			_ageGroupDropDown.dataProvider = Constants.LIST_OF_AGE_GROUPS;			
+			}
+			
+			private function getAddOns():void {
+				// Add-ons for configurable modules
+                if (Configuration.DEMOGRAPHICS_ADD_ON) 
+                {
+					for (var i:int = 0; i < Configuration.DEMOGRAPHICS_ADD_ONS.length; i++)
+					{
+						var parent:DisplayObjectContainer = demographicsMainBox;
+						for (var n:int = 0; n < Configuration.DEMOGRAPHICS_ADD_ONS[i]['parent'].length; n++)
+						{
+							parent = DisplayObjectContainer(parent.getChildByName(Configuration.DEMOGRAPHICS_ADD_ONS[i]['parent'][n]));
+						} 
+						parent.addChild(Configuration.DEMOGRAPHICS_ADD_ONS[i]['child']);
+					}
+                }
+			}
+			
+			public function onShow():void{	
+
+				editDisabled();
+				if(this.parentApplication.userData == null)
+					return;
+								
+				if(this.parentApplication.userData['picture'] != null)
+					_picture.text = this.parentApplication.userData['picture'];
+				else
+					_picture.text = "";
+				
+				if(this.parentApplication.userData['age'] != null)
+					_ageGroupDropDown.selectedIndex = Constants.LIST_OF_AGE_GROUPS.indexOf(this.parentApplication.userData['age']);
+				else
+					_ageGroupDropDown.selectedIndex = 0;
+				
+				if(this.parentApplication.userData['firstname'] != null)
+					_firstname.text = this.parentApplication.userData['firstname'];
+				else
+					_firstname.text = ""
+				
+				if(this.parentApplication.userData['lastname'] != null)
+					_lastname.text = this.parentApplication.userData['lastname'];
+				else
+					_lastname.text = "";
+				
+				if(this.parentApplication.userData['sex'] != null)
+				{
+					if(this.parentApplication.userData['sex'].toLowerCase() == "male")
+						maleRadio.selected = true;
+					else if (this.parentApplication.userData['sex'].toLowerCase() == "female")
+						femaleRadio.selected = true;
+					else
+						othersexRadio.selected = true;
+				}
+				
+				var i:int = Constants.COUNTRIES.indexOf(this.parentApplication.userLocation);
+				if(i != -1)
+				{
+					otherRadio.selected = true;
+					_locationsDropDown.selectedIndex = i;
+				}
+				else
+				{
+					i = Constants.LIST_OF_STATES_AND_TERRITORIES.indexOf(this.parentApplication.userLocation);
+					usRadio.selected = true;
+					if(i != -1)
+						_locationsDropDown.selectedIndex = i;
+					else if(this.parentApplication.userLocation != null && this.parentApplication.userLocation.toLowerCase() == "facebook")
+					{
+						locationForm.visible = false;
+						locationForm.includeInLayout = false;
+					}
+					else
+					{
+						usRadio.selected = true;
+						_locationsDropDown.prompt = "- Select a state or territory -";
+					}
+						
+				}
+					
+			}
+			
+			public function getIfCompeleted():Boolean
+			{
+				if(Configuration.ALLOW_PROFILE_MULTIPLE_EDIT)
+					return false;
+				else
+				{
+					if(_firstname.text.length > 0 && _lastname.text.length > 0 && _picture.text.length > 0)
+						return true;
+					else 
+						return false;
+				}
+			}
+
+			public function updateUserData():void{
+								
+				var parameters:Object = new Object();
+				parameters['field'] = "user_data";
+				parameters['new_value'] = "kv-pairs";				
+				
+				parameters['firstname'] = _firstname.text;
+				this.parentApplication.userData['firstname'] = _firstname.text;
+				parameters['lastname'] = _lastname.text;
+				this.parentApplication.userData['lastname'] = _lastname.text;
+				parameters['age'] = _ageGroupDropDown.selectedLabel;
+				this.parentApplication.userData['age'] = _ageGroupDropDown.selectedLabel;
+				parameters['picture'] = _picture.text;
+				this.parentApplication.userData['picture'] = _picture.text;
+				
+				if(maleRadio.selected)
+				{
+					parameters['sex'] = "male";
+					this.parentApplication.userData['sex'] = "male";
+				}
+				else if (femaleRadio.selected)
+				{
+					parameters['sex'] = "female";
+					this.parentApplication.userData['sex'] = "female";
+				}
+				else
+				{
+					parameters['sex'] = "declined to state";
+					this.parentApplication.userData['sex'] = "declined to state";
+				}
+				
+				// Add flexible registration fields here
+				if (Configuration.DEMOGRAPHICS_EXTRA_REGISTRATION) 
+				{
+					var handle:int = Configuration.EXTRA_REGISTRATION_HANDLE;
+					for (var i:int = 0; i < Configuration.EXTRA_REGISTRATION_FIELDS_LIST.length; i++)
+					{
+						var parent:DisplayObjectContainer = Configuration.DEMOGRAPHICS_ADD_ONS[handle]['child'];
+						var target:Object;
+						for (var n:int = 0; n < Configuration.EXTRA_REGISTRATION_FIELDS_LIST[i]['path'].length; n++)
+						{
+							parent = DisplayObjectContainer(parent.getChildByName(Configuration.EXTRA_REGISTRATION_FIELDS_LIST[i]['path'][n]));
+						} 
+						
+						target = parent.getChildByName(Configuration.EXTRA_REGISTRATION_FIELDS_LIST[i]['input']);
+						
+						var value:Object;
+						switch(Configuration.EXTRA_REGISTRATION_FIELDS_LIST[i]['type'])
+						{
+							case 'list':
+								value = target.selectedItem;
+								break;
+							case 'text':
+								value = target.text;
+								break;
+							default:
+								break;
+						}
+						
+						parameters[Configuration.EXTRA_REGISTRATION_FIELDS_LIST[i]['field']] = value;
+						this.parentApplication.userData[Configuration.EXTRA_REGISTRATION_FIELDS_LIST[i]['field']] = value;
+					}
+				}
+				save.enabled = false;
+				sendUserDataUpdate.url = this.parentApplication.httpUtils.getServiceUrl('accountsjson/update/');
+				//Alert.show(sendUserDataUpdate.url);
+				sendUserDataUpdate.send(parameters);
+				completed = true;
+
+				if(this.parentApplication.userData != null)
+				{
+					var userPictureURLString:String = this.parentApplication.userData['picture'];
+					if(userPictureURLString == null || userPictureURLString == "null" || userPictureURLString == "")
+						this.parentApplication.opinionMap.profile_pic.source = Configuration.UNKNOWN_USER;
+					else
+						this.parentApplication.opinionMap.profile_pic.source = userPictureURLString;	
+				}
+			}
+			
+			protected function handleSendUserDataUpdate():void{
+				sendUserDataUpdate.disconnect();
+				var parameters:Object = new Object();
+				parameters['field'] = "location" 
+				parameters['new_value'] = _locationsDropDown.selectedLabel;
+				this.parentApplication.opinionMap.userLocationText.text = "Location: " + _locationsDropDown.selectedLabel;
+				sendLocationUpdate.url = this.parentApplication.httpUtils.getServiceUrl('accountsjson/update/');
+			
+				if(parameters['new_value'] == null)
+					parameters['new_value'] = "";
+				
+				sendLocationUpdate.send(parameters);
+				heardAboutUpdate.url = this.parentApplication.httpUtils.getServiceUrl('accountsjson/update/');
+				parameters['field'] = "heard_about"
+				parameters['new_value'] = _heard_about.text;
+				heardAboutUpdate.send(parameters);
+				save.enabled = true;
+				//editDisabled();
+			}
+			
+			private function toggleCitiesList():void {
+				if (usRadio.selected){
+					_locationsDropDown.prompt = "- Select a state -";
+					_locationsDropDown.dataProvider = Constants.LIST_OF_STATES_AND_TERRITORIES;
+				}
+				if (otherRadio.selected){
+					_locationsDropDown.prompt = "- Select a location -";
+					_locationsDropDown.dataProvider = Constants.COUNTRIES;
+				} 
+			}
+			
+			private function editEnabled():void{
+				save.enabled = true;
+				edit.enabled = false;
+				_locationsDropDown.enabled = true;
+				_ageGroupDropDown.enabled = true;
+				_firstname.enabled = true;
+				_lastname.enabled = true;
+				_picture.enabled = true;
+				_heard_about.enabled = true;
+			}
+			
+			private function editDisabled():void{
+				save.enabled = false;
+				edit.enabled = true;
+				_locationsDropDown.enabled = false;
+				_ageGroupDropDown.enabled = false;
+				_firstname.enabled = false;
+				_lastname.enabled = false;
+				_picture.enabled = false;
+				_heard_about.enabled = false;
+			}
+			
+			private function handleFaultOrTimeout(event:FaultEvent):void{	
+				save.enabled = false;
+			}
+			
+			private function handleHeardAboutUpdate():void
+			{
+				//TODO
+			}
+			
+			private function handleSendLocationUpdate():void
+			{
+				//TODO
+			}
+			
+			
+		]]>
+	</mx:Script>
+	<utils:ExtendedHTTPService id="heardAboutUpdate" useProxy="false" method="POST" resultFormat="text" result="handleHeardAboutUpdate()" fault="handleFaultOrTimeout(event)"/>
+	<utils:ExtendedHTTPService id="sendLocationUpdate" useProxy="false" method="POST" resultFormat="text" result="handleSendLocationUpdate()" fault="handleFaultOrTimeout(event)"/>
+	<utils:ExtendedHTTPService id="sendUserDataUpdate" useProxy="false" method="POST" resultFormat="text" result="handleSendUserDataUpdate()" fault="handleFaultOrTimeout(event)"/>
+<mx:HBox visible="false" includeInLayout="false">
+		<utils:LoggedButton name="demographics_edit" id="edit" label="Edit" click="editEnabled()" enabled="true" visible="true" includeInLayout="true"/>
+		<utils:LoggedButton name="demographics_save" id="save" label="Save" click="updateUserData()" enabled="true" visible="true" includeInLayout="true"/>
+</mx:HBox>
+<mx:VBox id="demographicsMainBox" width="100%" verticalAlign="middle">
+	<mx:Form id="form" xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%">
+	<mx:FormItem id="locationForm" label="Location" styleName="signupLabel" visible="{Configuration.REGISTRATION_FIELDS_TABLE['location'].show}" required="{Configuration.REGISTRATION_FIELDS_TABLE['location'].required}" includeInLayout="{Configuration.REGISTRATION_FIELDS_TABLE['location'].show}">
+		<mx:HBox width="100%" verticalAlign="middle">
+			<mx:VBox verticalGap="0" visible="false" includeInLayout="false">
+				<mx:RadioButton id="usRadio" selected="true" label="United States" groupName="country" click="toggleCitiesList()" styleName="registrationButton"/>
+				<mx:RadioButton id="otherRadio" selected="false" label="Non U.S." groupName="country" click="toggleCitiesList()" styleName="registrationButton"/>	
+			</mx:VBox>
+			<mx:ComboBox id="_locationsDropDown" textAlign="center" width="250" styleName="registrationButton"/>	
+		</mx:HBox>
+	</mx:FormItem>
+		<mx:FormItem label="Gender" styleName="signupLabel" paddingTop="5" visible="{Configuration.REGISTRATION_FIELDS_TABLE['sex'].show}" required="{Configuration.REGISTRATION_FIELDS_TABLE['sex'].required}" includeInLayout="{Configuration.REGISTRATION_FIELDS_TABLE['sex'].show}">
+			<mx:HBox width="100%">
+				<mx:RadioButton id="maleRadio" selected="true" label="Male" groupName="gender" styleName="registrationButton"/>
+				<mx:RadioButton id="femaleRadio" selected="false" label="Female" groupName="gender" styleName="registrationButton"/>	
+				<mx:RadioButton id="othersexRadio" selected="false" label="Decline to State" groupName="gender" visible="{Configuration.SHOW_DECLINE_TO_STATE}" includeInLayout="{Configuration.SHOW_DECLINE_TO_STATE}" styleName="registrationButton"/>
+			</mx:HBox>
+		</mx:FormItem>
+		<mx:FormItem label="Age Group" styleName="signupLabel" visible="{Configuration.REGISTRATION_FIELDS_TABLE['age-group'].show}" required="{Configuration.REGISTRATION_FIELDS_TABLE['age-group'].required}" includeInLayout="{Configuration.REGISTRATION_FIELDS_TABLE['age-group'].show}">
+			<mx:HBox width="100%" verticalAlign="middle">
+				<mx:ComboBox id="_ageGroupDropDown" textAlign="center" width="210" styleName="registrationButton"/>	
+			</mx:HBox>
+		</mx:FormItem>
+		<mx:FormItem label="First Name" styleName="signupLabel" paddingTop="25" visible="{Configuration.REGISTRATION_FIELDS_TABLE['firstname'].show}"  required="{Configuration.REGISTRATION_FIELDS_TABLE['firstname'].required}" includeInLayout="{Configuration.REGISTRATION_FIELDS_TABLE['firstname'].show}">
+			<mx:HBox width="100%">
+				<mx:TextInput id="_firstname" color="#000000"  width="{Constants.EMAIL_FIELD_WIDTH}" text=""/>
+			</mx:HBox>
+		</mx:FormItem>
+		<mx:FormItem label="Last Name" styleName="signupLabel" paddingTop="5"  visible="{Configuration.REGISTRATION_FIELDS_TABLE['lastname'].show}"  required="{Configuration.REGISTRATION_FIELDS_TABLE['lastname'].required}" includeInLayout="{Configuration.REGISTRATION_FIELDS_TABLE['lastname'].show}">
+			<mx:HBox width="100%">
+				<mx:TextInput id="_lastname" color="#000000" width="{Constants.EMAIL_FIELD_WIDTH}" text=""/>
+			</mx:HBox>
+		</mx:FormItem>
+		<mx:FormItem label="Picture" styleName="signupLabel" paddingTop="5"  visible="{Configuration.REGISTRATION_FIELDS_TABLE['picture'].show}" required="{Configuration.REGISTRATION_FIELDS_TABLE['picture'].required}" includeInLayout="{Configuration.REGISTRATION_FIELDS_TABLE['picture'].show}">
+			<mx:HBox width="100%">
+				<mx:TextInput id="_picture" color="#000000" width="{Constants.EMAIL_FIELD_WIDTH}" text=""/>
+			</mx:HBox>
+		</mx:FormItem>	
+		<mx:FormItem label="How did you hear about us?" styleName="signupLabel" paddingTop="5"  visible="{Configuration.REGISTRATION_FIELDS_TABLE['heard_about'].show}" required="{Configuration.REGISTRATION_FIELDS_TABLE['heard_about'].required}" includeInLayout="{Configuration.REGISTRATION_FIELDS_TABLE['heard_about'].show}">
+			<mx:HBox width="100%">
+				<mx:TextInput id="_heard_about" color="#000000" width="{Constants.EMAIL_FIELD_WIDTH}" text=""/>
+			</mx:HBox>
+		</mx:FormItem>	
+	</mx:Form>
+		</mx:VBox>
+</mx:Module>

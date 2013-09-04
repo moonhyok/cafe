@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Module xmlns:mx="http://www.adobe.com/2006/mxml" 
+		   xmlns:utils="com.opinion.utils.*" 
+		   initialize="init()">
+	<mx:Script>
+		<![CDATA[
+			import com.opinion.settings.Configuration;
+			import com.adobe.serialization.json.JSON;
+			import com.opinion.utils.HTTPUtils;
+			import com.opinion.utils.FacebookAuthentication;
+			
+			//static class variables
+			public static var twitterURL:String;
+			private static var twitterURLReceived:Boolean;
+			public static var __callBackFunction; //needs to be untyped
+			
+			//implementation specific variables
+			[Bindable] public var implementationType:String; //either 'registration' or 'login'
+			public static const REGISTRATION:String = "registration";
+			public static const LOGIN:String = "login";
+			
+			public static const ERROR_TIMEOUT:int = 7000;
+			
+			//bindable
+			[Bindable] public var waitingForExternalAuth:Boolean;//typically triggers the enter dialog
+			
+			//just a random syntax note... I use __ to denote when we are using a function as an object
+			private function init():void
+			{
+				waitingForExternalAuth = false;
+				twitterURLReceived = false;
+				facebook_login_reg.source = Configuration.FACEBOOK_CONNECT_IMAGE;
+				twitter_login_reg.source = Configuration.TWITTER_IMAGE;
+				facebook_login_login.source = Configuration.FACEBOOK_CONNECT_IMAGE;
+				twitter_login_login.source = Configuration.TWITTER_IMAGE;
+				__callBackFunction = __void;
+			}
+			
+			private function refreshTwitterURL():void
+			{
+				twitterURLReceived = false;
+				var params:Object = new Object();
+				params['register'] = (implementationType == REGISTRATION);
+				//getTwitterURL.send(params);
+			}
+			
+			public function intializeModule(location:String):void
+			{
+				if(location != REGISTRATION && location != LOGIN)
+					throw new Error("Type of Social Media Module is unknown");
+				
+				implementationType = location;
+				refreshTwitterURL();
+			}
+			
+			public function __callBackURLWrapper():void
+			{
+				this.parentApplication.log.logUserEvent(1, 9, "Close event received");
+				if(waitingForExternalAuth)
+				{
+					this.parentApplication.loadingScreen.visible = true;
+					this.parentApplication.loadingScreen.includeInLayout = true;
+					checkAuthState.send();
+					this.parentApplication.opinionMap.mapOverlay.clearState();
+					twitterURLReceived = false;
+					
+					refreshTwitterURL() //get new url for the next time
+					
+					this.parentApplication.loginFormCallback = null; //clear for future attempts
+					this.parentApplication.signupPageCallback = null;
+					return;
+				}
+				
+				//not used right now but included in case we want to do something specific on callback
+				__callBackFunction(); //shamelessly abusing functions as first class data...
+			}
+			
+			//void function for default callback
+			public function __void():void
+			{
+				
+			}
+			
+			//publiclly accessible function to call the callback method, so we can submit the form from a button if neccessary
+			public function submit():void
+			{
+				__callBackURLWrapper();	
+			}
+			
+			private function onFacebookConnectClick():void
+			{
+				this.parentApplication.log.logUserEvent(1, 9, "Facebook Connect Clicked");
+				var f:FacebookAuthentication  = new FacebookAuthentication(this.parentApplication.httpUtils, (implementationType==REGISTRATION));
+				f.login();
+				waitingForExternalAuth = true;
+				
+				//unfortunately registration and login are not symmetric so we have to do different call back processes
+				if(implementationType == LOGIN)
+				{
+					this.parentApplication.loginFormCallback = __callBackURLWrapper;
+				}
+				else if(implementationType == REGISTRATION)
+				{
+					this.parentApplication.signupPageCallback = __callBackURLWrapper;
+				}
+			}
+			
+			private function onTwitterClick():void
+			{
+				this.parentApplication.log.logUserEvent(1, 9, "Twitter Connect Clicked");
+				if(twitterURLReceived)
+				{
+					if (ExternalInterface.available) 
+					{ 
+						ExternalInterface.call("window.open", twitterURL, "win", "height=640,width=500,toolbar=no,scrollbars=yes"); 
+					} 
+					else
+					{
+						navigateToURL(new URLRequest(twitterURL), "_blank");
+					}
+					
+					waitingForExternalAuth = true;
+					
+					//unfortunately registration and login are not symmetric so we have to do different call back processes
+					if(implementationType == LOGIN)
+					{
+						this.parentApplication.loginFormCallback = __callBackURLWrapper;
+					}
+					else if(implementationType == REGISTRATION)
+					{
+						this.parentApplication.signupPageCallback = __callBackURLWrapper;
+					}
+				}
+			}
+			
+			private function handleTwitterUrl():void
+			{
+				this.parentApplication.log.logUserEvent(1, 9, "Received twitter URL");
+				twitterURL = getTwitterURL.lastResult.toString();
+				twitterURLReceived = true;
+			}
+			
+			private function handleAuthState():void
+			{				
+				var decodedResult:Object = JSON.decode(checkAuthState.lastResult.toString());
+				if(decodedResult['success'] != null && decodedResult['success'])
+				{
+					if(implementationType == LOGIN)
+					{this.parentApplication.log.logUserEvent(1, 9, "Logging in");
+						this.parentApplication.login();
+						if(this.parentApplication.popup != null)
+							this.parentApplication.popup.removeMe();
+					}
+					else if(implementationType == REGISTRATION)
+					{
+						this.parentApplication.log.logUserEvent(1, 9, "Registration flow started");
+						if(this.parentApplication.numStatements == 2)
+						{
+							this.parentApplication.opinionMap.saveRatingsAndClear()
+						}
+						else
+						{
+							for (var sliderId:String in this.parentApplication.opinionMap.firstTimeStatements)
+							{
+								this.parentApplication.ratingModule.sendRating(sliderId, this.parentApplication.opinionMap.firstTimeStatements[sliderId]);
+							}
+							
+							this.parentApplication.opinionMap.removeFakePoint();
+							
+							/*if (Configuration.NO_STATEMENTS) // Send the discussion statement
+							{
+								if (this.parentApplication.opinionMap.mapOverlay.statementsPage.commentInput.text != Configuration.COMMENT_ENTRY_PROMPT)
+								{
+									this.parentApplication.opinionMap.mapOverlay.statementsPage.saveCommentsPage();
+								}
+							}*/
+							
+						}
+						this.parentApplication.opinionMap.mapOverlay.signupPage.sendFirstTimeRatings('agreement');
+					}
+				}
+				else if(decodedResult['social_errors'] != null)
+				{
+					this.parentApplication.log.logUserEvent(1, 9, "Social media errors");
+					this.parentApplication.loadingScreen.visible = false;
+					this.parentApplication.loadingScreen.includeInLayout = false;
+					waitingForExternalAuth = false;
+					error.visible = true;
+					error.includeInLayout = true;
+					error.text = decodedResult['social_errors'];
+					setTimeout(clearErrors,ERROR_TIMEOUT); 
+					
+					if(implementationType == REGISTRATION)
+						this.parentApplication.opinionMap.mapOverlay.currentState = 'signup';
+				}
+				else
+				{
+					this.parentApplication.log.logUserEvent(1, 9, "Closed with no authentication");
+					this.parentApplication.loadingScreen.visible = false;
+					this.parentApplication.loadingScreen.includeInLayout = false;
+					waitingForExternalAuth = false;
+					error.visible = true;
+					error.includeInLayout = true;
+					error.text = "You closed the authentication dialog without actually authenticating";
+					setTimeout(clearErrors,ERROR_TIMEOUT); 
+					
+					if(implementationType == REGISTRATION)
+						this.parentApplication.opinionMap.mapOverlay.currentState = 'signup';
+				}
+				
+			}
+			
+			private function clearErrors():void
+			{
+				error.visible = false;
+				error.includeInLayout = false;
+				error.text = "";
+				clearAuthState.send();
+				this.parentApplication.loginFormCallback = null;
+				this.parentApplication.signupPageCallback = null;
+			}
+			
+		]]>
+	</mx:Script>
+	<utils:ExtendedHTTPService id="getTwitterURL" url="{this.parentApplication.httpUtils.getServiceUrl('accountsjson/twitterurl/')}" useProxy="false" method="POST" resultFormat="text" result="handleTwitterUrl()"/>
+	<utils:ExtendedHTTPService id="checkAuthState" url="{this.parentApplication.httpUtils.getServiceUrl('accountsjson/authstate/')}" useProxy="false" method="GET" resultFormat="text" result="handleAuthState()"/>
+	<utils:ExtendedHTTPService id="clearAuthState" url="{this.parentApplication.httpUtils.getServiceUrl('accountsjson/clearautherr/')}" useProxy="false" method="POST" resultFormat="text" />
+	
+	<!--The UI requires slightly different layouts for each thing, so thats the logic here-->
+	<mx:HBox visible="{implementationType == LOGIN}" includeInLayout="{implementationType == LOGIN}" width="100%" horizontalAlign="center">
+		<mx:Image width="400" id="facebook_login_login" click="onFacebookConnectClick()" buttonMode="true" visible="{Configuration.INCLUDE_FACEBOOK}" includeInLayout="{Configuration.INCLUDE_FACEBOOK}"/>
+		<mx:Image id="twitter_login_login" click="onTwitterClick()" buttonMode="true" visible="{Configuration.INCLUDE_TWITTER}" includeInLayout="{Configuration.INCLUDE_TWITTER}"/>
+	</mx:HBox>
+	
+	<mx:HBox visible="{implementationType == REGISTRATION}" includeInLayout="{implementationType == REGISTRATION}" width="100%" horizontalAlign="center">
+			<mx:Image id="facebook_login_reg" click="onFacebookConnectClick()" visible="{Configuration.INCLUDE_FACEBOOK}" includeInLayout="{Configuration.INCLUDE_FACEBOOK}"/>
+			<mx:Image id="twitter_login_reg" click="onTwitterClick()" visible="{Configuration.INCLUDE_TWITTER}" includeInLayout="{Configuration.INCLUDE_TWITTER}"/>
+	</mx:HBox>
+	
+	<mx:Text id="error" fontSize="12" color="#FF0000" width="100%" visible="false" includeInLayout="false"/>
+</mx:Module>

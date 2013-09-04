@@ -1,0 +1,171 @@
+{% extends "admin_base.html" %}
+
+{% block scripts %}
+<script type="text/javascript">
+	$(document).ready(function()
+	{
+		$("#osTable").hide();
+		$("button").hide();
+		$("#message").hide();
+	});
+	
+	function getSearchResults()
+	{
+		var userid = dojo.byId("searchBar").value;		
+		$("#message").hide();
+		$("#osTable").hide();
+		$("button").hide();
+
+		// Get  Feedback Comments Data
+		dojo.xhrGet({
+				url: "{{url_root}}/search/1/" + userid + "/",
+				handleAs: "json",
+				load:function(response, ioArgs)
+				{
+					if (response.success)
+					{
+						var searchResult = response.data[0];
+						$("#osTable").show();
+						$("button").show();
+						populateTable(searchResult);					
+					}
+					else
+					{
+						//alert("Your search did not match any users");
+						$("#message").show();
+					}
+				},
+				error:function(error, ioArgs)
+				{ // This happens on a 500 error or alikes.
+					alert('Error: failed sending data');
+					
+                    switch(ioArgs.xhr.status) {
+                        case 404: //page not found error
+                            alert('404');
+                            break;
+                        case 500: // server side error
+                            alert('500');
+                            break;
+                        case 407: // proxy authentication
+                            alert('407');
+                            break;
+                        default: // default action
+                            alert('default')
+                    };
+
+                    alert("HTTP Error code:" + ioArgs.xhr.status);
+                    alert("Error Condition:" + error.responseText);
+            	    alert("Error Message:  " + error.message);					
+				}
+			});
+	}
+	
+	function populateTable(searchResult) 
+	{
+		dojo.byId('tableBodyWrapper').innerHTML = "";
+		if(searchResult != "")
+		{
+			// display the comments
+			var row = document.createElement('tr');
+			var id = searchResult.uid + "-" + searchResult.cid; 
+			row.setAttribute("id", id);
+											
+			var inputTd = document.createElement('td');
+			var checkBox = document.createElement('input');
+			checkBox.setAttribute("type", "checkbox");
+			inputTd.appendChild(checkBox);
+				
+			var user = document.createElement('td');
+			user.innerHTML = searchResult.username + ' <a href="'+searchResult.reset_link+'"> PW reset link</a>';
+			
+			var email = document.createElement('td');
+			email.innerHTML = searchResult.email;
+				
+			var comment = document.createElement('td');
+			comment.innerHTML = searchResult.comment;
+				
+			row.appendChild(inputTd);
+			row.appendChild(user);
+			row.appendChild(email);
+			row.appendChild(comment);
+			dojo.byId('tableBody').appendChild(row);
+		}
+		$("#osTable:has(tbody tr)").tablesorter({headers: { 0:{sorter: false}}, widgets: ['zebra']});
+	}
+	
+	function banUser()
+	{
+		try 
+		{
+			var table = dojo.byId('osTable');
+			var rowCount = table.rows.length;
+			var rowId = "";
+			var row = table.rows[1];
+			var chkbox = row.cells[0].childNodes[0];
+			if(null != chkbox && true == chkbox.checked) 
+			{
+				rowId = row.id.split("-")[0];
+				dojo.xhrGet({
+					url: "{{url_root}}/banish/" + rowId + "/",
+					handleAs: "json",
+					load:function(response, ioArgs)
+					{
+						if (response.success)
+						{
+							alert("Operation successful!");									
+						}
+					},	
+					error:function(data)
+					{ // This happens on a 500 error or alikes.
+						alert('Error: failed sending data');
+					}
+				});			
+			}
+			deleteRow(table);
+		}
+		catch(e) 
+		{
+			alert(e);
+		}		
+	}
+</script>
+{% endblock %}
+
+{% block mainContent %}
+    <h1> Search </h1>
+    <p>
+      
+   <input type="text" id="searchBar" class="inputTxt" />
+   <input type="button" id="searchBtn" value="Search" onClick="getSearchResults()" class="inputBtn" />
+   
+   <span onClick="getSearchResults()"> Test Search </span>
+   
+   <div class="buttons">
+    <button type="submit" class="negative" onClick="processComment('{{url_root}}/blacklist/')">
+        <img src="../../media/images/no.png" alt=""/> 
+        Blacklist Response
+    </button>
+    
+    <button type="submit" class="negative" onClick="banUser()">
+        <img src="../../media/images/ban.png" alt=""/>
+        Ban User
+    </button>
+</div>
+	<p id="message">Your search did not match any users</p>
+   <table id="osTable" class="tablesorter"> 
+    <thead> 
+    <tr> 
+        <th width="5%"><input type="checkbox" id="checkAll"/></th>
+        <th width="25%">User ID</th> 
+		<th width="25%">Email</th> 		
+        <th width="45%">Response</th>                 
+    </tr> 
+    </thead> 
+	
+    <div id="tableBodyWrapper">
+    <tbody id="tableBody"> 
+    </tbody> 
+    </div>
+</table>
+    </p>
+{% endblock %}

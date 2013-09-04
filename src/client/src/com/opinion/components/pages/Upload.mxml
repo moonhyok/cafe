@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Module xmlns:mx="http://www.adobe.com/2006/mxml" initialize="init()" 
+		   xmlns:core="com.opinion.components.core.*"
+		   xmlns:registration="com.opinion.components.registration.*" 
+		   xmlns:utils="com.opinion.utils.*"
+		   creationComplete="init()"
+		   layout="absolute">
+		
+		<mx:Script>
+			<![CDATA[
+				import mx.controls.Alert;
+				import com.adobe.serialization.json.JSON;
+				import com.opinion.settings.Constants;
+				import com.opinion.utils.AuthenticationUtils;
+				import com.opinion.utils.DisplayUtils;
+				import com.opinion.utils.HTTPUtils;
+				import com.opinion.utils.ExtendedHTTPService;
+				import com.opinion.settings.Configuration;
+				import mx.core.IFlexDisplayObject;
+				import mx.managers.PopUpManager;
+				import mx.rpc.events.FaultEvent;
+				import com.opinion.utils.Log;
+				import mx.rpc.http.HTTPService
+				import mx.controls.Alert;
+				private var fileRef:FileReference;
+				
+				private var FILE_UPLOAD_URL:String = "";
+				
+				private function init():void {
+					fileRef = new FileReference();
+					FILE_UPLOAD_URL = this.parentApplication.httpUtils.getServiceUrl("accountsjson/upload/picture/");
+					sendPictureUpdate.url = this.parentApplication.httpUtils.getServiceUrl('accountsjson/update/');
+					fileRef.addEventListener(Event.SELECT, fileRef_select);
+					fileRef.addEventListener(ProgressEvent.PROGRESS, fileRef_progress);
+					fileRef.addEventListener(Event.COMPLETE, fileRef_complete);
+					fileRef.addEventListener(DataEvent.UPLOAD_COMPLETE_DATA, responseHandler);
+				}
+				
+				private function browseAndUpload():void {
+					var imagesFilter:FileFilter = new FileFilter("Images","*.jpg;*.gif;*.png");
+					fileRef.browse([imagesFilter]);
+					message.text = "";
+				}
+				
+				private function fileRef_select(evt:Event):void {
+					try {
+						message.text = "size (bytes): " + numberFormatter.format(fileRef.size);
+						if(fileRef.size < 4000000)
+							fileRef.upload(new URLRequest(FILE_UPLOAD_URL),"Filedata");
+						else
+						{
+							message.text = "ERROR File Size must be less than 4MB";
+							message.visible=true;
+							message.includeInLayout = true;
+						}
+					} catch (err:Error) {
+						message.text = "ERROR Improper File";
+						message.visible=true;
+						message.includeInLayout = true;
+					}
+				}
+				
+				private function fileRef_progress(evt:ProgressEvent):void {
+					progressBar.visible = true;
+				}
+				
+				private function fileRef_complete(evt:Event):void {
+					message.visible=true;
+					message.includeInLayout = true;
+					message.text = "File Upload Successful!";
+					progressBar.visible = false;
+				}
+				
+				private function responseHandler(evt:DataEvent):void{
+					var url:String = evt.data.toString().substring(5,evt.data.toString().length-1);
+					this.parentApplication.opinionMap.profile_pic.source = url;
+					var par:Object = new Object();
+					par['field'] = 'user_data';
+					par['picture'] = url;
+					sendPictureUpdate.send(par);
+				}
+				
+				private function handleSendPictureUpdate():void
+				{
+					
+				}
+			]]>
+		</mx:Script>
+	<utils:ExtendedHTTPService id="sendPictureUpdate" useProxy="false" method="POST" resultFormat="text" result="handleSendPictureUpdate()" />
+	<mx:NumberFormatter id="numberFormatter" />		
+	<mx:VBox width="100%" height="100%">
+		<mx:Text text="{Configuration.PICTURE_UPLOAD_TEXT}" width="100%"/>
+		<mx:Button label="Upload file"
+				   click="browseAndUpload();"
+				   styleName="splashButton"
+				   />
+		<mx:Label id="message" visible="false" includeInLayout="false"/>
+		<mx:ProgressBar id="progressBar"
+						indeterminate="true"
+						visible="false" />
+	</mx:VBox>
+</mx:Module>
+		

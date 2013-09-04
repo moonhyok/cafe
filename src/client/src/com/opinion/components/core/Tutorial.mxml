@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Module xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:registration="com.opinion.components.registration.*" creationComplete="loadSlide()">
+	<mx:Script>
+		<![CDATA[
+			import mx.collections.ArrayCollection;
+			import com.opinion.utils.HTTPUtils;
+			import mx.controls.Alert;
+			
+			[Bindable] private var previousEnabled:Boolean = false;
+			[Bindable] private var nextEnabled:Boolean = true;
+			[Bindable] private var curSlideIndex:int = 0;
+
+			[Bindable] private var slides:ArrayCollection = new ArrayCollection([
+				{image: "tutorial-image-1.png", text: "The \"map\" of blooms represents the diversity of participants. The location of each person's bloom on the map is based on how he or she answered the baseline questions.  The size of each bloom is based on its reputation. Participants that are similar to you create blooms close to yours, and blooms that are far apart correspond to people who had very different responses."},
+				{image: "tutorial-image-3.png", text: "Using Principal Component Analysis (PCA), multiple opinions (more than two) can be projected onto two dimensions and still approximate original distance relationships.\n\nIn three dimensions, the problem can be thought of as shining a light onto a set of points and observing the resulting shadows. In the \"bad projection\" below, if you looked at just the shadows, you would think that the green point is closer to the blue point than it is to the red point, when in reality, the green point is closer to the red point. In the \"good projection,\" however the distance relationships are better preserved because the angle of the light was adjusted. Similarly, PCA can determine the best projection of the data points into two dimensions."},
+				{image: "tutorial-image-4.png", text: "Thanks to Principal Component Analysis (PCA), you can therefore interpret points near you as individuals who rated the propositions in a similar manner. Conversely, a point that is far away from yours corresponds to an individual who rated the propositions quite differently from you."},
+			]);
+			
+			private function determineEnabled():void {
+				if (curSlideIndex < slides.length - 1) {
+					nextEnabled = true;
+				}
+				else {
+					nextEnabled = false;
+				}
+				
+				if (curSlideIndex > 0) {
+					previousEnabled = true;
+				}
+				else {
+					previousEnabled = false;
+				}
+			}
+			 
+			private function loadSlide():void {
+				slideImage.source = this.parentApplication.httpUtils.createURLFromSWFDir(this, "assets/images/" + slides.getItemAt(curSlideIndex).image);
+				slideText.htmlText = slides.getItemAt(curSlideIndex).text;
+				slideNumberText.text = "Slide " + (curSlideIndex + 1);
+			}
+			
+			private function switchSlide():void {
+				slideImage.visible = false;
+				loadSlide();
+				slideImage.visible = true;
+			}
+			
+			private function first():void {
+				curSlideIndex = 0;
+				determineEnabled();
+				
+				switchSlide();
+			}
+			
+			private function last():void {
+				curSlideIndex = slides.length - 1;
+				determineEnabled();
+				
+				switchSlide();
+			}
+			
+			private function next():void {
+				curSlideIndex++;
+				determineEnabled();
+				
+				switchSlide();
+			}
+			
+			private function previous():void {
+				curSlideIndex--;
+				determineEnabled();
+				
+				switchSlide();
+			}
+		]]>
+	</mx:Script>
+	
+	<mx:Fade id="imageFade" duration="500"/>
+
+	<mx:Canvas width="100%" height="100%">
+		<mx:VBox width="100%" height="100%" horizontalAlign="center">
+			<mx:Text id="slideText" width="100%" minHeight="50" htmlText=""/>
+			<mx:Image id="slideImage" width="500" height="300" visible="true" showEffect="{imageFade}"/>
+			<mx:HBox verticalAlign="middle">
+				<mx:Button id="firstButton" styleName="firstButton" enabled="{previousEnabled}" click="first()"/>
+				<mx:Button id="previousButton" styleName="previousButton"  enabled="{previousEnabled}" click="previous()"/>
+				<mx:Text id="slideNumberText" styleName="slideNumberText" text=""/>
+				<mx:Button id="nextButton" styleName="nextButton" enabled="{nextEnabled}" click="next()"/>
+				<mx:Button id="lastButton" styleName="lastButton" enabled="{nextEnabled}" click="last()"/>
+			</mx:HBox>
+		</mx:VBox>
+	</mx:Canvas>
+</mx:Module>

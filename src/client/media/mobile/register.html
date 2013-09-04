@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<head>
+	<title>Opinion Space - Create Account</title>
+
+	<!-- for best viewing on mobile phones -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel='stylesheet' type='text/css' href='bootstrap/css/bootstrap-responsive.min.css' />
+	<link rel='stylesheet' type='text/css' href='css/opinionspace.css' />
+	<script type='text/javascript' src='js/jquery-1.8.2.min.js'></script>
+	<script type='text/javascript' src='js/d3.v2.min.js'></script>
+	<script type='text/javascript' src='bootstrap/js/bootstrap.min.js'></script>
+    <script type='text/javascript'>
+	function validate()
+	{
+		var name = document.forms["input"]["user"].value;
+		var pass = document.forms["input"]["pass"].value;
+		var conf = document.forms["input"]["confirm_pass"].value;
+		var email = document.forms["input"]["email"].value;
+		var passLength = 5 //Change to desired minimum password length
+		if(isEmpty(name) || isEmpty(pass) || isEmpty(conf) || isEmpty(email))
+  		{
+  			document.getElementById("alert").innerHTML="All fields must be filled out.";
+  			return false;
+  		}
+		else if(name.length < 3 || name.length > 8)
+		{
+			document.getElementById("alert").innerHTML="Username must be 3 to 8 characters long.";
+			return false;
+		}
+		else if(pass.length < passLength)
+		{
+			document.getElementById("alert").innerHTML="Password must be at least " + passLength + " characters long.";
+			return false;
+		}
+		else if(!isAlphanumeric(pass) || !isAlphanumeric(name))
+		{
+			document.getElementById("alert").innerHTML="Username and password must be alphanumeric"
+			return false;
+		}
+		else if(pass != conf)
+		{
+			document.getElementById("alert").innerHTML="Password confirmation incorrect.";
+			return false;
+		}
+	}
+	function isEmpty(str)
+	{
+		return (str == null || str == "");
+	}
+	function isAlphanumeric(str) //True if str uses only alphanumeric characters, false otherwise
+	{
+		var alpha = "abcdefghijklmnopqrstuvwxyz1234567890";
+   		for(var i = 0; i<str.length; i++)
+		{
+			check = str[i].toLowerCase(); //Not case sensitive
+			if(alpha.indexOf(check) == -1)
+				return false;
+		}
+    	return true;
+	}
+	</script>
+</head>
+
+<h1 style="text-align:center;">Create Account</h1>
+
+<center>
+<form name = "input" action = "" onsubmit = "return validate()" method = "post">
+Username<br> 
+<input type="text" name="user"><br><br>
+Password<br> 
+<input type="password" name="pass"><br><br>
+Confirm password<br> 
+<input type="password" name="confirm_pass"><br><br>
+E-mail address<br> 
+<input type="text" name="email"><br><br>
+
+<input type="submit" value="Create"><br>
+</form>
+<font color = #990000><p id = alert></p></font>
+</center>
+
+</body>
+</html>

@@ -1,0 +1,315 @@
+body  
+{
+	font-family: Geneva, "Lucida Sans", "Lucida Sans Unicode", Arial, sans-serif;
+	background:#f2f0eb;
+	margin: 0; /* it's good practice to zero the margin and padding of the body element to account for differing browser defaults */
+	padding: 0;
+	text-align: center; /* this centers the container in IE 5* browsers. The text is then set to the left aligned default in the #container selector */
+	color: #292b29;
+	font-size:12px;
+}
+.opinionSpace #container 
+{ 
+	width: 1000px;  /* using 20px less than a full 800px width allows for browser chrome and avoids a horizontal scroll bar */
+	background: #FFFFFF;
+	margin: 0 auto; /* the auto margins (in conjunction with a width) center the page */
+	border: 1px solid #FFFFFF;
+	text-align: left; /* this overrides the text-align: center on the body element. */
+	height:100%;
+} 
+.opinionSpace #header 
+{ 
+	background: #DDDDDD; 
+	padding: 0 10px 0 20px;  /* this padding matches the left alignment of the elements in the divs that appear beneath it. If an image is used in the #header instead of text, you may want to remove the padding. */
+} 
+.opinionSpace #header h1 
+{
+	margin: 0; /* zeroing the margin of the last element in the #header div will avoid margin collapse - an unexplainable space between divs. If the div has a border around it, this is not necessary as that also avoids the margin collapse */
+	padding: 10px 0; /* using padding instead of margin will allow you to keep the element away from the edges of the div */
+}
+.opinionSpace #sidebar 
+{
+	float: left; /* since this element is floated, a width must be given */
+	width: 200px; /* the actual width of this div, in standards-compliant browsers, or standards mode in Internet Explorer will include the padding and border in addition to the width */
+	/*background:#66666; /* the background color will be displayed for the length of the content in the column, but no further */
+	color:#FFFFFF;
+	padding: 15px 10px 15px 20px;	
+}
+.opinionSpace #mainContent
+{ 
+	margin: 0 0 0 250px; /* the left margin on this div element creates the column down the left side of the page - no matter how much content the sidebar1 div contains, the column space will remain. You can remove this margin if you want the #mainContent div's text to fill the #sidebar1 space when the content in #sidebar1 ends. */
+	padding: 0 5px; /* remember that padding is the space inside the div box and margin is the space outside the div box */
+} 
+.opinionSpace #footer 
+{ 
+	padding: 0 10px 0 20px; /* this padding matches the left alignment of the elements in the divs that appear above it. */
+	background:#f2f0eb; /* the background color will be displayed for the length of the content in the column, but no further */
+	color:#FFFFFF; 
+} 
+.opinionSpace #footer p 
+{
+	margin: 0; /* zeroing the margins of the first element in the footer will avoid the possibility of margin collapse - a space between divs */
+	padding: 0; /* padding on this element will create space, just as the the margin would have, without the margin collapse issue */
+}
+.fltrt 
+{ /* this class can be used to float an element right in your page. The floated element must precede the element it should be next to on the page. */
+	float: right;
+	margin-left: 8px;
+}
+.fltlft 
+{ /* this class can be used to float an element left in your page */
+	float: left;
+	margin-right: 8px;
+}
+.clearfloat 
+{ /* this class should be placed on a div or break element and should be the final element before the close of a container that should fully contain a float */
+	clear:both;
+    height:0;
+    font-size: 1px;
+    line-height: 0px;
+}
+/* place css fixes for all versions of IE in this conditional comment */
+.opinionSpace #sidebar1 { padding-top: 30px; }
+.opinionSpace #mainContent { zoom: 1; }
+/* the above proprietary zoom property gives IE the hasLayout it needs to avoid several bugs */
+
+/* Side Menu Styles */
+ul#menu, ul#menu ul 
+{
+  list-style-type:none;
+  margin: 0;
+  padding: 0;
+  width: 200px;
+}
+
+ul#menu a 
+{
+  display: block;
+  text-decoration: none;	
+  padding-left: 10px;
+}
+
+ul#menu li 
+{
+  margin-top: 1px;
+}
+
+ul#menu li a 
+{
+  background: #666666;
+  color: #fff;	
+  padding: 0.5em;
+}
+
+ul#menu li a:hover 
+{
+  background: #fff;
+  color:#28405a;
+  border-left: 5px #28405a solid;
+}
+
+ul#menu li ul li a 
+{
+  background: #28405a;
+  color: #fff;
+  padding-left: 20px;
+}
+
+ul#menu li ul li a:hover 
+{
+  background: #fff;
+  color:#28405a;
+  border-left: 5px #28405a solid;
+  padding-left: 15px;
+}
+
+/* table sorter */
+table.tablesorter 
+{
+	font-family:Geneva, "Lucida Sans", "Lucida Sans Unicode", Arial, sans-serif;
+	background-color: #CDCDCD;
+	margin:10px 0pt 15px;
+	font-size: 12px;
+	width: 100%;
+	text-align:left;
+}
+table.tablesorter thead tr th, table.tablesorter tfoot tr th 
+{
+	background-color: #e6EEEE;
+	border: 1px solid #FFF;
+	font-size: 12px;
+	padding: 4px;
+	text-align:center;
+}
+table.tablesorter thead tr .header 
+{
+	background-image: url(../../media/images/bg.gif);
+	background-repeat: no-repeat;
+	background-position: center right;
+	cursor: pointer;
+}
+table.tablesorter tbody td 
+{
+	color: #3D3D3D;
+	padding: 4px;
+	background-color: #FFF;
+	vertical-align: top;
+}
+table.tablesorter tbody tr.odd td 
+{
+	background-color:#F0F0F6;
+}
+table.tablesorter thead tr .headerSortUp 
+{
+	background-image: url(../../media/images/asc.gif);
+}
+table.tablesorter thead tr .headerSortDown 
+{
+	background-image: url(../../media/images/desc.gif);
+}
+table.tablesorter thead tr .headerSortDown, table.tablesorter thead tr .headerSortUp 
+{
+	background-color: #8dbdd8;
+}
+
+#osTable img
+{
+	margin-left:20px;
+	cursor:pointer;
+}
+
+/*overview tables*/
+table.overviewTable thead tr th, table.overviewTable tfoot tr th
+{
+	background-color: #28405a;
+	font-size: 10pt;
+	padding: 4px;
+	text-align:left;
+	color:#FFF;
+	width:500px;
+}
+
+table.overviewTable a
+{
+	text-decoration:none;	
+}
+table.overviewTable tbody td, table.overviewTable a:visited, table.overviewTable a
+{
+	color: #000;
+	padding: 2px;
+	background-color: #FFF;
+	vertical-align: top;
+	text-decoration:none;	
+}
+
+table.overviewTable a:hover
+{
+	text-decoration:underline;	
+}
+
+
+
+/*Button Styles*/
+/* BUTTONS */
+
+.buttons button
+{
+    margin:0 7px 0 0;
+    background-color:#f5f5f5;
+    border:1px solid #dedede;
+    border-top:1px solid #eee;
+    border-left:1px solid #eee;
+
+    font-family:Geneva, "Lucida Sans", "Lucida Sans Unicode", Arial, sans-serif;
+    font-size:100%;
+    line-height:130%;
+    text-decoration:none;
+    font-weight:bold;
+    color:#565656;
+    cursor:pointer;
+    padding:5px 10px 6px 7px; /* Links */
+}
+.buttons button
+{
+    width:auto;
+    overflow:visible;
+    padding:4px 10px 3px 7px; /* IE6 */
+}
+.buttons button[type]
+{
+    padding:5px 10px 5px 7px; /* Firefox */
+    line-height:17px; /* Safari */
+}
+*:first-child+html button[type]
+{
+    padding:4px 10px 3px 7px; /* IE7 */
+}
+.buttons button img
+{
+    margin:0 3px -3px 0;
+    padding:0;
+    border:none;
+    width:16px;
+    height:16px;
+}
+
+/* POSITIVE */
+
+.buttons button.positive
+{
+    color:#529214;
+}
+.buttons button.positive:hover
+{
+    background-color:#E6EFC2;
+    border:1px solid #C6D880;
+    color:#529214;
+}
+
+
+/* NEGATIVE */
+
+.buttons button.negative
+{
+    color:#d12f19;
+}
+.buttons button.negative:hover
+{
+    background:#fbe3e4;
+    border:1px solid #fbc2c4;
+    color:#d12f19;
+}
+
+.liner
+{
+	border-top: 1px solid;
+	margin-bottom: 2px;	
+}
+
+/*Input Type Styles*/
+.inputTxt
+{
+	font: 16px Geneva, "Lucida Sans", "Lucida Sans Unicode", Arial, sans-serif; 
+	border-color:#000;
+	border-style:solid;
+	border-width:1px;
+	color:FFFFFF;  
+	width: 350px;
+	height: 20px;
+}
+
+.inputBtn 
+{ 
+	color:#28405a; 
+	font: bold 16px Geneva, "Lucida Sans", "Lucida Sans Unicode", Arial, sans-serif; 
+	background-color:#fff; 
+	border:1px solid; 
+	border-color: #000;
+}
+
+/*High Variance Indicator*/
+.indicator
+{
+	height:8px;
+	width: 50px;	
+}

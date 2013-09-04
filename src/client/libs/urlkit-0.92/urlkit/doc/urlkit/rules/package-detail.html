@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="../../style.css" type="text/css" media="screen">
+<link rel="stylesheet" href="../../print.css" type="text/css" media="print">
+<title>urlkit.rules Summary</title>
+</head>
+<body>
+<script type="text/javascript" language="javascript" src="../../asdoc.js"></script><script type="text/javascript" language="javascript" src="../../cookies.js"></script><script type="text/javascript" language="javascript">
+<!--
+				asdocTitle = 'urlkit.rules Package - API Documentation';
+				var baseRef = '../../';
+				window.onload = configPage;
+			--></script>
+<table style="display:none" id="titleTable" cellspacing="0" cellpadding="0" class="titleTable">
+<tr>
+<td align="left" class="titleTableTitle">API Documentation</td><td align="right" class="titleTableTopNav"><a onclick="loadClassListFrame('../../all-classes.html')" href="../../package-summary.html">All&nbsp;Packages</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../all-classes.html')" href="../../class-summary.html">All&nbsp;Classes</a>&nbsp;|&nbsp;<a onclick="loadClassListFrame('../../index-list.html')" href="../../all-index-A.html">Index</a>&nbsp;|&nbsp;<a href="../../index.html?urlkit/rules/package-detail.html&amp;urlkit/rules/class-list.html" id="framesLink1">Frames</a><a onclick="parent.location=document.location" href="" style="display:none" id="noFramesLink1">No&nbsp;Frames</a></td><td rowspan="3" align="right" class="titleTableLogo"><img alt="Adobe Logo" title="Adobe Logo" class="logoImage" src="../../images/logo.jpg"></td>
+</tr>
+<tr class="titleTableRow2">
+<td align="left" id="subTitle" class="titleTableSubTitle">Package&nbsp;urlkit.rules</td><td align="right" id="subNav" class="titleTableSubNav"><a href="package-detail.html#interfaceSummary">Interfaces</a>&nbsp;| <a href="package-detail.html#classSummary">Classes</a></td>
+</tr>
+<tr class="titleTableRow3">
+<td colspan="2">&nbsp;</td>
+</tr>
+</table>
+<script type="text/javascript" language="javascript">
+<!--
+if (!isEclipse() || window.name != ECLIPSE_FRAME_NAME) {titleBar_setSubTitle("Package urlkit.rules"); titleBar_setSubNav(false,false,false,false,false,false,false,false,false,false,false,true,true,false);}
+--></script>
+<div class="MainContent">
+<br>
+<br>
+<hr>
+<a name="interfaceSummary"></a>
+<div class="summaryTableTitle">Interfaces</div>
+<table class="summaryTable" cellspacing="0" cellpadding="3">
+<tr>
+<th>&nbsp;</th><th width="30%">Interface</th><th width="70%">Description</th>
+</tr>
+<tr class="prow1">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><i><a href="IUrlApplicationState.html">IUrlApplicationState</a></i></td><td class="summaryTableLastCol">
+ Interface for a general representation of an application's state
+ in terms of a URL and a title.</td>
+</tr>
+<tr class="prow0">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><i><a href="IUrlRule.html">IUrlRule</a></i></td><td class="summaryTableLastCol">
+ Interface for a general element of a URL rule tree.</td>
+</tr>
+</table>
+<a name="classSummary"></a>
+<div class="summaryTableTitle">Classes</div>
+<table class="summaryTable" cellspacing="0" cellpadding="3">
+<tr>
+<th>&nbsp;</th><th width="30%">Class</th><th width="70%">Description</th>
+</tr>
+<tr class="prow1">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="FlexBrowserManagerAdapter.html">FlexBrowserManagerAdapter</a></td><td class="summaryTableLastCol">
+ This class is the interface interacts with an instance of IUrlApplicationState
+ on behalf of the containing HTML browser.</td>
+</tr>
+<tr class="prow0">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="StateNotAvailableError.html">StateNotAvailableError</a></td><td class="summaryTableLastCol">
+ Error subclass indicating that a rule could not perform some requested action due
+ to its not being completely initialized.</td>
+</tr>
+<tr class="prow1">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="UrlBaseRule.html">UrlBaseRule</a></td><td class="summaryTableLastCol">
+ Base class for rule implementations.</td>
+</tr>
+<tr class="prow0">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="UrlDelegateRule.html">UrlDelegateRule</a></td><td class="summaryTableLastCol">
+ A UrlDelegateRule is used to dynamically splice a child rule into a
+ parent rule tree, when the child rule's identity is computed.</td>
+</tr>
+<tr class="prow1">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="UrlNavigatorRule.html">UrlNavigatorRule</a></td><td class="summaryTableLastCol">
+ Subclass of UrlValueRule which provides automatic linkage of the
+ value to the 'label' property of an associated navigation
+ container's selectedChild.</td>
+</tr>
+<tr class="prow0">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="UrlRuleContainer.html">UrlRuleContainer</a></td><td class="summaryTableLastCol">
+ UrlRuleContainer is an abstract class which provides useful
+ functionality for rules which contain child elements.</td>
+</tr>
+<tr class="prow1">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="UrlRuleSet.html">UrlRuleSet</a></td><td class="summaryTableLastCol">
+ UrlRuleSet is a general container for a set of rules that act in
+ parallel (although not necessarily at the same time).</td>
+</tr>
+<tr class="prow0">
+<td class="summaryTablePaddingCol">&nbsp;</td><td class="summaryTableSecondCol"><a href="UrlValueRule.html">UrlValueRule</a></td><td class="summaryTableLastCol">
+ A type of rule element that exposes a value mapped to a specific
+ portion of its URL as determined by its urlFormat and/or urlPattern.</td>
+</tr>
+</table>
+<p></p>
+<div>
+<p></p>
+<center class="copyright"> 
+</center>
+</div>
+</div>
+</body>
+</html>
+<!-- -->

@@ -1,0 +1,39 @@
+introduce jquery enavbar
+2 clicks, slider raters and register
+
+--------------
+use fluiddivs in rate page
+social media buttons
+
+google font
+login page
+clean up register page, length width height
+score
+links
+sliders taking up full page
+
+sliders whole length
+question when rating
+prevent horizontal scrolling
+score -> blue bar
+bottom bar?
+score text animation
+d3 spread out blooms
+fonts
+percentage layout of page
+score server hole
+we don’t want to host jquery locally for speed, security updates
+color scheme, layout
+
+
+There is a lot of vertical space free, put a compelling image or screen shot on the landing page. Possible ideas, blooms, stats, etc. D3 has some interesting visualizations maybe find one that might be cool to do with our data.
+2.  Make sure the question text is the “short form” one of the JSON fields, this is just because if we want to ask a multi-part question we may not want to put the entire question there.
+3. Back -> Done
+After the ratings make the button become done
+4. Instructions don’t change, do some sort of transition to give the use meaningful instructions. Move the box down, round corners, and float.
+5. Sliders don’t reset after back
+6. After 2 full ratings, pull up statements page.
+7. After statements, pull up registration
+8. Login page is bad. We should make it take the whole screen.
+9. Score is completely missing
+10. Better sizing for fonts, use more of the screen.

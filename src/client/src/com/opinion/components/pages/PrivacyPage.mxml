@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Module xmlns:mx="http://www.adobe.com/2006/mxml"
+	xmlns:registration="com.opinion.components.registration.*"
+	xmlns:core="com.opinion.components.core.*"
+	layout="absolute">
+	<mx:Script>
+		<![CDATA[
+			import com.opinion.utils.HTTPUtils;
+        ]]>
+    </mx:Script>
+	
+	<mx:VBox styleName="emptyPaddedPage" width="100%" height="100%">
+		<mx:VBox width="100%" height="465">
+			<mx:Text styleName="h1Top" text="Privacy Policy"/>
+			<core:Privacy/>
+			<mx:HBox horizontalGap="0" textAlign="left" width="100%">
+				<mx:Text text="For questions regarding this policy, contact: "/>
+				<mx:LinkButton styleName="link" label="opinion.space.support@gmail.com" click="{this.parentApplication.httpUtils.openLinkSameWindow('mailto:opinion.space.support@gmail.com')}"/>
+			</mx:HBox>
+		</mx:VBox>
+	</mx:VBox>
+</mx:Module>

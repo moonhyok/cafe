@@ -1,0 +1,859 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Module xmlns:mx="http://www.adobe.com/2006/mxml" 
+		   xmlns:utils="com.opinion.utils.*"
+		   xmlns:spinner="com.opinion.components.spinner.*"
+		   initialize="init()"
+		   currentState="loggedOut" >
+	<mx:states>
+		<!--<mx:State name="given" />-->
+		<mx:State name="received"/>
+		<mx:State name="loggedOut"/>
+	</mx:states>
+	<mx:Script>
+		<![CDATA[
+			import flare.animate.Tween;
+		import com.opinion.settings.*;
+		import com.adobe.serialization.json.JSON;
+		import mx.controls.Text;
+		import mx.controls.TextArea;
+		import mx.controls.Image;
+		import mx.containers.HBox;
+		import com.opinion.utils.AuthenticationUtils;
+		import mx.controls.Alert;
+		import mx.events.SliderEvent;
+		import mx.controls.scrollClasses.ScrollBar;
+		import mx.controls.Button;
+		import mx.effects.Glow;
+		
+		[Bindable] private var loading:Boolean = false;
+		private var suggestionDict:Object; //Dict to store all the received suggestions, maps id to suggestion
+		private var buttonDict:Object; //Dict with buttons mapped to suggestion id's
+			
+		public var delayedFocusId:String = ""; //this fixes a wierd UI bug with the Y
+			
+		private var commentBoxWrapper:VBox;
+		private var commentBox:VBox;
+		private var newCommentText:TextArea;
+		private var commentSaveText:Text;
+			
+		private var suggestionBox:VBox;
+		private var suggestionBoxWrapper:VBox;
+		private var suggestionInput:TextArea;
+		private var saveSuggestionButton:Button;
+		private var suggestionSaveText:Text;
+		private var sendingSuggestion:Boolean = false;
+		private static const SEND_SUGGESTION_PROMPT:String = "Post Comment";
+			
+		[Bindable] private var oneRated:Boolean = false;
+		
+		/* Labels for the read more button, this is used in the toggling logic...
+		*/
+		private static const READ_MORE:String = "Read More";
+		private static const HIDE_SUGGESTION:String = "Hide"; 
+		
+		private var append:Boolean = false;
+		
+		private function init():void 
+		{
+			suggestionDict = new Object();
+			buttonDict = new Object();
+		}			
+			
+		private function loadReceivedSuggestions(noLoading:Boolean=true):void
+		{
+			if (this.parentApplication.opinionMap.selectedDiscussionStatementId == -1) 
+				getReceivedSuggestions.url = this.parentApplication.httpUtils.getServiceUrl('os/getreceivedsuggestions/'+ this.parentApplication.opinionSpaceId + '/');
+			else
+				getReceivedSuggestions.url = this.parentApplication.httpUtils.getServiceUrl('os/getreceivedsuggestions/'+ this.parentApplication.opinionSpaceId + "/" + this.parentApplication.opinionMap.selectedDiscussionStatementId + "/");
+			
+			var params:Object = new Object();
+			loading = noLoading;
+			params['entrycode'] = this.parentApplication.ENTRY_CODE;
+			getReceivedSuggestions.send(params);
+		}
+			
+		/*private function loadGivenSuggestions():void
+		{
+			
+			if (this.parentApplication.opinionMap.selectedDiscussionStatementId == -1) 
+				getGivenSuggestions.url = this.parentApplication.httpUtils.getServiceUrl('os/getgivensuggestions/'+ this.parentApplication.opinionSpaceId + '/');
+			else
+				getGivenSuggestions.url = this.parentApplication.httpUtils.getServiceUrl('os/getgivensuggestions/'+ this.parentApplication.opinionSpaceId + "/" + this.parentApplication.opinionMap.selectedDiscussionStatementId + "/");			
+			
+			var params:Object = new Object();
+			loading = true;
+			params['entrycode'] = this.parentApplication.ENTRY_CODE;
+			getGivenSuggestions.send(params);
+		}*/
+			
+		public function switchState(state:String):void
+		{
+			// exit state
+			switch (currentState)
+			{
+				case 'received':
+				//	receivedButton.selected = false;
+					
+					// move cursor to top
+					//suggestion_box.verticalScrollPosition = 0;
+					break;
+				/*case 'given':
+					givenButton.selected = false;
+					break;*/
+			}
+			
+			currentState = state;
+			
+			// enter state
+			switch (currentState)
+			{
+				case 'received':
+					loadReceivedSuggestions();
+			//		receivedButton.selected = true;
+					break;
+				/*case 'given':
+					loadGivenSuggestions();
+					givenButton.selected = true;
+					break;*/
+			}
+		}
+		
+		private function handleGetSuggestion():void
+		{
+			var decodedResult:Object = null;
+			
+			if(currentState == 'received' && getReceivedSuggestions.lastResult != null)
+				decodedResult = JSON.decode(getReceivedSuggestions.lastResult.toString());
+			//else if(currentState == 'given' && getGivenSuggestions.lastResult != null)
+				//decodedResult = JSON.decode(getGivenSuggestions.lastResult.toString());
+			
+			// Display notification if no suggestions to display
+			if (decodedResult['error'] == "User does not have a comment")
+			{
+				var suggestionHist:Text = new Text();
+				suggestionHist.setStyle('fontWeight', 'normal');
+				if(currentState == 'received')
+					suggestionHist.text = "You have not yet written a "+Configuration.STATS_RESPONSE_TERM.toLowerCase()+".";
+				suggestionHist.percentWidth = 100;
+				
+				var suggestionHistBox:VBox = new VBox();
+				suggestionHistBox.percentWidth = 100;
+				suggestionHistBox.setStyle('paddingTop', 10);
+				suggestionHistBox.setStyle('textAlign', 'center');
+				suggestionHistBox.addChild(suggestionHist);
+				unread_suggestion_panel.addChild(suggestionHistBox);
+				return;
+			}
+			
+			
+			if (!append) // normal
+			{
+				
+				//Two lists ensures that they are sorted by unread first and then by date, since the http response is date sorted
+				read_suggestion_panel.removeAllChildren();
+				unread_suggestion_panel.removeAllChildren();
+				
+				// Display notification if no suggestions to display
+				if (decodedResult.length == 0)
+				{
+					var suggestionHist:Text = new Text();
+					suggestionHist.setStyle('fontWeight', 'normal');
+					if(currentState == 'received')
+						suggestionHist.text = "Your "+Configuration.STATS_RESPONSE_TERM.toLowerCase()+" has not received any comments.";
+				//	else if(currentState == 'given')
+					//	suggestionHist.text = "You have not given any suggestions.";
+					suggestionHist.percentWidth = 100;
+					
+					var suggestionHistBox:VBox = new VBox();
+					suggestionHistBox.percentWidth = 100;
+					suggestionHistBox.setStyle('paddingTop', 10);
+					suggestionHistBox.setStyle('textAlign', 'center');
+					suggestionHistBox.addChild(suggestionHist);
+					unread_suggestion_panel.addChild(suggestionHistBox);
+					return;
+				}
+				
+				oneRated = false;
+				for(var i:int = 0; i < decodedResult.length ; i++)
+				{
+					var suggestion:Object = decodedResult[i];
+					suggestionDict[suggestion['id']] = suggestion;
+					if(suggestion['q'] == null)
+					{
+						unread_suggestion_panel.addChild(createSuggestionBox(suggestion));
+					}
+					else
+					{
+						oneRated = true;
+						read_suggestion_panel.addChild(createSuggestionBox(suggestion));
+					}
+					
+				}
+				
+				//formatting logic based on what is in the panels 
+				if(unread_suggestion_panel.getChildren().length > 0)
+				{
+					var header1:Text = new Text();
+					header1.text = "UNRATED SUGGESTIONS: "
+					var header2:Text = new Text();
+					header2.text = "RATED SUGGESTIONS: "
+					header2.setStyle('fontWeight', 'bold');
+					if(Configuration.SUGGESTION_RATING_SLIDERS)
+						unread_suggestion_panel.addChildAt(header1,0);
+					
+					if(Configuration.SUGGESTION_RATING_SLIDERS){
+						if(read_suggestion_panel.getChildren().length > 0) //add the other header if there is at least 1 read
+						{
+							read_suggestion_panel.addChildAt(header2,0);
+							unread_suggestion_panel.setStyle("paddingBottom", 30);
+						}
+						else
+						{
+							unread_suggestion_panel.setStyle("paddingBottom", 0);
+						}
+					}
+				}
+				else
+				{
+					unread_suggestion_panel.setStyle("paddingBottom", 0);
+				}
+				
+				loading = false;
+				
+			} else // just append the new suggestion to the list
+			{
+				if (unread_suggestion_panel.numChildren == decodedResult.length - 1)
+				{
+					var idx:int = decodedResult.length - 1;
+					var suggestion:Object = decodedResult[idx];
+					suggestionDict[suggestion['id']] = suggestion;
+					if(suggestion['q'] == null)
+					{
+						unread_suggestion_panel.addChild(createSuggestionBox(suggestion));
+					}
+					else
+					{
+						oneRated = true;
+						read_suggestion_panel.addChild(createSuggestionBox(suggestion));
+					}
+				}
+				
+				setTimeout(function():void{
+						var twn:Tween = new Tween(suggestion_box, .5, {'verticalScrollPosition':suggestion_box.maxVerticalScrollPosition});
+						twn.play();
+						},250);
+				
+				append = false;
+			}
+			
+			suggestionButton.visible = Configuration.SUGGESTIONS_ENABLED && this.parentApplication.currentCommentId != -1;
+			suggestionButton.includeInLayout = Configuration.SUGGESTIONS_ENABLED && this.parentApplication.currentCommentId != -1;
+			
+			// Scroll to bottom
+			/*
+			setTimeout(function():void{
+						var twn:Tween = new Tween(suggestion_box, .5, {'verticalScrollPosition':suggestion_box.maxVerticalScrollPosition});
+						twn.play();
+						},250);*/		
+		}
+			
+			private function saveClickYes(event:Event):void
+			{
+				var params:Object = new Object();
+				params['entrycode'] = this.parentApplication.ENTRY_CODE;
+				params['id'] = event.target.name;
+				params['q'] = 1.0;
+				saveSuggestionRating.send(params);
+			}
+			
+			private function saveClickNo(event:Event):void
+			{
+				var params:Object = new Object();
+				params['entrycode'] = this.parentApplication.ENTRY_CODE;
+				params['id'] = event.target.name;
+				params['q'] = 0.0;
+				saveSuggestionRating.send(params);
+			}
+			
+			private function onImageMouseOver(event:Event):void
+			{
+				var myColorTransform:ColorTransform = new ColorTransform(1,1,1,1,100,100,100);
+				event.target.transform.colorTransform = myColorTransform;
+			}
+
+			private function onImageMouseOut(event:Event):void
+			{
+				var myColorTransform:ColorTransform = new ColorTransform();
+				event.target.transform.colorTransform = myColorTransform;
+			}
+			
+			private function handleSaveSuggestionRating():void
+			{
+				loadReceivedSuggestions(false); 	
+			}
+			
+			
+			private function toggleReadMore(event:Event):void
+			{
+				var suggestionId:String = event.target.name;
+				if(event.target.label == READ_MORE)
+				{
+					focusSuggestion(suggestionId);
+				}
+				else if(event.target.label ==  HIDE_SUGGESTION)
+				{
+					hideSuggestion(suggestionId);
+				}
+				
+			}
+			
+			public function focusSuggestion(suggestionId:String):void
+			{				
+				for (var i:String in buttonDict)//hides all the other suggestions
+				{
+					hideSuggestion(i);
+				}
+				var suggestionContainer:DisplayObjectContainer = buttonDict[suggestionId].parent.parent;					
+				var text:String = '\"'+ suggestionDict[suggestionId]['text'] + '\"'; //gets the text puts in quotes
+				buttonDict[suggestionId].parent.getChildAt(0).getChildAt(1).visible = false; //teaser text is the child(1)
+				buttonDict[suggestionId].label = HIDE_SUGGESTION; //changes the button to the hide button
+				
+				//creates a text area with the suggestion
+				var textArea:Text = new Text();
+				textArea.text = text;
+				textArea.percentWidth = 100;
+				
+				//adds the a different box based on the state
+				//Remember to add childs at specific indices so removal is easy
+				if(currentState == 'received')
+				{
+					suggestionContainer.addChildAt(textArea,1);
+					if(Configuration.SUGGESTION_RATING_SLIDERS)
+						suggestionContainer.addChildAt(createRatingBox(suggestionDict[suggestionId]),2);
+				}
+				/*else if(currentState == 'given')
+				{
+					suggestionContainer.addChildAt(createCommentBox(suggestionDict[suggestionId]),1);
+				}*/
+				
+				delayedFocusId = "";
+			}
+			
+			public function autoScroll(suggestionId:String):void
+			{
+				var suggestionContainer:DisplayObjectContainer = buttonDict[suggestionId].parent.parent;
+				var button_correction:int = (edit_comment.includeInLayout == false) ? edit_comment.height: 0;
+				
+				if(suggestionContainer.parent.name == 'read_suggestion_panel')
+				{
+					suggestion_box.verticalScrollPosition = suggestionContainer.y + unread_suggestion_panel.height + button_correction;
+				}
+				else
+				{
+					suggestion_box.verticalScrollPosition = suggestionContainer.y + button_correction;
+				}
+			}
+			
+			private function hideSuggestion(suggestionId:String):void
+			{
+				var teaser:String =  suggestionDict[suggestionId]['text'];
+				buttonDict[suggestionId].label = READ_MORE; //toggle button
+				buttonDict[suggestionId].parent.getChildAt(0).getChildAt(1).visible = true;//show teaser text
+				
+				//run this twice sequentially so it removes both added components..
+				if(buttonDict[suggestionId].parent.parent.getChildren().length > 1)
+				{
+					buttonDict[suggestionId].parent.parent.removeChildAt(1);
+				}
+				
+				if(buttonDict[suggestionId].parent.parent.getChildren().length > 1)
+				{
+					buttonDict[suggestionId].parent.parent.removeChildAt(1);
+				}
+			}
+			
+			private function createSuggestionBox(suggestion:Object):VBox
+			{
+				var wrapperBox:VBox = new VBox();
+				wrapperBox.percentWidth = 100;
+				
+				var container:HBox = new HBox();
+				container.percentWidth = 100;
+				container.setStyle('verticalAlign', 'middle');
+				
+				var textHolder:VBox = new VBox();
+				textHolder.percentWidth = 100;
+				textHolder.setStyle('verticalGap',0);
+				
+				var username:Text = new Text();
+				username.percentWidth = 100;
+				if(currentState == 'received')
+					username.htmlText = "<b>"+suggestion['suggester_name']+"</b> \""+ suggestion['text']+ '\"';
+				//else if (currentState == 'given')
+					//username.text = "Your suggestion to " + suggestion['comment']['username']+":";				
+				textHolder.addChildAt(username,0);
+				
+				var timestamp:Text = new Text();
+				timestamp.percentWidth = 100;
+				timestamp.setStyle('textAlign', 'right');
+				timestamp.text = suggestion['time'];
+				textHolder.addChildAt(timestamp,1);
+				username.setStyle('fontWeight','normal');
+				timestamp.setStyle('fontWeight','normal');
+				
+				container.addChildAt(textHolder,0);
+				
+				/*var fullText:LoggedButton = new LoggedButton();
+				fullText.label= READ_MORE;
+				fullText.name = suggestion['id'];
+				buttonDict[suggestion['id']] = fullText;
+				fullText.addEventListener("click", toggleReadMore);
+				//fullText.percentWidth = 30;
+				container.addChildAt(fullText,1);*/
+				
+				wrapperBox.styleName = "commentHistoryBox";
+				wrapperBox.setStyle('borderColor', 0x7e7e7e);
+				wrapperBox.addChild(container);
+				return wrapperBox;
+			}
+			
+			private function getFirstThreeWords(text:String, bound:int):String
+			{
+				var result:String = "";
+				var rest:String = text;
+				var count:int = 0;
+				var limit:int = Math.min(text.length, bound);
+				
+				if(text.length < bound || text.indexOf(" ") == -1)
+					return text.substring(0,limit);
+				
+				while(rest.indexOf(" ") >= 0 && count < 3)
+				{
+					result += rest.substring(0,rest.indexOf(" ")) + " ";
+					rest = rest.substring(rest.indexOf(" ") + 1);
+					count ++;
+				}
+				
+				
+				return result.substring(0,limit);
+			}
+			
+			private function createRatingBox(suggestion:Object):VBox
+			{
+				var helpfulBox:VBox = new VBox();
+				helpfulBox.percentWidth = 100;
+				helpfulBox.setStyle('paddingTop', 10);
+				helpfulBox.setStyle('paddingBottom', 10);
+				
+				var qText:Text = new Text();
+				qText.text = Configuration.Q_VALUE_TEXT;
+				qText.styleName = "suggestionGivenDividerText";
+				var imageBox:HBox = new HBox();
+				imageBox.percentWidth = 100;
+				var slider:LargeOpinionSlider = new LargeOpinionSlider();
+				slider.name = suggestion['id']; 
+				slider.styleName = "ratingModuleSlider";
+				slider.percentWidth = 100;
+				
+				if(suggestion['q'] != null)
+					slider.value = suggestion['q'];
+				else
+					slider.value = .5;
+				
+				slider.addEventListener(SliderEvent.THUMB_RELEASE, sliderReleaseFunction);
+				//imageBox.addChild(no_image);
+
+				if(Configuration.SUGGESTION_RATING_SLIDERS)
+				{
+					imageBox.addChild(slider);
+					helpfulBox.addChild(qText);
+					helpfulBox.addChild(imageBox);
+				}
+				
+				//imageBox.addChild(yes_image);
+				return helpfulBox;
+			}
+			
+			private function createViewRatingBox(suggestion:Object):VBox
+			{
+				var helpfulBox:VBox = new VBox();
+				helpfulBox.percentWidth = 100;
+				
+				var qText:Text = new Text();
+				qText.percentWidth = 100;
+				qText.text = Configuration.Q_VALUE_TEXT_OTHERS;
+				qText.styleName = "suggestionGivenDividerText";
+				
+				var imageBox:HBox = new HBox();
+				imageBox.percentWidth = 100;
+				
+//				var yes_image:Image = new Image();
+	//			yes_image.source = Configuration.THUMBS_UP;
+		//		var no_image:Image = new Image();
+			//	no_image.source = Configuration.THUMBS_DOWN;
+					
+				if(suggestion['q'] != null)
+				{
+					var slider:OpinionSlider = new OpinionSlider();
+					slider.styleName = "ratingModuleSlider";	
+					slider.value = suggestion['q'];
+					slider.enabled = false;
+					slider.percentWidth = 100;
+					//imageBox.addChild(no_image);
+					imageBox.addChild(slider);
+					//imageBox.addChild(yes_image);
+				}
+				else
+				{
+					var noRatingText:Text = new Text();
+					noRatingText.text = "The author has not yet rated your suggestion.";
+					noRatingText.percentWidth = 100;
+					//noRatingText.setStyle('fontSize', 9);
+					imageBox.addChild(noRatingText);
+				}
+				
+				helpfulBox.addChild(qText);
+				helpfulBox.addChild(imageBox);
+				return helpfulBox;
+			}
+			
+			private function sliderReleaseFunction(event:Event):void
+			{
+				var params:Object = new Object();
+				if (Configuration.USE_ENTRY_CODES)
+	            	params['entrycode'] = this.parentApplication.ENTRY_CODE;
+				params['id'] = event.target.name;
+				params['q'] = event.target.value;
+				saveSuggestionRating.send(params);
+			}
+			
+			private function createCommentBox(suggestion:Object):VBox
+			{
+				var container:VBox = new VBox();
+				container.setStyle("verticalGap",20);
+				container.percentWidth = 100;
+				
+				var dividerText1:Text = new Text();
+				dividerText1.styleName = "suggestionGivenDividerText";
+				dividerText1.text = "Original "+Configuration.STATS_RESPONSE_TERM+": ";
+				dividerText1.percentWidth = 100;
+				var commentInput:Text = new Text();
+				//commentInput.styleName = "suggestionModuleInputText";
+				commentInput.text = '\"' + suggestion['comment']['comment'] + '\"';
+				commentInput.percentWidth = 100;
+				var dividerText2:Text = new Text();
+				dividerText2.text = "You suggested: ";
+				dividerText2.percentWidth = 100;
+				dividerText2.styleName = "suggestionGivenDividerText";
+				var suggestionInput:Text = new Text();
+				//commentInput.styleName = "suggestionModuleInputText";
+				suggestionInput.text = '\"' + suggestion['text'] + '\"';
+				suggestionInput.percentWidth = 100;
+				
+				var box1:VBox = new VBox();
+				box1.percentWidth = 100;
+				box1.addChild(dividerText1);
+				box1.addChild(commentInput);
+				
+				var box2:VBox = new VBox();
+				box2.percentWidth = 100;
+				box2.addChild(dividerText2);
+				box2.addChild(suggestionInput);
+				
+				container.addChild(box1);
+				container.addChild(box2);
+				//container.addChild(createViewRatingBox(suggestion));
+				
+				return container;
+			}
+			
+			private function createEditCommentBox():void{
+				commentBoxWrapper = new VBox();
+				commentBoxWrapper.width = this.parentApplication.ratingModule.width;
+				commentBoxWrapper.height = 400;
+				commentBoxWrapper.x = this.parentApplication.opinionMap.plotCanvas.width - 80 - this.parentApplication.ratingModule.width - commentBoxWrapper.width;
+				commentBoxWrapper.y = 100;
+				commentBoxWrapper.styleName = 'mapLeftPanelSubBox'
+				commentBoxWrapper.setStyle('verticalAlign', 'middle');
+				commentBox = new VBox();
+				commentBox.percentWidth = 100;
+				commentBox.percentHeight = 100;
+				var oldCommentText:TextArea = new TextArea();
+				//oldCommentText.styleName = 'ratingModuleCommentInputText';
+				oldCommentText.percentWidth = 100;
+				oldCommentText.percentHeight = 40;
+				oldCommentText.text = this.parentApplication.ratingModule.commentInput.text;
+				oldCommentText.maxChars = Configuration.MAX_COMMENT_LENGTH;
+				oldCommentText.editable = false;
+				
+				newCommentText = new TextArea();
+				newCommentText.styleName = 'ratingModuleCommentInputText';
+				newCommentText.percentWidth = 100;
+				newCommentText.percentHeight = 40;
+				newCommentText.maxChars = Configuration.MAX_COMMENT_LENGTH;
+				
+				var currentCommentPrompt:Text = new Text();
+				currentCommentPrompt.text = "Your most recent response:"
+				var newCommentPrompt:Text = new Text();
+				newCommentPrompt.text = "Revise your response:"
+				
+				var save:Button = new Button();
+				save.addEventListener("click",saveComment)
+				save.label = "Save Response";
+				var closeButton:Image = new Image();
+				closeButton.source = Configuration.CLOSE_BUTTON;
+				closeButton.addEventListener("click",removeEditCommentBox);
+					
+				commentBox.addChild(closeButton);
+				commentBox.addChild(currentCommentPrompt);
+				commentBox.addChild(oldCommentText);
+				commentBox.addChild(newCommentPrompt);
+				commentBox.addChild(newCommentText);
+				commentBox.addChild(save);
+				
+				commentBoxWrapper.addChild(commentBox);
+				commentSaveText = new Text();
+				commentSaveText.text = Configuration.SAVE_COMMENT_MESSAGE;
+				commentSaveText.percentWidth = 100;
+				commentSaveText.setStyle('fontSize',24);
+				commentSaveText.visible = false;
+				commentSaveText.includeInLayout = false;
+				commentBoxWrapper.addChild(commentSaveText);
+				
+				this.parentApplication.opinionMap.plotCanvas.addChild(commentBoxWrapper);
+			}
+			
+			private function saveComment(e:Event=null):void
+			{
+				if (newCommentText.text == "")
+				{
+					commentBox.visible = false;
+					commentBox.includeInLayout = false;
+					commentSaveText.visible = true;
+					commentSaveText.includeInLayout = true;
+					commentSaveText.text = "You must enter a comment.";
+					setTimeout(function():void{commentSaveText.text = Configuration.SAVE_COMMENT_MESSAGE;commentBox.visible = true;commentBox.includeInLayout = true;commentSaveText.visible = false;commentSaveText.includeInLayout = false;}, Constants.CLEAR_SAVE_STATUS_TIMEOUT);
+					return;
+				}
+				var parameters:Object = new Object();
+				parameters['comment'] = newCommentText.text;
+				
+				// Set the discussion statement
+				if (this.parentApplication.opinionMap.selectedDiscussionStatementId == -1)
+					sendSaveComment.url = this.parentApplication.httpUtils.getServiceUrl('os/savecomment/' + this.parentApplication.opinionSpaceId + '/');
+				else
+					sendSaveComment.url = this.parentApplication.httpUtils.getServiceUrl('os/savecomment/' + this.parentApplication.opinionSpaceId + '/' + this.parentApplication.opinionMap.selectedDiscussionStatementId + '/');
+				
+				if (Configuration.USE_ENTRY_CODES)
+					parameters['entrycode'] = this.parentApplication.ENTRY_CODE;
+				
+				sendSaveComment.send(parameters);
+			}
+			
+			private function handleSaveComment():void {
+				var decodedResult:Object = JSON.decode(sendSaveComment.lastResult.toString());
+				sendSaveComment.disconnect();
+				
+				var success:Boolean = AuthenticationUtils.handleErrorsNoFields(decodedResult, this);
+				
+				// TODO: Better error handling
+				if(AuthenticationUtils.resultIsAuthRequired(decodedResult))
+					return;
+							
+				if (success) {
+					removeEditCommentBox();
+					this.parentApplication.opinionMap.myComment = newCommentText.text;
+					this.parentApplication.ratingModule.commentInput.text = newCommentText.text;
+					// Update the user dot size
+					// Three scenarios:
+					// 1) the comment isn't changed, but they clicked save -> same rating so same size
+					// 2) the comment is new from having no comment before -> smallest size to default size
+					// 3) the comment is new from an old comment -> some size to default size
+					this.parentApplication.getUserCommentScore.send();					
+					// refresh the history
+					this.parentApplication.ratingModule.refreshHistory(decodedResult['prev_comments']);
+					this.parentApplication.ratingModule.currentState = 'profile';
+					this.parentApplication.ratingModule.switchBottomState('history');
+					//setTimeout(function():void{}, Constants.CLEAR_SAVE_STATUS_TIMEOUT);
+				}
+				else {
+					commentBox.visible = false;
+					commentBox.includeInLayout = false;
+					commentSaveText.visible = true;
+					commentSaveText.includeInLayout = true;
+					commentSaveText.text = "Save Failed";
+					setTimeout(function():void{commentSaveText.text = Configuration.SAVE_COMMENT_MESSAGE;commentBox.visible = true;commentBox.includeInLayout = true;commentSaveText.visible = false;commentSaveText.includeInLayout = false;}, Constants.CLEAR_SAVE_STATUS_TIMEOUT);
+				}
+			}		
+			
+			public function removeEditCommentBox(e:Event=null):void
+			{
+				if(commentBoxWrapper != null && this.parentApplication.opinionMap.plotCanvas.contains(commentBoxWrapper)){
+					this.parentApplication.opinionMap.plotCanvas.removeChild(commentBoxWrapper);
+				}
+			}
+			
+			public function removeSuggestionBox(e:Event=null):void
+			{
+				if(suggestionBoxWrapper != null && this.parentApplication.opinionMap.plotCanvas.contains(suggestionBoxWrapper)){
+					this.parentApplication.opinionMap.plotCanvas.removeChild(suggestionBoxWrapper);
+				}
+			}
+			private function clearFloatingPrompts():void
+			{
+				this.parentApplication.opinionMap.removeFloatingPrompt(this.parentApplication.opinionMap.rateResponsePrompt);
+				this.parentApplication.opinionMap.removeFloatingPrompt(this.parentApplication.opinionMap.leaveSuggestionPrompt);
+				this.parentApplication.opinionMap.removeFloatingPrompt(this.parentApplication.opinionMap.ratedTranslucentPrompt);
+			}
+			
+			private function createLeaveSuggestionBox():void
+			{
+				// if leave suggestion prompt is open, remove it
+				this.parentApplication.opinionMap.removeFloatingPrompt(this.parentApplication.opinionMap.leaveSuggestionPrompt);
+				if(this.parentApplication.isUserAuthenticated && this.parentApplication.usernameSearch)
+					this.parentApplication.opinionMap.removeTooltipOnUser()
+				suggestionBoxWrapper = new VBox();
+				suggestionBoxWrapper.width = this.parentApplication.ratingModule.width - 30;
+				suggestionBoxWrapper.height = 300;
+				suggestionBoxWrapper.x = this.parentApplication.opinionMap.plotCanvas.width - 90 - this.parentApplication.ratingModule.width - suggestionBoxWrapper.width;
+				suggestionBoxWrapper.y = 100;
+				suggestionBoxWrapper.styleName = 'mapLeftPanelSubBox'
+				suggestionBoxWrapper.setStyle('verticalAlign', 'middle');
+				var glow:Glow = new Glow();
+				glow.duration = 0;
+				glow.alphaFrom = 0;
+				glow.alphaTo = .17;
+				glow.blurXFrom = 0;
+				glow.blurXTo = 12;
+				glow.blurYFrom = 0;
+				glow.blurYTo = 12;
+				glow.strength = 3;
+				glow.color = 0x000000;
+				glow.target = suggestionBoxWrapper;
+				glow.play();
+				
+				suggestionBox = new VBox();
+				suggestionBox.percentWidth = 100;
+				suggestionBox.percentHeight = 100;
+				var introText:Text = new Text();
+				introText.text = 'Leave a comment on your own response';
+				introText.styleName = "statementsPageStatement";
+				introText.percentWidth = 100;
+				suggestionInput = new TextArea();
+				suggestionInput.styleName = 'opinionBox';
+				suggestionInput.percentWidth = 100;
+				suggestionInput.percentHeight = 80;
+				suggestionInput.maxChars = Configuration.MAX_COMMENT_LENGTH;
+				saveSuggestionButton = new LoggedButton();
+				saveSuggestionButton.styleName = "blueButton";
+				saveSuggestionButton.label = SEND_SUGGESTION_PROMPT;
+				saveSuggestionButton.addEventListener("click",saveSuggestion);
+				var closeButton:Image = new Image();
+				closeButton.source = Configuration.CLOSE_BUTTON;
+				closeButton.addEventListener("click",removeSuggestionBox);
+				var rHBox:HBox = new HBox();
+				rHBox.percentWidth = 100;
+				rHBox.setStyle('horizontalAlign','right');
+				rHBox.addChild(closeButton);
+				suggestionBox.addChild(rHBox);
+				suggestionBox.addChild(introText);
+				suggestionBox.addChild(suggestionInput);
+				suggestionBox.addChild(saveSuggestionButton);
+				suggestionBoxWrapper.addChild(suggestionBox);
+				suggestionSaveText = new Text();
+				suggestionSaveText.text = Configuration.SAVE_SUGGESTION_MESSAGE;
+				suggestionSaveText.percentWidth = 100;
+				suggestionSaveText.styleName = "error";
+				suggestionSaveText.visible = false;
+				suggestionSaveText.includeInLayout = false;
+				suggestionBox.addChild(suggestionSaveText);
+				//suggestionBoxWrapper.addChild(suggestionSaveText);
+				this.parentApplication.opinionMap.plotCanvas.addChild(suggestionBoxWrapper);
+			}
+			
+			public function saveSuggestion(e:Event):void
+			{				
+				if (sendingSuggestion)
+					return;
+				
+				if (suggestionInput.text == "")
+				{
+					//suggestionBox.visible = false;
+					//suggestionBox.includeInLayout = false;
+					suggestionSaveText.visible = true;
+					suggestionSaveText.includeInLayout = true;
+					suggestionSaveText.text = "You must enter a suggestion.";
+					setTimeout(function():void{suggestionSaveText.text = Configuration.SAVE_SUGGESTION_MESSAGE;suggestionBox.visible = true;suggestionBox.includeInLayout = true;suggestionSaveText.visible = false;suggestionSaveText.includeInLayout = false;}, Constants.CLEAR_SAVE_STATUS_TIMEOUT);
+					return;
+				}
+				
+				var params:Object = new Object();
+				params['suggestion'] = suggestionInput.text;
+				params['cid'] = this.parentApplication.currentCommentId;
+				
+				if (Configuration.USE_ENTRY_CODES)
+					params['entrycode'] = this.parentApplication.ENTRY_CODE;
+				
+				sendingSuggestion = true;
+				saveCommentSuggestion.send(params);
+			}
+			
+			public function handleSaveCommentSuggestion():void
+			{
+				var decodedResult:Object = JSON.decode(saveCommentSuggestion.lastResult.toString());
+				var success:Boolean = AuthenticationUtils.resultIsSuccess(decodedResult);
+				
+				// TODO: Better error handling
+				if(AuthenticationUtils.resultIsAuthRequired(decodedResult))
+					return;
+				
+				if (success) 
+				{
+					// Disable the suggestion input for UI purposes
+					removeSuggestionBox();
+					loadReceivedSuggestions();
+					append = true;
+				} else
+				{
+					//suggestionBox.visible = false;
+					//suggestionBox.includeInLayout = false;
+					suggestionSaveText.visible = true;
+					suggestionSaveText.includeInLayout = true;
+					suggestionSaveText.text = "Save Failed";
+					setTimeout(function():void{suggestionSaveText.text = Configuration.SAVE_SUGGESTION_MESSAGE;suggestionBox.visible = true;suggestionBox.includeInLayout = true;suggestionSaveText.visible = false;suggestionSaveText.includeInLayout = false;}, Constants.CLEAR_SAVE_STATUS_TIMEOUT);
+				}
+				
+				sendingSuggestion = false;
+			}
+		]]>
+	</mx:Script>
+	<utils:ExtendedHTTPService id="sendSaveComment" useProxy="false" method="POST" resultFormat="text" result="handleSaveComment()" requestTimeout="{Configuration.HTTP_REQUEST_TIMEOUT}"/>
+	<utils:ExtendedHTTPService id="getReceivedSuggestions" useProxy="false" method="POST" resultFormat="text" result="handleGetSuggestion()"/>
+	<utils:ExtendedHTTPService id="getGivenSuggestions" useProxy="false" method="POST" resultFormat="text" result="handleGetSuggestion()"/>
+	<utils:ExtendedHTTPService id="saveCommentSuggestion" url="{this.parentApplication.httpUtils.getServiceUrl('os/savesuggestion/')}"  method="POST" resultFormat="text" result="handleSaveCommentSuggestion()"/>
+	<utils:ExtendedHTTPService id="saveSuggestionRating" url="{this.parentApplication.httpUtils.getServiceUrl('os/savesuggestionrating/')}" useProxy="false" method="POST" resultFormat="text" result="handleSaveSuggestionRating()"/>
+	
+	<!--<spinner:Spinner visible="{loading}" includeInLayout="{loading}" />-->	
+	
+	<!--<mx:HBox width="100%" horizontalGap="3">
+		<utils:LoggedButton id="receivedButton" label="Received" name="received-suggestions" buttonMode="true" click="{switchState('received')}" />
+		<utils:LoggedButton id="givenButton" label="Given" name="given-suggestions" buttonMode="true" click="{switchState('given')}"/>
+	</mx:HBox>
+	
+	<mx:VBox width="100%" horizontalAlign="center">
+		<mx:VBox styleName="mapLeftPanelHorizontalBoxLine" width="97%" height="2" />	
+	</mx:VBox>-->
+	
+	<mx:VBox id="suggestion_box" width="100%" height="{this.parentApplication.opinionMap.mapLeftPanel.height - this.parentApplication.ratingModule.buttonCanvas.height - 100}" horizontalScrollPolicy="off" paddingBottom="10">
+		<mx:VBox id="unread_suggestion_panel" fontWeight="bold" name="unread_suggestion_panel" width="100%" />
+		<mx:VBox id="read_suggestion_panel"  name="read_suggestion_panel" width="100%" />
+		<mx:HBox width="100%" horizontalAlign="center">
+			<utils:LoggedButton name="comment-module-suggestion" styleName="blueButtonLarge" textWrap="false" label="Leave a Comment" id="suggestionButton" click="{removeSuggestionBox();clearFloatingPrompts();createLeaveSuggestionBox();}" visible="false" includeInLayout="false"/>			
+		</mx:HBox>
+	</mx:VBox >
+	
+	<mx:HBox width="100%" horizontalAlign="center" includeInLayout="false" visible="false">
+		<mx:Button id="edit_comment" label="Edit Your Response" click="{removeEditCommentBox();createEditCommentBox()}" visible="{!(!oneRated || !(currentState == 'received'))}" includeInLayout="{!(!oneRated || !(currentState == 'received'))}"/>		
+	</mx:HBox>
+
+</mx:Module>

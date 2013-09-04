@@ -1,0 +1,487 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Module xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" 
+	xmlns:core="com.opinion.components.core.*"
+	xmlns:pages="com.opinion.components.pages.*"
+	xmlns:registration="com.opinion.components.registration.*"
+	xmlns:utils="com.opinion.utils.*" 
+	initialize="init()" 
+    horizontalScrollPolicy="off"
+    creationComplete="getAddOns()">
+		<mx:Script>
+		<![CDATA[
+			import com.adobe.serialization.json.JSON;
+			import com.opinion.settings.Constants;
+			import com.opinion.utils.AuthenticationUtils;
+			import com.opinion.utils.DisplayUtils;
+			import com.opinion.utils.HTTPUtils;
+			import com.opinion.settings.Configuration;
+			
+			import mx.controls.Alert;
+			import mx.core.IFlexDisplayObject;
+			import mx.managers.PopUpManager;
+			import mx.rpc.events.FaultEvent;
+			import com.opinion.utils.Log;		
+			
+			[Bindable] private var registrationNetworkError:String = "";
+			private function init():void {			
+				check_availability.username_input = _username;
+			}
+			
+			private function getAddOns():void {
+				// Add-ons for configurable modules
+                if (Configuration.SIGNUP_PAGE_ADD_ON) 
+                {
+					for (var i:int = 0; i < Configuration.SIGNUP_PAGE_ADD_ONS.length; i++)
+					{
+						var parent:DisplayObjectContainer = signupPageMainBox;
+						for (var n:int = 0; n < Configuration.SIGNUP_PAGE_ADD_ONS[i]['parent'].length; n++)
+						{
+							parent = DisplayObjectContainer(parent.getChildByName(Configuration.SIGNUP_PAGE_ADD_ONS[i]['parent'][n]));
+						} 
+						parent.addChild(Configuration.SIGNUP_PAGE_ADD_ONS[i]['child']);
+					}
+                }
+				//glowRegistration.play();
+			}
+		
+
+			public function register():void {	
+				
+				if(_username.text!= "" && this.parentApplication.registeredUsername == _username.text) //registration went through already
+				{
+					var parameters:Object = new Object();
+					parameters['username'] = this.parentApplication.registeredUsername.toLowerCase();
+					parameters['password'] = this.parentApplication.registeredPassword;
+					parameters['os_id'] = this.parentApplication.opinionSpaceId;
+					sendLogin.send(parameters);
+					return;
+				}
+				
+				if(Configuration.SOFT_ENTRY_CODES)
+				{
+					var parameters:Object = new Object();
+					parameters['username'] = " ";
+					parameters['password'] = " ";
+					parameters['entrycode'] = this.parentApplication.ENTRY_CODE;
+					parameters['os_id'] = this.parentApplication.opinionSpaceId;
+					sendLogin.send(parameters);
+					return;
+				}
+								
+				//we want to deactivate the button so users cannot submit a number of registration requests 
+				// as they are wayting for the reply from the server
+				_submit_button.enabled=false;
+				//we will enable it in the handleSendRegister()
+				// Remove instruction text and replace error text
+			    hideInstructionText();
+				//this.parentApplication.opinionMap.removeFakePoint();
+				
+                // Clear all error fields
+			    _error___all__.text = "";
+			    _error_email.text = "";
+			    _error_username.text = "";
+	//		    _error_password1.text = "";
+//			    _error_password2.text = "";
+				
+				networkError.visible = false;
+				networkError.includeInLayout = false;
+				
+				if(_username.text == "" || _password1.text == "")
+				{
+					_error___all__.text = "Please fill in all the fields.";
+					_submit_button.enabled=true;
+					return;
+				}
+			    
+				var parameters:Object = new Object();
+				parameters['email'] = _email.text;
+				parameters['username'] = _username.text;
+			
+				parameters['location'] = '';//This string is cleaned in the UserDemographics form
+				
+				parameters['url'] = "";
+				
+				if (_heardabout.text != "")
+					parameters['heard_about'] = _heardabout.text;
+				else
+			    	parameters['heard_about'] = "";				
+				parameters['password1'] = _password1.text;
+				parameters['password2'] = _password1.text;
+				parameters['question'] = "";
+				parameters['answer'] = "";
+				sendRegister._failure_function = registrationFailed;
+				sendRegister._retry_function = register;
+				sendRegister.maxBackOff = true;
+				sendRegister.send(parameters);
+				
+				this.parentApplication.opinionMap.transitionDemoText(Configuration.INSTRUCTIONS_6,true);
+				
+				// Show loading screen
+				this.parentApplication.loadingScreen.visible = true;
+			}
+			
+			private function handleSendRegister():void {
+				var decodedResult:Object = JSON.decode(sendRegister.lastResult.toString());
+				sendRegister.disconnect();
+				var success:Boolean = AuthenticationUtils.handleErrorsFormFields(decodedResult, this, [_error___all__, _error_email, _error_username]);
+				
+				if (success) {
+					this.parentApplication.registeredUsername = _username.text;
+					this.parentApplication.registeredPassword = _password1.text;
+					this.parentApplication.registeredEmail = _email.text;
+					
+					var parameters:Object = new Object();
+					parameters['username'] = this.parentApplication.registeredUsername.toLowerCase();
+					parameters['password'] = this.parentApplication.registeredPassword;
+					parameters['os_id'] = this.parentApplication.opinionSpaceId;
+					sendLogin._failure_function = loginFailed;
+					sendLogin.stateless = true;
+					sendLogin.send(parameters);
+				}
+				else
+				{
+					// Error, hide loading screen
+					this.parentApplication.loadingScreen.visible = false;
+				}
+				//we need to enable the button again
+				_submit_button.enabled=true;
+			}
+
+			protected function handleSendLogin():void {
+				var decodedResult:Object = JSON.decode(sendLogin.lastResult.toString());
+				sendLogin.disconnect();
+				var success:Boolean = AuthenticationUtils.handleErrorsNoFields(decodedResult, this);
+
+				if (success) {
+					networkError.visible = false;
+					networkError.includeInLayout = false;
+					this.parentApplication.opinionMap.mapOverlay.showCommentsPage();
+					//demographics.updateUserData();
+					//this.parentApplication.ratingModule.sendRating(1, 1.0 - this.parentApplication.opinionMap.originalCoordinates['fakeUserDot'].y); // Translate coordinate space to slider space
+					//this.parentApplication.ratingModule.sendRating(2,this.parentApplication.opinionMap.originalCoordinates['fakeUserDot'].x);
+					if(this.parentApplication.numStatements == 2){
+						this.parentApplication.opinionMap.saveRatingsAndClear();
+					}
+					else
+					{
+						// Send statement ratings (this can be from the statements page or the comment ratings if NO_STATEMENTS is on)
+						for (var sliderId:String in this.parentApplication.opinionMap.firstTimeStatements)
+						{
+							this.parentApplication.ratingModule.sendRating(sliderId, this.parentApplication.opinionMap.firstTimeStatements[sliderId]);
+						}
+						this.parentApplication.opinionMap.removeFakePoint();
+						
+						/*if (Configuration.NO_STATEMENTS) // Send the discussion statement
+						{
+							if (this.parentApplication.opinionMap.mapOverlay.statementsPage.commentInput.text != Configuration.COMMENT_ENTRY_PROMPT)
+							{
+								this.parentApplication.opinionMap.mapOverlay.statementsPage.saveCommentsPage();
+							}
+						}*/
+					}					
+					// Our protocol is first agreement, and then insight dictionary
+					sendFirstTimeRatings('agreement');
+				} else
+				{
+					// Error, hide loading screen
+					this.parentApplication.loadingScreen.visible = false;
+				}
+			}
+			
+			public function sendFirstTimeRatings(type:String):void
+			{
+				var parameters:Object = new Object();
+				var ratingsDict:Dictionary;
+				
+				// choose which dictionary of ratings to send
+				switch(type)
+				{
+					case 'agreement':
+						ratingsDict = this.parentApplication.opinionMap.getFirstTimeAgreeRatings();
+						break; 
+					case 'insight':
+						ratingsDict = this.parentApplication.opinionMap.getFirstTimeInsightRatings();
+						break; 
+				}
+				
+				// populate the parameters object				
+				for (var key:String in ratingsDict)
+				{
+					parameters[key] = Number(ratingsDict[key]);
+				}
+				
+				parameters['type'] = type;
+				
+				sendFirstTime._failure_function = firstTimeFailed;
+				sendFirstTime._retry_function = firstTimeRetry;
+				sendFirstTime.send(parameters);
+			}
+			
+			private function firstTimeRetry():void
+			{
+				sendFirstTimeRatings('agreement');
+			}
+			
+			private function handleSendFirstTimeRatings():void
+			{
+				var decodedResult:Object = JSON.decode(sendFirstTime.lastResult.toString());
+				sendFirstTime.disconnect();
+				var success:Boolean = AuthenticationUtils.handleErrorsNoFields(decodedResult, this);
+				if (success)
+				{
+					networkError.visible = false;
+					networkError.includeInLayout = false;
+					
+					// Our protocol is first agreement, and then insight dictionary
+					if (decodedResult['type'] == 'agreement')
+					{
+						sendFirstTimeRatings('insight');
+						return;
+					}
+					
+					if(!this.parentApplication.opinionMap.userSignedUp)
+					{
+						this.parentApplication.opinionMap.userSignedUp = true;
+						this.parentApplication.login();
+					}
+					form.visible= true; //reset in case login from external stuff fails
+					form.includeInLayout = true;
+					clearFields();
+					//this.parentApplication.opinionMap.hideFlareVisSliders();
+					//this.parentApplication.opinionMap.removeFakePoint();
+					//emailWelcome();
+				} else
+				{
+					// Error, hide loading screen
+					this.parentApplication.loadingScreen.visible = false;
+				}
+			}
+			
+			private function creationComplete():void {
+			    focusManager.setFocus(_email);
+                form.addEventListener(KeyboardEvent.KEY_DOWN, checkFormKey);
+			}
+			
+			private function submitForm():void {
+					register();
+            }
+            
+            /* If the enter key is pressed within the form, submit it */
+            private function checkFormKey(event:KeyboardEvent):void {
+                if(event.charCode == 13) {
+                    submitForm();
+                }
+            }
+            
+            // Old code for sending a create password link
+			private function handleSendCreatePassword():void {
+				var decoded:Object = JSON.decode(sendCreatePassword.lastResult.toString());
+				sendCreatePassword.disconnect();
+				//trace(decoded);
+			}
+
+			private function onUsernameChange():void{
+				check_availability.hideAllSuggestionFields();
+			}
+			
+			private function emailWelcome():void {
+				var parameters:Object = new Object();
+				parameters['email'] = _email.text;
+				sendCreatePassword.send(parameters);
+			}
+			            			
+			private function showInstructionsText(num:int):void {
+				switch(num) {
+					case 0:
+						usernameInstructions.visible = true;
+						usernameInstructions.includeInLayout = true;
+						_error_username.visible = false;
+						_error_username.includeInLayout = false;
+						break;
+					case 1:
+						emailInstructions.visible = true;
+						emailInstructions.includeInLayout = true;
+						_error_email.visible = false;
+						_error_email.includeInLayout = false;
+						break;
+					default:
+						break;
+				}
+			}
+			
+			/**
+			 * Only responsible for turning off the instruction text. AuthenticationUtils takes care of
+			 * turning on the correct error texts
+			 */ 
+			private function hideInstructionText():void {
+				usernameInstructions.visible = false;
+				usernameInstructions.includeInLayout = false;
+				emailInstructions.visible = false;
+				emailInstructions.includeInLayout = false;
+			}
+			
+			private function goToPrivacy():void {
+				this.parentApplication.currentState = 'about';
+				this.parentApplication.aboutPage.switchDisplay(this.parentApplication.aboutPage.privacyDiv);
+				//this.parentApplication.aboutPage.fromRegistration = true;
+			}
+			
+			private function handleFaultOrTimeout(event:FaultEvent):void{					
+			}
+			
+			private function registrationFailed():void
+			{
+				this.parentApplication.loadingScreen.visible = false;
+				var parameters:Object = sendRegister.lastCallParameters;
+				_email.text = parameters['email'];
+				_username.text = parameters['username']; 
+				_password1.text = parameters['password1']; 
+				//_password2.text = parameters['password2'];
+				
+				if(sendRegister.backOffTimer > 32)
+				{
+					networkError.visible = true;
+					networkError.includeInLayout = true;
+					_submit_button.enabled = true;
+					sendRegister.backOffReset();
+					registrationNetworkError = "Maximum retries exceeded";
+					return;
+				}
+				
+				networkError.visible = true;
+				networkError.includeInLayout = true;
+				for(var i:int = 0; i<sendRegister.backOffTimer; i++)
+					setTimeout(displayCountDown,i*1000,sendRegister.backOffTimer - i);
+			}
+			
+			private function loginFailed():void
+			{
+				this.parentApplication.loadingScreen.visible = false;
+				networkError.visible = true;
+				networkError.includeInLayout = true;
+				for(var i:int = 0; i<sendLogin.backOffTimer; i++)
+					setTimeout(displayCountDown,i*1000,sendLogin.backOffTimer - i);
+			}
+			
+			private function firstTimeFailed():void
+			{
+				this.parentApplication.loadingScreen.visible = false;
+				networkError.visible = true;
+				networkError.includeInLayout = true;
+				for(var i:int = 0; i<sendFirstTime.backOffTimer; i++)
+					setTimeout(displayCountDown,i*1000,sendFirstTime.backOffTimer - i);
+			}
+			
+			private function displayCountDown(left:int):void
+			{
+				registrationNetworkError = "Network error retrying in: " + left + "s";
+			}
+			
+			private function clearFields():void
+			{
+				_username.text = "";
+				_password1.text = "";
+//				_password2.text = "";
+				_heardabout.text = "";
+				_email.text = "";
+			}
+			
+			private function continueWithoutAccount():void
+			{
+				this.parentApplication.opinionMap.mapOverlay.clearState();
+				this.parentApplication.opinionMap.fadeInDots();
+				this.parentApplication.opinionMap.transitionDemoText("You can read and rate ideas without an account.",false,0,false,true,"Enter your own idea");
+				this.parentApplication.opinionMap.signupContinue = true;
+			}
+			
+		]]>
+	</mx:Script>
+	<utils:ExtendedHTTPService id="sendLogin" url="{this.parentApplication.httpUtils.getServiceUrl('accountsjson/login/')}" useProxy="false" method="POST" resultFormat="text" result="handleSendLogin()" fault="handleFaultOrTimeout(event)"/>
+	<utils:ExtendedHTTPService id="sendRegister" url="{this.parentApplication.httpUtils.getServiceUrl('accountsjson/register/')}" useProxy="false" method="POST" resultFormat="text" result="handleSendRegister()" fault="handleFaultOrTimeout(event)"/>
+    <utils:ExtendedHTTPService id="sendCreatePassword" url="{this.parentApplication.httpUtils.getServiceUrl('accountsjson/password/create/')}" useProxy="false" method="POST" resultFormat="text" result="handleSendCreatePassword()" fault="handleFaultOrTimeout(event)"/>
+	<utils:ExtendedHTTPService id="sendFirstTime" url="{this.parentApplication.httpUtils.getServiceUrl('os/firsttime/' + this.parentApplication.opinionSpaceId + '/')}" useProxy="false" method="POST" resultFormat="text" result="handleSendFirstTimeRatings()" fault="handleFaultOrTimeout(event)"/>
+	
+	<!--<mx:Glow id="glowRegistration" duration="250" alphaFrom="0" alphaTo=".65" blurXFrom="0.0" blurXTo="10.0" blurYFrom="0.0" blurYTo="10.0"  strength="2" color="0x00F5FE" target="{_submit_button}"/>-->
+	<mx:Fade id="errorFade" duration="500"/>
+	
+    <mx:VBox id="signupPageMainBox" width="100%" height="100%">
+		<mx:HBox id="signupPageBody" width="100%" height="100%">
+			<mx:VBox id="registrationBox" width="100%" height="100%" styleName="mapLeftPanelSubBoxLessPadding" verticalGap="0">				
+				<mx:VBox width="100%" horizontalAlign="center" paddingBottom="5">
+					<mx:VBox styleName="mapLeftPanelHorizontalBoxLine" width="100%" height="1"/>	
+				</mx:VBox>
+				
+				<!--<mx:Text fontSize="15" textAlign="center" fontWeight="bold" width="100%" text="{'Sign in with Facebook or create an account'}" visible="{Configuration.ALLOW_EXTERNAL_LOGIN}" includeInLayout="{Configuration.ALLOW_EXTERNAL_LOGIN}"/>-->
+				<core:SocialMedia id="socialMedia" visible="{Configuration.ALLOW_EXTERNAL_LOGIN}" includeInLayout="{Configuration.ALLOW_EXTERNAL_LOGIN}" width="100%" paddingTop="10"/>
+				
+				<mx:VBox width="100%" horizontalAlign="center" paddingTop="5" visible="{Configuration.ALLOW_EXTERNAL_LOGIN}" includeInLayout="{Configuration.ALLOW_EXTERNAL_LOGIN}" >
+					<mx:Text text="OR" fontSize="22" fontWeight="bold"/>
+					<mx:VBox styleName="mapLeftPanelHorizontalBoxLine" width="100%" height="1"/>	
+				</mx:VBox>
+								
+				<mx:Text id="networkError" width="100%" height="20" color="#FF0000" fontWeight="bold" styleName="error" text="{registrationNetworkError}" visible="false" includeInLayout="false" showEffect="{errorFade}"/>
+				
+				<mx:Form id="form" width="100%" xmlns:mx="http://www.adobe.com/2006/mxml" paddingLeft="0" verticalGap="2" paddingTop="0" paddingBottom="0" visible="{!Configuration.SOFT_ENTRY_CODES}" includeInLayout="{!Configuration.SOFT_ENTRY_CODES}">					
+					<mx:VBox width="100%" horizontalAlign="left" styleName="signupLabel" visible="{Configuration.REGISTRATION_FIELDS_TABLE['username'].show}" includeInLayout="{Configuration.REGISTRATION_FIELDS_TABLE['username'].show}">
+						<mx:Text fontSize="22" fontWeight="bold" text="{Configuration.SIGNUP_PAGE_REGISTER_PROMPT}" textAlign="center" width="100%"/>
+						<mx:Text fontSize="15" text="Choose a username, e.g. GregSmith12"/>
+						<mx:TextInput id="_username" width="100%" text="" styleName="opinionBox" change="onUsernameChange()"/>
+						<mx:Text id="_error_username" width="100%" styleName="error" visible="false" includeInLayout="false" text="" showEffect="{errorFade}"/>
+						<mx:Text id="usernameInstructions" width="100%" styleName="error" text="{Configuration.USERNAME_INSTRUCTION_TEXT}" visible="false" includeInLayout="false" showEffect="{errorFade}"/>
+						
+						<registration:CheckAvailability id="check_availability" width="100%" visible="false" includeInLayout="false"/> <!--visible="{!(!Configuration.REGISTRATION_FIELDS_TABLE['username'].show || !(_username.text != ''))}" includeInLayout="{!(!Configuration.REGISTRATION_FIELDS_TABLE['username'].show || !(_username.text != ''))}" paddingTop="10" showEffect="{errorFade}"/>-->
+					</mx:VBox>
+					
+					<!--<pages:Demographics id="demographics" width="100%"/>-->
+					
+					<mx:VBox width="100%" horizontalAlign="left" styleName="signupLabel" paddingTop="1" visible="{Configuration.REGISTRATION_FIELDS_TABLE['email'].show}" includeInLayout="{Configuration.REGISTRATION_FIELDS_TABLE['email'].show}">
+						<mx:Text text="Email" fontSize="15"/>
+						<mx:TextInput id="_email" width="100%" text="" styleName="opinionBox"/>
+						
+						<mx:HBox width="100%">
+							<mx:Text width="100%" fontSize="13" text="We will respect your privacy and not share it with others."/>
+							<mx:LinkButton styleName="signin" fontSize="13" label="Read" click="{this.parentApplication.httpUtils.openLinkNewWindow('http://opinion.berkeley.edu/privacy.html')}"/>
+						</mx:HBox>
+						
+						
+						<mx:Text id="emailInstructions" width="100%" styleName="error" text="{Configuration.EMAIL_INSTRUCTION_TEXT}" visible="false" includeInLayout="false" showEffect="{errorFade}"/>
+						<mx:Text id="_error_email"  styleName="error" visible="false" includeInLayout="false" text="" showEffect="{errorFade}"/>
+					</mx:VBox> 
+					
+					<mx:VBox width="100%" horizontalAlign="left" styleName="signupLabel" paddingTop="3">
+						<mx:Text fontSize="15" text="Password"/>
+						<mx:TextInput id="_password1"  width="100%" text="" styleName="opinionBox" displayAsPassword="true"/>
+					</mx:VBox>
+					
+					<!--<mx:VBox width="100%" horizontalAlign="left" styleName="signupLabel" paddingTop="1">
+						<mx:Text text="Confirm Password"/>
+						<mx:TextInput id="_password2"  width="100%" text="" styleName="opinionBox" displayAsPassword="true"/>
+					</mx:VBox>-->
+					
+					<!-- begin optional -->
+					<mx:VBox width="100%" horizontalAlign="left" styleName="signupLabel" paddingTop="5" visible="{Configuration.REGISTRATION_FIELDS_TABLE['heard_about'].show}" includeInLayout="{Configuration.REGISTRATION_FIELDS_TABLE['heard_about'].show}">
+						<mx:Text text="HOW DID YOU HEAR ABOUT OPINION SPACE?" width="100%" fontSize="16"/>
+						<mx:TextInput id="_heardabout"  width="100%" text="" />
+						<mx:Text id="_error_heardabout" styleName="error" visible="false" text="" showEffect="{errorFade}"/>
+					</mx:VBox>
+					
+					<mx:Text id="_error___all__" styleName="error" visible="true" includeInLayout="true" text="" showEffect="{errorFade}"/>
+					
+				</mx:Form>
+				<mx:VBox  width="100%" horizontalAlign="center">
+					<mx:Text visible="{Configuration.SOFT_ENTRY_CODES}" width="100%" fontSize="18" textAlign="center" fontWeight="bold" includeInLayout="{Configuration.SOFT_ENTRY_CODES}" text="When you return to this site to check on your progress, you can use your personalized link to sign in.">
+					</mx:Text>
+					<utils:LoggedButton width="250" name="registration_see-where-i-stand" fontSize="16" id="_submit_button" styleName="blueButtonLarge" label="{Configuration.SOFT_ENTRY_CODES ? 'Continue' : Configuration.REGISTER_BUTTON_TEXT}" click="submitForm()"/>
+					<mx:VBox styleName="mapLeftPanelHorizontalBoxLine" width="100%" height="1"/>	
+					<mx:VBox width="100%" height="10"/>	
+					<utils:LoggedButton width="250" name="registration_continue" id="_continue_button" styleName="grayButtonLarge" fontSize="16" label="Continue Without Signing Up" click="continueWithoutAccount()"/>
+				</mx:VBox>					
+			</mx:VBox>
+			<mx:VBox styleName="signupInstructionsBox" horizontalAlign="left" visible="{Configuration.SHOW_PRIVACY_POLICY}" includeInLayout="{Configuration.SHOW_PRIVACY_POLICY}">
+				<mx:Text width="100%">
+				</mx:Text>
+				<mx:LinkButton paddingTop="10" label="Go to Privacy Policy" styleName="signuplink" click="goToPrivacy()" visible="false" includeInLayout="false"/>
+			</mx:VBox>	
+		</mx:HBox>
+	</mx:VBox>
+</mx:Module>

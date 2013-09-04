@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Module xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" xmlns:controls="com.fxcomponents.controls.*" xmlns:controls1="com.asfusion.controls.*" xmlns:core="com.opinion.components.core.*">
+	<mx:Script>
+		<![CDATA[
+			import com.opinion.utils.HTTPUtils;
+			import com.opinion.utils.DisplayUtils;
+        ]]>
+    </mx:Script>
+    
+	<mx:VBox width="670" height="100%">
+			<mx:Text styleName="h1Top" text="FAQ"/>
+			<mx:Text width="100%" styleName="h2" text="1. Why do I have to rate the five initial propositions?"/>
+			<mx:Text width="100%">
+				<mx:htmlText>
+					<![CDATA[This is a way for us to get a baseline understanding of your position with regards to U.S. foreign policy. Your ratings are used to position you on the space so that you are near users with similar opinions.]]>
+				</mx:htmlText>
+			</mx:Text>		
+			<mx:Text width="100%" styleName="h2" text="2. Why can't I find myself in the space?"/>
+			<mx:Text width="100%">
+				<mx:htmlText>
+					<![CDATA[You are the yellow point encompassed by a yellow halo that you will see after you register.]]>
+				</mx:htmlText>
+			</mx:Text>
+			<mx:Text width="100%" styleName="h2" text="3. What does my position in the space mean? Does left mean more liberal?"/>
+			<mx:Text width="100%">
+				<mx:htmlText>
+					<![CDATA[Not at all, but good question! In Opinion Space the layout is determined completely by the data entered by participants: it is computed using statistical dimensionality reduction techniques. Opinion Space is designed to move beyond the usual left-right linear spectrum to display "constellations" of opinions. Try opening the Opinion Dashboard and moving your sliders to see how changes in your opinion will affect your position in Opinion Space.]]>
+				</mx:htmlText>
+			</mx:Text>
+			<mx:Text width="100%" styleName="h2" text="4.  How do I interpret the space? Do points near me correspond to participants with similar opinions?"/>
+			<mx:Text width="100%">
+				<mx:htmlText>
+					<![CDATA[Rather than orientation of the axes, the Opinion Space “map” should be interpreted by the distance relationships between points. If two people have similar opinions their points will be close in Opinion Space, but the converse is not necessarily true. Depending on the statistics, it is possible that two users with different opinions will be projected nearby in Opinion Space. You can click on different points to see the responses of people close and far from you, and you can also see their opinions on the five initial propositions.]]>
+				</mx:htmlText>
+			</mx:Text>
+			<mx:Text width="100%" styleName="h2" text="5. What does my Author Score mean?"/>
+			<mx:Text width="100%">
+				<mx:htmlText>
+					<![CDATA[Your Author Score reflects how insightful other Opinion Space users found your response to the discussion topic. You will receive a higher score if your response is rated highly by a diversity of users as opposed to only users who share similar baseline opinions. Over time, your score may go up or down depending on the ratings your comment receives.]]>
+				</mx:htmlText>
+			</mx:Text>
+			<mx:Text width="100%" styleName="h2" text="6. What does my Reviewer Score mean?"/>
+			<mx:Text width="100%">
+				<mx:htmlText>
+					<![CDATA[Your Reviewer Score measures your ability to identify insightful comments early on. You also receive points for helping our system by reviewing the comments that you read.]]>
+				</mx:htmlText>
+			</mx:Text>
+			<mx:Text width="100%" styleName="h2" text="7. Why are some points larger than others?"/>
+			<mx:Text width="100%">
+				<mx:htmlText>
+					<![CDATA[The size of a point is a function of the Author Score for the corresponding comment. In general, larger points have been rated more insightful than smaller points.]]>
+				</mx:htmlText>
+			</mx:Text>
+			<mx:Text width="100%" styleName="h2" text="8. What do the pulsing halos around certain points signify?"/>
+			<mx:Text width="100%">
+				<mx:htmlText>
+					<![CDATA[Points with halos correspond to responses with the top 20 Author Scores.]]>
+				</mx:htmlText>
+			</mx:Text>
+			<mx:Text width="100%" styleName="h2" text="9. What does the color of a point mean?"/>
+			<mx:Text width="100%">
+				<mx:htmlText>
+					<![CDATA[A point is colored white if you have not yet rated the corresponding response and our confidence of its score (or size) is above a threshold. Grey points also correspond to responses that you have not yet rated, but our confidence of their insightfulness is below threshold. (You will receive more points towards your Reviewer Score if you accurately report on the insightfulness of grey point responses.)
+
+Green-hued points refer to responses that you have reported are more insightful, and red-hued points correspond to responses that you have reported are less insightful.]]>
+				</mx:htmlText>
+			</mx:Text>
+			<mx:Text width="100%" styleName="h2" text="10. Why are there two ratings, one for how much I 'agree' with a comment and one for how 'insightful' a comment is?"/>
+			<mx:Text width="100%">
+				<mx:htmlText>
+					<![CDATA[A comment is "insightful" if it offers a perspective that is not obvious on the surface. A primary goal of Opinion Space is to "depolarize" discussions by encouraging communication between people who may not agree with each other.  You'll probably find many comments you don't agree with, but hopefully some of these will still be insightful.]]>
+				</mx:htmlText>
+			</mx:Text>
+			<mx:Text width="100%" styleName="h2" text="11. Why does my point move some days even though I haven't changed my opinions?"/>
+			<mx:Text width="100%">
+				<mx:htmlText>
+					<![CDATA[We run Principal Component Analysis regularly to re-compute the best possible mapping into two dimensions, and this often gives new meaning to the axes of the space. While your point remains at the same five-dimensional location, as defined by your responses to the five initial propositions, its projection onto two dimensions will change periodically.]]>
+				</mx:htmlText>
+			</mx:Text>
+			<mx:Text width="100%" styleName="h2" text="12. Are all of the points in the space shown at once? What if it gets too cluttered?"/>
+			<mx:Text width="100%">
+				<mx:htmlText>
+					<![CDATA[We realize that throwing 1,000 points at you would be a bit overwhelming! Instead, we show you all of the points that you yourself have rated (up to a certain limit), as well as the most recently changed points in the space (again up to a certain limit), with no more than 200 points displayed at any given time.  Points with responses to the discussion question have priority.]]>
+				</mx:htmlText>
+			</mx:Text>
+			<mx:Text width="100%" styleName="h2" text="13. Why did my comment get cut-off?"/>
+			<mx:Text width="100%">
+				<mx:htmlText>
+					<![CDATA[If your comment is too long, we are unable to display the entire text while viewing your own opinions; however, other users will be able to review the full comment, and you can edit the text by clicking the Edit Response button directly beneath the textbox.]]>
+				</mx:htmlText>
+			</mx:Text>			
+	</mx:VBox>
+</mx:Module>

@@ -1,0 +1,72 @@
+Branding
+1. Product Name,PRODUCT_NAME, example Collective Discovery Engine
+2. Project Heading,HEADER_TITLE, example Opinion Space
+3. Project Sub-heading,HEADER_TITLE_VERSION, example LEARNING
+4. Use Header Image,HEADER_IMAGE, example false (requires 5,6)
+5. Header Image Source,HEADER_IMAGE_SOURCE, example ""
+6. Header Image Link,HEADER_IMAGE_LINK, example ""
+7. Front Page Title,WELCOME_PAGE_TITLE, example The Collective Discovery Enginge
+
+Welcome page
+1. Sub Title,WELCOME_PAGE_SUBLOGO_TEXT, example How can social media be used to benefit primary and secondary learning?
+2. Show Number of Users, OPINIONS_EXPRESSED_NUM_USERS, example true, (requires 3)
+3. What do you call a user, USER_POST_TEXT, example PARTICIPANTS
+4. Announcement, ANNOUNCEMENT, example true (requires 5)
+5. Announcement Text, ANNOUNCEMENT_TEXT, example Kindle Fires will be awarded for the three best ideas!
+
+Help and Feedback
+1. Error Emails,SHOW_FEEDBACK,example true (requires 2)
+2. Feedback Text,FEEDBACK_TEXT,example FOUND A BUG?
+3. About Page,SHOW_HELP,example True
+4. About Page Text,HELP_TEXT, example "HELP"
+
+Logins
+1. Allow Facebook/Twitter,ALLOW_EXTERNAL_LOGIN, example true
+2. Facebook,INCLUDE_FACEBOOK, example true (requires 3)
+3. Facebook App ID,FACEBOOK_APP_ID, example 376089995779662
+3. Twitter,INCLUDE_TWITTER, example false
+
+Sliders
+1. Top Slider,SHOW_AGREEMENT_SLIDER, example true requires(2,3,4,5,6,7)
+2. Top Slider Question,AGREEMENT_TEXT, example How innovative is this idea?
+3. Top Slider Left Text,AGREEMENT_LEFT_TEXT, example Not innovative
+4. Top Slider Right Text,AGREEMENT_RIGHT_TEXT, example Very innovative
+5. Top Slider Stats Text,AGREEMENT_HISTOGRAM_TEXT, example Innovative
+6. Top Slider Legend Left Text,LEGEND_AGREEMENT_LEFT, example Less Innovative
+7. Top Slider Legend Right Text,LEGEND_AGREEMENT_RIGHT, example More Innovative;
+8. Bottom Slider,SHOW_INSIGHT_SLIDER, example true requires(9,10,11,12,13,14)
+9. Bottom Slider Question,INSIGHT_TEXT, example How Effective is this idea?
+10. Bottom Slider Left Text,INSIGHT_LEFT_TEXT, example Not Effective
+11. Bottom Slider Right Text,INSIGHT_RIGHT_TEXT, example Very Effective
+12. Bottom Slider Stats Text,INSIGHT_HISTOGRAM_TEXT, example Effective
+13. Bottom Slider Legend Left Text,LEGEND_INSIGHT_LEFT, example Less Effective
+14. Bottom Slider Legend Right Text,LEGEND_INSIGHT_RIGHT, example More Effective
+
+Walkthrough
+1. Walkthrough slides,SHOW_WALKTHROUGH, example true
+2. Walkthrough title,WALKTHROUGH_INTRO_TEXT, example Welcome to the\nCollective Discovery Engine
+3. Walkthrough main text,WALKTHROUGH_SEARCH_DESCRIPTION "The Collective Discovery Engine is focused around a primary question of interest, such as \“How can social media be used to benefit primary and secondary learning?\”";
+4. Walkthrough sub text,WALKTHROUGH_TOP_TEXT, example Note the colorful circular \"blooms\" (like plants). Each bloom represents an idea or answer suggested by a participant. The bloom's position depends on the opinions of its author. Its size and color depend on how others have rated it.\n\nKindle Fires will be awarded for the three best ideas!
+5. Walkthrough next text, WALKTHROUGH_TEXT, example Continue
+6. Walkthrough two text,WALKTHROUGH_INTRO2_TEXT, example Evaluate other participant's ideas by clicking on the blooms.
+public static var STATEMENTS_INTRO_TEXT:String = "Now plant your own idea!\nOn the right side there will be 8 propositions. Use the sliders to indicate your opinions on these propositions. Remember to scroll down if neccessary, and click \"Done\" when finished."
+
+First Time
+1. Step 1 Title,FIRST_TIME_RATE_STEP, example STEP 1
+2. Step 1 Text,FIRST_TIME_RATE_PROMPT, example Click any bloom to begin.
+3. Step 2 Title,FIRST_TIME_STATEMENT_STEP, example STEP 2
+4. Step 2 Text,FIRST_TIME_STATEMENTS_INSTRUCTIONS, example Please express your opinions on the 8 statements to the right.  Note how your bloom moves in response.
+5. Step 3 Title,FIRST_TIME_SIGNUP_STEP, example STEP 3
+6. Step 3 Text,FIRST_TIME_SIGNUP_INSTRUCTIONS, example Please register so we can contact you if your idea wins one of the Kindle Fire prizes.
+7. Step 4 Title,COMMENT_NOT_FINISHED_TEXT, example STEP 4
+8. Step 4 Text1,POST_REGISTRATION_TITLE, example Thank you!  Please contribute your own idea...
+9. Step 4 Text2,POST_REGISTRATION_TEXT, example We welcome your ideas for how social media can be used to improve pirmary and secondary education.   If you do not wish to enter an idea now, click \"Skip\". You can always enter one later.
+10. Step 4 Text 3,POST_LEAVERESPONSE_TITLE, example Thank you for joining the discussion!
+11.	Step 4 Text 4,POST_LEAVERESPONSE_TEXT, example You are now done placing your bloom. You should now read and evaluate the responses of other participants. You can track your progress in the Stats tab.
+12.	Number of trial points,EXPLORE_THRESHOLD_RATINGS,example 2.0
+13.	Trial point wording,YOUR_SCORE_LANGUAGE,example Ideas Explored: 
+
+Contact
+Contact Email,CONTACT_SUPPORT_EMAIL, example sanjaykrishn@gmail.com
+
+

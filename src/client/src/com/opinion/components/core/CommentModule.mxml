@@ -1,0 +1,692 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Module xmlns:mx="http://www.adobe.com/2006/mxml" 
+		   xmlns:core="com.opinion.components.core.*" 
+		   xmlns:utils="com.opinion.utils.*" 
+		   creationComplete="creationComplete()" xmlns:panel="com.visualempathy.extensions.panel.*" currentState="rate">
+	<mx:states>
+		<mx:State name="rate" enterState="initState()" exitState="exitState()"/>
+		<mx:State name="opinions" enterState="initState()" exitState="exitState()"/>
+		<mx:State name="history" enterState="initState()" exitState="exitState()"/>
+	</mx:states>
+	<mx:Script>
+		<![CDATA[
+			import flare.animate.Tween;
+			import mx.effects.Glow;
+			import com.opinion.settings.Constants;
+			import com.opinion.utils.DisplayUtils;
+			import com.opinion.utils.HTTPUtils;
+			import com.opinion.settings.Configuration;
+			import mx.controls.Alert;
+			import mx.rpc.events.FaultEvent;
+			import com.adobe.serialization.json.JSON;
+			import mx.effects.Fade;
+			
+			import flash.utils.Timer;
+			
+			import mx.collections.*;
+			import mx.controls.sliderClasses.Slider;
+			import mx.events.ItemClickEvent;
+			import mx.events.SliderEvent;
+			
+			import com.opinion.utils.*;
+		
+		   	public static const COMMENT_BOX_HEIGHT:int = 350;
+		   	public static const COMMENT_BOX_WIDTH:int = 200;
+    		public static const COMMENT_DISPLAY_HEIGHT:int = 110;
+    		public static const COMMENT_DISPLAY_HEIGHT_WITH_PREVQ:int = 85;
+    		
+    		[Bindable] public var commentTextAreaHeight:int = COMMENT_DISPLAY_HEIGHT;
+    		
+    		public static const COMMENT_VIEWER_TITLE:String = "Review This Response";
+    		public static const LANDMARK_VIEWER_TITLE:String = "Landmark Viewer";
+    		
+    		[Bindable] public var landmarkImageURL:String;
+    		[Bindable] public var landmarkDesc:String;
+    		[Bindable] public var landmarkGuessText:String;
+    		[Bindable] public var landmarkName:String;
+    		
+    		[Bindable] public var commentBoxHeight:int = COMMENT_BOX_HEIGHT;
+    		
+    		[Bindable] public var opinionMap:OpinionMap;
+    		
+//    		[Bindable] public var viewRatingLabel:String = OpinionMap.SHOW_RATING_LABEL;
+//   		[Bindable] public var previousCommentLabel:String = OpinionMap.GET_PREVIOUS_COMMENT_LABEL;
+    		
+            [Bindable] private var LABEL_ARRAY:ArrayCollection = new ArrayCollection([
+                {label:"Rate response"},
+                {label:"View opinions"}
+            ]);    		
+    		
+    		[Bindable] public var username:String = "";
+    		[Bindable] public var location:String = "";
+    		
+    		private var mouseOverDisabled:Boolean = false;
+    		
+    		private var commentId:int = -1;
+    		private var sendingSuggestion:Boolean = false;
+    		private static const RATE_PROMPT:String = "Rate this idea";
+    		private static const SUGGEST_PROMPT:String = "Leave a comment";
+    		
+    		private static const SEND_SUGGESTION_PROMPT:String = "Post Comment";
+    		
+    		private static const BOTTOM_BOX_HEIGHT:int = 190;
+			
+			private var suggestionBox:VBox;
+			private var suggestionBoxWrapper:VBox;
+			private var suggestionInput:TextArea;
+//            private var saveSuggestionButton:Button;
+			private var suggestionSaveText:Text;
+			public var oldValueAgreement:Number = .5;
+			public var oldValueComment:Number = .5;
+    		
+    		private function creationComplete():void {
+    			opinionMap = this.parentApplication.opinionMap;
+    							
+    			commentSlider.addEventListener(SliderEvent.THUMB_RELEASE, commentSliderRelease);
+				commentSlider.addEventListener(SliderEvent.CHANGE, commentSliderRelease);
+    			agreementSlider.addEventListener(SliderEvent.THUMB_RELEASE, agreementSliderRelease);
+				agreementSlider.addEventListener(SliderEvent.CHANGE, agreementSliderRelease);
+    			
+    			saveCommentSuggestion.url = this.parentApplication.httpUtils.getServiceUrl('os/savesuggestion/');
+    			
+    			//drawDialogTail(dialogTailBox);
+    		}
+			
+			private function initState():void {
+				switch (currentState) {
+					case 'rate':
+						rateButton.selected = true;
+						break;
+					case 'opinions':
+						break;
+					case 'history':
+						historyButton.selected = true;
+						break;
+					default:
+						break;
+				}
+			}
+			
+			private function exitState():void
+			{
+				removeSuggestionBox();
+				switch (currentState) {
+					case 'rate':
+						rateButton.selected = false;
+						break;
+					case 'opinions':
+						break;
+					case 'history':
+						historyButton.selected = false;
+						hideHistory();
+						break;
+					default:
+						break;
+				}
+			}
+			
+			private function createSuggestionBox():void
+			{
+				// if leave suggestion prompt is open, remove it
+				this.parentApplication.opinionMap.removeFloatingPrompt(this.parentApplication.opinionMap.leaveSuggestionPrompt);
+				if(this.parentApplication.isUserAuthenticated && this.parentApplication.usernameSearch)
+					this.parentApplication.opinionMap.removeTooltipOnUser()
+				suggestionBoxWrapper = new VBox();
+				suggestionBoxWrapper.width = this.parentApplication.opinionMap.commentModule.width;
+				suggestionBoxWrapper.height = 300;
+				suggestionBoxWrapper.x = this.parentApplication.opinionMap.plotCanvas.width - 30 - this.parentApplication.opinionMap.commentModule.width - suggestionBoxWrapper.width;
+				suggestionBoxWrapper.y = 100;
+				suggestionBoxWrapper.styleName = 'mapLeftPanelSubBox'
+				suggestionBoxWrapper.setStyle('verticalAlign', 'middle');
+				var glow:Glow = new Glow();
+				glow.duration = 0;
+				glow.alphaFrom = 0;
+				glow.alphaTo = .17;
+				glow.blurXFrom = 0;
+				glow.blurXTo = 12;
+				glow.blurYFrom = 0;
+				glow.blurYTo = 12;
+				glow.strength = 3;
+				glow.color = 0x000000;
+				glow.target = suggestionBoxWrapper;
+				glow.play();
+				
+				suggestionBox = new VBox();
+				suggestionBox.percentWidth = 100;
+				suggestionBox.percentHeight = 100;
+				var introText:Text = new Text();
+				introText.text = 'What are one or two specific ways this idea can be improved?';
+				introText.styleName = "statementsPageStatement";
+				introText.percentWidth = 100;
+				suggestionInput = new TextArea();
+				suggestionInput.styleName = 'opinionBox';
+				suggestionInput.percentWidth = 100;
+				suggestionInput.percentHeight = 80;
+				suggestionInput.maxChars = Configuration.MAX_COMMENT_LENGTH;
+//				saveSuggestionButton = new LoggedButton();
+	//			saveSuggestionButton.styleName = "blueButton";
+		//		saveSuggestionButton.label = SEND_SUGGESTION_PROMPT;
+			//	saveSuggestionButton.addEventListener("click",saveSuggestion);
+				var closeButton:Image = new Image();
+				closeButton.source = Configuration.CLOSE_BUTTON;
+				closeButton.addEventListener("click",removeSuggestionBox);
+				var rHBox:HBox = new HBox();
+				rHBox.percentWidth = 100;
+				rHBox.setStyle('horizontalAlign','right');
+				rHBox.addChild(closeButton);
+				suggestionBox.addChild(rHBox);
+				suggestionBox.addChild(introText);
+				suggestionBox.addChild(suggestionInput);
+				//suggestionBox.addChild(saveSuggestionButton);
+				suggestionBoxWrapper.addChild(suggestionBox);
+				suggestionSaveText = new Text();
+				suggestionSaveText.text = Configuration.SAVE_SUGGESTION_MESSAGE;
+				suggestionSaveText.percentWidth = 100;
+				suggestionSaveText.styleName = "error";
+				suggestionSaveText.visible = false;
+				suggestionSaveText.includeInLayout = false;
+				suggestionBox.addChild(suggestionSaveText);
+				//suggestionBoxWrapper.addChild(suggestionSaveText);
+				this.parentApplication.opinionMap.plotCanvas.addChild(suggestionBoxWrapper);
+			}
+			
+			public function removeSuggestionBox(e:Event=null):void
+			{
+				if(suggestionBoxWrapper != null && this.parentApplication.opinionMap.plotCanvas.contains(suggestionBoxWrapper)){
+				this.parentApplication.opinionMap.plotCanvas.removeChild(suggestionBoxWrapper);
+				}
+			}
+
+			//var oldValueComment:Number = .5;
+			public function commentSliderRelease(event:SliderEvent):void {
+				var targetSlider:Slider = Slider(event.target);
+				var targetSliderValue:Number = targetSlider.value;
+				if (event.type == SliderEvent.CHANGE && Math.abs(targetSlider.value-oldValueComment)< .05)
+				{
+					oldValueComment = targetSlider.value;
+					return;
+				}
+				oldValueComment = targetSlider.value;
+				
+				// disallow the first rating if there is no change (mouseclick) 
+				if (opinionMap.storedCommentRating[opinionMap.curCommentUserId.toString()] == -1 && targetSliderValue == Constants.DEFAULT_SLIDER_VALUE)
+				{
+					return;
+				}
+			
+				// Save the comment rating change
+				opinionMap.sendCommentRating(targetSliderValue);
+			}
+			
+			public function agreementSliderRelease(event:SliderEvent):void {
+				var targetSlider:Slider = Slider(event.target);
+				var targetSliderValue:Number = targetSlider.value;
+				if (event.type == SliderEvent.CHANGE && Math.abs(targetSlider.value-oldValueAgreement)< .05)
+				{
+					oldValueAgreement = targetSlider.value;
+					return;
+				}
+				oldValueAgreement = targetSlider.value;
+			
+				// disallow the first rating if there is no change (mouseclick) 
+				if (opinionMap.storedAgreementRating[opinionMap.curCommentUserId.toString()] == -1 && targetSliderValue == Constants.DEFAULT_SLIDER_VALUE)
+				{
+					return;
+				}			
+			
+				// Save the comment rating change
+				opinionMap.sendCommentAgreement(targetSliderValue);
+			}
+
+			public function showHideAgreeText(visible:Boolean):void {
+			//	agreeSDTxt.visible = visible;
+				//agreeSATxt.visible = visible;
+				//insightNITxt.visible = visible;
+				//insightVITxt.visible = visible;
+				
+			}
+			
+			/*
+			private function iconMouseAction(over:Boolean, text:Text):void {
+				if (mouseOverDisabled) return;
+				
+				if (over) {
+					text.setStyle('color', 0xb1e0ff);
+					flagIcon.source = FLAG_OVER;	
+				}
+				else {
+					text.setStyle('color', 0xb3e1e1);
+					flagIcon.source = FLAG;
+				} 
+			}
+			
+			public function disableFlagIconMouseOver():void {
+				flagIcon.source = FLAG;
+				mouseOverDisabled = true;
+			}			
+			
+			public function enableFlagIconMouseOver():void {
+				mouseOverDisabled = false;
+			}
+			*/
+			
+			public function setCommentId(commentId:int):void
+			{
+				this.commentId = commentId;
+			}
+			
+			public function saveSuggestion(e:Event):void
+			{				
+				if (sendingSuggestion)
+					return;
+				
+				if (suggestionInput.text == "")
+				{
+					//suggestionBox.visible = false;
+					//suggestionBox.includeInLayout = false;
+					suggestionSaveText.visible = true;
+					suggestionSaveText.includeInLayout = true;
+					suggestionSaveText.text = "You must enter a comment.";
+					setTimeout(function():void{suggestionSaveText.text = Configuration.SAVE_SUGGESTION_MESSAGE;suggestionBox.visible = true;suggestionBox.includeInLayout = true;suggestionSaveText.visible = false;suggestionSaveText.includeInLayout = false;}, Constants.CLEAR_SAVE_STATUS_TIMEOUT);
+					return;
+				}
+				
+				var params:Object = new Object();
+				params['suggestion'] = suggestionInput.text;
+				params['cid'] = this.commentId;
+				
+				if (Configuration.USE_ENTRY_CODES)
+	            	params['entrycode'] = this.parentApplication.ENTRY_CODE;
+				
+				sendingSuggestion = true;
+				saveCommentSuggestion.send(params);
+			}
+			
+			public function handleSaveCommentSuggestion():void
+			{
+				var decodedResult:Object = JSON.decode(saveCommentSuggestion.lastResult.toString());
+				var success:Boolean = AuthenticationUtils.resultIsSuccess(decodedResult);
+				
+				// TODO: Better error handling
+				if(AuthenticationUtils.resultIsAuthRequired(decodedResult))
+					return;
+				
+				if (success) 
+				{
+					// Disable the suggestion input for UI purposes
+					removeSuggestionBox();
+					
+					// update numSuggestion
+					this.parentApplication.numSuggestions += 1;
+					
+					if (this.parentApplication.opinionMap.selectedDiscussionStatementId == -1)
+						this.parentApplication.opinionMap.getComment.url = this.parentApplication.httpUtils.getServiceUrl("os/getcomment/" + this.parentApplication.opinionSpaceId + "/" + this.parentApplication.opinionMap.curCommentUserId + "/");
+					else
+						this.parentApplication.opinionMap.getComment.url = this.parentApplication.httpUtils.getServiceUrl("os/getcomment/" + this.parentApplication.opinionSpaceId + "/" + this.parentApplication.opinionMap.curCommentUserId + "/" + this.parentApplication.opinionMap.selectedDiscussionStatementId + "/");
+					
+					var parameters:Object = new Object();
+					if (Configuration.USE_ENTRY_CODES)
+						parameters['entrycode'] = this.parentApplication.ENTRY_CODE;
+					this.parentApplication.opinionMap.getComment.send(parameters);
+				} else
+				{
+					//suggestionBox.visible = false;
+					//suggestionBox.includeInLayout = false;
+					suggestionSaveText.visible = true;
+					suggestionSaveText.includeInLayout = true;
+					suggestionSaveText.text = "Save Failed";
+					setTimeout(function():void{suggestionSaveText.text = Configuration.SAVE_SUGGESTION_MESSAGE;suggestionBox.visible = true;suggestionBox.includeInLayout = true;suggestionSaveText.visible = false;suggestionSaveText.includeInLayout = false;}, Constants.CLEAR_SAVE_STATUS_TIMEOUT);
+				}
+				
+				sendingSuggestion = false;
+			}
+			
+			private function handleFaultOrTimeout(event:FaultEvent):void
+			{
+				//suggestionBox.visible = false;
+				//suggestionBox.includeInLayout = false;
+				suggestionSaveText.visible = true;
+				suggestionSaveText.includeInLayout = true;
+				suggestionSaveText.text = "Save Failed";
+				setTimeout(function():void{suggestionSaveText.text = Configuration.SAVE_SUGGESTION_MESSAGE;suggestionBox.visible = true;suggestionBox.includeInLayout = true;suggestionSaveText.visible = false;suggestionSaveText.includeInLayout = false;}, Constants.CLEAR_SAVE_STATUS_TIMEOUT);
+			}
+			
+			public function setToRateResponse():void
+			{
+				currentState = 'rate';
+			/*	suggestionInput.text = "";
+				suggestionInput.enabled = true;
+				suggestionInput.editable = true;
+				saveSuggestionButton.text = SEND_SUGGESTION_PROMPT;*/
+			}
+			
+			private function drawDialogTail(parent:HBox):void
+			{
+				var tail:Shape = new Shape();
+				tail.graphics.moveTo(60,30);
+				tail.graphics.beginFill(0xdbe3e6, 1);
+				tail.graphics.lineTo(25,30);
+				tail.graphics.lineTo(0,0);
+				tail.graphics.lineTo(60,30);
+				tail.x = 40;
+				parent.rawChildren.addChild(tail);
+			}
+			
+			private function viewHistory():void
+			{				
+				currentState = 'history';
+				refreshHistory();
+			}
+			
+			public function refreshHistory(highlight:Boolean = false):void{
+				var curUserId:String = this.parentApplication.opinionMap.curSelectedSprite.name;
+				
+				if (!highlight)
+				{
+					responseHistoryBox.removeAllChildren();	
+					
+					if (this.parentApplication.opinionMap.storedCommentRevisions[curUserId].length == 0)
+					{
+						responseHistoryBox.removeAllChildren();	
+						var commentHist:Text = new Text();
+						commentHist.text = username + " has received no comments.";
+						commentHist.percentWidth = 100;
+						
+						var commentHistBox:VBox = new VBox();
+						commentHistBox.percentWidth = 100;
+						commentHistBox.setStyle('textAlign', 'center');
+						commentHistBox.addChild(commentHist);
+						responseHistoryBox.addChild(commentHistBox);
+						return;
+					}
+				
+					for(var i:int = 0; i<this.parentApplication.opinionMap.storedCommentRevisions[curUserId].length; i++)
+					{
+						var wrapperBox:HBox = new HBox();
+						wrapperBox.percentWidth = 100;
+						var commentHist:Text = new Text();
+						commentHist.percentWidth= 100;
+						
+						var timestamp:Text = new Text();
+						timestamp.percentWidth = 100;
+						timestamp.setStyle('textAlign', 'right');
+						timestamp.text = this.parentApplication.opinionMap.storedCommentRevisions[curUserId][i][1];
+						
+						var commentHistBox:VBox = new VBox();
+						commentHistBox.styleName="commentHistoryBox";
+						
+						if(this.parentApplication.opinionMap.storedCommentRevisions[curUserId][i][2] == 'comment')
+						{
+							commentHist.text = this.parentApplication.opinionMap.storedCommentRevisions[curUserId][i][3] + '\'s updated response:' + '\n' + '\"' + this.parentApplication.opinionMap.storedCommentRevisions[curUserId][i][0] + '\"';
+							wrapperBox.setStyle('horizontalAlign', 'left');
+						}
+						else
+						{
+							commentHist.htmlText = "<b>"+this.parentApplication.opinionMap.storedCommentRevisions[curUserId][i][3]+"</b>" + ': ' + '\"' + this.parentApplication.opinionMap.storedCommentRevisions[curUserId][i][0] + '\"';
+							commentHistBox.setStyle('borderColor', 0x7e7e7e);
+							wrapperBox.setStyle('horizontalAlign', 'center');
+						}
+						
+						commentHistBox.percentWidth = 100;//80;
+						commentHistBox.addChild(commentHist);
+						commentHistBox.addChild(timestamp);
+						wrapperBox.addChild(commentHistBox);
+						
+						responseHistoryBox.addChild(wrapperBox);
+					}
+					
+					scrollHistoryToBottom();
+				}
+				else
+				{
+					var highlightedBox:HBox = null;
+					
+					// Remove the "this user has no comments" prompt
+					if (this.parentApplication.opinionMap.storedCommentRevisions[curUserId].length == 1)
+					{
+						responseHistoryBox.removeAllChildren();
+					}
+					
+					// Check there's something new
+					if (responseHistoryBox.numChildren == this.parentApplication.opinionMap.storedCommentRevisions[curUserId].length - 1)
+					{
+						var idx:int = this.parentApplication.opinionMap.storedCommentRevisions[curUserId].length - 1;
+						
+						var wrapperBox:HBox = new HBox();
+						wrapperBox.percentWidth = 100;
+						var commentHist:Text = new Text();
+						commentHist.percentWidth= 100;
+						
+						var timestamp:Text = new Text();
+						timestamp.percentWidth = 100;
+						timestamp.setStyle('textAlign', 'right');
+						timestamp.text = this.parentApplication.opinionMap.storedCommentRevisions[curUserId][i][1];
+						
+						var commentHistBox:VBox = new VBox();
+						commentHistBox.styleName="commentHistoryBox";
+						
+						commentHist.htmlText = "<b>"+this.parentApplication.opinionMap.storedCommentRevisions[curUserId][idx][3]+"</b>" + ': ' + '\"' + this.parentApplication.opinionMap.storedCommentRevisions[curUserId][idx][0] + '\"';
+						commentHistBox.setStyle('borderColor', 0x7e7e7e);
+						wrapperBox.setStyle('horizontalAlign', 'center');
+						
+						commentHistBox.percentWidth = 100;//80;
+						commentHistBox.addChild(commentHist);
+						commentHistBox.addChild(timestamp);
+						wrapperBox.addChild(commentHistBox);
+						
+						highlightedBox = wrapperBox;
+						
+						var fade:Fade = new Fade();
+						fade.duration = 3000;
+						fade.alphaFrom = 0.0;
+						fade.alphaTo = 1.0;
+						fade.target = highlightedBox;
+						fade.play();
+						setTimeout(function(displayObj:DisplayObject, idx:int):void {
+									responseHistoryBox.addChildAt(displayObj, idx);
+									scrollHistoryToBottom();
+									},500,highlightedBox, this.parentApplication.opinionMap.storedCommentRevisions[curUserId].length - 1); 
+					}
+				}
+								
+			}
+			
+			private function scrollHistoryToBottom(duration:int = 500):void
+			{
+				setTimeout(function():void{
+								var twn:Tween = new Tween(bottomBox, .75, {'verticalScrollPosition':bottomBox.maxVerticalScrollPosition});
+								twn.play();
+								},500);
+			}
+			
+			private function hideHistory():void
+			{
+				commentText.percentHeight = 100;
+			}
+			
+			private function clearFloatingPrompts():void
+			{
+				this.parentApplication.opinionMap.removeFloatingPrompt(this.parentApplication.opinionMap.rateResponsePrompt);
+				this.parentApplication.opinionMap.removeFloatingPrompt(this.parentApplication.opinionMap.leaveSuggestionPrompt);
+				this.parentApplication.opinionMap.removeFloatingPrompt(this.parentApplication.opinionMap.ratedTranslucentPrompt);
+			}
+			
+			private function firstTime():void {
+				if (Configuration.SHOW_WALKTHROUGH)
+					this.parentApplication.opinionMap.mapOverlay.showWalkthrough();
+				this.parentApplication.opinionMap.currentTopicBox.visible = true;
+				this.parentApplication.opinionMap.currentTopicBox.includeInLayout = true;
+				this.parentApplication.opinionMap.currentTopicContent.visible = true;
+				this.parentApplication.opinionMap.currentTopicContent.includeInLayout = true;
+				this.parentApplication.opinionMap.currentTopicHeader.visible = true;
+				this.parentApplication.opinionMap.currentTopicHeader.includeInLayout = true;
+				//this.parentApplication.opinionMap.transitionDemoText("Thanks for visiting!  Please start by evaluating the suggestions\nfrom two prior visitors. Click any bloom to start...",false);
+				this.parentApplication.currentState = 'home';
+				this.parentApplication.opinionMap.unHideOtherUsers();
+				this.parentApplication.usernameSearch = false;
+			}
+			
+			private function defaultRatings():void{
+				this.parentApplication.opinionMap.sendCommentAgreement(.5);
+				this.parentApplication.opinionMap.sendCommentRating(.5);
+			}
+			
+		]]>
+	</mx:Script>
+	
+	
+	<utils:ExtendedHTTPService id="saveCommentSuggestion" method="POST" resultFormat="text" result="handleSaveCommentSuggestion()" fault="handleFaultOrTimeout(event)"/>
+	<mx:Fade id="fade" duration="750"/>
+	
+	<mx:VBox id="commentPanel" height="100%" width="100%" visible="false">
+		<mx:VBox id="commentContainer" height="100%" width="100%" styleName="mapLeftPanelSubBox">
+			<!--<mx:TabBar id="commentModuleTabs" itemClick="clickEvent(event);" width="300" tabStyleName="commentTabSkin" selectedTabTextStyleName="commentTabSelected">
+				<mx:dataProvider>
+					{LABEL_ARRAY}
+				</mx:dataProvider>
+			</mx:TabBar> -->
+				
+			<!-- User info and response -->
+			<mx:VBox height="100%" width="100%" horizontalAlign="center">
+				<mx:HBox width="100%" horizontalAlign="left" verticalAlign="middle">
+					<mx:Image id="profile_pic" visible="{Configuration.USE_PROFILE_PIC}" includeInLayout="{Configuration.USE_PROFILE_PIC}" width="{Configuration.PROFILE_PIC_WIDTH}" height="{Configuration.PROFILE_PIC_HEIGHT}" horizontalAlign="left"/>
+					<mx:HBox width="100%">
+						<mx:Text text="{String(username).toUpperCase()}" fontWeight="bold" fontSize="18"/>
+						<mx:Text text=" " fontWeight="bold" fontSize="18" visible="{this.title.text !=''}" includeInLayout="{this.title.text !=''}"/>
+						<mx:Text id="title" text="" visible="{this.title.text !=''}" includeInLayout="{this.title.text !=''}" fontWeight="bold" fontSize="18"/>
+					</mx:HBox>	
+					<!--<utils:LoggedButton id="historyButton" label="History" click="{currentState = (currentState == 'history')? 'comment':'history' }" visible="false" includeInLayout="false" />-->
+					<mx:VBox height="100%" paddingTop="3" paddingRight="3" verticalAlign="top" horizontalAlign="right">
+						<mx:Image id="closeButtonIcon" source="{Configuration.CLOSE_BUTTON}" mouseOver="{closeButtonIcon.source = Configuration.CLOSE_BUTTON_DOWN}" mouseOut="{closeButtonIcon.source = Configuration.CLOSE_BUTTON}" buttonMode="true" click="{opinionMap.handlePlotClick()}"/>
+					</mx:VBox>
+				</mx:HBox>
+				
+				<mx:VBox id="responseBox" height="100%" width="100%" verticalGap="0" verticalScrollPolicy="auto">
+		        	<!--<mx:Text styleName="commentIntroText" width="100%" text="{this.parentApplication.discussionStatementShortDecoded}" toolTip="{this.parentApplication.discussionStatementDecoded}"/>-->
+		        	<!--<mx:HBox id="dialogTailBox" paddingLeft="10" width="100%" height="30"/>-->
+			        <mx:VBox height="100%" width="100%">
+				        <mx:TextArea id="commentText" text="" width="100%" height="100%" minHeight="{Configuration.COMMENT_MODULE_COMMENT_INPUT_TEXT_HEIGHT}" editable="false" verticalScrollPolicy="auto" styleName="ratingModuleCommentInputText"/>
+						<mx:Text width="100%" height="100%" id="commentTeaser" text="{Configuration.COMMENT_TEASER}" styleName="commentTeaser" visible="true"  includeInLayout="true"/>
+			        </mx:VBox>
+				</mx:VBox>
+			</mx:VBox>
+			
+			<!-- Toolbar -->
+			<mx:HBox id="iconBar" width="100%" horizontalGap="4" paddingTop="5" paddingBottom="5" visible="{this.parentApplication.isUserAuthenticated}" includeInLayout="{this.parentApplication.isUserAuthenticated}">
+				<utils:LoggedButton id="rateButton" name="comment-module-rate" textWrap="false" label="Rate Idea" click="{currentState = 'rate'}" visible="{Configuration.SUGGESTIONS_ENABLED}" includeInLayout="{Configuration.SUGGESTIONS_ENABLED}"/>
+				<utils:LoggedButton id="historyButton" name="comment-module-history" textWrap="false" label="View Comments" click="{viewHistory()}" visible="{Configuration.SUGGESTIONS_ENABLED}" includeInLayout="{Configuration.SUGGESTIONS_ENABLED}"/>
+				<utils:LoggedButton name="comment-module-opinions" textWrap="false" label="Opinions" click="{currentState = 'opinions'}" visible="{Configuration.ALLOW_VIEW_OPINIONS}" includeInLayout="{Configuration.ALLOW_VIEW_OPINIONS}"/>
+				
+				<mx:HBox width="100%" horizontalAlign="right" visible="{Configuration.CAN_FLAG_COMMENT}" includeInLayout="{Configuration.CAN_FLAG_COMMENT}">
+					<utils:LoggedButton name="comment-module-flag2" label="Off Topic?" id="flagButton2" click="opinionMap.handleFlagClick()" textWrap="false"/>
+					<utils:LoggedButton name="comment-module-flag" label="Inappropriate?" id="flagButton" click="opinionMap.handleFlagClick()" textWrap="false"/>	
+				</mx:HBox>
+			</mx:HBox>
+			
+			<mx:VBox width="100%" horizontalAlign="center">
+				<mx:VBox styleName="mapLeftPanelHorizontalBoxLine" width="97%" height="1"/>	
+			</mx:VBox>
+			
+			<mx:VBox id="bottomBox2" width="100%" visible="{this.parentApplication.usernameSearch}" includeInLayout="{this.parentApplication.usernameSearch}">
+				<utils:LoggedButton name="welcome_first-time" label="Join The Discussion" styleName="blueButtonLarge" click="firstTime()"/>
+			</mx:VBox>
+
+			<!-- bottom box -->
+			<mx:VBox id="bottomBox" width="100%" visible="{!this.parentApplication.usernameSearch}" includeInLayout="{!this.parentApplication.usernameSearch}">
+
+				<!-- view opinions -->
+				<mx:VBox id="userViewSliderBox" width="100%" visible="{currentState == 'opinions'}" includeInLayout="{currentState == 'opinions'}" showEffect="{fade}">
+	    			<mx:VBox id="userViewSliderBoxWrapper" width="100%" horizontalAlign="center"/>
+	    		</mx:VBox>
+				
+				<!-- History -->			
+				<mx:VBox width="100%" visible="{currentState == 'history'}" includeInLayout="{currentState == 'history'}" showEffect="{fade}" horizontalAlign="center" paddingBottom="10">
+					<!--<mx:Text text="{'All Suggestions For ' + username}" fontFamily="Arial" fontSize="13" fontWeight="bold" />-->
+					<mx:VBox id="responseHistoryBox" paddingLeft="10" width="100%" verticalGap="10"/>
+					<utils:LoggedButton name="comment-module-suggestion" textWrap="false" styleName="blueButtonLarge" label="Leave a Comment" id="suggestionButton" click="{removeSuggestionBox();clearFloatingPrompts();createSuggestionBox();}" visible="{Configuration.SUGGESTIONS_ENABLED}" includeInLayout="{Configuration.SUGGESTIONS_ENABLED}"/>
+				</mx:VBox>
+				
+				<!-- rating sliders -->
+				<mx:VBox id="rateBox" width="100%" showEffect="{fade}" visible="{currentState == 'rate'}" includeInLayout="{currentState == 'rate'}">
+					<mx:VBox width="100%" visible="{(!Configuration.LENSES_ENBALED || !opinionMap.approvedForLenses)}" includeInLayout="{(!Configuration.LENSES_ENBALED || !opinionMap.approvedForLenses)}">
+						<mx:VBox id="commentSliderVBox" width="100%" verticalGap="0" horizontalScrollPolicy="off" >
+							<mx:VBox visible="{Configuration.SHOW_AGREEMENT_SLIDER }" includeInLayout="{Configuration.SHOW_AGREEMENT_SLIDER}" width="100%" verticalGap="0" paddingBottom="10">
+								<mx:HBox id="agreementIntroText" visible="false" includeInLayout="false" width="100%">
+					        		<mx:Text width="100%" fontSize="17" fontWeight="bold" text="{Configuration.AGREEMENT_TEXT}" />
+					        	</mx:HBox>
+					        	<mx:VBox width="100%" horizontalAlign="center" textAlign="center" verticalAlign="middle" verticalGap="0">
+					        	
+									<core:OpinionSlider id="agreementSlider" visible="false" width="100%"
+										maximum="{Constants.MAX_RATING}" minimum="{Constants.MIN_RATING}" 
+										 liveDragging="true" value="{(Constants.MAX_RATING - Constants.MIN_RATING) / 2}"/>
+										 
+							        <mx:HBox width="100%" paddingTop="5" paddingBottom="5" fontSize="15" color="0x6b6b6b" fontWeight="bold">
+							        	<mx:HBox width="50%" horizontalAlign="left" >
+							        		<mx:Text id="agreeSDTxt" text="{Configuration.AGREEMENT_LEFT_TEXT}" />		
+							        	</mx:HBox>
+							        	<mx:HBox width="50%" horizontalAlign="right" >
+							        		<mx:Text id="agreeSATxt" text="{Configuration.AGREEMENT_RIGHT_TEXT}" />		
+							        	</mx:HBox>	
+							        </mx:HBox>
+					        	</mx:VBox>
+					        	
+					        	<mx:VBox width="100%" horizontalAlign="center">
+									<mx:VBox styleName="mapLeftPanelHorizontalBoxLine" width="97%" height="1"/>	
+								</mx:VBox>
+							</mx:VBox>
+				
+							<mx:VBox visible="{Configuration.SHOW_INSIGHT_SLIDER}" includeInLayout="{Configuration.SHOW_INSIGHT_SLIDER}" width="100%" verticalGap="0">
+					        	<mx:HBox id="commentIntroText" visible="false" includeInLayout="false" width="100%">
+					        		<mx:Text width="100%" fontSize="17" fontWeight="bold" text="{Configuration.INSIGHT_TEXT}" />
+					        	</mx:HBox>
+					        	<mx:VBox width="100%" horizontalAlign="center" textAlign="center" verticalAlign="middle" verticalGap="0">
+					        			
+									<core:OpinionSlider id="commentSlider" visible="false" width="100%"
+										maximum="{Constants.MAX_RATING}" minimum="{Constants.MIN_RATING}" 
+										 liveDragging="true" value="{(Constants.MAX_RATING - Constants.MIN_RATING) / 2}"/> 
+							       <!-- <mx:Button id="commentTeaserText" styleName="teaserButton" label="Get started to rate this comment!" click="{this.parentApplication.currentState = 'statements'}" visible="false" includeInLayout="false"/>-->
+							        
+							        <mx:HBox width="100%" paddingTop="5" paddingBottom="5" fontSize="15" color="0x6b6b6b" fontWeight="bold">
+							        	<mx:HBox width="50%" horizontalAlign="left" >
+							        		<mx:Text id="insightNITxt" text="{Configuration.INSIGHT_LEFT_TEXT}" />		
+							        	</mx:HBox>
+							        	<mx:HBox width="50%" horizontalAlign="right" >
+							        		<mx:Text id="insightVITxt" text="{Configuration.INSIGHT_RIGHT_TEXT}" />		
+							        	</mx:HBox>	
+							        </mx:HBox>
+					        	</mx:VBox>
+					        	
+					        	<mx:VBox width="100%" horizontalAlign="center">
+									<mx:VBox styleName="mapLeftPanelHorizontalBoxLine" width="97%" height="1"/>	
+									<utils:LoggedButton styleName="blueButtonLarge" label="Done" click="{defaultRatings();this.parentApplication.opinionMap.hideCurrentIdea()}"/>
+								</mx:VBox>
+					        	
+							</mx:VBox>
+							
+							<mx:VBox visible="false" includeInLayout="false">
+								<mx:Label id="saveRatingStatus" fontSize="12"/>	
+							</mx:VBox>
+						</mx:VBox>					
+					</mx:VBox>
+				</mx:VBox>
+	
+				<!-- Suggestion box -->
+				<!--<mx:VBox id="suggestionBox" width="100%" height="{rateBox.height}" visible="{currentState == 'suggestion'}" includeInLayout="{currentState == 'suggestion'}" showEffect="{fade}">
+					<mx:Text text="What are one or two specific ways this idea can be improved?" fontWeight="bold" width="100%"/>
+					<mx:TextArea id="suggestionInput" height="100%" styleName="suggestionInputText" width="100%" maxChars="{Constants.MAX_COMMENT_LENGTH}"/>
+					
+					<mx:HBox width="100%">
+						<mx:HBox width="50%" horizontalAlign="left">
+							<mx:Label id="saveSuggestionStatus" text="{Constants.SAVE_COMMENT_STATUS_DEFAULT}"/>
+						</mx:HBox>
+						<mx:HBox width="50%" horizontalAlign="right">
+							<mx:Text id="saveSuggestionButton" mouseChildren="false" buttonMode="true" useHandCursor="true" styleName="smallLinksFont" text="{SEND_SUGGESTION_PROMPT}" click="saveSuggestion()" mouseOver="{saveSuggestionButton.setStyle('color', Configuration.TEXT_OVER);}" mouseOut="{saveSuggestionButton.setStyle('color', Configuration.TEXT_NORMAL);}"/>
+						</mx:HBox>
+					</mx:HBox>	
+				</mx:VBox>	-->	
+				
+			</mx:VBox>
+
+   		</mx:VBox>  			
+    </mx:VBox>
+</mx:Module>

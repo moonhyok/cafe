@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Module xmlns:mx="http://www.adobe.com/2006/mxml">
+	<mx:Script>
+		<![CDATA[
+			
+			private function click():void {
+				this.parentApplication.popup.removeMe();
+			}
+			
+		]]>
+	</mx:Script>
+	<mx:VBox width="100%" height="100%" horizontalAlign="center" verticalAlign="middle" verticalGap="0" styleName="notificationPopup">
+		<mx:HBox horizontalGap="0">
+			<mx:Text text="Warning: " fontWeight="bold"/>
+			<mx:Text text="You have not entered a response to the discussion question!"/>
+		</mx:HBox>
+		<mx:Text text="Don't worry, you can go back to enter a response or you can enter one later." paddingBottom="25"/>		
+		<mx:Button id="_submit_button" styleName="yellowButton" label="Okay" click="click()"/>
+	</mx:VBox>
+</mx:Module>

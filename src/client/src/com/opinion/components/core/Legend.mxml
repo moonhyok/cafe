@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Module xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" initialize="createDots()">
+	
+	<mx:Script>
+		<![CDATA[
+			
+			private function createDots():void {
+				
+				var gradientGlow:GradientGlowFilter = new GradientGlowFilter();
+                gradientGlow.distance = 0;
+                gradientGlow.angle = 0;
+                gradientGlow.colors = [0x000000, 0x88B514, 0x88B514, 0x88B514];
+                gradientGlow.alphas = [0, .2, .4, .7];
+                gradientGlow.ratios = [0, 64, 94, 127];
+                gradientGlow.blurX = 20;
+                gradientGlow.blurY = 20;
+                gradientGlow.strength = 4;
+                gradientGlow.quality = BitmapFilterQuality.MEDIUM;
+                gradientGlow.type = BitmapFilterType.OUTER;				
+				// Halo dot example
+				var dot1:Sprite = createCircle(50,50,'1',6,1,0x88B514);
+				dot1.filters = [gradientGlow];
+				dot1.addChild(createHalo(0,0,'1halo',2,.5,20,0x88B514));
+				dotHolder.addChild(dot1);
+				
+				// Twinkle dot example
+				var dot2:Sprite = createCircle(50,125,'2',6,1,0x88B514);
+				dot2.filters = [gradientGlow];
+				dotHolder.addChild(dot2);
+				
+				// Low confidence dot example
+				var dot3:Sprite = createCircle(50,275,'3',6,.3,0x88B514);
+				dotHolder.addChild(dot3);
+				
+				// Dot size example
+				var dot4:Sprite = createCircle(25,200,'4',4,1,0x88B514);
+				var dot5:Sprite = createCircle(50,200,'5',6,1,0x88B514);
+				var dot6:Sprite = createCircle(75,200,'6',9,1,0x88B514);
+				
+				dotHolder.addChild(dot4);
+				dotHolder.addChild(dot5);
+				dotHolder.addChild(dot6);
+			}
+			
+            private function createCircle(x:Number, y:Number, id:String, radius:int, alpha:Number, color:Number):Sprite {
+                var sprite:Sprite = new Sprite();
+                
+                sprite.graphics.beginFill(color, alpha);
+                sprite.graphics.drawCircle(0, 0, radius);
+                        
+                sprite.x = x;
+                sprite.y = y;
+                sprite.name = id;
+                return sprite;
+            }
+            
+            private function createHalo(x:Number, y:Number, id:String, lineThickness:Number, alpha:Number, radius:int, color:Number):Sprite {            
+            	var sprite:Sprite = new Sprite();
+            	
+            	sprite.graphics.lineStyle(lineThickness, color, alpha);            	
+            	sprite.graphics.drawCircle(0, 0, radius);
+            	sprite.x = x;
+            	sprite.y = y;
+            	sprite.name = id;
+            	return sprite;
+            }			
+		]]>
+	</mx:Script>
+	
+	<mx:Canvas id="legendCanvas" width="100%" height="100%">
+		<mx:HBox width="100%" height="100%">
+			<mx:UIComponent id="dotHolder" height="100%" width="110"/>
+			<mx:VBox id="rightVBox" height="100%" horizontalAlign="center">
+				<mx:Text text="The top ten user responses are highlighted with a ring around the user's dot." width="250" paddingTop="20" paddingBottom="30"/> 
+				<mx:Text text="The top 20 user responses are the dots that twinkle." width="250" paddingBottom="35"/>
+				<mx:Text text="A dot's size corresponds to the responder score of that user" width="250" paddingBottom="30" />
+				<mx:Text text="The newer user responses are the lighter shaded dots in the space." width="250"/>
+			</mx:VBox>
+		</mx:HBox>
+	</mx:Canvas>
+</mx:Module>

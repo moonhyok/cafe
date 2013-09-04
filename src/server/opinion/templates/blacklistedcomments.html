@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+{% extends "admin_base.html" %}
+
+{% block scripts %}
+<script type="text/javascript">
+	var required_data = ['blacklisted_comments']
+	$(document).ready(function()
+	{
+		$("#osTable").hide();
+		$("button").hide();
+		$("#message").hide();
+		$("#disc_block").html(output_disc_header())
+	});
+
+
+	retrieve_admin_content(function(data)
+	{
+		if(data.success)
+		{
+			var blacklistedComments = data.data.blacklisted_comments;
+			populateTable(blacklistedComments);
+			populate_disc_header(data.data.discussion_statements, function(data)
+			{
+				var blacklistedComments = data.data.blacklisted_comments;
+				$('#tableBody').html("")
+				populateTable(blacklistedComments);
+			})
+		}	
+	}, discussion_id)
+	/*
+	// Get  Feedback Comments Data
+	dojo.xhrGet({
+			url: "{{url_root}}/admincontent/1/",
+			handleAs: "json",
+			load:function(response, ioArgs)
+			{
+				if (response.success)
+				{
+					var blacklistedComments = response.data[9];
+					populateTable(blacklistedComments);					
+				}	
+			},
+			error:function(data)
+			{ // This happens on a 500 error or alikes.
+				alert('Error: failed sending data');
+			}
+		});
+	*/
+	function populateTable(blacklistedCommentsData) 
+	{
+		if(blacklistedCommentsData == "")
+		{
+			$("#message").show();
+		}
+		else
+		{
+			$("#osTable").show();
+			$("button").show();
+			// display the comments
+			for (var i=0; i<blacklistedCommentsData.length; i++) 
+			{
+				var row = document.createElement('tr');
+				var id = blacklistedCommentsData[i].uid + "-" + blacklistedCommentsData[i].cid; 
+				row.setAttribute("id", id);
+								
+				var inputTd = document.createElement('td');
+				var checkBox = document.createElement('input');
+				checkBox.setAttribute("type", "checkbox");
+				inputTd.appendChild(checkBox);
+				
+				var user = document.createElement('td');
+				user.innerHTML = blacklistedCommentsData[i].username;
+				
+				var comment = document.createElement('td');
+				comment.innerHTML = blacklistedCommentsData[i].comment;
+				
+				row.appendChild(inputTd);
+				row.appendChild(user);
+				row.appendChild(comment);
+				dojo.byId('tableBody').appendChild(row);
+			}
+			$("#osTable:has(tbody tr)").tablesorter({headers: { 0:{sorter: false}}, widgets: ['zebra']});
+		}
+	}
+</script>
+{% endblock %}
+
+{% block mainContent %}
+    <h1> Blacklisted Comments </h1>
+    <p>
+  <span id='disc_block'></span>
+   <div class="buttons">
+    <button type="submit" class="positive" onClick="processComment('{{url_root}}/approvecomment/')">
+        <img src="../../media/images/yes.png" alt=""/> 
+        Remove from Admin Panel
+    </button>
+    
+    <button type="submit" class="negative" onClick="processComment('{{url_root}}/unblacklist/')">
+        <img src="../../media/images/no.png" alt=""/>
+        Not Blacklisted Response
+    </button>
+</div>
+	<p id="message">There are no blacklisted comments</p>
+   <table id="osTable" class="tablesorter"> 
+    <thead> 
+    <tr> 
+        <th width="5%"><input type="checkbox" id="checkAll"/></th>
+        <th width="25%">User Name</th>  
+        <th width="70%">Response</th>                 
+    </tr> 
+    </thead> 
+    <tbody id="tableBody"> 
+    </tbody> 
+</table>
+    </p>
+{% endblock %}

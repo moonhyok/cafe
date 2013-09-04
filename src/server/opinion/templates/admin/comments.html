@@ -1,0 +1,15 @@
+<h1>Comment Moderation</h1>
+
+{% if comments %}
+<form method="post" action="">
+<table border="0" cellspacing="4">
+<tr><td>&nbsp;</td><td><b># Flagged</b></td><td><b>ID</b></td><td><b>Comment Text</b></td></tr>
+{% for comment in comments %}
+<tr><td><input type="checkbox" name="erase_ids" value="{{ comment.0 }}" /></td><td>{{ comment.2 }}</td><td>{{ comment.0 }}</td><td>{{ comment.1 }}</td></tr>
+{% endfor %}
+</table>
+<input type="submit" value="Erase Checked Comments" />
+</form>
+{% else %}
+No flagged comments.
+{% endif %}
