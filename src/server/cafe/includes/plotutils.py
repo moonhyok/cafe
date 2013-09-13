@@ -1,5 +1,5 @@
 import sys, os
-import cafe.scripts.environ
+#import cafe.scripts.environ
 from cafe.cafe_core.models import *
 from django.contrib.auth.models import User
 

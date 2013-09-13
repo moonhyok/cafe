@@ -5,10 +5,7 @@ urlpatterns = patterns('',
     # Info pages
     (r'^$', 'cafe.cafe_core.views.app'),
     (r'^(\w+)$', 'cafe.cafe_core.views.app'), 
-    (r'^app/$', 'cafe.cafe_core.views.app'), 
-
-    (r'^mobile/$', 'cafe.cafe_core.views.mobile'), 
-
+    (r'^app/$', 'cafe.cafe_core.views.app'),
     (r'^app/(\w+)/$', 'cafe.cafe_core.views.app'), 
     (r'^about/$', 'cafe.cafe_core.views.about'),
     (r'^feedback/$', 'cafe.cafe_core.views.feedback'),

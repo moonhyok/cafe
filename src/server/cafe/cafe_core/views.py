@@ -58,7 +58,7 @@ def index(request):
     create_visitor(request)
     return render_to_response('app.html', context_instance = RequestContext(request, {'client_settings':get_client_settings()}))
 
-def mobile(request):
+def app(request):
     create_visitor(request)
     #print get_client_settings(True)
     os = get_os(1)
@@ -72,19 +72,6 @@ def mobile(request):
 											 'topic': DiscussionStatement.objects.filter(is_current=True)[0].statement,
 											 'short_topic': DiscussionStatement.objects.filter(is_current=True)[0].short_version,
 											 'statements': OpinionSpaceStatement.objects.all().order_by('id')}))
-
-def app(request, username=None):
-	create_visitor(request)
-	if username != None:
-		if not Settings.objects.boolean('SOFT_ENTRY_CODES'):
-			users = User.objects.filter(username = username)
-			if users.count()==0:
-				username = NULL_USER_INDICATOR
-			elif len(DiscussionComment.objects.filter(user = users[0])) == 0:
-				username = NULL_USER_INDICATOR
-		return render_to_response('app.html', context_instance = RequestContext(request, {'username': username, 'client_settings':get_client_settings()}))
-	else:
-		return render_to_response('app.html', context_instance = RequestContext(request, {'client_settings':get_client_settings()}))
 
 def get_client_settings(dic=False):
 	client_settings = {}

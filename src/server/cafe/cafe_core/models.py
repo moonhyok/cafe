@@ -2,6 +2,36 @@ from django.db.models import *
 from django.contrib.auth.models import User
 from cafe.settings_local import CONFIGURABLES
 
+class CafeUser(Model):
+	"""
+	This is the main model, this is tied to a django user, and some of the attributes
+	may be redundant. However, the links here allow us for fast retrieval.
+	"""
+	user = ForeignKey(User, db_index = True, blank = True, null = True)
+	created = DateTimeField(auto_now_add = True)
+	
+	participation_score = FloatField(null = True)
+	primary_score = FloatField(null = True)
+	secondary_score = FloatField(null = True)
+	
+	
+	x = FloatField(null = True)
+	y = FloatField(null = True)
+
+class CafeComment(Model):
+	"""
+	This table stores comments in response to a discussion question.
+	As before the is_current flag indicates whether this is the current
+	response or not. Note this attribute is doubly-linked to users
+	"""
+	title = CharField(max_length = 512)
+	comment = CharField(max_length = 4096)
+	user = ForeignKey(CafeUser, db_index = True, blank = True, null = True)
+	sampling_weight = FloatField(null = True)
+	banished = BooleanField(db_index = True)
+	is_current = BooleanField(db_index = True)
+	created = DateTimeField(auto_now_add = True)
+	
 class CafeProposition(Model):
 	"""
 	This table stores propositions, we divide propositions into
@@ -37,18 +67,6 @@ class CafeDiscussionQuestion(Model):
 	short_version = CharField(max_length = 4096)
 	is_current = BooleanField(db_index = True)
 	created = DateTimeField(auto_now_add = True)
-
-class CafeComment(Model):
-	"""
-	This table stores comments in response to a discussion question.
-	As before the is_current flag indicates whether this is the current
-	response or not. Note this attribute is doubly-linked to users
-	"""
-	title = CharField(max_length = 512)
-	comment = CharField(max_length = 4096)
-	user = ForeignKey(CafeUser, db_index = True, blank = True, null = True)
-	is_current = BooleanField(db_index = True)
-	created = DateTimeField(auto_now_add = True)
 	
 class CafeCommentPrimaryRating(Model):
 	"""
@@ -56,6 +74,7 @@ class CafeCommentPrimaryRating(Model):
 	"""
 	comment = ForeignKey(CafeComment, db_index = True, blank = True, null = True)
 	is_current = BooleanField(db_index = True)
+	rater = ForeignKey(User, db_index = True, blank = True, null = True)
 	created = DateTimeField(auto_now_add = True)
 	value = FloatField(null = True)
 	
@@ -65,31 +84,9 @@ class CafeCommentSecondaryRating(Model):
 	"""
 	comment = ForeignKey(CafeComment, db_index = True, blank = True, null = True)
 	is_current = BooleanField(db_index = True)
+	rater = ForeignKey(User, db_index = True, blank = True, null = True)
 	created = DateTimeField(auto_now_add = True)
 	value = FloatField(null = True)
-
-class CafeUser(Model):
-	"""
-	This is the main model, this is tied to a django user, and some of the attributes
-	may be redundant. However, the links here allow us for fast retrieval.
-	"""
-	user = ForeignKey(User, db_index = True, blank = True, null = True)
-	created = DateTimeField(auto_now_add = True)
-	
-	current_comment = ForeignKey(CafeComment, db_index = True, blank = True, null = True)
-	
-	participation_score = FloatField(null = True)
-	primary_score = FloatField(null = True)
-	secondary_score = FloatField(null = True)
-	
-	rated_comments = models.ManyToManyField(CafeComment)
-	
-	x = FloatField(null = True)
-	y = FloatField(null = True)
-	
-	sampling_weight = FloatField(null = True)
-	
-	banished = BooleanField(db_index = True)
 	
 """
 Legacy OS Models
