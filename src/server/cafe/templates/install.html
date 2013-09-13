@@ -1,0 +1,19 @@
+{% extends "admin_base.html" %}
+
+{% block mainContent %}
+<div style='padding:15px'>
+{% if saved	 %}
+ Settings Updated!
+{% endif %}
+	<form method="POST" action="."><table>
+			{% for field in form %}
+					<tr>
+	        			<td>{{ field.label}}:</td>
+						<td>{{ field }}</td>
+	      			</tr>
+			{% endfor %}
+  	</table>
+  	<input type=submit value='Save Settings'>
+	</form>
+</div>
+{% endblock %}

@@ -1,0 +1,171 @@
+{% extends "admin_base.html" %}
+
+{% block scripts %}
+<script type="text/javascript">
+	var required_data = ['unapproved']
+	var topAuthors_lastday = "";
+	var topAuthors = "";
+	var topAuthors_twodays = "";
+	var topAuthors_forever = "";
+	$(document).ready(function()
+	{
+		$("#osTable").hide();
+		$("button").hide();
+		$("#message").hide();
+		$("input[name='comments']")[0].checked = true;
+		$("#disc_block").html(output_disc_header())
+	});
+	
+	retrieve_admin_content(function(data)
+	{
+		if (data.success)
+		{
+			topAuthors = data.data.unapproved;
+			topAuthors_forever = data.data.unapproved_alltime;
+			topAuthors_twodays = data.data.unapproved_twodays;
+			topAuthors_lastday = data.data.unapproved_oneday;
+			populateTable(topAuthors);
+			populate_disc_header(data.data.discussion_statements, function(data)
+			{
+				$("#osTable").hide();
+				$("button").hide();
+				$("#message").hide();
+				$("#osTable tbody").html("");
+				topAuthors = data.data.unapproved;
+				topAuthors_forever = data.data.unapproved_alltime;
+				topAuthors_twodays = data.data.unapproved_twodays;
+				topAuthors_lastday = data.data.unapproved_oneday;
+
+				$("[name=comments]").attr("checked", false);
+				$("[name=comments]").filter("[value=7]").attr("checked","checked");
+				populateTable(topAuthors);
+			})
+		}
+	}, 1)
+	
+	/*
+	// Get  Feedback Comments Data
+	dojo.xhrGet({
+			url: "{{url_root}}/admincontent/1/",
+			handleAs: "json",
+			load:function(response, ioArgs)
+			{
+				if (response.success)
+				{
+					topAuthors = response.data[0];
+					topAuthors_forever = response.data[8];
+					topAuthors_twodays = response.data[7];
+					topAuthors_lastday = response.data[6];
+					populateTable(topAuthors);
+					
+				}	
+			},
+			error:function(data)
+			{ // This happens on a 500 error or alikes.
+				alert('Error: failed sending data');
+			}
+		});
+		
+	*/
+	$("input[name='comments']").live('click',function() 
+	{
+        $("#osTable").hide();
+		$("button").hide();
+		$("#message").hide();
+		$("#osTable tbody").html("");
+		var selected = $("input[name='comments']:checked").val();
+		if(selected == "7")
+		{
+			populateTable(topAuthors);
+		}
+		else if(selected == "2")
+		{
+			populateTable(topAuthors_twodays);
+		}
+		else if(selected == "1")
+		{
+			populateTable(topAuthors_lastday);
+		}
+		else if(selected == "0")
+		{
+			populateTable(topAuthors_forever);
+		}
+    });
+	function populateTable(topAuthors) 
+	{
+		if(topAuthors == "")
+		{
+			$("#message").show();
+		}
+		else
+		{
+			$("#osTable").show();
+			$("button").show();
+			
+			// display the comments
+			for (var i=0; i<topAuthors.length; i++) 
+			{
+				var row = document.createElement('tr');
+				var id = topAuthors[i].uid + "-" + topAuthors[i].cid; 
+				row.setAttribute("id", id);
+								
+				var inputTd = document.createElement('td');
+				var checkBox = document.createElement('input');
+				checkBox.setAttribute("type", "checkbox");
+				inputTd.appendChild(checkBox);
+				
+				var user = document.createElement('td');
+				user.innerHTML = topAuthors[i].username;
+				
+				var comment = document.createElement('td');
+				comment.innerHTML = topAuthors[i].comment;
+				
+				row.appendChild(inputTd);
+				row.appendChild(user);
+				row.appendChild(comment);
+				dojo.byId('tableBody').appendChild(row);
+			}
+			$("#osTable").tablesorter({headers: { 0:{sorter: false}}, widgets: ['zebra']});
+		}
+	}
+</script>
+
+{% endblock %}
+
+{% block mainContent %}
+
+    <h1> New Additions to Top Authors </h1>
+    <p>
+    <span id='disc_block'></span>
+   <p>Please choose the time period for which you want see the new additions to top authors</p>	
+   <input type="radio" name="comments" value="7" CHECKED /> Last 7 days
+   <input type="radio" name="comments" value="2" /> Last 2 days
+   <input type="radio" name="comments" value="1" /> Yesterday
+   <input type="radio" name="comments" value="0" /> Forever
+   <br/>
+   <br/>
+   <div class="buttons">
+    <button type="submit" class="positive" onClick="processComment('{{url_root}}/approvecomment/')">
+        <img src="../../media/images/yes.png" alt=""/> 
+        Remove from Admin Panel
+    </button>
+    
+    <button type="submit" class="negative" onClick="processComment('{{url_root}}/blacklist/')">
+        <img src="../../media/images/no.png" alt=""/>
+        Blacklist Response
+    </button>
+</div>
+	<p id="message">There are no new additions to top authors in the selected time period</p>
+   <table id="osTable" class="tablesorter"> 
+    <thead> 
+    <tr> 
+        <th width="5%"><input type="checkbox" id="checkAll"/></th>
+        <th width="25%">User ID</th>  
+        <th width="70%">Response</th>                 
+    </tr> 
+    </thead> 
+    <tbody id="tableBody"> 
+    </tbody> 
+</table>
+    </p>
+{% endblock %}b
