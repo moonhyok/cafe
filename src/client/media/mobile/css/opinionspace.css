@@ -1,42 +1,66 @@
 /* opinionspace.css - contains styles for the Opinion Space project */
 
-#entered-comment{
-	height:200px !important;
-
+.margin{
+	background-color: #DDDDDD
+	position: absolute;
+	z-index: -500;
 }
 
+.inst-score {
+	display:none;
+	font-weight:bold;
+}
+
+.slider-agree-labels, .slider-range-labels{
+	font-size:90%
+}
+
+.alignleft {
+	padding-left: 10px;
+	float: left;
+}
+.alignright {
+	padding-right: 10px;
+	float: right;
+}
+
+#entered-comment{
+	display:inline;
+	height:200px;
+
+}
 
 /* This prevents the jQuery navbar buttons from staying pressed */
 .ui-footer .ui-navbar .ui-btn-active {
-        border: 1px solid       #222;
-        background:             #333333;
-        font-weight: bold;
-        color:                     #fff;
-        text-shadow: 0 -1px 1px #000;
-        background-image: -webkit-gradient(linear, left top, left bottom, from( #555), to( #333));
-        background-image: -webkit-linear-gradient(#555, #333);
-        background-image:    -moz-linear-gradient(#555, #333);
-        background-image:     -ms-linear-gradient(#555, #333);
-        background-image:      -o-linear-gradient(#555, #333);
-        background-image:         linear-gradient(#555, #333);
-    }
+	border: 1px solid       #222;
+	background:             #333333;
+	font-weight: bold;
+	color:                     #fff;
+	text-shadow: 0 -1px 1px #000;
+	background-image: -webkit-gradient(linear, left top, left bottom, from( #555), to( #333));
+	background-image: -webkit-linear-gradient(#555, #333);
+	background-image:    -moz-linear-gradient(#555, #333);
+	background-image:     -ms-linear-gradient(#555, #333);
+	background-image:      -o-linear-gradient(#555, #333);
+	background-image:         linear-gradient(#555, #333);
+}
 
 /** Testing out leaderboard*/
 table.pretty {
-  margin: 0 px auto;
-  border-collapse: collapse;
+	margin: 0 auto;
+	border-collapse: collapse;
 }
 table.pretty th, table.pretty td {
-  border: 1px #ADD8E6 solid;
-  padding: 0.2em;
+	border: 1px #ADD8E6 solid;
+	padding: 0.2em;
 }
 table.pretty th {
-  background: #ADD8E6;
-  text-align: left;
+	background: #ADD8E6;
+	text-align: left;
 }
 table.pretty caption {
-  margin-left: inherit;
-  margin-right: inherit;
+	margin-left: inherit;
+	margin-right: inherit;
 }
 
 
@@ -80,213 +104,231 @@ table.pretty caption {
 
 /*label.ui-input-text {
 	font-size: 12px;
-}*/
+	}*/
 
-.ui-input-text {
-	width: 98% !important;
-	height:30px;
-} 
-
-
-img.center {
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-#editCommentBox {
-	width: 100%;
-}
-
-/* get the bootstrap version of these */
-.alert-danger,.alert-error {
-	color: #b94a48;
-	background-color: #f2dede;
-	border-color: #eed3d7;
-}
-
-#menubar {
-	display: none;
-}
-
-.ui-slider-input {
-	display:none !important;
-	width:1px !important;
-	height:1px !important;
-}
-.ui-slider-track {
-	width:99% !important;
-	float:left;
-	margin: 0 !important;
-}
-
-html {
-	height: 100%;
-}
-
-body {
-	font-family: "Helvetica Neue", Arial, sans-serif;
-	background-color: #ddd;
-	height: 100%;
-	padding: 0 !important;
-	/* use helvetica neue, bootstrap style */
-}
+	/** TODO: this isn't fixing the line-height */
+	.ui-input-text {
+		width: 98% !important;
+		height:30px;
+	} 
 
 
-strong {
-	font-weight: bold;
-	color: #1EB3DF;
-}
-strong.go-back {
-	color: #54D6F6;
-	cursor: pointer;
-}
+	img.center {
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+	}
 
-#score{
-	font-weight: bold;
-}
+	#editCommentBox {
+		width: 100%;
+	}
 
-.frame {
+	/* get the bootstrap version of these */
+	.alert-danger,.alert-error {
+		color: #b94a48;
+		background-color: #f2dede;
+		border-color: #eed3d7;
+	}
 
-	width: 100%;
-	height: 100%;
+	.menubar {
+		display: none;
+	}
 
-	position: absolute;
-	top: 0;
-	left: 0;
+	.ui-slider-input {
+		display:none !important;
+		width:1px !important;
+		height:1px !important;
+	}
+	.ui-slider-track {
+		width:99% !important;
+		float:left;
+		margin: 0 !important;
+	}
 
-	display: none;
+	html {
+		height: 100%;
+	}
 
-	background-color: transparent;
-	background-color: rgba(0, 0, 0, .2);
-}
-
-.header {
-	text-align: center;
-	background-color: #EEE9DF;
-
-	width: 100%;
-	line-height: 20px;
-	padding: 10px 0px;
-
-	//margin-bottom: 20px;
-}
-
-.instructions{
-	position: absolute;
-	top: 250;
-	left: 0px;
-	background-color: #ADD8E6;
-	z-index: 2;
-
-	width: 100%;
-
-	line-height: 20px;
-	padding: 10px 0px;
-
-	text-align: center;
-}
+	body {
+		font-family: "Helvetica Neue", Arial, sans-serif;
+		background-color: #ddd;
+		height: 100%;
+		padding: 0 !important;
+		/* use helvetica neue, bootstrap style */
+	}
 
 
-.login-header, .reg-header, .slider-header{
-	background-color: #ADD8E6;
-	z-index: 2;
-	width: 100%;
-	line-height: 20px;
-	padding-top: 10px;
-	padding-bottom: 10px;
-	text-align: center;
-	color: black !important;
-}
+	strong {
+		font-weight: bold;
+		color: #1EB3DF;
+	}
+	strong.go-back {
+		color: #54D6F6;
+		cursor: pointer;
+	}
 
-.score {
-	visibility: hidden;
+	#score{
+		font-weight: bold;
+	}
 
-}
+	.frame {
 
-.endsliders, .myBloom, .stats, .help, .leaderboard, .comment-input{ /* piggy backing the the new divs here for now,  .stats, .help*/
-	display: none;
-	position: fixed;
-	top: 0;
-	right: 0;
-	width: 100%;
-	height: 100%;
-	background-color: #E7E1D8;
-	z-index: 999;
-	overflow-y: auto;
-	overflow-x: hidden;
+		width: 100%;
+		height: 100%;
 
-}
+		position: absolute;
+		top: 0;
+		left: 0;
 
-.error_username {
-	position: fixed;
-	top: 0;
-	right: 0;
-	background-color: #E7E1D8;
-	z-index: 999;
-	overflow-y: auto;
-	overflow-x: hidden;
-}
+		display: none;
 
-.sliders, .reg-sliders{
-	text-align: center;
-	width: 100%;
-	font-size: 12pt;
-}
+		background-color: transparent;
+		background-color: rgba(0, 0, 0, .2);
+	}
 
-.register {
-	display: none;
-	position: fixed;
-	top: 0;
-	right: 0;
-	width: 100%;
-	height: 100%;
-	background-color: #E7E1D8;
-	padding-bottom: 30px;
-	z-index: 999;
-	overflow-y: auto;
-	overflow-x: hidden;
-}
+	.header {
+		text-align: center;
+		background-color: #3D3D3D;
+		color: white;
+		font-weight:bold;
+		text-shadow: none;
+		width: 100%;
+		line-height: 20px;
+		padding: 10px 0px;
+		/*margin-bottom: 20px; */
+	}
 
-.login { 
-	text-align: center;
-	display: none;
-	position: fixed;
-	bottom: 0;
-	right: 0;
-	width: 100%;
-	height: 100%;
-	background-color: #E7E1D8;
-	padding-top: 15px;
-	padding-bottom: 20px;a
-	overflow-y: auto;
-	overflow-x: hidden;
-	z-index: 999;
+	.instructions{
+		/*position: absolute;*/
+		top: 250;
+		left: 0px;
+		background-color: #ADD8E6;
+		z-index: 2;
 
-}
+		width: 100%;
 
-.landing {
-	text-align: center;
-	position: fixed;
-	bottom: 0;
-	right: 0;
-	width: 100%;
-	height: 100%;
-	background-color: #E7E1D8;
+		line-height: 20px;
+		padding: 10px 0px;
 
-	padding-top: 20px;
-	padding-bottom: 20px;
+		text-align: center;
+	}
 
-	overflow: auto;
 
-	z-index: 9998;
-}
+	.login-header, .reg-header, .slider-header{
+		background-color: #ADD8E6;
+		z-index: 2;
+		width: 100%;
+		line-height: 20px;
+		padding-top: 10px;
+		padding-bottom: 10px;
+		text-align: center;
+		color: black !important;
+	}
 
-.loading{
-	text-align: center;
-	position: fixed;
-	left: 0;
-	top: 0;
+	.score {
+		visibility: hidden;
+
+	}
+
+	.login, .endsliders, .my-comment, .stats, .help, .leaderboard, .comment-input{ /* piggy backing the the new divs here for now,  .stats, .help*/
+		display: none;
+		position: fixed;
+		top: 0;
+		right: 0;
+		width: 100%;
+		height: 100%;
+		background-color: #E7E1D8;
+		z-index: 999;
+		overflow-y: auto;
+		overflow-x: hidden;
+
+	}
+
+	.error_username {
+		position: fixed;
+		top: 0;
+		right: 0;
+		background-color: #E7E1D8;
+		z-index: 999;
+		overflow-y: auto;
+		overflow-x: hidden;
+	}
+
+	.sliders, .reg-sliders{
+		text-align: center;
+		width: 100%;
+		font-size: 12pt;
+	}
+
+	.register {
+		display: none;
+		position: fixed;
+		top: 0;
+		right: 0;
+		width: 100%;
+		height: 100%;
+		background-color: #E7E1D8;
+		padding-bottom: 30px;
+		z-index: 999;
+		overflow-y: auto;
+		overflow-x: hidden;
+	}
+
+	/*.login { 
+		text-align: center;
+		display: none;
+		position: fixed;
+		top: 0;
+		bottom: 0;
+		right: 0;
+		width: 100%;
+		height: 100%;
+		background-color: #E7E1D8;
+		padding-bottom: 20px;
+		overflow-y: auto;
+		overflow-x: hidden;
+		z-index: 9999999;
+
+	}*/
+
+	.logout {
+		display:none;
+		text-align: center;
+		position: fixed;
+		bottom: 0;
+		right: 0;
+		width: 100%;
+		height: 100%;
+		background-color: #E7E1D8;
+		padding-top: 20px;
+		padding-bottom: 20px;
+		overflow-y: auto;
+        overflow-x: hidden;
+		z-index: 999;
+	}
+
+	.landing {
+		text-align: center;
+		position: fixed;
+		bottom: 0;
+		right: 0;
+		width: 100%;
+		height: 100%;
+		background-color: #E7E1D8;
+
+		padding-top: 20px;
+		padding-bottom: 20px;
+
+		overflow: auto;
+
+		z-index: 9998;
+	}
+
+	.loading{
+		text-align: center;
+		position: fixed;
+		left: 0;
+		top: 0;
 	/*bottom: 0;
 	right: 0; */
 
@@ -302,7 +344,7 @@ strong.go-back {
 }
 
 .landing-header {
-	font-size: 125%;
+	font-size: 150%;
 	padding-top: 30px;
 	padding-bottom: 20px;
 	font-family: 'Roboto Condensed', sans-serif;
@@ -310,6 +352,7 @@ strong.go-back {
 .landing-intro {
 	line-height: 25px;
 	padding: 10px 30px 10px 30px;
+
 	/* less padding on the bottom and top so both buttons can show up*/
 }
 
