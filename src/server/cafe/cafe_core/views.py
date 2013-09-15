@@ -3,6 +3,7 @@ from django.template import RequestContext
 from django.core.mail import send_mail
 from django.db import connection
 from django.http import HttpResponseServerError
+from django.http import HttpResponseRedirect
 
 from models import *
 from admin import *
@@ -59,6 +60,9 @@ def index(request):
     return render_to_response('app.html', context_instance = RequestContext(request, {'client_settings':get_client_settings()}))
 
 def app(request):
+    if request.mobile:
+        return HttpResponseRedirect(URL_ROOT + "/mobile/")
+
     create_visitor(request)
     #print get_client_settings(True)
     os = get_os(1)

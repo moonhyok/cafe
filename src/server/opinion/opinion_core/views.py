@@ -3,6 +3,7 @@ from django.template import RequestContext
 from django.core.mail import send_mail
 from django.db import connection
 from django.http import HttpResponseServerError
+from django.http import HttpResponseRedirect
 
 from models import *
 from admin import *
@@ -74,6 +75,8 @@ def mobile(request):
 											 'statements': OpinionSpaceStatement.objects.all().order_by('id')}))
 
 def app(request, username=None):
+	if request.mobile:
+		return HttpResponseRedirect(URL_ROOT + "/mobile/")
 	create_visitor(request)
 	if username != None:
 		if not Settings.objects.boolean('SOFT_ENTRY_CODES'):
