@@ -5,331 +5,349 @@
   <title>{{ client_settings.WELCOME_PAGE_TITLE }}</title>
 
   <!-- for best viewing on mobile phones -->
-  <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
-
-  <!-- I think this prevents unnecessary horizontal scrolling,
-  have to double-check with overflow css -->
-  <meta name="viewport" content="user-scalable=no, width=device-width" />
-
+  <!-- <meta name='viewport' content='width=device-width, initial-scale=1.0'> -->
+  <meta name='viewport' content='user-scalable=no, width=device-width' />
   <link rel='stylesheet' type='text/css' href='./../media/mobile/css/reset.css' />
   <link rel='stylesheet' type='text/css' href='./../media/mobile/bootstrap/css/bootstrap-responsive.min.css' />
-  <!--<link rel='stylesheet' type='text/css' href='css/opinionspace.css' /> -->
 
-  <script type="text/javascript">
-  console.log("im setting the variables NOW");
-  window.url_root = "{{ url_root }}";
+  <script type='text/javascript'>
+  window.url_root = '{{ url_root }}';
   window.num_sliders = {{ statements|length }};
-  window.authenticated = {{ loggedIn }};
-  window.user_score = {{ client_data.score }};
-  window.username_test = "{{ client_data.username }}";
-  console.log("user_score:" + window.user_score.toString());
-  console.log("authenticated:" + window.authenticated.toString());
-  console.log("username:" + window.username_test.toString());
+  window.conf = { 'SCORE_SCALE_FACTOR'  : {{ client_settings.SCORE_SCALE_FACTOR }},
+  'YOUR_SCORE_LANGUAGE' : "{{ client_settings.YOUR_SCORE_LANGUAGE }}",
+  'INSTRUCTIONS_3'      : "{{ client_settings.INSTRUCTIONS_3 }}",
+  'FUN_COLORS'          : {{ client_settings.FUN_COLORS }}
+};
+</script>
 
-  </script>
-  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-  <script type='text/javascript' src='./../media/mobile/js/csrf-ajax.js'></script>
-  <script type='text/javascript' src='./../media/mobile/js/d3.v2.min.js'></script>
-  <script type='text/javascript' src='./../media/mobile/js/opinion-space-utils.js'></script>
-  <script type='text/javascript' src='./../media/mobile/bootstrap/js/bootstrap.min.js'></script>
-  <script type='text/javascript' src='./../media/mobile/js/os.js'></script>
-  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css" />
-  <script src="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js"></script>
-  <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css'>
-  <link rel='stylesheet' type='text/css' href='./../media/mobile/css/opinionspace.css' />
-  
+<script type='text/javascript' src='http://code.jquery.com/jquery-1.9.1.js'></script>
+<script>
+// TURNING OFF ALL AJAX
+$.ajaxSetup({
+  async: false
+});
+</script>
 
+<script type='text/javascript' src='./../media/mobile/js/csrf-ajax.js'></script>
+<script type='text/javascript' src='http://d3js.org/d3.v2.min.js'></script>
+<script type='text/javascript' src='./../media/mobile/bootstrap/js/bootstrap.min.js'></script>
+<script type='text/javascript' src='./../media/mobile/js/blooms.js'></script>
+<script type='text/javascript' src='./../media/mobile/js/accounts.js'></script>
+<script type='text/javascript' src='./../media/mobile/js/rate.js'></script>
+<script type='text/javascript' src='./../media/mobile/js/utils.js'></script>
+<script type='text/javascript' src='http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js'></script>
+
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+<script type='text/javascript' src='./../media/mobile/js/stats.js'></script>
+<script>
+stats.setConf("{{ client_settings.AGREEMENT_HISTOGRAM_TEXT }}", 
+  "{{ client_settings.LEGEND_AGREEMENT_LEFT }}",
+  "{{ client_settings.LEGEND_AGREEMENT_RIGHT }}",
+  "{{ client_settings.INSIGHT_HISTOGRAM_TEXT }}",
+  "{{ client_settings.LEGEND_INSIGHT_LEFT }}",
+  "{{ client_settings.LEGEND_INSIGHT_RIGHT }}");
+</script>
+
+
+<link rel='stylesheet' type='text/css' href='http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css' />
+<link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Roboto+Condensed'/>
+<link rel='stylesheet' type='text/css' href='./../media/mobile/css/opinionspace.css' /> 
 </head>
 <body>
 
-  <div class="loading">
-    <br><br>
-    <img src="./../media/mobile/img/loader.gif">
-  </div>
 
-  <div class='header'><strong>Topic: {{ short_topic }}</strong></div>
-
-  <div data-role="navbar" id="menubar">
-    <ul>
-      <li><a href="#" data-theme="b" onClick="$('.stats').slideDown();"><span id="score2"><span id="score-label2">Score: </span><span id="score-holder2"></span></span>
-      </a></li>
-      <li><a href="#" data-theme="b" onClick="$('.myBloom').slideDown();">My Bloom</a></li>
-      <li><a href="#" data-theme="b" onClick="$('.stats').slideDown();">My Stats</a></li>
-      <!-- <li><a href="#" data-theme="b" onClick="">Sign Out</a></li> -->
-    </ul>
-  </div>
-
-
-  <div class="instructions" id="instructions">
-    <span id="score"><span id="score-label"></span><span id="score-holder"></span></span>
-    <span id="inst_text">{{ client_settings.INSTRUCTIONS_1 }}</span>
-  <!--
-  <span id="menubar">
-    <a href="#" onClick="$('.myBloom').slideDown();">[My Bloom]</a>
-    <a href="#" onClick="$('.stats').slideDown();">[See Stats]</a>
-    <a href="#" onClick="$('.help').slideDown();">[Help]</a>
-  </span> -->
-</div>
-
-
-<!-- <div class="rate-loading"><img src="img/ajax-loader.gif">&nbsp; Comment loading...</div> -->
-<div class="rate">
-  <div class='header'><strong>{{ topic }}</strong></div>
-
-  <!--     <div class="rate-wrap"> -->
-  <div id="commentInput" class="answer"></div>
-
-  <div class="sliders">
-    <hr>
-    {{ client_settings.AGREEMENT_TEXT }}<br/>
-    <input data-track-theme="b" data-theme="a" type="range" name="slider1" id="slider1" value="50" min="0" max="100" animate="true"/>
-    <hr>
-    {{ client_settings.INSIGHT_TEXT }}<br/>
-    <input data-track-theme="b" data-theme="a" type="range" name="slider2" id="slider2" value="50" min="0" max="100" animate="true"/>
-    <hr>
-    <button type="submit" data-theme="a" id="go-back" onClick="utils.doneRating()">Done Rating</button>
-  </div>
-  <!--     </div> -->  
-  <br><br>
-
-</div>
-<div id='rating'>
-
-  <div class="endsliders">
-    <div class ='slider-header'>
-      <p>{{ client_settings.INSTRUCTIONS_4 }}</p>
+  <div class="top-bar">
+    <div class='header'>
+      {% if client_settings.HEADER_IMAGE == "true" %}
+      <img class="header-img-topic" src={{ client_settings.HEADER_IMAGE_SOURCE }} class="center" style="width:150px;"><br>
+      {% endif %}
+      Topic: {{ short_topic }}
     </div>
-    <br>
-    <div class="sliders-wrap" data-theme="b">
-      <center>
-        {% for statement in statements %}
-        {% ifnotequal statement.statement "" %}
-        <p class='slider-question'> {{ statement.statement }} </p>
-        <input data-track-theme="b" data-theme="a" type="range" id="s{{statement.id}}" value="50" min="0" max="100" animate="true"/><hr>
-        {% else %}
-        <div style="display:none;">
-          <input data-track-theme="b" data-theme="a" type="range" id="s{{statement.id}}" value="50" min="0" max="100" animate="true"/><hr>
-        </div>
-        {% endifnotequal %}
-        {% endfor %}
+
+    <div data-role='navbar' class='menubar'>
+      <ul>
+        <li><a data-theme='b' class='stats-btn'>
+          <span class='score-label'></span><span class='score-value'></span>
+        </a></li>
+        <li><a data-theme='b' class='my-comment-btn'>My Comment</a></li>
+        <li><a data-theme='b' class='logout-btn'>Logout</a></li>
+      </ul>
+    </div>
+
+    <div class='instructions' id='instructions'>
+      <span class='inst-score'><span class='score-label'></span><span class='score-value'></span></span>
+      <span class='inst-text'>{{ client_settings.INSTRUCTIONS_1 }}</span>
+    </div>
+    <div class="margin"><!--<br><br><br><br>--></div>
+  </div>
+
+  <!-- <div class='rate-loading'><img src='img/ajax-loader.gif'>&nbsp; Comment loading...</div> -->
+  <div class='rate'>
+    <div class='header'>{{ topic }}</div>
+
+    <!--     <div class='rate-wrap'> -->
+    <div id='commentInput' class='answer'></div>
+
+    <div class='sliders'>
+      <hr>
+      {{ client_settings.AGREEMENT_TEXT }}<br><br>
+      <div class="slider-range-labels">
+        <div class="alignleft">&larr;{{ client_settings.AGREEMENT_LEFT_TEXT }}</div>
+        <div class="alignright">{{ client_settings.AGREEMENT_RIGHT_TEXT }} &rarr;</div>
       </div>
-      <button type="submit" data-theme="a" onClick="utils.storeSliders({{ statements|length }})">Done</button>
-    </center>
+      <div style="clear: both;"></div>
+      <input data-track-theme='b' data-theme='a' type='range' name='slider1' id='slider1' value='50' min='0' max='100' animate='true'/>
+
+      <hr>
+
+      {{ client_settings.INSIGHT_TEXT }}<br/>
+      <div class="slider-range-labels">
+        <div class="alignleft">&larr; {{ client_settings.INSIGHT_LEFT_TEXT }}</div>
+        <div class="alignright">{{ client_settings.INSIGHT_RIGHT_TEXT }} &rarr;</div>
+      </div>
+      <div style="clear: both;"></div>
+
+      <input data-track-theme='b' data-theme='a' type='range' name='slider2' id='slider2' value='50' min='0' max='100' animate='true'/>
+      <hr>
+      <button type='submit' data-theme='a' id='go-back' onClick='rate.doneRating()'>Done Rating</button>
+    </div>
+    <!--     </div> -->  
+    <br><br>
+
+  </div>
+  <div id='rating'>
+
+    <div class='endsliders'>
+      <div class ='slider-header'>
+        <p>{{ client_settings.INSTRUCTIONS_4 }}</p>
+      </div>
+      <br>
+      <div class='sliders-wrap' data-theme='b'>
+        <center>
+          {% for statement in statements %}
+          {% ifnotequal statement.statement '' %}
+          <p class='slider-question'> {{ statement.statement }} </p>
+
+          <div class="slider-agree-labels">
+            <div class="alignleft">&larr; <i>Strongly Disagree</i></div>
+            <div class="alignright"><i>Strongly Agree</i> &rarr;</div>
+          </div>
+          <div style="clear: both;"></div>
+
+          <input data-track-theme='b' data-theme='a' type='range' id='s{{statement.id}}' value='50' min='0' max='100' animate='true'/><hr>
+
+          {% else %}
+          <div style='display:none;'>
+            <input data-track-theme='b' data-theme='a' type='range' id='s{{statement.id}}' value='50' min='0' max='100' animate='true'/><hr>
+          </div>
+          {% endifnotequal %}
+          {% endfor %}
+        </div>
+        <button type='submit' data-theme='a' class='done-endsliders-btn'>Done</button>
+      </center>
+    </div>
   </div>
 </div>
-</div>
 
-<div class='myBloom'>
-  <div class="row" style="text-align:center;">
-    <div class="span6">
+<div class='my-comment'>
+  <div class='row' style='text-align:center;'>
+    <div class='span6'>
       <br><br>
-      <img src="./../media/mobile/bloom.png" width="10%" alt="bloom">
+      <img src='./../media/mobile/img/bloom.png' width='10%'>
     </div>
-    <div class="span6">
+    <div class='span6'>
       <br>
-      <strong>Username:</strong> {{ client_data.username }}<br>
-      <strong>Score:</strong> <span id="score-holder3"></span> Points<br>
-      <strong>Idea Rated By: </strong>{{ client_data.rated_by }} Participants<br>
+      <strong>Username:</strong><span class='username'></span><br>
+      <strong><span class='score-label'></span></strong> <span class='score-value'></span><br>
+      <strong>Idea Rated By: </strong><span class='num-rated-by'></span> Participants<br>
     </div>
   </div>
 
   <br>
 
-  <div id="commentRegion">
+  <div class='comment-region'>
+    <div class='comment-text'></div>
 
-    <div id="commentText">
-      {{ client_data.comment }}
-    </div>
+    {% if client_settings.ALLOW_EDIT_COMMENT == "true" %}
+    <button type='submit' data-theme='a' class='edit-comment-btn'>Edit Comment</button>
+    {% endif %}
 
-    <!-- <button type="submit" data-theme="a" onClick="utils.editComment();">Edit Comment</button> -->
-    <button type="submit" data-theme="a" onClick="$('.myBloom').slideUp();$('#menubar').find('.ui-btn-active').removeClass('ui-btn-active ui-focus');
-    ">Done</button>
+    <button type='submit' data-theme='a' class='edit-comment-done-btn'>Done</button>
   </div>
 
-  <div id="editComment" style="display:none">
-    <div data-role="fieldcontain">
-      <textarea id="editCommentBox">  {{ client_data.comment }} </textarea>
-    </div>
-
-    <button type="submit" data-theme="a" onClick="">Save Comment</button>
-    <button type="submit" data-theme="a" onClick="$('.myBloom').slideUp();$('#menubar').find('.ui-btn-active').removeClass('ui-btn-active ui-focus');
-    ">Cancel</button>
+  <div class='edit-comment' style='display:none'>
+    <textarea class='edit-comment-box'></textarea>
+    <button data-theme='a' class='edit-comment-save-btn'>Save Comment</button>
+    <button data-theme='a' class='edit-comment-cancel-btn'>Cancel</button>
   </div>
 
 </div>
 
 <div class='stats'>
-  <div class="row" style="text-align:center;">
-    <div class="span6">
-      <img src="./../media/mobile/bloom.png" width="10%" alt="bloom">
+  <div class='row' style='text-align:center;'>
+    <div class='span6'>
+      <img src='./../media/mobile/img/bloom.png' width='10%' alt='bloom'>
     </div>
-    <div class="span6">
+    <div class='span6'>
       <br>
-      <strong>Username:</strong> {{ client_data.username }}<br>
-      <strong>Score:</strong> <span id="score-holder4"></span> Points<br>
-      <strong>Idea Rated By: </strong>{{ client_data.rated_by}} Participants<br>
+      <strong>Username:</strong><span class='username'></span><br>
+      <strong><span class='score-label'></span></strong> <span class='score-value'></span><br>
+      <strong>Idea Rated By: </strong><span class='num-rated-by'></span> Participants<br>
 
     </div>
   </div>
 
-
   <hr>
-  <!--
-  See how other participants rated your bloom:<br><br>
 
-  <strong>Agreement rating:</strong><br>
-  <strong></strong><input data-track-theme="b" data-theme="a" type="range" id="agreement" value="86" min="0" max="100" disabled="true"/>
-  <hr>
-  <strong>Insightful rating:</strong><br>
-  <strong></strong><input data-track-theme="b" data-theme="a" type="range" id="insightful" id="slider2" value="63" min="0" max="100" disabled="true"/>
-  <hr> -->
-  <center><h1>Leaderboard</h1><center>
+  <div class='graphs-wrap' style='text-align:center;'>
 
-    <table class="pretty">
+    <div class='graphs-insufficient' style='display:none;'>You can see a graph of the ratings you've received after you have been rated by 5 people.<br>
+      Now please rate more blooms to earn more points.  Just click Done and choose any bloom..."</div>
+
+      <div class='graphs'>
+        <strong>Ratings Received</strong>
+        <div class='row' style='text-align:center;'>
+          <div id='graph-1' class='span6'></div>
+          <div id='graph-2' class='span6'></div>
+        </div>
+      </div>
+    </div>
+
+    <br>
+    {% if client_settings.LEADERBOARD_ENABLED == "true" %}
+    <button data-theme='a' onClick="$('.leaderboard').slideDown();">Leaderboard</button>
+    {% endif %}
+    <button data-theme='a' class="stats-done-btn">Done</button>
+  </div>
+
+  <div class='leaderboard'>
+    <br><br>
+    <center><h1>Leaderboard</h1></center>
+
+    <table class='pretty'>
       <tr>
         <th>Username</th><th>Points</th>
       </tr>
       {% for leader in leaderboard%}
       <tr>
-        <td>{{ leader.username }}</td><td> {{ leader.total_score|add:"0" }}</td>
-      </tr>
-      {% endfor %}
-    </table>
-
-  <!-- <div id="bargraph">
-</div> -->
-
-<br>
-
-<!-- <button data-theme="a" onClick="$('.leaderboard').slideDown();">Leaderboard</button> -->
-
-<button type="submit" data-theme="a" onClick="$('.stats').slideUp();$('#menubar').find('.ui-btn-active').removeClass('ui-btn-active ui-focus');
-">Done</button>
-</div>
-
-<div class='leaderboard'>
-  <br><br>
-  <center><h1>Leaderboard</h1><center>
-
-    <table class="pretty">
-      <tr>
-        <th>Username</th><th>Points</th>
-      </tr>
-      {% for leader in leaderboard%}
-      <tr>
-        <td>{{ leader.username }}</td><td> {{ leader.total_score|add:"0" }}</td>
+        <td>{{ leader.username }}</td><td> {{ leader.total_score|add:'0' }}</td>
       </tr>
       {% endfor %}
     </table>
 
     <br><br>
-    <button type="submit" data-theme="a" onClick="$('.leaderboard').slideUp();$('#menubar').find('.ui-btn-active').removeClass('ui-btn-active ui-focus');
-    ">Done</button>
+    <button data-theme='a' onClick="$('.leaderboard').slideUp();">Done</button>
 
   </div>
 
-  <div class='help'>
+  <div id='d3'>
+    <!--    <div class='loading'><img src='img/ajax-loader-gray.gif'>&nbsp; Loading opinions...</div>-->
+  </div>
 
-    <h2>Opinion Space helps participants:<h2><br>
-      Visualize their relationships to other participants.<br>
-      Express thoughtful ideas and suggestions about emerging issues and products.<br>
-      Engage in friendly competition with other participants.<br>
-      Learn and gain insights from other participants.<br><br>
+  <!-- it is important for the frame to be after the d3 div -->
+  <div class='frame'></div>
+  <div class = 'register' id='register'>
+    <div class = 'reg-header'>{{ client_settings.INSTRUCTIONS_5 }}</div>
+    <form method='post' action='{{ url_root }}/accountsjson/register/' id='reg_form'>
+      <input type='hidden' value='{{ topic }}' name='question'>
+      <input type='hidden' value='{{ url_root }}' name='url'>
 
-      It works like this: new participants use graphical sliders to express the degree to which they agree or disagree with five baseline statements such as: "I'm very interested in issue A", "I am an active user of product B".  These responses are combined to display the new participant as a unique point in a map.  The map is not based on predetermined categories, but on similarity of interests, behavior, and perspectives.  It is designed to "depolarize" discussions by including all participants on a single level playing field.<br><br>
-
-      Participants click on the points of other community members to read ideas and suggestions on discussion topics such as "What new approaches could be used to address issue C?  "What features would you like to see in a new version of product D?".  Participants evaluate the ideas of others and enter their own ideas.  Participants earn points as Reviewers based on how they evaluate the ideas of others and earn points as Authors based on how others rate their own ideas.
-      <button type="submit" data-theme="a" onClick="$('.help').slideUp();">Done</button>
-    </div> 
-
-    <div id='d3'>
-<!--    <div class="loading"><img src='img/ajax-loader-gray.gif'>&nbsp; Loading opinions...</div>
--->  </div>
-<!-- it is important for the frame to be after the d3 div -->
-<div class="frame"></div>
-<div class = 'register' id="register">
-  <div class = 'reg-header'>{{ client_settings.INSTRUCTIONS_5 }}</div>
-  <form method='post' action='{{ url_root }}/accountsjson/register/' id='reg_form'>
-    <input type='hidden' value='{{ topic }}' name='question'>
-    <input type='hidden' value='{{ url_root }}' name='url'>
-
-    <div data-role="fieldcontain">
-      <label for="regusername">Username:</label><br>
-      <input type="text" id="regusername" name="regusername">
-      <div class="alert-error" id="username-error" style="display:none;">
-        Usernames should only contain numbers and letters.
+      <div data-role='fieldcontain'>
+        <label for='regusername'>Username:</label>
+        <input type='text' id='regusername' name='regusername'>
+        <div class='alert-error' id='username-error' style='display:none;'></div>
       </div>
+
+      <div data-role='fieldcontain'>
+        <label for='regpassword1'>Password:</label>
+        <input type ='password' id='regpassword1' name='regpassword1'>
+        <div class='alert-error' id='password-error' style='display:none;'></div>
+      </div> 
+
+      <div data-role='fieldcontain'>
+        <label for='regemail'>Email:</label>
+        <input type ='text' id='regemail' name='regemail'>
+        <div class='alert-error' id='email-error' style='display:none;'> </div>
+      </div> 
+
+      <input type='submit' value='Submit' id='finishRegistration'>
+    </form>
+    <br><br><br>
+  </div>
+
+  <div class='comment-input'>
+    <div class = 'reg-header'>{{ client_settings.INSTRUCTIONS_6 }}</div>
+    <div id = 'reg-question'> <p>{{ topic }}</p>
+      <textarea rows='20' cols = '30' name = 'answer' id='entered-comment'> </textarea> 
+    </div>
+    <input type='submit' value='Done' data-theme='a' class='comment-submit-btn'>
+  </div>
+
+  <div class='login' id='login'>
+    <div class='login-header'>Please Login</div>
+
+    <div class='alert-error' id='login-error' style='display:none;'>
+      Please check your username and password and try again.
     </div>
 
-    <div data-role="fieldcontain">
-      <label for="regpassword1">Password:</label><br>
-      <input type ="password" id="regpassword1" name="regpassword1">
-      <div class="alert-error" id="password-error" style="display:none;">
-        Please enter a password.
-      </div>
-    </div> 
-
-    <div data-role="fieldcontain">
-      <label for="regemail">Email:</label><br>
-      <input type ="text" id="regemail" name="regemail">
-      <div class="alert-error" id="email-error" style="display:none;">
-        That does not look like an email address.
-      </div>
-    </div> 
-
-    <input type="submit" value="Submit" id="finishRegistration">
-  </form>
-  <br><br><br>
-</div>
-
-<div class="comment-input">
-  <div class = 'reg-header'>{{ client_settings.INSTRUCTIONS_6 }}</div>
-  <div id = 'reg-question'> <p>{{ topic }}</p>
-    <textarea rows="20" cols = "30" name = "answer" id="entered-comment"> </textarea> 
-  </div>
-  <input type="submit" value="Done" data-theme="a" onClick="window.comment = document.getElementById('entered-comment').value;$('.comment-input').slideUp();utils.showRegister();">
-</div>
-
-<!-- <div data-role="page" id="index"> -->
-<div class='login' id="login">
-  <div class = 'login-header'><br>Please Login</div>
-
-  <div class="alert-error" id="login-error" style="display:none;">
-    Please check your username and password and try again.
+    <form id='login_form'>
+      <br>
+      <p class='label'>Username</p>
+      <input type='text' name='username'>
+      <p class ='label'>Password</p>
+      <input type='password' name='password'>
+      <!-- <button type='submit' data-theme='a' id='login-button'>Login</button>  -->
+      <input type='submit' value='Login'>
+    </form>
   </div>
 
-  <form id='login_form'>
-    <br>
-    <p class='label'>Username</p>
-    <input type='text' name='username'>
-    <p class ='label'>Password</p>
-    <input type='password' name='password'>
-    <button type="submit" data-theme="a" id="login-button">Login</button> 
-
-  </div>
-</form>
 </div>
 
+<div class='logout'>
+  <div class='landing-header'>
+    Thank you for participating!
+  </div>
 
+  {% if client_settings.HEADER_IMAGE == "true" %}
+  <img class="header-img-topic" src={{ client_settings.HEADER_IMAGE_SOURCE }} class="center" style="width:150px;"><br>
+  {% endif %}
+
+  <p> Return at any time to check your progress!<br> You can see how other participants are rating your idea. </p><br>
+
+  <img src='./../media/mobile/img/bar_graph.png' class='center'>
+  <br> 
+  <div class='ui-body ui-body-b'
+  <fieldset class='ui-grid-a'>
+    <button data-theme='a' class='logout-start-over'>Start Over</button>
+    <button data-theme='b' class='logout-login-again'>Login again?</button>
+  </fieldset>
+</div>
+</div>
 
 <div class='landing'>
   <div class='landing-intro'>
     <div class='landing-header'>
-
-      The Collective Discovery Engine
+      {{ client_settings.WELCOME_PAGE_TITLE }}
     </div>
+
+    {% if client_settings.HEADER_IMAGE == "true" %}
+    <img class="header-img-topic" src={{ client_settings.HEADER_IMAGE_SOURCE }} class="center" style="width:150px;"><br>
+    {% endif %}
+
     <p> The "Collective Discovery Engine" is an interactive visual and social environment designed to allow participants to collaboratively generate, cultivate, and evaluate ideas around topics of mutual interest. </p><br>
     <p> <strong>Select a bloom</strong> to read an idea, and then <strong>rate it</strong> and add your own ideas. </p>
   </div>
-  <div class="ui-body ui-body-b"
-  <fieldset class="ui-grid-a">
-    <button type="submit" data-theme="a"  onClick='utils.firstTime();' >First time</button>
-    <button type="cancel" data-theme="b"  onClick='utils.showLogin();'>Login</button>
+  <div class='ui-body ui-body-b'
+  <fieldset class='ui-grid-a'>
+    <button type='submit' data-theme='a' class='first-time-btn'>First time</button>
+    <button type='cancel' data-theme='b' class='login-btn'>Returning</button>
   </fieldset>
 </div>
 <br><br>
-<img id="splash" src="./../media/mobile/os_splash.png" alt="opinionspace_splash" class="center"> 
+<img id='splash' src='./../media/mobile/img/os_splash.png' class='center'> 
 </div>
+
+
 
 
 </body>
