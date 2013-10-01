@@ -10,7 +10,7 @@ var blooms = (function($, d3, console) {
     /** Creates global variable window.visuals to determine blooms colors and sizes.
      *  Copied from the flash version. */
 
-    function generateBloomSizesAndColors() {
+    function generateBloomSizesAndColors(data) {
         window.visuals = {
             userIdToCommentScoreBucket: {},
             userIdToAvgAgreementBucket: {},
@@ -28,14 +28,17 @@ var blooms = (function($, d3, console) {
 
         var sorted_comments_ids;
         var sorted_avg_agreement;
+        
+        sorted_comments_ids = data['sorted_comments_ids'];
+        sorted_avg_agreement = data['sorted_avg_agreement'];
 
-        utils.ajaxTempOff(function() {
-            $.getJSON(window.url_root + '/os/all/1/', function(data) {
-                sorted_comments_ids = data['sorted_comments_ids'];
-                sorted_avg_agreement = data['sorted_avg_agreement'];
-            });
+        // utils.ajaxTempOff(function() {
+        //     $.getJSON(window.url_root + '/os/all/1/', function(data) {
+        //         sorted_comments_ids = data['sorted_comments_ids'];
+        //         sorted_avg_agreement = data['sorted_avg_agreement'];
+        //     });
 
-        });
+        // });
 
         storeSortedIDsToBuckets(sorted_comments_ids, window.visuals.userIdToCommentScoreBucket, window.visuals.POINT_SIZES.length);
         storeSortedIDsToBuckets(sorted_avg_agreement, window.visuals.userIdToAvgAgreementBucket, window.visuals.POINT_COLORS.length);
@@ -194,34 +197,52 @@ var blooms = (function($, d3, console) {
         neverseen_id = typeof neverseen_id === 'undefined' ? 1 : neverseen_id;
 
         var eigens, ratings, result; //these are undefined by default
-        $.when(
-            $.getJSON(window.url_root + '/os/show/' + show_id + '/'),
-            $.getJSON(window.url_root + '/os/neverseencomments/' + neverseen_id + '/')
-        ).done(function(data1, data2) {
-            eigens = data1[0]['eigenvectors']; //data, success, jqxhr
-            ratings = data2[0]['ratings'];
 
+        var data1, data2;
 
-            //make this it's own function
-            // hack to allow own bloom - should be cleaned up later
-            //var curr_user_id = data1[0]['cur_user_id'];
-            var users_statements = data1[0]['statements'];
-            var users_ratings = [];
-            for (var i = 0; i < users_statements.length; i += 1) {
-                users_ratings[i] = new Array("curUser", users_statements[i][0], users_statements[i][3]);
+        $.ajax({
+            async: false,
+            dataType: "json",
+            url: window.url_root + '/os/show/' + show_id + '/',
+            success: function(d1) {
+                data1 = d1;
+                eigens = data1['eigenvectors'];
+                data2 = data1['never_seen_comments'];
+                ratings = data2['ratings'];
+                generateBloomSizesAndColors(data2);
+                //console.log(eigens);
+
             }
-
-            if (window.authenticated) {
-                ratings = ratings.concat(users_ratings);
-            }
-            //end of hack
-
-            result = compileEigenvectorsAndRatings(eigens, ratings);
-            showfunc({
-                points: result,
-                comments: data2[0].comments
-            });
         });
+
+        // $.when(
+        //     $.getJSON(window.url_root + '/os/show/' + show_id + '/'),
+        //     $.getJSON(window.url_root + '/os/neverseencomments/' + neverseen_id + '/')
+        // ).done(function(data1, data2) {
+        //     eigens = data1[0]['eigenvectors']; //data, success, jqxhr
+        //     ratings = data2[0]['ratings'];
+
+
+        //make this it's own function
+        // hack to allow own bloom - should be cleaned up later
+        //var curr_user_id = data1[0]['cur_user_id'];
+        var users_statements = data1['statements'];
+        var users_ratings = [];
+        for (var i = 0; i < users_statements.length; i += 1) {
+            users_ratings[i] = new Array("curUser", users_statements[i][0], users_statements[i][3]);
+        }
+
+        if (window.authenticated) {
+            ratings = ratings.concat(users_ratings);
+        }
+        //end of hack
+
+        result = compileEigenvectorsAndRatings(eigens, ratings);
+        showfunc({
+            points: result,
+            comments: data2.comments
+        });
+        // });
 
     }
 
@@ -257,7 +278,7 @@ var blooms = (function($, d3, console) {
     // Side Effects: Populate the d3 graph with blooms according to the data from pullLivePoints.
 
     function populateBlooms() {
-        generateBloomSizesAndColors();
+//        generateBloomSizesAndColors();
 
         // set up loading sign
         $('svg').remove();
@@ -278,111 +299,81 @@ var blooms = (function($, d3, console) {
 
         //console.log('resizing: width: ' + width + ' height: ' + height);
 
-        pullLivePoints(function(object) {
+         pullLivePoints(function(object) {
             var data = object.points;
             var comments = object.comments;
+
+            console.log(data);
+            console.log(comments);
+
             $('svg').remove();
             // clear anything that's in the div already (e.g. loading button)
             $('#d3 .loading').hide();
             var svg = d3.select('#d3')
-                .append('svg')
-                .attr('width', width + margin.left + margin.right)
-                .attr('height', height + margin.top + margin.bottom)
-                .append('g')
+            .append('svg')
+            .attr('width', width + margin.left + margin.right)
+            .attr('height', height + margin.top + margin.bottom)
+            .append('g')
             // .attr('class', 'main')
             .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
             // create the scales - these will map actual data to pixels on the screen.
             var x = d3.scale.linear()
-                .domain(d3.extent(data, function(d) {
-                    return d.x;
-                }))
-                .range([0, width]);
+            .domain(d3.extent(data, function(d) {
+                return d.x;
+            }))
+            .range([0, width]);
 
             var y = d3.scale.linear()
-                .domain(d3.extent(data, function(d) {
-                    return d.y;
-                }))
-                .range([height, 0]);
+            .domain(d3.extent(data, function(d) {
+                return d.y;
+            }))
+            .range([height, 0]);
 
             //var rescale = generateRescalingFactor();
 
-            svg.selectAll('.bloom')
-                .data(data)
-                .enter()
-                .append('g')
-                .attr('class', 'bloom')
-                .append('circle')
-                .attr('class', 'bloom-circle')
-                .attr('cx', function(d) {
-                    return x(d.x);
-                })
-                .attr('cy', function(d) {
-                    return y(d.y);
-                })
-                .attr('r', function(d) {
-                    return mapScoreToRadius(d.uid, comments);
-                })
-                .attr('data-r', function() {
-                    return d3.select(this).attr('r');
-                })
-                .style('fill', function(d) {
-                    return mapUidToColor(d.uid, comments);
-                })
-            //.style('fill', 'url(#gradient)')
-            .style('stroke', 'white')
-                .style('stroke-width', function(d) {
-                    if (d.uid == "curUser") {
-                        return "10px";
-                    } else {
-                        return "5px";
-                    }
-                })
-                .datum(function(d) {
-                    return d;
-                })
-                .on('click', function(d) {
-                    if (d.uid == "curUser") {
-                        accounts.loadMyCommentDiv();
-                        $('.my-comment').slideDown();
-                        return;
-                    }
-                    if (false) { //accounts.readyToLogin() && !window.authenticated
-                        //rate.showSliders();
-                    } else {
-                        var _this = d3.select(this);
-                        $('.rate-loading').slideDown();
-                        var commentData = rate.pullComment(d.uid, 'uid', comments);
-                        var content = commentData.comment;
-                        var cid = commentData.cid;
-                        window.current_cid = cid;
+            svg.selectAll(".bloom")
+            .data(data)
+            .enter()
+            .append("svg:image")
+            .attr("xlink:href", function() {
+                return "/media/mobile/img/cafe/cafe" + Math.floor((Math.random()*6)).toString() + ".png";
 
-                        _this.transition()
-                            .attr('r', function() {
-                                return parseInt(_this.attr('data-r'), 10) + 20;
-                            })
-                            .duration(1000).each("end", function() {
-
-                                rate.updateDescriptions(document.getElementById('commentInput'), content);
-                                $('.rate').slideDown(function() {
-                                    $('.rate-loading').slideUp();
-                                    $('.rate').data('cid', cid);
-                                });
-                                $('#go-back').click(function() {
-                                    _this.transition()
-                                        .attr('r', 0)
-                                        .duration(2000);
-                                });
-
-
-                            });
-                    }
-
+            })
+            .attr('x', function(d) {
+                return x(d.x);
+            })
+            .attr('y', function(d) {
+                return y(d.y);
+            })
+            .attr("width", "140")
+            .attr("height", "140")
+            .attr("transform", function(d) {
+                    //var rotations = ['-65', '-20', '45', '80'];
+                    //return "rotate(" + choice(rotations).toString() + ")";
+                    return choice(["rotate(-65)", "rotate(-45)", "rotate(20)"]);
                 })
-                .append('circle')
-                .attr('r', 2)
-                .style('fill', 'white');
-
+            .datum(function(d) {
+                return d;
+            })
+            .on('click', function(d) {
+                var commentData = rate.pullComment(d.uid, 'uid', comments);
+                var content = commentData.comment;
+                var cid = commentData.cid;
+                window.current_cid = cid;
+                $('.rate').slideDown();
+                $('.rate-loading').slideDown();
+                rate.updateDescriptions(document.getElementById('commentInput'), content);
+                $('.rate').slideDown(function() {
+                    $('.rate-loading').slideUp();
+                    $('.rate').data('cid', cid);
+                });
+                $('#go-back').click(function() {
+                    _this.transition()
+                    .attr('r', 0)
+                    .duration(2000);
+                });
+            });
         });
     }
 
@@ -390,9 +381,10 @@ var blooms = (function($, d3, console) {
 
     function alreadyAuthenticated() {
         //TOFIX utils.showLoading("Loading...");
-        utils.ajaxTempOff(function() {
-            populateBlooms();
-        });
+
+        //utils.ajaxTempOff(function() {
+        populateBlooms();
+        //});
         accounts.initLoggedInFeatures();
         //TOFIX utils.hideLoading();
         $('.landing').hide();

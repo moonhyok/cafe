@@ -67,6 +67,7 @@ def mobile(request):
 
     return render_to_response('mobile.html', context_instance = RequestContext(request, {'url_root' : settings.URL_ROOT,
 											 'loggedIn' : str(request.user.is_authenticated()).lower(),
+											 'change_prompt' : str(request.user.is_authenticated()).lower(),
 											 'client_data': mobile_client_data(request),
 											 'client_settings': get_client_settings(True),
 											 'leaderboard': get_top_scores(os, disc_stmt, request, 10),
@@ -1005,10 +1006,6 @@ def os_list(request):
     return json_result(tuple(OpinionSpace.objects.all().values_list('id', 'name')))
 
 def os_show(request, os_id, disc_stmt_id = None):
-    if TEMP_DEBUG_LOGGING:
-    	TEMP_DEBUG_FILE = open(TEMP_DEBUG_FILENAME, 'a')
-    	TEMP_DEBUG_FILE.write("\nOS/SHOW:"+ str(datetime.datetime.now())+"\n")  
-
     """
 	
 	Returns the state variables required for the creation of an Opinion Space or
@@ -1020,8 +1017,6 @@ def os_show(request, os_id, disc_stmt_id = None):
     try:
     	os = get_os(os_id)
     except QueryUtilsError, q:
-    	if TEMP_DEBUG_LOGGING:
-    		TEMP_DEBUG_FILE.write(json_error(q.error_message).content)
     	return json_error(q.error_message)
 
     name = os.name
@@ -1160,7 +1155,7 @@ def os_show(request, os_id, disc_stmt_id = None):
         else:
             cur_comment_id = -1	
     else:
-            cur_comment_id = -1	
+            cur_comment_id = -1    
 
     result = {'name': name,
               'statements': statements,
@@ -1186,12 +1181,9 @@ def os_show(request, os_id, disc_stmt_id = None):
 			  'finished_additional_questions': finished_additional_questions,
 			  'num_fully_rated': num_fully_rated,
 			  'adminpanel_uids': adminpanel_uids,
+	      'never_seen_comments': os_never_seen_comments_json(request,os_id,disc_stmt_id),
               'cur_comment_id': cur_comment_id,
 			  'date' : date_dict}
-
-    if TEMP_DEBUG_LOGGING:
-    	TEMP_DEBUG_FILE.write(json_result(result).content)
-    	TEMP_DEBUG_FILE.close()
     
     return json_result(result)
 
@@ -2316,17 +2308,22 @@ def os_never_seen_comments(request,os_id,disc_stmt_id=None):
 	
 	if os == None or len(disc_stmt) == 0:
 		return json_error('Invalid Request')
+	    
+	cache = NeverSeenCache.objects.filter(created__gte=datetime.date.today()).order_by('-created')
+	if len(cache) > 0 and not request.user.is_authenticated():
+	    cache = cache[0]
+	    return json_result(json.loads(cache.value))
 
-	query = request.REQUEST.get('query', False)
-	no_statements = request.REQUEST.get('no_statements', False)
-	if no_statements == "false": # Flash booleans aren't transferred correctly
-		no_statements = False
+	#query = request.REQUEST.get('query', False)
+	#no_statements = request.REQUEST.get('no_statements', False)
+	#if no_statements == "false": # Flash booleans aren't transferred correctly
+	#	no_statements = False
 
-	never_seen_comments = get_never_seen_comments(request.user,os,disc_stmt[0],Settings.objects.int('MAX_NUM_TOTAL_DOTS'), False, no_statements)
+	never_seen_comments = get_never_seen_comments(request.user,os,disc_stmt[0],Settings.objects.int('MAX_NUM_TOTAL_DOTS'), False)
 	# Check for an argument username -- this param is only sent on createOS
-	username = request.REQUEST.get('username', False)
-	if username:
-		never_seen_comments += get_comment_by_username(request, username, os, disc_stmt)
+	#username = request.REQUEST.get('username', False)
+	#if username:
+	#	never_seen_comments += get_comment_by_username(request, username, os, disc_stmt)
 	
 	# create log 
 	create_comments_returned_log(request, os, never_seen_comments, LogCommentsReturned.unrated)
@@ -2343,14 +2340,65 @@ def os_never_seen_comments(request,os_id,disc_stmt_id=None):
 		data = get_user_data(tup[0])
 		if len(data) > 0:
 			user_data[tup[0]] = data	
-	
-	return json_result({'comments': never_seen_comments,
+	result = {'comments': never_seen_comments,
 						'ratings': user_ratings,
 						'user_data': user_data,
-						'query': query,
-						'no_statements': no_statements,
 						'sorted_comments_ids': sort_by_response_score(never_seen_comments),
-						'sorted_avg_agreement':sort_by_avg_agreement(never_seen_comments)})
+						'sorted_avg_agreement':sort_by_avg_agreement(never_seen_comments)}
+	nc = NeverSeenCache(value=json.dumps(result))
+	nc.save()
+	return json_result(result)
+    
+def os_never_seen_comments_json(request,os_id,disc_stmt_id=None):
+	os = get_os(os_id)
+	
+	if disc_stmt_id == None:
+		disc_stmt = os.discussion_statements.filter(is_current = True)
+	else:
+		disc_stmt = DiscussionStatement.objects.filter(id = disc_stmt_id)
+	
+	if os == None or len(disc_stmt) == 0:
+		return json_error('Invalid Request')
+	    
+	cache = NeverSeenCache.objects.filter(created__gte=datetime.date.today()).order_by('-created')
+	if len(cache) > 0:
+	    cache = cache[0]
+	    return json.loads(cache.value)
+
+	#query = request.REQUEST.get('query', False)
+	#no_statements = request.REQUEST.get('no_statements', False)
+	#if no_statements == "false": # Flash booleans aren't transferred correctly
+	#	no_statements = False
+
+	never_seen_comments = get_never_seen_comments(request.user,os,disc_stmt[0],Settings.objects.int('MAX_NUM_TOTAL_DOTS'), False)
+	# Check for an argument username -- this param is only sent on createOS
+	#username = request.REQUEST.get('username', False)
+	#if username:
+	#	never_seen_comments += get_comment_by_username(request, username, os, disc_stmt)
+	
+	# create log 
+	create_comments_returned_log(request, os, never_seen_comments, LogCommentsReturned.unrated)
+	
+	# Get the user ratings
+	uids = []
+	for comment in never_seen_comments:
+		uids.append(comment['uid'])
+	user_ratings = get_user_ratings(request, os, uids)
+	
+	# Get user data
+	user_data = {}
+	for tup in user_ratings:
+		data = get_user_data(tup[0])
+		if len(data) > 0:
+			user_data[tup[0]] = data	
+	result = {'comments': never_seen_comments,
+						'ratings': user_ratings,
+						'user_data': user_data,
+						'sorted_comments_ids': sort_by_response_score(never_seen_comments),
+						'sorted_avg_agreement':sort_by_avg_agreement(never_seen_comments)}
+	nc = NeverSeenCache(value=json.dumps(result))
+	nc.save()
+	return result
 	
 @auth_required	
 def os_rated_updated_comments(request,os_id,disc_stmt_id=None):

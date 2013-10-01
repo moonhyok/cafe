@@ -1164,7 +1164,7 @@ def format_discussion_comment(request_user, response):
 	
 	return {'uid': response.user.id,
 			'username': get_formatted_username(response.user),
-			'location': get_location(response.user),
+			#'location': get_location(response.user),
 			'cid': response.id,
 			'disc_id': response.discussion_statement.id,
 			'rating': get_user_comment_rating(request_user, response),
@@ -1173,8 +1173,8 @@ def format_discussion_comment(request_user, response):
 			'norm_score': sanitize_comment_score(response.normalized_score_sum),
 			'comment': response.comment,
 			'rev_score': get_reviewer_score(response.user),
-			'vis_vars': get_visual_variables(response),
-			'prev_comments': get_revisions_and_suggestions(response.user, response.opinion_space, response.discussion_statement,False) }
+			'vis_vars': [0,0,0]}
+			#'prev_comments': get_revisions_and_suggestions(response.user, response.opinion_space, response.discussion_statement,False) }
 
 def format_general_discussion_comment(response):
 	
@@ -1507,18 +1507,8 @@ def get_user_recent_ratings_from_all_revisions(user,os,disc_stmt,type='insight',
 	return ratings_tuples_filtered_list
 	
 def get_never_seen_comments(user,os,disc_stmt,max_num=None,efficient_count=False, no_statements=False):
-	
-	# If we're using comments to position users
-	if Settings.objects.boolean('NO_STATEMENTS') and no_statements:
-		statement_ids = os.statements.values_list('id')
-		
-		# Retrieve the comments of users whose ids match the statement ids
-		comments = DiscussionComment.objects.filter(is_current = True, opinion_space = os, discussion_statement = disc_stmt, user__in = statement_ids)
-		
-		return [format_discussion_comment(user, comment) for comment in comments]
-	
-	users_with_ratings = UserData.objects.filter(key = 'first_rating').values_list('user')
-	users_with_no_ratings = User.objects.all().exclude(id__in = users_with_ratings)
+	#users_with_ratings = UserData.objects.filter(key = 'first_rating').values_list('user')
+	users_with_no_ratings = [] #User.objects.all().exclude(id__in = users_with_ratings)
 
 	rated_users = set()	
 	
@@ -1540,11 +1530,15 @@ def get_never_seen_comments(user,os,disc_stmt,max_num=None,efficient_count=False
 
 		rated_users.add(user) #exlude self too
 		
-	current_comments = DiscussionComment.objects.filter(is_current = True, blacklisted = False, opinion_space = os, discussion_statement = disc_stmt).exclude(user__in = list(rated_users)).exclude(user__in = users_with_no_ratings)
-	if DATABASE_ENGINE == 'sqlite3':	
-		current_comments =  current_comments.extra(select={'rand_weight': "query_weight * random()"}).extra(order_by=['-rand_weight'])
+		current_comments = DiscussionComment.objects.filter(is_current = True, blacklisted = False, opinion_space = os, discussion_statement = disc_stmt).exclude(user__in = list(rated_users)).exclude(user__in = users_with_no_ratings)
+		
+		if DATABASE_ENGINE == 'sqlite3':	
+			current_comments =  current_comments.extra(select={'rand_weight': "query_weight * random()"}).extra(order_by=['-rand_weight'])
+		else:
+			current_comments =  current_comments.extra(select={'rand_weight': "query_weight * rand()"}).extra(where=["LENGTH(comment) - LENGTH(REPLACE(comment, ' ', '')) >= %s"], params=[str(2)]).extra(order_by=['-rand_weight'])
 	else:
-		current_comments =  current_comments.extra(select={'rand_weight': "query_weight * rand()"}).extra(where=["LENGTH(comment) - LENGTH(REPLACE(comment, ' ', '')) >= %s"], params=[str(2)]).extra(order_by=['-rand_weight'])
+		current_comments = DiscussionComment.objects.filter(is_current = True, blacklisted = False, opinion_space = os, discussion_statement = disc_stmt).order_by('-query_weight')
+		
 	#print users_with_no_ratings
 	if max_num != None:
 		current_comments = current_comments[:max_num]

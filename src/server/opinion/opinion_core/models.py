@@ -2,6 +2,12 @@ from django.db.models import *
 from django.contrib.auth.models import User
 from opinion.settings_local import CONFIGURABLES
 
+class NeverSeenCache(Model):
+	value = CharField(max_length = 8192)
+	created = DateTimeField(auto_now_add = True, db_index = True)
+	class Meta:
+		db_table = 'never_seen_cache'
+		
 class ReviewerScore(Model):
 	user = ForeignKey(User, db_index = True, blank = True, null = True)
 	reviewer_score = FloatField(null = True)
@@ -117,7 +123,7 @@ class DiscussionComment(Model):
     confidence = FloatField(null = True)
     blacklisted = BooleanField()
     is_current = BooleanField(db_index = True)
-    query_weight = FloatField(null = True)
+    query_weight = FloatField(null = True, db_index = True)
     created = DateTimeField(auto_now_add = True, db_index = True)
     
     def __unicode__(self):
