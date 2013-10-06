@@ -181,14 +181,14 @@ $(document).ready(function() {
         });
         var index_user = names.indexOf("regusername");
         var index_pass = names.indexOf("regpassword1");
-        var index_email = names.indexOf("regemail");
+        //var index_email = names.indexOf("regemail");
 
         var data2 = {};
         data2["username"] = serializedData[index_user].value;
         data2["password1"] = serializedData[index_pass].value;
         data2["password"] = serializedData[index_pass].value;
         data2["password2"] = serializedData[index_pass].value;
-        data2["email"] = serializedData[index_email].value;
+        //data2["email"] = serializedData[index_email].value;
 
         var serializedFormData = $(this).serialize();
 
@@ -200,7 +200,7 @@ $(document).ready(function() {
                 data: data2,
                 success: function(data) {
                     $("#username-error").hide();
-                    $("#email-error").hide();
+                    //$("#email-error").hide();
                     $("#password-error").hide();
 
                     if (data.hasOwnProperty('success')) {
@@ -230,10 +230,10 @@ $(document).ready(function() {
                                 $("#username-error").show();
                             }
 
-                            if ('email' in errors) {
+                           /* if ('email' in errors) {
                                 $("#email-error").html(errors['email']);
                                 $("#email-error").show();
-                            }
+                            }*/
 
                             if ('password1' in errors) {
                                 $("#password-error").html(errors['password1']);

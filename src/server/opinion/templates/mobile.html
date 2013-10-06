@@ -55,32 +55,43 @@ stats.setConf("{{ client_settings.AGREEMENT_HISTOGRAM_TEXT }}",
 <link rel='stylesheet' type='text/css' href='./../media/mobile/css/opinionspace.css' />
 
 <script type="text/javascript">
-    window.onload = function() {
-      var testData = [
-        {times: [{"starting_time": 1355752800000, "ending_time": 1355759900000}, {"starting_time": 1355767900000, "ending_time": 1355774400000}]},
-        {times: [{"starting_time": 1355759910000, "ending_time": 1355761900000}, ]},
-        {times: [{"starting_time": 1355761910000, "ending_time": 1355763910000}]},
-      ];
-      
-      var width = 100;
-    
-      function timelineCircle() {
-        var chart = d3.timeline()
-          .width(width)
-          .tickFormat( // 
-            {format: d3.time.format("%I %p"), 
-            tickTime: d3.time.hours, 
-            tickNumber: 1, 
-            tickSize: 30})
-          .display("circle"); // toggle between rectangles and circles
 
-        var svg = d3.select("#timeline").append("svg").attr("width", width)
-          .datum(testData).call(chart);
-      }
+var medians = {{ medians|safe }}; 
 
-      timelineCircle();
-    }
-  </script>
+function score_to_grade(score) {
+  
+  if (score == 100)
+    return 'A';
+  else if (score > 91)
+    return 'A-';
+  else if (score > 83)
+    return 'B+';
+  else if (score > 75)
+    return 'B';
+  else if (score > 66 )
+    return 'B-';
+  else if (score > 58 )
+    return 'C+';
+  else if (score > 50 )
+    return 'C';
+  else if (score > 41 )
+    return 'C-';
+  else if (score > 33 )
+    return 'D+';
+  else if (score > 25 )
+    return 'D';
+  else if (score == 0 )
+    return 'F';
+  else
+    return 'D-';
+}
+
+function update_score(statement) {
+  document.getElementById('g'+statement).innerHTML=score_to_grade(document.getElementById('s'+statement).value);
+  document.getElementById('o'+statement).innerHTML=score_to_grade(medians[statement]*100);
+}
+
+</script>
 
 </head>
 
@@ -124,6 +135,10 @@ stats.setConf("{{ client_settings.AGREEMENT_HISTOGRAM_TEXT }}",
     <div class='header'>{{ topic }}</div>
 
     <!--     <div class='rate-wrap'> -->
+    <br/>
+    
+    <center>
+    <div class="answerwrapper">
     <div id='commentInput' class='answer'></div>
 
     <div class='sliders'>
@@ -149,6 +164,8 @@ stats.setConf("{{ client_settings.AGREEMENT_HISTOGRAM_TEXT }}",
       <hr>
       <button type='submit' data-theme='a' id='go-back' onClick='rate.doneRating()'>Done Rating</button>
     </div>
+    </div>
+    </center>
     <!--     </div> -->  
     <br><br>
 
@@ -160,10 +177,31 @@ stats.setConf("{{ client_settings.AGREEMENT_HISTOGRAM_TEXT }}",
         <p>Grade from A to F how well or poorly you feel California's elected officials are working to address the following key issues:</p>
       </div>
       <br>
-      <div style="padding-left: 30px;padding-right:30px;">
-        <p/>
-        <center>
-          {% for statement in statements %}
+      <center>
+      <div class='reportcard'>
+      <center>
+       <font size="6">Citizen's Report Card</font>
+        
+        <table class='cardtable' style="width:90%;">
+                  
+        <tr>
+          <td style="border-bottom: 1px double black;">
+          Category
+          </td>
+          
+          <td style="border-bottom: 1px double black;">
+          My Grade 
+          </td>
+          
+          <td style="border-bottom: 1px double black;">
+            Our Grade 
+          </td>
+        </tr>
+        
+        {% for statement in statements %}
+        <tr>
+        <td>
+      
           {% ifnotequal statement.statement '' %}
           <p class='slider-question'> {{ statement.statement }} </p>
 
@@ -176,21 +214,42 @@ stats.setConf("{{ client_settings.AGREEMENT_HISTOGRAM_TEXT }}",
             <!--<div class="alignleft">&larr; <i>F</i></div>
             <div class="alignright"><i>A+</i> &rarr;</div>-->
           </div>
-          <div style="clear: both;"></div>
+          <!--<div style="clear: both;"></div>-->
           
-          
-          <input type='range' id='s{{statement.id}}' name='s{{statement.id}}' value='2' min='0' max='4' step='1' animate='true' data-highlight="true" onchange=""/><hr>
+          <input type='range' id='s{{statement.id}}' name='s{{statement.id}}' value='50' min='0' max='100' animate='true' data-highlight="true" onchange="update_score('{{statement.id}}');"/>
 
           {% else %}
           <div style='display:none;'>
-            <input type='range' id='s{{statement.id}}' name='s{{statement.id}}' value='2' min='0' max='4' step='1' animate='true'/><hr>
+            <input type='range' id='s{{statement.id}}' name='s{{statement.id}}' value='50' min='0' max='100' animate='true'/>
           </div>
           {% endifnotequal %}
+        </td>
+        
+        <td style="vertical-align:middle;">
+        <div id='g{{statement.id}}' class="grade"></div>
+        </td>
+        
+        <td style="vertical-align:middle;">
+        <div id='o{{statement.id}}' class="grade2"></div>
+        </td>
+        
+        </tr>
+          
           {% endfor %}
+                
+        </table>
+        
+        <div style="width: 300px;padding-bottom:15px;">
+          <button type='submit' data-theme='a' class='done-endsliders-btn'>Done</button>
         </div>
-        <button type='submit' data-theme='a' class='done-endsliders-btn'>Done</button>
+                
+        
+        </div>
+
       </center>
     </div>
+    </center>
+      
   </div>
 </div>
 
@@ -238,11 +297,11 @@ stats.setConf("{{ client_settings.AGREEMENT_HISTOGRAM_TEXT }}",
           <div style="clear: both;"></div>
           
           
-          <input type='range' id='s{{statement.id}}' name='s{{statement.id}}' value='2' min='0' max='4' step='1' animate='true' data-highlight="true" onchange=""/><hr>
+          <input type='range' id='c{{statement.id}}' name='s{{statement.id}}' value='50' min='0' max='100' animate='true' data-highlight="true" onchange=""/><hr>
 
           {% else %}
           <div style='display:none;'>
-            <input type='range' id='s{{statement.id}}' name='s{{statement.id}}' value='2' min='0' max='4' step='1' animate='true'/><hr>
+            <input type='range' id=cs{{statement.id}}' name='s{{statement.id}}' value='50' min='0' max='100' animate='true'/><hr>
           </div>
           {% endifnotequal %}
           {% endfor %}
@@ -316,36 +375,34 @@ stats.setConf("{{ client_settings.AGREEMENT_HISTOGRAM_TEXT }}",
   <div class='frame'></div>
   <div class = 'register' id='register'>
     <div class = 'reg-header'>{{ client_settings.INSTRUCTIONS_5 }}</div>
-    <form method='post' action='{{ url_root }}/accountsjson/register/' id='reg_form'>
+    
+    <br/>
+    
+    <center>
+    <div class= 'registerpanel'>
+    
+    <center>
+    <font size="5" style="text-decoration: underline;">Report your grades</font>
+    </center>
+    
+    <form id='reg_form' class='form-horizontal' method='post' action='{{ url_root }}/accountsjson/register/'>
+    <fieldset>
       <input type='hidden' value='{{ topic }}' name='question'>
       <input type='hidden' value='{{ url_root }}' name='url'>
 
-      <div data-role='fieldcontain'>
-        <label for='regusername'>Username:</label>
-        <input type='text' id='regusername' name='regusername'>
+        <label>Email: </label>
+        <input class="input-small" type='text' id='regusername' name='regusername'>
         <div class='alert-error' id='username-error' style='display:none;'></div>
-      </div>
-
-      <div data-role='fieldcontain'>
-        <label for='regpassword1'>Password:</label>
-        <input type ='password' id='regpassword1' name='regpassword1'>
+        
+        <label>Password: </label>
+        <input class="input-small" type ='password' id='regpassword1' name='regpassword1'>
         <div class='alert-error' id='password-error' style='display:none;'></div>
-      </div> 
 
-      <div data-role='fieldcontain'>
-        <label for='regemail'>Email:</label>
-        <input type ='text' id='regemail' name='regemail'>
+        <label>CA Zip Code: </label>
+        <input class="input-small" type ='text' id='zip' name='zip' class="input-small">
         <div class='alert-error' id='email-error' style='display:none;'> </div>
-      </div>
       
-      <div data-role='fieldcontain'>
-        <label for='zip'>CA Zip Code:</label>
-        <input type ='text' id='zip' name='zip' class="input-small">
-        <div class='alert-error' id='email-error' style='display:none;'> </div>
-      </div>
-      
-  <div data-role='fieldcontain'>
-        <label for='age'>Age Group:  </label>   
+        <label>Age Group:  </label>   
       <select>
   <option>18-25</option>
   <option>26-35</option>
@@ -354,32 +411,54 @@ stats.setConf("{{ client_settings.AGREEMENT_HISTOGRAM_TEXT }}",
   <option>56-65</option>
   <option>66+</option>
 </select>
-      </div>
   
-  <div data-role='fieldcontain'>
-        <label for='gender'>Gender:  </label>    
+        <label>Gender:  </label>    
       <select>
   <option>Male</option>
   <option>Female</option>
 </select>
-      </div>
 
-      <input type='submit' value='Submit' id='finishRegistration'>
+      <input type='submit' value='Join the CAFE!' id='finishRegistration'>
+        </fieldset>
     </form>
-    <br><br><br>
+    <!--<br><br><br>-->
+    </div>
+    </center>
   </div>
 
   <div class='comment-input'>
     <div class = 'reg-header'>{{ client_settings.INSTRUCTIONS_6 }}</div>
-    <div id = 'reg-question'> <p>{{ topic }}</p>
+    
+    <br/>
+    
+    <center>
+    <div class='comment-panel'>
+    
+    <center>
+    <div id = 'reg-question' style="padding-left:50px;"><font size="5">{{ topic }}</font>
+      <br/>
       <textarea rows='20' cols = '30' name = 'answer' id='entered-comment'> </textarea> 
     </div>
-    <input type='submit' value='Done' data-theme='a' class='comment-submit-btn'>
+        
+        <div style="width: 300px;padding-bottom:15px;">
+          <button type='submit' data-theme='a' class='comment-submit-btn'>Done</button>
+        </div>
+    </center>
+    
+    </div>
+    
+    </center>
+      
+    
   </div>
 
   <div class='login' id='login'>
+    
     <div class='login-header'>Please Login</div>
-
+    <br/>
+    
+    <center>
+    <div class="loginpanel">  
     <div class='alert-error' id='login-error' style='display:none;'>
       Please check your username and password and try again.
     </div>
@@ -393,6 +472,10 @@ stats.setConf("{{ client_settings.AGREEMENT_HISTOGRAM_TEXT }}",
       <!-- <button type='submit' data-theme='a' id='login-button'>Login</button>  -->
       <input type='submit' value='Login'>
     </form>
+    
+    </div>
+    </center>
+    
   </div>
 
 </div>

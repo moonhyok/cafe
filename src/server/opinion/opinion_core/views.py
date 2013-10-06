@@ -64,6 +64,13 @@ def mobile(request):
     #print get_client_settings(True)
     os = get_os(1)
     disc_stmt = get_disc_stmt(os, 1)
+    
+    statements = OpinionSpaceStatement.objects.all().order_by('id')
+    medians = {}
+	#.values_list('id', 'statement', 'short_version'))
+	
+    for s in statements:
+        medians[str(s.id)] = numpy.median(UserRating.objects.filter(opinion_space_statement=s,is_current=True).values_list('rating'))
 
     return render_to_response('mobile.html', context_instance = RequestContext(request, {'url_root' : settings.URL_ROOT,
 											 'loggedIn' : str(request.user.is_authenticated()).lower(),
@@ -73,7 +80,8 @@ def mobile(request):
 											 'leaderboard': get_top_scores(os, disc_stmt, request, 10),
 											 'topic': DiscussionStatement.objects.filter(is_current=True)[0].statement,
 											 'short_topic': DiscussionStatement.objects.filter(is_current=True)[0].short_version,
-											 'statements': OpinionSpaceStatement.objects.all().order_by('id')}))
+											 'statements': statements,
+											 'medians': json.dumps(medians)}))
 
 def app(request, username=None):
 	if request.mobile:

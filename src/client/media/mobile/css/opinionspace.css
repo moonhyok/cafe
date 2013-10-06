@@ -32,8 +32,15 @@
 
 #entered-comment{
 	display:inline;
-	height:200px;
-
+	height:300px;
+	font-family: "Comic Sans MS", cursive, sans-serif;
+	color: #000099;
+	font-weight:bold;
+	text-shadow: none;
+	font-size: 18px;
+	background-color: transparent;
+	line-height: 25px;
+	padding-top: 15px;
 }
 
 /* This prevents the jQuery navbar buttons from staying pressed */
@@ -219,6 +226,48 @@ table.pretty caption {
 		text-align: center;
 	}
 	
+	.reportcard{
+		background-color: #F0D49D;
+		font-family: "Courier New", Courier, monospace;
+		color: black;
+		font-weight:bold;
+		text-shadow: none;
+		text-align: center;
+		width: 90%;
+	}
+	
+	.comment-panel{
+		background: url('/media/mobile/img/cafe/cafe_notebook.png') repeat-y;
+		font-family: "Courier New", Courier, monospace;
+		color: black;
+		font-weight:bold;
+		text-shadow: none;
+		text-align: center;
+		width: 90%;
+	}
+	
+	.cardtable, tr, th, td{
+		border: 1px solid black;
+		padding-right: 10px;
+		padding-left: 10px;
+	}
+	
+	.grade{
+		font-family: "Comic Sans MS", cursive, sans-serif;
+		color: #000099;
+		font-weight:bold;
+		text-shadow: none;
+		font-size: 30px;
+	}
+	
+	.grade2{
+		font-family: "Comic Sans MS", cursive, sans-serif;
+		color: #E81943;
+		font-weight:bold;
+		text-shadow: none;
+		font-size: 30px;
+	}
+	
 	.instructions2{
 		/*position: absolute;*/
 		top: 250;
@@ -258,7 +307,8 @@ table.pretty caption {
 		right: 0;
 		width: 100%;
 		height: 100%;
-		background-color: #E7E1D8;
+		/*background-color: #E7E1D8;*/
+		background-image:url('/media/mobile/img/cafe/cafe_bg.png');
 		z-index: 999;
 		overflow-y: auto;
 		overflow-x: hidden;
@@ -277,8 +327,10 @@ table.pretty caption {
 
 	.sliders, .reg-sliders{
 		text-align: center;
-		width: 100%;
+		width: 90%;
 		font-size: 12pt;
+		padding-bottom: 20px;
+		background-color: rgba(200,200,200,0.3);
 	}
 
 	.register {
@@ -288,11 +340,37 @@ table.pretty caption {
 		right: 0;
 		width: 100%;
 		height: 100%;
-		background-color: #E7E1D8;
+		/*background-color: #E7E1D8;*/
+		background-image:url('/media/mobile/img/cafe/cafe_bg.png');
 		padding-bottom: 30px;
 		z-index: 999;
 		overflow-y: auto;
 		overflow-x: hidden;
+	}
+	
+	.registerpanel{
+		background-color: #F0D49D;
+		font-family: "Courier New", Courier, monospace;
+		color: black;
+		font-weight:bold;
+		text-shadow: none;
+		text-align: center;
+		width: 90%;
+		padding-right: 20px;
+		padding-left: 20px;
+	}
+	
+	.loginpanel{
+		background-color: #F0D49D;
+		font-family: "Courier New", Courier, monospace;
+		color: black;
+		font-weight:bold;
+		text-shadow: none;
+		text-align: center;
+		width: 90%;
+		padding-right: 20px;
+		padding-left: 20px;
+		padding-bottom: 20px;
 	}
 
 	/*.login { 
@@ -381,16 +459,17 @@ table.pretty caption {
 	padding: 5px;
 }
 
-#reg-question {
+/*#reg-question {
 	background-color: #CEBCA3;
 	width: 100%;
 	line-height: 2em;
 	padding: 10px 0;
 	text-align: center;
-	/* make the background for the question a light brown */
+	make the background for the question a light brown 
 	margin-bottom: 20px;
 	margin-top: 10px;
 }
+*/
 
 #question {
 	background-color: #EEE9DF;
@@ -402,14 +481,23 @@ table.pretty caption {
 }
 
 .answer {
-	background-color: #E7E1D8;
-	font-size: 12pt;
-	width: 98%;
-	padding: 0 2%;
-	padding-top: 10px;
-	margin-bottom: 20px;
+	/*background-color: #E7E1D8;*/
+	/*background: url('/media/mobile/img/cafe/cafe_notebook.png') repeat-y;*/
+	font-size: 18px;
+	font-family: "Comic Sans MS", cursive, sans-serif;
+	line-height: 25px;
+	padding-left: 65px;
+	padding-bottom: 30px;
+	color: #E81943;
 	height: auto;
 	overflow: auto;
+	text-align: left;
+}
+
+.answerwrapper {
+	/*background-color: #E7E1D8;*/
+	background: url('/media/mobile/img/cafe/cafe_notebook.png') repeat-y;
+	width: 90%;
 }
 
 .rate {
@@ -419,7 +507,8 @@ table.pretty caption {
 	right: 0;
 	width: 100%;
 	height: 100%;
-	background-color: #E7E1D8;
+	/*background-color: #E7E1D8;*/
+	background-image:url('/media/mobile/img/cafe/cafe_bg.png');
 	padding-bottom: 30px;
 	z-index: 999;
 	overflow-y: auto;
@@ -512,6 +601,6 @@ table.pretty caption {
 }
 */
 
-input[type=submit]:active, input[type=button]:active {
+/*input[type=submit]:active, input[type=button]:active {
 	border-style: inset;
-}
+}*/
