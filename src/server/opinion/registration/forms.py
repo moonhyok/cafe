@@ -33,9 +33,8 @@ class RegistrationForm(forms.Form):
     ``RegistrationProfile.objects.create_inactive_user()``.
     
     """
-    username = forms.RegexField(regex=r'^\w+$',
-                                min_length=opinion.settings.MIN_USERNAME_LENGTH,
-                                max_length=30,
+    username = forms.EmailField(min_length=opinion.settings.MIN_USERNAME_LENGTH,
+                                max_length=75,
                                 widget=forms.TextInput(attrs=attrs_dict),
                                 label=_(u'username'),
 								required=opinion.settings.REGISTRATION_FIELD_TABLE['username']['required'])

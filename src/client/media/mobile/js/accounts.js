@@ -77,7 +77,7 @@ var accounts = (function($, d3, console) {
             success: function(data) {
                 if (data.hasOwnProperty('success')) {
                     console.log("successful login detected!!");
-                    rate.sendComment(window.comment);
+                    /*rate.sendComment(window.comment);
 
                     for (var i = 1; i <= window.num_sliders; i++) {
                         rate.sendSlider(window.sliders['s' + i], i);
@@ -89,7 +89,7 @@ var accounts = (function($, d3, console) {
                     }
 
                     rate.sendAgreementRating(window.ratings[window.ratings.length - 1]);
-                    rate.sendInsightRating(window.ratings[window.ratings.length - 1]);
+                    rate.sendInsightRating(window.ratings[window.ratings.length - 1]);*/
                     //window.authenticated = true;
                 } else {
                     // we should rerender the form here.
@@ -295,7 +295,10 @@ $(document).ready(function() {
     });
 
     $('.first-time-btn').click(function() {
-        accounts.firstTime();
+        //accounts.firstTime();
+        $('.landing').slideUp();
+        $('.endsliders').slideDown();
+        //rate.initScore();
     });
 
     $('.login-btn').click(function() {

@@ -51,14 +51,16 @@ stats.setConf("{{ client_settings.AGREEMENT_HISTOGRAM_TEXT }}",
 
 
 <link rel='stylesheet' type='text/css' href='http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css' />
-<link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Roboto+Condensed'/>
+<link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Knewave'/>
 <link rel='stylesheet' type='text/css' href='./../media/mobile/css/opinionspace.css' />
 
 <script type="text/javascript">
 
 var medians = {{ medians|safe }}; 
 
-function score_to_grade(score) {
+function score_to_grade(score1) {
+  
+  var score = 100 - score1;
   
   if (score == 100)
     return 'A';
@@ -123,7 +125,7 @@ function update_score(statement) {
     
     {% if change_prompt == "true" %}
     <div class='instructions2' id='instructions2'>
-      Click on My Views to revise your responses.
+      Rate two ideas to join the discussion.
     </div>
     {% endif %}
     
@@ -173,14 +175,14 @@ function update_score(statement) {
   <div id='rating'>
 
     <div class='endsliders'>
-      <div class ='slider-header'>
+      <!--<div class ='slider-header'>
         <p>Grade from A to F how well or poorly you feel California's elected officials are working to address the following key issues:</p>
-      </div>
+      </div>-->
       <br>
       <center>
       <div class='reportcard'>
       <center>
-       <font size="6">Citizen's Report Card</font>
+       <font size="6">Grade Your Government</font>
         
         <table class='cardtable' style="width:90%;">
                   
@@ -206,11 +208,11 @@ function update_score(statement) {
           <p class='slider-question'> {{ statement.statement }} </p>
 
           <div id="grades" class="slider-agree-labels">
-      <div style="text-align: left;width: 10%;">F<span></span></div>
-      <div style="text-align: center;width: 26.2%;">D<span></span></div>
-      <div style="text-align: center;width: 26.2%;">C<span></span></div>
+      <div style="text-align: left;width: 10%;">A<span></span></div>
       <div style="text-align: center;width: 26.2%;">B<span></span></div>
-      <div style="text-align: right;width: 10%;">A<span></span></div>
+      <div style="text-align: center;width: 26.2%;">C<span></span></div>
+      <div style="text-align: center;width: 26.2%;">D<span></span></div>
+      <div style="text-align: right;width: 10%;">F<span></span></div>
             <!--<div class="alignleft">&larr; <i>F</i></div>
             <div class="alignright"><i>A+</i> &rarr;</div>-->
           </div>
@@ -254,6 +256,9 @@ function update_score(statement) {
 </div>
 
 <div class='my-comment'>
+  <br/>
+  <center>
+   <div class='edit-comment-panel'>
   <div class='row' style='text-align:center;'>
     <div class='span6'>
       <br><br>
@@ -277,6 +282,7 @@ function update_score(statement) {
     {% endif %}
 
     <button type='submit' data-theme='a' class='edit-comment-done-btn'>Done</button>
+    <br/>
   </div>
 
   <div class='edit-comment' style='display:none'>
@@ -286,11 +292,11 @@ function update_score(statement) {
           <p class='slider-question'> {{ statement.statement }} </p>
 
           <div id="grades" class="slider-agree-labels">
-      <div style="text-align: left;width: 10%;">F<span></span></div>
-      <div style="text-align: center;width: 26.2%;">D<span></span></div>
-      <div style="text-align: center;width: 26.2%;">C<span></span></div>
+      <div style="text-align: left;width: 10%;">A<span></span></div>
       <div style="text-align: center;width: 26.2%;">B<span></span></div>
-      <div style="text-align: right;width: 10%;">A<span></span></div>
+      <div style="text-align: center;width: 26.2%;">C<span></span></div>
+      <div style="text-align: center;width: 26.2%;">D<span></span></div>
+      <div style="text-align: right;width: 10%;">F<span></span></div>
             <!--<div class="alignleft">&larr; <i>F</i></div>
             <div class="alignright"><i>A+</i> &rarr;</div>-->
           </div>
@@ -307,7 +313,11 @@ function update_score(statement) {
           {% endfor %}
     <button data-theme='a' class='edit-comment-save-btn'>Save</button>
     <button data-theme='a' class='edit-comment-cancel-btn'>Cancel</button>
+    <br/>
   </div>
+  
+   </div>
+   </center>
 
 </div>
 
@@ -374,7 +384,7 @@ function update_score(statement) {
   <!-- it is important for the frame to be after the d3 div -->
   <div class='frame'></div>
   <div class = 'register' id='register'>
-    <div class = 'reg-header'>{{ client_settings.INSTRUCTIONS_5 }}</div>
+    <!--<div class = 'reg-header'>{{ client_settings.INSTRUCTIONS_5 }}</div>-->
     
     <br/>
     
@@ -382,7 +392,7 @@ function update_score(statement) {
     <div class= 'registerpanel'>
     
     <center>
-    <font size="5" style="text-decoration: underline;">Report your grades</font>
+    <font size="6">Report your grades</font>
     </center>
     
     <form id='reg_form' class='form-horizontal' method='post' action='{{ url_root }}/accountsjson/register/'>
@@ -402,7 +412,7 @@ function update_score(statement) {
         <input class="input-small" type ='text' id='zip' name='zip' class="input-small">
         <div class='alert-error' id='email-error' style='display:none;'> </div>
       
-        <label>Age Group:  </label>   
+<!--        <label>Age Group:  </label>   
       <select>
   <option>18-25</option>
   <option>26-35</option>
@@ -416,18 +426,19 @@ function update_score(statement) {
       <select>
   <option>Male</option>
   <option>Female</option>
-</select>
-
+      </select>
+-->
       <input type='submit' value='Join the CAFE!' id='finishRegistration'>
         </fieldset>
     </form>
     <!--<br><br><br>-->
+    <br/>
     </div>
     </center>
   </div>
 
   <div class='comment-input'>
-    <div class = 'reg-header'>{{ client_settings.INSTRUCTIONS_6 }}</div>
+    <!--<div class = 'reg-header'>{{ client_settings.INSTRUCTIONS_6 }}</div>-->
     
     <br/>
     
@@ -435,7 +446,7 @@ function update_score(statement) {
     <div class='comment-panel'>
     
     <center>
-    <div id = 'reg-question' style="padding-left:50px;"><font size="5">{{ topic }}</font>
+    <div id = 'reg-question'><font size="6">{{ topic }}</font>
       <br/>
       <textarea rows='20' cols = '30' name = 'answer' id='entered-comment'> </textarea> 
     </div>
@@ -454,11 +465,12 @@ function update_score(statement) {
 
   <div class='login' id='login'>
     
-    <div class='login-header'>Please Login</div>
+    <!--<div class='login-header'>Please Login</div>-->
     <br/>
     
     <center>
-    <div class="loginpanel">  
+    <div class="loginpanel">
+    <font size="6">Login</font>
     <div class='alert-error' id='login-error' style='display:none;'>
       Please check your username and password and try again.
     </div>
@@ -481,6 +493,9 @@ function update_score(statement) {
 </div>
 
 <div class='logout'>
+  <br/>
+  <center>
+  <div class='landing-intro'>
   <div class='landing-header'>
     Thank you for participating!
   </div>
@@ -489,50 +504,49 @@ function update_score(statement) {
   <img class="header-img-topic" src={{ client_settings.HEADER_IMAGE_SOURCE }} class="center" style="width:150px;"><br>
   {% endif %}
 
+  <div class='landing-desc'>
   <p> Return at any time to check your progress!<br> You can see how other participants are rating your idea. </p><br>
 
   <img src='./../media/mobile/img/bar_graph.png' class='center'>
+  </div>
   <br> 
-  <div class='ui-body ui-body-b'
-  <fieldset class='ui-grid-a'>
-    <button data-theme='a' class='logout-start-over'>Start Over</button>
-    <button data-theme='b' class='logout-login-again'>Login again?</button>
-  </fieldset>
+    <button data-theme='a' class='logout-start-over' data-inline="true">Start Over</button>
+    <button data-theme='b' class='logout-login-again' data-inline="true">Login again?</button>
 </div>
+  </center>
 </div>
 
 <div class='landing'>
+  <br/><br/>
+  <center>
   <div class='landing-intro'>
     <div class='landing-header'>
-      {{ client_settings.WELCOME_PAGE_TITLE }}
+      Welcome to the CAFE!
     </div>
 
     {% if client_settings.HEADER_IMAGE == "true" %}
     <img class="header-img-topic" src={{ client_settings.HEADER_IMAGE_SOURCE }} class="center" style="width:150px;"><br>
     {% endif %}
 
-    <p>In contrast to polls and surveys that are extremely valuable for analysts, CAFE is user-facing: the CAFE platform will provide direct, immediate visual feedback to participants, allowing them to instantly understand where they stand on key issues with respect to other participants and encourage open-ended / qualitative responses that can enhance interaction between users.</p>
-  </div>
-  <div class='ui-body ui-body-b'
-  <fieldset class='ui-grid-a'>
-    <button type='submit' data-theme='a' class='first-time-btn'>First time</button>
-    <button type='cancel' data-theme='b' class='login-btn'>Returning</button>
-  </fieldset>
-</div>
-<br><br>
+    <div class='landing-desc'>
+        Grade and discuss your state government's progress.
+    </div>
+    
+    <button type='submit' data-theme='a' class='first-time-btn' data-inline="true">First time</button>
+    <button type='cancel' data-theme='b' class='login-btn' data-inline="true">Returning</button>
+    
 <!--<img id='splash' src='./../media/mobile/img/os_splash.png' class='center'>-->
-<h2>Current Leaders</h2>
-    <table class='pretty'>
-      <tr>
-        <th>Username</th><th>Points</th>
-      </tr>
+<div class='landing-desc' style="font-size: 22px;color: #CCE6FF;">
+  <font style="font-size:30px;color: #FFFFFF;">Current Leaders</font><br/>
       {% for leader in leaderboard%}
-      <tr>
-        <td>{{ leader.username }}</td><td> {{ leader.total_score|add:'0' }}</td>
-      </tr>
+
+ * {{ leader.username }} {{ leader.total_score|add:'0' }} points<br/>
       {% endfor %}
-    </table>
 </div>
+  </div>
+</center>
+</div>
+
 </div>
 </body>
 </html>

@@ -61,29 +61,6 @@ var rate = (function($, d3, console) {
         resetRatingSliders();
         logScore();
 
-        if (!window.authenticated) {
-
-            storeRating($("#slider1").val(), $("#slider2").val(), window.current_cid);
-            //console.log('rated: ' + window.current_cid + " " + document.getElementById("slider2").value);
-
-            switch (window.user_score) {
-                case 1:
-                    console.log(window.conf);
-                    changeInstruction(window.conf['INSTRUCTIONS_3']);
-                    $('.rate').slideUp();
-                    initScore();
-                    break;
-                case 2:
-                    $('.rate').slideUp('fast', function() {
-                        $('.endsliders').slideDown();
-                    });
-                    initMenubar();
-                    break;
-                default:
-                    $('.rate').slideUp();
-                    break;
-            }
-        } else {
             sendAgreementRating({
                 'r1': $("#slider1").val(),
                 'r2': $("#slider2").val(),
@@ -94,8 +71,17 @@ var rate = (function($, d3, console) {
                 'r2': $("#slider2").val(),
                 'cid': window.current_cid
             });
-            $('.rate').slideUp();
-        }
+            
+            
+            //TODO FIX!!!
+            if (window.user_score == 2) {
+                $('.rate').slideUp();
+                $('.comment-input').slideDown();
+            }
+            else{
+                $('.rate').slideUp();
+            }
+            
     }
 
     // pulls a live comment text from the database. id is either the cid or the uid,
@@ -205,7 +191,7 @@ var rate = (function($, d3, console) {
         window.sliders.push(slider_values);
         //$('.endsliders').slideUp();
         $('.endsliders').slideUp('fast', function() {
-            accounts.showCommentInput();
+            accounts.showRegister();
         });
     }
     //This function just pulls up the registration sliders form, right before prompting the 
@@ -347,7 +333,8 @@ $(document).ready(function() {
     $('.comment-submit-btn').click(function() {
         window.comment = $('#entered-comment').val();
         $('.comment-input').slideUp();
-        accounts.showRegister();
+        sendComment($('#entered-comment').val());
+        //accounts.showRegister();
     });
 
     // 'comment-submit-btn'
