@@ -337,7 +337,7 @@ var blooms = (function($, d3, console) {
             .enter()
             .append("svg:image")
             .attr("xlink:href", function() {
-                return "/media/mobile/img/cafe/cafe" + Math.floor((Math.random()*6)).toString() + ".png";
+                return window.url_root + "/media/mobile/img/cafe/cafe" + Math.floor((Math.random()*6)).toString() + ".png";
 
             })
             .attr('x', function(d) {

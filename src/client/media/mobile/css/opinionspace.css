@@ -235,7 +235,7 @@ table.pretty caption {
 	}
 	
 	.comment-panel{
-		/*background: url('/media/mobile/img/cafe/cafe_notebook.png') repeat-y;*/
+		/*background: url('../img/cafe/cafe_notebook.png') repeat-y;*/
 		color: black;
 		background-color: #F0D49D;
 		font-weight:bold;
@@ -306,7 +306,7 @@ table.pretty caption {
 		width: 100%;
 		height: 100%;
 		/*background-color: #E7E1D8;*/
-		background-image:url('/media/mobile/img/cafe/cafe_bg.png');
+		background-image:url('../img/cafe/cafe_bg.png');
 		z-index: 999;
 		overflow-y: auto;
 		overflow-x: hidden;
@@ -329,7 +329,7 @@ table.pretty caption {
 		width: 90%;
 		font-size: 12pt;
 		padding-bottom: 20px;
-		background-color: rgba(200,200,200,0.3);
+		/*background-color: rgba(200,200,200,0.3);*/
 	}
 
 	.register {
@@ -340,7 +340,7 @@ table.pretty caption {
 		width: 100%;
 		height: 100%;
 		/*background-color: #E7E1D8;*/
-		background-image:url('/media/mobile/img/cafe/cafe_bg.png');
+		background-image:url('../img/cafe/cafe_bg.png');
 		padding-bottom: 30px;
 		z-index: 999;
 		overflow-y: auto;
@@ -407,7 +407,7 @@ table.pretty caption {
 		width: 100%;
 		height: 100%;
 		/*background-color: #E7E1D8;*/
-		background-image:url('/media/mobile/img/cafe/cafe_bg.png');
+		background-image:url('../img/cafe/cafe_bg.png');
 		padding-top: 20px;
 		padding-bottom: 20px;
 		overflow-y: auto;
@@ -423,7 +423,7 @@ table.pretty caption {
 		width: 100%;
 		height: 100%;
 		/*background-color: #E7E1D8;*/
-		background-image:url('/media/mobile/img/cafe/cafe_bg.png');
+		background-image:url('../img/cafe/cafe_bg.png');
 		padding-top: 20px;
 		padding-bottom: 20px;
 
@@ -472,7 +472,7 @@ table.pretty caption {
 
 .landing-intro {
 	width: 80%;
-	background: url('/media/mobile/img/cafe/cafe_chalkboard.jpg');
+	background: url('../img/cafe/cafe_chalkboard.jpg');
 	border: 4px #966F33 solid;
 	padding-top: 5px;
 	vertical-align: middle;
@@ -506,12 +506,16 @@ table.pretty caption {
 
 .answer {
 	/*background-color: #E7E1D8;*/
-	/*background: url('/media/mobile/img/cafe/cafe_notebook.png') repeat-y;*/
+	/*background: url('../img/cafe/cafe_notebook.png') repeat-y;*/
+	border: 2px solid #555566;
+background-color: #FFFFFF;
+	width: 90%;
 	font-size: 18px;
 	font-family: "Comic Sans MS", cursive, sans-serif;
 	line-height: 25px;
-	padding-left: 65px;
 	padding-bottom: 30px;
+	padding-left: 20px;
+	padding-top: 15px;
 	color: #E81943;
 	height: auto;
 	overflow: auto;
@@ -521,7 +525,7 @@ table.pretty caption {
 .answerwrapper {
 	/*background-color: #E7E1D8;*/
 	background-color: #F0D49D;
-	/*background: url('/media/mobile/img/cafe/cafe_notebook.png') repeat-y;*/
+	/*background: url('../img/cafe/cafe_notebook.png') repeat-y;*/
 	width: 90%;
 	text-shadow: none;
 	color: #000000;
@@ -535,7 +539,7 @@ table.pretty caption {
 	width: 100%;
 	height: 100%;
 	/*background-color: #E7E1D8;*/
-	background-image:url('/media/mobile/img/cafe/cafe_bg.png');
+	background-image:url('../img/cafe/cafe_bg.png');
 	padding-bottom: 30px;
 	z-index: 999;
 	overflow-y: auto;
@@ -580,7 +584,7 @@ table.pretty caption {
 
 #d3 {
 	display: block;
-	background-image:url('/media/mobile/img/cafe/cafe_bg.png');
+	background-image:url('../img/cafe/cafe_bg.png');
 	background-size:cover;
 	width: 100%;
 	height: 100%;

@@ -271,6 +271,7 @@ $(document).ready(function() {
                         utils.showLoading("Loading...", function() {
                             blooms.populateBlooms();
                             accounts.initLoggedInFeatures();
+			    $('.top-bar').show();
 
                             setTimeout(function() { // d3 needs a little extra time to load
                                 $('.login').slideUp('fast', function() {
@@ -298,6 +299,7 @@ $(document).ready(function() {
         //accounts.firstTime();
         $('.landing').slideUp();
         $('.endsliders').slideDown();
+	$('.top-bar').show();
         //rate.initScore();
     });
 

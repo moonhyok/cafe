@@ -100,15 +100,15 @@ function update_score(statement) {
 <body>
 
 
-  <div class="top-bar">
-    <div class='header'>
+  <div class="top-bar" style="visibility:hidden;">
+   <div class='header'>
       {% if client_settings.HEADER_IMAGE == "true" %}
       <img class="header-img-topic" src={{ client_settings.HEADER_IMAGE_SOURCE }} class="center" style="width:150px;"><br>
       {% endif %}
       Topic: {{ short_topic }}
     </div>
 
-    <div data-role='navbar' class='menubar'>
+    <div data-role='navbar' class='menubar' >
       <ul>
         <li><a data-theme='b' class='stats-btn'>
           <span class='score-label'></span><span class='score-value'></span>
@@ -141,11 +141,12 @@ function update_score(statement) {
     
     <center>
     <div class="answerwrapper">
+    <br/>
     <div id='commentInput' class='answer'></div>
 
     <div class='sliders'>
       <hr>
-      {{ client_settings.AGREEMENT_TEXT }}<br><br>
+      {{ client_settings.AGREEMENT_TEXT }}<br/>
       <div class="slider-range-labels">
         <div class="alignleft">&larr;{{ client_settings.AGREEMENT_LEFT_TEXT }}</div>
         <div class="alignright">{{ client_settings.AGREEMENT_RIGHT_TEXT }} &rarr;</div>
@@ -187,7 +188,7 @@ function update_score(statement) {
         <table class='cardtable' style="width:90%;">
                   
         <tr>
-          <td style="border-bottom: 1px double black;">
+          <td style="border-bottom: 1px double black; width: 60%;">
           Category
           </td>
           
@@ -218,7 +219,7 @@ function update_score(statement) {
           </div>
           <!--<div style="clear: both;"></div>-->
           
-          <input type='range' id='s{{statement.id}}' name='s{{statement.id}}' value='50' min='0' max='100' animate='true' data-highlight="true" onchange="update_score('{{statement.id}}');"/>
+          <input type='range' id='s{{statement.id}}' name='s{{statement.id}}' class="foo" value='50' min='0' max='100' animate='true' data-highlight="true" onchange="update_score('{{statement.id}}');"/>
 
           {% else %}
           <div style='display:none;'>
