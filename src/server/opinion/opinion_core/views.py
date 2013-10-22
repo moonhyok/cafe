@@ -59,7 +59,7 @@ def index(request):
     create_visitor(request)
     return render_to_response('app.html', context_instance = RequestContext(request, {'client_settings':get_client_settings()}))
 
-def mobile(request):
+def mobile(request,username=None):
     create_visitor(request)
     #print get_client_settings(True)
     os = get_os(1)
@@ -1164,7 +1164,7 @@ def os_show(request, os_id, disc_stmt_id = None):
             cur_comment_id = -1	
     else:
             cur_comment_id = -1    
-
+    
     result = {'name': name,
               'statements': statements,
               'discussion_statements': disc_stmt_objs,
@@ -2354,7 +2354,10 @@ def os_never_seen_comments(request,os_id,disc_stmt_id=None):
 						'sorted_comments_ids': sort_by_response_score(never_seen_comments),
 						'sorted_avg_agreement':sort_by_avg_agreement(never_seen_comments)}
 	nc = NeverSeenCache(value=json.dumps(result))
-	nc.save()
+        
+        nc.save()            
+            
+
 	return json_result(result)
     
 def os_never_seen_comments_json(request,os_id,disc_stmt_id=None):
