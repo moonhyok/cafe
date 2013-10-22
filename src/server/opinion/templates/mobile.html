@@ -88,9 +88,13 @@ function score_to_grade(score1) {
     return 'D-';
 }
 
+
 function update_score(statement) {
-  document.getElementById('g'+statement).innerHTML=score_to_grade(document.getElementById('s'+statement).value);
-  document.getElementById('o'+statement).innerHTML=score_to_grade(medians[statement]*100);
+    $('#g' + statement).html(score_to_grade($('#s' + statement).val()));
+
+    $('#o' + statement).hide();
+    $('#o' + statement).html(score_to_grade(medians[statement]*100))
+    $('#o' + statement).delay(1000).fadeIn();
 }
 
 </script>
@@ -100,7 +104,7 @@ function update_score(statement) {
 <body>
 
 
-  <div class="top-bar" style="visibility:hidden;">
+  <div class="top-bar" style="">
    <div class='header'>
       {% if client_settings.HEADER_IMAGE == "true" %}
       <img class="header-img-topic" src={{ client_settings.HEADER_IMAGE_SOURCE }} class="center" style="width:150px;"><br>
@@ -219,7 +223,11 @@ function update_score(statement) {
           </div>
           <!--<div style="clear: both;"></div>-->
           
+<<<<<<< HEAD
           <input type='range' id='s{{statement.id}}' name='s{{statement.id}}' value='50' min='0' max='100' onchange="update_score('{{statement.id}}');"/>
+=======
+          <input type='range' id='s{{statement.id}}' name='s{{statement.id}}' value='50' min='0' max='100' animate='true' data-highlight="true" onchange="update_score('{{statement.id}}');"/>
+>>>>>>> 9c3d3e2cdd9563e8a885063c79fef974c51c5ce3
 
           {% else %}
           <div style='display:none;'>

@@ -337,6 +337,7 @@ $(document).ready(function() {
         //accounts.showRegister();
     });
 
+
     // 'comment-submit-btn'
     //onClick='window.comment = document.getElementById('entered-comment').value;$('.comment-input').slideUp();accounts.showRegister();'
 });
