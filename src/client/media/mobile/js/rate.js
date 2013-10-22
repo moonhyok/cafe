@@ -12,7 +12,7 @@ var rate = (function($, d3, console) {
     }
 
     function updateScoreHolders() {
-        $('.score-value').html(window.user_score.toString());
+        $('.score-value').html((window.user_score).toString());
     }
 
     function resetRatingSliders() {

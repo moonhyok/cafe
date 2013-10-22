@@ -12,7 +12,9 @@
 }
 
 .slider-agree-labels, .slider-range-labels{
-	font-size:90%
+	font-size:13px;
+	color: #000000;
+	padding-top: 5px;
 }
 
 #grades div {
@@ -32,14 +34,14 @@
 
 #entered-comment{
 	display:inline;
-	height:300px;
-	font-family: "Comic Sans MS", cursive, sans-serif;
+	height:400px;
+	font-family: sans-serif;
 	color: #000099;
 	font-weight:bold;
 	text-shadow: none;
-	font-size: 18px;
-	line-height: 25px;
+	font-size: 12px;
 	padding-top: 15px;
+	width: 90%;
 }
 
 /* This prevents the jQuery navbar buttons from staying pressed */
@@ -118,10 +120,10 @@ table.pretty caption {
 	}*/
 
 	/** TODO: this isn't fixing the line-height */
-	.ui-input-text {
+	/*.ui-input-text {
 		width: 98% !important;
 		height:30px;
-	} 
+	} */
 
 
 	img.center {
@@ -228,10 +230,12 @@ table.pretty caption {
 		background-color: #F0D49D;
 		/*font-family: "Courier New", Courier, monospace;*/
 		color: black;
-		font-weight:bold;
 		text-shadow: none;
 		text-align: center;
-		width: 90%;
+		width: 95%;
+		padding-right: 10px;
+		padding-left: 10px;
+		padding-bottom: 10px;
 	}
 	
 	.comment-panel{
@@ -327,7 +331,7 @@ table.pretty caption {
 		text-align: center;
 		text-shadow: none;
 		width: 90%;
-		font-size: 12pt;
+		font-size: 14px;
 		padding-bottom: 20px;
 		/*background-color: rgba(200,200,200,0.3);*/
 	}
@@ -452,26 +456,34 @@ table.pretty caption {
 }
 
 .landing-header {
-	font-family: 'Belleza', sans-serif;
+	font-family: sans-serif;
 	text-shadow: none;
 	color: #FFFFCC;
-	font-size: 40px;
-	text-decoration: underline;
+	font-size: 30px;
+}
+
+.basic-header {
+	font-family: sans-serif;
+	text-shadow: none;
+	color: #000000;
+	font-size: 20px;
+	padding-bottom: 10px;
+	padding-top: 10px;
 }
 
 .landing-desc {
 	padding-top: 10px;
 	padding-bottom: 10px;
-	font-family: 'Belleza', sans-serif;
+	font-family: sans-serif;
 	text-shadow: none;
-	color: #FFFFFF;
-	font-size: 30px;
+	color: #DDDDDD;
+	font-size: 20px;
 	width: 90%;
 	left: 0;
 }
 
 .landing-intro {
-	width: 80%;
+	width: 85%;
 	background: url('../img/cafe/cafe_chalkboard.jpg');
 	border: 4px #966F33 solid;
 	padding-top: 5px;
@@ -507,16 +519,13 @@ table.pretty caption {
 .answer {
 	/*background-color: #E7E1D8;*/
 	/*background: url('../img/cafe/cafe_notebook.png') repeat-y;*/
-	border: 2px solid #555566;
-background-color: #FFFFFF;
+	/*border: 2px solid #555566;*/
 	width: 90%;
-	font-size: 18px;
-	font-family: "Comic Sans MS", cursive, sans-serif;
-	line-height: 25px;
+	font-size: 14px;
+	font-family: sans-serif;
 	padding-bottom: 30px;
-	padding-left: 20px;
+	padding-left: 10px;
 	padding-top: 15px;
-	color: #E81943;
 	height: auto;
 	overflow: auto;
 	text-align: left;
@@ -553,6 +562,8 @@ background-color: #FFFFFF;
 .slider-question {
 	text-align: center;
 	width: 100%;
+	padding-bottom: 5px;
+	font-size: 15px;
 }
 
 .rated, .rated-thanks {
@@ -593,6 +604,48 @@ background-color: #FFFFFF;
 	/*z-index: 999; */
 
 }
+
+.dialog {
+	background-color: rgba(0, 0, 0, 0.7);
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top:0;
+	left: 0;
+}
+
+.dialog-text1 {
+	position: relative;
+	display: table-cell;
+        vertical-align: middle;
+	background-color: rgba(50, 50, 50, 1.0);
+	width: 320px;
+	height: 80%;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+	text-decoration: none;
+	color: #FFFFFF;
+	text-shadow: none;
+	padding-right: 10px;
+	padding-left: 10px;
+}
+
+.dialog-text2 {
+	position: relative;
+	display: table-cell;
+        vertical-align: middle;
+	background-color: rgba(50, 50, 50, 1.0);
+	width: 320px;
+	height: 80%;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+	text-decoration: none;
+	color: #FFFFFF;
+	text-shadow: none;
+	padding-right: 10px;
+	padding-left: 10px;
+}
+
 
 .axis path,
     .axis line {

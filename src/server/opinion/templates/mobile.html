@@ -31,7 +31,7 @@ $.ajaxSetup({
 <script type='text/javascript' src='./../media/mobile/js/csrf-ajax.js'></script>
 <script type='text/javascript' src='http://d3js.org/d3.v2.min.js'></script>
 <script src="./../media/mobile/js/d3-timeline.js"></script>
-<script type='text/javascript' src='./../media/mobile/bootstrap/js/bootstrap.min.js'></script>
+<!--<script type='text/javascript' src='./../media/mobile/bootstrap/js/bootstrap.min.js'></script>-->
 <script type='text/javascript' src='./../media/mobile/js/blooms.js'></script>
 <script type='text/javascript' src='./../media/mobile/js/accounts.js'></script>
 <script type='text/javascript' src='./../media/mobile/js/rate.js'></script>
@@ -63,24 +63,26 @@ function score_to_grade(score1) {
   var score = 100 - score1;
   
   if (score == 100)
+    return 'A+';
+  else if (score > 93)
     return 'A';
-  else if (score > 91)
+  else if (score > 87)
     return 'A-';
-  else if (score > 83)
+  else if (score > 81)
     return 'B+';
-  else if (score > 75)
+  else if (score > 69 )
     return 'B';
-  else if (score > 66 )
+  else if (score > 63 )
     return 'B-';
-  else if (score > 58 )
+  else if (score > 56 )
     return 'C+';
-  else if (score > 50 )
+  else if (score > 44 )
     return 'C';
-  else if (score > 41 )
+  else if (score > 38 )
     return 'C-';
-  else if (score > 33 )
+  else if (score > 32 )
     return 'D+';
-  else if (score > 25 )
+  else if (score > 19 )
     return 'D';
   else if (score == 0 )
     return 'F';
@@ -91,10 +93,10 @@ function score_to_grade(score1) {
 
 function update_score(statement) {
     $('#g' + statement).html(score_to_grade($('#s' + statement).val()));
-
     $('#o' + statement).hide();
     $('#o' + statement).html(score_to_grade(medians[statement]*100))
-    $('#o' + statement).delay(1000).fadeIn();
+    $('#o' + statement).delay(1500).fadeIn();
+    //$('#s'+statement).prop('disabled', 'disabled');
 }
 
 </script>
@@ -114,10 +116,10 @@ function update_score(statement) {
 
     <div data-role='navbar' class='menubar' >
       <ul>
-        <li><a data-theme='b' class='stats-btn'>
+        <li><a data-theme='b' class='stats-btn' >
           <span class='score-label'></span><span class='score-value'></span>
         </a></li>
-        <li><a data-theme='b' class='my-comment-btn'>My Views</a></li>
+        <li><a data-theme='b' class='my-comment-btn'>Stats</a></li>
         <li><a data-theme='b' class='logout-btn'>Logout</a></li>
       </ul>
     </div>
@@ -126,12 +128,6 @@ function update_score(statement) {
       <span class='inst-score'><span class='score-label'></span><span class='score-value'></span></span>
       <span class='inst-text'>{{ client_settings.INSTRUCTIONS_1 }}</span>
     </div>
-    
-    {% if change_prompt == "true" %}
-    <div class='instructions2' id='instructions2'>
-      Rate two ideas to join the discussion.
-    </div>
-    {% endif %}
     
     <div class="margin"><!--<br><br><br><br>--></div>
   </div>
@@ -169,7 +165,13 @@ function update_score(statement) {
 
       <input data-track-theme='b' data-theme='a' type='range' name='slider2' id='slider2' value='50' min='0' max='100' animate='true'/>
       <hr>
-      <button type='submit' data-theme='a' id='go-back' onClick='rate.doneRating()'>Done Rating</button>
+      <center>
+        <div style="width: 300px;">
+        <button type='submit' data-theme='a' id='go-back' onClick='rate.doneRating()' data-icon="check">Done Rating</button>
+      </div>
+      </center>
+      
+      
     </div>
     </div>
     </center>
@@ -187,7 +189,7 @@ function update_score(statement) {
       <center>
       <div class='reportcard'>
       <center>
-       <font size="6">Grade Your Government</font>
+       <div class="basic-header"> Grade Your Government </div>
         
         <table class='cardtable' style="width:90%;">
                   
@@ -223,17 +225,14 @@ function update_score(statement) {
           </div>
           <!--<div style="clear: both;"></div>-->
           
-<<<<<<< HEAD
-          <input type='range' id='s{{statement.id}}' name='s{{statement.id}}' value='50' min='0' max='100' onchange="update_score('{{statement.id}}');"/>
-=======
-          <input type='range' id='s{{statement.id}}' name='s{{statement.id}}' value='50' min='0' max='100' animate='true' data-highlight="true" onchange="update_score('{{statement.id}}');"/>
->>>>>>> 9c3d3e2cdd9563e8a885063c79fef974c51c5ce3
+          <input type='range' id='s{{statement.id}}' data-theme="d" name='s{{statement.id}}' value='50' min='0' max='100' step="5" onchange="update_score('{{statement.id}}');"/>
 
           {% else %}
           <div style='display:none;'>
             <input type='range' id='s{{statement.id}}' name='s{{statement.id}}' value='50' min='0' max='100' animate='true'/>
           </div>
           {% endifnotequal %}
+          <br/>
         </td>
         
         <td style="vertical-align:middle;">
@@ -244,17 +243,17 @@ function update_score(statement) {
         <div id='o{{statement.id}}' class="grade2"></div>
         </td>
         
+        
         </tr>
           
           {% endfor %}
                 
         </table>
         
-        <div style="width: 300px;padding-bottom:15px;">
-          <button type='submit' data-theme='a' class='done-endsliders-btn'>Done</button>
-        </div>
+        <div style="width: 300px;">
+        <button type='submit' data-theme='e' class='done-endsliders-btn' data-icon="arrow-r">Next</button>
+        </div>        
                 
-        
         </div>
 
       </center>
@@ -401,25 +400,30 @@ function update_score(statement) {
     <div class= 'registerpanel'>
     
     <center>
-    <font size="6">Report your grades</font>
+    <div class="basic-header">Report your grades</div>
     </center>
     
     <form id='reg_form' class='form-horizontal' method='post' action='{{ url_root }}/accountsjson/register/'>
-    <fieldset>
       <input type='hidden' value='{{ topic }}' name='question'>
       <input type='hidden' value='{{ url_root }}' name='url'>
-
-        <label>Email: </label>
-        <input class="input-small" type='text' id='regusername' name='regusername'>
-        <div class='alert-error' id='username-error' style='display:none;'></div>
         
-        <label>Password: </label>
-        <input class="input-small" type ='password' id='regpassword1' name='regpassword1'>
-        <div class='alert-error' id='password-error' style='display:none;'></div>
+        <div data-role="fieldcontain">
+	<label for="regusername">Email:</label>
+	<input type="text" id='regusername' name='regusername' value="" placeholder="Email" data-theme="b"/>
+        <div class='alert-error' id='username-error' style='display:none;'></div>
+        </div>
+        
 
-        <label>CA Zip Code: </label>
-        <input class="input-small" type ='text' id='zip' name='zip' class="input-small">
-        <div class='alert-error' id='email-error' style='display:none;'> </div>
+        <div data-role="fieldcontain">
+        <label for="regpassword1">Password:</label>
+        <input type ='password' id='regpassword1' name='regpassword1' placeholder="Password">
+        <div class='alert-error' id='password-error' style='display:none;'></div>
+        </div>
+
+        <div data-role="fieldcontain">
+        <label for="zip">CA Zip Code:</label>
+        <input type ='text' id='zip' name='zip' placeholder="Zip Code">
+        </div>
       
 <!--        <label>Age Group:  </label>   
       <select>
@@ -437,8 +441,17 @@ function update_score(statement) {
   <option>Female</option>
       </select>
 -->
-      <input type='submit' value='Join the CAFE!' id='finishRegistration'>
-        </fieldset>
+ <center>
+    
+  <div style="width: 300px;">
+        <input type='submit' value='Submit Your Grades' id='finishRegistration' data-theme="e" data-icon="check">
+  </div>
+  
+  <img src="{{url_root}}/media/mobile/img/cafe/discuss.png" style="width: 200px;"/><br/>
+  After you submit your grades, you will join a discussion about the California Government.
+  
+ </center>
+      
     </form>
     <!--<br><br><br>-->
     <br/>
@@ -455,13 +468,13 @@ function update_score(statement) {
     <div class='comment-panel'>
     
     <center>
-    <div id = 'reg-question'><font size="6">{{ topic }}</font>
+    <div id = 'reg-question'><div class="basic-header">{{ topic }}</div>
       <br/>
       <textarea rows='20' cols = '30' name = 'answer' id='entered-comment'> </textarea> 
     </div>
         
         <div style="width: 300px;padding-bottom:15px;">
-          <button type='submit' data-theme='a' class='comment-submit-btn'>Done</button>
+          <button type='submit' data-theme='a' class='comment-submit-btn' data-icon='check'>Save</button>
         </div>
     </center>
     
@@ -479,19 +492,24 @@ function update_score(statement) {
     
     <center>
     <div class="loginpanel">
-    <font size="6">Login</font>
+    <div class="basic-header">Welcome Back</div>
     <div class='alert-error' id='login-error' style='display:none;'>
       Please check your username and password and try again.
     </div>
 
     <form id='login_form'>
       <br>
-      <p class='label'>Username</p>
-      <input type='text' name='username'>
+      <p class='label'>Email</p>
+      <input type='text' name='username' placeholder="Email">
       <p class ='label'>Password</p>
-      <input type='password' name='password'>
+      <input type='password' name='password' placeholder="Password">
       <!-- <button type='submit' data-theme='a' id='login-button'>Login</button>  -->
-      <input type='submit' value='Login'>
+      <center>
+        <div style="width: 300px;">
+        <button type='submit' data-theme='a' data-icon="forward">Login</button>
+      </div>
+      </center>
+      
     </form>
     
     </div>
@@ -533,16 +551,16 @@ function update_score(statement) {
       California Assesment and Feedback Engine.
     </div>
 
-    {% if client_settings.HEADER_IMAGE == "true" %}
-    <img class="header-img-topic" src={{ client_settings.HEADER_IMAGE_SOURCE }} class="center" style="width:150px;"><br>
-    {% endif %}
-
     <div class='landing-desc'>
         Grade and discuss the California Government.
     </div>
     
-    <button type='submit' data-theme='a' class='first-time-btn' data-inline="true">First time</button>
-    <button type='cancel' data-theme='b' class='login-btn' data-inline="true">Returning</button>
+    <img class="header-img-topic" src="{{ url_root }}/media/mobile/img/cafe/cafe2.png" class="center" style="width:150px;"><br>
+    
+    <div style="width: 300px;">
+    <button type='submit' data-theme='e' class='first-time-btn' data-icon="star">First time</button>
+    <button type='cancel' data-theme='a' class='login-btn' data-icon="forward">Returning</button>
+    </div>
     
 <!--<img id='splash' src='./../media/mobile/img/os_splash.png' class='center'>-->
 <!--<div class='landing-desc' style="font-size: 22px;color: #CCE6FF;">
@@ -554,6 +572,34 @@ function update_score(statement) {
 </div>-->
 
   </div>
+</center>
+</div>
+
+<div class='dialog' style="display: none;">
+  <br/><br/>
+  <center>
+  <div class='dialog-text1'>
+    <button type='submit' data-theme='b' data-icon="star">The Discussion</button>
+    <img class="header-img-topic" src="{{ url_root }}/media/mobile/img/cafe/map_teaser.png" class="center" style="width:250px;"><br>
+    Each cup on the coffee table represents a participant.
+    The position of the cup is determined by the participants grades.
+    Clicking on a cup reveals the participant's contribution to the discussion.
+    <div style="width: 150px;">
+      <button type='submit' data-theme='e' class='dialog-next' data-icon="arrow-r" onclick="$('.dialog-text1').hide();$('.dialog-text2').show();">Next</button>
+    </div>
+  </div>
+  
+  <div class='dialog-text2' style="display:none;">
+    <button type='submit' data-theme='b' data-icon="star">The Discussion</button>
+    <img class="header-img-topic" src="{{ url_root }}/media/mobile/img/cafe/rating_teaser.png" class="center" style="width:250px;"><br>
+    You can evaluate a participant's response on two sliders.
+    After rating two responses, you can leave a response of your own.
+    As you rate more responses and other participants rate you, you will earn points.
+    <div style="width: 150px;">
+      <button type='submit' data-theme='e' class='dialog-ready' data-icon="check">Ready</button>
+    </div>
+  </div>
+  
 </center>
 </div>
 

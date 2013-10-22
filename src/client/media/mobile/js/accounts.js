@@ -137,8 +137,6 @@ var accounts = (function($, d3, console) {
     function initLoggedInFeatures(justRegistered) {
         justRegistered = typeof justRegistered !== 'undefined' ? justRegistered : false;
 
-        rate.initMenubar();
-
         utils.ajaxTempOff(function() {
             stats.showGraphs(justRegistered);
 
@@ -150,7 +148,15 @@ var accounts = (function($, d3, console) {
             });
 
         });
-
+        
+        if (window.user_score == 0) {
+            $('.instructions').hide();
+            $('.dialog').slideDown();
+        }
+        else
+        {
+          rate.initMenubar();   
+        }
         setNumRatedBy();
     }
 
@@ -205,16 +211,16 @@ $(document).ready(function() {
 
                     if (data.hasOwnProperty('success')) {
                         accounts.setAuthenticated();
-                        utils.showLoading("Creating your bloom...", function() {
+                        utils.showLoading("Loading...", function() {
                                 accounts.loginAfterRegister(data2);
                                 blooms.populateBlooms();
                                 accounts.initLoggedInFeatures(true);
 
                             setTimeout(function() { //give d3 some extra time
                                 $('.register').slideUp('fast', function() {
-                                    utils.hideLoading(1000);
+                                    utils.hideLoading(500);
                                 });
-                                }, 1500);
+                                }, 500);
 
                             
                         });
@@ -314,6 +320,11 @@ $(document).ready(function() {
     $('.edit-comment-btn').click(function() {
         $('.comment-region').hide();
         $('.edit-comment').show();
+    });
+    
+    $('.dialog-ready').click(function() {
+        rate.initMenubar(); 
+        $('.dialog').slideUp();
     });
 
     $('.edit-comment-save-btn').click(function() {

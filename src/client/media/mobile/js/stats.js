@@ -158,10 +158,10 @@ return {
 
 $(document).ready(function() {
 
-  $('.stats-btn').click(function() {
+  /*$('.stats-btn').click(function() {
     $('.stats').slideDown();
     $('.menubar').find('.ui-btn-active').removeClass('ui-btn-active ui-focus');
-  });
+  });*/
 
   $('.stats-done-btn').click(function() {
     $('.stats').slideUp();
