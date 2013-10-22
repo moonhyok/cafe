@@ -3,7 +3,8 @@ from django.contrib.auth.models import User
 from opinion.settings_local import CONFIGURABLES
 
 class NeverSeenCache(Model):
-	value = CharField(max_length = 8192)
+	#value = CharField(max_length = 8192)
+	value = TextField()
 	created = DateTimeField(auto_now_add = True, db_index = True)
 	class Meta:
 		db_table = 'never_seen_cache'
