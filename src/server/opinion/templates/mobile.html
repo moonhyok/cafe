@@ -40,6 +40,7 @@ $.ajaxSetup({
 
 <script type="text/javascript" src="http://www.google.com/jsapi"></script>
 <script type='text/javascript' src='./../media/mobile/js/stats.js'></script>
+<!--<script src="./../media/mobile/js/jquery.nouislider.min.js"></script>-->
 <script>
 stats.setConf("{{ client_settings.AGREEMENT_HISTOGRAM_TEXT }}", 
   "{{ client_settings.LEGEND_AGREEMENT_LEFT }}",
@@ -53,6 +54,7 @@ stats.setConf("{{ client_settings.AGREEMENT_HISTOGRAM_TEXT }}",
 <link rel='stylesheet' type='text/css' href='http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css' />
 <link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Belleza'/>
 <link rel='stylesheet' type='text/css' href='./../media/mobile/css/opinionspace.css' />
+<!--<link href="./../media/mobile/css/jquery.nouislider.min.css" rel="stylesheet">-->
 
 <script type="text/javascript">
 
@@ -95,10 +97,20 @@ function update_score(statement) {
     $('#g' + statement).html(score_to_grade($('#s' + statement).val()));
     $('#o' + statement).hide();
     $('#o' + statement).html(score_to_grade(medians[statement]*100))
-    $('#o' + statement).delay(1500).fadeIn();
-    //$('#s'+statement).prop('disabled', 'disabled');
+    $('#o' + statement).delay(100).fadeIn();
+    $('.s'+statement).slider('disable');
 }
+</script>
 
+<script>
+$().ready(function()
+{
+
+{% for statement in statements %}
+$( ".s{{statement.id}}" ).on( "slidestop", function() { update_score({{statement.id}});});
+{% endfor %}
+
+});
 </script>
 
 </head>
@@ -225,7 +237,7 @@ function update_score(statement) {
           </div>
           <!--<div style="clear: both;"></div>-->
           
-          <input type='range' id='s{{statement.id}}' data-theme="d" name='s{{statement.id}}' value='50' min='0' max='100' step="5" onchange="update_score('{{statement.id}}');"/>
+          <input type='range' id='s{{statement.id}}' data-theme="d" name='s{{statement.id}}' class='s{{statement.id}}' value='50' min='0' max='100' step="5"/>
 
           {% else %}
           <div style='display:none;'>
@@ -249,7 +261,7 @@ function update_score(statement) {
           {% endfor %}
                 
         </table>
-        
+      
         <div style="width: 300px;">
         <button type='submit' data-theme='e' class='done-endsliders-btn' data-icon="arrow-r">Next</button>
         </div>        
@@ -261,6 +273,7 @@ function update_score(statement) {
     </center>
       
   </div>
+
 </div>
 
 <div class='my-comment'>
