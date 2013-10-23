@@ -108,6 +108,7 @@ $().ready(function()
 
 {% for statement in statements %}
 $( ".s{{statement.id}}" ).on( "slidestop", function() { update_score({{statement.id}});});
+$( ".s{{statement.id}}" ).slider({ animate: false });
 {% endfor %}
 
 });
@@ -206,15 +207,15 @@ $( ".s{{statement.id}}" ).on( "slidestop", function() { update_score({{statement
         <table class='cardtable' style="width:90%;">
                   
         <tr>
-          <td style="border-bottom: 1px double black; width: 60%;">
+          <td style="border-bottom: 1px double black;">
           Category
           </td>
           
-          <td style="border-bottom: 1px double black;">
+          <td style="border-bottom: 1px double black; width: 20px;">
           My Grade 
           </td>
           
-          <td style="border-bottom: 1px double black;">
+          <td style="border-bottom: 1px double black; width: 20px;">
             Our Grade 
           </td>
         </tr>
