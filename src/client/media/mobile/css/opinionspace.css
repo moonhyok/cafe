@@ -157,6 +157,13 @@ table.pretty caption {
 		float:left;
 		margin: 0 !important;
 	}
+	
+	.ui-slider .ui-slider-handle {
+		cursor: default;
+		height: 2.2em !important;
+		position: absolute;
+		width: 2.2em !important;
+	}
 
 	html {
 		height: 100%;
