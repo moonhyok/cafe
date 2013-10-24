@@ -12,7 +12,7 @@
 }
 
 .slider-agree-labels, .slider-range-labels{
-	font-size:13px;
+	font-size:10px;
 	color: #000000;
 	padding-top: 5px;
 }
@@ -266,7 +266,7 @@ table.pretty caption {
 		color: #000099;
 		font-weight:bold;
 		text-shadow: none;
-		font-size: 30px;
+		font-size: 20px;
 	}
 	
 	.grade2{
@@ -274,7 +274,7 @@ table.pretty caption {
 		color: #004444;
 		font-weight:bold;
 		text-shadow: none;
-		font-size: 30px;
+		font-size: 20px;
 	}
 	
 	.instructions2{
@@ -466,7 +466,7 @@ table.pretty caption {
 	font-family: sans-serif;
 	text-shadow: none;
 	color: #FFFFCC;
-	font-size: 30px;
+	font-size: 25px;
 }
 
 .basic-header {
@@ -484,7 +484,7 @@ table.pretty caption {
 	font-family: sans-serif;
 	text-shadow: none;
 	color: #DDDDDD;
-	font-size: 20px;
+	font-size: 16px;
 	width: 90%;
 	left: 0;
 }
@@ -570,7 +570,7 @@ table.pretty caption {
 	text-align: center;
 	width: 100%;
 	padding-bottom: 5px;
-	font-size: 15px;
+	font-size: 13px;
 }
 
 .rated, .rated-thanks {
