@@ -317,7 +317,7 @@ table.pretty caption {
 		width: 100%;
 		height: 100%;
 		/*background-color: #E7E1D8;*/
-		background-image:url('../img/cafe/cafe_bg.png');
+		background-image:url('../img/cafe/cafe_bg.jpg');
 		z-index: 999;
 		overflow-y: auto;
 		overflow-x: hidden;
@@ -351,7 +351,7 @@ table.pretty caption {
 		width: 100%;
 		height: 100%;
 		/*background-color: #E7E1D8;*/
-		background-image:url('../img/cafe/cafe_bg.png');
+		background-image:url('../img/cafe/cafe_bg.jpg');
 		padding-bottom: 30px;
 		z-index: 999;
 		overflow-y: auto;
@@ -418,7 +418,7 @@ table.pretty caption {
 		width: 100%;
 		height: 100%;
 		/*background-color: #E7E1D8;*/
-		background-image:url('../img/cafe/cafe_bg.png');
+		background-image:url('../img/cafe/cafe_bg.jpg');
 		padding-top: 20px;
 		padding-bottom: 20px;
 		overflow-y: auto;
@@ -434,7 +434,7 @@ table.pretty caption {
 		width: 100%;
 		height: 100%;
 		/*background-color: #E7E1D8;*/
-		background-image:url('../img/cafe/cafe_bg.png');
+		background-image:url('../img/cafe/cafe_bg.jpg');
 		padding-top: 20px;
 		padding-bottom: 20px;
 
@@ -555,7 +555,7 @@ table.pretty caption {
 	width: 100%;
 	height: 100%;
 	/*background-color: #E7E1D8;*/
-	background-image:url('../img/cafe/cafe_bg.png');
+	background-image:url('../img/cafe/cafe_bg.jpg');
 	padding-bottom: 30px;
 	z-index: 999;
 	overflow-y: auto;
@@ -602,7 +602,7 @@ table.pretty caption {
 
 #d3 {
 	display: block;
-	background-image:url('../img/cafe/cafe_bg.png');
+	background-image:url('../img/cafe/cafe_bg.jpg');
 	background-size:cover;
 	width: 100%;
 	height: 100%;
