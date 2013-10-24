@@ -142,7 +142,7 @@ var accounts = (function($, d3, console) {
 
             //var data = $.getJSON(window.url_root + '/os/show/1/');
             $.getJSON(window.url_root + '/os/show/1/', function(data) {
-                $('.score-value').text(data['cur_user_rater_score']);
+                $('.score-value').text(""+~~(data['cur_user_rater_score']*window.conf.SCORE_SCALE_FACTOR));
                 window.user_score = data['cur_user_rater_score'];
                 $('.username').text(' ' + data['cur_username']);
             });
