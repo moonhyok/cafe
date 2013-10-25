@@ -313,6 +313,10 @@ $(document).ready(function() {
         accounts.showLogin();
     });
 
+    $('.login-form-go-back').click(function() {
+        $('.landing').slideDown();
+        $('.login').slideUp();    });
+
     $('.my-comment-btn').click(function() {
         accounts.loadMyCommentDiv();
     });
