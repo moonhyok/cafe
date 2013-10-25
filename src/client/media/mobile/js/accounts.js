@@ -122,6 +122,7 @@ var accounts = (function($, d3, console) {
 
     /** Sets the field ".num-rated-by" to the number of people who've rated the 
      *  users comment. */
+
     function setNumRatedBy() {
         utils.ajaxTempOff(function() {
             $.getJSON(window.url_root + '/os/ratedby/1/', function(data) {
@@ -134,7 +135,9 @@ var accounts = (function($, d3, console) {
     /** Sets up all the stuff that loggedIn users expect and need. 
      *  JUSTREGISTERED is a boolean and optional. Used to shortcircuit showGraphs.
      */
+
     function initLoggedInFeatures(justRegistered) {
+        $('.top-bar').show();
         justRegistered = typeof justRegistered !== 'undefined' ? justRegistered : false;
 
         utils.ajaxTempOff(function() {
@@ -142,20 +145,18 @@ var accounts = (function($, d3, console) {
 
             //var data = $.getJSON(window.url_root + '/os/show/1/');
             $.getJSON(window.url_root + '/os/show/1/', function(data) {
-                $('.score-value').text(""+~~(data['cur_user_rater_score']*window.conf.SCORE_SCALE_FACTOR));
+                $('.score-value').text("" + ~~(data['cur_user_rater_score'] * window.conf.SCORE_SCALE_FACTOR));
                 window.user_score = data['cur_user_rater_score'];
                 $('.username').text(' ' + data['cur_username']);
             });
 
         });
-        
+
         if (window.user_score == 0) {
             $('.instructions').hide();
             $('.dialog').slideDown();
-        }
-        else
-        {
-          rate.initMenubar();   
+        } else {
+            rate.initMenubar();
         }
         setNumRatedBy();
     }
@@ -212,17 +213,17 @@ $(document).ready(function() {
                     if (data.hasOwnProperty('success')) {
                         accounts.setAuthenticated();
                         utils.showLoading("Loading...", function() {
-                                accounts.loginAfterRegister(data2);
-                                blooms.populateBlooms();
-                                accounts.initLoggedInFeatures(true);
+                            accounts.loginAfterRegister(data2);
+                            blooms.populateBlooms();
+                            accounts.initLoggedInFeatures(true);
 
                             setTimeout(function() { //give d3 some extra time
                                 $('.register').slideUp('fast', function() {
                                     utils.hideLoading(500);
                                 });
-                                }, 500);
+                            }, 500);
 
-                            
+
                         });
                         //accounts.setAuthenticated();
                     } else {
@@ -236,7 +237,7 @@ $(document).ready(function() {
                                 $("#username-error").show();
                             }
 
-                           /* if ('email' in errors) {
+                            /* if ('email' in errors) {
                                 $("#email-error").html(errors['email']);
                                 $("#email-error").show();
                             }*/
@@ -277,7 +278,7 @@ $(document).ready(function() {
                         utils.showLoading("Loading...", function() {
                             blooms.populateBlooms();
                             accounts.initLoggedInFeatures();
-			    $('.top-bar').show();
+                            $('.top-bar').show();
 
                             setTimeout(function() { // d3 needs a little extra time to load
                                 $('.login').slideUp('fast', function() {
@@ -305,7 +306,7 @@ $(document).ready(function() {
         //accounts.firstTime();
         $('.landing').slideUp();
         $('.endsliders').slideDown();
-	$('.top-bar').show();
+        $('.top-bar').show();
         //rate.initScore();
     });
 
@@ -315,7 +316,8 @@ $(document).ready(function() {
 
     $('.login-form-go-back').click(function() {
         $('.landing').slideDown();
-        $('.login').slideUp();    });
+        $('.login').slideUp();
+    });
 
     $('.my-comment-btn').click(function() {
         accounts.loadMyCommentDiv();
@@ -325,9 +327,9 @@ $(document).ready(function() {
         $('.comment-region').hide();
         $('.edit-comment').show();
     });
-    
+
     $('.dialog-ready').click(function() {
-        rate.initMenubar(); 
+        rate.initMenubar();
         $('.dialog').slideUp();
     });
 
