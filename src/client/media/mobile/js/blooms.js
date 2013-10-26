@@ -349,15 +349,14 @@ var blooms = (function($, d3, console) {
             .attr("width", "140")
             .attr("height", "140")
             .attr("transform", function(d) {
-                    //var rotations = ['-65', '-20', '45', '80'];
-                    //return "rotate(" + choice(rotations).toString() + ")";
                     return choice(["rotate(-65)", "rotate(-45)", "rotate(20)"]);
                 })
             .datum(function(d) {
                 return d;
             })
             .on('click', function(d) {
-                var commentData = rate.pullComment(d.uid, 'uid', comments);
+                var _this = d3.select(this);
+                 var commentData = rate.pullComment(d.uid, 'uid', comments);
                 var content = commentData.comment;
                 var cid = commentData.cid;
                 window.current_cid = cid;
@@ -369,9 +368,7 @@ var blooms = (function($, d3, console) {
                     $('.rate').data('cid', cid);
                 });
                 $('#go-back').click(function() {
-                    _this.transition()
-                    .attr('r', 0)
-                    .duration(2000);
+                    _this.remove();
                 });
             });
         });
