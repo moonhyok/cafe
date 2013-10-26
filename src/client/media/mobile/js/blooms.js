@@ -336,9 +336,11 @@ var blooms = (function($, d3, console) {
             .data(data)
             .enter()
             .append("svg:image")
-            .attr("xlink:href", function() {
+            .attr("xlink:href", function(d) {
+                if (d.uid == "curUser") {
+                    return window.url_root + "/media/mobile/img/cafe/cafeCurUser.png";
+                }
                 return window.url_root + "/media/mobile/img/cafe/cafe" + Math.floor((Math.random()*6)).toString() + ".png";
-
             })
             .attr('x', function(d) {
                 return x(d.x);
