@@ -158,7 +158,7 @@ function update_score(statement) {
 
 <!-- <div class='rate-loading'><img src='img/ajax-loader.gif'>&nbsp; Comment loading...</div> -->
 <div class='rate'>
-  <div class='header'>{{ topic }}</div>
+  <div class='header'>Topic: {{ topic }}</div>
 
   <!--     <div class='rate-wrap'> -->
   <br/>
@@ -218,12 +218,14 @@ function update_score(statement) {
       <center>
         <div class='reportcard'>
           <center>
-           <div class="basic-header"> Grade Your Government </div>
-
+           <div class="basic-header">Grade California's State Government</div>
+           
+           <div>Please grade from A to F how well you feel California's elected officials are working to address the following issues:</div> 
+          <br/>
            <table class='cardtable' style="width:90%;">
             <tr>
               <td style="border-bottom: 1px double black;">
-                Category
+                Subject
               </td>
               <td style="border-bottom: 1px double black; width: 20px;">
                 My Grade 
@@ -431,7 +433,7 @@ function update_score(statement) {
         <div class= 'registerpanel'>
 
           <center>
-            <div class="basic-header">Report your grades</div>
+            <div class="basic-header">Save Your Grades and Join the Discussion</div>
           </center>
 
           <form id='reg_form' class='form-horizontal' method='post' action='{{ url_root }}/accountsjson/register/'>
@@ -475,7 +477,7 @@ function update_score(statement) {
     <center>
 
       <div style="width: 100%; max-width: 300px;">
-        <input type='submit' value='Submit Your Grades' id='finishRegistration' data-theme="e" data-icon="check">
+        <input type='submit' value='Save and Join' id='finishRegistration' data-theme="e" data-icon="check">
       </div>
 
 <!--       <img src="{{url_root}}/media/mobile/img/cafe/discuss.png" style="width: 200px;"/><br/>
@@ -522,7 +524,11 @@ function update_score(statement) {
 
   <center>
     <div class="loginpanel">
+            <div style="width: 100%; max-width: 150px; padding-top:5px;">
+            <button data-theme='c' class='login-form-go-back' data-icon="arrow-l" data-mini="true">Back</button>
+            </div>
       <div class="basic-header">Welcome Back</div>
+      
       <div class='alert-error' id='login-error' style='display:none;'>
         Please check your username and password and try again.
       </div>
@@ -536,9 +542,7 @@ function update_score(statement) {
         <!-- <button type='submit' data-theme='a' id='login-button'>Login</button>  -->
         <center>
           <div style="width: 100%; max-width: 300px;">
-            <button type='submit' data-theme='a' data-icon="forward">Login</button>
-            <button data-theme='a' class='login-form-go-back' data-icon="back">Go Back</button>
-
+            <button type='submit' data-theme='a' data-icon="forward">Login</button>              
           </div>
         </center>
 
@@ -552,8 +556,9 @@ function update_score(statement) {
 </div>
 
 <div class='logout'>
-  <br/>
+  <br/><br/>
   <center>
+    
     <div class='landing-intro'>
       <div class='landing-header'>
         Thank you for participating!
@@ -566,7 +571,7 @@ function update_score(statement) {
       <div class='landing-desc'>
         <p> Return at any time to check your progress!<br> You can see how other participants are rating your idea. </p><br>
 
-        <img src='./../media/mobile/img/bar_graph.png' class='center' style="width:30%;">
+        <img src='./../media/mobile/img/bar_graph.png' class='center' style="width:200px;">
       </div>
       <br> 
       <button data-theme='a' class='logout-start-over' data-inline="true">Start Over</button>
@@ -580,12 +585,12 @@ function update_score(statement) {
   <center>
     <div class='landing-intro'>
       <div class='landing-header'>
-        California Assesment and Feedback Engine.
+        A Citizen's Report Card for Californa
       </div>
 
 
       <div class='landing-desc'>
-        Grade and discuss the California government.
+        Grade and discuss the California government
       </div>
 
       <img class="header-img-topic" src="{{ url_root }}/media/mobile/img/cafe/cafe2.png" class="center" style="width:150px;"><br>
@@ -615,8 +620,7 @@ function update_score(statement) {
       <button type='submit' data-theme='b' data-icon="star">The Discussion</button>
       <img class="header-img-topic" src="{{ url_root }}/media/mobile/img/cafe/map_teaser.png" class="center" style="width:250px;"><br>
       Each cup on the coffee table represents a participant.
-      The position of the cup is determined by the participants grades.
-      Clicking on a cup reveals the participant's contribution to the discussion.
+      The position of the cup is determined by the participant's grades.
       <div style="width: 150px;">
         <button type='submit' data-theme='e' class='dialog-next' data-icon="arrow-r" onclick="$('.dialog-text1').hide();$('.dialog-text2').show();">Next</button>
       </div>
@@ -624,12 +628,21 @@ function update_score(statement) {
 
     <div class='dialog-text2' style="display:none;">
       <button type='submit' data-theme='b' data-icon="star">The Discussion</button>
+      <img class="header-img-topic" src="{{ url_root }}/media/mobile/img/cafe/cafe_click_idea.jpg" class="center" style="width:250px;"><br>
+      Clicking on a cup reveals the participant's response to the current discussion topic: <strong>"{{ topic }}"</strong>
+      <div style="width: 150px;">
+        <button type='submit' data-theme='e' class='dialog-next' data-icon="arrow-r" onclick="$('.dialog-text2').hide();$('.dialog-text3').show();">Next</button>
+      </div>
+    </div>
+        
+    <div class='dialog-text3' style="display:none;">
+      <button type='submit' data-theme='b' data-icon="star">The Discussion</button>
       <img class="header-img-topic" src="{{ url_root }}/media/mobile/img/cafe/rating_teaser.png" class="center" style="width:250px;"><br>
       You can evaluate a participant's response on two sliders.
       After rating two responses, you can leave a response of your own.
       As you rate more responses and other participants rate you, you will earn points.
       <div style="width: 150px;">
-        <button type='submit' data-theme='e' class='dialog-ready' data-icon="check">Ready</button>
+        <button type='submit' data-theme='e' class='dialog-ready' data-icon="check">Ready!</button>
       </div>
     </div>
 
