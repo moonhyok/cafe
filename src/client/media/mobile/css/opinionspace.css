@@ -567,10 +567,8 @@ table.pretty caption {
 }
 
 .slider-question {
-	text-align: center;
 	width: 100%;
-	padding-bottom: 5px;
-	font-size: 13px;
+	font-size: 15px;
 }
 
 .rated, .rated-thanks {

@@ -222,7 +222,7 @@ function update_score(statement) {
            
            <div>Please grade from A to F how well you feel California's elected officials are working to address the following issues:</div> 
           <br/>
-           <table class='cardtable' style="width:90%;">
+           <table class='cardtable' style="width:98%;">
             <tr>
               <td style="border-bottom: 1px double black;">
                 Subject
@@ -239,8 +239,42 @@ function update_score(statement) {
             <tr>
               <td>
                 {% ifnotequal statement.statement '' %}
-                <p class='slider-question'> {{ statement.statement }} </p>
+                <div class='slider-question'>{{ statement.statement }} </div>
+<!--                <p class='slider-question'> {{ statement.statement }} </p>
 
+                <div id="grades" class="slider-agree-labels">
+                  <div style="text-align: left;width: 10%;">A<span></span></div>
+                  <div style="text-align: center;width: 26.2%;">B<span></span></div>
+                  <div style="text-align: center;width: 26.2%;">C<span></span></div>
+                  <div style="text-align: center;width: 26.2%;">D<span></span></div>
+                  <div style="text-align: right;width: 10%;">F<span></span></div>
+          </div>
+
+          <br><div id="s{{statement.id}}" class="endslider-slider"></div>
+-->
+          {% else %}
+          <!--<div style='display:none;'>
+              <br><div id="s{{statement.id}}" class="endslider-slider"></div>
+             <input type='range' id='s{{statement.id}}' name='s{{statement.id}}' value='50' min='0' max='100' animate='true'/> 
+          </div>-->
+          {% endifnotequal %}
+          <br/>
+        </td>
+        
+        <td style="vertical-align:middle;">
+          <div id='g{{statement.id}}' class="grade"></div>
+        </td>
+        
+        <td style="vertical-align:middle;">
+          <div id='o{{statement.id}}' class="grade2"></div>
+        </td>
+        
+        
+      </tr>
+    
+      <tr>
+        <td colspan="3">
+                        {% ifnotequal statement.statement '' %}
                 <div id="grades" class="slider-agree-labels">
                   <div style="text-align: left;width: 10%;">A<span></span></div>
                   <div style="text-align: center;width: 26.2%;">B<span></span></div>
@@ -262,17 +296,7 @@ function update_score(statement) {
           </div>
           {% endifnotequal %}
           <br/>
-        </td>
-        
-        <td style="vertical-align:middle;">
-          <div id='g{{statement.id}}' class="grade"></div>
-        </td>
-        
-        <td style="vertical-align:middle;">
-          <div id='o{{statement.id}}' class="grade2"></div>
-        </td>
-        
-        
+          </td>
       </tr>
 
       {% endfor %}
