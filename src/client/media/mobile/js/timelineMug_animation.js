@@ -1,49 +1,27 @@
 //loading data
-var xmlhttp;
-var data;
-var number_time_point=4;
-// xValue[i][j] user j's x at i timepoint
+var number_time_point=4
 var xValue=new Array(number_time_point);
 var yValue=new Array(number_time_point);
 var number_user=new Array();
 
-function load(url,cfunc)
-{
-  
-  if (window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari
-  xmlhttp=new XMLHttpRequest();
-  }
-  else{// code for IE6, IE5
-  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-  xmlhttp.onreadystatechange=cfunc
-  xmlhttp.open("GET",url,true);
-  xmlhttp.send();
-}
+$.getJSON( "data_simulated.json", function( data ) {
 
-function getPosition()
-{
-   load("data.xml",function(){
-      if (xmlhttp.readyState==4 && xmlhttp.status==200){
-	      data=xmlhttp.responseXML;
-	      for (var i=0; i<number_time_point; i++){
-               var currentX=new Array();
-               var currentY=new Array();
-               var user_number=data.getElementsByTagName('x'+i.toString());
-               number_user[i]=user_number.length;
-               for (var j=0; j<number_user[i]; j++){                          
-		         currentX[j]=data.getElementsByTagName('x'+i.toString())[j].childNodes[0].nodeValue;
-		         currentY[j]=data.getElementsByTagName('y'+i.toString())[j].childNodes[0].nodeValue;
-	           }
-               xValue[i]=currentX;
-               yValue[i]=currentY;	  
-          }
-          init();           
-      }
-   }); 
-}
+    xValue[0]=data.x0;
+    xValue[1]=data.x1;
+    xValue[2]=data.x2;
+    xValue[3]=data.x3;
+    yValue[0]=data.y0;
+    yValue[1]=data.y1;
+    yValue[2]=data.y2;
+    yValue[3]=data.y3;
+    number_user[0]=data.x0.length;
+    number_user[1]=data.x1.length;
+    number_user[2]=data.x2.length;
+    number_user[3]=data.x3.length;
+    init();
+});
 
-
+// xValue[i][j] user j's x at i timepoint
 //Animation
 var canvas;
 var ctx;
@@ -122,17 +100,15 @@ function init() {
         x_vel_direction[i]=x_dir;
         y_vel_direction[i]=y_dir;
     }
-    /*console.log(number_user);
-    console.log(xValue);
-    console.log(yValue);
-    console.log(mug_x);
-    console.log(mug_y);
-    console.log(speed_ratio);
-    console.log(x_vel_direction);
-    console.log(y_vel_direction);*/
-    //assign initial position
-    mug_x_current=mug_x[0];
-    mug_y_current=mug_y[0];
+
+ 	for (var j=0; j<number_user[0]; j++)
+	{
+		mug_x_current[j]=mug_x[0][j];
+		mug_y_current[j]=mug_y[0][j];
+        x_vel_current[j]=x_vel_direction[0][j];
+        y_vel_current[j]=y_vel_direction[0][j];
+	}
+
     draw();
     
 }
@@ -140,8 +116,7 @@ function init() {
 function update(){
     if (time_steps<time_thresholds[0])
     {
-        x_vel_current=x_vel_direction[0];
-        y_vel_current=y_vel_direction[0];
+
 	    for (var i=0; i<number_user[0]; i++)
         {    
            mug_x_current[i]=mug_x_current[i]+x_vel_current[i]*speed_ratio[0][i];
@@ -150,10 +125,13 @@ function update(){
         
         if (time_steps-(time_thresholds[0]-1)>=0)
         {
-			for (var j=number_user[0]; j<number_user[1]; j++)
+			
+			for (var j=0; j<number_user[1]; j++)
 			{
 				mug_x_current[j]=mug_x[1][j];
 				mug_y_current[j]=mug_y[1][j];
+				x_vel_current[j]=x_vel_direction[1][j];
+                y_vel_current[j]=y_vel_direction[1][j];
 			}
 		}
         time_steps+=1; 
@@ -161,9 +139,7 @@ function update(){
     }
     else if(time_steps>=time_thresholds[0] && time_steps<time_thresholds[1])
     {
-               
-        x_vel_current=x_vel_direction[1];
-        y_vel_current=y_vel_direction[1];
+
         for (var i=0; i<number_user[1]; i++)
         {    
            mug_x_current[i]=mug_x_current[i]+x_vel_current[i]*speed_ratio[1][i];
@@ -171,18 +147,20 @@ function update(){
         }
         if (time_steps-(time_thresholds[1]-1)>=0)
         {
-			for (var j=number_user[1]; j<number_user[2]; j++)
+
+			for (var j=0; j<number_user[2]; j++)
 			{
 				mug_x_current[j]=mug_x[2][j];
 				mug_y_current[j]=mug_y[2][j];
+			    x_vel_current[j]=x_vel_direction[2][j];
+                y_vel_current[j]=y_vel_direction[2][j];
 			}
 		}
         time_steps+=1; 
     }
     else if (time_steps>=time_thresholds[1] && time_steps<time_thresholds[2])
     {
-		x_vel_current=x_vel_direction[2];
-        y_vel_current=y_vel_direction[2];
+
         for (var i=0; i<number_user[2]; i++)
         {    
            mug_x_current[i]=mug_x_current[i]+x_vel_current[i]*speed_ratio[2][i];
@@ -221,13 +199,26 @@ function draw() {
 function main_loop() {
 	draw();
 	update();
+	
+}
+var setID;
+function clickreset(){
+	
+	setID=setInterval(main_loop, 15);	
 }
 
-function clickreset(){
-	time_steps=0;
-	init();
-	setInterval(main_loop, 15);
+function reset(){
+	clearInterval(setID);
+	time_steps=0;   
+	for (var j=0; j<number_user[0]; j++)
+	{
+		mug_x_current[j]=mug_x[0][j];
+		mug_y_current[j]=mug_y[0][j];
+        x_vel_current[j]=x_vel_direction[0][j];
+        y_vel_current[j]=y_vel_direction[0][j];
+	} 
 }
+
 	
-getPosition();
+
 
