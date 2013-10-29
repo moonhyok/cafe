@@ -333,7 +333,7 @@ $(document).ready(function() {
     $('.comment-submit-btn').click(function() {
         window.comment = $('#entered-comment').val();
         $('.comment-input').slideUp();
-        sendComment($('#entered-comment').val());
+        rate.sendComment($('#entered-comment').val());
         //accounts.showRegister();
     });
 
