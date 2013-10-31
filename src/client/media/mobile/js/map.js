@@ -81,7 +81,7 @@
 			});
 		}
 
-		geojson = L.geoJson(CAcounty0, {
+		geojson = L.geoJson(map_data0, {
 			style: style,
 			onEachFeature: onEachFeature
 		}).addTo(map);
@@ -118,14 +118,14 @@ function update(index){
 	{
 		case '0':
 		map.removeLayer( geojson );
-	    geojson = L.geoJson(CAcounty0, {
+	    geojson = L.geoJson(map_data0, {
 			style: style,
 			onEachFeature: onEachFeature
 		}).addTo(map);
 		break;
 		case '1':
 		map.removeLayer( geojson );
-		geojson = L.geoJson(CAcounty1, {
+		geojson = L.geoJson(map_data1, {
 			style: style,
 			onEachFeature: onEachFeature
 		}).addTo(map);
