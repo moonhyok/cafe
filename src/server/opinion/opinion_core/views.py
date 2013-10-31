@@ -1741,9 +1741,9 @@ def os_get_comment(request, os_id, user_id, disc_stmt_id = None):
 #
 
 @auth_required
-def os_flag_comment(request, os_id, user_id):
+def os_flag_comment(request, os_id, comment_id):
     discussion_statement = DiscussionStatement.objects.filter(opinion_space = os_id, is_current = True)[0]
-    comment = DiscussionComment.objects.filter(is_current = True, opinion_space = os_id, discussion_statement = discussion_statement, user = user_id)[:1]
+    comment = DiscussionComment.objects.filter(id=comment_id)[:1]
     
     if not len(comment) == 1:
         return json_error('That comment does not exist.')

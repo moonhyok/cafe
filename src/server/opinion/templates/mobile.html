@@ -190,9 +190,17 @@ function update_score(statement) {
   <center>
     <div class="answerwrapper">
       <br/>
-      <div id='commentInput' class='answer'></div>
-
+      <div id='commentInput' class='answer'></div>              
       <div class='sliders'>
+        
+        <p align="left">
+        <label for="flip-1" style="font-size: 12px !important;">Inappropriate or Irrelevant?</label>
+        <select name="flip-1" id="flip-1" class="flip-1" data-role="slider" data-mini="true" data-theme="a">
+	<option value="no">No</option>
+	<option value="yes">Yes</option>
+        </select>
+        </p>
+                
         <hr>
         {{ client_settings.AGREEMENT_TEXT }}<br/>
         <div class="slider-range-labels">
@@ -215,16 +223,16 @@ function update_score(statement) {
         <div style="clear: both;"></div>
 
         <div id="slider2" class="rating-slider"></div>
-
+        
         <!-- <input data-track-theme='b' data-theme='a' type='range' name='slider2' id='slider2' value='50' min='0' max='100' animate='true'/> -->
         <hr>
+                  
         <center>
           <div style="width: 100%;max-width: 300px;">
             <button type='submit' data-theme='a' id='go-back' onClick='rate.doneRating()' data-icon="check">Done Rating</button>
           </div>
         </center>
-
-
+        
       </div>
     </div>
   </center>

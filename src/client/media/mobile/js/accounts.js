@@ -328,6 +328,21 @@ $(document).ready(function() {
         $('.edit-comment').show();
     });
 
+$('.flip-1').change(function() {
+    $.ajax({
+            type: "POST",
+            url: window.url_root + "/os/flagcomment/1/"+window.current_cid+"/",
+            success: function(data) {
+                if (data.hasOwnProperty('success')) {
+                    console.log("flag successfully sent");
+                }
+            },
+            error: function() {
+                console.log("ERROR flag didn't get sent");
+            }
+        });
+    });
+
     $('.dialog-ready').click(function() {
         rate.initMenubar();
         $('.dialog').slideUp();
