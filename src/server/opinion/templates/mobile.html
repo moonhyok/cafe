@@ -502,7 +502,7 @@ function update_score(statement) {
           </div>
 
           <div data-role="fieldcontain">
-            <label for="zip" class='regforminput' >CA Zip Code:</label>
+            <label for="zip" class='regforminput' >California Zip Code:</label>
             <input type ='text' id='zip' name='zip' class='regforminput' placeholder="Zip Code">
           </div>
 
@@ -662,28 +662,28 @@ function update_score(statement) {
 </div>
 
 <div class='dialog' style="display: none;">
-  <br/><br/>
+  <br/>
   <center>
     <div class='dialog-text1'>
-      <button type='submit' data-theme='b' data-icon="star">The Discussion</button>
+      
+      <button type='submit' data-theme='b' data-icon="star"><font size="5">The Discussion</font></button>
       <img class="header-img-topic" src="{{ url_root }}/media/mobile/img/cafe/map_teaser.png" class="center" style="width:250px;"><br>
-      Each cup on the coffee table represents a participant.
-      The position of the cup is determined by the participant's grades.
+      Welcome to the dicussion. The current discussion topic is:<br/><strong>"{{ topic }}"</strong>
       <div style="width: 150px;">
         <button type='submit' data-theme='e' class='dialog-next' data-icon="arrow-r" onclick="$('.dialog-text1').hide();$('.dialog-text2').show();">Next</button>
       </div>
     </div>
 
     <div class='dialog-text2' style="display:none;">
-      <button type='submit' data-theme='b' data-icon="star">The Discussion</button>
+      <button type='submit' data-theme='b' data-icon="star"><font size="5">The Discussion</font></button>
       <img class="header-img-topic" src="{{ url_root }}/media/mobile/img/cafe/cafe_click_idea.jpg" class="center" style="width:250px;"><br>
-      Clicking on a cup reveals the participant's response to the current discussion topic: <strong>"{{ topic }}"</strong>
+      Each mug represents a participant. <strong>Click on a mug to begin.</strong>
       <div style="width: 150px;">
-        <button type='submit' data-theme='e' class='dialog-next' data-icon="arrow-r" onclick="$('.dialog-text2').hide();$('.dialog-text3').show();">Next</button>
+        <button type='submit' data-theme='e' class='dialog-ready' data-icon="arrow-r">Ready!</button>
       </div>
     </div>
         
-    <div class='dialog-text3' style="display:none;">
+    <!--<div class='dialog-text3' style="display:none;">
       <button type='submit' data-theme='b' data-icon="star">The Discussion</button>
       <img class="header-img-topic" src="{{ url_root }}/media/mobile/img/cafe/rating_teaser.png" class="center" style="width:250px;"><br>
       You can evaluate a participant's response on two sliders.
@@ -692,7 +692,7 @@ function update_score(statement) {
       <div style="width: 150px;">
         <button type='submit' data-theme='e' class='dialog-ready' data-icon="check">Ready!</button>
       </div>
-    </div>
+    </div>-->
 
   </center>
 </div>
