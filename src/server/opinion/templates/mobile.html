@@ -81,6 +81,11 @@ stats.setConf("{{ client_settings.AGREEMENT_HISTOGRAM_TEXT }}",
 <link href="./../media/mobile/css/jquery.nouislider.min.css" rel="stylesheet">
 
 <script type="text/javascript">
+var finishedStatements=[];
+
+for(var l = 0; l < window.num_sliders; l++) {
+    finishedStatements.push(0);
+}
 
 var medians = {{ medians|safe }}; 
 
@@ -116,13 +121,32 @@ function score_to_grade(score1) {
     return 'D-';
 }
 
+function statementsComplete() {
+  for(var i = 0; i < window.num_sliders; i++) {
+    if (finishedStatements[i]==0) {
+      return false;
+    }
+  }
+  return true;
+}
+
 /** Updates statement number STATEMENT (which is of type number). */
 function update_score(statement) {
   $('#g' + statement).html(score_to_grade($('#s' + statement).val()));
   $('#o' + statement).hide();
   $('#o' + statement).html(score_to_grade(medians[statement]*100))
-  $('#o' + statement).delay(100).fadeIn();
-  $('.s'+statement).slider('disable');
+  $('#o' + statement).delay(200).fadeIn();
+  //$('.s'+statement).slider('disable');
+  document.getElementById('tr1'+statement).style.backgroundColor = "rgba(255, 255, 255, 0.3)";
+  $('#tr1'+statement).delay(1000).fadeOut(2000);
+  finishedStatements[statement-1]= 1;
+  
+  if (statementsComplete()) {
+    $('.cardtable').delay(1000).fadeOut(2000);
+  }
+  
+  //document.getElementById('tr1'+statement).fadeOut(1000);//style.display = 'none';
+  //document.getElementById('tr2'+statement).fadeOut(1000);//style.display = 'none';
 }
 </script>
 
@@ -224,22 +248,24 @@ function update_score(statement) {
           <br/>
            <table class='cardtable' style="width:98%;">
             <tr>
-              <td style="border-bottom: 1px double black;">
+              <td style="width: 80%;">
                 Subject
               </td>
-              <td style="border-bottom: 1px double black; width: 20px;">
+              <td style="width: 10%;">
                 My Grade 
               </td>
-              <td style="border-bottom: 1px double black; width: 20px;">
-                Our Grade 
+              <td style="width: 10%;">
+                Average
               </td>
             </tr>
+           </table>
 
             {% for statement in statements %}
+            <table id="tr1{{statement.id}}" class='cardtable' style="width:98%;">
             <tr>
-              <td>
+              <td style="width: 80%;height: 45px;">
                 {% ifnotequal statement.statement '' %}
-                <div class='slider-question'>{{ statement.statement }} </div>
+                <div class='slider-question'>({{statement.id}}/{{ statements|length}}) {{ statement.statement }} </div>
 <!--                <p class='slider-question'> {{ statement.statement }} </p>
 
                 <div id="grades" class="slider-agree-labels">
@@ -261,11 +287,11 @@ function update_score(statement) {
           <br/>
         </td>
         
-        <td style="vertical-align:middle;">
+        <td style="vertical-align:middle;width: 10%;">
           <div id='g{{statement.id}}' class="grade"></div>
         </td>
         
-        <td style="vertical-align:middle;">
+        <td style="vertical-align:middle;width: 10%;">
           <div id='o{{statement.id}}' class="grade2"></div>
         </td>
         
@@ -286,7 +312,7 @@ function update_score(statement) {
           </div>
           <!--<div style="clear: both;"></div>-->
 
-          <br><div id="s{{statement.id}}" class="endslider-slider"></div>
+          <br><div id="s{{statement.id}}" class="endslider-slider" style=""></div>
           <!-- <input type='range' id='s{{statement.id}}' data-theme="d" name='s{{statement.id}}' class='s{{statement.id}}' value='50' min='0' max='100' step="5" style=""/> -->
 
           {% else %}
@@ -298,10 +324,8 @@ function update_score(statement) {
           <br/>
           </td>
       </tr>
-
+ </table>
       {% endfor %}
-
-    </table>
 
     <div style="width: 100%; max-width: 300px;">
       <button type='submit' data-theme='e' class='done-endsliders-btn' data-icon="arrow-r">Next</button>
@@ -609,7 +633,7 @@ function update_score(statement) {
   <center>
     <div class='landing-intro'>
       <div class='landing-header'>
-        A Citizen's Report Card for Californa
+        A Citizen's Report Card for California
       </div>
 
 
