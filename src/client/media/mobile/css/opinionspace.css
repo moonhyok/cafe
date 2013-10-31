@@ -277,6 +277,10 @@ table.pretty caption {
 		font-size: 30px;
 	}
 	
+	.regforminput{
+		font-size: 22px !important;	
+	}
+	
 	.instructions2{
 		/*position: absolute;*/
 		top: 250;
@@ -361,7 +365,6 @@ table.pretty caption {
 	.registerpanel{
 		background-color: #F0D49D;
 		color: black;
-		font-weight:bold;
 		text-shadow: none;
 		text-align: center;
 		width: 90%;
@@ -473,7 +476,7 @@ table.pretty caption {
 	font-family: sans-serif;
 	text-shadow: none;
 	color: #000000;
-	font-size: 20px;
+	font-size: 25px;
 	padding-bottom: 10px;
 	padding-top: 10px;
 }

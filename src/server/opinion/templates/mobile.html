@@ -248,14 +248,14 @@ function update_score(statement) {
           <br/>
            <table class='cardtable' style="width:98%;">
             <tr>
-              <td style="width: 80%;">
+              <td>
                 Subject
               </td>
-              <td style="width: 10%;">
-                My Grade 
+              <td style="vertical-align:middle;width: 45px;">
+                My Grade
               </td>
-              <td style="width: 10%;">
-                Average
+              <td style="vertical-align:middle;width: 45px;">
+                Avg. Grade
               </td>
             </tr>
            </table>
@@ -263,7 +263,7 @@ function update_score(statement) {
             {% for statement in statements %}
             <table id="tr1{{statement.id}}" class='cardtable' style="width:98%;">
             <tr>
-              <td style="width: 80%;height: 45px;">
+              <td style="height: 45px;">
                 {% ifnotequal statement.statement '' %}
                 <div class='slider-question'>({{statement.id}}/{{ statements|length}}) {{ statement.statement }} </div>
 <!--                <p class='slider-question'> {{ statement.statement }} </p>
@@ -287,11 +287,11 @@ function update_score(statement) {
           <br/>
         </td>
         
-        <td style="vertical-align:middle;width: 10%;">
+        <td style="vertical-align:middle;width: 45px;">
           <div id='g{{statement.id}}' class="grade"></div>
         </td>
         
-        <td style="vertical-align:middle;width: 10%;">
+        <td style="vertical-align:middle;width: 45px;">
           <div id='o{{statement.id}}' class="grade2"></div>
         </td>
         
@@ -489,21 +489,21 @@ function update_score(statement) {
             <input type='hidden' value='{{ url_root }}' name='url'>
 
             <div data-role="fieldcontain">
-             <label for="regusername">Email:</label>
-             <input type="text" id='regusername' name='regusername' value="" placeholder="Email" data-theme="b"/>
+             <label for="regusername" class='regforminput' >Email:</label>
+             <input type="text" id='regusername' name='regusername' class='regforminput' value="" placeholder="Email" data-theme="b"/>
              <div class='alert-error' id='username-error' style='display:none;'></div>
            </div>
 
 
            <div data-role="fieldcontain">
-            <label for="regpassword1">Password:</label>
-            <input type ='password' id='regpassword1' name='regpassword1' placeholder="Password">
+            <label for="regpassword1" class='regforminput' >Password:</label>
+            <input type ='password' id='regpassword1' name='regpassword1' class='regforminput'  placeholder="Password">
             <div class='alert-error' id='password-error' style='display:none;'></div>
           </div>
 
           <div data-role="fieldcontain">
-            <label for="zip">CA Zip Code:</label>
-            <input type ='text' id='zip' name='zip' placeholder="Zip Code">
+            <label for="zip" class='regforminput' >CA Zip Code:</label>
+            <input type ='text' id='zip' name='zip' class='regforminput' placeholder="Zip Code">
           </div>
 
 <!--        <label>Age Group:  </label>   
@@ -583,10 +583,10 @@ function update_score(statement) {
 
       <form id='login_form'>
         <br>
-        <p class='label'>Email</p>
-        <input type='text' name='username' placeholder="Email">
-        <p class ='label'>Password</p>
-        <input type='password' name='password' placeholder="Password">
+        <p class="regforminput">Email</p>
+        <input type='text' name='username' class="regforminput" placeholder="Email">
+        <p class="regforminput">Password</p>
+        <input type='password' name='password' class="regforminput" placeholder="Password">
         <!-- <button type='submit' data-theme='a' id='login-button'>Login</button>  -->
         <center>
           <div style="width: 100%; max-width: 300px;">
