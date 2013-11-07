@@ -252,7 +252,7 @@ function update_score(statement) {
           <center>
            <div class="basic-header">Grade California's State Government</div>
            
-           <div>Please grade from A to F how well you feel California's elected officials are working to address the following issues:</div> 
+           <div>Please grade from A to F how well you feel California's elected officials are working to address the following 6 subjects:</div> 
           <br/>
            <table class='cardtable' style="width:98%;">
             <tr>
@@ -674,17 +674,17 @@ function update_score(statement) {
   <center>
     <div class='dialog-text1'>
       
-      <button type='submit' data-theme='b' data-icon="star"><font size="5">The Discussion</font></button>
-      <img class="header-img-topic" src="{{ url_root }}/media/mobile/img/cafe/map_teaser.png" class="center" style="width:250px;"><br>
-      Welcome to the dicussion. The current discussion topic is:<br/><strong>"{{ topic }}"</strong>
+      <div data-role="header" data-theme="b" style="-moz-border-radius: 15px;border-radius: 15px;width:100%;"><font size="6">The Discussion</font></div>
+      <img class="header-img-topic" src="{{ url_root }}/media/mobile/img/cafe/map_teaser.png" class="center" style="width:200px;padding-top:3px;"><br>
+      The current discussion topic is:<br/><strong>"{{ topic }}"</strong>
       <div style="width: 150px;">
         <button type='submit' data-theme='e' class='dialog-next' data-icon="arrow-r" onclick="$('.dialog-text1').hide();$('.dialog-text2').show();">Next</button>
       </div>
     </div>
 
     <div class='dialog-text2' style="display:none;">
-      <button type='submit' data-theme='b' data-icon="star"><font size="5">The Discussion</font></button>
-      <img class="header-img-topic" src="{{ url_root }}/media/mobile/img/cafe/cafe_click_idea.jpg" class="center" style="width:250px;"><br>
+      <div data-role="header" data-theme="b" style="-moz-border-radius: 15px;border-radius: 15px;width:100%;"><font size="6">The Discussion</font></div>
+      <img class="header-img-topic" src="{{ url_root }}/media/mobile/img/cafe/cafe_click_idea.jpg" class="center" style="width:200px;padding-top:3px;"><br>
       Each mug represents a participant.<br/><strong>Click on a mug to begin.</strong>
       <div style="width: 150px;">
         <button type='submit' data-theme='e' class='dialog-ready' data-icon="arrow-r">Ready!</button>

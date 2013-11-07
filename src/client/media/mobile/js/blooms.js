@@ -5,8 +5,7 @@
 var blooms = (function($, d3, console) {
     // Enable strict javascript interpretation
     "use strict";
-
-
+    
     /** Creates global variable window.visuals to determine blooms colors and sizes.
      *  Copied from the flash version. */
 
@@ -165,8 +164,8 @@ var blooms = (function($, d3, console) {
 
         for (var i = 0; i < ratings.length; i += window.num_sliders) {
             rating = compileIndexedElementsToList(ratings.slice(i, i + window.num_sliders), rating_value_index);
-            x = Math.abs(dotProduct(ex, rating));
-            y = Math.abs(dotProduct(ey, rating));
+            x = dotProduct(ex, rating);
+            y = dotProduct(ey, rating);
             uid = ratings[i][rating_uid_index];
             result.push({
                 'uid': uid,
@@ -174,7 +173,7 @@ var blooms = (function($, d3, console) {
                 'y': y
             });
         }
-        return result;
+        return [result, Math.sqrt(dotProduct(ex,ex)),Math.sqrt(dotProduct(ey,ey))];
     }
 
     // Arguments: show_id, the id to pass to the show view (defaults to 1),
@@ -239,7 +238,9 @@ var blooms = (function($, d3, console) {
 
         result = compileEigenvectorsAndRatings(eigens, ratings);
         showfunc({
-            points: result,
+            points: result[0],
+            normx: result[1],
+            normy: result[2],
             comments: data2.comments
         });
         // });
@@ -287,24 +288,30 @@ var blooms = (function($, d3, console) {
 
         // define the margins
         //console.log("window height: " + $(window).height() + 'window width: ' + $(window).width());
-        var margin = {
-            top: 55,
-            left: 55,
-            right: 55,
-            bottom: 55
-        },
-
-            width = $(window).width() - margin.right - margin.left,
-            height = $(window).height() - margin.bottom - margin.top; // - $('.top-bar').height();
 
         //console.log('resizing: width: ' + width + ' height: ' + height);
 
          pullLivePoints(function(object) {
             var data = object.points;
+            var normx = object.normx;
+            var normy = object.normy;
             var comments = object.comments;
 
             console.log(data);
             console.log(comments);
+            
+            var margin = {
+            top: 55,
+            left: 55,
+            right: 55,
+            bottom: 55
+            }
+
+            var width = $(window).width() - margin.right - margin.left;
+            var height = $(window).height() - margin.bottom - margin.top;
+            
+            var canvasx = d3.scale.linear().domain(d3.extent(data, function(d) {return d.x;})).range([margin.left, width]);
+            var canvasy = d3.scale.linear().domain(d3.extent(data, function(d) {return d.y;})).range([margin.bottom, height]);
 
             $('svg').remove();
             // clear anything that's in the div already (e.g. loading button)
@@ -317,19 +324,6 @@ var blooms = (function($, d3, console) {
             // .attr('class', 'main')
             .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
-            // create the scales - these will map actual data to pixels on the screen.
-            var x = d3.scale.linear()
-            .domain(d3.extent(data, function(d) {
-                return d.x;
-            }))
-            .range([0, width]);
-
-            var y = d3.scale.linear()
-            .domain(d3.extent(data, function(d) {
-                return d.y;
-            }))
-            .range([height, 0]);
-
             //var rescale = generateRescalingFactor();
 
             svg.selectAll(".bloom")
@@ -337,22 +331,23 @@ var blooms = (function($, d3, console) {
             .enter()
             .append("svg:image")
             .attr("xlink:href", function(d) {
+                console.log({'uid': d.uid,'x': canvasx(d.x),'y': canvasy(d.y)});
                 if (d.uid == "curUser") {
                     return window.url_root + "/media/mobile/img/cafe/cafeCurUser.png";
                 }
                 return window.url_root + "/media/mobile/img/cafe/cafe" + Math.floor((Math.random()*6)).toString() + ".png";
             })
             .attr('x', function(d) {
-                return x(d.x);
+                return canvasx(d.x);
             })
             .attr('y', function(d) {
-                return y(d.y);
+                return canvasy(d.y);
             })
-            .attr("width", "140")
-            .attr("height", "140")
-            .attr("transform", function(d) {
-                    return choice(["rotate(-65)", "rotate(-45)", "rotate(20)"]);
-                })
+            .attr("width", "110")
+            .attr("height", "110")
+            //.attr("transform", function(d) {
+            //        return choice(["rotate(-65)", "rotate(-45)", "rotate(20)"]);
+            //    })
             .datum(function(d) {
                 return d;
             })
