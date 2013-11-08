@@ -1060,7 +1060,8 @@ def os_show(request, os_id, disc_stmt_id = None):
     
     if request.user.is_authenticated():
         ratings = tuple(os.ratings.filter(user = request.user, is_current = True).values_list('opinion_space_statement', 'rating')[:len(statements)])
-        comment_filter = os.comments.filter(user = request.user, is_current = True, discussion_statement = current_disc_stmt)
+
+	comment_filter = os.comments.filter(user = request.user, is_current = True, discussion_statement = current_disc_stmt)
         comment_filter_nc = os.comments.filter(user = request.user,discussion_statement = current_disc_stmt)
         comment = tuple(comment_filter.values_list('comment')[:1])
         comment_score = tuple([[0]])
@@ -1796,7 +1797,7 @@ def os_save_ratings(request, os_id):
 def os_save_rating(request, os_id):
     params = request.REQUEST
 
-    st_id = params.get('statement_id', False)
+    st_id = params.get('id', False)
     
     if st_id:
         # Set old rating as not current

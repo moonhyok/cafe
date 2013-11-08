@@ -183,7 +183,7 @@ var rate = (function($, d3, console) {
     // to slide up. 
 
     function storeSliders(num_sliders) {
-        if (window.sliders === undefined) {
+        /*if (window.sliders === undefined) {
             window.sliders = [];
         }
 
@@ -192,7 +192,7 @@ var rate = (function($, d3, console) {
             slider_values['s' + i] = $('#s' + i).val();
         }
 
-        window.sliders.push(slider_values);
+        window.sliders.push(slider_values);*/
         //$('.endsliders').slideUp();
         $('.endsliders').slideUp('fast', function() {
             accounts.showRegister();
@@ -217,6 +217,7 @@ var rate = (function($, d3, console) {
 
     
     function sendSlider(rating, number) {
+        alert(rating/100);
         $.ajax({
             type: "POST",
             url: window.url_root + "/os/saverating/1/",

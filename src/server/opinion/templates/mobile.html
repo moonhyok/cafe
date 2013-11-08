@@ -12,6 +12,7 @@
 
   <script type='text/javascript'>
   window.url_root = '{{ url_root }}';
+  window.sliders = [];
   window.num_sliders = {{ statements|length }};
   window.conf = { 'SCORE_SCALE_FACTOR'  : {{ client_settings.SCORE_SCALE_FACTOR }},
   'YOUR_SCORE_LANGUAGE' : "{{ client_settings.YOUR_SCORE_LANGUAGE }}",
@@ -136,6 +137,7 @@ function update_score(statement) {
   $('#o' + statement).hide();
   $('#o' + statement).html(score_to_grade(medians[statement]*100))
   $('#o' + statement).delay(200).fadeIn();
+  window.sliders[statement] = $('#s' + statement).val();
   //$('.s'+statement).slider('disable');
   document.getElementById('tr1'+statement).style.backgroundColor = "rgba(255, 255, 255, 0.3)";
   $('#tr1'+statement).delay(1000).fadeOut(2000);

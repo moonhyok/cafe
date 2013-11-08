@@ -225,10 +225,10 @@ var blooms = (function($, d3, console) {
         //make this it's own function
         // hack to allow own bloom - should be cleaned up later
         //var curr_user_id = data1[0]['cur_user_id'];
-        var users_statements = data1['statements'];
+        var users_statements = data1['cur_user_ratings'];
         var users_ratings = [];
         for (var i = 0; i < users_statements.length; i += 1) {
-            users_ratings[i] = new Array("curUser", users_statements[i][0], users_statements[i][3]);
+            users_ratings[i] = new Array("curUser", users_statements[i][0], users_statements[i][1]);
         }
 
         if (window.authenticated) {
@@ -331,7 +331,7 @@ var blooms = (function($, d3, console) {
             .enter()
             .append("svg:image")
             .attr("xlink:href", function(d) {
-                console.log({'uid': d.uid,'x': canvasx(d.x),'y': canvasy(d.y)});
+                console.log({'uid': d.uid,'x':d.x,'y':d.y,'cx': canvasx(d.x),'cy': canvasy(d.y)});
                 if (d.uid == "curUser") {
                     return window.url_root + "/media/mobile/img/cafe/cafeCurUser.png";
                 }

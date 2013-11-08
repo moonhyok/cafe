@@ -80,7 +80,7 @@ var accounts = (function($, d3, console) {
                     //rate.sendComment(window.comment);
 
                     for (var i = 1; i <= window.num_sliders; i++) {
-                        rate.sendSlider(window.sliders['s' + i], i);
+                        rate.sendSlider(window.sliders[i], i);
                     }
 
                     //for (i = 0; i < window.ratings.length - 1; i++) {
