@@ -348,6 +348,11 @@ $('.flip-1').change(function() {
         rate.initMenubar();
         $('.dialog').slideUp();
     });
+    
+    $('.dialog-score-ready').click(function() {
+        $('.dialog-score').slideUp();
+        rate.initMenubar();
+    });
 
     $('.edit-comment-save-btn').click(function() {
         rate.sendComment($('.edit-comment-box').val());

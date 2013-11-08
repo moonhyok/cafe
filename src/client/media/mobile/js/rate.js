@@ -58,6 +58,11 @@ var rate = (function($, d3, console) {
         $('.instructions').hide();
         $('.menubar').show();
     }
+    
+    function hideMenubar() {
+        $('.instructions').hide();
+        $('.menubar').hide();
+    }
 
 
     function doneRating() {
@@ -81,6 +86,12 @@ var rate = (function($, d3, console) {
             if (window.user_score == 2) {
                 $('.rate').slideUp();
                 $('.comment-input').slideDown();
+            }
+            else if (window.user_score == 1)
+            {
+                $('.rate').slideUp();
+                hideMenubar();
+                $('.dialog-score').slideDown();
             }
             else{
                 $('.rate').slideUp();
