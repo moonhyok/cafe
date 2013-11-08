@@ -735,6 +735,12 @@ table.pretty caption {
       height:20px; width:20px; float:left;
     }
 
+   .noUi-handle{
+	background-color: #303030 !important;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+	border:3px solid #999999 !important;
+   }
 
   .avg-grades div {
 	font: 16px sans-serif;
