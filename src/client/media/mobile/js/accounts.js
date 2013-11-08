@@ -81,8 +81,11 @@ var accounts = (function($, d3, console) {
 
                     for (var i = 1; i <= window.num_sliders; i++) {
                         rate.sendSlider(window.sliders[i], i);
+                        //blooms will be populated at the end of this! see callback
+                        //there are two calls!!
                     }
-
+                    accounts.initLoggedInFeatures(true);
+                    
                     //for (i = 0; i < window.ratings.length - 1; i++) {
                     //    rate.sendAgreementRating(window.ratings[i]);
                     //    rate.sendInsightRating(window.ratings[i]);
@@ -215,8 +218,6 @@ $(document).ready(function() {
                         utils.showLoading("Loading...", function() {
                             accounts.loginAfterRegister(data2);
                             blooms.populateBlooms();
-                            accounts.initLoggedInFeatures(true);
-
                             setTimeout(function() { //give d3 some extra time
                                 $('.register').slideUp('fast', function() {
                                     utils.hideLoading(500);

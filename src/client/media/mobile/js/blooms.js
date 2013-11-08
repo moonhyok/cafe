@@ -225,15 +225,27 @@ var blooms = (function($, d3, console) {
         //make this it's own function
         // hack to allow own bloom - should be cleaned up later
         //var curr_user_id = data1[0]['cur_user_id'];
-        var users_statements = data1['cur_user_ratings'];
-        var users_ratings = [];
-        for (var i = 0; i < users_statements.length; i += 1) {
-            users_ratings[i] = new Array("curUser", users_statements[i][0], users_statements[i][1]);
+        if (window.sliders.length == window.num_sliders+1) {
+                var users_ratings = [];
+                for (var i = 1; i <= window.num_sliders; i += 1) {
+                    users_ratings[i-1] = new Array("curUser", i+1, parseFloat(window.sliders[i])/100);
+                }
+                console.log(users_ratings);
+                ratings = ratings.concat(users_ratings);
+            }
+        else{
+            
+            if (window.authenticated) {
+            var users_statements = data1['cur_user_ratings'];
+            var users_ratings = [];
+            for (var i = 0; i < users_statements.length; i += 1) {
+                users_ratings[i] = new Array("curUser", users_statements[i][0], users_statements[i][1]);
+            }
+                ratings = ratings.concat(users_ratings);
+            }
+            
         }
 
-        if (window.authenticated) {
-            ratings = ratings.concat(users_ratings);
-        }
         //end of hack
 
         result = compileEigenvectorsAndRatings(eigens, ratings);

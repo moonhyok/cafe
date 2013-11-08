@@ -217,7 +217,6 @@ var rate = (function($, d3, console) {
 
     
     function sendSlider(rating, number) {
-        alert(rating/100);
         $.ajax({
             type: "POST",
             url: window.url_root + "/os/saverating/1/",
