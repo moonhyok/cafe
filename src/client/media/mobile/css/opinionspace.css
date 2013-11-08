@@ -131,6 +131,11 @@ table.pretty caption {
 		margin-left: auto;
 		margin-right: auto;
 	}
+	
+	.score-label, .score-value, .stats-label,.logout-label{
+		font-size: 16px;
+	}
+	
 
 	#editCommentBox {
 		width: 100%;
@@ -703,6 +708,16 @@ table.pretty caption {
     .coloredDiv {
       height:20px; width:20px; float:left;
     }
+
+
+  .avg-grades div {
+	font: 16px sans-serif;
+	 background-color: steelblue;
+	text-align: right;
+	 padding: 3px;
+	margin: 1px;
+	color: white;
+ }
 
 /*.loading {
 	display: block;

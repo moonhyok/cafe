@@ -151,7 +151,6 @@ function update_score(statement) {
   //document.getElementById('tr2'+statement).fadeOut(1000);//style.display = 'none';
 }
 </script>
-
 </head>
 
 <body>
@@ -169,8 +168,8 @@ function update_score(statement) {
       <li><a data-theme='b' class='stats-btn' >
         <span class='score-label'></span><span class='score-value'></span>
       </a></li>
-      <li><a data-theme='b' class='my-comment-btn'>Stats</a></li>
-      <li><a data-theme='b' class='logout-btn'>Logout</a></li>
+      <li><a data-theme='b' class='my-comment-btn'><span class='stats-label'>Stats</span></a></li>
+      <li><a data-theme='b' class='logout-btn'><span class='logout-label'>Logout</span></a></li>
     </ul>
   </div>
 
@@ -356,26 +355,58 @@ function update_score(statement) {
   <center>
    <div class='edit-comment-panel'>
     <div class='row' style='text-align:center;'>
-      <div class='span6'>
+      <!--<div class='span6'>
         <br><br>
         <img src='./../media/mobile/img/bloom.png' width='10%'>
-      </div>
-      <div class='span6'>
+      </div>-->
+      <div>
         <br>
         <strong>Username:</strong><span class='username'></span><br>
         <strong><span class='score-label'></span></strong> <span class='score-value'></span><br>
         <strong>Idea Rated By: </strong><span class='num-rated-by'></span> Participants<br>
-      </div>
-    </div>
+      </div>  
+
+      <center>
+              <table>
+        <tr style="background-color: #000000;">
+          <td>
+          <font style="color: #FFFFFF;">
+            Subject
+          </font>
+          </td>
+          <td>
+          <font style="color: #FFFFFF;">
+            Avg. Grade
+          </font>
+          </td>
+        </tr>
+       {% for statement in statements %}
+       <tr>
+        <td>
+          {{ statement.statement }}
+        </td>
+        <td>
+          <script>
+            document.write(score_to_grade(medians[{{statement.id}}]*100));
+          </script>
+        </td>
+       </tr>
+       {%endfor%}
+      </table>
+              
+      </center>
+
+      
+  </div>      
 
     <br>
 
     <div class='comment-region'>
       <div class='comment-text'></div>
 
-      {% if client_settings.ALLOW_EDIT_COMMENT == "true" %}
+      <!--{% if client_settings.ALLOW_EDIT_COMMENT == "true" %}
       <button type='submit' data-theme='a' class='edit-comment-btn'>Change Your Response</button>
-      {% endif %}
+      {% endif %}-->
 
       <button type='submit' data-theme='a' class='edit-comment-done-btn'>Done</button>
       <br/>
@@ -422,9 +453,9 @@ function update_score(statement) {
 
   <div class='stats'>
     <div class='row' style='text-align:center;'>
-      <div class='span6'>
+      <!--<div class='span6'>
         <img src='./../media/mobile/img/bloom.png' width='10%' alt='bloom'>
-      </div>
+      </div>-->
       <div class='span6'>
         <br>
         <strong>Username:</strong><span class='username'></span><br>

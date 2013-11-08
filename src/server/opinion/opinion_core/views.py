@@ -67,10 +67,12 @@ def mobile(request,username=None):
     
     statements = OpinionSpaceStatement.objects.all().order_by('id')
     medians = {}
-	#.values_list('id', 'statement', 'short_version'))
-	
+    statement_labels = {};
+ #.values_list('id', 'statement', 'short_version'))
+
     for s in statements:
         medians[str(s.id)] = numpy.median(UserRating.objects.filter(opinion_space_statement=s,is_current=True).values_list('rating'))
+        statement_labels[str(s.id)] = s.statement
 
     return render_to_response('mobile.html', context_instance = RequestContext(request, {'url_root' : settings.URL_ROOT,
 											 'loggedIn' : str(request.user.is_authenticated()).lower(),
@@ -81,6 +83,7 @@ def mobile(request,username=None):
 											 'topic': DiscussionStatement.objects.filter(is_current=True)[0].statement,
 											 'short_topic': DiscussionStatement.objects.filter(is_current=True)[0].short_version,
 											 'statements': statements,
+                                                                                         'statement_labels': json.dumps(statement_labels), 
 											 'medians': json.dumps(medians)}))
 
 def app(request, username=None):
