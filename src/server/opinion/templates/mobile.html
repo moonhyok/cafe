@@ -35,6 +35,8 @@ jQuery(document).ready(function() {
   $(".endslider-slider").noUiSlider({
     range: [0, 100], start: 50, step: 5, handles: 1,connect: false,
   }).change(function () {
+
+   $(this).attr('disabled', 'disabled');
     var id = $(this).attr('id');
     id = parseInt(id.substring(1, id.length)); // strips the leading 's'
     update_score(id);
@@ -133,11 +135,12 @@ function statementsComplete() {
 
 /** Updates statement number STATEMENT (which is of type number). */
 function update_score(statement) {
+
   $('#g' + statement).html(score_to_grade($('#s' + statement).val()));
   $('#o' + statement).hide();
   $('#o' + statement).html(score_to_grade(medians[statement]*100))
   $('#o' + statement).delay(200).fadeIn();
-  window.sliders[statement] = $('#s' + statement).val();
+  window.sliders[statement] = $('#s' + statement).val();		     
   //$('.s'+statement).slider('disable');
   document.getElementById('tr1'+statement).style.backgroundColor = "rgba(255, 255, 255, 0.3)";
   $('#tr1'+statement).delay(1000).fadeOut(2000);
@@ -146,7 +149,7 @@ function update_score(statement) {
   if (statementsComplete()) {
     $('.cardtable').delay(1000).fadeOut(2000);
   }
-  
+
   //document.getElementById('tr1'+statement).fadeOut(1000);//style.display = 'none';
   //document.getElementById('tr2'+statement).fadeOut(1000);//style.display = 'none';
 }
