@@ -2385,7 +2385,7 @@ def os_never_seen_comments_json(request,os_id,disc_stmt_id=None):
 	#if no_statements == "false": # Flash booleans aren't transferred correctly
 	#	no_statements = False
 
-	never_seen_comments = get_never_seen_comments(request.user,os,disc_stmt[0],Settings.objects.int('MAX_NUM_TOTAL_DOTS'), False)
+	never_seen_comments = get_never_seen_comments(request.user,os,disc_stmt[0],7, False)
 	# Check for an argument username -- this param is only sent on createOS
 	#username = request.REQUEST.get('username', False)
 	#if username:
