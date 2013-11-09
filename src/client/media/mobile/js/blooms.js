@@ -320,10 +320,10 @@ var blooms = (function($, d3, console) {
             }
 
             var width = $(window).width() - margin.right - margin.left;
-            var height = $(window).height() - margin.bottom - margin.top;
+            var height = $(window).height()- margin.bottom - margin.top - 100;
             
-            var canvasx = d3.scale.linear().domain(d3.extent(data, function(d) {return d.x;})).range([margin.left, width]);
-            var canvasy = d3.scale.linear().domain(d3.extent(data, function(d) {return d.y;})).range([margin.bottom, height]);
+            var canvasx = d3.scale.linear().domain(d3.extent(data, function(d) {return d.x;})).range([margin.left, width-margin.right]);
+            var canvasy = d3.scale.linear().domain(d3.extent(data, function(d) {return d.y;})).range([margin.top, height-margin.bottom]);
 
             $('svg').remove();
             // clear anything that's in the div already (e.g. loading button)

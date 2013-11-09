@@ -363,13 +363,17 @@ function update_score(statement) {
         <img src='./../media/mobile/img/bloom.png' width='10%'>
       </div>-->
       <div>
+        <u>My Statistics</u>
         <br>
         <strong>Username:</strong><span class='username'></span><br>
         <strong><span class='score-label'></span></strong> <span class='score-value'></span><br>
         <strong>Idea Rated By: </strong><span class='num-rated-by'></span> Participants<br>
       </div>  
-
+<hr/>
       <center>
+      <div class="aggstat1">
+        <u>Aggregate Statistics</u>
+        <br/>
               <table>
         <tr style="background-color: #000000;">
           <td>
@@ -396,10 +400,29 @@ function update_score(statement) {
        </tr>
        {%endfor%}
       </table>
-              
-      </center>
-
+      <div style="width:150px;">
+        <button data-theme='c' data-mini="true" class='dialog-next' data-icon="arrow-r" onclick="$('.aggstat1').hide();$('.aggstat2').show();">Next</button>
+      </div>
       
+    </div>          
+        
+    <div class="aggstat2" style="display:none;">
+        <u>How cups have changed</u><br/>      
+    <iframe width="300" height="225" src="//www.youtube.com/embed/Vufcqe7f3hE" frameborder="0" allowfullscreen></iframe>
+    <div style="width:150px;">
+     <button data-theme='c' data-mini="true" class='dialog-next' data-icon="arrow-r" onclick="$('.aggstat2').hide();$('.aggstat3').show();">Next</button>
+    </div>
+    </div>
+    
+    <div class="aggstat3" style="display:none;">
+        <u>California map</u> <br/>  
+    <iframe width="300" height="225" src="//www.youtube.com/embed/hDsu_R2odOA" frameborder="0" allowfullscreen></iframe>
+    <div style="width:150px;">
+    <button data-theme='c' data-mini="true" class='dialog-next' data-icon="arrow-r" onclick="$('.aggstat3').hide();$('.aggstat1').show();">Next</button>
+    </div>
+    </div>
+    
+      </center>
   </div>      
 
     <br>
