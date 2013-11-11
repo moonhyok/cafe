@@ -184,30 +184,26 @@ $(document).ready(function() {
         e.preventDefault();
         e.stopPropagation();
 
-        //The following set of code is needed to format the data for the login which occurs after the registration
-        var serializedData = $(this).serializeArray();
-        var names = serializedData.map(function(r) {
-            return r.name;
-        });
-        var index_user = names.indexOf("regusername");
-        var index_pass = names.indexOf("regpassword1");
-        //var index_email = names.indexOf("regemail");
+        var registrationData = {
+            "username": $('#regusername').val(),
+            "password": $('#regpassword1').val(),
+            "password1": $('#regpassword1').val(),
+            "password2": $('#regpassword1').val(),
+            "email": $('#regemail').val(),
+            "zip" : $('#regzip').val()
+        };
 
-        var data2 = {};
-        data2["username"] = serializedData[index_user].value;
-        data2["password1"] = serializedData[index_pass].value;
-        data2["password"] = serializedData[index_pass].value;
-        data2["password2"] = serializedData[index_pass].value;
-        //data2["email"] = serializedData[index_email].value;
-
-        var serializedFormData = $(this).serialize();
+        var loginData = {
+            "username": registrationData.username.toLowerCase(),
+            "password": registrationData.password,
+        };
 
         utils.ajaxTempOff(function() {
             $.ajax({
                 url: window.url_root + '/accountsjson/register/',
                 type: 'POST',
                 dataType: 'json',
-                data: data2,
+                data: registrationData,
                 success: function(data) {
                     $("#username-error").hide();
                     //$("#email-error").hide();
@@ -216,7 +212,7 @@ $(document).ready(function() {
                     if (data.hasOwnProperty('success')) {
                         accounts.setAuthenticated();
                         utils.showLoading("Loading...", function() {
-                            accounts.loginAfterRegister(data2);
+                            accounts.loginAfterRegister(loginData);
                             blooms.populateBlooms();
                             setTimeout(function() { //give d3 some extra time
                                 $('.register').slideUp('fast', function() {
