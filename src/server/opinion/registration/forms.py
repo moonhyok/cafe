@@ -38,6 +38,7 @@ class RegistrationForm(forms.Form):
                                 widget=forms.TextInput(attrs=attrs_dict),
                                 label=_(u'username'),
 								required=opinion.settings.REGISTRATION_FIELD_TABLE['username']['required'])
+
     email = forms.EmailField(max_length=75,
                              widget=forms.TextInput(attrs=dict(attrs_dict,
                                                                maxlength=75)),
@@ -56,9 +57,11 @@ class RegistrationForm(forms.Form):
     
     url = forms.URLField(max_length=1024, required=opinion.settings.REGISTRATION_FIELD_TABLE['url']['required'])
 
-    question = forms.CharField(max_length=512, label=_(u'question'), required=opinion.settings.REGISTRATION_FIELD_TABLE['question']['required']) 
+    question = forms.CharField(max_length=512, label=(u'question'), required=opinion.settings.REGISTRATION_FIELD_TABLE['question']['required']) 
 
-    answer = forms.CharField(max_length=512, label=_(u'answer'), required=opinion.settings.REGISTRATION_FIELD_TABLE['answer']['required']) 
+    answer = forms.CharField(max_length=512, label=(u'answer'), required=opinion.settings.REGISTRATION_FIELD_TABLE['answer']['required']) 
+
+    zipcode = forms.CharField(max_length=5, label=(u'zipcode'), required=True)
 	
     def clean_username(self):
         """
@@ -82,6 +85,8 @@ class RegistrationForm(forms.Form):
 		Verify there is a matching question and answer
 
         """
+        from opinion.opinion_core.models import *
+
         if 'password1' in self.cleaned_data and 'password2' in self.cleaned_data:
             if self.cleaned_data['password1'] != self.cleaned_data['password2']:
                 raise forms.ValidationError(_(u'You must type the same password each time'))
@@ -99,6 +104,10 @@ class RegistrationForm(forms.Form):
 					raise forms.ValidationError(_(u'You must type in a question'))
 				if self.cleaned_data['question'] == "":
 					raise forms.ValidationError(_(u'You must type in a question'))
+
+        if 'zipcode' in self.cleaned_data:
+            if not len(ZipCode.objects.filter(code=self.cleaned_data['zipcode'])):
+                raise forms.ValidationError(_(u'Invalid zipcode'))
 
         return self.cleaned_data
     

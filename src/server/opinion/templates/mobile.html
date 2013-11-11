@@ -176,7 +176,7 @@ function update_score(statement) {
     </ul>
   </div>
 
-  <div class='instructions' id='instructions'>
+  <div class='instructions' id='instructions' style='display:none'>
     <span class='inst-score'><span class='score-label'></span><span class='score-value'></span></span>
     <span class='inst-text'>{{ client_settings.INSTRUCTIONS_1 }}</span>
   </div>
@@ -545,7 +545,7 @@ function update_score(statement) {
       <br/>
 
       <center>
-        <div class= 'registerpanel'>
+        <div class= 'registerpanel' id='registerpanel'>
 
           <center>
             <div class="basic-header">Save Your Grades and Join the Discussion</div>
@@ -569,8 +569,10 @@ function update_score(statement) {
           </div>
 
           <div data-role="fieldcontain">
-            <label for="zip" class='regforminput' >California Zip Code:</label>
-            <input type ='text' id='zip' name='zip' class='regforminput' placeholder="Zip Code">
+            <label for="regzip" class='regforminput' >California Zip Code:</label>
+            <input type ='text' id='regzip' name='regzip' class='regforminput' placeholder="Zip Code">
+            <div class='alert-error' id='zipcode-error' style='display:none;'></div>
+
           </div>
 
 <!--        <label>Age Group:  </label>   

@@ -184,13 +184,25 @@ $(document).ready(function() {
         e.preventDefault();
         e.stopPropagation();
 
+        $("#username-error").hide();
+        $("#password-error").hide();
+        $("#zipcode-error").hide();
+
+        // Handle bad length zipcodes client-side
+        if ($('#regzip').val().length != 5) {
+            $("#zipcode-error").html("Please enter a 5 digit zipcode.");
+            $("#zipcode-error").show();
+            $('#registerpanel').find('.ui-btn-active').removeClass('ui-btn-active ui-focus');
+            return;
+        }
+
         var registrationData = {
             "username": $('#regusername').val(),
             "password": $('#regpassword1').val(),
             "password1": $('#regpassword1').val(),
             "password2": $('#regpassword1').val(),
             "email": $('#regemail').val(),
-            "zip" : $('#regzip').val()
+            "zipcode" : $('#regzip').val()
         };
 
         var loginData = {
@@ -208,6 +220,8 @@ $(document).ready(function() {
                     $("#username-error").hide();
                     //$("#email-error").hide();
                     $("#password-error").hide();
+
+                    window.foo = data;
 
                     if (data.hasOwnProperty('success')) {
                         accounts.setAuthenticated();
@@ -242,6 +256,13 @@ $(document).ready(function() {
                             if ('password1' in errors) {
                                 $("#password-error").html(errors['password1']);
                                 $("#password-error").show();
+                            }
+
+                            //if ('zipcode' in errors) {
+                            //TODO
+                            if (data['form_errors']['__all__'][0]) {
+                                $("#zipcode-error").html(data['form_errors']['__all__'][0]);
+                                $("#zipcode-error").show();
                             }
 
                             $('#register').find('.ui-btn-active').removeClass('ui-btn-active ui-focus');
@@ -303,7 +324,7 @@ $(document).ready(function() {
         //accounts.firstTime();
         $('.landing').slideUp();
         $('.endsliders').slideDown();
-        $('.top-bar').show();
+        //$('.top-bar').show();
         //rate.initScore();
     });
 
