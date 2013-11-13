@@ -132,8 +132,12 @@ table.pretty caption {
 		margin-right: auto;
 	}
 	
-	.score-label, .score-value, .stats-label,.logout-label{
-		font-size: 16px;
+	.score-label, .score-value{
+		font-size: 25px;
+	}
+	
+	.stats-label,.logout-label{
+		font-size: 18px;
 	}
 	
 
@@ -346,6 +350,17 @@ table.pretty caption {
 		z-index: 999;
 		overflow-y: auto;
 		overflow-x: hidden;
+	}
+	
+	.scorebox{
+		text-shadow: none;
+		font-weight: bold;
+		color: #FFFFFF;
+		position:absolute;
+		top:120px;
+		left:10px;
+		background-color: transparent;
+		z-index: 999;
 	}
 
 	.sliders, .reg-sliders{
