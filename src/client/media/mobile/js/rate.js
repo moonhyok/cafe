@@ -8,7 +8,7 @@ var rate = (function($, d3, console) {
 
     // update the questions element in the html
     function updateDescriptions(answer, content) {
-        answer.innerHTML = content;
+        answer.value = content;
     }
 
     function updateScoreHolders() {
