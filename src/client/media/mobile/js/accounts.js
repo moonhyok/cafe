@@ -404,8 +404,7 @@ $('.flip-1').change(function() {
     });
 
     $('.logout-start-over').click(function() {
-        $('.landing').slideDown();
-        $('.logout').slideUp();
+        location.reload();
     });
 
     $('.logout-login-again').click(function() {

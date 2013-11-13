@@ -171,12 +171,11 @@ function update_score(statement) {
       <li><a data-theme='e' class='my-comment-btn'><span class='stats-label'>Stats</span></a></li>
       <li><a data-theme='e' class='logout-btn'><span class='logout-label'>Logout</span></a></li>
     </ul>
-  </div>
-  
-  <div class="scorebox">
+      <div class="scorebox">
     <span class='score-label'></span><span class='score-value'></span>
   </div>
-
+  </div>
+  
   <div class='instructions' id='instructions'>
     <span class='inst-score'><span class='score-label'></span><span class='score-value'></span></span>
     <span class='inst-text'>{{ client_settings.INSTRUCTIONS_1 }}</span>
@@ -189,16 +188,15 @@ function update_score(statement) {
 <div class='rate'>
   <div class='header'>Topic: {{ topic }}</div>
     <div class="answerwrapper">
-      <br/>
       <textarea id='commentInput' class='answer' readonly="true"></textarea>              
       <div class='sliders'>
         
         <p align="left">
-        <label for="flip-1" style="font-size: 12px !important;">Inappropriate or Irrelevant?</label>
-        <select name="flip-1" id="flip-1" class="flip-1" data-role="slider" data-mini="true" data-theme="a">
+        <a href="#" style="font-size: 12px !important;">Inappropriate or Irrelevant?</a>
+        <!--<select name="flip-1" id="flip-1" class="flip-1" data-role="slider" data-mini="true" data-theme="a">
 	<option value="no">No</option>
 	<option value="yes">Yes</option>
-        </select>
+        </select>-->
         </p>
                 
         <hr>
@@ -530,10 +528,8 @@ function update_score(statement) {
     <div class='frame'></div>
     <div class = 'register' id='register'>
       <!--<div class = 'reg-header'>{{ client_settings.INSTRUCTIONS_5 }}</div>-->
-
-      <br/>
         <div class= 'registerpanel'>
-            <div class="basic-header" style="font-size: 28px;">Save Your Grades<br/>and Join the Discussion</div>
+            <div class="basic-header" style="font-size: 24px;padding-top: 5px;">Save Your Grades<br/>and Join the Discussion</div>
 
           <form id='reg_form' class='form-horizontal' method='post' action='{{ url_root }}/accountsjson/register/'>
             <input type='hidden' value='{{ topic }}' name='question'>
@@ -574,9 +570,16 @@ function update_score(statement) {
             </select>
     -->
 
-      <div style="width: 100%; max-width: 300px;">
-        <input type='submit' value='Save and Join' id='finishRegistration' data-theme="e" data-icon="check">
-      </div>
+      <!--<div style="display: none;">
+        <input type='submit' value='Save and Join' id='finishRegistration' data-theme="e" data-icon="check" class="regFormSubmit">
+      </div>-->
+      
+      <center>
+        <div style="width: 100%; max-width: 300px;">
+        <button type='submit' data-theme='e' data-icon='check'><font size="5">Save and Join</font></button>
+       </div>
+      </center>
+
 
 <!--       <img src="{{url_root}}/media/mobile/img/cafe/discuss.png" style="width: 200px;"/><br/>
       After you submit your grades, you will join a discussion about the California government. -->
@@ -590,7 +593,7 @@ function update_score(statement) {
     <div class='comment-panel'>
         <div id = 'reg-question'><div class="basic-header" style="font-size: 24px;">{{ topic }}</div>
         <br/>
-        <textarea rows='20' cols = '30' name = 'answer' id='entered-comment'> </textarea> 
+        <textarea name='answer' id='entered-comment' style="width: 95% !important;height: 250px !important;padding-right: 10px;font-size: 18px;font-family: sans-serif;"> </textarea> 
       </div>
 
       <center>
@@ -652,10 +655,8 @@ function update_score(statement) {
     </div>
     
       <div class='landing-desc'>
-        <p> Return at any time to check your progress!</p>
-        <p>You can see how other participants are rating your idea.</p>
-        <button data-theme='a' class='logout-start-over' data-inline="true"><font size="5">Start Over</font></button>
-        <button data-theme='b' class='logout-login-again' data-inline="true"><font size="5">Login again?</font></button>
+        <button data-theme='a' class='logout-start-over'><font size="5">Start Over</font></button>
+        <button data-theme='b' class='logout-login-again'><font size="5">Login again?</font></button>
       </div>
     
 </div>
@@ -666,13 +667,14 @@ function update_score(statement) {
         A Citizen's Report Card for California
       </div>
   </div>
-  
       <div class='landing-desc'>
-        Grade and discuss the California government
+        Grade and discuss the California government<br/><br/>
+        <center>
         <div style="width: 100%; max-width: 300px;">
         <button type='submit' data-theme='e' class='first-time-btn' data-icon="star"><font size="5">First time</font></button>
         <button type='cancel' data-theme='a' class='login-btn' data-icon="forward"><font size="5">Returning</font></button>
-         </div>  
+         </div>
+        </center>
       </div>
 </div>
 
