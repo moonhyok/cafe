@@ -205,7 +205,9 @@ var rate = (function($, d3, console) {
 
         window.sliders.push(slider_values);*/
         //$('.endsliders').slideUp();
+        if(!accounts.setAuthenticated()){// if user enter with valid entry code, no need to show Register
         accounts.showRegister();
+        }
         $('.endsliders').slideUp();
     }
     //This function just pulls up the registration sliders form, right before prompting the 
