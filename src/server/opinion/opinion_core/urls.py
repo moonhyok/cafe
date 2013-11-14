@@ -8,7 +8,7 @@ urlpatterns = patterns('',
     (r'^app/$', 'opinion.opinion_core.views.app'), 
 
     (r'^mobile/$', 'opinion.opinion_core.views.mobile'), 
-
+    (r'^mobile/(?P<entry_code>\w+)/$', 'opinion.opinion_core.views.mobile'),
     (r'^app/(\w+)/$', 'opinion.opinion_core.views.app'), 
     (r'^about/$', 'opinion.opinion_core.views.about'),
     (r'^feedback/$', 'opinion.opinion_core.views.feedback'),
