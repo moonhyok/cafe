@@ -8,7 +8,7 @@ var rate = (function($, d3, console) {
 
     // update the questions element in the html
     function updateDescriptions(answer, content) {
-        answer.innerHTML = content;
+        answer.value = content;
     }
 
     function updateScoreHolders() {
@@ -205,9 +205,10 @@ var rate = (function($, d3, console) {
 
         window.sliders.push(slider_values);*/
         //$('.endsliders').slideUp();
-        $('.endsliders').slideUp('fast', function() {
-            accounts.showRegister();
-        });
+        if(!accounts.setAuthenticated()){// if user enter with valid entry code, no need to show Register
+        accounts.showRegister();
+        }
+        $('.endsliders').slideUp();
     }
     //This function just pulls up the registration sliders form, right before prompting the 
     //  user to register. Once sliders are filled, once done will only cause the registration prompt

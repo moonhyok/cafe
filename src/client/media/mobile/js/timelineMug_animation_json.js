@@ -3,26 +3,6 @@ var number_time_point=4
 var xValue=new Array(number_time_point);
 var yValue=new Array(number_time_point);
 var number_user=new Array();
-
-$.getJSON( "data_simulated.json", function( data ) {
-
-    xValue[0]=data.x0;
-    xValue[1]=data.x1;
-    xValue[2]=data.x2;
-    xValue[3]=data.x3;
-    yValue[0]=data.y0;
-    yValue[1]=data.y1;
-    yValue[2]=data.y2;
-    yValue[3]=data.y3;
-    number_user[0]=data.x0.length;
-    number_user[1]=data.x1.length;
-    number_user[2]=data.x2.length;
-    number_user[3]=data.x3.length;
-    init();
-});
-
-// xValue[i][j] user j's x at i timepoint
-//Animation
 var canvas;
 var ctx;
 var background;
@@ -42,18 +22,38 @@ var x_vel_current=new Array();
 var y_vel_current=new Array();
 var time_thresholds=new Array; // used to check which velocity to use
 var time_steps=0; //accumulate thorugh update
+$.getJSON( window.url_root +"/media/mobile/js/data_simulated.json", function( data ) {
+
+    xValue[0]=data.x0;
+    xValue[1]=data.x1;
+    xValue[2]=data.x2;
+    xValue[3]=data.x3;
+    yValue[0]=data.y0;
+    yValue[1]=data.y1;
+    yValue[2]=data.y2;
+    yValue[3]=data.y3;
+    number_user[0]=data.x0.length;
+    number_user[1]=data.x1.length;
+    number_user[2]=data.x2.length;
+    number_user[3]=data.x3.length;
+    init();
+});
+
+// xValue[i][j] user j's x at i timepoint
+//Animation
+
 function init() {
 	
 	canvas = document.getElementById("MugAnimation");
 	width = canvas.width;
 	height = canvas.height;
 	ctx = canvas.getContext("2d");
-
+  
 	// init mug
     for (var i=0; i<number_user[number_time_point-1]; i++)
     {
        mug[i] = new Image();
-	   mug[i].src = 'cafe'+(Math.round(Math.random()*5)).toString()+'.png';
+	   mug[i].src = window.url_root +'/media/mobile/img/cafe/cafe'+(Math.round(Math.random()*5)).toString()+'.png';
     }
     // assign position
     for (var i=0; i<number_time_point; i++){
@@ -108,7 +108,7 @@ function init() {
         x_vel_current[j]=x_vel_direction[0][j];
         y_vel_current[j]=y_vel_direction[0][j];
 	}
-
+    
     draw();
     
 }
@@ -125,7 +125,6 @@ function update(){
         
         if (time_steps-(time_thresholds[0]-1)>=0)
         {
-			
 			for (var j=0; j<number_user[1]; j++)
 			{
 				mug_x_current[j]=mug_x[1][j];
@@ -195,20 +194,35 @@ function draw() {
 	
 		
 }
- 
+
+var setUpdate;
 function main_loop() {
+	
 	draw();
 	update();
-	
+	if (time_steps-(time_thresholds[0]-1)>=0 & time_steps-(time_thresholds[0]-1)<1)
+	{
+        setTimeout('main_loop()',800);
+	}
+	else if(time_steps-(time_thresholds[1]-1)>=0 &time_steps-(time_thresholds[1	]-1)<1)
+	{
+		setTimeout('main_loop()',800);
+	}
+	else if(time_steps<=time_thresholds[2])
+	{
+	setTimeout('main_loop()',10);
+    }
+    else
+    {return;}
 }
-var setID;
+var setMainLoop;
 function clickreset(){
-	
-	setID=setInterval(main_loop, 15);	
+    	main_loop();
+	//setMainLoop=setInterval(main_loop, 15);	
 }
 
 function reset(){
-	clearInterval(setID);
+	
 	time_steps=0;   
 	for (var j=0; j<number_user[0]; j++)
 	{
@@ -219,6 +233,5 @@ function reset(){
 	} 
 }
 
-	
 
 

@@ -166,17 +166,20 @@ function update_score(statement) {
     Topic: {{ short_topic }}
   </div>
 
-  <div data-role='navbar' class='menubar' >
+  <div data-role='navbar' class='menubar'>
     <ul>
-      <li><a data-theme='b' class='stats-btn' >
-        <span class='score-label'></span><span class='score-value'></span>
-      </a></li>
-      <li><a data-theme='b' class='my-comment-btn'><span class='stats-label'>Stats</span></a></li>
-      <li><a data-theme='b' class='logout-btn'><span class='logout-label'>Logout</span></a></li>
+      <li><a data-theme='e' class='my-comment-btn'><span class='stats-label'>Stats</span></a></li>
+      <li><a data-theme='e' class='logout-btn'><span class='logout-label'>Logout</span></a></li>
     </ul>
+      <div class="scorebox">
+    <span class='score-label'></span><span class='score-value'></span>
   </div>
+<<<<<<< HEAD
 
   <div class='instructions' id='instructions' style='display:none'>
+  </div>
+  
+
     <span class='inst-score'><span class='score-label'></span><span class='score-value'></span></span>
     <span class='inst-text'>{{ client_settings.INSTRUCTIONS_1 }}</span>
   </div>
@@ -187,22 +190,16 @@ function update_score(statement) {
 <!-- <div class='rate-loading'><img src='img/ajax-loader.gif'>&nbsp; Comment loading...</div> -->
 <div class='rate'>
   <div class='header'>Topic: {{ topic }}</div>
-
-  <!--     <div class='rate-wrap'> -->
-  <br/>
-
-  <center>
     <div class="answerwrapper">
-      <br/>
-      <div id='commentInput' class='answer'></div>              
+      <textarea id='commentInput' class='answer' readonly="true"></textarea>              
       <div class='sliders'>
         
         <p align="left">
-        <label for="flip-1" style="font-size: 12px !important;">Inappropriate or Irrelevant?</label>
-        <select name="flip-1" id="flip-1" class="flip-1" data-role="slider" data-mini="true" data-theme="a">
+        <a href="#" style="font-size: 12px !important;">Inappropriate or Irrelevant?</a>
+        <!--<select name="flip-1" id="flip-1" class="flip-1" data-role="slider" data-mini="true" data-theme="a">
 	<option value="no">No</option>
 	<option value="yes">Yes</option>
-        </select>
+        </select>-->
         </p>
                 
         <hr>
@@ -233,15 +230,12 @@ function update_score(statement) {
                   
         <center>
           <div style="width: 100%;max-width: 300px;">
-            <button type='submit' data-theme='a' id='go-back' onClick='rate.doneRating()' data-icon="check">Done Rating</button>
+            <button type='submit' data-theme='a' id='go-back' onClick='rate.doneRating()' data-icon="check"><font size="5">Done Rating</font></button>
           </div>
         </center>
         
       </div>
     </div>
-  </center>
-  <!--     </div> -->  
-  <br><br>
 
 </div>
 <div id='rating'>
@@ -250,15 +244,12 @@ function update_score(statement) {
       <!--<div class ='slider-header'>
         <p>Grade from A to F how well or poorly you feel California's elected officials are working to address the following key issues:</p>
       </div>-->
-      <br>
-      <center>
         <div class='reportcard'>
-          <center>
-           <div class="basic-header">Grade California's State Government</div>
+           <div class="basic-header" style="font-size: 24px;padding-top: 5px;">Grade California's State Government</div>
            
            <div>Please grade from A to F how well you feel California's elected officials are working to address the following 6 subjects:</div> 
           <br/>
-           <table class='cardtable' style="width:98%;">
+           <table class='cardtable' style="width:100%;padding-right:10px;">
             <tr>
               <td>
                 Subject
@@ -273,7 +264,7 @@ function update_score(statement) {
            </table>
 
             {% for statement in statements %}
-            <table id="tr1{{statement.id}}" class='cardtable' style="width:98%;">
+            <table id="tr1{{statement.id}}" class='cardtable' style="width:100%;padding-right:10px;">
             <tr>
               <td style="height: 45px;">
                 {% ifnotequal statement.statement '' %}
@@ -339,16 +330,15 @@ function update_score(statement) {
  </table>
       {% endfor %}
 
-    <div style="width: 100%; max-width: 300px;">
-      <button type='submit' data-theme='e' class='done-endsliders-btn' data-icon="arrow-r">Next</button>
-    </div>        
+    <center>
+          <div style="width: 100%; max-width: 300px;">
+      <button type='submit' data-theme='e' class='done-endsliders-btn' data-icon="arrow-r"><font size="5">Next</font></button>
+    </div> 
+    </center>
+       
 
   </div>
-
-</center>
 </div>
-</center>
-
 </div>
 
 </div>
@@ -409,6 +399,16 @@ function update_score(statement) {
     <div class="aggstat2" style="display:none;">
         <u>How cups have changed</u><br/>      
     <iframe width="300" height="225" src="//www.youtube.com/embed/Vufcqe7f3hE" frameborder="0" allowfullscreen></iframe>
+    <canvas id="MugAnimation" width="600" height="400" style="background-image:url('{{ url_root }}/media/mobile/img/cafe/cafe_bg.png');background-repeat:repeat;
+			background-size: 100% 100%;	"></canvas>
+			
+       <div style="width:150px;">
+	   <button type="button" onclick="clickreset()">Play</button>
+       </div>
+       <div style="width:150px;">
+	   <button type="button" onclick="reset()">Reset</button>
+       </div>
+       <script type="text/javascript" src="{{ url_root }}/media/mobile/js/timelineMug_animation_json.js"></script> 
     <div style="width:150px;">
      <button data-theme='c' data-mini="true" class='dialog-next' data-icon="arrow-r" onclick="$('.aggstat2').hide();$('.aggstat3').show();">Next</button>
     </div>
@@ -542,14 +542,8 @@ function update_score(statement) {
     <div class = 'register' id='register'>
       <!--<div class = 'reg-header'>{{ client_settings.INSTRUCTIONS_5 }}</div>-->
 
-      <br/>
-
-      <center>
-        <div class= 'registerpanel' id='registerpanel'>
-
-          <center>
-            <div class="basic-header">Save Your Grades and Join the Discussion</div>
-          </center>
+        <div class= 'registerpanel'>
+            <div class="basic-header" style="font-size: 24px;padding-top: 5px;">Save Your Grades<br/>and Join the Discussion</div>
 
           <form id='reg_form' class='form-horizontal' method='post' action='{{ url_root }}/accountsjson/register/'>
             <input type='hidden' value='{{ topic }}' name='question'>
@@ -591,47 +585,40 @@ function update_score(statement) {
             <option>Female</option>
             </select>
     -->
-    <center>
 
-      <div style="width: 100%; max-width: 300px;">
-        <input type='submit' value='Save and Join' id='finishRegistration' data-theme="e" data-icon="check">
-      </div>
+      <!--<div style="display: none;">
+        <input type='submit' value='Save and Join' id='finishRegistration' data-theme="e" data-icon="check" class="regFormSubmit">
+      </div>-->
+      
+      <center>
+        <div style="width: 100%; max-width: 300px;">
+        <button type='submit' data-theme='e' data-icon='check'><font size="5">Save and Join</font></button>
+       </div>
+      </center>
+
 
 <!--       <img src="{{url_root}}/media/mobile/img/cafe/discuss.png" style="width: 200px;"/><br/>
       After you submit your grades, you will join a discussion about the California government. -->
-
-    </center>
-
   </form>
   <br/>
 </div>
-</center>
 </div>
 
 <div class='comment-input'>
   <!--<div class = 'reg-header'>{{ client_settings.INSTRUCTIONS_6 }}</div>-->
-
-  <br/>
-
-  <center>
     <div class='comment-panel'>
+        <div id = 'reg-question'><div class="basic-header" style="font-size: 24px;">{{ topic }}</div>
+        <br/>
+        <textarea name='answer' id='entered-comment' style="width: 95% !important;height: 250px !important;padding-right: 10px;font-size: 18px;font-family: sans-serif;"> </textarea> 
+      </div>
 
       <center>
-        <div id = 'reg-question'><div class="basic-header">{{ topic }}</div>
-        <br/>
-        <textarea rows='20' cols = '30' name = 'answer' id='entered-comment'> </textarea> 
+        <div style="width: 300px;padding-bottom:15px;">
+        <button type='submit' data-theme='a' class='comment-submit-btn' data-icon='check'><font size="5">Save</font></button>
       </div>
+      </center>
 
-      <div style="width: 300px;padding-bottom:15px;">
-        <button type='submit' data-theme='a' class='comment-submit-btn' data-icon='check'>Save</button>
-      </div>
-    </center>
-    
   </div>
-
-</center>
-
-
 </div>
 
 <div class='login' id='login'>
@@ -659,7 +646,7 @@ function update_score(statement) {
         <!-- <button type='submit' data-theme='a' id='login-button'>Login</button>  -->
         <center>
           <div style="width: 100%; max-width: 300px;">
-            <button type='submit' data-theme='a' data-icon="forward">Login</button>              
+            <button type='submit' data-theme='a' data-icon="forward"><font size="5">Login</font></button>              
           </div>
         </center>
 
@@ -673,9 +660,6 @@ function update_score(statement) {
 </div>
 
 <div class='logout'>
-  <br/><br/>
-  <center>
-    
     <div class='landing-intro'>
       <div class='landing-header'>
         Thank you for participating!
@@ -684,50 +668,30 @@ function update_score(statement) {
       {% if client_settings.HEADER_IMAGE == "true" %}
       <img class="header-img-topic" src={{ client_settings.HEADER_IMAGE_SOURCE }} class="center" style="width:150px;"><br>
       {% endif %}
-
-      <div class='landing-desc'>
-        <p> Return at any time to check your progress!<br> You can see how other participants are rating your idea. </p><br>
-
-        <img src='./../media/mobile/img/bar_graph.png' class='center' style="width:200px;">
-      </div>
-      <br> 
-      <button data-theme='a' class='logout-start-over' data-inline="true">Start Over</button>
-      <button data-theme='b' class='logout-login-again' data-inline="true">Login again?</button>
     </div>
-  </center>
+    
+      <div class='landing-desc'>
+        <button data-theme='a' class='logout-start-over'><font size="5">Start Over</font></button>
+        <button data-theme='b' class='logout-login-again'><font size="5">Login again?</font></button>
+      </div>
+    
 </div>
 
 <div class='landing'>
-  <br/><br/>
-  <center>
     <div class='landing-intro'>
       <div class='landing-header'>
         A Citizen's Report Card for California
       </div>
-
-
-      <div class='landing-desc'>
-        Grade and discuss the California government
-      </div>
-
-      <img class="header-img-topic" src="{{ url_root }}/media/mobile/img/cafe/map_teaser.png" class="center" style="width:250px;"><br>
-
-      <div style="width: 100%; max-width: 300px;">
-        <button type='submit' data-theme='e' class='first-time-btn' data-icon="star">First time</button>
-        <button type='cancel' data-theme='a' class='login-btn' data-icon="forward">Returning</button>
-      </div>
-
-      <!--<img id='splash' src='./../media/mobile/img/os_splash.png' class='center'>-->
-<!--<div class='landing-desc' style="font-size: 22px;color: #CCE6FF;">
-  <font style="font-size:30px;color: #FFFFFF;">Current Leaders</font><br/>
-      {% for leader in leaderboard%}
-
- * {{ leader.username }} {{ leader.total_score|add:'0' }} points<br/>
-      {% endfor %}
-    </div>-->
-
   </div>
-</center>
+      <div class='landing-desc'>
+        Grade and discuss the California government<br/><br/>
+        <center>
+        <div style="width: 100%; max-width: 300px;">
+        <button type='submit' data-theme='e' class='first-time-btn' data-icon="star"><font size="5">First time</font></button>
+        <button type='cancel' data-theme='a' class='login-btn' data-icon="forward"><font size="5">Returning</font></button>
+         </div>
+        </center>
+      </div>
 </div>
 
 <div class='dialog' style="display: none;">
