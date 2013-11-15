@@ -258,8 +258,8 @@ $(document).ready(function() {
                                 $("#password-error").show();
                             }
 
-                            //if ('zipcode' in errors) {
-                            //TODO
+   
+                            //TODO: why doesn't this come up under form_errors[zip_code]
                             if (data['form_errors']['__all__'][0]) {
                                 $("#zipcode-error").html(data['form_errors']['__all__'][0]);
                                 $("#zipcode-error").show();
