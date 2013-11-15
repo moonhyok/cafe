@@ -396,6 +396,16 @@ function update_score(statement) {
     <div class="aggstat2" style="display:none;">
         <u>How cups have changed</u><br/>      
     <iframe width="300" height="225" src="//www.youtube.com/embed/Vufcqe7f3hE" frameborder="0" allowfullscreen></iframe>
+    <canvas id="MugAnimation" width="600" height="400" style="background-image:url('{{ url_root }}/media/mobile/img/cafe/cafe_bg.png');background-repeat:repeat;
+			background-size: 100% 100%;	"></canvas>
+			
+       <div style="width:150px;">
+	   <button type="button" onclick="clickreset()">Play</button>
+       </div>
+       <div style="width:150px;">
+	   <button type="button" onclick="reset()">Reset</button>
+       </div>
+       <script type="text/javascript" src="{{ url_root }}/media/mobile/js/timelineMug_animation_json.js"></script> 
     <div style="width:150px;">
      <button data-theme='c' data-mini="true" class='dialog-next' data-icon="arrow-r" onclick="$('.aggstat2').hide();$('.aggstat3').show();">Next</button>
     </div>
