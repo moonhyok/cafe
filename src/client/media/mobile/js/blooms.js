@@ -8,7 +8,6 @@ var blooms = (function($, d3, console) {
     
     /** Creates global variable window.visuals to determine blooms colors and sizes.
      *  Copied from the flash version. */
-
     function generateBloomSizesAndColors(data) {
         window.visuals = {
             userIdToCommentScoreBucket: {},
@@ -230,7 +229,7 @@ var blooms = (function($, d3, console) {
                 for (var i = 1; i <= window.num_sliders; i += 1) {
                     users_ratings[i-1] = new Array("curUser", i+1, parseFloat(window.sliders[i])/100);
                 }
-                console.log(users_ratings);
+                // console.log(users_ratings);
                 ratings = ratings.concat(users_ratings);
             }
         else{
@@ -302,26 +301,31 @@ var blooms = (function($, d3, console) {
         //console.log("window height: " + $(window).height() + 'window width: ' + $(window).width());
 
         //console.log('resizing: width: ' + width + ' height: ' + height);
+        window.blooms = [];
 
          pullLivePoints(function(object) {
             var data = object.points;
             var normx = object.normx;
             var normy = object.normy;
             var comments = object.comments;
-
-            console.log(data);
-            console.log(comments);
             
+            // Since the cup image is about 100px, margin is about 100
+            // if that changes, change this too
             var margin = {
-            top: 55,
-            left: 55,
-            right: 55,
-            bottom: 55
-            }
+            top: 100,
+            left: 100,
+            right: 100,
+            bottom: 100
+            };
 
             var width = $(window).width() - margin.right - margin.left;
-            var height = $(window).height()- margin.bottom - margin.top - 100;
-            
+
+            // TODO: this shouldn't be hardcoded, instead $('.top-bar').height()
+            // but calling that here is before bar is loaded, so fix that
+            var topBarHeight = 81;
+
+            var height = $(window).height()- margin.bottom - margin.top - topBarHeight;
+
             var canvasx = d3.scale.linear().domain(d3.extent(data, function(d) {return d.x;})).range([margin.left, width-margin.right]);
             var canvasy = d3.scale.linear().domain(d3.extent(data, function(d) {return d.y;})).range([margin.top, height-margin.bottom]);
 
@@ -343,7 +347,8 @@ var blooms = (function($, d3, console) {
             .enter()
             .append("svg:image")
             .attr("xlink:href", function(d) {
-                console.log({'uid': d.uid,'x':d.x,'y':d.y,'cx': canvasx(d.x),'cy': canvasy(d.y)});
+                window.blooms.push(d.uid);
+                // console.log({'uid': d.uid,'x':d.x,'y':d.y,'cx': canvasx(d.x),'cy': canvasy(d.y)});
                 if (d.uid == "curUser") {
                     return window.url_root + "/media/mobile/img/cafe/cafeCurUser.png";
                 }
@@ -355,7 +360,7 @@ var blooms = (function($, d3, console) {
             .attr('y', function(d) {
                 return canvasy(d.y);
             })
-            .attr("width", "110")
+            .attr("width", "110") //if this changes, change the margin above
             .attr("height", "110")
             //.attr("transform", function(d) {
             //        return choice(["rotate(-65)", "rotate(-45)", "rotate(20)"]);
@@ -378,6 +383,21 @@ var blooms = (function($, d3, console) {
                 });
                 $('#go-back').click(function() {
                     _this.remove();
+
+                    /* Remove this bloom from our bookkeeping array. */
+                    var index = $.inArray(d.uid, window.blooms);
+                    if (index >= 0) {
+                        window.blooms.splice(index, 1);
+                    }
+                    
+                    /* Load more blooms if none left */
+                    if (window.blooms.length === 0) {
+                        utils.showLoading("Loading more ideas...", function() {
+                            populateBlooms();
+                        });
+                        utils.hideLoading(500);
+                    }
+
                 });
             });
         });
