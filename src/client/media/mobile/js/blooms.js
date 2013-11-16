@@ -311,12 +311,18 @@ var blooms = (function($, d3, console) {
             
             // Since the cup image is about 100px, margin is about 100
             // if that changes, change this too
-            var margin = {
-            top: 100,
-            left: 100,
-            right: 100,
-            bottom: 100
+
+        var margin = 0;
+        var marginVal = $(window).width() < 500 ? 50 : 100;
+
+        margin = {
+            top: marginVal,
+            left: marginVal,
+            right: marginVal,
+            bottom: marginVal
             };
+
+
 
             var width = $(window).width() - margin.right - margin.left;
 
@@ -370,10 +376,11 @@ var blooms = (function($, d3, console) {
             })
             .on('click', function(d) {
                 var _this = d3.select(this);
-                 var commentData = rate.pullComment(d.uid, 'uid', comments);
+                var commentData = rate.pullComment(d.uid, 'uid', comments);
                 var content = commentData.comment;
                 var cid = commentData.cid;
                 window.current_cid = cid;
+                window.current_uid = d.uid;
                 $('.rate').slideDown();
                 $('.rate-loading').slideDown();
                 rate.updateDescriptions(document.getElementById('commentInput'), content);
@@ -385,18 +392,22 @@ var blooms = (function($, d3, console) {
                     _this.remove();
 
                     /* Remove this bloom from our bookkeeping array. */
-                    var index = $.inArray(d.uid, window.blooms);
+                    var index = $.inArray(window.current_uid, window.blooms);
                     if (index >= 0) {
                         window.blooms.splice(index, 1);
                     }
                     
+
                     /* Load more blooms if none left */
+                    try {
                     if (window.blooms.length === 0) {
+                        console.log("here");
+                        window.blooms = undefined; //needed to avoid infinite recursing
                         utils.showLoading("Loading more ideas...", function() {
                             populateBlooms();
                         });
                         utils.hideLoading(500);
-                    }
+                    } } catch(err){ /* undefined variable blooms. */ };
 
                 });
             });
