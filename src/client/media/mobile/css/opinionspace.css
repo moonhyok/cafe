@@ -490,9 +490,10 @@ table.pretty caption {
 	font-family: sans-serif;
 	text-shadow: none;
 	color: #FFFFFF;
-	font-size: 36px;
+	font-size: 34px;
 	text-align: left;
 	font-weight: bold;
+	width: 100%;
 }
 
 .basic-header {
@@ -500,7 +501,7 @@ table.pretty caption {
 	text-shadow: none;
 	font-weight: bold;
 	color: #000000;
-	font-size: 36px;
+	font-size: 34px;
 	padding-bottom: 10px;
 	padding-top: 10px;
 }
@@ -508,7 +509,6 @@ table.pretty caption {
 .landing-desc {
 	padding-top: 10px;
 	padding-bottom: 10px;
-	padding-left: 10px;
 	font-family: sans-serif;
 	text-shadow: none;
 	font-weight: bold;
@@ -525,9 +525,8 @@ table.pretty caption {
 	/*background: url('../img/cafe/cafe_chalkboard.jpg');*/
 	/*border: 4px #966F33 solid;*/
 	background-color: #333333;
-	padding-top: 40px;
-	padding-bottom: 30px;
-	padding-left: 5px;
+	padding-top: 30px;
+	padding-bottom: 10px;
 	vertical-align: middle;
 	/* less padding on the bottom and top so both buttons can show up*/
 }
