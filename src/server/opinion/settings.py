@@ -14,6 +14,7 @@ INTERNAL_IPS = (
 )
 
 AUTHENTICATION_BACKENDS = (
+    'opinion.code-auth.EntryCodeModelBackend',
     'opinion.email-auth.EmailOrUsernameModelBackend',
     'django.contrib.auth.backends.ModelBackend'
 )

@@ -184,39 +184,49 @@ $(document).ready(function() {
         e.preventDefault();
         e.stopPropagation();
 
-        //The following set of code is needed to format the data for the login which occurs after the registration
-        var serializedData = $(this).serializeArray();
-        var names = serializedData.map(function(r) {
-            return r.name;
-        });
-        var index_user = names.indexOf("regusername");
-        var index_pass = names.indexOf("regpassword1");
-        //var index_email = names.indexOf("regemail");
+        $("#username-error").hide();
+        $("#password-error").hide();
+        $("#zipcode-error").hide();
 
-        var data2 = {};
-        data2["username"] = serializedData[index_user].value;
-        data2["password1"] = serializedData[index_pass].value;
-        data2["password"] = serializedData[index_pass].value;
-        data2["password2"] = serializedData[index_pass].value;
-        //data2["email"] = serializedData[index_email].value;
+        // Handle bad length zipcodes client-side
+        if ($('#regzip').val().length != 5) {
+            $("#zipcode-error").html("Please enter a 5 digit zipcode.");
+            $("#zipcode-error").show();
+            $('#registerpanel').find('.ui-btn-active').removeClass('ui-btn-active ui-focus');
+            return;
+        }
 
-        var serializedFormData = $(this).serialize();
+        var registrationData = {
+            "username": $('#regusername').val(),
+            "password": $('#regpassword1').val(),
+            "password1": $('#regpassword1').val(),
+            "password2": $('#regpassword1').val(),
+            "email": $('#regemail').val(),
+            "zipcode" : $('#regzip').val()
+        };
+
+        var loginData = {
+            "username": registrationData.username.toLowerCase(),
+            "password": registrationData.password,
+        };
 
         utils.ajaxTempOff(function() {
             $.ajax({
                 url: window.url_root + '/accountsjson/register/',
                 type: 'POST',
                 dataType: 'json',
-                data: data2,
+                data: registrationData,
                 success: function(data) {
                     $("#username-error").hide();
                     //$("#email-error").hide();
                     $("#password-error").hide();
 
+                    window.foo = data;
+
                     if (data.hasOwnProperty('success')) {
                         accounts.setAuthenticated();
                         utils.showLoading("Loading...", function() {
-                            accounts.loginAfterRegister(data2);
+                            accounts.loginAfterRegister(loginData);
                             blooms.populateBlooms();
                             $('.register').slideUp();
                             utils.hideLoading();
@@ -246,6 +256,13 @@ $(document).ready(function() {
                             if ('password1' in errors) {
                                 $("#password-error").html(errors['password1']);
                                 $("#password-error").show();
+                            }
+
+   
+                            //TODO: why doesn't this come up under form_errors[zip_code]
+                            if (data['form_errors']['__all__'][0]) {
+                                $("#zipcode-error").html(data['form_errors']['__all__'][0]);
+                                $("#zipcode-error").show();
                             }
 
                             $('#register').find('.ui-btn-active').removeClass('ui-btn-active ui-focus');
@@ -307,7 +324,7 @@ $(document).ready(function() {
         //accounts.firstTime();
         $('.landing').slideUp();
         $('.endsliders').slideDown();
-        $('.top-bar').show();
+        //$('.top-bar').show();
         //rate.initScore();
     });
 

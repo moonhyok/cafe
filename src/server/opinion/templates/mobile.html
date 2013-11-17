@@ -171,12 +171,16 @@ function update_score(statement) {
       <li><a data-theme='e' class='my-comment-btn'><span class='stats-label'>Stats</span></a></li>
       <li><a data-theme='e' class='logout-btn'><span class='logout-label'>Logout</span></a></li>
     </ul>
+</div>
       <div class="scorebox">
     <span class='score-label'></span><span class='score-value'></span>
   </div>
-  </div>
+
+  <div class='instructions' id='instructions' style='display:none'>
+
   
-  <div class='instructions' id='instructions'>
+  
+
     <span class='inst-score'><span class='score-label'></span><span class='score-value'></span></span>
     <span class='inst-text'>{{ client_settings.INSTRUCTIONS_1 }}</span>
   </div>
@@ -396,6 +400,16 @@ function update_score(statement) {
     <div class="aggstat2" style="display:none;">
         <u>How cups have changed</u><br/>      
     <iframe width="300" height="225" src="//www.youtube.com/embed/Vufcqe7f3hE" frameborder="0" allowfullscreen></iframe>
+    <canvas id="MugAnimation" width="600" height="400" style="background-image:url('{{ url_root }}/media/mobile/img/cafe/cafe_bg.png');background-repeat:repeat;
+			background-size: 100% 100%;	"></canvas>
+			
+       <div style="width:150px;">
+	   <button type="button" onclick="clickreset()">Play</button>
+       </div>
+       <div style="width:150px;">
+	   <button type="button" onclick="reset()">Reset</button>
+       </div>
+       <script type="text/javascript" src="{{ url_root }}/media/mobile/js/timelineMug_animation_json.js"></script> 
     <div style="width:150px;">
      <button data-theme='c' data-mini="true" class='dialog-next' data-icon="arrow-r" onclick="$('.aggstat2').hide();$('.aggstat3').show();">Next</button>
     </div>
@@ -528,6 +542,7 @@ function update_score(statement) {
     <div class='frame'></div>
     <div class = 'register' id='register'>
       <!--<div class = 'reg-header'>{{ client_settings.INSTRUCTIONS_5 }}</div>-->
+
         <div class= 'registerpanel'>
             <div class="basic-header" style="font-size: 24px;padding-top: 5px;">Save Your Grades<br/>and Join the Discussion</div>
 
@@ -549,8 +564,10 @@ function update_score(statement) {
           </div>
 
           <div data-role="fieldcontain">
-            <label for="zip" class='regforminput' >California Zip Code:</label>
-            <input type ='text' id='zip' name='zip' class='regforminput' placeholder="Zip Code">
+            <label for="regzip" class='regforminput' >California Zip Code:</label>
+            <input type ='text' id='regzip' name='regzip' class='regforminput' placeholder="Zip Code">
+            <div class='alert-error' id='zipcode-error' style='display:none;'></div>
+
           </div>
 
 <!--        <label>Age Group:  </label>   
