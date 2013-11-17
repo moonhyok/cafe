@@ -26,6 +26,8 @@ from opinion.settings_local import CATEGORIES
 from opinion.includes.plotutils import *
 from opinion.decorators import *
 
+from django.contrib.auth import authenticate, login
+
 import math
 import numpy
 import operator
@@ -59,8 +61,12 @@ def index(request):
     create_visitor(request)
     return render_to_response('app.html', context_instance = RequestContext(request, {'client_settings':get_client_settings()}))
 
-def mobile(request,username=None):
+def mobile(request,entry_code=None):
     create_visitor(request)
+    if entry_code!=None:
+        user=authenticate(entrycode=entry_code)
+        if user !=None:
+           login(request,user)
     #print get_client_settings(True)
     os = get_os(1)
     disc_stmt = get_disc_stmt(os, 1)

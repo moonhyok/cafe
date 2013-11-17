@@ -2,6 +2,15 @@ from django.db.models import *
 from django.contrib.auth.models import User
 from opinion.settings_local import CONFIGURABLES
 
+class ZipCode(Model):
+    code = CharField(max_length=5, db_index = True)
+    city = TextField()
+    state = CharField(max_length=2)
+
+class ZipCodeLog(Model):
+    user = ForeignKey(User)
+    location = ForeignKey(ZipCode)
+
 class NeverSeenCache(Model):
 	#value = CharField(max_length = 8192)
 	value = TextField()

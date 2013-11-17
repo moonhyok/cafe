@@ -17,13 +17,13 @@ var rate = (function($, d3, console) {
 
     function resetRatingSliders() {
         setTimeout(function() {
-            $("#slider1").val(50).slider("refresh");
+            $("#slider1").val(50); //.slider("refresh");
         }, 1500);
         setTimeout(function() {
-            $("#slider2").val(50).slider("refresh");
+            $("#slider2").val(50); //.slider("refresh");
         }, 1500);
         setTimeout(function() {
-            $(".flip-1").val('no').trigger('create').slider("refresh");
+            $(".flip-1").val('no').trigger('create'); //.slider("refresh");
             $(".flip-1").trigger('slidestop');
         }, 1500);
     }
@@ -205,7 +205,9 @@ var rate = (function($, d3, console) {
 
         window.sliders.push(slider_values);*/
         //$('.endsliders').slideUp();
+        if(!accounts.setAuthenticated()){// if user enter with valid entry code, no need to show Register
         accounts.showRegister();
+        }
         $('.endsliders').slideUp();
     }
     //This function just pulls up the registration sliders form, right before prompting the 
