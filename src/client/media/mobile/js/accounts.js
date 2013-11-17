@@ -156,7 +156,6 @@ var accounts = (function($, d3, console) {
         });
 
         if (window.user_score == 0) {
-            $('.instructions').hide();
             $('.dialog').slideDown();
         } else {
             rate.initMenubar();
@@ -408,8 +407,6 @@ $('.flip-1').change(function() {
                     window.user_score = undefined;
                     window.authenticated = false;
                     $('.menubar').hide();
-                    $('#instructions').show();
-                    $('.inst-score').hide();
                     rate.resetEndSliders();
                 } else {}
             },

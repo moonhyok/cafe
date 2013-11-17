@@ -45,22 +45,24 @@ var rate = (function($, d3, console) {
     }
 
     function changeInstruction(t) {
-        $('.inst_text').text(t);
+        //$('.inst_text').text(t);
     }
 
     function initScore() {
-        $('.inst-score').prepend('[');
-        $('.inst-score').append(']');
-        $('.inst-score').show();
+        //$('.inst-score').prepend('[');
+        //$('.inst-score').append(']');
+        //$('.inst-score').show();
     }
 
     function initMenubar() {
-        $('.instructions').hide();
+        //$('.instructions').hide();
+        $('.scorebox').show();
         $('.menubar').show();
     }
     
     function hideMenubar() {
-        $('.instructions').hide();
+        //$('.instructions').hide();
+        $('.scorebox').hide();
         $('.menubar').hide();
     }
 
