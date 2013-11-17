@@ -218,13 +218,13 @@ $(document).ready(function() {
                         utils.showLoading("Loading...", function() {
                             accounts.loginAfterRegister(data2);
                             blooms.populateBlooms();
-                            setTimeout(function() { //give d3 some extra time
+                            $('.register').slideUp();
+                            utils.hideLoading();
+                            /*setTimeout(function() { //give d3 some extra time
                                 $('.register').slideUp('fast', function() {
                                     utils.hideLoading(500);
                                 });
-                            }, 500);
-
-
+                            }, 500);*/
                         });
                         //accounts.setAuthenticated();
                     } else {
