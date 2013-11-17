@@ -87,7 +87,7 @@ def mobile(request,username=None):
 											 'medians': json.dumps(medians)}))
 
 def app(request, username=None):
-	if request.mobile:
+	if True:
 		return HttpResponseRedirect(URL_ROOT + "/mobile/")
 	create_visitor(request)
 	if username != None:
