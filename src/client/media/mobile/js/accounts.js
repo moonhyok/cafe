@@ -376,12 +376,14 @@ $('.flip-1').change(function() {
     
     $('.dialog-score-ready').click(function() {
         $('.dialog-score').slideUp();
+        $('.scorebox').show();
         //rate.initMenubar();
     });
     
     $('.dialog-yourmug-ready').click(function() {
         $('.dialog-yourmug').slideUp();
         rate.initMenubar();
+        $('.scorebox').show();
         try{
             window.your_mug.transition().duration(1000).style("opacity", "1");
         }catch(err){}
