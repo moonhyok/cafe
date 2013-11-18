@@ -182,6 +182,13 @@ $(document).ready(function() {
     $('#reg_form').submit(function(e) {
         e.preventDefault();
         e.stopPropagation();
+        
+        if (window.registration_in_progress) {
+            return;
+        }
+        else{
+            window.registration_in_progress = true;
+        }
 
         $("#username-error").hide();
         $("#password-error").hide();
@@ -221,6 +228,7 @@ $(document).ready(function() {
                     $("#password-error").hide();
 
                     window.foo = data;
+                    window.registration_in_progress = false;
 
                     if (data.hasOwnProperty('success')) {
                         accounts.setAuthenticated();
