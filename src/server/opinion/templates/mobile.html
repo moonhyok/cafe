@@ -399,8 +399,8 @@ function update_score(statement) {
         
     <div class="aggstat2" style="display:none;">
         <u>How cups have changed</u><br/>      
-    <iframe width="300" height="225" src="//www.youtube.com/embed/Vufcqe7f3hE" frameborder="0" allowfullscreen></iframe>
-    <canvas id="MugAnimation" width="600" height="400" style="background-image:url('{{ url_root }}/media/mobile/img/cafe/cafe_bg.png');background-repeat:repeat;
+    <!--<iframe width="300" height="225" src="//www.youtube.com/embed/Vufcqe7f3hE" frameborder="0" allowfullscreen></iframe>-->
+    <canvas id="MugAnimation" width="300" height="300" style="background-image:url('{{ url_root }}/media/mobile/img/cafe/cafe_bg.png');background-repeat:repeat;
 			background-size: 100% 100%;	"></canvas>
 			
        <div style="width:150px;">
@@ -422,12 +422,12 @@ function update_score(statement) {
     <button data-theme='c' data-mini="true" data-icon="arrow-r" onclick="$('.aggstat3').hide();$('.aggstat1').show();">Next</button>
     </div>
     </div>
-    
+    <div style="width:300px;">
+      <button type='submit' data-theme='a' class='edit-comment-done-btn'>Back</button>
+    </div>
       </center>
   </div>      
-
-    <br>
-
+    
     <div class='comment-region'>
       <div class='comment-text'></div>
 
@@ -435,7 +435,7 @@ function update_score(statement) {
       <button type='submit' data-theme='a' class='edit-comment-btn'>Change Your Response</button>
       {% endif %}-->
 
-      <button type='submit' data-theme='a' class='edit-comment-done-btn'>Done</button>
+
       <br/>
     </div>
 
@@ -511,7 +511,7 @@ function update_score(statement) {
       {% if client_settings.LEADERBOARD_ENABLED == "true" %}
       <button data-theme='a' onClick="$('.leaderboard').slideDown();">Leaderboard</button>
       {% endif %}
-      <button data-theme='a' class="stats-done-btn">Done</button>
+      <button data-theme='a' class="stats-done-btn">Back</button>
     </div>
 
     <div class='leaderboard'>
@@ -530,7 +530,7 @@ function update_score(statement) {
       </table>
 
       <br><br>
-      <button data-theme='a' onClick="$('.leaderboard').slideUp();">Done</button>
+      <button data-theme='a' onClick="$('.leaderboard').slideUp();">Back</button>
 
     </div>
 
