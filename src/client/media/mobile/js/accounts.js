@@ -352,9 +352,10 @@ $(document).ready(function() {
         $('.comment-region').hide();
         $('.edit-comment').show();
     });
-
-$('.flip-1').change(function() {
-    $.ajax({
+    
+    $('#flag').click(function() {
+        document.getElementById('flag').innerHTML='<strong>Flagged for Review</strong>';
+            $.ajax({
             type: "POST",
             url: window.url_root + "/os/flagcomment/1/"+window.current_cid+"/",
             success: function(data) {

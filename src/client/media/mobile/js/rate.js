@@ -66,8 +66,7 @@ var rate = (function($, d3, console) {
         $('.scorebox').hide();
         $('.menubar').hide();
     }
-
-
+    
     function doneRating() {
         //note: this done-rating button is mapped twice, see below in populateBlooms #go-back.
         resetRatingSliders();
