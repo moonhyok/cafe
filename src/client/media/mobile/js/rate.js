@@ -23,9 +23,8 @@ var rate = (function($, d3, console) {
             $("#slider2").val(50); //.slider("refresh");
         }, 1500);
         setTimeout(function() {
-            $(".flip-1").val('no').trigger('create'); //.slider("refresh");
-            $(".flip-1").trigger('slidestop');
-        }, 1500);
+            document.getElementById('flag').innerHTML='Inappropriate or Irrelevant?';
+        }, 500);
     }
 
     function resetEndSliders() {
