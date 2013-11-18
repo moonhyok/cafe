@@ -356,6 +356,8 @@ var blooms = (function($, d3, console) {
                 window.blooms.push(d.uid);
                 // console.log({'uid': d.uid,'x':d.x,'y':d.y,'cx': canvasx(d.x),'cy': canvasy(d.y)});
                 if (d.uid == "curUser") {
+                    var _this = d3.select(this);
+                    window.your_mug = _this;
                     return window.url_root + "/media/mobile/img/cafe/cafeCurUser.png";
                 }
                 return window.url_root + "/media/mobile/img/cafe/cafe" + Math.floor((Math.random()*6)).toString() + ".png";
@@ -368,6 +370,12 @@ var blooms = (function($, d3, console) {
             })
             .attr("width", "110") //if this changes, change the margin above
             .attr("height", "110")
+            .attr("opacity", function(d){                
+                    if (window.user_score == 0 && d.uid == "curUser")
+                        return "0";
+                    else
+                        return "1";
+                })
             //.attr("transform", function(d) {
             //        return choice(["rotate(-65)", "rotate(-45)", "rotate(20)"]);
             //    })
@@ -376,6 +384,13 @@ var blooms = (function($, d3, console) {
             })
             .on('click', function(d) {
                 var _this = d3.select(this);
+                $('.instructions').hide();
+                
+                if (d.uid == "curUser") {
+                    $('.comment-input').slideDown();
+                    return;
+                }
+                
                 var commentData = rate.pullComment(d.uid, 'uid', comments);
                 var content = commentData.comment;
                 var cid = commentData.cid;
@@ -390,6 +405,7 @@ var blooms = (function($, d3, console) {
                 });
                 $('#go-back').click(function() {
                     _this.remove();
+                    //_this.transition().duration(500).style("opacity", "0");
 
                     /* Remove this bloom from our bookkeeping array. */
                     var index = $.inArray(window.current_uid, window.blooms);
@@ -397,7 +413,6 @@ var blooms = (function($, d3, console) {
                         window.blooms.splice(index, 1);
                     }
                     
-
                     /* Load more blooms if none left */
                     try {
                     if (window.blooms.length === 0) {

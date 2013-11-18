@@ -362,6 +362,7 @@ $('.flip-1').change(function() {
 
     $('.dialog-ready').click(function() {
         rate.initMenubar();
+        $('.instructions').show();
         $('.dialog').slideUp();
     });
     
@@ -369,6 +370,15 @@ $('.flip-1').change(function() {
         $('.dialog-score').slideUp();
         rate.initMenubar();
     });
+    
+    $('.dialog-yourmug-ready').click(function() {
+        $('.dialog-yourmug').slideUp();
+        rate.initMenubar();
+        try{
+            window.your_mug.transition().duration(1000).style("opacity", "1");
+        }catch(err){}
+    });
+
 
     $('.edit-comment-save-btn').click(function() {
         rate.sendComment($('.edit-comment-box').val());

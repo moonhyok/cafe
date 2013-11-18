@@ -180,6 +180,8 @@ function update_score(statement) {
     <!--<span class='inst-score'><span class='score-label'></span><span class='score-value'></span></span>
     <span class='inst-text'>{{ client_settings.INSTRUCTIONS_1 }}</span>-->
   </div>
+  
+  <div class='instructions' style="display:none">Click on a mug to begin</div>
 
   <div class="margin"><!--<br><br><br><br>--></div>
 </div>
@@ -491,7 +493,7 @@ function update_score(statement) {
     <div class='graphs-wrap' style='text-align:center;'>
 
       <div class='graphs-insufficient' style='display:none;'>You can see a graph of the ratings you've received after you have been rated by 5 people.<br>
-        Now please rate more blooms to earn more points.  Just click Done and choose any bloom..."</div>
+        Now please rate more mugs to earn more points.  Just click Done and choose any mugs..."</div>
 
         <div class='graphs'>
           <strong>Ratings Received</strong>
@@ -711,10 +713,10 @@ function update_score(statement) {
       <div data-role="header" data-theme="b" style="-moz-border-radius: 15px;border-radius: 15px;width:100%;"><font size="6">The Discussion</font></div>
       <img class="header-img-topic" src="{{ url_root }}/media/mobile/img/cafe/cafe_click_idea.jpg" class="center" style="width:200px;padding-top:3px;"><br>
       </center>
-      Each mug represents a participant.<br/><strong>Click on a mug to begin.</strong>
+      Each mug represents a participant's response to the discussion topic.</strong>
       <center>
       <div style="width: 150px;">
-        <button type='submit' data-theme='e' class='dialog-ready' data-icon="arrow-r">Ready!</button>
+        <button type='submit' data-theme='e' class='dialog-ready' data-icon="arrow-r">Next</button>
       </div>
       </center>
     </div>
@@ -738,11 +740,26 @@ function update_score(statement) {
       <div data-role="header" data-theme="b" style="-moz-border-radius: 15px;border-radius: 15px;width:100%;"><font size="6">Earning Points</font></div>
       <img class="header-img-topic" src="{{ url_root }}/media/mobile/img/cafe/points_teaser.png" class="center" style="width:90%;padding-top:3px;"><br>
       </center>
-      
       Rating ideas earns points. <br/> <strong>Rate another idea before you can leave one of your own.</strong>
       <center>
       <div style="width: 150px;">
-        <button type='submit' data-theme='e' class='dialog-score-ready' data-icon="arrow-r">Hide</button>
+        <button type='submit' data-theme='e' class='dialog-score-ready' data-icon="arrow-r">Next</button>
+      </div>
+      </center>
+    </div>
+</div>
+
+<div class='dialog-yourmug' style="display: none;">
+  <br/>
+    <div class='dialog-yourmug-text1'>
+      <center>
+      <div data-role="header" data-theme="b" style="-moz-border-radius: 15px;border-radius: 15px;width:100%;"><font size="6">Your Mug</font></div>
+      <img class="header-img-topic" src="{{ url_root }}/media/mobile/img/cafe/yourmug-teaser.png" class="center" style="width:150px;padding-top:3px;"><br>
+      </center>
+      Your mug is highlighted with a yellow coaster. To leave a response click on your mug.<br/>
+      <center>
+      <div style="width: 150px;">
+        <button type='submit' data-theme='e' class='dialog-yourmug-ready' data-icon="arrow-r">Next</button>
       </div>
       </center>
     </div>

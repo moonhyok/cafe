@@ -87,7 +87,9 @@ var rate = (function($, d3, console) {
             //TODO FIX!!!
             if (window.user_score == 2) {
                 $('.rate').slideUp();
-                $('.comment-input').slideDown();
+                hideMenubar();
+                $('.dialog-yourmug').slideDown();
+                //$('.comment-input').slideDown();
             }
             else if (window.user_score == 1)
             {
