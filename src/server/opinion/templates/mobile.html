@@ -563,7 +563,7 @@ function update_score(statement) {
 
           <div data-role="fieldcontain" onclick="document.getElementById('regzip').focus();">
             <label for="regzip" class='regforminput' >California Zip Code:</label>
-            <input type ='text' id='regzip' name='regzip' class='regforminput' placeholder="California Zip Code:">
+            <input type ='text' id='regzip' name='regzip' class='regforminput' placeholder="California Zip Code">
             <div class='alert-error' id='zipcode-error' style='display:none;'></div>
           </div>
 
@@ -589,8 +589,8 @@ function update_score(statement) {
       </div>-->
       
       <center>
-        <div style="width: 100%; max-width: 300px;">
-        <button type='submit' data-theme='e' data-icon='check'><font size="5">Save and Join</font></button>
+        <div style="width: 100%; max-width: 300px;" onclick="document.getElementById('register').focus();">
+        <button type='submit' data-theme='e' data-icon='check' id="register"><font size="5">Save and Join</font></button>
        </div>
       </center>
 
