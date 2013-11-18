@@ -57,6 +57,9 @@ var rate = (function($, d3, console) {
     function initMenubar() {
         //$('.instructions').hide();
         $('.menubar').show();
+        if (window.user_score >= 1) {
+            $('.scorebox').show();
+        }
     }
     
     function hideMenubar() {
