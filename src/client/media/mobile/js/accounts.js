@@ -361,14 +361,14 @@ $('.flip-1').change(function() {
     });
 
     $('.dialog-ready').click(function() {
-        rate.initMenubar();
+        //rate.initMenubar();
         $('.instructions').show();
         $('.dialog').slideUp();
     });
     
     $('.dialog-score-ready').click(function() {
         $('.dialog-score').slideUp();
-        rate.initMenubar();
+        //rate.initMenubar();
     });
     
     $('.dialog-yourmug-ready').click(function() {

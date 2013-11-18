@@ -328,7 +328,7 @@ var blooms = (function($, d3, console) {
 
             // TODO: this shouldn't be hardcoded, instead $('.top-bar').height()
             // but calling that here is before bar is loaded, so fix that
-            var topBarHeight = 81;
+            var topBarHeight = 100;
 
             var height = $(window).height()- margin.bottom - margin.top - topBarHeight;
 
@@ -386,7 +386,7 @@ var blooms = (function($, d3, console) {
                 var _this = d3.select(this);
                 $('.instructions').hide();
                 
-                if (d.uid == "curUser") {
+                if (d.uid == "curUser" && window.user_score >= 2) {
                     $('.comment-input').slideDown();
                     return;
                 }

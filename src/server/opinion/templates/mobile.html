@@ -148,6 +148,7 @@ function update_score(statement) {
   
   if (statementsComplete()) {
     $('.cardtable').delay(1000).fadeOut(2000);
+    $('.rc-sub-header').delay(1000).fadeOut(2000);
   }
 
   //document.getElementById('tr1'+statement).fadeOut(1000);//style.display = 'none';
@@ -157,7 +158,6 @@ function update_score(statement) {
 </head>
 
 <body>
-
   <div class="top-bar" style="display:none;">
    <div class='header'>
     {% if client_settings.HEADER_IMAGE == "true" %}
@@ -246,7 +246,7 @@ function update_score(statement) {
         <div class='reportcard'>
            <div class="basic-header" style="font-size: 24px;padding-top: 5px;">Grade California's State Government</div>
            
-           <div>Please grade from A to F how well you feel California's elected officials are working to address the following 6 subjects:</div> 
+           <div class="rc-sub-header">Please grade from A to F how well you feel California's elected officials are working to address the following 6 subjects:</div> 
           <br/>
            <table class='cardtable' style="width:100%;padding-right:10px;">
             <tr>
@@ -554,7 +554,6 @@ function update_score(statement) {
              <div class='alert-error' id='username-error' style='display:none;'></div>
            </div>
 
-
            <div data-role="fieldcontain" onclick="document.getElementById('regpassword1').focus();">
             <label for="regpassword1" class='regforminput' >Password:</label>
             <input type ='password' id='regpassword1' name='regpassword1' class='regforminput'  placeholder="Password">
@@ -605,7 +604,7 @@ function update_score(statement) {
 <div class='comment-input'>
   <!--<div class = 'reg-header'>{{ client_settings.INSTRUCTIONS_6 }}</div>-->
     <div class='comment-panel'>
-        <div id = 'reg-question'><div class="basic-header" style="font-size: 24px;">{{ topic }}</div>
+        <div id = 'reg-question'><div class="basic-header" style="font-size: 24px;">In what specific way would <strong><u>you</u></strong> recommend that California invest the current budget surplus?</div>
         <br/>
         <textarea name='answer' id='entered-comment' style="width: 95% !important;height: 250px !important;padding-right: 10px;font-size: 18px;font-family: sans-serif;"> </textarea> 
       </div>
