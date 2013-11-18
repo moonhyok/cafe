@@ -148,6 +148,7 @@ function update_score(statement) {
   finishedStatements[statement-1]= 1;
   
   if (statementsComplete()) {
+    //setTimeout(function (){$('.done-endsliders-btn').click();},1000);
     $('.cardtable').delay(1000).fadeOut(2000);
     $('.rc-sub-header').delay(1000).fadeOut(2000);
   }
@@ -551,7 +552,7 @@ function update_score(statement) {
 
             <div data-role="fieldcontain" onclick="document.getElementById('regusername').focus();">
              <label for="regusername" class='regforminput' >Email:</label>
-             <input type="email" id='regusername' name='regusername' class='regforminput' value="" placeholder="Email" data-theme="b" autofocus="true"/>
+             <input type="email" id='regusername' name='regusername' class='regforminput' value="" placeholder="Email" data-theme="b"/>
              <div class='alert-error' id='username-error' style='display:none;'></div>
            </div>
 

@@ -194,13 +194,14 @@ $(document).ready(function() {
         $("#password-error").hide();
         $("#zipcode-error").hide();
 
+        /*Let us leave this to the server to handle
         // Handle bad length zipcodes client-side
         if ($('#regzip').val().length != 5) {
             $("#zipcode-error").html("Please enter a 5 digit zipcode.");
             $("#zipcode-error").show();
             $('#registerpanel').find('.ui-btn-active').removeClass('ui-btn-active ui-focus');
             return;
-        }
+        }*/
 
         var registrationData = {
             "username": $('#regusername').val(),
