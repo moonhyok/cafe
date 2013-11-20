@@ -37,7 +37,7 @@ jQuery(document).ready(function() {
     range: [0, 100], start: 50, step: 5, handles: 1,connect: false,
   }).change(function () {
 
-   $(this).attr('disabled', 'disabled');
+   //$(this).attr('disabled', 'disabled');
     var id = $(this).attr('id');
     id = parseInt(id.substring(1, id.length)); // strips the leading 's'
     update_score(id);
@@ -138,20 +138,20 @@ function statementsComplete() {
 function update_score(statement) {
 
   $('#g' + statement).html(score_to_grade($('#s' + statement).val()));
-  $('#o' + statement).hide();
+  //$('#o' + statement).hide();
   $('#o' + statement).html(score_to_grade(medians[statement]*100))
-  $('#o' + statement).delay(200).fadeIn();
+  //$('#o' + statement).delay(200).fadeIn();
   window.sliders[statement] = $('#s' + statement).val();		     
   //$('.s'+statement).slider('disable');
-  document.getElementById('tr1'+statement).style.backgroundColor = "rgba(255, 255, 255, 0.3)";
-  $('#tr1'+statement).delay(1000).fadeOut(2000);
+  document.getElementById('tr1'+statement).style.backgroundColor = "rgba(255, 255, 255, 0.5)";
+  //$('#tr1'+statement).delay(1000).fadeOut(2000);
   finishedStatements[statement-1]= 1;
   
-  if (statementsComplete()) {
+ /* if (statementsComplete()) {
     //setTimeout(function (){$('.done-endsliders-btn').click();},1000);
     $('.cardtable').delay(1000).fadeOut(2000);
     $('.rc-sub-header').delay(1000).fadeOut(2000);
-  }
+  }*/
 
   //document.getElementById('tr1'+statement).fadeOut(1000);//style.display = 'none';
   //document.getElementById('tr2'+statement).fadeOut(1000);//style.display = 'none';
@@ -250,7 +250,7 @@ function update_score(statement) {
            
            <div class="rc-sub-header">Please grade from A to F how well you feel California's elected officials are working to address the following 6 subjects:</div> 
           <br/>
-           <table class='cardtable' style="width:100%;padding-right:10px;">
+           <table class='cardtable' style="width:100%;padding-right:10px;background-color: #333333;color:#FFFFFF;">
             <tr>
               <td>
                 Subject
@@ -269,7 +269,7 @@ function update_score(statement) {
             <tr>
               <td style="height: 45px;">
                 {% ifnotequal statement.statement '' %}
-                <div class='slider-question'>({{statement.id}}/{{ statements|length}}) {{ statement.statement }} </div>
+                <div class='slider-question'>{{statement.id}}. {{ statement.statement }} </div>
 <!--                <p class='slider-question'> {{ statement.statement }} </p>
 
                 <div id="grades" class="slider-agree-labels">
@@ -329,6 +329,7 @@ function update_score(statement) {
           </td>
       </tr>
  </table>
+            <br>
       {% endfor %}
 
     <center>
