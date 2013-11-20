@@ -79,6 +79,9 @@ def mobile(request,entry_code=None):
     for s in statements:
         medians[str(s.id)] = numpy.median(UserRating.objects.filter(opinion_space_statement=s,is_current=True).values_list('rating'))
         statement_labels[str(s.id)] = s.statement
+	
+    random_username = 'user'+ ''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(10))+'@example.com';
+    random_password = ''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(10));
 
     return render_to_response('mobile.html', context_instance = RequestContext(request, {'url_root' : settings.URL_ROOT,
 											 'loggedIn' : str(request.user.is_authenticated()).lower(),
@@ -89,6 +92,8 @@ def mobile(request,entry_code=None):
 											 'topic': DiscussionStatement.objects.filter(is_current=True)[0].statement,
 											 'short_topic': DiscussionStatement.objects.filter(is_current=True)[0].short_version,
 											 'statements': statements,
+											 'random_username': random_username,
+											 'random_password': random_password,
                                                                                          'statement_labels': json.dumps(statement_labels), 
 											 'medians': json.dumps(medians)}))
 

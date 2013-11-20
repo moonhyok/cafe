@@ -550,22 +550,22 @@ function update_score(statement) {
           <form id='reg_form' class='form-horizontal' method='post' action='{{ url_root }}/accountsjson/register/' style="width: 95%;">
             <input type='hidden' value='{{ topic }}' name='question'>
             <input type='hidden' value='{{ url_root }}' name='url'>
-
-            <div data-role="fieldcontain" onclick="document.getElementById('regusername').focus();">
-             <label for="regusername" class='regforminput' >Email:</label>
-             <input type="email" id='regusername' name='regusername' class='regforminput' value="" placeholder="Email" data-theme="b"/>
+              
+            <div data-role="fieldcontain" style="display: none;">
+             <label for="regusername" class='regforminput'>Email:</label>
+             <input type="hidden" id='regusername' name='regusername' class='regforminput' value='{{ random_username }}' placeholder="Email" data-theme="b"/>
              <div class='alert-error' id='username-error' style='display:none;'></div>
-           </div>
+            </div>
 
-           <div data-role="fieldcontain" onclick="document.getElementById('regpassword1').focus();">
-            <label for="regpassword1" class='regforminput' >Password:</label>
-            <input type ='password' id='regpassword1' name='regpassword1' class='regforminput'  placeholder="Password">
-            <div class='alert-error' id='password-error' style='display:none;'></div>
+           <div data-role="fieldcontain" style='display:none;'>
+            <label for="regpassword1" class='regforminput' style="display: none;">Password:</label>
+            <input type ='hidden' id='regpassword1' name='regpassword1' class='regforminput' value='{{ random_password }}' placeholder="Password">
+            <div class='alert-error' id='password-error'></div>
           </div>
 
-          <div data-role="fieldcontain" onclick="document.getElementById('regzip').focus();">
-            <label for="regzip" class='regforminput' >California Zip Code:</label>
-            <input type ='text' id='regzip' name='regzip' class='regforminput' placeholder="California Zip Code">
+          <div data-role="fieldcontain">
+            <label for="regzip" class='regforminput' >Zip Code:</label>
+            <input type ='text' id='regzip' name='regzip' class='regforminput' placeholder="Zip Code">
             <div class='alert-error' id='zipcode-error' style='display:none;'></div>
           </div>
 
