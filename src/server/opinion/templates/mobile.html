@@ -16,7 +16,7 @@
   window.registration_in_progress = false;
   window.num_sliders = {{ statements|length }};
   window.conf = { 'SCORE_SCALE_FACTOR'  : {{ client_settings.SCORE_SCALE_FACTOR }},
-  'YOUR_SCORE_LANGUAGE' : "{{ client_settings.YOUR_SCORE_LANGUAGE }}",
+  'YOUR_SCORE_LANGUAGE' : "Your Score",
   'INSTRUCTIONS_3'      : "{{ client_settings.INSTRUCTIONS_3 }}",
   'FUN_COLORS'          : {{ client_settings.FUN_COLORS }}
 };
@@ -182,8 +182,7 @@ function update_score(statement) {
     <!--<span class='inst-score'><span class='score-label'></span><span class='score-value'></span></span>
     <span class='inst-text'>{{ client_settings.INSTRUCTIONS_1 }}</span>-->
   </div>
-  
-  <div class='instructions' style="display:none">Click on a mug to begin</div>
+  <div data-role="header" data-theme="e" class='instructions' style="display:none">Click on a mug to begin</div>
 
   <div class="margin"><!--<br><br><br><br>--></div>
 </div>
@@ -346,27 +345,23 @@ function update_score(statement) {
 </div>
 
 <div class='my-comment'>
-  <br/>
-  <center>
    <div class='edit-comment-panel'>
-    <div class='row' style='text-align:center;'>
+    <div class='row'>
       <!--<div class='span6'>
         <br><br>
         <img src='./../media/mobile/img/bloom.png' width='10%'>
       </div>-->
-      <div>
-        <u>My Statistics</u>
-        <br>
-        <strong>Username:</strong><span class='username'></span><br>
-        <strong><span class='score-label'></span></strong> <span class='score-value'></span><br>
-        <strong>Idea Rated By: </strong><span class='num-rated-by'></span> Participants<br>
-      </div>  
+        <div class="basic-header">My Statistics</div>
+        <span class='username' style="display: none;"></span>
+        <span class='score-label'></span> <span class='score-value'></span><br>
+        <span class='num-label'>Idea Rated By:</span> <span class='num-rated-by'></span> Participants<br>
 <hr/>
+              <div class="basic-header" style="font-size: 22px;">Aggregate Statistics</div>
       <center>
       <div class="aggstat1">
-        <u>Aggregate Statistics</u>
         <br/>
-              <table>
+        
+        <table style="width: 90%;">
         <tr style="background-color: #000000;">
           <td>
           <font style="color: #FFFFFF;">
@@ -399,17 +394,16 @@ function update_score(statement) {
     </div>          
         
     <div class="aggstat2" style="display:none;">
-        <u>How cups have changed</u><br/>      
+        Changes in the mug positions<br/>      
     <!--<iframe width="300" height="225" src="//www.youtube.com/embed/Vufcqe7f3hE" frameborder="0" allowfullscreen></iframe>-->
-    <canvas id="MugAnimation" width="300" height="300" style="background-image:url('{{ url_root }}/media/mobile/img/cafe/cafe_bg.png');background-repeat:repeat;
+    <canvas id="MugAnimation" width="250" height="200" style="background-image:url('{{ url_root }}/media/mobile/img/cafe/cafe_bg.png');background-repeat:repeat;
 			background-size: 100% 100%;	"></canvas>
 			
-       <div style="width:150px;">
-	   <button type="button" onclick="clickreset()">Play</button>
+       <div style="width:300px;">
+	   <button type="button" onclick="clickreset()" data-mini="true" data-inline="true">Play</button>
+           <button type="button" onclick="reset()" data-mini="true" data-inline="true"> Reset</button>
        </div>
-       <div style="width:150px;">
-	   <button type="button" onclick="reset()">Reset</button>
-       </div>
+
        <script type="text/javascript" src="{{ url_root }}/media/mobile/js/timelineMug_animation_json.js"></script> 
     <div style="width:150px;">
      <button data-theme='c' data-mini="true" data-icon="arrow-r" onclick="$('.aggstat2').hide();$('.aggstat3').show();">Next</button>
@@ -417,7 +411,7 @@ function update_score(statement) {
     </div>
     
     <div class="aggstat3" style="display:none;">
-        <u>California map</u> <br/>  
+        California map <br/>  
     <iframe width="300" height="225" src="//www.youtube.com/embed/hDsu_R2odOA" frameborder="0" allowfullscreen></iframe>
     <div style="width:150px;">
     <button data-theme='c' data-mini="true" data-icon="arrow-r" onclick="$('.aggstat3').hide();$('.aggstat1').show();">Next</button>
@@ -475,7 +469,6 @@ function update_score(statement) {
         </div>
 
       </div>
-    </center>
 
   </div>
 
@@ -543,11 +536,11 @@ function update_score(statement) {
     <div class='frame'></div>
     <div class = 'register' id='register'>
       <!--<div class = 'reg-header'>{{ client_settings.INSTRUCTIONS_5 }}</div>-->
-
+      
         <div class= 'registerpanel'>
-            <div class="basic-header" style="font-size: 24px;padding-top: 5px;padding-bottom: 0px;">Save Your Grades and<br/>Join the Discussion</div>
-
-          <form id='reg_form' class='form-horizontal' method='post' action='{{ url_root }}/accountsjson/register/' style="width: 95%;">
+            <div class="basic-header" style="font-size: 24px;padding-top: 5px;padding-bottom: 0px; width: 100%">To save your grades and join the discussion, just enter your zip code</div>
+          <br>
+          <form id='reg_form' class='form-horizontal' method='post' action='{{ url_root }}/accountsjson/register/' style="width: 95%; padding-left: 5px;">
             <input type='hidden' value='{{ topic }}' name='question'>
             <input type='hidden' value='{{ url_root }}' name='url'>
               
@@ -564,8 +557,7 @@ function update_score(statement) {
           </div>
 
           <div data-role="fieldcontain">
-            <label for="regzip" class='regforminput' >Zip Code:</label>
-            <input type ='text' id='regzip' name='regzip' class='regforminput' placeholder="Zip Code">
+            <input type ='text' id='regzip' name='regzip' class='regforminput' value="" placeholder="Zip Code">
             <div class='alert-error' id='zipcode-error' style='display:none;'></div>
           </div>
 
@@ -607,30 +599,30 @@ function update_score(statement) {
 <div class='comment-input'>
   <!--<div class = 'reg-header'>{{ client_settings.INSTRUCTIONS_6 }}</div>-->
     <div class='comment-panel'>
-        <div id = 'reg-question'><div class="basic-header" style="font-size: 24px;">In what specific way would <font color="#FFFFFF">YOU</font> recommend that California invest the current budget surplus?</div>
-        <br/>
-        <textarea name='answer' id='entered-comment' style="width: 95% !important;height: 250px !important;padding-right: 10px;font-size: 18px;font-family: sans-serif;"> </textarea> 
-      </div>
+        <div class="basic-header" style="font-size: 16px;">In what specific way would <u>YOU</u> recommend that California invest the current budget surplus?</div>
+        <textarea name='answer' id='entered-comment' style="width: 95% !important;height: 150px !important;padding-right: 10px;font-size: 14px;"> </textarea> 
 
-      <center>
-        <div style="width: 300px;padding-bottom:15px;">
+        <div style="width: 300px;padding-bottom:15px;font-size:12px;color: #888888;">
+        You can receive periodic updates by email about how the discussion has changed. <a href="#">Privacy Policy</a>
+        <input type="email" id='regemail' name='regemail' placeholder="Email (Optional)" data-theme="b"/>
         <button type='submit' data-theme='a' class='comment-submit-btn' data-icon='check'><font size="5">Save</font></button>
       </div>
-      </center>
-
+        
   </div>
 </div>
 
 <div class='login' id='login'>
 
   <!--<div class='login-header'>Please Login</div>-->
-  <br/>
+  <div class="basic-header">About The Project</div>
+The Digital CRC for California is a new UC Berkeley project in collaboration with Lt. Governor Gavin Newsom that integrates our CAFE technology into a mobile phone platform that allows Californians to grade (from A to F) how well they feel California's elected officials are working to address 6 key subjects.  The interface is designed to track changes over time and to encourage to join online dialogues about key issues. 
 
-  <center>
-    <div class="loginpanel">
-            <div style="width: 100%; max-width: 150px; padding-top:5px;">
-            <button data-theme='c' class='login-form-go-back' data-icon="arrow-l" data-mini="true">Back</button>
-            </div>
+    <div style="width: 100%; max-width: 150px; padding-top:5px;">
+      <button data-theme='c' class='login-form-go-back' data-icon="arrow-l" data-mini="true">Back</button>
+  </div>
+    
+    <div class="loginpanel" style="display: none;">
+            
       <div class="basic-header">Welcome Back</div>
       
       <div class='alert-error' id='login-error' style='display:none;'>
@@ -687,8 +679,8 @@ function update_score(statement) {
         Grade and discuss the California government<br/><br/>
         <center>
         <div style="width: 100%; max-width: 300px;">
-        <button type='submit' data-theme='e' class='first-time-btn' data-icon="star"><font size="5">First time</font></button>
-        <button type='cancel' data-theme='a' class='login-btn' data-icon="forward"><font size="5">Returning</font></button>
+        <button type='submit' data-theme='e' class='first-time-btn' data-icon="star"><font size="5">Enter</font></button>
+        <button type='cancel' data-theme='a' class='login-btn' data-icon="info"><font size="5">About</font></button>
          </div>
         </center>
       </div>
@@ -698,8 +690,8 @@ function update_score(statement) {
   <br/>
     <div class='dialog-text1'>
       <center>
-      <div data-role="header" data-theme="b" style="-moz-border-radius: 15px;border-radius: 15px;width:100%;"><font size="6">The Discussion</font></div>
-      <img class="header-img-topic" src="{{ url_root }}/media/mobile/img/cafe/map_teaser.png" class="center" style="width:150px;padding-top:3px;"><br>
+      <div style="width:100%;font-size:32px;">The Discussion</div>
+      <img class="header-img-topic" src="{{ url_root }}/media/mobile/img/cafe/map_teaser.png" class="center" style="width:150px;padding-top:5px;padding-bottom: 5px;"><br>
       </center>
       The discussion topic is:<br/><strong>"{{ topic }}"</strong>
       <center>
@@ -711,10 +703,10 @@ function update_score(statement) {
 
     <div class='dialog-text2' style="display:none;">
       <center>
-      <div data-role="header" data-theme="b" style="-moz-border-radius: 15px;border-radius: 15px;width:100%;"><font size="6">The Discussion</font></div>
+      <div style="width:100%;font-size:32px;">The Discussion</div>
       <img class="header-img-topic" src="{{ url_root }}/media/mobile/img/cafe/cafe_click_idea.jpg" class="center" style="width:200px;padding-top:3px;"><br>
       </center>
-      Each mug represents a participant's response to the discussion topic.</strong>
+      Each mug represents a participant's response to the discussion topic.
       <center>
       <div style="width: 150px;">
         <button type='submit' data-theme='e' class='dialog-ready' data-icon="arrow-r">Next</button>
@@ -738,10 +730,10 @@ function update_score(statement) {
   <br/>
     <div class='dialog-score-text1'>
       <center>
-      <div data-role="header" data-theme="b" style="-moz-border-radius: 15px;border-radius: 15px;width:100%;"><font size="6">Earning Points</font></div>
+      <div style="width:100%;font-size:32px;">Earning Points</div>
       <img class="header-img-topic" src="{{ url_root }}/media/mobile/img/cafe/points_teaser.png" class="center" style="width:90%;padding-top:3px;"><br>
       </center>
-      Rating ideas earns points. <br/> <strong>Rate another idea before you can leave one of your own.</strong>
+      Rating ideas earns points. Rate one more idea and then you can leave one of your own.
       <center>
       <div style="width: 150px;">
         <button type='submit' data-theme='e' class='dialog-score-ready' data-icon="arrow-r">Next</button>
@@ -754,7 +746,7 @@ function update_score(statement) {
   <br/>
     <div class='dialog-yourmug-text1'>
       <center>
-      <div data-role="header" data-theme="b" style="-moz-border-radius: 15px;border-radius: 15px;width:100%;"><font size="6">Your Mug</font></div>
+      <div style="width:100%;font-size:32px;">Your Mug</div>
       <img class="header-img-topic" src="{{ url_root }}/media/mobile/img/cafe/yourmug-teaser.png" class="center" style="width:150px;padding-top:3px;"><br>
       </center>
       Your mug is highlighted with a yellow coaster. To leave your idea, click on your mug.<br/>

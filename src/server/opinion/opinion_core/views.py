@@ -78,6 +78,8 @@ def mobile(request,entry_code=None):
 
     for s in statements:
         medians[str(s.id)] = numpy.median(UserRating.objects.filter(opinion_space_statement=s,is_current=True).values_list('rating'))
+        if medians[str(s.id)] <= 1e-5:
+            medians[str(s.id)] = 0
         statement_labels[str(s.id)] = s.statement
 	
     random_username = 'user'+ ''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(10))+'@example.com';

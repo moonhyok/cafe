@@ -202,14 +202,14 @@ $(document).ready(function() {
             $('#registerpanel').find('.ui-btn-active').removeClass('ui-btn-active ui-focus');
             return;
         }*/
-
+        
         var registrationData = {
             "username": $('#regusername').val(),
             "password": $('#regpassword1').val(),
             "password1": $('#regpassword1').val(),
             "password2": $('#regpassword1').val(),
             "email": $('#regemail').val(),
-            "zipcode" : $('#regzip').val()
+            "zipcode" : ($('#regzip').val() == '')?'-1':$('#regzip').val()
         };
 
         var loginData = {

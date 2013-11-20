@@ -33,13 +33,8 @@
 
 #entered-comment{
 	display:inline;
-	height:400px;
-	font-family: sans-serif;
-	color: #000099;
-	font-weight:bold;
+	color: #000000;
 	text-shadow: none;
-	font-size: 12px;
-	padding-top: 15px;
 	width: 90%;
 }
 
@@ -131,8 +126,8 @@ table.pretty caption {
 		margin-right: auto;
 	}
 	
-	.score-label, .score-value{
-		font-size: 25px;
+	.score-label, .score-value,.num-rated-by,.num-label{
+		font-size: 18px;
 	}
 	
 	.stats-label,.logout-label{
@@ -188,7 +183,7 @@ table.pretty caption {
 
 	strong {
 		font-weight: bold;
-		color: #1EB3DF;
+		color: #FFE366;
 	}
 	strong.go-back {
 		color: #54D6F6;
@@ -232,16 +227,14 @@ table.pretty caption {
 		/*position: absolute;*/
 		top: 250;
 		left: 0px;
-		background-color: #ADD8E6;
 		z-index: 999;
 		text-shadow: none;
-		font-size: 24px;
-
+		font-size: 16px;
+		font-weight:bold;
 		width: 100%;
-
 		line-height: 20px;
 		padding: 10px 0px;
-
+		padding-left: 10px;
 		text-align: left;
 	}
 	
@@ -263,7 +256,6 @@ table.pretty caption {
 		background-color: #FAEBCD;
 		font-weight:bold;
 		text-shadow: none;
-		text-align: center;
 		width: 95%;
 		padding-right: 10px;
 		padding-left: 10px;
@@ -358,11 +350,11 @@ table.pretty caption {
 	.scorebox{
 		text-shadow: none;
 		font-weight: bold;
-		color: #FFFFFF;
+		color: #FFE366;
 		position:absolute;
 		bottom:30px;
-		left:10px;
-		background-color: transparent;
+		left:3px;
+		background-color: rgba(0,0,0,.5);
 		z-index: 999;
 	}
 
@@ -400,11 +392,8 @@ table.pretty caption {
 	.edit-comment-panel{
 		background-color: #FAEBCD;
 		color: black;
-		font-weight:bold;
 		text-shadow: none;
-		text-align: center;
-		width: 90%;
-		padding-right: 20px;
+		width: 100%;
 		padding-left: 10px;
 	}
 	
@@ -504,7 +493,7 @@ table.pretty caption {
 	font-weight: bold;
 	color: #000000;
 	font-size: 34px;
-	padding-bottom: 10px;
+	padding-bottom: 7px;
 	padding-top: 5px;
 	padding-left: 5px;
 }

@@ -246,7 +246,8 @@ var blooms = (function($, d3, console) {
         }
 
         //end of hack
-
+        ratings.reverse();
+        
         result = compileEigenvectorsAndRatings(eigens, ratings);
         showfunc({
             points: result[0],
@@ -406,7 +407,6 @@ var blooms = (function($, d3, console) {
                 $('#go-back').click(function() {
                     _this.remove();
                     //_this.transition().duration(500).style("opacity", "0");
-
                     /* Remove this bloom from our bookkeeping array. */
                     var index = $.inArray(window.current_uid, window.blooms);
                     if (index >= 0) {
@@ -415,7 +415,7 @@ var blooms = (function($, d3, console) {
                     
                     /* Load more blooms if none left */
                     try {
-                    if (window.blooms.length === 0) {
+                    if (window.blooms.length === 1) {
                         console.log("here");
                         window.blooms = undefined; //needed to avoid infinite recursing
                         utils.showLoading("Loading more ideas...", function() {
