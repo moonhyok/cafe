@@ -382,6 +382,12 @@ $(document).ready(function() {
         //rate.initMenubar();
     });
     
+    $('.dialog-continue-ready').click(function() {
+        $('.dialog-continue').hide();
+        rate.initMenubar();
+        $('.scorebox').show();
+    });
+    
     $('.dialog-yourmug-ready').click(function() {
         $('.dialog-yourmug').slideUp();
         rate.initMenubar();

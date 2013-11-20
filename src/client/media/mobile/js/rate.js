@@ -353,6 +353,9 @@ $(document).ready(function() {
     $('.comment-submit-btn').click(function() {
         window.comment = $('#entered-comment').val();
         $('.comment-input').slideUp();
+        $('.dialog-continue').show();
+        $('.scorebox').hide();
+        $('.menubar').hide();
         rate.sendComment($('#entered-comment').val());
         //accounts.showRegister();
     });
