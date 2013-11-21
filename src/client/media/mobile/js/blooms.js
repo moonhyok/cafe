@@ -246,7 +246,7 @@ var blooms = (function($, d3, console) {
         }
 
         //end of hack
-        ratings.reverse();
+        //ratings.reverse();
         
         result = compileEigenvectorsAndRatings(eigens, ratings);
         showfunc({

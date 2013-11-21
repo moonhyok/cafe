@@ -813,7 +813,8 @@ table.pretty caption {
    }
    
    .rate-username{
-	 padding-top: 3px;
+	 padding-top: 10px;
+	 font-size: 16px;
    }
 
   .avg-grades div {
