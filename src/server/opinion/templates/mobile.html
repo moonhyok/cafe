@@ -189,21 +189,19 @@ function update_score(statement) {
 
 <!-- <div class='rate-loading'><img src='img/ajax-loader.gif'>&nbsp; Comment loading...</div> -->
 <div class='rate'>
-  <div class='header'>Topic: {{ topic }}</div>
+  <!--<div class='header'>Topic: {{ topic }}</div>-->
     <div class="answerwrapper">
       <span class="rate-username"></span>
       <textarea id='commentInput' class='answer' readonly="true"></textarea>              
       <div class='sliders'>
-        
-        <p align="right">
-        <a href="#" style="font-size: 12px !important;" id="flag">Inappropriate or Irrelevant?</a>
+        <div style="text-align: right">
+        <a href="#" style="font-size: 11px !important;" id="flag">Inappropriate or Irrelevant?</a>
         <!--<select name="flip-1" id="flip-1" class="flip-1" data-role="slider" data-mini="true" data-theme="a">
 	<option value="no">No</option>
 	<option value="yes">Yes</option>
         </select>-->
-        </p>
-                
-        <hr>
+        </div>
+            <hr>   
         How creative is this idea?<br/>
         <div class="slider-range-labels">
           <div class="alignleft">&larr;Non Creative</div>
@@ -211,11 +209,9 @@ function update_score(statement) {
         </div>
         <div style="clear: both;"></div>
 
-        <div id="slider1" class="rating-slider"></div>
+        <div id="slider1" class="rating-slider" style="padding-bottom: 10px;"></div>
 
         <!--<input data-track-theme='b' data-theme='a' type='range' name='slider1' id='slider1' value='50' min='0' max='100' animate='true'/> -->
-
-        <hr>
 
         How beneficial is this for your community?<br/>
         <div class="slider-range-labels">
@@ -226,9 +222,7 @@ function update_score(statement) {
 
         <div id="slider2" class="rating-slider"></div>
         
-        <!-- <input data-track-theme='b' data-theme='a' type='range' name='slider2' id='slider2' value='50' min='0' max='100' animate='true'/> -->
-        <hr>
-                  
+        <!-- <input data-track-theme='b' data-theme='a' type='range' name='slider2' id='slider2' value='50' min='0' max='100' animate='true'/> -->       
         <center>
           <div style="width: 100%;max-width: 300px;">
             <button type='submit' data-theme='a' id='go-back' onClick='rate.doneRating()' data-icon="check"><font size="5">Next</font></button>
@@ -688,11 +682,10 @@ The Digital CRC for California is a new UC Berkeley project in collaboration wit
 </div>
 
 <div class='dialog' style="display: none;">
-  <br/>
     <div class='dialog-text1'>
       <center>
       <div style="width:100%;font-size:32px;">The Discussion</div>
-      <img class="header-img-topic" src="{{ url_root }}/media/mobile/img/cafe/map_teaser.png" class="center" style="width:150px;padding-top:5px;padding-bottom: 5px;"><br>
+      <img class="header-img-topic" src="{{ url_root }}/media/mobile/img/cafe/map_teaser.png" class="center" style="width:150px;padding-top:3px;padding-bottom: 3px;"><br>
       </center>
       The discussion topic is:<br/><strong>"{{ topic }}"</strong>
       <center>

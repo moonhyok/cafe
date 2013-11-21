@@ -329,7 +329,7 @@ var blooms = (function($, d3, console) {
 
             // TODO: this shouldn't be hardcoded, instead $('.top-bar').height()
             // but calling that here is before bar is loaded, so fix that
-            var topBarHeight = 100;
+            var topBarHeight = 90;
 
             var height = $(window).height()- margin.bottom - margin.top - topBarHeight;
 
