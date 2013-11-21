@@ -314,12 +314,12 @@ var blooms = (function($, d3, console) {
             // if that changes, change this too
 
         var margin = 0;
-        var marginVal = $(window).width() < 500 ? 50 : 100;
+        var marginVal = $(window).width() < 500 ? 40 : 100;
 
         margin = {
             top: marginVal,
-            left: marginVal,
-            right: marginVal,
+            left: marginVal - 10 ,
+            right: marginVal ,
             bottom: marginVal
             };
 
@@ -371,7 +371,7 @@ var blooms = (function($, d3, console) {
             })
             .attr("width", "110") //if this changes, change the margin above
             .attr("height", "110")
-            .attr("opacity", function(d){                
+            .attr("opacity", function(d) {               
                     if (window.user_score == 0 && d.uid == "curUser")
                         return "0";
                     else
@@ -423,11 +423,12 @@ var blooms = (function($, d3, console) {
                             populateBlooms();
                         });
                         utils.hideLoading(500);
-                    } } catch(err){ /* undefined variable blooms. */ };
+                    } } catch(err){ /* undefined variable blooms. */ }
 
                 });
             });
         });
+    $('#d3').height($(window).height() - $('.top-bar').height());
     }
 
     /** Handles a users entrance into the garden if they are already authenticated. */
@@ -455,6 +456,12 @@ $(document).ready(function() {
     if (accounts.setAuthenticated()) {
         blooms.alreadyAuthenticated();
     }
+
+    $('#d3').height($(window).height() - $('.top-bar').height());
+
+    $('.top-bar').resize(function() {
+        $('#d3').height($(window).height() - $('.top-bar').height());
+    });
 
     $(window).resize(function() {
         // TODO: this needs to occur iff substantial resize
