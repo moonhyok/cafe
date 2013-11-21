@@ -40,6 +40,7 @@ import urllib
 import datetime
 import socket
 import time
+import datetime
 try:
     import json
 except ImportError:
@@ -60,6 +61,22 @@ if CUSTOM_LEADERBOARD_LISTS or HAVE_ADDITIONAL_QUESTIONS:
 def index(request):
     create_visitor(request)
     return render_to_response('app.html', context_instance = RequestContext(request, {'client_settings':get_client_settings()}))
+
+#check if we should display report card for user with entry code( deal with refreshing and revisiting)
+def prompt_report_card(user):
+    if user.is_authenticated():
+       last_rating=UserRating.objects.filter(user__exact=user).filter(is_current__exact=True)
+       last_visit_day=datetime.datetime.now()-last_rating[0].created
+       for i in range(1,len(last_rating)):
+           difference=datetime.datetime.now()-last_rating[i].created
+           if difference<last_visit_day:
+              last_visit_day=difference
+       if last_visit_day.seconds<=60:
+          return False
+       else:
+          return True
+    else:
+       return True
 
 def mobile(request,entry_code=None):
     create_visitor(request)
@@ -86,6 +103,7 @@ def mobile(request,entry_code=None):
     random_password = ''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(10));
 
     return render_to_response('mobile.html', context_instance = RequestContext(request, {'url_root' : settings.URL_ROOT,
+                                                                                         'returning_prompt_report_card': str(prompt_report_card(request.user)).lower(),
 											 'loggedIn' : str(request.user.is_authenticated()).lower(),
 											 'change_prompt' : str(request.user.is_authenticated()).lower(),
 											 'client_data': mobile_client_data(request),
