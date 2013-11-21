@@ -268,7 +268,7 @@ function update_score(statement) {
             <tr>
               <td style="height: 45px;">
                 {% ifnotequal statement.statement '' %}
-                <div class='slider-question'>{{statement.id}}. {{ statement.statement }} </div>
+                <div class='slider-question'><script>var sid={{statement.id}}-1;var total={{statements|length}};document.write(total-sid);</script>. {{ statement.statement }} </div>
 <!--                <p class='slider-question'> {{ statement.statement }} </p>
 
                 <div id="grades" class="slider-agree-labels">
