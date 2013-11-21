@@ -60,6 +60,14 @@ jQuery(document).ready(function() {
     range: [0, 100], start: 50, step: 5, handles: 1,connect: false
 
   });
+
+  // give the statement sliders some color
+  var _grades = {'A' : 7, 'B' : 30, 'C': 55, 'D': 80, 'F' : 98 };
+  $.map( _grades, function(position, letter) {
+    var span = $('<span>', { style : 'position: absolute; z-index: -1; top: 7px;', html: letter });
+    span.css( 'left', position + '%' );
+    $('.endslider-slider > .noUi-horizontal').append( span );
+  });
 });
 
 
@@ -315,18 +323,20 @@ function update_score(statement) {
       <tr>
         <td colspan="3">
                         {% ifnotequal statement.statement '' %}
-                <div id="grades" class="slider-agree-labels">
+                <!-- <div id="grades" class="slider-agree-labels">
                   <div style="text-align: left;width: 10%;">A<span></span></div>
                   <div style="text-align: center;width: 26.2%;">B<span></span></div>
                   <div style="text-align: center;width: 26.2%;">C<span></span></div>
                   <div style="text-align: center;width: 26.2%;">D<span></span></div>
                   <div style="text-align: right;width: 10%;">F<span></span></div>
             <!--<div class="alignleft">&larr; <i>F</i></div>
-            <div class="alignright"><i>A+</i> &rarr;</div>-->
-          </div>
+            <div class="alignright"><i>A+</i> &rarr;</div>--/
+          </div> -->
           <!--<div style="clear: both;"></div>-->
 
-          <br><div id="s{{statement.id}}" data-statement="{{statement.id}}" class="endslider-slider" style=""></div>
+          <br><div id="s{{statement.id}}" data-statement="{{statement.id}}" class="endslider-slider statement-slider" style="">
+
+          </div>
           <!-- <input type='range' id='s{{statement.id}}' data-theme="d" name='s{{statement.id}}' class='s{{statement.id}}' value='50' min='0' max='100' step="5" style=""/> -->
 
           {% else %}
@@ -451,6 +461,7 @@ function update_score(statement) {
       {% ifnotequal statement.statement '' %}
       <p class='slider-question'> {{ statement.statement }} </p>
 
+<!--
       <div id="grades" class="slider-agree-labels">
         <div style="text-align: left;width: 10%;">A<span></span></div>
         <div style="text-align: center;width: 26.2%;">B<span></span></div>
@@ -458,9 +469,10 @@ function update_score(statement) {
         <div style="text-align: center;width: 26.2%;">D<span></span></div>
         <div style="text-align: right;width: 10%;">F<span></span></div>
             <!--<div class="alignleft">&larr; <i>F</i></div>
-            <div class="alignright"><i>A+</i> &rarr;</div>-->
+            <div class="alignright"><i>A+</i> &rarr;</div>--/
           </div>
           <div style="clear: both;"></div>
+          -->
           
             <div id="c{{statement.id}}" class="change-rating-slider"></div>
 
