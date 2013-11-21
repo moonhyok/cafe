@@ -191,6 +191,7 @@ function update_score(statement) {
 <div class='rate'>
   <div class='header'>Topic: {{ topic }}</div>
     <div class="answerwrapper">
+      <span class="rate-username"></span>
       <textarea id='commentInput' class='answer' readonly="true"></textarea>              
       <div class='sliders'>
         
@@ -230,7 +231,7 @@ function update_score(statement) {
                   
         <center>
           <div style="width: 100%;max-width: 300px;">
-            <button type='submit' data-theme='a' id='go-back' onClick='rate.doneRating()' data-icon="check"><font size="5">Done Rating</font></button>
+            <button type='submit' data-theme='a' id='go-back' onClick='rate.doneRating()' data-icon="check"><font size="5">Next</font></button>
           </div>
         </center>
         

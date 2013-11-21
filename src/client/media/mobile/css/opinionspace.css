@@ -811,6 +811,10 @@ table.pretty caption {
 	border-radius: 15px;
 	border:3px solid #999999 !important;
    }
+   
+   .rate-username{
+	 padding-top: 3px;
+   }
 
   .avg-grades div {
 	font: 16px sans-serif;

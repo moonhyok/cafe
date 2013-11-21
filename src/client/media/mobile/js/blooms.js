@@ -392,6 +392,7 @@ var blooms = (function($, d3, console) {
                     return;
                 }
                 
+                $('.rate-username').html('Participant '+d.uid + '\'s response: ');
                 var commentData = rate.pullComment(d.uid, 'uid', comments);
                 var content = commentData.comment;
                 var cid = commentData.cid;
@@ -405,7 +406,7 @@ var blooms = (function($, d3, console) {
                     $('.rate').data('cid', cid);
                 });
                 $('#go-back').click(function() {
-                    _this.remove();
+                    _this.remove();    
                     //_this.transition().duration(500).style("opacity", "0");
                     /* Remove this bloom from our bookkeeping array. */
                     var index = $.inArray(window.current_uid, window.blooms);
