@@ -33,8 +33,16 @@ $.ajaxSetup({
 });
 
 jQuery(document).ready(function() {
-  $(".endslider-slider").noUiSlider({
-    range: [0, 100], start: 50, step: 5, handles: 1,connect: false,
+   $(".endslider-slider").noUiSlider({
+    range: [0, 100],
+    start: 50,
+    step: 5,
+    handles: 1,
+    connect: false,
+    slide: function() {
+      var id = $(this).data('statement');
+      $('#g' + id).html( score_to_grade( $(this).val() ) ).css('opacity', .3);
+    }
   }).change(function () {
 
    //$(this).attr('disabled', 'disabled');
@@ -137,7 +145,7 @@ function statementsComplete() {
 /** Updates statement number STATEMENT (which is of type number). */
 function update_score(statement) {
 
-  $('#g' + statement).html(score_to_grade($('#s' + statement).val()));
+  $('#g' + statement).css('opacity', 1);
   //$('#o' + statement).hide();
   $('#o' + statement).html(score_to_grade(medians[statement]*100))
   //$('#o' + statement).delay(200).fadeIn();
@@ -316,12 +324,12 @@ function update_score(statement) {
           </div>
           <!--<div style="clear: both;"></div>-->
 
-          <br><div id="s{{statement.id}}" class="endslider-slider" style=""></div>
+          <br><div id="s{{statement.id}}" data-statement="{{statement.id}}" class="endslider-slider" style=""></div>
           <!-- <input type='range' id='s{{statement.id}}' data-theme="d" name='s{{statement.id}}' class='s{{statement.id}}' value='50' min='0' max='100' step="5" style=""/> -->
 
           {% else %}
           <div style='display:none;'>
-              <br><div id="s{{statement.id}}" class="endslider-slider"></div>
+              <br><div id="s{{statement.id}}" data-statement="{{statement.id}}"  class="endslider-slider"></div>
             <!-- <input type='range' id='s{{statement.id}}' name='s{{statement.id}}' value='50' min='0' max='100' animate='true'/> -->
           </div>
           {% endifnotequal %}
