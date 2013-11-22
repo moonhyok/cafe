@@ -71,7 +71,7 @@ def prompt_report_card(user):
            difference=datetime.datetime.now()-last_rating[i].created
            if difference<last_visit_day:
               last_visit_day=difference
-       if last_visit_day.seconds<=60:
+       if last_visit_day.seconds<=60*60*24*30:
           return False
        else:
           return True
@@ -103,7 +103,7 @@ def mobile(request,entry_code=None):
     random_password = ''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(10));
 
     return render_to_response('mobile.html', context_instance = RequestContext(request, {'url_root' : settings.URL_ROOT,
-                                                                                         'returning_prompt_report_card': "false",#str(prompt_report_card(request.user)).lower(),
+                                                                                         'returning_prompt_report_card': str(prompt_report_card(request.user)).lower(),
 											 'loggedIn' : str(request.user.is_authenticated()).lower(),
 											 'change_prompt' : str(request.user.is_authenticated()).lower(),
 											 'client_data': mobile_client_data(request),
