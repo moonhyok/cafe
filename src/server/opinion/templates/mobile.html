@@ -63,7 +63,7 @@ jQuery(document).ready(function() {
   });
 
   // give the statement sliders some color
-  var _grades = {'A' : 7, 'B' : 30, 'C': 55, 'D': 80, 'F' : 98 };
+  var _grades = {'A' : 5, 'B' : 25, 'C': 50, 'D': 75, 'F' : 96 };
   $.map( _grades, function(position, letter) {
     var span = $('<span>', { style : 'position: absolute; z-index: -1; top: 7px;', html: letter });
     span.css( 'left', position + '%' );
@@ -118,9 +118,9 @@ function score_to_grade(score1) {
   
   if (score == 100)
     return 'A+';
-  else if (score > 93)
+  else if (score > 92)
     return 'A';
-  else if (score > 87)
+  else if (score > 86)
     return 'A-';
   else if (score > 81)
     return 'B+';
