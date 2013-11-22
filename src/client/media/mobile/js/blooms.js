@@ -442,8 +442,8 @@ var blooms = (function($, d3, console) {
         accounts.initLoggedInFeatures();
         //TOFIX utils.hideLoading();
         $('.landing').hide();
-        //if(window.conf.RETURNING_PROMPT_REPORT_CARD){
-        //$('.endsliders').slideDown();}
+        if(window.conf.RETURNING_PROMPT_REPORT_CARD){
+        $('.endsliders').slideDown();}
     }
 
     return {
