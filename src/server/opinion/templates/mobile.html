@@ -348,7 +348,7 @@ function update_score(statement) {
       {% endfor %}
 
     <center>
-          <div style="width: 100%; max-width: 300px;">
+          <div style="width: 100%; max-width: 300px;padding-bottom:30px;">
       <button type='submit' data-theme='e' class='done-endsliders-btn' data-icon="arrow-r"><font size="5">Next</font></button>
     </div> 
     </center>
@@ -403,8 +403,8 @@ function update_score(statement) {
        </tr>
        {%endfor%}
       </table>
-      <div style="width:150px;">
-        <button data-theme='c' data-mini="true" data-icon="arrow-r" onclick="$('.aggstat1').hide();$('.aggstat2').show();">Next</button>
+      <div style="width:300px;">
+        <button data-theme='e' data-icon="arrow-r" onclick="$('.aggstat1').hide();$('.aggstat2').show();">Next</button>
       </div>
       
     </div>          
@@ -421,25 +421,25 @@ function update_score(statement) {
        </div>
 
        <script type="text/javascript" src="{{ url_root }}/media/mobile/js/timelineMug_animation_json.js"></script> 
-    <div style="width:150px;">
-     <button data-theme='c' data-mini="true" data-icon="arrow-r" onclick="$('.aggstat2').hide();$('.aggstat3').show();">Next</button>
+    <div style="width:300px;">
+     <button data-theme='e' data-icon="arrow-r" onclick="$('.aggstat2').hide();$('.aggstat3').show();">Next</button>
     </div>
     </div>
     
     <div class="aggstat3" style="display:none;">
         California map <br/>  
     <iframe width="300" height="225" src="//www.youtube.com/embed/hDsu_R2odOA" frameborder="0" allowfullscreen></iframe>
-    <div style="width:150px;">
-    <button data-theme='c' data-mini="true" data-icon="arrow-r" onclick="$('.aggstat3').hide();$('.aggstat1').show();">Next</button>
+    <div style="width:300px;">
+    <button data-theme='e'  data-icon="arrow-r" onclick="$('.aggstat3').hide();$('.aggstat1').show();">Next</button>
     </div>
     </div>
     <div style="width:300px;">
-      <button type='submit' data-theme='a' class='edit-comment-done-btn'>Back</button>
+      <button type='submit' data-theme='e' class='edit-comment-done-btn'>Back to Discussion</button>
     </div>
       </center>
   </div>      
     
-    <div class='comment-region'>
+    <div class='comment-region' style="display:none;">
       <div class='comment-text'></div>
 
       <!--{% if client_settings.ALLOW_EDIT_COMMENT == "true" %}
@@ -748,10 +748,11 @@ The Digital CRC for California is a new UC Berkeley project in collaboration wit
   <br/>
     <div class='dialog-score-text1'>
       <center>
-      <div style="width:100%;font-size:32px;">Earning Points</div>
+      <!--<div style="width:100%;font-size:32px;">Earning Points</div>-->
       <img class="header-img-topic" src="{{ url_root }}/media/mobile/img/cafe/points_teaser.png" class="center" style="width:90%;padding-top:3px;"><br>
       </center>
-      Rating ideas earns points. Rate one more idea and then you can leave one of your own.
+      You earn points by rating others and when others rate your idea.
+      Rate one more person's idea before entering your own...
       <center>
       <div style="width: 150px;">
         <button type='submit' data-theme='e' class='dialog-score-ready' data-icon="arrow-r">Next</button>
@@ -767,7 +768,7 @@ The Digital CRC for California is a new UC Berkeley project in collaboration wit
       <div style="width:100%;font-size:32px;">Your Mug</div>
       <img class="header-img-topic" src="{{ url_root }}/media/mobile/img/cafe/yourmug-teaser.png" class="center" style="width:150px;padding-top:3px;"><br>
       </center>
-      Your mug is highlighted with a yellow coaster. To leave your idea, click on your mug.<br/>
+      To enter your own idea, click on your mug (highlighted in yellow).<br/>
       <center>
       <div style="width: 150px;">
         <button type='submit' data-theme='e' class='dialog-yourmug-ready' data-icon="arrow-r">Next</button>
@@ -780,8 +781,8 @@ The Digital CRC for California is a new UC Berkeley project in collaboration wit
   <br/>
     <div class='dialog-continue-text1'>
       <center>
-      <div style="width:100%;font-size:32px;">Response Saved!</div>
-      <img class="header-img-topic" src="{{ url_root }}/media/mobile/img/cafe/continue_teaser.png" class="center" style="width:150px;padding-top:3px;"><br>
+      <div style="width:100%;font-size:32px;padding-bottom:15px;">Response Saved!</div>
+      <!--<img class="header-img-topic" src="{{ url_root }}/media/mobile/img/cafe/continue_teaser.png" class="center" style="width:150px;padding-top:3px;"><br>-->
       </center>
       Continue to read and evaluate other's ideas to earn more points.
       You can see detailed statistics in the stats page.
