@@ -364,7 +364,6 @@ var blooms = (function($, d3, console) {
                 return window.url_root + "/media/mobile/img/cafe/cafe" + Math.floor((Math.random()*6)).toString() + ".png";
             })
             .attr('x', function(d) {
-                console.log(canvasx(d.x)+','+canvasx(d.y))
                 return canvasx(d.x);
             })
             .attr('y', function(d) {

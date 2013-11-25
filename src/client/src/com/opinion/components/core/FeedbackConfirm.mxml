@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<mx:Module xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:utils="com.opinion.utils.*">
-	<mx:Text width="100%" fontSize="14" text="Thank you for your report! It is extremely valuable to us to continue improving the system!"/>
-	<mx:Box paddingTop="10" paddingLeft="10">
-		<utils:LoggedButton label="Close" styleName="blueButtonLarge" click="{this.parentApplication.popup.removeMe()}"/>
-	</mx:Box>
-</mx:Module>

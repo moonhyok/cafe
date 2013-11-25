@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<mx:Module xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" width="100%">
-	<mx:Text width="100%" fontSize="15" color="#000000">
-		<mx:htmlText>
-			<![CDATA[Privacy Policy: Only your username and location will be visible to others, but your email address won't be shared with anyone.]]>
-		</mx:htmlText>
-	</mx:Text>
-</mx:Module>
