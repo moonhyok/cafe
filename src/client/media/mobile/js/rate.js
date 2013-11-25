@@ -10,11 +10,30 @@ var rate = (function($, d3, console) {
     function updateDescriptions(answer, content) {
         answer.value = content;
     }
+    
+    function logUserEvent(logtype,buttonType) {
+        $.ajax({
+            type: "POST",
+            url: window.url_root + "/log/userevent/",
+            data: {
+                'log_type': logtype,
+                'details': buttonType
+            },
+            success: function(data) {
+                if (data.hasOwnProperty('success')) {
+                    console.log("Event logged");
+                }
+            },
+            error: function() {
+                console.log("Log save failed");
+            }
+        });
+    }
 
     function updateScoreHolders() {
         $('.score-value').html((~~(window.user_score * window.conf.SCORE_SCALE_FACTOR)).toString());
     }
-
+    
     function resetRatingSliders() {
         setTimeout(function() {
             $("#slider1").val(50); //.slider("refresh");
@@ -71,6 +90,7 @@ var rate = (function($, d3, console) {
         //note: this done-rating button is mapped twice, see below in populateBlooms #go-back.
         resetRatingSliders();
         logScore();
+        logUserEvent(4,'rated');
 
             sendAgreementRating({
                 'r1': $("#slider1").val(),
@@ -250,7 +270,7 @@ var rate = (function($, d3, console) {
             }
         });
     }
-
+    
     //@rating - the values of the sliders and the cid to send the data to the server 
     //          rating is of the form {r1: value, r2: value, cid: cid}, where r1 is for agreement slider
     // sends the value assoicated with the agreement rating for the cid found in the rating. 
@@ -328,6 +348,7 @@ var rate = (function($, d3, console) {
         'changeInstruction' : changeInstruction,
         'initScore' : initScore,
         'initMenubar' : initMenubar,
+        'logUserEvent' : logUserEvent,
         'doneRating' : doneRating,
         'pullComment' : pullComment,
         'getComment' : getComment,
@@ -347,6 +368,7 @@ $(document).ready(function() {
     $('.score-label').text(utils.toTitleCase(window.conf['YOUR_SCORE_LANGUAGE']).trim().replace(':', '') + ': ');
 
     $('.done-endsliders-btn').click(function() {
+        rate.logUserEvent(5,'sliders finished');
         rate.storeSliders(num_sliders);
     });
 
@@ -356,6 +378,7 @@ $(document).ready(function() {
         $('.dialog-continue').show();
         $('.scorebox').hide();
         $('.menubar').hide();
+        rate.logUserEvent(6,'comment submitted');
         rate.sendComment($('#entered-comment').val());
         //accounts.showRegister();
     });
