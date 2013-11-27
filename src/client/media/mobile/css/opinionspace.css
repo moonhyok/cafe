@@ -41,7 +41,7 @@
 /* This prevents the jQuery navbar buttons from staying pressed */
 .ui-footer .ui-navbar .ui-btn-active {
 	border: 1px solid       #222;
-	background:             #333333;
+	background:             #04376c;
 	font-weight: bold;
 	color:                     #fff;
 	background-image: -webkit-gradient(linear, left top, left bottom, from( #555), to( #333));
@@ -174,7 +174,14 @@ table.pretty caption {
 
 	body {
 		/*font-family: "Helvetica Neue", Arial, sans-serif;*/
-		background-color: #FAEBCD;
+		background: #C7E1EB; /* Old browsers */
+		background: -moz-linear-gradient(top, #C7E1EB 0%, #FFFFFF 100%); /* FF3.6+ */
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#C7E1EB), color-stop(100%,#FFFFFF)); /* Chrome,Safari4+ */
+		background: -webkit-linear-gradient(top, #C7E1EB 0%,#FFFFFF 100%); /* Chrome10+,Safari5.1+ */
+		background: -o-linear-gradient(top, #C7E1EB 0%,#FFFFFF 100%); /* Opera 11.10+ */
+		background: -ms-linear-gradient(top, #C7E1EB 0%,#FFFFFF 100%); /* IE10+ */
+		background: linear-gradient(to bottom, #C7E1EB 0%,#FFFFFF 100%); /* W3C */
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#C7E1EB', endColorstr='#FFFFFF',GradientType=0 ); /* IE6-9 */
 		height: 100%;
 		padding: 0 !important;
 		/* use helvetica neue, bootstrap style */
@@ -183,7 +190,7 @@ table.pretty caption {
 
 	strong {
 		font-weight: bold;
-		color: #FFE366;
+		color: #444444;
 	}
 	strong.go-back {
 		color: #54D6F6;
@@ -211,8 +218,9 @@ table.pretty caption {
 
 	.header {
 		text-align: left;
-		background-color: #3D3D3D;
+		background-color: #04376c;
 		color: white;
+		font-weight: bold;
 		text-shadow: none;
 		width: 100%;
 		font-size: 15px;
@@ -227,36 +235,29 @@ table.pretty caption {
 		left: 0px;
 		z-index: 999;
 		text-shadow: none;
-		font-size: 16px;
-		font-weight:bold;
+		font-size: 15px !important;
 		width: 100%;
 		line-height: 20px;
-		padding: 10px 0px;
-		padding-left: 10px;
+		padding: 5px 0px;
+		padding-left: 3px;
 		text-align: left;
 	}
 	
 	.reportcard{
-		background-color: #FAEBCD;
+		/*background-color: #FAEBCD;*/
 		/*font-family: "Courier New", Courier, monospace;*/
 		color: black;
 		text-shadow: none;
-		width: 90%;
+		width: 100%;
 		height: 100%;
-		padding-right: 20px;
-		padding-left: 10px;
 		padding-top: 20px;
 	}
 	
 	.comment-panel{
 		/*background: url('../img/cafe/cafe_notebook.png') repeat-y;*/
 		color: black;
-		background-color: #FAEBCD;
-		font-weight:bold;
 		text-shadow: none;
-		width: 95%;
-		padding-right: 10px;
-		padding-left: 10px;
+		width: 100%;
 		height: 100%;
 	}
 	
@@ -327,7 +328,15 @@ table.pretty caption {
 		right: 0;
 		width: 100%;
 		height: 100%;
-		background-color: #FAEBCD;
+		/*background-color: #FAEBCD;*/
+		background: #C7E1EB; /* Old browsers */
+		background: -moz-linear-gradient(top, #C7E1EB 0%, #FFFFFF 100%); /* FF3.6+ */
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#C7E1EB), color-stop(100%,#FFFFFF)); /* Chrome,Safari4+ */
+		background: -webkit-linear-gradient(top, #C7E1EB 0%,#FFFFFF 100%); /* Chrome10+,Safari5.1+ */
+		background: -o-linear-gradient(top, #C7E1EB 0%,#FFFFFF 100%); /* Opera 11.10+ */
+		background: -ms-linear-gradient(top, #C7E1EB 0%,#FFFFFF 100%); /* IE10+ */
+		background: linear-gradient(to bottom, #C7E1EB 0%,#FFFFFF 100%); /* W3C */
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#C7E1EB', endColorstr='#FFFFFF',GradientType=0 ); /* IE6-9 */
 		/*background-image:url('../img/cafe/cafe_bg.jpg');*/
 		z-index: 999;
 		overflow-y: auto;
@@ -348,12 +357,19 @@ table.pretty caption {
 	.scorebox{
 		text-shadow: none;
 		font-weight: bold;
-		color: #FFE366;
-		position:absolute;
+		color: #FFFFFF;
+		position: absolute;
 		bottom:30px;
 		left:3px;
-		background-color: rgba(0,0,0,.5);
+		background-color: rgba(4,44,108,.5);
 		z-index: 999;
+	}
+	
+	.scorebox-fake{
+		text-shadow: none;
+		font-weight: bold;
+		color: #FFFFFF;
+		background-color: rgba(4,44,108,1);
 	}
 
 	.sliders, .reg-sliders{
@@ -372,7 +388,14 @@ table.pretty caption {
 		right: 0;
 		width: 100%;
 		height: 100%;
-		background-color: #FAEBCD;
+		background: #C7E1EB; /* Old browsers */
+		background: -moz-linear-gradient(top, #C7E1EB 0%, #FFFFFF 100%); /* FF3.6+ */
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#C7E1EB), color-stop(100%,#FFFFFF)); /* Chrome,Safari4+ */
+		background: -webkit-linear-gradient(top, #C7E1EB 0%,#FFFFFF 100%); /* Chrome10+,Safari5.1+ */
+		background: -o-linear-gradient(top, #C7E1EB 0%,#FFFFFF 100%); /* Opera 11.10+ */
+		background: -ms-linear-gradient(top, #C7E1EB 0%,#FFFFFF 100%); /* IE10+ */
+		background: linear-gradient(to bottom, #C7E1EB 0%,#FFFFFF 100%); /* W3C */
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#C7E1EB', endColorstr='#FFFFFF',GradientType=0 ); /* IE6-9 */
 		/*background-image:url('../img/cafe/cafe_bg.jpg');*/
 		z-index: 999;
 		overflow-y: auto;
@@ -380,7 +403,6 @@ table.pretty caption {
 	}
 	
 	.registerpanel{
-		background-color: #FAEBCD;
 		color: black;
 		text-shadow: none;
 		width: 100%;
@@ -388,11 +410,9 @@ table.pretty caption {
 	}
 	
 	.edit-comment-panel{
-		background-color: #FAEBCD;
 		color: black;
 		text-shadow: none;
 		width: 100%;
-		padding-left: 10px;
 	}
 	
 	.loginpanel{
@@ -436,8 +456,15 @@ table.pretty caption {
 		right: 0;
 		width: 100%;
 		height: 100%;
+		background: #C7E1EB; /* Old browsers */
+		background: -moz-linear-gradient(top, #C7E1EB 0%, #FFFFFF 100%); /* FF3.6+ */
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#C7E1EB), color-stop(100%,#FFFFFF)); /* Chrome,Safari4+ */
+		background: -webkit-linear-gradient(top, #C7E1EB 0%,#FFFFFF 100%); /* Chrome10+,Safari5.1+ */
+		background: -o-linear-gradient(top, #C7E1EB 0%,#FFFFFF 100%); /* Opera 11.10+ */
+		background: -ms-linear-gradient(top, #C7E1EB 0%,#FFFFFF 100%); /* IE10+ */
+		background: linear-gradient(to bottom, #C7E1EB 0%,#FFFFFF 100%); /* W3C */
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#C7E1EB', endColorstr='#FFFFFF',GradientType=0 ); /* IE6-9 */
 		/*background-image:url('../img/cafe/cafe_bg.jpg');*/
-		background-color: #FAEBCD;
 		overflow: auto;
 		z-index: 999;
 	}
@@ -450,7 +477,15 @@ table.pretty caption {
 		width: 100%;
 		height: 100%;
 		/*background-image:url('../img/cafe/cafe_bg.jpg');*/
-		background-color: #FAEBCD;
+		/*background-color: #FAEBCD;*/
+		background: #C7E1EB; /* Old browsers */
+		background: -moz-linear-gradient(top, #C7E1EB 0%, #FFFFFF 100%); /* FF3.6+ */
+		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#C7E1EB), color-stop(100%,#FFFFFF)); /* Chrome,Safari4+ */
+		background: -webkit-linear-gradient(top, #C7E1EB 0%,#FFFFFF 100%); /* Chrome10+,Safari5.1+ */
+		background: -o-linear-gradient(top, #C7E1EB 0%,#FFFFFF 100%); /* Opera 11.10+ */
+		background: -ms-linear-gradient(top, #C7E1EB 0%,#FFFFFF 100%); /* IE10+ */
+		background: linear-gradient(to bottom, #C7E1EB 0%,#FFFFFF 100%); /* W3C */
+		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#C7E1EB', endColorstr='#FFFFFF',GradientType=0 ); /* IE6-9 */
 		overflow: auto;
 		z-index: 999;
 	}
@@ -475,38 +510,37 @@ table.pretty caption {
 	}
 
 .landing-header {
-	font-family: sans-serif;
+	font-family: futura, verdana, sans-serif;
 	text-shadow: none;
 	color: #FFFFFF;
-	font-size: 34px;
+	font-size: 42px;
 	text-align: left;
-	font-weight: bold;
+	text-align: center;
 	width: 100%;
 	padding-left: 5px;
+	line-height: 42px;
 }
 
 .basic-header {
-	font-family: sans-serif;
+	font-family: futura, verdana, sans-serif;
 	text-shadow: none;
-	font-weight: bold;
+	text-align: center;
 	color: #000000;
 	font-size: 34px;
+	line-height: 30px;
 	padding-bottom: 7px;
 	padding-top: 5px;
-	padding-left: 5px;
 }
 
 .landing-desc {
 	padding-top: 10px;
 	padding-bottom: 10px;
-	font-family: sans-serif;
+	font-family: myriad pro, trebuchet ms, arial, sans-serif;
 	text-shadow: none;
-	font-weight: bold;
-	color: #444444;
-	font-size: 22px;
+	color: #000000;
+	font-size: 28px;
 	height: 100%;
 	left: 0;
-	padding-left: 5px;
 	text-align: left;
 }
 
@@ -515,8 +549,8 @@ table.pretty caption {
 	text-align: left;
 	/*background: url('../img/cafe/cafe_chalkboard.jpg');*/
 	/*border: 4px #966F33 solid;*/
-	background-color: #333333;
-	padding-top: 60px;
+	background-color: #04376c;
+	padding-top: 30px;
 	padding-bottom: 10px;
 	vertical-align: middle;
 	/* less padding on the bottom and top so both buttons can show up*/
@@ -555,13 +589,12 @@ table.pretty caption {
 	height: 120px !important;
 	padding-right: 10px;
 	font-size: 14px !important;
-	font-family: sans-serif;
+	font-family: futura, verdana, sans-serif;
 	text-shadow: none !important;
 }
 
 .answerwrapper {
 	/*background-color: #E7E1D8;*/
-	background-color: #FAEBCD;
 	/*background: url('../img/cafe/cafe_notebook.png') repeat-y;*/
 	width: 100%;
 	text-shadow: none;
@@ -578,7 +611,15 @@ table.pretty caption {
 	width: 100%;
 	height: 100%;
 	/*background-color: #E7E1D8;*/
-	background-color: #FAEBCD;
+	/*background-color: #FAEBCD;*/
+	background: #C7E1EB; /* Old browsers */
+	background: -moz-linear-gradient(top, #C7E1EB 0%, #FFFFFF 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#C7E1EB), color-stop(100%,#FFFFFF)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, #C7E1EB 0%,#FFFFFF 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, #C7E1EB 0%,#FFFFFF 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, #C7E1EB 0%,#FFFFFF 100%); /* IE10+ */
+	background: linear-gradient(to bottom, #C7E1EB 0%,#FFFFFF 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#C7E1EB', endColorstr='#FFFFFF',GradientType=0 ); /* IE6-9 */
 	/*background-image:url('../img/cafe/cafe_bg.jpg');*/
 	z-index: 999;
 	overflow-y: auto;
@@ -644,19 +685,14 @@ table.pretty caption {
 
 .dialog-text1 {
 	position: relative;
-	display: table-cell;
         vertical-align: middle;
-	background-color: rgba(50, 50, 50, 1.0);
-	width: 320px;
-	height: 80%;
-	-moz-border-radius: 15px;
-	border-radius: 15px;
-	padding-top: 3px;
+	color: #000000;
+	background: #C7E1EB;
+	width: 100%;
+	height: 100%;
 	text-decoration: none;
-	color: #FFFFFF;
 	text-shadow: none;
-	padding-right: 10px;
-	padding-left: 10px;
+	padding-left: 5px;
 	font-size: 23px;
 	line-height: 23px;
 }
@@ -672,18 +708,14 @@ table.pretty caption {
 
 .dialog-score-text1 {
 	position: relative;
-	display: table-cell;
         vertical-align: middle;
-	background-color: rgba(50, 50, 50, 1.0);
-	width: 320px;
-	height: 80%;
-	-moz-border-radius: 15px;
-	border-radius: 15px;
+	color: #000000;
+	background: #C7E1EB;
+	width: 100%;
+	height: 100%;
 	text-decoration: none;
-	color: #FFFFFF;
 	text-shadow: none;
-	padding-right: 10px;
-	padding-left: 10px;
+	padding-left: 5px;
 	font-size: 23px;
 	line-height: 23px;
 }
@@ -699,18 +731,14 @@ table.pretty caption {
 
 .dialog-continue-text1 {
 	position: relative;
-	display: table-cell;
         vertical-align: middle;
-	background-color: rgba(50, 50, 50, 1.0);
-	width: 320px;
-	height: 80%;
-	-moz-border-radius: 15px;
-	border-radius: 15px;
+	color: #000000;
+	background: #C7E1EB;
+	width: 100%;
+	height: 100%;
 	text-decoration: none;
-	color: #FFFFFF;
 	text-shadow: none;
-	padding-right: 10px;
-	padding-left: 10px;
+	padding-left: 5px;
 	font-size: 23px;
 	line-height: 23px;
 }
@@ -727,36 +755,28 @@ table.pretty caption {
 
 .dialog-yourmug-text1 {
 	position: relative;
-	display: table-cell;
         vertical-align: middle;
-	background-color: rgba(50, 50, 50, 1.0);
-	width: 320px;
-	height: 80%;
-	-moz-border-radius: 15px;
-	border-radius: 15px;
+	color: #000000;
+	background: #C7E1EB;
+	width: 100%;
+	height: 100%;
 	text-decoration: none;
-	color: #FFFFFF;
 	text-shadow: none;
-	padding-right: 10px;
-	padding-left: 10px;
+	padding-left: 5px;
 	font-size: 23px;
 	line-height: 23px;
 }
 
 .dialog-text2 {
 	position: relative;
-	display: table-cell;
         vertical-align: middle;
-	background-color: rgba(50, 50, 50, 1.0);
-	width: 320px;
-	height: 80%;
-	-moz-border-radius: 15px;
-	border-radius: 15px;
+	color: #000000;
+	background: #C7E1EB;
+	width: 100%;
+	height: 100%;
 	text-decoration: none;
-	color: #FFFFFF;
 	text-shadow: none;
-	padding-right: 10px;
-	padding-left: 10px;
+	padding-left: 5px;
 	font-size: 23px;
 	line-height: 23px;
 }
@@ -764,18 +784,15 @@ table.pretty caption {
 
 .dialog-text3 {
 	position: relative;
-	display: table-cell;
         vertical-align: middle;
-	background-color: rgba(50, 50, 50, 1.0);
-	width: 320px;
-	height: 80%;
-	-moz-border-radius: 15px;
-	border-radius: 15px;
+	color: #000000;
+	background: #C7E1EB;
+	width: 100%;
+	height: 100%;
 	text-decoration: none;
-	color: #FFFFFF;
 	text-shadow: none;
-	padding-right: 10px;
-	padding-left: 10px;
+	padding-left: 5px;
+	font-size: 23px;
 	line-height: 23px;
 }
 
@@ -789,12 +806,12 @@ table.pretty caption {
     }
 
     .axis text {
-      font-family: sans-serif;
+      font-family: futura, verdana, sans-serif;
       font-size: 10px;
     }
 
     .timeline-label {
-      font-family: sans-serif;
+      font-family: futura, verdana, sans-serif;
       font-size: 12px;
     }
     

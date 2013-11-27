@@ -177,7 +177,7 @@ function update_score(statement) {
     <!--<span class='inst-score'><span class='score-label'></span><span class='score-value'></span></span>
     <span class='inst-text'>{{ client_settings.INSTRUCTIONS_1 }}</span>-->
   </div>
-  <div data-role="header" data-theme="e" class='instructions' style="display:none">Click on a mug to begin</div>
+  <div class='instructions' data-role="header" data-theme="e" style="display:none">Click on a mug to begin</div>
 
   <div class="margin"><!--<br><br><br><br>--></div>
 </div>
@@ -187,7 +187,7 @@ function update_score(statement) {
   <!--<div class='header'>Topic: {{ topic }}</div>-->
     <div class="answerwrapper">
       <span class="rate-username"></span>
-      <textarea id='commentInput' class='answer' readonly="true"></textarea>              
+      <textarea id='commentInput' class='answer' readonly="true" style="overflow-y:scroll !important;"></textarea>              
       <div class='sliders'>
         <div style="text-align: right">
         <a href="#" style="font-size: 11px !important;" id="flag">Inappropriate or Irrelevant?</a>
@@ -235,26 +235,26 @@ function update_score(statement) {
         <p>Grade from A to F how well or poorly you feel California's elected officials are working to address the following key issues:</p>
       </div>-->
         <div class='reportcard'>
-           <div class="basic-header" style="font-size: 24px;padding-top: 5px;">Grade California's State Government</div>
+           <div class="basic-header" style="font-size: 32px;padding-top: 5px;">Grade California's State Government</div>
+          <center>
+            <div class="rc-sub-header" style="width:95%;text-align: left;padding-bottom:5px;">Please grade from A to F how well you feel California's elected officials are working to address the following 6 subjects:</div> 
            
-           <div class="rc-sub-header">Please grade from A to F how well you feel California's elected officials are working to address the following 6 subjects:</div> 
-          <br/>
-           <table class='cardtable' style="width:100%;padding-right:10px;background-color: #333333;color:#FFFFFF;">
+           <table class='cardtable' style="width:95%;background-color: #04376c;color:#FFFFFF;">
             <tr>
-              <td>
+              <td style="text-align: center;vertical-align: middle;">
                 Subject
               </td>
-              <td style="vertical-align:middle;width: 45px;">
+              <td style="vertical-align:middle;width: 45px;text-align: center;vertical-align: middle;">
                 My Grade
               </td>
-              <td style="vertical-align:middle;width: 45px;">
+              <td style="vertical-align:middle;width: 45px;text-align: center;vertical-align: middle;">
                 Avg. Grade
               </td>
             </tr>
            </table>
 
             {% for statement in statements %}
-            <table id="tr1{{statement.id}}" class='cardtable' style="width:100%;padding-right:10px;">
+            <table id="tr1{{statement.id}}" class='cardtable' style="width:95%;">
             <tr>
               <td style="height: 45px;">
                 {% ifnotequal statement.statement '' %}
@@ -322,6 +322,7 @@ function update_score(statement) {
  </table>
             <br>
       {% endfor %}
+          </center>
 
     <center>
           <div style="width: 100%; max-width: 300px;padding-bottom:30px;">
@@ -403,8 +404,9 @@ function update_score(statement) {
     </div>
     
     <div class="aggstat3" style="display:none;">
-        California map <br/>  
-    <iframe width="300" height="225" src="//www.youtube.com/embed/hDsu_R2odOA" frameborder="0" allowfullscreen></iframe>
+        California map <br/>
+        
+    <!--<iframe width="300" height="225" src="//www.youtube.com/embed/hDsu_R2odOA" frameborder="0" allowfullscreen></iframe>-->
     <div style="width:300px;">
     <button data-theme='e'  data-icon="arrow-r" onclick="$('.aggstat3').hide();$('.aggstat1').show();">Next</button>
     </div>
@@ -532,7 +534,7 @@ function update_score(statement) {
       <!--<div class = 'reg-header'>{{ client_settings.INSTRUCTIONS_5 }}</div>-->
       
         <div class= 'registerpanel'>
-            <div class="basic-header" style="font-size: 24px;padding-top: 5px;padding-bottom: 0px; width: 100%">To save your grades and join the discussion, just enter your zip code</div>
+            <div class="basic-header" style="font-size: 30px;padding-top: 5px;padding-bottom: 0px; width: 100%">To save your grades and join the discussion, just enter your zip code</div>
           <br>
           <form id='reg_form' class='form-horizontal' method='post' action='{{ url_root }}/accountsjson/register/' style="width: 95%; padding-left: 5px;">
             <input type='hidden' value='{{ topic }}' name='question'>
@@ -593,10 +595,11 @@ function update_score(statement) {
 <div class='comment-input'>
   <!--<div class = 'reg-header'>{{ client_settings.INSTRUCTIONS_6 }}</div>-->
     <div class='comment-panel'>
-        <div class="basic-header" style="font-size: 16px;">In what specific way would <u>YOU</u> recommend that California invest the current budget surplus?</div>
-        <textarea name='answer' id='entered-comment' style="width: 300px !important;height: 130px !important;padding-right: 10px;font-size: 16px;"> </textarea> 
+        <div style="font-size: 16px;padding-left: 7px;padding-right: 7px;">In what specific way would <u>YOU</u> recommend that California invest the current budget surplus?
+        <textarea name='answer' id='entered-comment' style="width: 300px !important;height: 130px !important;font-size: 16px;"> </textarea>
+        </div>
 
-        <div style="width: 300px;padding-bottom:15px;font-size:12px;color: #888888;">
+        <div style="padding-left: 7px;width: 300px;padding-bottom:15px;font-size:12px;color: #888888;">
         <input type="email" id='regemail' name='regemail' style="font-size: 16px !important;" placeholder="Email (Optional)" data-theme="b"/>
         You can receive periodic updates by email about how the discussion has changed. <a href="#">Privacy Policy</a>
         <button type='submit' data-theme='a' class='comment-submit-btn' data-icon='check'><font size="5">Save</font></button>
@@ -658,8 +661,8 @@ The Citizen Report Card for California is a new UC Berkeley project in collabora
     </div>
     
       <div class='landing-desc'>
-        <button data-theme='a' class='logout-start-over'><font size="5">Start Over</font></button>
-        <button data-theme='b' class='logout-login-again'><font size="5">Login again?</font></button>
+        <button data-theme='e' class='logout-start-over'><font size="5">Start Over</font></button>
+        <button data-theme='e' class='logout-login-again'><font size="5">Login again?</font></button>
       </div>
     
 </div>
@@ -667,25 +670,24 @@ The Citizen Report Card for California is a new UC Berkeley project in collabora
 <div class='landing'>
     <div class='landing-intro'>
       <div class='landing-header'>
-        California Report Card
+        California<br/>Report Card
       </div>
   </div>
       <div class='landing-desc'>
-        Grade and discuss the California government<br/><br/>
         <center>
-        <div style="width: 100%; max-width: 300px;">
+        <div style="width: 100%; max-width: 300px;text-align:left;">
+        Grade and discuss the California government<br/>
         <button type='submit' data-theme='e' class='first-time-btn' data-icon="star"><font size="5">Enter</font></button>
-        <button type='cancel' data-theme='a' class='login-btn' data-icon="info"><font size="5">About</font></button>
+        <button type='cancel' data-theme='e' class='login-btn' data-icon="info"><font size="5">About</font></button>
          </div>
         </center>
       </div>
 </div>
 
 <div class='dialog' style="display: none;">
-  <br/>
     <div class='dialog-text1'>
       <center>
-      <div style="width:100%;font-size:32px;">The Discussion</div>
+      <div class="basic-header" style="width:100%;">The Discussion</div>
       <img class="header-img-topic" src="{{ url_root }}/media/mobile/img/cafe/map_teaser.png" class="center" style="width:150px;padding-top:3px;padding-bottom: 3px;"><br>
       </center>
       The discussion topic is:<br/><strong>"{{ topic }}"</strong>
@@ -698,7 +700,7 @@ The Citizen Report Card for California is a new UC Berkeley project in collabora
 
     <div class='dialog-text2' style="display:none;">
       <center>
-      <div style="width:100%;font-size:32px;">The Discussion</div>
+      <div class="basic-header" style="width:100%;">The Discussion</div>
       <img class="header-img-topic" src="{{ url_root }}/media/mobile/img/cafe/cafe_click_idea.jpg" class="center" style="width:200px;padding-top:3px;"><br>
       </center>
       Each mug represents a participant's response to the discussion topic.
@@ -722,11 +724,14 @@ The Citizen Report Card for California is a new UC Berkeley project in collabora
 </div>
 
 <div class='dialog-score' style="display: none;">
-  <br/>
     <div class='dialog-score-text1'>
+      <br/>
       <center>
+        <div class="scorebox-fake" style="width: 200px;">
+          Your Score: 100
+        </div>
       <!--<div style="width:100%;font-size:32px;">Earning Points</div>-->
-      <img class="header-img-topic" src="{{ url_root }}/media/mobile/img/cafe/points_teaser.png" class="center" style="width:90%;padding-top:3px;"><br>
+      <!--<img class="header-img-topic" src="{{ url_root }}/media/mobile/img/cafe/points_teaser.png" class="center" style="width:200px;padding-top:3px;"><br>-->
       </center>
       You earn points by rating others and when others rate your idea.
       Rate one more person's idea before entering your own...
@@ -739,10 +744,9 @@ The Citizen Report Card for California is a new UC Berkeley project in collabora
 </div>
 
 <div class='dialog-yourmug' style="display: none;">
-  <br/>
     <div class='dialog-yourmug-text1'>
       <center>
-      <div style="width:100%;font-size:32px;">Your Mug</div>
+      <div class="basic-header" style="width:100%;">Your Mug</div>
       <img class="header-img-topic" src="{{ url_root }}/media/mobile/img/cafe/yourmug-teaser.png" class="center" style="width:150px;padding-top:3px;"><br>
       </center>
       To enter your own idea, click on your mug (highlighted in yellow).<br/>
@@ -755,10 +759,9 @@ The Citizen Report Card for California is a new UC Berkeley project in collabora
 </div>
 
 <div class='dialog-continue' style="display: none;">
-  <br/>
     <div class='dialog-continue-text1'>
       <center>
-      <div style="width:100%;font-size:32px;padding-bottom:15px;">Response Saved!</div>
+      <div class="basic-header" style="width:100%;">Response Saved!</div>
       <!--<img class="header-img-topic" src="{{ url_root }}/media/mobile/img/cafe/continue_teaser.png" class="center" style="width:150px;padding-top:3px;"><br>-->
       </center>
       Continue to read and evaluate other's ideas to earn more points.
