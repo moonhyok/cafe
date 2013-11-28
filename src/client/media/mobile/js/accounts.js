@@ -180,6 +180,7 @@ var accounts = (function($, d3, console) {
 
 $(document).ready(function() {
     $('#reg_form').submit(function(e) {
+        $('#register').find('.ui-btn-active').removeClass('ui-btn-active ui-focus');
         e.preventDefault();
         e.stopPropagation();
         rate.logUserEvent(9,'register');
@@ -273,8 +274,6 @@ $(document).ready(function() {
                                 $("#zipcode-error").html(data['form_errors']['__all__'][0]);
                                 $("#zipcode-error").show();
                             }
-
-                            $('#register').find('.ui-btn-active').removeClass('ui-btn-active ui-focus');
                         }
                     }
                 },
