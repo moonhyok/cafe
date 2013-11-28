@@ -314,13 +314,13 @@ var blooms = (function($, d3, console) {
             // if that changes, change this too
 
         var margin = 0;
-        var marginVal = $(window).width() < 500 ? 40 : 100;
+        var marginVal = 0;//$(window).width() < 500 ? 40 : 100;
 
         margin = {
-            top: marginVal,
-            left: marginVal - 10 ,
-            right: marginVal ,
-            bottom: marginVal
+            top: 0,
+            left: 0,
+            right: 40,
+            bottom: 100
             };
 
 
@@ -369,8 +369,8 @@ var blooms = (function($, d3, console) {
             .attr('y', function(d) {
                 return canvasy(d.y);
             })
-            .attr("width", "110") //if this changes, change the margin above
-            .attr("height", "110")
+            .attr("width", "90") //if this changes, change the margin above
+            .attr("height", "90")
             .attr("opacity", function(d) {               
                     if (window.user_score == 0 && d.uid == "curUser")
                         return "0";
