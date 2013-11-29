@@ -34,7 +34,7 @@ def create_table_row_user(user):
         time_joined_display = DateFormat(datetime.datetime.fromtimestamp(float(user_data_login[0].value))).format('h:i:s A')
     username_display = user.username
     if user.email != '':
-		email_display = user.email
+		email_display = '--'
     else:
 		email_display = '--'
     table_row += time_joined_display + '\t' + username_display + '\t' + email_display + '\t' + str(score)
@@ -48,10 +48,11 @@ title = " " + url_list[len(url_list) - 1] + " "
 
 # Subject
 df_now = DateFormat(datetime.datetime.now())
-report_subject = 'Hybrid Wisdom' +title + '(on hybridwisdom.com) Referral List for ' + df_now.format('l, F jS, Y')
+report_subject = 'Citizen Report Card (on citizenreportcard.org) Acitivity Digest for ' + df_now.format('l, F jS, Y')
 
 # From
-report_from = Settings.objects.string('DEFAULT_FROM_EMAIL')
+#report_from = Settings.objects.string('DEFAULT_FROM_EMAIL')
+report_from = 'messages@citizenreportcard.org'
 
 # Recipients
 if EMAIL_RECIPIENTS:
@@ -61,7 +62,7 @@ if EMAIL_RECIPIENTS:
 report_body = ''
 
 ## Header
-report_header = 'Hybrid Wisdom' +title + '(on hybridwisdom.com) Referral List for ' + df_now.format('l, F jS, Y') + '\n\n'
+report_header = report_subject + '\n'
 report_body += report_header
 
 ## Feedback
@@ -98,7 +99,7 @@ report_body += table_body
 
 ## Daily Statistics
 daily_statistics = '\n\n'
-daily_statistics += 'Total newly registered users: ' + str(len(users))
+daily_statistics += 'Total new users: ' + str(len(users))
 daily_statistics += '\n'
 report_body += daily_statistics
 

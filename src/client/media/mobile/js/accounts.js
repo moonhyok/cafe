@@ -78,7 +78,7 @@ var accounts = (function($, d3, console) {
                 if (data.hasOwnProperty('success')) {
                     console.log("successful login detected!!");
                     //rate.sendComment(window.comment);
-
+                    rate.logUserEvent(0,'login');
                     for (var i = 1; i <= window.num_sliders; i++) {
                         rate.sendSlider(window.sliders[i], i);
                         //blooms will be populated at the end of this! see callback
@@ -180,8 +180,10 @@ var accounts = (function($, d3, console) {
 
 $(document).ready(function() {
     $('#reg_form').submit(function(e) {
+        $('#register').find('.ui-btn-active').removeClass('ui-btn-active ui-focus');
         e.preventDefault();
         e.stopPropagation();
+        rate.logUserEvent(9,'register');
         
         if (window.registration_in_progress) {
             return;
@@ -272,8 +274,6 @@ $(document).ready(function() {
                                 $("#zipcode-error").html(data['form_errors']['__all__'][0]);
                                 $("#zipcode-error").show();
                             }
-
-                            $('#register').find('.ui-btn-active').removeClass('ui-btn-active ui-focus');
                         }
                     }
                 },
@@ -332,6 +332,7 @@ $(document).ready(function() {
         //accounts.firstTime();
         $('.landing').slideUp();
         $('.endsliders').slideDown();
+        rate.logUserEvent(7,'first time');
         //$('.top-bar').show();
         //rate.initScore();
     });
@@ -371,24 +372,28 @@ $(document).ready(function() {
     });
 
     $('.dialog-ready').click(function() {
+        rate.logUserEvent(8,'dialog 1');
         //rate.initMenubar();
         $('.instructions').show();
         $('.dialog').slideUp();
     });
     
     $('.dialog-score-ready').click(function() {
+        rate.logUserEvent(8,'dialog 2');
         $('.dialog-score').slideUp();
         $('.scorebox').show();
         //rate.initMenubar();
     });
     
     $('.dialog-continue-ready').click(function() {
+        rate.logUserEvent(8,'dialog 3');
         $('.dialog-continue').hide();
         rate.initMenubar();
         $('.scorebox').show();
     });
     
     $('.dialog-yourmug-ready').click(function() {
+        rate.logUserEvent(8,'dialog 4');
         $('.dialog-yourmug').slideUp();
         rate.initMenubar();
         $('.scorebox').show();
@@ -419,6 +424,7 @@ $(document).ready(function() {
     });
 
     $('.logout-btn').click(function(e) {
+        rate.logUserEvent(1,'logout');
         $('.logout').show();
         e.preventDefault();
         e.stopPropagation();
