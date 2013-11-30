@@ -568,7 +568,7 @@ def PCA_svd(X, standardize=True):
 
 ################### Principal Component Analysis using MDP ##########################
 
-def pca_mdp(X, standardize=True, inputDim, desiredDim=10):
+def pca_mdp(X, standardize=False, inputDim, desiredDim=10):
     """
     
     PCA using MDP library and training nodes, code for which is in pca_class.PrincipalComponentAnalysis
@@ -589,7 +589,7 @@ def pca_mdp(X, standardize=True, inputDim, desiredDim=10):
     @type return: numpy array
 
     """
-    if standardize:
+    if standardize: # not sure if standardization is actually helpful for mdp, so set to False by default
         X = standardization(X)
 
     pcaAlgo = pcamdp(inputDim, X, desiredDim)
