@@ -1,16 +1,38 @@
 <!DOCTYPE html>
 <html lang='en'>
+
 <head>
 
-  <title>{{ client_settings.WELCOME_PAGE_TITLE }}</title>
+<title>California Report Card</title>
 
-  <!-- for best viewing on mobile phones -->
-  <!-- <meta name='viewport' content='width=device-width, initial-scale=1.0'> -->
-  <meta name='viewport' content='user-scalable=no, width=device-width,initial-scale=1, maximum-scale=1' />
-  <link rel='stylesheet' type='text/css' href='./../media/mobile/css/reset.css' />
-  <link rel='stylesheet' type='text/css' href='./../media/mobile/bootstrap/css/bootstrap-responsive.min.css' />
+<!-- for best viewing on mobile phones -->
+<meta name='viewport' content='user-scalable=no, width=device-width,initial-scale=1, maximum-scale=1' />
 
-  <script type='text/javascript'>
+<!-- CSS stylesheets -->
+<link rel='stylesheet' type='text/css' href='./../media/mobile/css/reset.css' />
+<link rel='stylesheet' type='text/css' href='./../media/mobile/bootstrap/css/bootstrap-responsive.min.css' />
+<link rel='stylesheet' type='text/css' href='http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css' />
+<link rel='stylesheet' type='text/css' href='./../media/mobile/css/themes/cafe_jquery.css'/>
+<link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Belleza'/>
+<link href="./../media/mobile/css/jquery.nouislider.min.css" rel="stylesheet">
+<link rel='stylesheet' type='text/css' href='./../media/mobile/css/opinionspace.css' />
+
+<!-- Java Script -->
+<script type='text/javascript' src='http://code.jquery.com/jquery-1.9.1.js'></script>
+<script src="./../media/mobile/js/jquery.nouislider.min.js"></script>
+<script type='text/javascript' src='./../media/mobile/js/csrf-ajax.js'></script>
+<script type='text/javascript' src='http://d3js.org/d3.v2.min.js'></script>
+<script src="./../media/mobile/js/d3-timeline.js"></script>
+<script type='text/javascript' src='./../media/mobile/js/blooms.js'></script>
+<script type='text/javascript' src='./../media/mobile/js/rate.js'></script>
+<script type='text/javascript' src='./../media/mobile/js/accounts.js'></script>
+<script type='text/javascript' src='./../media/mobile/js/utils.js'></script>
+<script type='text/javascript' src='http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js'></script>
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+<script type='text/javascript' src='./../media/mobile/js/stats.js'></script>
+
+<!--Java script that needs to be run on init-->
+<script type='text/javascript'>
   window.url_root = '{{ url_root }}';
   window.sliders = [];
   window.registration_in_progress = false;
@@ -22,16 +44,14 @@
   'RETURNING_PROMPT_REPORT_CARD': {{returning_prompt_report_card}}
 };
 
-</script>
-
-<script type='text/javascript' src='http://code.jquery.com/jquery-1.9.1.js'></script>
-<script src="./../media/mobile/js/jquery.nouislider.min.js"></script>
-
-<script>
 // TURNING OFF ALL AJAX
 $.ajaxSetup({
   async: false
 });
+
+for (var i = 0; i <= window.num_sliders; i++) {
+    window.sliders[i] = 50;
+}
 
 jQuery(document).ready(function() {
    $(".endslider-slider").noUiSlider({
@@ -71,39 +91,13 @@ jQuery(document).ready(function() {
   });
 });
 
-
-</script>
-
-<script type='text/javascript' src='./../media/mobile/js/csrf-ajax.js'></script>
-<script type='text/javascript' src='http://d3js.org/d3.v2.min.js'></script>
-<script src="./../media/mobile/js/d3-timeline.js"></script>
-<!--<script type='text/javascript' src='./../media/mobile/bootstrap/js/bootstrap.min.js'></script>-->
-<script type='text/javascript' src='./../media/mobile/js/blooms.js'></script>
-<script type='text/javascript' src='./../media/mobile/js/accounts.js'></script>
-<script type='text/javascript' src='./../media/mobile/js/rate.js'></script>
-<script type='text/javascript' src='./../media/mobile/js/utils.js'></script>
-<script type='text/javascript' src='http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.js'></script>
-
-<script type="text/javascript" src="http://www.google.com/jsapi"></script>
-<script type='text/javascript' src='./../media/mobile/js/stats.js'></script>
-<script>
 stats.setConf("{{ client_settings.AGREEMENT_HISTOGRAM_TEXT }}", 
   "{{ client_settings.LEGEND_AGREEMENT_LEFT }}",
   "{{ client_settings.LEGEND_AGREEMENT_RIGHT }}",
   "{{ client_settings.INSIGHT_HISTOGRAM_TEXT }}",
   "{{ client_settings.LEGEND_INSIGHT_LEFT }}",
   "{{ client_settings.LEGEND_INSIGHT_RIGHT }}");
-</script>
 
-
-<link rel='stylesheet' type='text/css' href='http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css' />
-<link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Belleza'/>
-<link href="./../media/mobile/css/jquery.nouislider.min.css" rel="stylesheet">
-
-<link rel='stylesheet' type='text/css' href='./../media/mobile/css/opinionspace.css' />
-
-
-<script type="text/javascript">
 var finishedStatements=[];
 
 for(var l = 0; l < window.num_sliders; l++) {
@@ -155,27 +149,14 @@ function statementsComplete() {
 
 /** Updates statement number STATEMENT (which is of type number). */
 function update_score(statement) {
-
   $('#g' + statement).css('opacity', 1);
-  //$('#o' + statement).hide();
   $('#o' + statement).html(score_to_grade(medians[statement]*100))
-  //$('#o' + statement).delay(200).fadeIn();
   window.sliders[statement] = $('#s' + statement).val();		     
-  //$('.s'+statement).slider('disable');
-  document.getElementById('tr1'+statement).style.backgroundColor = "rgba(255, 255, 255, 0.5)";
-  //$('#tr1'+statement).delay(1000).fadeOut(2000);
+  document.getElementById('tr1'+statement).style.backgroundColor = "rgba(255, 222, 115, 0.3)";
   finishedStatements[statement-1]= 1;
-  
- /* if (statementsComplete()) {
-    //setTimeout(function (){$('.done-endsliders-btn').click();},1000);
-    $('.cardtable').delay(1000).fadeOut(2000);
-    $('.rc-sub-header').delay(1000).fadeOut(2000);
-  }*/
-
-  //document.getElementById('tr1'+statement).fadeOut(1000);//style.display = 'none';
-  //document.getElementById('tr2'+statement).fadeOut(1000);//style.display = 'none';
 }
 </script>
+
 </head>
 
 <body>
@@ -189,8 +170,8 @@ function update_score(statement) {
 
   <div data-role='navbar' class='menubar'>
     <ul>
-      <li><a data-theme='e' class='my-comment-btn'><span class='stats-label'>Stats</span></a></li>
-      <li><a data-theme='e' class='logout-btn'><span class='logout-label'>Logout</span></a></li>
+      <li><a data-theme='b' class='my-comment-btn'><span class='stats-label'>Stats</span></a></li>
+      <li><a data-theme='b' class='logout-btn'><span class='logout-label'>Logout</span></a></li>
     </ul>
 </div>
   
@@ -201,7 +182,7 @@ function update_score(statement) {
     <!--<span class='inst-score'><span class='score-label'></span><span class='score-value'></span></span>
     <span class='inst-text'>{{ client_settings.INSTRUCTIONS_1 }}</span>-->
   </div>
-  <div data-role="header" data-theme="e" class='instructions' style="display:none">Click on a mug to begin</div>
+  <div class='instructions' style="display:none">Click on a mug to begin</div>
 
   <div class="margin"><!--<br><br><br><br>--></div>
 </div>
@@ -211,7 +192,7 @@ function update_score(statement) {
   <!--<div class='header'>Topic: {{ topic }}</div>-->
     <div class="answerwrapper">
       <span class="rate-username"></span>
-      <textarea id='commentInput' class='answer' readonly="true"></textarea>              
+      <textarea id='commentInput' class='answer' readonly="true" style="overflow-y:scroll !important;"></textarea>              
       <div class='sliders'>
         <div style="text-align: right">
         <a href="#" style="font-size: 11px !important;" id="flag">Inappropriate or Irrelevant?</a>
@@ -230,7 +211,7 @@ function update_score(statement) {
 
         <div id="slider1" class="rating-slider" style="padding-bottom: 10px;"></div>
 
-        <!--<input data-track-theme='b' data-theme='a' type='range' name='slider1' id='slider1' value='50' min='0' max='100' animate='true'/> -->
+        <!--<input data-track-theme='b' data-theme='b' type='range' name='slider1' id='slider1' value='50' min='0' max='100' animate='true'/> -->
 
         How beneficial is this for your community?<br/>
         <div class="slider-range-labels">
@@ -241,10 +222,10 @@ function update_score(statement) {
 
         <div id="slider2" class="rating-slider"></div>
         
-        <!-- <input data-track-theme='b' data-theme='a' type='range' name='slider2' id='slider2' value='50' min='0' max='100' animate='true'/> -->       
+        <!-- <input data-track-theme='b' data-theme='b' type='range' name='slider2' id='slider2' value='50' min='0' max='100' animate='true'/> -->       
         <center>
           <div style="width: 100%;max-width: 300px;">
-            <button type='submit' data-theme='a' id='go-back' onClick='rate.doneRating()' data-icon="check"><font size="5">Next</font></button>
+            <button type='submit' data-theme='b' id='go-back' onClick='rate.doneRating()' data-icon="check"><font size="5">Next</font></button>
           </div>
         </center>
         
@@ -259,26 +240,26 @@ function update_score(statement) {
         <p>Grade from A to F how well or poorly you feel California's elected officials are working to address the following key issues:</p>
       </div>-->
         <div class='reportcard'>
-           <div class="basic-header" style="font-size: 24px;padding-top: 5px;">Grade California's State Government</div>
+           <div class="basic-header" style="font-size: 32px;padding-top: 5px;">Grade California's State Government</div>
+          <center>
+            <div class="rc-sub-header" style="width:95%;text-align: left;padding-bottom:5px;">Please grade from A to F how well you feel California's elected officials are working to address the following 6 subjects:</div> 
            
-           <div class="rc-sub-header">Please grade from A to F how well you feel California's elected officials are working to address the following 6 subjects:</div> 
-          <br/>
-           <table class='cardtable' style="width:100%;padding-right:10px;background-color: #333333;color:#FFFFFF;">
+           <table class='cardtable' style="width:95%;color:#FFFFFF;background-color: #04376c;">
             <tr>
-              <td>
+              <td style="text-align: center;vertical-align: middle;">
                 Subject
               </td>
-              <td style="vertical-align:middle;width: 45px;">
+              <td style="vertical-align:middle;width: 45px;text-align: center;vertical-align: middle;">
                 My Grade
               </td>
-              <td style="vertical-align:middle;width: 45px;">
+              <td style="vertical-align:middle;width: 45px;text-align: center;vertical-align: middle;">
                 Avg. Grade
               </td>
             </tr>
            </table>
 
             {% for statement in statements %}
-            <table id="tr1{{statement.id}}" class='cardtable' style="width:100%;padding-right:10px;">
+            <table id="tr1{{statement.id}}" class='cardtable' style="width:95%;">
             <tr>
               <td style="height: 45px;">
                 {% ifnotequal statement.statement '' %}
@@ -346,10 +327,11 @@ function update_score(statement) {
  </table>
             <br>
       {% endfor %}
+          </center>
 
     <center>
           <div style="width: 100%; max-width: 300px;padding-bottom:30px;">
-      <button type='submit' data-theme='e' class='done-endsliders-btn' data-icon="arrow-r"><font size="5">Next</font></button>
+      <button type='submit' data-theme='b' class='done-endsliders-btn' data-icon="arrow-r"><font size="5">Next</font></button>
     </div> 
     </center>
        
@@ -378,7 +360,7 @@ function update_score(statement) {
         <br/>
         
         <table style="width: 90%;">
-        <tr style="background-color: #000000;">
+        <tr style="background-color: #04376c;">
           <td>
           <font style="color: #FFFFFF;">
             Subject
@@ -404,7 +386,7 @@ function update_score(statement) {
        {%endfor%}
       </table>
       <div style="width:300px;">
-        <button data-theme='e' data-icon="arrow-r" onclick="$('.aggstat1').hide();$('.aggstat2').show();">Next</button>
+        <button data-theme='b' data-icon="arrow-r" onclick="$('.aggstat1').hide();$('.aggstat2').show();">Next</button>
       </div>
       
     </div>          
@@ -422,19 +404,20 @@ function update_score(statement) {
 
        <script type="text/javascript" src="{{ url_root }}/media/mobile/js/timelineMug_animation_json.js"></script> 
     <div style="width:300px;">
-     <button data-theme='e' data-icon="arrow-r" onclick="$('.aggstat2').hide();$('.aggstat3').show();">Next</button>
+     <button data-theme='b' data-icon="arrow-r" onclick="$('.aggstat2').hide();$('.aggstat3').show();">Next</button>
     </div>
     </div>
     
     <div class="aggstat3" style="display:none;">
-        California map <br/>  
-    <iframe width="300" height="225" src="//www.youtube.com/embed/hDsu_R2odOA" frameborder="0" allowfullscreen></iframe>
+        California map <br/>
+        
+    <!--<iframe width="300" height="225" src="//www.youtube.com/embed/hDsu_R2odOA" frameborder="0" allowfullscreen></iframe>-->
     <div style="width:300px;">
-    <button data-theme='e'  data-icon="arrow-r" onclick="$('.aggstat3').hide();$('.aggstat1').show();">Next</button>
+    <button data-theme='b'  data-icon="arrow-r" onclick="$('.aggstat3').hide();$('.aggstat1').show();">Next</button>
     </div>
     </div>
     <div style="width:300px;">
-      <button type='submit' data-theme='e' class='edit-comment-done-btn'>Back to Discussion</button>
+      <button type='submit' data-theme='b' class='edit-comment-done-btn'>Back to Discussion</button>
     </div>
       </center>
   </div>      
@@ -443,7 +426,7 @@ function update_score(statement) {
       <div class='comment-text'></div>
 
       <!--{% if client_settings.ALLOW_EDIT_COMMENT == "true" %}
-      <button type='submit' data-theme='a' class='edit-comment-btn'>Change Your Response</button>
+      <button type='submit' data-theme='b' class='edit-comment-btn'>Change Your Response</button>
       {% endif %}-->
 
 
@@ -481,8 +464,8 @@ function update_score(statement) {
           </div>
           {% endifnotequal %}
           {% endfor %}
-          <button data-theme='a' class='edit-comment-save-btn'>Save</button>
-          <button data-theme='a' class='edit-comment-cancel-btn'>Cancel</button>
+          <button data-theme='b' class='edit-comment-save-btn'>Save</button>
+          <button data-theme='b' class='edit-comment-cancel-btn'>Cancel</button>
           <br/>
         </div>
 
@@ -521,9 +504,9 @@ function update_score(statement) {
       <div id="timeline"></div>
       <br>
       {% if client_settings.LEADERBOARD_ENABLED == "true" %}
-      <button data-theme='a' onClick="$('.leaderboard').slideDown();">Leaderboard</button>
+      <button data-theme='b' onClick="$('.leaderboard').slideDown();">Leaderboard</button>
       {% endif %}
-      <button data-theme='a' class="stats-done-btn">Back</button>
+      <button data-theme='b' class="stats-done-btn">Back</button>
     </div>
 
     <div class='leaderboard'>
@@ -542,7 +525,7 @@ function update_score(statement) {
       </table>
 
       <br><br>
-      <button data-theme='a' onClick="$('.leaderboard').slideUp();">Back</button>
+      <button data-theme='b' onClick="$('.leaderboard').slideUp();">Back</button>
 
     </div>
 
@@ -556,7 +539,7 @@ function update_score(statement) {
       <!--<div class = 'reg-header'>{{ client_settings.INSTRUCTIONS_5 }}</div>-->
       
         <div class= 'registerpanel'>
-            <div class="basic-header" style="font-size: 24px;padding-top: 5px;padding-bottom: 0px; width: 100%">To save your grades and join the discussion, just enter your zip code</div>
+            <div class="basic-header" style="font-size: 30px;padding-top: 5px;padding-bottom: 0px; width: 100%">To save your grades and join the discussion, just enter your zip code</div>
           <br>
           <form id='reg_form' class='form-horizontal' method='post' action='{{ url_root }}/accountsjson/register/' style="width: 95%; padding-left: 5px;">
             <input type='hidden' value='{{ topic }}' name='question'>
@@ -575,7 +558,7 @@ function update_score(statement) {
           </div>
 
           <div data-role="fieldcontain">
-            <input type ='text' id='regzip' name='regzip' class='regforminput' value="" placeholder="Zip Code">
+            <input type ='text' id='regzip' name='regzip' class='regforminput' value="" placeholder="Zip Code" onblur="$('#reg_form').submit();">
             <div class='alert-error' id='zipcode-error' style='display:none;'></div>
           </div>
 
@@ -597,12 +580,12 @@ function update_score(statement) {
     -->
 
       <!--<div style="display: none;">
-        <input type='submit' value='Save and Join' id='finishRegistration' data-theme="e" data-icon="check" class="regFormSubmit">
+        <input type='submit' value='Save and Join' id='finishRegistration' data-theme="a" data-icon="check" class="regFormSubmit">
       </div>-->
       
       <center>
         <div style="width: 100%; max-width: 300px;" onclick="document.getElementById('registerb').focus();">
-        <button type='submit' data-theme='e' data-icon='check' id="registerb"><font size="5">Save and Join</font></button>
+        <button type='submit' data-theme='b' data-icon='check' id="registerb"><font size="5">Save and Join</font></button>
        </div>
       </center>
 
@@ -617,13 +600,14 @@ function update_score(statement) {
 <div class='comment-input'>
   <!--<div class = 'reg-header'>{{ client_settings.INSTRUCTIONS_6 }}</div>-->
     <div class='comment-panel'>
-        <div class="basic-header" style="font-size: 16px;">In what specific way would <u>YOU</u> recommend that California invest the current budget surplus?</div>
-        <textarea name='answer' id='entered-comment' style="width: 300px !important;height: 130px !important;padding-right: 10px;font-size: 16px;"> </textarea> 
+        <div style="font-size: 16px;padding-left: 7px;padding-right: 7px;font-family: futura, verdana, sans-serif;line-height:16px;">In what specific way would <u>YOU</u> recommend that California invest the current budget surplus?
+        <textarea name='answer' id='entered-comment' style="width: 300px !important;height: 130px !important;font-size: 16px;"> </textarea>
+        </div>
 
-        <div style="width: 300px;padding-bottom:15px;font-size:12px;color: #888888;">
-        <input type="email" id='regemail' name='regemail' style="font-size: 16px !important;" placeholder="Email (Optional)" data-theme="b"/>
+        <div style="padding-left: 7px;width: 300px;padding-bottom:15px;font-size:12px;color: #888888;">
+        <input type="email" id='regemail' name='regemail' style="font-size: 16px !important;" placeholder="Email (Optional)" data-theme="b" onblur="$('.comment-submit-btn').click();"/>
         You can receive periodic updates by email about how the discussion has changed. <a href="#">Privacy Policy</a>
-        <button type='submit' data-theme='a' class='comment-submit-btn' data-icon='check'><font size="5">Save</font></button>
+        <button type='submit' data-theme='b' class='comment-submit-btn' data-icon='check'><font size="5">Save</font></button>
       </div>
         
   </div>
@@ -654,10 +638,10 @@ The Citizen Report Card for California is a new UC Berkeley project in collabora
         <input type='text' name='username' class="regforminput" placeholder="Email">
         <p class="regforminput">Password</p>
         <input type='password' name='password' class="regforminput" placeholder="Password">
-        <!-- <button type='submit' data-theme='a' id='login-button'>Login</button>  -->
+        <!-- <button type='submit' data-theme='b' id='login-button'>Login</button>  -->
         <center>
           <div style="width: 100%; max-width: 300px;">
-            <button type='submit' data-theme='a' data-icon="forward"><font size="5">Login</font></button>              
+            <button type='submit' data-theme='b' data-icon="forward"><font size="5">Login</font></button>              
           </div>
         </center>
 
@@ -682,8 +666,12 @@ The Citizen Report Card for California is a new UC Berkeley project in collabora
     </div>
     
       <div class='landing-desc'>
-        <button data-theme='a' class='logout-start-over'><font size="5">Start Over</font></button>
+        <center>
+        <div style="width: 100%; max-width: 300px;text-align:left;">
+        <button data-theme='b' class='logout-start-over'><font size="5">Start Over</font></button>
         <button data-theme='b' class='logout-login-again'><font size="5">Login again?</font></button>
+        </div>
+        </center>
       </div>
     
 </div>
@@ -691,44 +679,43 @@ The Citizen Report Card for California is a new UC Berkeley project in collabora
 <div class='landing'>
     <div class='landing-intro'>
       <div class='landing-header'>
-        California Report Card
+        California<br/>Report Card
       </div>
   </div>
       <div class='landing-desc'>
-        Grade and discuss the California government<br/><br/>
         <center>
-        <div style="width: 100%; max-width: 300px;">
-        <button type='submit' data-theme='e' class='first-time-btn' data-icon="star"><font size="5">Enter</font></button>
-        <button type='cancel' data-theme='a' class='login-btn' data-icon="info"><font size="5">About</font></button>
+        <div style="width: 100%; max-width: 300px;text-align:left;">
+        Grade and discuss the California government<br/>
+        <button type='submit' data-theme='b' class='first-time-btn' data-icon="star"><font size="5">Enter</font></button>
+        <button type='cancel' data-theme='b' class='login-btn' data-icon="info"><font size="5">About</font></button>
          </div>
         </center>
       </div>
 </div>
 
 <div class='dialog' style="display: none;">
-  <br/>
     <div class='dialog-text1'>
       <center>
-      <div style="width:100%;font-size:32px;">The Discussion</div>
+      <div class="basic-header" style="width:100%;">The Discussion</div>
       <img class="header-img-topic" src="{{ url_root }}/media/mobile/img/cafe/map_teaser.png" class="center" style="width:150px;padding-top:3px;padding-bottom: 3px;"><br>
       </center>
       The discussion topic is:<br/><strong>"{{ topic }}"</strong>
       <center>
       <div style="width: 150px;">
-        <button type='submit' data-theme='e' class='dialog-next' data-icon="arrow-r" onclick="$('.dialog-text1').hide();$('.dialog-text2').show();">Next</button>
+        <button type='submit' data-theme='b' class='dialog-next' data-icon="arrow-r" onclick="$('.dialog-text1').hide();$('.dialog-text2').show();">Next</button>
       </div>
       </center>
     </div>
 
     <div class='dialog-text2' style="display:none;">
       <center>
-      <div style="width:100%;font-size:32px;">The Discussion</div>
+      <div class="basic-header" style="width:100%;">The Discussion</div>
       <img class="header-img-topic" src="{{ url_root }}/media/mobile/img/cafe/cafe_click_idea.jpg" class="center" style="width:200px;padding-top:3px;"><br>
       </center>
       Each mug represents a participant's response to the discussion topic.
       <center>
       <div style="width: 150px;">
-        <button type='submit' data-theme='e' class='dialog-ready' data-icon="arrow-r">Next</button>
+        <button type='submit' data-theme='b' class='dialog-ready' data-icon="arrow-r">Next</button>
       </div>
       </center>
     </div>
@@ -740,56 +727,57 @@ The Citizen Report Card for California is a new UC Berkeley project in collabora
       After rating two responses, you can leave a response of your own.
       As you rate more responses and other participants rate you, you will earn points.
       <div style="width: 150px;">
-        <button type='submit' data-theme='e' class='dialog-ready' data-icon="check">Ready!</button>
+        <button type='submit' data-theme='b' class='dialog-ready' data-icon="check">Ready!</button>
       </div>
     </div>-->
 </div>
 
 <div class='dialog-score' style="display: none;">
-  <br/>
     <div class='dialog-score-text1'>
+      <br/>
       <center>
+        <div class="scorebox-fake" style="width: 200px;">
+          Your Score: 100
+        </div>
       <!--<div style="width:100%;font-size:32px;">Earning Points</div>-->
-      <img class="header-img-topic" src="{{ url_root }}/media/mobile/img/cafe/points_teaser.png" class="center" style="width:90%;padding-top:3px;"><br>
+      <!--<img class="header-img-topic" src="{{ url_root }}/media/mobile/img/cafe/points_teaser.png" class="center" style="width:200px;padding-top:3px;"><br>-->
       </center>
       You earn points by rating others and when others rate your idea.
       Rate one more person's idea before entering your own...
       <center>
       <div style="width: 150px;">
-        <button type='submit' data-theme='e' class='dialog-score-ready' data-icon="arrow-r">Next</button>
+        <button type='submit' data-theme='b' class='dialog-score-ready' data-icon="arrow-r">Next</button>
       </div>
       </center>
     </div>
 </div>
 
 <div class='dialog-yourmug' style="display: none;">
-  <br/>
     <div class='dialog-yourmug-text1'>
       <center>
-      <div style="width:100%;font-size:32px;">Your Mug</div>
+      <div class="basic-header" style="width:100%;">Your Mug</div>
       <img class="header-img-topic" src="{{ url_root }}/media/mobile/img/cafe/yourmug-teaser.png" class="center" style="width:150px;padding-top:3px;"><br>
       </center>
       To enter your own idea, click on your mug (highlighted in yellow).<br/>
       <center>
       <div style="width: 150px;">
-        <button type='submit' data-theme='e' class='dialog-yourmug-ready' data-icon="arrow-r">Next</button>
+        <button type='submit' data-theme='b' class='dialog-yourmug-ready' data-icon="arrow-r">Next</button>
       </div>
       </center>
     </div>
 </div>
 
 <div class='dialog-continue' style="display: none;">
-  <br/>
     <div class='dialog-continue-text1'>
       <center>
-      <div style="width:100%;font-size:32px;padding-bottom:15px;">Response Saved!</div>
+      <div class="basic-header" style="width:100%;">Response Saved!</div>
       <!--<img class="header-img-topic" src="{{ url_root }}/media/mobile/img/cafe/continue_teaser.png" class="center" style="width:150px;padding-top:3px;"><br>-->
       </center>
       Continue to read and evaluate other's ideas to earn more points.
       You can see detailed statistics in the stats page.
       <center>
       <div style="width: 150px;">
-        <button type='submit' data-theme='e' class='dialog-continue-ready' data-icon="arrow-r">Next</button>
+        <button type='submit' data-theme='b' class='dialog-continue-ready' data-icon="arrow-r">Next</button>
       </div>
       </center>
     </div>

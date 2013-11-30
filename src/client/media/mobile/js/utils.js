@@ -22,7 +22,7 @@ var utils = (function($, d3, console) {
                 text: msg,
                 textVisible: true,
                 textonly: true,
-                theme: 'a',
+                theme: 'b',
                 html: ""
             });
         } else {
@@ -30,12 +30,13 @@ var utils = (function($, d3, console) {
                 text: msg,
                 textVisible: true,
                 textonly: true,
-                theme: 'a',
+                theme: 'b',
                 html: ""
             });
             setTimeout(f, TIMEOUT_AFTER_LOADING);
         }
     }
+    
 
     /** Hides the loader with an artifical delay of DELAY milliseconds. */
 
