@@ -230,9 +230,10 @@ def register(request, success_url=None,
 			demog.save()
 
 			# Create a zip code log entry for this user
-			z = ZipCode.objects.filter(code=request_post_copy['zipcode'])[0]
-			c = ZipCodeLog(user=new_user, location=z)
-			c.save()
+			z = ZipCode.objects.filter(code=request_post_copy['zipcode'])
+			if len(z) > 0:
+				c = ZipCodeLog(user=new_user, location=z[0])
+				c.save()
 			
 			# If this was a visitor, connect to a user
 			connect_visitor_to_user(request, new_user.id)
