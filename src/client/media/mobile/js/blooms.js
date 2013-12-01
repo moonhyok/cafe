@@ -371,11 +371,12 @@ var blooms = (function($, d3, console) {
             })
             .attr("width", "90") //if this changes, change the margin above
             .attr("height", "90")
-            .attr("opacity", function(d) {               
-                    if (window.user_score == 0 && d.uid == "curUser")
+            .attr("opacity", function(d) {
+                    if (window.user_score === 0 && d.uid == "curUser") {
                         return "0";
-                    else
+                    } else {
                         return "1";
+                    }
                 })
             //.attr("transform", function(d) {
             //        return choice(["rotate(-65)", "rotate(-45)", "rotate(20)"]);
