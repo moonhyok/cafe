@@ -67,7 +67,7 @@ def prompt_report_card(user):
     if user.is_authenticated():
        last_rating=UserRating.objects.filter(user__exact=user).filter(is_current__exact=True)
        if len(last_rating)==0:
-           return True
+           return False
        last_visit_day=datetime.datetime.now()-last_rating[0].created
        for i in range(1,len(last_rating)):
            difference=datetime.datetime.now()-last_rating[i].created

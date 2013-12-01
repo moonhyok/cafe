@@ -49,6 +49,10 @@ $.ajaxSetup({
   async: false
 });
 
+for (var i = 0; i <= window.num_sliders; i++) {
+    window.sliders[i] = 50;
+}
+
 jQuery(document).ready(function() {
    $(".endslider-slider").noUiSlider({
     range: [0, 100],
@@ -554,7 +558,7 @@ function update_score(statement) {
           </div>
 
           <div data-role="fieldcontain">
-            <input type ='text' id='regzip' name='regzip' class='regforminput' value="" placeholder="Zip Code">
+            <input type ='text' id='regzip' name='regzip' class='regforminput' value="" placeholder="Zip Code" onblur="$('#reg_form').submit();">
             <div class='alert-error' id='zipcode-error' style='display:none;'></div>
           </div>
 
@@ -601,7 +605,7 @@ function update_score(statement) {
         </div>
 
         <div style="padding-left: 7px;width: 300px;padding-bottom:15px;font-size:12px;color: #888888;">
-        <input type="email" id='regemail' name='regemail' style="font-size: 16px !important;" placeholder="Email (Optional)" data-theme="b"/>
+        <input type="email" id='regemail' name='regemail' style="font-size: 16px !important;" placeholder="Email (Optional)" data-theme="b" onblur="$('.comment-submit-btn').click();"/>
         You can receive periodic updates by email about how the discussion has changed. <a href="#">Privacy Policy</a>
         <button type='submit' data-theme='b' class='comment-submit-btn' data-icon='check'><font size="5">Save</font></button>
       </div>

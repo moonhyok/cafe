@@ -106,8 +106,8 @@ class RegistrationForm(forms.Form):
 					raise forms.ValidationError(_(u'You must type in a question'))
 
         if 'zipcode' in self.cleaned_data:
-            if not len(ZipCode.objects.filter(code=self.cleaned_data['zipcode'])):
-                raise forms.ValidationError(_(u'Invalid zipcode'))
+            if not len(self.cleaned_data['zipcode']) == 5:
+                raise forms.ValidationError(_(u'Zipcode must be 5 digits'))
 
         return self.cleaned_data
     
