@@ -81,6 +81,8 @@ jQuery(document).ready(function() {
     range: [0, 100], start: 50, step: 5, handles: 1,connect: false
 
   });
+  
+  //$(".noUi-target").click(function () {});
 
   // give the statement sliders some color
   var _grades = {'A' : 5, 'B' : 25, 'C': 50, 'D': 75, 'F' : 96 };
@@ -242,7 +244,7 @@ function update_score(statement) {
         <div class='reportcard'>
            <div class="basic-header" style="font-size: 32px;padding-top: 5px;">Grade California's State Government</div>
           <center>
-            <div class="rc-sub-header" style="width:95%;text-align: left;padding-bottom:5px;">Please grade from A to F how well you feel California's elected officials are working to address the following 6 subjects:</div> 
+            <div class="rc-sub-header" style="width:95%;text-align: left;padding-bottom:5px;">Drag the yellow handle to grade from A to F how well you feel California's elected officials are working to address the following 6 subjects:</div> 
            
            <table class='cardtable' style="width:95%;color:#FFFFFF;background-color: #04376c;">
             <tr>
