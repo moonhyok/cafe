@@ -2,7 +2,7 @@
 // Crunches numbers & generates the ``garden" of blooms.
 // Dependencies: jQuery
 
-var blooms = (function($, d3, console) {
+var _blooms = blooms = (function($, d3, console) {
     // Enable strict javascript interpretation
     "use strict";
     
@@ -327,9 +327,7 @@ var blooms = (function($, d3, console) {
 
             var width = $(window).width() - margin.right - margin.left;
 
-            // TODO: this shouldn't be hardcoded, instead $('.top-bar').height()
-            // but calling that here is before bar is loaded, so fix that
-            var topBarHeight = 90;
+            var topBarHeight = $('.top-bar').height() || 90;
 
             var height = $(window).height()- margin.bottom - margin.top - topBarHeight;
 
@@ -455,18 +453,17 @@ var blooms = (function($, d3, console) {
 
 $(document).ready(function() {
     if (accounts.setAuthenticated()) {
-        blooms.alreadyAuthenticated();
+        _blooms.alreadyAuthenticated();
     }
 
     $('#d3').height($(window).height() - $('.top-bar').height());
 
-    $('.top-bar').resize(function() {
-        $('#d3').height($(window).height() - $('.top-bar').height());
+    $('.top-bar').on('height', function() {
+        _blooms.populateBlooms();
     });
 
     $(window).resize(function() {
-        // TODO: this needs to occur iff substantial resize
-        // and not if in middle of AJAX call.
-        // utils.blooms();
+        // TODO: check if a ajax call
+        _blooms.populateBlooms();
     });
 });
