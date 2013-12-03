@@ -399,7 +399,9 @@ $(document).ready(function() {
         $('.scorebox').show();
         try{
             window.your_mug.transition().duration(1000).style("opacity", "1");
-        }catch(err){}
+        }catch(err){
+            console.log(err);
+        }
     });
 
 
