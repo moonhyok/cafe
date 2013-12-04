@@ -60,6 +60,7 @@ jQuery(document).ready(function() {
     step: 5,
     handles: 1,
     connect: false,
+    behaviour: "none",
     slide: function() {
       var id = $(this).data('statement');
       $('#g' + id).html( score_to_grade( $(this).val() ) ).css('opacity', .3);
@@ -74,11 +75,11 @@ jQuery(document).ready(function() {
   });
 
   $(".rating-slider").noUiSlider({
-    range: [0, 100], start: 50, step: 5, handles: 1,connect: false
+    range: [0, 100], start: 50, step: 5, handles: 1,connect: false, behaviour: "none"
   });
 
   $(".change-rating-slider").noUiSlider({
-    range: [0, 100], start: 50, step: 5, handles: 1,connect: false
+    range: [0, 100], start: 50, step: 5, handles: 1,connect: false, behaviour: "none"
 
   });
   
@@ -89,7 +90,7 @@ jQuery(document).ready(function() {
   $.map( _grades, function(position, letter) {
     var span = $('<span>', { style : 'position: absolute; z-index: -1; top: 7px;', html: letter });
     span.css( 'left', position + '%' );
-    $('.endslider-slider > .noUi-horizontal').append( span );
+    $('.endslider-slider > .noUi-base').append( span );
   });
 });
 

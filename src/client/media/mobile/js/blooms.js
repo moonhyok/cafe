@@ -302,7 +302,8 @@ var _blooms = blooms = (function($, d3, console) {
         //console.log("window height: " + $(window).height() + 'window width: ' + $(window).width());
 
         //console.log('resizing: width: ' + width + ' height: ' + height);
-        window.blooms = [];
+        /** Keeps track of which blooms are present, so we can load more when they run out. */
+        window.blooms_list = [];
 
          pullLivePoints(function(object) {
             var data = object.points;
@@ -352,7 +353,7 @@ var _blooms = blooms = (function($, d3, console) {
             .enter()
             .append("svg:image")
             .attr("xlink:href", function(d) {
-                window.blooms.push(d.uid);
+                window.blooms_list.push(d.uid);
                 // console.log({'uid': d.uid,'x':d.x,'y':d.y,'cx': canvasx(d.x),'cy': canvasy(d.y)});
                 if (d.uid == "curUser") {
                     var _this = d3.select(this);
@@ -410,14 +411,14 @@ var _blooms = blooms = (function($, d3, console) {
                     /* Remove this bloom from our bookkeeping array. */
                     var index = $.inArray(window.current_uid, window.blooms);
                     if (index >= 0) {
-                        window.blooms.splice(index, 1);
+                        window.blooms_list.splice(index, 1);
                     }
                     
                     /* Load more blooms if none left */
                     try {
-                    if (window.blooms.length === 1) {
+                    if (window.blooms_list.length === 1) {
                         console.log("here");
-                        window.blooms = undefined; //needed to avoid infinite recursing
+                        window.blooms_list = undefined; //needed to avoid infinite recursing
                         utils.showLoading("Loading more ideas...", function() {
                             populateBlooms();
                         });
