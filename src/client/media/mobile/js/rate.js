@@ -75,6 +75,8 @@ var rate = (function($, d3, console) {
     function initMenubar() {
         //$('.instructions').hide();
         $('.menubar').show();
+        $('.top-bar').trigger('height');
+
         if (window.user_score >= 1) {
             $('.scorebox').show();
         }
@@ -84,6 +86,8 @@ var rate = (function($, d3, console) {
         //$('.instructions').hide();
         $('.scorebox').hide();
         $('.menubar').hide();
+
+        $('.top-bar').trigger('height');
     }
     
     function doneRating() {
@@ -115,6 +119,10 @@ var rate = (function($, d3, console) {
             {
                 $('.rate').slideUp();
                 hideMenubar();
+
+                // ui has changed!
+                $('.top-bar').trigger('height');
+
                 $('.dialog-score').slideDown();
             }
             else{

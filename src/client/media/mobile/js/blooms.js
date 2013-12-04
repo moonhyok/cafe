@@ -2,7 +2,7 @@
 // Crunches numbers & generates the ``garden" of blooms.
 // Dependencies: jQuery
 
-var blooms = (function($, d3, console) {
+var _blooms = blooms = (function($, d3, console) {
     // Enable strict javascript interpretation
     "use strict";
     
@@ -302,7 +302,8 @@ var blooms = (function($, d3, console) {
         //console.log("window height: " + $(window).height() + 'window width: ' + $(window).width());
 
         //console.log('resizing: width: ' + width + ' height: ' + height);
-        window.blooms = [];
+        /** Keeps track of which blooms are present, so we can load more when they run out. */
+        window.blooms_list = [];
 
          pullLivePoints(function(object) {
             var data = object.points;
@@ -327,9 +328,7 @@ var blooms = (function($, d3, console) {
 
             var width = $(window).width() - margin.right - margin.left;
 
-            // TODO: this shouldn't be hardcoded, instead $('.top-bar').height()
-            // but calling that here is before bar is loaded, so fix that
-            var topBarHeight = 90;
+            var topBarHeight = $('.top-bar').height() || 90;
 
             var height = $(window).height()- margin.bottom - margin.top - topBarHeight;
 
@@ -354,7 +353,7 @@ var blooms = (function($, d3, console) {
             .enter()
             .append("svg:image")
             .attr("xlink:href", function(d) {
-                window.blooms.push(d.uid);
+                window.blooms_list.push(d.uid);
                 // console.log({'uid': d.uid,'x':d.x,'y':d.y,'cx': canvasx(d.x),'cy': canvasy(d.y)});
                 if (d.uid == "curUser") {
                     var _this = d3.select(this);
@@ -371,11 +370,12 @@ var blooms = (function($, d3, console) {
             })
             .attr("width", "90") //if this changes, change the margin above
             .attr("height", "90")
-            .attr("opacity", function(d) {               
-                    if (window.user_score == 0 && d.uid == "curUser")
+            .attr("opacity", function(d) {
+                    if (window.user_score === 0 && d.uid == "curUser") {
                         return "0";
-                    else
+                    } else {
                         return "1";
+                    }
                 })
             //.attr("transform", function(d) {
             //        return choice(["rotate(-65)", "rotate(-45)", "rotate(20)"]);
@@ -411,14 +411,14 @@ var blooms = (function($, d3, console) {
                     /* Remove this bloom from our bookkeeping array. */
                     var index = $.inArray(window.current_uid, window.blooms);
                     if (index >= 0) {
-                        window.blooms.splice(index, 1);
+                        window.blooms_list.splice(index, 1);
                     }
                     
                     /* Load more blooms if none left */
                     try {
-                    if (window.blooms.length === 1) {
+                    if (window.blooms_list.length === 1) {
                         console.log("here");
-                        window.blooms = undefined; //needed to avoid infinite recursing
+                        window.blooms_list = undefined; //needed to avoid infinite recursing
                         utils.showLoading("Loading more ideas...", function() {
                             populateBlooms();
                         });
@@ -454,18 +454,17 @@ var blooms = (function($, d3, console) {
 
 $(document).ready(function() {
     if (accounts.setAuthenticated()) {
-        blooms.alreadyAuthenticated();
+        _blooms.alreadyAuthenticated();
     }
 
     $('#d3').height($(window).height() - $('.top-bar').height());
 
-    $('.top-bar').resize(function() {
-        $('#d3').height($(window).height() - $('.top-bar').height());
+    $('.top-bar').on('height', function() {
+        _blooms.populateBlooms();
     });
 
     $(window).resize(function() {
-        // TODO: this needs to occur iff substantial resize
-        // and not if in middle of AJAX call.
-        // utils.blooms();
+        // TODO: check if a ajax call
+        _blooms.populateBlooms();
     });
 });
