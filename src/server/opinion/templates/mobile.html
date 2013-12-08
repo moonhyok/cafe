@@ -77,7 +77,13 @@ jQuery(document).ready(function() {
   $(".rating-slider").noUiSlider({
     range: [0, 100], start: 50, step: 5, handles: 1,connect: false, behaviour: "none"
   });
-
+  
+  var html_label ="<div class='slider-range-labels' style='position: relative; top: 0px;z-index: -1;'><div class='alignleft'>&larr;Very Creative</div><div class='alignright'>Not Creative&rarr;</div></div>";
+  $('.rating-slider1 > .noUi-base').append( html_label );
+  
+    var html_label ="<div class='slider-range-labels' style='position: relative; top: 0px;z-index: -1;'><div class='alignleft'>&larr;Very Beneficial</div><div class='alignright'>Not Beneficial&rarr;</div></div>";
+  $('.rating-slider2 > .noUi-base').append( html_label );
+  
   $(".change-rating-slider").noUiSlider({
     range: [0, 100], start: 50, step: 5, handles: 1,connect: false, behaviour: "none"
 
@@ -206,24 +212,20 @@ function update_score(statement) {
         </div>
             <hr>   
         How creative is this idea?<br/>
-        <div class="slider-range-labels" style="position: relative; top: 14px;z-index: 2;">
-          <div class="alignleft">&larr;Very Creative</div>
-          <div class="alignright">Not Creative&rarr;</div>
-        </div>
         <div style="clear: both;"></div>
 
-        <div id="slider1" class="rating-slider"></div><br/>
+        <div id="slider1" class="rating-slider rating-slider1"></div><br/>
 
         <!--<input data-track-theme='b' data-theme='b' type='range' name='slider1' id='slider1' value='50' min='0' max='100' animate='true'/> -->
 
         How beneficial is this for your community?<br/>
-        <div class="slider-range-labels" style="position: relative; top: 14px;z-index: 2;">
+        <!--<div class="slider-range-labels" style="position: relative; top: 14px;z-index: 2;">
           <div class="alignleft">&larr;Very beneficial</div>
           <div class="alignright">Not beneficial&rarr;</div>
-        </div>
+        </div>-->
         <div style="clear: both;"></div>
 
-        <div id="slider2" class="rating-slider"></div>
+        <div id="slider2" class="rating-slider rating-slider2"></div><br/>
         
         <!-- <input data-track-theme='b' data-theme='b' type='range' name='slider2' id='slider2' value='50' min='0' max='100' animate='true'/> -->       
         <center>
@@ -609,7 +611,7 @@ function update_score(statement) {
 
         <div style="padding-left: 7px;width: 300px;padding-bottom:15px;font-size:12px;color: #888888;">
         <input type="email" id='regemail' name='regemail' style="font-size: 16px !important;" placeholder="Email (Optional)" data-theme="b" onblur="$('.comment-submit-btn').click();"/>
-        You can receive periodic updates by email about how the discussion has changed. <a href="#">Privacy Policy</a>
+        You can receive periodic updates by email about how the discussion has changed. <a href="http://opinion.berkeley.edu/privacy.html" target="_blank">Privacy Policy</a>
         <button type='submit' data-theme='b' class='comment-submit-btn' data-icon='check'><font size="5">Save</font></button>
       </div>
         
@@ -801,11 +803,6 @@ The Citizen Report Card for California is a new UC Berkeley project in collabora
       </center>
     </div>
 </div>
-
-
-<div class='about-privacy' style="display: none;">
-</div>
-
 
 </div>
 <script>
