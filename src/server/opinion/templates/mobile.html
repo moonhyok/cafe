@@ -78,10 +78,10 @@ jQuery(document).ready(function() {
     range: [0, 100], start: 50, step: 5, handles: 1,connect: false, behaviour: "none"
   });
   
-  var html_label ="<div class='slider-range-labels' style='position: relative; top: 0px;z-index: -1;'><div class='alignleft'>&larr;Very Creative</div><div class='alignright'>Not Creative&rarr;</div></div>";
+  var html_label ="<div class='slider-range-labels' style='position: relative; top: -2px;z-index: -1;'><div class='alignleft'>&larr;Very Creative</div><div class='alignright'>Not Creative&rarr;</div></div>";
   $('.rating-slider1 > .noUi-base').append( html_label );
   
-    var html_label ="<div class='slider-range-labels' style='position: relative; top: 0px;z-index: -1;'><div class='alignleft'>&larr;Very Beneficial</div><div class='alignright'>Not Beneficial&rarr;</div></div>";
+    var html_label ="<div class='slider-range-labels' style='position: relative; top: -2px;z-index: -1;'><div class='alignleft'>&larr;Very Beneficial</div><div class='alignright'>Not Beneficial&rarr;</div></div>";
   $('.rating-slider2 > .noUi-base').append( html_label );
   
   $(".change-rating-slider").noUiSlider({
@@ -94,7 +94,7 @@ jQuery(document).ready(function() {
   // give the statement sliders some color
   var _grades = {'A' : 5, 'B' : 25, 'C': 50, 'D': 75, 'F' : 96 };
   $.map( _grades, function(position, letter) {
-    var span = $('<span>', { style : 'position: absolute; z-index: -1; top: 0px;font-size:12px;font-weight: bold;color: #FFFFFF;', html: letter });
+    var span = $('<span>', { style : 'position: absolute; z-index: -1; top: -1px;font-size:11px;font-weight: bold;color: #FFFFFF;', html: letter });
     span.css( 'left', position + '%' );
     $('.endslider-slider > .noUi-base').append( span );
   });
@@ -212,7 +212,7 @@ function update_score(statement) {
         </div>
             <hr>   
         How creative is this idea?<br/>
-        <div style="clear: both;"></div>
+        <div style="clear: both;padding-bottom: 18px;"></div>
 
         <div id="slider1" class="rating-slider rating-slider1"></div><br/>
 
@@ -223,7 +223,7 @@ function update_score(statement) {
           <div class="alignleft">&larr;Very beneficial</div>
           <div class="alignright">Not beneficial&rarr;</div>
         </div>-->
-        <div style="clear: both;"></div>
+        <div style="clear: both;padding-bottom: 18px;"></div>
 
         <div id="slider2" class="rating-slider rating-slider2"></div><br/>
         
@@ -791,14 +791,14 @@ The Citizen Report Card for California is a new UC Berkeley project in collabora
 <div class='about-vis' style="display: none;">
   <div class='dialog-continue-text1'>
       <center>
-      <div class="basic-header" style="width:100%;">Response Saved!</div>
+      <div class="basic-header" style="width:100%;">About the Visualization</div>
       <img class="header-img-topic" src="{{ url_root }}/media/mobile/img/cafe/map_teaser.png" class="center" style="width:150px;padding-top:3px;"><br>
       </center>
-      Continue to read and evaluate other's ideas to earn more points.
-      You can see detailed statistics in the stats page.
+      The location of each person's mug is based on how he or she answered graded.
+      Participants that graded similarly are close, and ones that differed are far apart.
       <center>
       <div style="width: 150px;">
-        <button type='submit' data-theme='b' class='dialog-continue-ready' data-icon="arrow-r">Next</button>
+        <button type='submit' data-theme='b' class='dialog-vis-ready' data-icon="arrow-r">Next</button>
       </div>
       </center>
     </div>
