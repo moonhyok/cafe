@@ -12,7 +12,7 @@
 }
 
 .slider-agree-labels, .slider-range-labels{
-	font-size:12px;
+	font-size:11px;
 	font-weight: bold;
 	color: #FFFFFF;
 }
@@ -851,7 +851,7 @@ table.pretty caption {
 .noUi-base {
 	background-color: #3d3d3d;
 	border: 1px solid black;
-	height: 15px !important;
+	height: 12px !important;
 }
 
 .noUi-handle {
@@ -865,7 +865,7 @@ table.pretty caption {
 	background-image:-o-linear-gradient(#FFDEAD,#FFC501);
 	background-image:linear-gradient(#FFDEAD,#FFC501);
 	
-	margin: -16px 0px 0px -23px;
+	margin: -17px 0px 0px -22px;
 
 	-moz-box-shadow:0 1px 3px rgba(0,0,0,.2);
 	-webkit-box-shadow:0 1px 3px rgba(0,0,0,.2);
