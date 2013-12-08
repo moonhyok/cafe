@@ -88,7 +88,7 @@ jQuery(document).ready(function() {
   // give the statement sliders some color
   var _grades = {'A' : 5, 'B' : 25, 'C': 50, 'D': 75, 'F' : 96 };
   $.map( _grades, function(position, letter) {
-    var span = $('<span>', { style : 'position: absolute; z-index: -1; top: 7px;', html: letter });
+    var span = $('<span>', { style : 'position: absolute; z-index: -1; top: 0px;font-size:12px;font-weight: bold;color: #FFFFFF;', html: letter });
     span.css( 'left', position + '%' );
     $('.endslider-slider > .noUi-base').append( span );
   });
@@ -206,20 +206,20 @@ function update_score(statement) {
         </div>
             <hr>   
         How creative is this idea?<br/>
-        <div class="slider-range-labels">
-          <div class="alignleft">&larr;Non Creative</div>
-          <div class="alignright">Very Creative&rarr;</div>
+        <div class="slider-range-labels" style="position: relative; top: 14px;z-index: 2;">
+          <div class="alignleft">&larr;Very Creative</div>
+          <div class="alignright">Not Creative&rarr;</div>
         </div>
         <div style="clear: both;"></div>
 
-        <div id="slider1" class="rating-slider" style="padding-bottom: 10px;"></div>
+        <div id="slider1" class="rating-slider"></div><br/>
 
         <!--<input data-track-theme='b' data-theme='b' type='range' name='slider1' id='slider1' value='50' min='0' max='100' animate='true'/> -->
 
         How beneficial is this for your community?<br/>
-        <div class="slider-range-labels">
-          <div class="alignleft">&larr;Not beneficial</div>
-          <div class="alignright">Very beneficial&rarr;</div>
+        <div class="slider-range-labels" style="position: relative; top: 14px;z-index: 2;">
+          <div class="alignleft">&larr;Very beneficial</div>
+          <div class="alignright">Not beneficial&rarr;</div>
         </div>
         <div style="clear: both;"></div>
 
@@ -785,6 +785,27 @@ The Citizen Report Card for California is a new UC Berkeley project in collabora
       </center>
     </div>
 </div>
+
+<div class='about-vis' style="display: none;">
+  <div class='dialog-continue-text1'>
+      <center>
+      <div class="basic-header" style="width:100%;">Response Saved!</div>
+      <img class="header-img-topic" src="{{ url_root }}/media/mobile/img/cafe/map_teaser.png" class="center" style="width:150px;padding-top:3px;"><br>
+      </center>
+      Continue to read and evaluate other's ideas to earn more points.
+      You can see detailed statistics in the stats page.
+      <center>
+      <div style="width: 150px;">
+        <button type='submit' data-theme='b' class='dialog-continue-ready' data-icon="arrow-r">Next</button>
+      </div>
+      </center>
+    </div>
+</div>
+
+
+<div class='about-privacy' style="display: none;">
+</div>
+
 
 </div>
 <script>
