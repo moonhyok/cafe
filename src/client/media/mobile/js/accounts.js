@@ -162,7 +162,25 @@ var accounts = (function($, d3, console) {
         }
         setNumRatedBy();
     }
-
+    
+    function sendEmail(mail){
+		
+		$.ajax({
+            type: "POST",
+            dataType: 'json',
+            url: window.url_root + "/confirmationmail/",
+            data: {'mail':mail},
+            success: function(data) {
+                if (data.hasOwnProperty('success')) {
+                    //console.log("data was sent!")
+                }
+            },
+            error: function() {
+				
+                console.log("email didn't get sent!");
+            }
+        });
+	}
     return {
         'showCommentInput': showCommentInput,
         'showRegister': showRegister,
@@ -173,7 +191,8 @@ var accounts = (function($, d3, console) {
         'setAuthenticated': setAuthenticated,
         'loginAfterRegister': loginAfterRegister,
         'loadMyCommentDiv': loadMyCommentDiv,
-        'initLoggedInFeatures': initLoggedInFeatures
+        'initLoggedInFeatures': initLoggedInFeatures,
+        'sendEmail': sendEmail
     };
 
 })($, d3, console);
@@ -432,6 +451,7 @@ $(document).ready(function() {
         $('.logout').show();
         e.preventDefault();
         e.stopPropagation();
+        window.history.pushState("", "", '/mobile');
 
         $.ajax({
             url: window.url_root + '/accountsjson/logout/',
@@ -463,5 +483,13 @@ $(document).ready(function() {
         $('.logout').slideUp();
         $('.login').slideDown();
     });
-
+    
+    $('#regrade-btn').click(function(){
+		$('.welcome-back').hide();
+		$('.endsliders').show();
+	});
+	
+	$('#garden-btn').click(function(){
+		$('.welcome-back').slideUp();
+	});
 });
