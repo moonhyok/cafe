@@ -442,8 +442,13 @@ var _blooms = blooms = (function($, d3, console) {
         accounts.initLoggedInFeatures();
         //TOFIX utils.hideLoading();
         $('.landing').hide();
-        if(window.conf.RETURNING_PROMPT_REPORT_CARD){
-        $('.endsliders').slideDown();}
+        if(window.conf.RETURN_USER_FIRST_TIME){
+		$('.welcome-back').slideDown();
+		}
+		else{
+		$('.welcome-back').hide();
+		}
+        
     }
 
     return {
@@ -456,6 +461,9 @@ $(document).ready(function() {
     if (accounts.setAuthenticated()) {
         _blooms.alreadyAuthenticated();
     }
+    else{
+		$('.welcome-back').hide();
+	}
 
     $('#d3').height($(window).height() - $('.top-bar').height());
 
