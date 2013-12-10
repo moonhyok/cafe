@@ -41,6 +41,8 @@ import datetime
 import socket
 import time
 import datetime
+import hashlib
+from django.core.validators import validate_email
 try:
     import json
 except ImportError:
@@ -80,12 +82,29 @@ def prompt_report_card(user):
     else:
        return True
 
+def return_user_first_time(request,entrycode):
+    if entrycode==None: #first time user
+        return False
+    else:
+        if request.user.is_authenticated():  #valid entry code user
+           if request.session['refresh_times']==1: #1 means refresh
+              return False
+           else:
+              return True
+        else: 
+           return False
+
 def mobile(request,entry_code=None):
     create_visitor(request)
-    if entry_code!=None:
-        user=authenticate(entrycode=entry_code)
-        if user !=None:
-           login(request,user)
+    if request.user.is_authenticated(): 
+       if entry_code!=None: #entrycode user refresh page
+          request.session['refresh_times']=1
+    else:
+       if entry_code!=None:         #entry code user relogin "first time"
+          user=authenticate(entrycode=entry_code)
+          if user !=None:
+             login(request,user)
+             request.session['refresh_times']=0
     #print get_client_settings(True)
     os = get_os(1)
     disc_stmt = get_disc_stmt(os, 1)
@@ -105,7 +124,7 @@ def mobile(request,entry_code=None):
     random_password = ''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(10));
 
     return render_to_response('mobile.html', context_instance = RequestContext(request, {'url_root' : settings.URL_ROOT,
-                                                                                         'returning_prompt_report_card': str(prompt_report_card(request.user)).lower(),
+                                                                                         'return_user_first_time':str(return_user_first_time(request,entry_code)).lower(),
 											 'loggedIn' : str(request.user.is_authenticated()).lower(),
 											 'change_prompt' : str(request.user.is_authenticated()).lower(),
 											 'client_data': mobile_client_data(request),
@@ -118,6 +137,35 @@ def mobile(request,entry_code=None):
 											 'random_password': random_password,
                                                                                          'statement_labels': json.dumps(statement_labels), 
 											 'medians': json.dumps(medians)}))
+
+
+def confirmation_mail(request):
+    
+    email=request.REQUEST.get('mail')
+    try:
+      validate_email(email)
+      user=User.objects.get(username=request.user.username)
+      print user.username,user.email,len(user.email)
+      if len(user.email)==0:
+         user.email=email
+         user.save()
+         entrycode=hashlib.sha224(email).hexdigest()[0:7]
+         ECobject=EntryCode(username=user.username,code=entrycode)
+         ECobject.save()	
+    
+         #send out confirmation email
+         subject = "Welcome to the CA report card"
+         email_list = [user.email]
+         message = render_to_string('registration/confirmation_email.txt', 
+									   { 'url_root': settings.URL_ROOT, 
+										 'entrycode': entrycode,
+                                         'number_people': len(User.objects.all()) })     
+         send_mail(subject, message, Settings.objects.string('DEFAULT_FROM_EMAIL'), email_list)
+         return json_success()
+      else:
+         return json_success()
+    except:
+      json_error("Please enter a valid email")
 
 def app(request, username=None):
 	if True:
