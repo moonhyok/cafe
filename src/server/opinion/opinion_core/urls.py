@@ -106,6 +106,8 @@ urlpatterns = patterns('',
     (r'^os/updatecomment/(\d+)/(\d+)/$', 'opinion.opinion_core.views.os_update_comment'),
     (r'^os/updatecomment/(\d+)/(\d+)/(\d+)/$', 'opinion.opinion_core.views.os_update_comment'),
     
+    #send confirmation email with entry code
+    (r'^confirmationmail/$','opinion.opinion_core.views.confirmation_mail'),
     
     # Admin
     (r'^admin/comments/$', 'opinion.opinion_core.admin.comment_admin'),
