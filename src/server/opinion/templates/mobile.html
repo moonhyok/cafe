@@ -41,7 +41,7 @@
   'YOUR_SCORE_LANGUAGE' : "Your Score",
   'INSTRUCTIONS_3'      : "{{ client_settings.INSTRUCTIONS_3 }}",
   'FUN_COLORS'          : {{ client_settings.FUN_COLORS }},
-  'RETURNING_PROMPT_REPORT_CARD': {{returning_prompt_report_card}}
+  'RETURN_USER_FIRST_TIME': {{return_user_first_time}}
 };
 
 // TURNING OFF ALL AJAX
@@ -679,6 +679,23 @@ The Citizen Report Card for California is a new UC Berkeley project in collabora
         </center>
       </div>
     
+</div>
+
+<div class='welcome-back'> 
+     <div class='landing-intro'>
+      <div class='landing-header'>
+        California<br/>Report Card
+      </div>
+     </div>
+     <div class='landing-desc'>
+        <center>
+        <div style="width: 100%; max-width: 300px;text-align:left;">
+		Welcome back!! Please enter your new grade or read more ideas<br/>
+     <button type='submit' data-theme='b' id='regrade-btn' ><font size="5">Enter new grades</font></button>
+     <button type='cancel' data-theme='b' id='garden-btn' ><font size="5">Read more ideas</font></button>
+       </div>
+        </center>
+      </div>
 </div>
 
 <div class='landing'>
