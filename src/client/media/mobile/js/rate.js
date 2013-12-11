@@ -396,9 +396,9 @@ $(document).ready(function() {
         $('.menubar').hide();
         rate.logUserEvent(6,'comment submitted');
         rate.sendComment($('#entered-comment').val());
-        if ($('#regemail').val()){
-			accounts.sendEmail($('#regemail').val());
-		}
+        //if ($('#regemail').val()){
+	//		accounts.sendEmail($('#regemail').val());
+	//	}
         //accounts.showRegister();
     });
     
