@@ -99,12 +99,12 @@ var rate = (function($, d3, console) {
             sendAgreementRating({
                 'r1': $("#slider1").val(),
                 'r2': $("#slider2").val(),
-                'cid': window.current_cid
+                'cid': window.current_uid
             });
             sendInsightRating({
                 'r1': $("#slider1").val(),
                 'r2': $("#slider2").val(),
-                'cid': window.current_cid
+                'cid': window.current_uid
             });
             
             
@@ -129,6 +129,13 @@ var rate = (function($, d3, console) {
                 $('.rate').slideUp();
             }
             
+    }
+    
+    function doneRatingNoSave() {
+        //note: this done-rating button is mapped twice, see below in populateBlooms #go-back.
+        resetRatingSliders();
+        logUserEvent(4,'rated');
+        $('.rate').slideUp();
     }
 
     // pulls a live comment text from the database. id is either the cid or the uid,
@@ -358,6 +365,7 @@ var rate = (function($, d3, console) {
         'initMenubar' : initMenubar,
         'logUserEvent' : logUserEvent,
         'doneRating' : doneRating,
+        'doneRatingNoSave' : doneRatingNoSave,
         'pullComment' : pullComment,
         'getComment' : getComment,
         'getCommentByUID' : getCommentByUID,
@@ -388,7 +396,15 @@ $(document).ready(function() {
         $('.menubar').hide();
         rate.logUserEvent(6,'comment submitted');
         rate.sendComment($('#entered-comment').val());
+        //if ($('#regemail').val()){
+	//		accounts.sendEmail($('#regemail').val());
+	//	}
         //accounts.showRegister();
+    });
+    
+    $('.comment-cancel-btn').click(function() {
+        $('.comment-input').slideUp();
+        rate.logUserEvent(6,'comment cancelled');
     });
 
 

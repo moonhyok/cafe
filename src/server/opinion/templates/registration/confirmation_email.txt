@@ -1,0 +1,7 @@
+Thank you for participating California Citizen Report Card! 
+
+{{number_people}} people has graded California Government!
+
+You can join the system again via the following link anytime!
+
+{{ url_root }}/mobile/{{entrycode}}
