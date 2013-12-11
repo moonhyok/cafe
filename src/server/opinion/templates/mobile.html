@@ -205,6 +205,7 @@ function update_score(statement) {
       <textarea id='commentInput' class='answer' readonly="true" style="overflow-y:scroll !important;"></textarea>              
       <div class='sliders'>
         <div style="text-align: right">
+        <a href="#" style="font-size: 11px !important;" onclick="rate.doneRatingNoSave();">Skip</a>
         <a href="#" style="font-size: 11px !important;" id="flag">Inappropriate or Irrelevant?</a>
         <!--<select name="flip-1" id="flip-1" class="flip-1" data-role="slider" data-mini="true" data-theme="a">
 	<option value="no">No</option>
@@ -614,6 +615,7 @@ function update_score(statement) {
         <input type="email" id='regemail' name='regemail' style="font-size: 16px !important;" placeholder="Email (Optional)" data-theme="b"/>
         You can receive periodic updates by email about how the discussion has changed. <a href="http://opinion.berkeley.edu/privacy.html" target="_blank">Privacy Policy</a>
         <button type='submit' data-theme='b' class='comment-submit-btn' data-icon='check'><font size="5">Save</font></button>
+        <button type='submit' data-theme='b' class='comment-cancel-btn' data-icon='check'><font size="5">Cancel</font></button>
       </div>
         
   </div>
@@ -726,8 +728,8 @@ The Citizen Report Card for California is a new UC Berkeley project in collabora
       </center>
       The discussion topic is:<br/><strong>"{{ topic }}"</strong>
       <center>
-      <div style="width: 150px;">
-        <button type='submit' data-theme='b' class='dialog-next' data-icon="arrow-r" onclick="$('.dialog-text1').hide();$('.dialog-text2').show();">Next</button>
+      <div style="width: 300px;">
+        <button type='submit' data-theme='b' class='dialog-next' data-icon="arrow-r" onclick="$('.dialog-text1').hide();$('.dialog-text2').show();"><font size="5">Next</font></button>
       </div>
       </center>
     </div>
@@ -740,8 +742,8 @@ The Citizen Report Card for California is a new UC Berkeley project in collabora
       Each mug represents a participant's response to the discussion topic.<br/>
       <a href="#" onclick="$('.dialog-text2').hide();$('.dialog-vis-text').show();" style="font-size: 14px;">More about visualization</a>
       <center>
-      <div style="width: 150px;">
-        <button type='submit' data-theme='b' class='dialog-ready' data-icon="arrow-r">Next</button>
+      <div style="width: 300px;">
+        <button type='submit' data-theme='b' class='dialog-ready' data-icon="arrow-r"><font size="5">Next</font></button>
       </div>
       </center>
     </div>
@@ -754,8 +756,8 @@ The Citizen Report Card for California is a new UC Berkeley project in collabora
       The location of each participant's mug is based on how he or she graded.
       Participants that graded similarly are close, and ones that differed are far apart.
       <center>
-      <div style="width: 150px;">
-        <button type='submit' data-theme='b' class='dialog-ready' data-icon="arrow-r">Next</button>
+      <div style="width: 300px;">
+        <button type='submit' data-theme='b' class='dialog-ready' data-icon="arrow-r"><font size="5">Next</font></button>
       </div>
       </center>
     </div>
@@ -785,8 +787,8 @@ The Citizen Report Card for California is a new UC Berkeley project in collabora
       You earn points by rating others and when others rate your idea.
       Rate one more person's idea before entering your own...
       <center>
-      <div style="width: 150px;">
-        <button type='submit' data-theme='b' class='dialog-score-ready' data-icon="arrow-r">Next</button>
+      <div style="width: 300px;">
+        <button type='submit' data-theme='b' class='dialog-score-ready' data-icon="arrow-r"><font size="5">Next</font></button>
       </div>
       </center>
     </div>
@@ -800,8 +802,8 @@ The Citizen Report Card for California is a new UC Berkeley project in collabora
       </center>
       To enter your own idea, click on your mug (highlighted in yellow).<br/>
       <center>
-      <div style="width: 150px;">
-        <button type='submit' data-theme='b' class='dialog-yourmug-ready' data-icon="arrow-r">Next</button>
+      <div style="width: 300px;">
+        <button type='submit' data-theme='b' class='dialog-yourmug-ready' data-icon="arrow-r"><font size="5">Next</font></button>
       </div>
       </center>
     </div>
@@ -816,8 +818,8 @@ The Citizen Report Card for California is a new UC Berkeley project in collabora
       Continue to read and evaluate other's ideas to earn more points.
       You can see detailed statistics in the stats page.
       <center>
-      <div style="width: 150px;">
-        <button type='submit' data-theme='b' class='dialog-continue-ready' data-icon="arrow-r">Next</button>
+      <div style="width: 300px;">
+        <button type='submit' data-theme='b' class='dialog-continue-ready' data-icon="arrow-r"><font size="5">Next</font></button>
       </div>
       </center>
     </div>

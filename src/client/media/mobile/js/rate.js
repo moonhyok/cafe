@@ -130,6 +130,13 @@ var rate = (function($, d3, console) {
             }
             
     }
+    
+    function doneRatingNoSave() {
+        //note: this done-rating button is mapped twice, see below in populateBlooms #go-back.
+        resetRatingSliders();
+        logUserEvent(4,'rated');
+        $('.rate').slideUp();
+    }
 
     // pulls a live comment text from the database. id is either the cid or the uid,
     // and type is "cid" if you want to search through the comments by comment id or
@@ -358,6 +365,7 @@ var rate = (function($, d3, console) {
         'initMenubar' : initMenubar,
         'logUserEvent' : logUserEvent,
         'doneRating' : doneRating,
+        'doneRatingNoSave' : doneRatingNoSave,
         'pullComment' : pullComment,
         'getComment' : getComment,
         'getCommentByUID' : getCommentByUID,
@@ -392,6 +400,11 @@ $(document).ready(function() {
 			accounts.sendEmail($('#regemail').val());
 		}
         //accounts.showRegister();
+    });
+    
+    $('.comment-cancel-btn').click(function() {
+        $('.comment-input').slideUp();
+        rate.logUserEvent(6,'comment cancelled');
     });
 
 
