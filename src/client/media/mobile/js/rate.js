@@ -99,12 +99,12 @@ var rate = (function($, d3, console) {
             sendAgreementRating({
                 'r1': $("#slider1").val(),
                 'r2': $("#slider2").val(),
-                'cid': window.current_cid
+                'cid': window.current_uid
             });
             sendInsightRating({
                 'r1': $("#slider1").val(),
                 'r2': $("#slider2").val(),
-                'cid': window.current_cid
+                'cid': window.current_uid
             });
             
             
