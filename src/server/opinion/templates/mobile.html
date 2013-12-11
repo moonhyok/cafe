@@ -260,7 +260,7 @@ function update_score(statement) {
                 My Grade
               </td>
               <td style="vertical-align:middle;width: 45px;text-align: center;vertical-align: middle;">
-                Avg. Grade
+                <a href="#" onclick="$('.endsliders').hide();$('.dialog-avggrade').show();" style="color:#FFC501;">Avg. Grade</a>
               </td>
             </tr>
            </table>
@@ -824,6 +824,22 @@ The Citizen Report Card for California is a new UC Berkeley project in collabora
       </center>
     </div>
 </div>
+
+<div class='dialog-avggrade' style="display: none;">
+    <div class='dialog-avggrade-text'>
+      <center>
+      <div class="basic-header" style="width:100%;">Average Grades</div>
+      <img class="header-img-topic" src="{{ url_root }}/media/mobile/img/cafe/avggrade.png" class="center" style="width:150px;padding-top:3px;"><br>
+      </center>
+      The Average Grade is based on the grades from all participants thusfar.
+      <center>
+      <div style="width: 300px;">
+        <button type='submit' data-theme='b' data-icon="arrow-r" onclick="$('.dialog-avggrade').hide();$('.endsliders').show();"><font size="5">Back</font></button>
+      </div>
+      </center>
+    </div>
+</div>
+
 </div>
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
