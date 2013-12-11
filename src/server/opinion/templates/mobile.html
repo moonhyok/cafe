@@ -626,9 +626,11 @@ function update_score(statement) {
 Under Construction<br/>
 The Citizen Report Card for California is a new UC Berkeley project in collaboration with the CITRIS Data & Democracy Initiative that integrates our CAFE technology into a mobile phone platform that allows Californians to grade (from A to F) how well they feel California's elected officials are working to address 6 key subjects.  The interface is designed to track changes over time and to encourage online dialogues about key issues. 
 
-    <div style="width: 100%; max-width: 150px; padding-top:5px;">
-      <button data-theme='c' class='login-form-go-back' data-icon="arrow-l" data-mini="true">Back</button>
-  </div>
+    <center>
+    <div style="width: 300px;">
+        <button type='submit' data-theme='b' class='login-form-go-back' data-icon="arrow-l"><font size="5">Back</font></button>
+      </div>
+    </center>
     
     <div class="loginpanel" style="display: none;">
             
@@ -735,7 +737,22 @@ The Citizen Report Card for California is a new UC Berkeley project in collabora
       <div class="basic-header" style="width:100%;">The Discussion</div>
       <img class="header-img-topic" src="{{ url_root }}/media/mobile/img/cafe/cafe_click_idea.jpg" class="center" style="width:200px;padding-top:3px;"><br>
       </center>
-      Each mug represents a participant's response to the discussion topic.
+      Each mug represents a participant's response to the discussion topic.<br/>
+      <a href="#" onclick="$('.dialog-text2').hide();$('.dialog-vis-text').show();" style="font-size: 14px;">More about visualization</a>
+      <center>
+      <div style="width: 150px;">
+        <button type='submit' data-theme='b' class='dialog-ready' data-icon="arrow-r">Next</button>
+      </div>
+      </center>
+    </div>
+    
+      <div class='dialog-vis-text' style="display:none;">
+      <center>
+      <div class="basic-header" style="width:100%;">About the Visualization</div>
+      <img class="header-img-topic" src="{{ url_root }}/media/mobile/img/cafe/map_teaser.png" class="center" style="width:150px;padding-top:3px;"><br>
+      </center>
+      The location of each participant's mug is based on how he or she graded.
+      Participants that graded similarly are close, and ones that differed are far apart.
       <center>
       <div style="width: 150px;">
         <button type='submit' data-theme='b' class='dialog-ready' data-icon="arrow-r">Next</button>
@@ -805,23 +822,6 @@ The Citizen Report Card for California is a new UC Berkeley project in collabora
       </center>
     </div>
 </div>
-
-<div class='about-vis' style="display: none;">
-  <div class='dialog-continue-text1'>
-      <center>
-      <div class="basic-header" style="width:100%;">About the Visualization</div>
-      <img class="header-img-topic" src="{{ url_root }}/media/mobile/img/cafe/map_teaser.png" class="center" style="width:150px;padding-top:3px;"><br>
-      </center>
-      The location of each person's mug is based on how he or she answered graded.
-      Participants that graded similarly are close, and ones that differed are far apart.
-      <center>
-      <div style="width: 150px;">
-        <button type='submit' data-theme='b' class='dialog-vis-ready' data-icon="arrow-r">Next</button>
-      </div>
-      </center>
-    </div>
-</div>
-
 </div>
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
