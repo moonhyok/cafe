@@ -898,15 +898,23 @@ table.pretty caption {
 }
 
 .noUi-handle {
-	background: #FFC501;
-	border: 1px solid #AAAAAA;
+	border: 1px solid #FF5700 /*{b-bup-border}*/;
+	background: #FFC501 /*{b-bup-background-color}*/;
+	/*border: 1px solid #AAAAAA;
 
-	background-image:-webkit-gradient(linear,left top,left bottom,from(#FFDEAD),to(#FFC501));
-	background-image:-webkit-linear-gradient(#FFDEAD,#FFC501);
-	background-image:-moz-linear-gradient(#FFDEAD,#FFC501);
-	background-image:-ms-linear-gradient(#FFDEAD,#FFC501);
-	background-image:-o-linear-gradient(#FFDEAD,#FFC501);
-	background-image:linear-gradient(#FFDEAD,#FFC501);
+	background-image:-webkit-gradient(linear,left top,left bottom,from(#E8B91A),to(#FFC501));
+	background-image:-webkit-linear-gradient(#E8B91A,#FFC501);
+	background-image:-moz-linear-gradient(#E8B91A,#FFC501);
+	background-image:-ms-linear-gradient(#E8B91A,#FFC501);
+	background-image:-o-linear-gradient(#E8B91A,#FFC501);
+	background-image:linear-gradient(#E8B91A,#FFC501);*/
+	
+background-image: -webkit-gradient(linear, left top, left bottom, from( #FFd401 /*{b-bup-background-start}*/), to( #eab500 /*{b-bup-background-end}*/)); /* Saf4 , Chrome */
+	background-image: -webkit-linear-gradient( #FFd401 /*{b-bup-background-start}*/, #eab500 /*{b-bup-background-end}*/); /* Chrome 10 , Saf5.1  */
+	background-image:    -moz-linear-gradient( #FFd401 /*{b-bup-background-start}*/, #eab500 /*{b-bup-background-end}*/); /* FF3.6 */
+	background-image:     -ms-linear-gradient( #FFd401 /*{b-bup-background-start}*/, #eab500 /*{b-bup-background-end}*/); /* IE10 */
+	background-image:      -o-linear-gradient( #FFd401 /*{b-bup-background-start}*/, #eab500 /*{b-bup-background-end}*/); /* Opera 11.10  */
+	background-image:         linear-gradient( #FFd401 /*{b-bup-background-start}*/, #eab500 /*{b-bup-background-end}*/);
 	
 	margin: -17px 0px 0px -22px;
 
