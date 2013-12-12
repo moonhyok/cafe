@@ -371,7 +371,7 @@ var _blooms = blooms = (function($, d3, console) {
             .attr("width", "90") //if this changes, change the margin above
             .attr("height", "90")
             .attr("opacity", function(d) {
-                    if (window.user_score === 0 && d.uid == "curUser") {
+                    if (window.user_score <= 1 && d.uid == "curUser") {
                         return "0";
                     } else {
                         return "1";
@@ -468,11 +468,11 @@ $(document).ready(function() {
     $('#d3').height($(window).height() - $('.top-bar').height());
 
     $('.top-bar').on('height', function() {
-        _blooms.populateBlooms();
+        //_blooms.populateBlooms();
     });
 
     $(window).resize(function() {
         // TODO: check if a ajax call
-        _blooms.populateBlooms();
+        //_blooms.populateBlooms();
     });
 });

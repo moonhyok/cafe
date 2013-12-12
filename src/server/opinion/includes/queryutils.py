@@ -1507,8 +1507,8 @@ def get_user_recent_ratings_from_all_revisions(user,os,disc_stmt,type='insight',
 	return ratings_tuples_filtered_list
 	
 def get_never_seen_comments(user,os,disc_stmt,max_num=None,efficient_count=False, no_statements=False):
-	#users_with_ratings = UserData.objects.filter(key = 'first_rating').values_list('user')
-	users_with_no_ratings = [] #User.objects.all().exclude(id__in = users_with_ratings)
+	users_with_ratings = UserData.objects.filter(key = 'first_rating').values_list('user')
+	users_with_no_ratings = User.objects.all().exclude(id__in = users_with_ratings)
 
 	rated_users = set()	
 	

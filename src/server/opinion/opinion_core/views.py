@@ -2460,11 +2460,13 @@ def os_never_seen_comments_json(request,os_id,disc_stmt_id=None):
 	
 	if os == None or len(disc_stmt) == 0:
 		return json_error('Invalid Request')
-	    
+	
+	"""    
 	cache = NeverSeenCache.objects.filter(created__gte=datetime.date.today()).order_by('-created')
 	if len(cache) > 0 and not request.user.is_authenticated():
 	    cache = cache[0]
 	    return json.loads(cache.value)
+	"""
 
 	#query = request.REQUEST.get('query', False)
 	#no_statements = request.REQUEST.get('no_statements', False)
