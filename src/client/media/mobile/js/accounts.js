@@ -491,5 +491,6 @@ $(document).ready(function() {
 	
 	$('#garden-btn').click(function(){
 		$('.welcome-back').slideUp();
+                $('.menubar').show();
 	});
 });

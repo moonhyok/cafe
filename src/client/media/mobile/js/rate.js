@@ -385,7 +385,13 @@ $(document).ready(function() {
 
     $('.done-endsliders-btn').click(function() {
         rate.logUserEvent(5,'sliders finished');
-        rate.storeSliders(num_sliders);
+        rate.storeSliders(window.num_sliders);
+        if (window.authenticated) {
+            for (var i = 1; i <= window.num_sliders; i++) {
+                rate.sendSlider(window.sliders[i], i);
+            }
+            $('.menubar').show();
+        }
     });
 
     $('.comment-submit-btn').click(function() {
