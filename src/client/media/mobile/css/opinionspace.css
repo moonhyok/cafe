@@ -543,6 +543,7 @@ table.pretty caption {
 .landing-desc {
 	padding-top: 10px;
 	padding-bottom: 10px;
+	line-height: 27px;
 	font-family: myriad pro, trebuchet ms, arial, sans-serif;
 	text-shadow: none;
 	color: #000000;
