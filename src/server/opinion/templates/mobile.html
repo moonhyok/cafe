@@ -178,10 +178,11 @@ function update_score(statement) {
     Topic: {{ short_topic }}
   </div>
 
-  <div data-role='navbar' class='menubar'>
+  <div data-role='navbar' class='menubar' data-iconpos="left" style="width: 100%;">
     <ul>
-      <li><a data-theme='b' class='my-comment-btn'><span class='stats-label'>Stats</span></a></li>
-      <li><a data-theme='b' class='logout-btn'><span class='logout-label'>Logout</span></a></li>
+      <li style="width: 10%;"><a data-theme='b' class='home-btn' data-icon="home" onclick="$('.welcome-back').show();$('.menubar').hide();"><span class='home-label'>&nbsp;</span></a></li>
+      <li style="width: 45%;"><a data-theme='b' class='my-comment-btn'><span class='stats-label'>Stats</span></a></li>
+      <li style="width: 45%;"><a data-theme='b' class='logout-btn'><span class='logout-label'>Logout</span></a></li>
     </ul>
 </div>
   
@@ -695,7 +696,6 @@ The Citizen Report Card for California is a new UC Berkeley project in collabora
      <div class='landing-desc'>
         <center>
         <div style="width: 100%; max-width: 300px;text-align:left;">
-		Welcome back!! Please enter your new grade or read more ideas<br/>
      <button type='submit' data-theme='b' id='regrade-btn' ><font size="5">Enter new grades</font></button>
      <button type='cancel' data-theme='b' id='garden-btn' ><font size="5">Read more ideas</font></button>
        </div>
@@ -726,7 +726,7 @@ The Citizen Report Card for California is a new UC Berkeley project in collabora
       <div class="basic-header" style="width:100%;">The Discussion</div>
       <img class="header-img-topic" src="{{ url_root }}/media/mobile/img/cafe/map_teaser.png" class="center" style="width:150px;padding-top:3px;padding-bottom: 3px;"><br>
       </center>
-      The discussion topic is:<br/><strong>"{{ topic }}"</strong>
+      The discussion topic is:<br/>"{{ topic }}"
       <center>
       <div style="width: 300px;">
         <button type='submit' data-theme='b' class='dialog-next' data-icon="arrow-r" onclick="$('.dialog-text1').hide();$('.dialog-text2').show();"><font size="5">Next</font></button>
