@@ -154,9 +154,9 @@ var accounts = (function($, d3, console) {
             });
 
         });
-
+        
         if (window.user_score == 0) {
-            $('.dialog').slideDown();
+            $('.dialog').show();
         } else {
             rate.initMenubar();
         }
