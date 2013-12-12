@@ -27,6 +27,7 @@ from opinion.includes.plotutils import *
 from opinion.decorators import *
 
 from django.contrib.auth import authenticate, login
+from django.views.decorators.cache import cache_control
 
 import math
 import numpy
@@ -94,6 +95,7 @@ def return_user_first_time(request,entrycode):
         else: 
            return False
 
+@cache_control(no_cache=True)
 def mobile(request,entry_code=None):
     create_visitor(request)
     reviewer_score = 0
