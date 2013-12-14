@@ -14,7 +14,7 @@
 .slider-agree-labels, .slider-range-labels{
 	font-size:11px;
 	font-weight: bold;
-	color: #FFFFFF;
+	color: #000000;
 }
 
 #grades div {
@@ -40,7 +40,7 @@
 }
 
 /* This prevents the jQuery navbar buttons from staying pressed */
-.ui-footer .ui-navbar .ui-btn-active {
+.ui-navbar .ui-btn-active {
 	border: 1px solid       #222;
 	background:             #04376c;
 	font-weight: bold;
@@ -51,6 +51,10 @@
 	background-image:     -ms-linear-gradient(#555, #333);
 	background-image:      -o-linear-gradient(#555, #333);
 	background-image:         linear-gradient(#555, #333);
+}
+
+.ui-navbar .ui-btn-inner {
+	padding: 0px !important;
 }
 
 /** Testing out leaderboard*/
@@ -133,6 +137,7 @@ table.pretty caption {
 	
 	.stats-label,.logout-label{
 		font-size: 18px;
+		padding-bottom: 5px;
 	}
 	
 	.home-label{
@@ -179,14 +184,7 @@ table.pretty caption {
 
 	body {
 		/*font-family: "Helvetica Neue", Arial, sans-serif;*/
-		background: #C7E1EB; /* Old browsers */
-		background: -moz-linear-gradient(top, #C7E1EB 0%, #FFFFFF 100%); /* FF3.6+ */
-		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#C7E1EB), color-stop(100%,#FFFFFF)); /* Chrome,Safari4+ */
-		background: -webkit-linear-gradient(top, #C7E1EB 0%,#FFFFFF 100%); /* Chrome10+,Safari5.1+ */
-		background: -o-linear-gradient(top, #C7E1EB 0%,#FFFFFF 100%); /* Opera 11.10+ */
-		background: -ms-linear-gradient(top, #C7E1EB 0%,#FFFFFF 100%); /* IE10+ */
-		background: linear-gradient(to bottom, #C7E1EB 0%,#FFFFFF 100%); /* W3C */
-		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#C7E1EB', endColorstr='#FFFFFF',GradientType=0 ); /* IE6-9 */
+		background: #04376c;
 		height: 100%;
 		padding: 0 !important;
 		/* use helvetica neue, bootstrap style */
@@ -222,15 +220,16 @@ table.pretty caption {
 	}
 
 	.header {
-		text-align: left;
-		background-color: #04376c;
 		color: white;
 		text-shadow: none;
-		width: 100%;
-		font-size: 15px;
-		padding: 5px 0px;
-		padding-left: 3px;
-		line-height: 15px;
+		width: 95%;
+		font-size: 18px;
+		/*padding: 5px 0px;*/
+		text-align: left;
+		line-height: 19px;
+		padding-left: 5px;
+		padding-right: 5px;
+		padding-bottom: 5px;
 		font-family: futura, verdana, sans-serif;
 		/*margin-bottom: 20px; */
 	}
@@ -243,18 +242,15 @@ table.pretty caption {
 		left: 0px;
 		z-index: 999;
 		text-shadow: none;
-		font-size: 15px !important;
+		font-size: 19px !important;
 		width: 100%;
 		line-height: 20px;
-		padding: 5px 0px;
-		padding-left: 3px;
-		text-align: left;
 	}
 	
 	.reportcard{
 		/*background-color: #FAEBCD;*/
 		/*font-family: "Courier New", Courier, monospace;*/
-		color: black;
+		color: white;
 		text-shadow: none;
 		width: 100%;
 		height: 100%;
@@ -263,21 +259,22 @@ table.pretty caption {
 	
 	.comment-panel{
 		/*background: url('../img/cafe/cafe_notebook.png') repeat-y;*/
-		color: black;
+		color: white;
 		text-shadow: none;
 		width: 100%;
 		height: 100%;
+		padding-top: 10px;
 	}
 	
 	.cardtable, tr, th, td{
-		border: 1px solid black;
+		border: 1px solid white;
 		padding-right: 10px;
 		padding-left: 10px;
 	}
 	
 	.grade{
 		font-family: "Comic Sans MS", sans-serif;
-		color: #000099;
+		color: #FFC501;
 		font-weight:bold;
 		text-shadow: none;
 		font-size: 30px;
@@ -285,7 +282,7 @@ table.pretty caption {
 	
 	.grade2{
 		font-family: "Comic Sans MS", sans-serif;
-		color: #004444;
+		color: #FFC501;
 		font-weight:bold;
 		text-shadow: none;
 		font-size: 30px;
@@ -337,15 +334,7 @@ table.pretty caption {
 		width: 100%;
 		height: 100%;
 		/*background-color: #FAEBCD;*/
-		background: #C7E1EB; /* Old browsers */
-		background: -moz-linear-gradient(top, #C7E1EB 0%, #FFFFFF 100%); /* FF3.6+ */
-		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#C7E1EB), color-stop(100%,#FFFFFF)); /* Chrome,Safari4+ */
-		background: -webkit-linear-gradient(top, #C7E1EB 0%,#FFFFFF 100%); /* Chrome10+,Safari5.1+ */
-		background: -o-linear-gradient(top, #C7E1EB 0%,#FFFFFF 100%); /* Opera 11.10+ */
-		background: -ms-linear-gradient(top, #C7E1EB 0%,#FFFFFF 100%); /* IE10+ */
-		background: linear-gradient(to bottom, #C7E1EB 0%,#FFFFFF 100%); /* W3C */
-		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#C7E1EB', endColorstr='#FFFFFF',GradientType=0 ); /* IE6-9 */
-		/*background-image:url('../img/cafe/cafe_bg.jpg');*/
+		background: #04376c;
 		z-index: 999;
 		overflow-y: auto;
 		overflow-x: hidden;
@@ -365,26 +354,26 @@ table.pretty caption {
 	.scorebox{
 		text-shadow: none;
 		font-weight: bold;
-		color: #FFFFFF;
+		color: #000000;
 		position: absolute;
-		bottom:30px;
+		bottom:40px;
 		left:3px;
-		background-color: rgba(4,44,108,.5);
+		background-color: rgba(255,255,255,.7);
 		z-index: 999;
 	}
 	
 	.scorebox-fake{
 		text-shadow: none;
 		font-weight: bold;
-		color: #FFFFFF;
-		background-color: rgba(4,44,108,1);
+		color: #000000;
+		background-color: rgba(255,255,255,.7);
 	}
 
 	.sliders, .reg-sliders{
 		text-align: center;
 		text-shadow: none;
 		width: 95%;
-		font-size: 14px;
+		font-size: 16px;
 		padding-bottom: 3px;
 		/*background-color: rgba(200,200,200,0.3);*/
 	}
@@ -396,36 +385,28 @@ table.pretty caption {
 		right: 0;
 		width: 100%;
 		height: 100%;
-		background: #C7E1EB; /* Old browsers */
-		background: -moz-linear-gradient(top, #C7E1EB 0%, #FFFFFF 100%); /* FF3.6+ */
-		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#C7E1EB), color-stop(100%,#FFFFFF)); /* Chrome,Safari4+ */
-		background: -webkit-linear-gradient(top, #C7E1EB 0%,#FFFFFF 100%); /* Chrome10+,Safari5.1+ */
-		background: -o-linear-gradient(top, #C7E1EB 0%,#FFFFFF 100%); /* Opera 11.10+ */
-		background: -ms-linear-gradient(top, #C7E1EB 0%,#FFFFFF 100%); /* IE10+ */
-		background: linear-gradient(to bottom, #C7E1EB 0%,#FFFFFF 100%); /* W3C */
-		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#C7E1EB', endColorstr='#FFFFFF',GradientType=0 ); /* IE6-9 */
-		/*background-image:url('../img/cafe/cafe_bg.jpg');*/
+		background: #04376c;
 		z-index: 999;
 		overflow-y: auto;
 		overflow-x: hidden;
 	}
 	
 	.registerpanel{
-		color: black;
+		color: white;
 		text-shadow: none;
 		width: 100%;
 		height: 100%;
 	}
 	
 	.edit-comment-panel{
-		color: black;
+		color: white;
 		text-shadow: none;
 		width: 100%;
 	}
 	
 	.loginpanel{
 		background-color: #FAEBCD;
-		color: black;
+		color: white;
 		font-weight:bold;
 		text-shadow: none;
 		text-align: center;
@@ -464,15 +445,7 @@ table.pretty caption {
 		right: 0;
 		width: 100%;
 		height: 100%;
-		background: #C7E1EB; /* Old browsers */
-		background: -moz-linear-gradient(top, #C7E1EB 0%, #FFFFFF 100%); /* FF3.6+ */
-		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#C7E1EB), color-stop(100%,#FFFFFF)); /* Chrome,Safari4+ */
-		background: -webkit-linear-gradient(top, #C7E1EB 0%,#FFFFFF 100%); /* Chrome10+,Safari5.1+ */
-		background: -o-linear-gradient(top, #C7E1EB 0%,#FFFFFF 100%); /* Opera 11.10+ */
-		background: -ms-linear-gradient(top, #C7E1EB 0%,#FFFFFF 100%); /* IE10+ */
-		background: linear-gradient(to bottom, #C7E1EB 0%,#FFFFFF 100%); /* W3C */
-		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#C7E1EB', endColorstr='#FFFFFF',GradientType=0 ); /* IE6-9 */
-		/*background-image:url('../img/cafe/cafe_bg.jpg');*/
+		background: #04376c;
 		overflow: auto;
 		z-index: 999;
 	}
@@ -486,14 +459,7 @@ table.pretty caption {
 		height: 100%;
 		/*background-image:url('../img/cafe/cafe_bg.jpg');*/
 		/*background-color: #FAEBCD;*/
-		background: #C7E1EB; /* Old browsers */
-		background: -moz-linear-gradient(top, #C7E1EB 0%, #FFFFFF 100%); /* FF3.6+ */
-		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#C7E1EB), color-stop(100%,#FFFFFF)); /* Chrome,Safari4+ */
-		background: -webkit-linear-gradient(top, #C7E1EB 0%,#FFFFFF 100%); /* Chrome10+,Safari5.1+ */
-		background: -o-linear-gradient(top, #C7E1EB 0%,#FFFFFF 100%); /* Opera 11.10+ */
-		background: -ms-linear-gradient(top, #C7E1EB 0%,#FFFFFF 100%); /* IE10+ */
-		background: linear-gradient(to bottom, #C7E1EB 0%,#FFFFFF 100%); /* W3C */
-		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#C7E1EB', endColorstr='#FFFFFF',GradientType=0 ); /* IE6-9 */
+		background: #04376c; /* Old browsers */
 		overflow: auto;
 		z-index: 999;
 	}
@@ -533,7 +499,7 @@ table.pretty caption {
 	font-family: futura, verdana, sans-serif;
 	text-shadow: none;
 	text-align: center;
-	color: #000000;
+	color: #FFFFFF;
 	font-size: 34px;
 	line-height: 30px;
 	padding-bottom: 7px;
@@ -546,7 +512,7 @@ table.pretty caption {
 	line-height: 27px;
 	font-family: myriad pro, trebuchet ms, arial, sans-serif;
 	text-shadow: none;
-	color: #000000;
+	color: #FFFFFF;
 	font-size: 28px;
 	height: 100%;
 	left: 0;
@@ -595,10 +561,10 @@ table.pretty caption {
 	/*background: url('../img/cafe/cafe_notebook.png') repeat-y;*/
 	/*border: 2px solid #555566;*/
 	width: 95% !important;
-	height: 120px !important;
+	height: 150px !important;
 	padding-right: 10px;
-	font-size: 14px !important;
-	font-family: futura, verdana, sans-serif;
+	font-size: 16px !important;
+	font-family: Arial, sans-serif;
 	text-shadow: none !important;
 }
 
@@ -607,9 +573,10 @@ table.pretty caption {
 	/*background: url('../img/cafe/cafe_notebook.png') repeat-y;*/
 	width: 100%;
 	text-shadow: none;
-	color: #000000;
+	color: #FFFFFF;
 	padding-right: 10px;
 	padding-left: 7px;
+	padding-top: 7px;
 }
 
 .rate {
@@ -621,14 +588,7 @@ table.pretty caption {
 	height: 100%;
 	/*background-color: #E7E1D8;*/
 	/*background-color: #FAEBCD;*/
-	background: #C7E1EB; /* Old browsers */
-	background: -moz-linear-gradient(top, #C7E1EB 0%, #FFFFFF 100%); /* FF3.6+ */
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#C7E1EB), color-stop(100%,#FFFFFF)); /* Chrome,Safari4+ */
-	background: -webkit-linear-gradient(top, #C7E1EB 0%,#FFFFFF 100%); /* Chrome10+,Safari5.1+ */
-	background: -o-linear-gradient(top, #C7E1EB 0%,#FFFFFF 100%); /* Opera 11.10+ */
-	background: -ms-linear-gradient(top, #C7E1EB 0%,#FFFFFF 100%); /* IE10+ */
-	background: linear-gradient(to bottom, #C7E1EB 0%,#FFFFFF 100%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#C7E1EB', endColorstr='#FFFFFF',GradientType=0 ); /* IE6-9 */
+	background: #04376c;
 	/*background-image:url('../img/cafe/cafe_bg.jpg');*/
 	z-index: 999;
 	overflow-y: auto;
@@ -696,15 +656,15 @@ table.pretty caption {
 .dialog-text1 {
 	position: relative;
         vertical-align: middle;
-	color: #000000;
-	background: #C7E1EB;
+	color: #FFFFFF;
+	background: #04376c;
 	width: 100%;
 	height: 100%;
 	text-decoration: none;
 	text-shadow: none;
-	padding-left: 5px;
-	font-size: 23px;
-	line-height: 23px;
+	padding-left: 10px;
+	font-size: 18px;
+	line-height: 18px;
 }
 
 .dialog-score {
@@ -719,18 +679,27 @@ table.pretty caption {
 .dialog-score-text1 {
 	position: relative;
         vertical-align: middle;
-	color: #000000;
-	background: #C7E1EB;
+	color: #FFFFFF;
+	background: #04376c;
 	width: 100%;
 	height: 100%;
 	text-decoration: none;
 	text-shadow: none;
-	padding-left: 5px;
-	font-size: 23px;
-	line-height: 23px;
+	padding-left: 10px;
+	font-size: 18px;
+	line-height: 18px;
 }
 
 .dialog-continue {
+	background-color: rgba(0, 0, 0, 0.7);
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top:0;
+	left: 0;
+}
+
+.dialog-email {
 	background-color: rgba(0, 0, 0, 0.7);
 	width: 100%;
 	height: 100%;
@@ -752,29 +721,46 @@ table.pretty caption {
 .dialog-continue-text1 {
 	position: relative;
         vertical-align: middle;
-	color: #000000;
-	background: #C7E1EB;
+	color: #FFFFFF;
+	background: #04376c;
 	width: 100%;
 	height: 100%;
 	text-decoration: none;
 	text-shadow: none;
-	padding-left: 5px;
-	font-size: 23px;
-	line-height: 23px;
+	padding-left: 10px;
+	font-size: 18px;
+	line-height: 18px;
+	padding-top: 10px;
+}
+
+
+.dialog-email-text1 {
+	position: relative;
+        vertical-align: middle;
+	color: #FFFFFF;
+	background: #04376c;
+	width: 100%;
+	height: 100%;
+	text-decoration: none;
+	text-shadow: none;
+	padding-left: 10px;
+	padding-top: 10px;
+	font-size: 18px;
+	line-height: 18px;
 }
 
 .dialog-vis-text {
 	position: relative;
         vertical-align: middle;
-	color: #000000;
-	background: #C7E1EB;
+	color: #FFFFFF;
+	background: #04376c;
 	width: 100%;
 	height: 100%;
 	text-decoration: none;
 	text-shadow: none;
-	padding-left: 5px;
-	font-size: 23px;
-	line-height: 23px;
+	padding-left: 10px;
+	font-size: 18px;
+	line-height: 18px;
 }
 
 
@@ -790,58 +776,58 @@ table.pretty caption {
 .dialog-yourmug-text1 {
 	position: relative;
         vertical-align: middle;
-	color: #000000;
-	background: #C7E1EB;
+	color: #FFFFFF;
+	background: #04376c;
 	width: 100%;
 	height: 100%;
 	text-decoration: none;
 	text-shadow: none;
-	padding-left: 5px;
-	font-size: 23px;
-	line-height: 23px;
+	padding-left: 10px;
+	font-size: 18px;
+	line-height: 18px;
 }
 
 .dialog-text2 {
 	position: relative;
         vertical-align: middle;
-	color: #000000;
-	background: #C7E1EB;
+	color: #FFFFFF;
+	background: #04376c;
 	width: 100%;
 	height: 100%;
 	text-decoration: none;
 	text-shadow: none;
-	padding-left: 5px;
-	font-size: 23px;
-	line-height: 23px;
+	padding-left: 10px;
+	font-size: 18px;
+	line-height: 18px;
 }
 
 
 .dialog-text3 {
 	position: relative;
         vertical-align: middle;
-	color: #000000;
-	background: #C7E1EB;
+	color: #FFFFFF;
+	background: #04376c;
 	width: 100%;
 	height: 100%;
 	text-decoration: none;
 	text-shadow: none;
-	padding-left: 5px;
-	font-size: 23px;
-	line-height: 23px;
+	padding-left: 10px;
+	font-size: 18px;
+	line-height: 18px;
 }
 
 .dialog-avggrade-text {
 	position: relative;
         vertical-align: middle;
-	color: #000000;
-	background: #C7E1EB;
+	color: #FFFFFF;
+	background: #04376c;
 	width: 100%;
 	height: 100%;
 	text-decoration: none;
 	text-shadow: none;
-	padding-left: 5px;
-	font-size: 23px;
-	line-height: 23px;
+	padding-left: 10px;
+	font-size: 18px;
+	line-height: 18px;
 }
 
 
@@ -876,9 +862,8 @@ table.pretty caption {
     }
    
    .rate-username{
-	 padding-top: 10px;
 	 font-size: 16px;
-	 font-family: futura, verdana, sans-serif;
+	 font-family: Arial, sans-serif;
    }
 
   .avg-grades div {
@@ -892,9 +877,14 @@ table.pretty caption {
 
 
 .noUi-base {
-	background-color: #3d3d3d;
-	border: 1px solid black;
+	background-color: #cFcFcF;
+	border: 2px solid #cFcFcF;
+	border-radius:35px;
 	height: 12px !important;
+}
+
+.noUi-background{
+	background: none !important;
 }
 
 .noUi-handle {
@@ -916,13 +906,19 @@ background-image: -webkit-gradient(linear, left top, left bottom, from( #FFd401 
 	background-image:      -o-linear-gradient( #FFd401 /*{b-bup-background-start}*/, #eab500 /*{b-bup-background-end}*/); /* Opera 11.10  */
 	background-image:         linear-gradient( #FFd401 /*{b-bup-background-start}*/, #eab500 /*{b-bup-background-end}*/);
 	
-	margin: -17px 0px 0px -22px;
+	margin: -10px 0px 0px -10px;
+	
+	width: 30px !important;
+	height: 30px !important;
 
 	-moz-box-shadow:0 1px 3px rgba(0,0,0,.2);
 	-webkit-box-shadow:0 1px 3px rgba(0,0,0,.2);
 	box-shadow:0 1px 3px rgba(0,0,0,.2);
 
 	border-radius: 45%;
+}
+.header-img-topic{
+padding-bottom: 10px;
 }
 
 .welcome-back {
@@ -932,16 +928,10 @@ background-image: -webkit-gradient(linear, left top, left bottom, from( #FFd401 
 		right: 0;
 		width: 100%;
 		height: 100%;
+		display: none;
 		/*background-image:url('../img/cafe/cafe_bg.jpg');*/
 		/*background-color: #FAEBCD;*/
-		background: #C7E1EB; /* Old browsers */
-		background: -moz-linear-gradient(top, #C7E1EB 0%, #FFFFFF 100%); /* FF3.6+ */
-		background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#C7E1EB), color-stop(100%,#FFFFFF)); /* Chrome,Safari4+ */
-		background: -webkit-linear-gradient(top, #C7E1EB 0%,#FFFFFF 100%); /* Chrome10+,Safari5.1+ */
-		background: -o-linear-gradient(top, #C7E1EB 0%,#FFFFFF 100%); /* Opera 11.10+ */
-		background: -ms-linear-gradient(top, #C7E1EB 0%,#FFFFFF 100%); /* IE10+ */
-		background: linear-gradient(to bottom, #C7E1EB 0%,#FFFFFF 100%); /* W3C */
-		filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#C7E1EB', endColorstr='#FFFFFF',GradientType=0 ); /* IE6-9 */
+		background-color: #04376c;
 		overflow: auto;
 		z-index: 999;
 	}

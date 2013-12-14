@@ -409,9 +409,20 @@ $(document).ready(function() {
     $('.dialog-continue-ready').click(function() {
         rate.logUserEvent(8,'dialog 3');
         $('.dialog-continue').hide();
-        rate.initMenubar();
-        $('.scorebox').show();
+         $('.dialog-email').show();
+        //rate.initMenubar();
+        //$('.scorebox').show();
     });
+
+    $('.dialog-email-ready').click(function() {
+            rate.logUserEvent(8,'dialog 4');
+            $('.dialog-email').hide();
+            rate.initMenubar();
+            $('.scorebox').show();
+            //if ($('#regemail').val()){
+           //		accounts.sendEmail($('#regemail').val());
+           //	}
+        });
     
     $('.dialog-yourmug-ready').click(function() {
         rate.logUserEvent(8,'dialog 4');

@@ -98,13 +98,9 @@ def return_user_first_time(request,entrycode):
 @cache_control(no_cache=True)
 def mobile(request,entry_code=None):
     create_visitor(request)
-    reviewer_score = 0
     if request.user.is_authenticated(): 
        if entry_code!=None: #entrycode user refresh page
           request.session['refresh_times']=1
-          reviewer_score = ReviewerScore.objects.filter(user = request.user)
-          if len(reviewer_score) != 0:
-             reviewer_score = reviewer_score[0].reviewer_score
     else:
        if entry_code!=None:         #entry code user relogin "first time"
           user=authenticate(entrycode=entry_code)
@@ -139,10 +135,10 @@ def mobile(request,entry_code=None):
 											 'topic': DiscussionStatement.objects.filter(is_current=True)[0].statement,
 											 'short_topic': DiscussionStatement.objects.filter(is_current=True)[0].short_version,
 											 'statements': statements,
-											 'init_score': reviewer_score,
+											 'init_score': len(get_fully_rated_responses(request, disc_stmt)),
 											 'random_username': random_username,
 											 'random_password': random_password,
-                                                                                         'statement_labels': json.dumps(statement_labels), 
+                                             'statement_labels': json.dumps(statement_labels),
 											 'medians': json.dumps(medians)}))
 
 
