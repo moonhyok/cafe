@@ -8,19 +8,19 @@ var accounts = (function($, d3, console) {
     // a function to pull up the registration prompt
 
     function showRegister() {
-        $('.register').slideDown();
+        $('.register').show();
         $('#finishRegistration').click(function() {});
     }
 
     function showCommentInput() {
-        $('.comment-input').slideDown();
+        $('.comment-input').show();
     }
 
     // a function to pull up the login prompt.
 
     function showLogin() {
-        $('.landing').slideUp();
-        $('.login').slideDown();
+        $('.landing').hide();
+        $('.login').show();
     }
 
     //function that determines if the user has already rated 2 comments
@@ -44,9 +44,7 @@ var accounts = (function($, d3, console) {
             utils.ajaxTempOff(blooms.populateBlooms);
 
             setTimeout(function() { // d3 needs a little extra time to load
-                $('.landing').slideUp('fast', function() {
-                    utils.hideLoading(1000);
-                });
+                $('.landing').hide();
             }, 1500);
         });
     }
@@ -110,15 +108,14 @@ var accounts = (function($, d3, console) {
             $.getJSON(window.url_root + '/os/show/1/', function(data) {
                 try {
                     var comment = data['cur_user_comment'][0][0];
-                    $('.comment-text').html(comment);
-                    $('.edit-comment-box').html(comment);
+                    $('#entered-comment').html(comment);
                 } catch (err) {
                     // probably an admin user or something. they didn't have a comment
                 }
             });
         });
 
-        $('.my-comment').slideDown();
+        $('.my-comment').show();
         $('.menubar').find('.ui-btn-active').removeClass('ui-btn-active ui-focus');
 
     }
@@ -257,7 +254,7 @@ $(document).ready(function() {
                         utils.showLoading("Loading...", function() {
                             accounts.loginAfterRegister(loginData);
                             blooms.populateBlooms();
-                            $('.register').slideUp();
+                            $('.register').hide();
                             utils.hideLoading();
                             /*setTimeout(function() { //give d3 some extra time
                                 $('.register').slideUp('fast', function() {
@@ -328,9 +325,7 @@ $(document).ready(function() {
                             $('.top-bar').show();
 
                             setTimeout(function() { // d3 needs a little extra time to load
-                                $('.login').slideUp('fast', function() {
-                                    utils.hideLoading(1000);
-                                });
+                                $('.login').hide();
                             }, 1000);
                         });
                     } else {
@@ -351,8 +346,8 @@ $(document).ready(function() {
 
     $('.first-time-btn').click(function() {
         //accounts.firstTime();
-        $('.landing').slideUp();
-        $('.endsliders').slideDown();
+        $('.landing').hide();
+        $('.endsliders').show();
         rate.logUserEvent(7,'first time');
         //$('.top-bar').show();
         //rate.initScore();
@@ -363,8 +358,8 @@ $(document).ready(function() {
     });
 
     $('.login-form-go-back').click(function() {
-        $('.landing').slideDown();
-        $('.login').slideUp();
+        $('.landing').show();
+        $('.login').hide();
     });
 
     $('.my-comment-btn').click(function() {
@@ -396,12 +391,12 @@ $(document).ready(function() {
         rate.logUserEvent(8,'dialog 1');
         //rate.initMenubar();
         $('.instructions').show();
-        $('.dialog').slideUp();
+        $('.dialog').hide();
     });
     
     $('.dialog-score-ready').click(function() {
         rate.logUserEvent(8,'dialog 2');
-        $('.dialog-score').slideUp();
+        $('.dialog-score').hide();
         $('.scorebox').show();
         //rate.initMenubar();
     });
@@ -426,7 +421,7 @@ $(document).ready(function() {
     
     $('.dialog-yourmug-ready').click(function() {
         rate.logUserEvent(8,'dialog 4');
-        $('.dialog-yourmug').slideUp();
+        $('.dialog-yourmug').hide();
         rate.initMenubar();
         $('.scorebox').show();
         try{
@@ -441,10 +436,7 @@ $(document).ready(function() {
         rate.sendComment($('.edit-comment-box').val());
         $('.menubar').find('.ui-btn-active').removeClass('ui-btn-active ui-focus');
 
-        $('.my-comment').slideUp('slow', function() {
-            $('.edit-comment').hide();
-            $('.comment-region').show();
-        });
+        $('.my-comment').hide();
     });
 
     $('.edit-comment-cancel-btn').click(function() {
@@ -454,7 +446,7 @@ $(document).ready(function() {
 
     $('.edit-comment-done-btn').click(function() {
         $('.menubar').find('.ui-btn-active').removeClass('ui-btn-active ui-focus');
-        $('.my-comment').slideUp();
+        $('.my-comment').hide();
     });
 
     $('.logout-btn').click(function(e) {
@@ -491,8 +483,8 @@ $(document).ready(function() {
     });
 
     $('.logout-login-again').click(function() {
-        $('.logout').slideUp();
-        $('.login').slideDown();
+        $('.logout').hide();
+        $('.login').show();
     });
     
     $('#regrade-btn').click(function(){
@@ -501,7 +493,7 @@ $(document).ready(function() {
 	});
 	
 	$('#garden-btn').click(function(){
-		$('.welcome-back').slideUp();
+		$('.welcome-back').hide();
                 $('.menubar').show();
 	});
 });

@@ -11,10 +11,35 @@
 	font-weight:bold;
 }
 
-.slider-agree-labels, .slider-range-labels{
+.top-bar{
+    display:none;
+    width: 100%;
+    background-color: #04376c;
+}
+
+.slider-agree-labels{
 	font-size:11px;
 	font-weight: bold;
 	color: #000000;
+}
+
+.slider-range-labels{
+    position: relative;
+    top: -2px;
+    z-index: -1;
+    font-size:11px;
+    font-weight: bold;
+    color: #000000;
+}
+
+.grade-labels {
+    position: absolute;
+    z-index: -1;
+    top: -2px;
+    font-size:11px;
+    font-weight: bold;
+    color: #000000;
+    background:none;
 }
 
 #grades div {
@@ -36,7 +61,9 @@
 	display:inline;
 	color: #000000;
 	text-shadow: none;
-	width: 90%;
+	width: 300px !important;
+	height: 180px !important;
+	font-size: 18px;
 }
 
 /* This prevents the jQuery navbar buttons from staying pressed */
@@ -156,8 +183,18 @@ table.pretty caption {
 		border-color: #eed3d7;
 	}
 
+	.my-comment-btn, .logout-btn {
+	    padding-bottom: 4px;
+	    padding-top: 3px;
+	}
+
+	.home-btn{
+	    padding-top: 0px !important;
+	}
+
 	.menubar {
 		display: none;
+		width: 100%;
 	}
 
 	.ui-slider-input {
@@ -223,12 +260,12 @@ table.pretty caption {
 		color: white;
 		text-shadow: none;
 		width: 95%;
-		font-size: 18px;
+		font-size: 16px;
 		/*padding: 5px 0px;*/
 		text-align: left;
 		line-height: 19px;
 		padding-left: 5px;
-		padding-right: 5px;
+		padding-right: 3px;
 		padding-bottom: 5px;
 		padding-top: 5px;
 		font-family: futura, verdana, sans-serif;
@@ -243,9 +280,10 @@ table.pretty caption {
 		left: 0px;
 		z-index: 999;
 		text-shadow: none;
-		font-size: 19px !important;
+		font-size: 16px !important;
 		width: 100%;
 		line-height: 20px;
+		display:none;
 	}
 	
 	.reportcard{
@@ -255,16 +293,16 @@ table.pretty caption {
 		text-shadow: none;
 		width: 100%;
 		height: 100%;
-		padding-top: 20px;
 	}
 	
 	.comment-panel{
 		/*background: url('../img/cafe/cafe_notebook.png') repeat-y;*/
 		color: white;
 		text-shadow: none;
-		width: 100%;
+		width: 95%;
 		height: 100%;
 		padding-top: 10px;
+		padding-right: 10px;
 	}
 	
 	.cardtable, tr, th, td{
@@ -272,6 +310,40 @@ table.pretty caption {
 		padding-right: 10px;
 		padding-left: 10px;
 	}
+
+	.slider-row{
+	padding-top: 15px;
+	padding-bottom: 15px;
+	}
+
+	.title-table {
+	    width:95%;
+	    color:#000000;
+	    background-color: #FFC501;
+	    font-size:15px;
+	}
+
+	.stats-table {
+    	    width:95%;
+    	    font-size:15px;
+    }
+
+    .stats-table-title {
+        color:#000000;
+        background-color: #FFC501;
+    }
+
+	.title-table-label1 {
+    	    text-align: center;
+    	    vertical-align: middle;
+    }
+
+    .title-table-label2 {
+            vertical-align:middle;
+            width: 45px;
+            text-align: center;
+            vertical-align: middle;
+    }
 	
 	.grade{
 		font-family: "Comic Sans MS", sans-serif;
@@ -293,6 +365,11 @@ table.pretty caption {
 		font-size: 28px !important;
 		margin: 0px !important;
 		padding-top: 0px !important;
+	}
+
+	.reg_form{
+	    width: 95%;
+	    padding-left: 5px;
 	}
 	
 	.instructions2{
@@ -324,7 +401,7 @@ table.pretty caption {
 
 	.score {
 		visibility: hidden;
-
+		display: none;
 	}
 
 	.login, .endsliders, .my-comment, .stats, .help, .leaderboard, .comment-input{ /* piggy backing the the new divs here for now,  .stats, .help*/
@@ -355,6 +432,7 @@ table.pretty caption {
 	.scorebox{
 		text-shadow: none;
 		font-weight: bold;
+		display: none;
 		color: #000000;
 		position: absolute;
 		bottom:40px;
@@ -366,7 +444,10 @@ table.pretty caption {
 	.scorebox-fake{
 		text-shadow: none;
 		font-weight: bold;
+		width: 250px;
 		color: #000000;
+		padding-top: 5px;
+		padding-bottom: 5px;
 		background-color: rgba(255,255,255,.7);
 	}
 
@@ -395,8 +476,10 @@ table.pretty caption {
 	.registerpanel{
 		color: white;
 		text-shadow: none;
-		width: 100%;
+		width: 95%;
 		height: 100%;
+		padding-right: 7px;
+		padding-left: 7px;
 	}
 	
 	.edit-comment-panel{
@@ -496,26 +579,81 @@ table.pretty caption {
 	line-height: 42px;
 }
 
+.rc-sub-header {
+    width:95%;
+    text-align: left;
+    padding-bottom:5px;
+    font-size: 16px;
+}
+
 .basic-header {
 	font-family: futura, verdana, sans-serif;
 	text-shadow: none;
 	text-align: center;
 	color: #FFFFFF;
 	font-size: 34px;
-	line-height: 30px;
-	padding-bottom: 7px;
+	line-height: 34px;
+	padding-bottom: 10px;
 	padding-top: 5px;
+}
+
+.basic-header2 {
+	font-family: futura, verdana, sans-serif;
+	text-shadow: none;
+	text-align: center;
+	color: #FFFFFF;
+	font-size: 28px;
+	line-height: 28px;
+	padding-bottom: 10px;
+	padding-top: 5px;
+}
+
+.basic-sub-header {
+	font-family: futura, verdana, sans-serif;
+	text-shadow: none;
+	text-align: center;
+	color: #FFFFFF;
+	font-size: 18px;
+	line-height: 20px;
+	padding-bottom: 10px;
+	padding-top: 5px;
+}
+
+.basic-sub-sub-header{
+font-size: 18px;
+padding-left: 7px;
+padding-right: 7px;
+font-family: Arial, sans-serif;
+line-height:18px;
+}
+
+.basic-fine-print{
+font-size: 14px;
+color: #DDDDDD;
+font-weight:bold;
+line-height:16px;
+text-align:left;
+padding-right: 5px;
+font-family: Arial, sans-serif;
+padding-left: 5px;
+}
+
+.about-link a {
+color: #FFFFFF;
+font-size: 16px;
+padding-right: 7px;
 }
 
 .landing-desc {
 	padding-top: 10px;
 	padding-bottom: 10px;
 	line-height: 27px;
-	font-family: myriad pro, trebuchet ms, arial, sans-serif;
+	font-family: futura, verdana, sans-serif;
 	text-shadow: none;
 	color: #FFFFFF;
 	font-size: 28px;
 	height: 100%;
+	width: 100%;
 	left: 0;
 	text-align: left;
 }
@@ -523,30 +661,15 @@ table.pretty caption {
 .landing-intro {
 	width: 100%;
 	text-align: left;
-	/*background: url('../img/cafe/cafe_chalkboard.jpg');*/
-	/*border: 4px #966F33 solid;*/
 	background-color: #04376c;
 	padding-top: 30px;
 	padding-bottom: 10px;
 	vertical-align: middle;
-	/* less padding on the bottom and top so both buttons can show up*/
 }
 
 .button {
 	padding: 5px;
 }
-
-/*#reg-question {
-	background-color: #CEBCA3;
-	width: 100%;
-	line-height: 2em;
-	padding: 10px 0;
-	text-align: center;
-	make the background for the question a light brown 
-	margin-bottom: 20px;
-	margin-top: 10px;
-}
-*/
 
 #question {
 	background-color: #EEE9DF;
@@ -557,16 +680,44 @@ table.pretty caption {
 	margin-bottom: 20px;
 }
 
+.comment-admin-text {
+    text-align: right;
+    padding-right: 5px;
+}
+
+.comment-admin-text-a{
+    font-size: 13px !important;
+    color: #FFFFFF !important;
+    font-family: Arial, sans-serif;
+}
+
 .answer {
 	background-color: #E7E1D8;
-	/*background: url('../img/cafe/cafe_notebook.png') repeat-y;*/
-	/*border: 2px solid #555566;*/
 	width: 95% !important;
 	height: 150px !important;
 	padding-right: 10px;
 	font-size: 16px !important;
 	font-family: Arial, sans-serif;
 	text-shadow: none !important;
+	overflow-y:scroll !important;
+}
+
+.standard-btn-div {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    padding-bottom: 10px;
+}
+
+.standard-btn-div .ui-btn-inner{
+    font-family: Arial, sans-serif;
+    line-height: 20px;
+}
+
+.standard-btn-div .ui-btn{
+    font-family: Arial, sans-serif;
+    line-height: 20px;
+    border-radius: 10px !important;
 }
 
 .answerwrapper {
@@ -645,18 +796,20 @@ table.pretty caption {
 
 }
 
-.dialog {
+.dialog-style{
 	background-color: rgba(0, 0, 0, 0.7);
 	width: 100%;
 	height: 100%;
 	position: absolute;
 	top:0;
 	left: 0;
+	display: none;
 }
 
-.dialog-text1 {
+.dialog-text-style {
 	position: relative;
         vertical-align: middle;
+        font-family: Arial, sans-serif;
 	color: #FFFFFF;
 	background: #04376c;
 	width: 100%;
@@ -668,60 +821,10 @@ table.pretty caption {
 	line-height: 18px;
 }
 
-.dialog-score {
-	background-color: rgba(0, 0, 0, 0.7);
-	width: 100%;
-	height: 100%;
-	position: absolute;
-	top:0;
-	left: 0;
-}
-
-.dialog-score-text1 {
+.dialog-text-notitle {
 	position: relative;
         vertical-align: middle;
-	color: #FFFFFF;
-	background: #04376c;
-	width: 100%;
-	height: 100%;
-	text-decoration: none;
-	text-shadow: none;
-	padding-left: 10px;
-	font-size: 18px;
-	line-height: 18px;
-}
-
-.dialog-continue {
-	background-color: rgba(0, 0, 0, 0.7);
-	width: 100%;
-	height: 100%;
-	position: absolute;
-	top:0;
-	left: 0;
-}
-
-.dialog-email {
-	background-color: rgba(0, 0, 0, 0.7);
-	width: 100%;
-	height: 100%;
-	position: absolute;
-	top:0;
-	left: 0;
-}
-
-.dialog-avggrade {
-	background-color: rgba(0, 0, 0, 0.7);
-	width: 100%;
-	height: 100%;
-	position: absolute;
-	top:0;
-	left: 0;
-}
-
-
-.dialog-continue-text1 {
-	position: relative;
-        vertical-align: middle;
+        font-family: Arial, sans-serif;
 	color: #FFFFFF;
 	background: #04376c;
 	width: 100%;
@@ -733,105 +836,6 @@ table.pretty caption {
 	line-height: 18px;
 	padding-top: 10px;
 }
-
-
-.dialog-email-text1 {
-	position: relative;
-        vertical-align: middle;
-	color: #FFFFFF;
-	background: #04376c;
-	width: 100%;
-	height: 100%;
-	text-decoration: none;
-	text-shadow: none;
-	padding-left: 10px;
-	padding-top: 10px;
-	font-size: 18px;
-	line-height: 18px;
-}
-
-.dialog-vis-text {
-	position: relative;
-        vertical-align: middle;
-	color: #FFFFFF;
-	background: #04376c;
-	width: 100%;
-	height: 100%;
-	text-decoration: none;
-	text-shadow: none;
-	padding-left: 10px;
-	font-size: 18px;
-	line-height: 18px;
-}
-
-
-.dialog-yourmug {
-	background-color: rgba(0, 0, 0, 0.7);
-	width: 100%;
-	height: 100%;
-	position: absolute;
-	top:0;
-	left: 0;
-}
-
-.dialog-yourmug-text1 {
-	position: relative;
-        vertical-align: middle;
-	color: #FFFFFF;
-	background: #04376c;
-	width: 100%;
-	height: 100%;
-	text-decoration: none;
-	text-shadow: none;
-	padding-left: 10px;
-	font-size: 18px;
-	line-height: 18px;
-}
-
-.dialog-text2 {
-	position: relative;
-        vertical-align: middle;
-	color: #FFFFFF;
-	background: #04376c;
-	width: 100%;
-	height: 100%;
-	text-decoration: none;
-	text-shadow: none;
-	padding-left: 10px;
-	font-size: 18px;
-	line-height: 18px;
-}
-
-
-.dialog-text3 {
-	position: relative;
-        vertical-align: middle;
-	color: #FFFFFF;
-	background: #04376c;
-	width: 100%;
-	height: 100%;
-	text-decoration: none;
-	text-shadow: none;
-	padding-left: 10px;
-	font-size: 18px;
-	line-height: 18px;
-}
-
-.dialog-avggrade-text {
-	position: relative;
-        vertical-align: middle;
-	color: #FFFFFF;
-	background: #04376c;
-	width: 100%;
-	height: 100%;
-	text-decoration: none;
-	text-shadow: none;
-	padding-left: 10px;
-	font-size: 18px;
-	line-height: 18px;
-}
-
-
 
 .axis path,
     .axis line {
@@ -906,9 +910,9 @@ background-image: -webkit-gradient(linear, left top, left bottom, from( #FFd401 
 	background-image:     -ms-linear-gradient( #FFd401 /*{b-bup-background-start}*/, #eab500 /*{b-bup-background-end}*/); /* IE10 */
 	background-image:      -o-linear-gradient( #FFd401 /*{b-bup-background-start}*/, #eab500 /*{b-bup-background-end}*/); /* Opera 11.10  */
 	background-image:         linear-gradient( #FFd401 /*{b-bup-background-start}*/, #eab500 /*{b-bup-background-end}*/);
-	
+
 	margin: -10px 0px 0px -10px;
-	
+
 	width: 30px !important;
 	height: 30px !important;
 
@@ -918,8 +922,15 @@ background-image: -webkit-gradient(linear, left top, left bottom, from( #FFd401 
 
 	border-radius: 45%;
 }
+
 .header-img-topic{
-padding-bottom: 10px;
+    padding-bottom: 0px;
+    position:relative;
+    left: -10px;
+    width:100%;
+    max-width:400px;
+    max-height:210px;
+    padding-top:3px;
 }
 
 .welcome-back {

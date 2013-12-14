@@ -33,832 +33,577 @@
 
 <!--Java script that needs to be run on init-->
 <script type='text/javascript'>
-  window.url_root = '{{ url_root }}';
+
+  window.url_root = '{{ url_root }}'; //setting the url_root
+
   window.sliders = [];
+
   window.registration_in_progress = false;
+
   window.num_sliders = {{ statements|length }};
-  window.conf = { 'SCORE_SCALE_FACTOR'  : {{ client_settings.SCORE_SCALE_FACTOR }},
-  'YOUR_SCORE_LANGUAGE' : "Your Score",
-  'INSTRUCTIONS_3'      : "{{ client_settings.INSTRUCTIONS_3 }}",
-  'FUN_COLORS'          : {{ client_settings.FUN_COLORS }},
-  'RETURN_USER_FIRST_TIME': {{return_user_first_time}}
-};
+
   window.user_score = {{init_score}};
 
-// TURNING OFF ALL AJAX
-$.ajaxSetup({
-  async: false
-});
+  window.conf = { 'SCORE_SCALE_FACTOR'  : {{ client_settings.SCORE_SCALE_FACTOR }},
+                  'YOUR_SCORE_LANGUAGE' : "Your Score",
+                  'INSTRUCTIONS_3'      : "{{ client_settings.INSTRUCTIONS_3 }}",
+                  'FUN_COLORS'          : {{ client_settings.FUN_COLORS }},
+                  'RETURN_USER_FIRST_TIME': {{return_user_first_time}}
+                };
 
-jQuery(document).ready(function() {
-  
-  for (var i = 0; i <= window.num_sliders; i++) {
-    window.sliders[i] = 40+(i%2)*20;
-   $(".endslider-slider"+(i+1)).noUiSlider({
-    range: [0, 100],
-    start: window.sliders[i] ,
-    step: 5,
-    handles: 1,
-    connect: false,
-    behaviour: "none",
-    slide: function() {
-      var id = $(this).data('statement');
-      $('#g' + id).html( score_to_grade( $(this).val() ) );
-    }
-  }).change(function () {
 
-   //$(this).attr('disabled', 'disabled');
-    var id = $(this).attr('id');
-    id = parseInt(id.substring(1, id.length)); // strips the leading 's'
-    update_score(id);
-  });
-      }
+  // TURNING OFF ALL AJAX
+  $.ajaxSetup({async: false});
+
+ jQuery(document).ready(function(){
+   for (var i = 0; i <= window.num_sliders; i++) {
+     window.sliders[i] = 40+(i%2)*20;
+     $(".endslider-slider"+(i+1)).noUiSlider({
+       range: [0, 100],
+       start: window.sliders[i] ,
+       step: 5,
+       handles: 1,
+       connect: false,
+       behaviour: "none",
+       slide: function() {
+       var id = $(this).data('statement');
+       $('#g' + id).html( score_to_grade( $(this).val() ) );
+       }
+     }).change(function () {
+      var id = $(this).attr('id');
+      id = parseInt(id.substring(1, id.length)); // strips the leading 's'
+      update_score(id);
+     });
+   }
 
   $(".rating-slider").noUiSlider({
     range: [0, 100], start: 50, step: 5, handles: 1,connect: false, behaviour: "none"
   });
   
-  var html_label ="<div class='slider-range-labels' style='position: relative; top: -2px;z-index: -1;'><div class='alignleft'>&larr;Not Creative</div><div class='alignright'>Very Creative&rarr;</div></div>";
+  var html_label ="<div class='slider-range-labels'><div class='alignleft'>&larr;Not Creative</div><div class='alignright'>Very Creative&rarr;</div></div>";
   $('.rating-slider1 > .noUi-base').append( html_label );
   
-    var html_label ="<div class='slider-range-labels' style='position: relative; top: -2px;z-index: -1;'><div class='alignleft'>&larr;Not Beneficial</div><div class='alignright'>Very Beneficial&rarr;</div></div>";
+  var html_label ="<div class='slider-range-labels'><div class='alignleft'>&larr;Not Beneficial</div><div class='alignright'>Very Beneficial&rarr;</div></div>";
   $('.rating-slider2 > .noUi-base').append( html_label );
   
   $(".change-rating-slider").noUiSlider({
     range: [0, 100], start: 50, step: 5, handles: 1,connect: false, behaviour: "none"
-
   });
-  
-  //$(".noUi-target").click(function () {});
 
   // give the statement sliders some color
   var _grades = {'A' : 5, 'B' : 25, 'C': 50, 'D': 75, 'F' : 96 };
   $.map( _grades, function(position, letter) {
-    var span = $('<span>', { style : 'position: absolute; z-index: -1; top: -2px;font-size:11px;font-weight: bold;color: #000000;background:none;', html: letter });
-    span.css( 'left', position + '%' );
+    var span = '<span class="grade-labels" style="left:'+position+'%;">'+letter+'</span>';
     $('.statement-slider > .noUi-base').append( span );
   });
-});
 
-stats.setConf("{{ client_settings.AGREEMENT_HISTOGRAM_TEXT }}", 
-  "{{ client_settings.LEGEND_AGREEMENT_LEFT }}",
-  "{{ client_settings.LEGEND_AGREEMENT_RIGHT }}",
-  "{{ client_settings.INSIGHT_HISTOGRAM_TEXT }}",
-  "{{ client_settings.LEGEND_INSIGHT_LEFT }}",
-  "{{ client_settings.LEGEND_INSIGHT_RIGHT }}");
+ });
 
-var finishedStatements=[];
+ stats.setConf("{{ client_settings.AGREEMENT_HISTOGRAM_TEXT }}",
+               "{{ client_settings.LEGEND_AGREEMENT_LEFT }}",
+               "{{ client_settings.LEGEND_AGREEMENT_RIGHT }}",
+               "{{ client_settings.INSIGHT_HISTOGRAM_TEXT }}",
+               "{{ client_settings.LEGEND_INSIGHT_LEFT }}",
+               "{{ client_settings.LEGEND_INSIGHT_RIGHT }}"
+              );
 
-for(var l = 0; l < window.num_sliders; l++) {
+ var finishedStatements=[];
+
+ for(var l = 0; l < window.num_sliders; l++) {
     finishedStatements.push(0);
-}
+ }
 
-var medians = {{ medians|safe }}; 
+ var medians = {{ medians|safe }};
 
-function score_to_grade(score1) {
-
-  var score = 100 - score1;
+ function score_to_grade(score1) {
+    var score = 100 - score1;
   
-  if (score == 100)
-    return 'A+';
-  else if (score > 92)
-    return 'A';
-  else if (score > 86)
-    return 'A-';
-  else if (score > 81)
-    return 'B+';
-  else if (score > 69 )
-    return 'B';
-  else if (score > 63 )
-    return 'B-';
-  else if (score > 56 )
-    return 'C+';
-  else if (score > 44 )
-    return 'C';
-  else if (score > 38 )
-    return 'C-';
-  else if (score > 32 )
-    return 'D+';
-  else if (score > 19 )
-    return 'D';
-  else if (score == 0 )
-    return 'F';
-  else
-    return 'D-';
-}
+    if (score == 100)
+        return 'A+';
+    else if (score > 92)
+        return 'A';
+    else if (score > 86)
+        return 'A-';
+    else if (score > 81)
+        return 'B+';
+    else if (score > 69 )
+        return 'B';
+    else if (score > 63 )
+        return 'B-';
+    else if (score > 56 )
+        return 'C+';
+    else if (score > 44 )
+        return 'C';
+    else if (score > 38 )
+        return 'C-';
+    else if (score > 32 )
+        return 'D+';
+    else if (score > 19 )
+        return 'D';
+    else if (score == 0 )
+        return 'F';
+    else
+        return 'D-';
+ }
 
-function statementsComplete() {
+ function statementsComplete() {
   for(var i = 0; i < window.num_sliders; i++) {
     if (finishedStatements[i]==0) {
       return false;
     }
   }
   return true;
+ }
+
+    /** Updates statement number STATEMENT (which is of type number). */
+ function update_score(statement) {
+   $('#g' + statement).css('opacity', 1);
+   $('#o' + statement).html(score_to_grade(medians[statement]*100))
+   window.sliders[statement] = $('#s' + statement).val();
+   document.getElementById('tr1'+statement).style.backgroundColor = "rgba(255, 255, 255, 0.25)";
+   finishedStatements[statement-1]= 1;
 }
 
-/** Updates statement number STATEMENT (which is of type number). */
-function update_score(statement) {
-  $('#g' + statement).css('opacity', 1);
-  $('#o' + statement).html(score_to_grade(medians[statement]*100))
-  window.sliders[statement] = $('#s' + statement).val();		     
-  document.getElementById('tr1'+statement).style.backgroundColor = "rgba(255, 255, 255, 0.25)";
-  finishedStatements[statement-1]= 1;
-}
 </script>
-<meta name="google-translate-customization" content="eafde824bc8e224d-e21501ea7ec3fcff-g772450b68a5f36d7-1d"></meta>
+
+    <meta name="google-translate-customization" content="eafde824bc8e224d-e21501ea7ec3fcff-g772450b68a5f36d7-1d"></meta>
+
 </head>
 
 <body>
-  <div class="top-bar" style="display:none;width: 100%;background-color: #04376c;">
+
+  <div class="top-bar">
     <center>
-   <div class='header'>
-    {{ short_topic }}
-  </div>
-
-  <div data-role='navbar' class='menubar' style="width: 100%;">
-    <ul>
-      <li style="width: 20%;"><a data-theme='b' id='home-btn' onclick="$('.welcome-back').show();$('.menubar').hide();" style="padding-top: 0px !important;"><img width="25px;" src="{{url_root}}/media/mobile/img/cafe/home-icon.png"></a></li>
-      <li style="width: 40%;"><a data-theme='b' class='my-comment-btn' style="padding-bottom: 4px;padding-top: 3px;"><span class='stats-label'>Stats</span></a></li>
-      <li style="width: 40%;"><a data-theme='b' class='logout-btn' style="padding-bottom: 4px;padding-top: 3px;"><span class='logout-label'>Logout</span></a></li>
-    </ul>
-</div>
-  
-  <div class="scorebox" style="display: none">
-    <span class='score-label'></span><span class='score-value'></span>
-  </div>
-
-  <div class='instructions' style="display:none">Click on any mug to begin</div>
-  </center>
-    <!--<span class='inst-score'><span class='score-label'></span><span class='score-value'></span></span>
-    <span class='inst-text'>{{ client_settings.INSTRUCTIONS_1 }}</span>-->
-  </div>
-  
-  <div class="margin"><!--<br><br><br><br>--></div>
-  
-</div>
-
-<!-- <div class='rate-loading'><img src='img/ajax-loader.gif'>&nbsp; Comment loading...</div> -->
-<div class='rate'>
-  <!--<div class='header'>Topic: {{ topic }}</div>-->
-    <div class="answerwrapper">
-      <span class="rate-username"></span>
-      <textarea id='commentInput' class='answer' readonly="true" style="overflow-y:scroll !important;"></textarea>              
-      <div class='sliders'>
-        <div style="text-align: right">
-        <a href="#" style="font-size: 13px !important;color: #AAAAAA;" onclick="rate.doneRatingNoSave();">Skip</a>&nbsp;&nbsp;&nbsp;
-        <a href="#" style="font-size: 13px !important;color: #AAAAAA;" id="flag">Inappropriate or Irrelevant?</a>
-        <!--<select name="flip-1" id="flip-1" class="flip-1" data-role="slider" data-mini="true" data-theme="a">
-	<option value="no">No</option>
-	<option value="yes">Yes</option>
-        </select>-->
+        <div class='header'>
+            {{ short_topic }}
         </div>
-            <hr>   
+
+        <div data-role='navbar' class='menubar'>
+            <ul>
+                <li style="width: 20%;"><a data-theme='b' id='home-btn' class='home-btn' onclick="$('.welcome-back').show();$('.menubar').hide();"><img width="25px;" src="{{url_root}}/media/mobile/img/cafe/home-icon.png"></a></li>
+                <li style="width: 40%;"><a data-theme='b' class='my-comment-btn'><span class='stats-label'>Stats</span></a></li>
+                <li style="width: 40%;"><a data-theme='b' class='logout-btn'><span class='logout-label'>Logout</span></a></li>
+            </ul>
+        </div>
+  
+        <div class="scorebox">
+            <span class='score-label'></span><span class='score-value'></span>
+        </div>
+
+        <div class='instructions'>Click on any mug to begin</div>
+    </center>
+  </div>
+
+
+  <div class="margin"></div>
+
+  <div class='rate'>
+    <div class="answerwrapper">
+
+      <span class="rate-username"></span>
+
+      <textarea id='commentInput' class='answer' readonly="true"></textarea>
+
+      <div class='sliders'>
+
+        <div class="comment-admin-text">
+            <a href="#" class="comment-admin-text-a" onclick="rate.doneRatingNoSave();">Skip</a>&nbsp;&nbsp;&nbsp;
+            <a href="#" class="comment-admin-text-a" id="flag">Inappropriate or Irrelevant?</a>
+        </div>
+
+        <hr>
+
         How creative is this idea?<br/>
+
         <div style="clear: both;padding-bottom: 12px;"></div>
 
         <div id="slider1" class="rating-slider rating-slider1"></div><br/>
 
-        <!--<input data-track-theme='b' data-theme='b' type='range' name='slider1' id='slider1' value='50' min='0' max='100' animate='true'/> -->
-
         How beneficial is this for your community?<br/>
-        <!--<div class="slider-range-labels" style="position: relative; top: 14px;z-index: 2;">
-          <div class="alignleft">&larr;Very beneficial</div>
-          <div class="alignright">Not beneficial&rarr;</div>
-        </div>-->
+
         <div style="clear: both;padding-bottom: 12px;"></div>
 
         <div id="slider2" class="rating-slider rating-slider2"></div><br/>
-        
-        <!-- <input data-track-theme='b' data-theme='b' type='range' name='slider2' id='slider2' value='50' min='0' max='100' animate='true'/> -->       
-        <center>
-          <div style="width: 100%;max-width: 300px;">
-            <button type='submit' data-theme='b' id='go-back' onClick='rate.doneRating()' data-icon="check"><font size="5">Next</font></button>
-          </div>
 
+        <center>
+          <div class="standard-btn-div">
+            <button type='submit' data-theme='b' id='go-back' onClick='rate.doneRating()'><font size="5">Next</font></button>
+          </div>
         </center>
         
         <!--begin gtranslate-->
-        <!--<div id="google_translate_element"></div>
-<script type="text/javascript">
-function googleTranslateElementInit() {
-  new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, multilanguagePage: true, gaTrack: true, gaId: 'UA-34341740-14'}, 'google_translate_element');
-}
-</script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>-->
-          <!--end gtranslate-->
+        <!--
+        <div id="google_translate_element"></div>
+        <script type="text/javascript">
+        function googleTranslateElementInit() {
+        new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, multilanguagePage: true, gaTrack: true, gaId: 'UA-34341740-14'}, 'google_translate_element');
+        }
+        </script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>-->
+        <!--end gtranslate-->
         
       </div>
+
     </div>
-
-</div>
-<div id='rating'>
-
-  <div class='endsliders'>
-      <!--<div class ='slider-header'>
-        <p>Grade from A to F how well or poorly you feel California's elected officials are working to address the following key issues:</p>
-      </div>-->
-        <div class='reportcard'>
-           <div class="basic-header" style="font-size: 32px;padding-top: 5px;">Grade California's State Government</div>
-          <center>
-            <div class="rc-sub-header" style="width:95%;text-align: left;padding-bottom:5px;">Drag the yellow handle to grade from A to F how well you feel California's elected officials are working to address the following 6 subjects:</div> 
-           
-           <table class='cardtable' style="width:95%;color:#000000;background-color: #FFC501;font-size:15px;">
-            <tr>
-              <td style="text-align: center;vertical-align: middle;">
-                <strong>Subject</strong>
-              </td>
-              <td style="vertical-align:middle;width: 45px;text-align: center;vertical-align: middle;">
-                <strong>My Grade</strong>
-              </td>
-              <td style="vertical-align:middle;width: 45px;text-align: center;vertical-align: middle;">
-                <a href="#" onclick="$('.endsliders').hide();$('.dialog-avggrade').show();" style="color:#0000FF;">Avg. Grade</a>
-              </td>
-            </tr>
-           </table>
-
-            {% for statement in statements %}
-            <table id="tr1{{statement.id}}" class='cardtable' style="width:95%;">
-            <tr>
-              <td style="height: 45px;">
-                {% ifnotequal statement.statement '' %}
-                <div class='slider-question'><script>var sid={{statement.id}}-1;var total={{statements|length}};document.write(total-sid);</script>. {{ statement.statement }} </div>
-<!--                <p class='slider-question'> {{ statement.statement }} </p>
-
-                <div id="grades" class="slider-agree-labels">
-                  <div style="text-align: left;width: 10%;">A<span></span></div>
-                  <div style="text-align: center;width: 26.2%;">B<span></span></div>
-                  <div style="text-align: center;width: 26.2%;">C<span></span></div>
-                  <div style="text-align: center;width: 26.2%;">D<span></span></div>
-                  <div style="text-align: right;width: 10%;">F<span></span></div>
-          </div>
-
-          <br><div id="s{{statement.id}}" class="endslider-slider"></div>
--->
-          {% else %}
-          <!--<div style='display:none;'>
-              <br><div id="s{{statement.id}}" class="endslider-slider"></div>
-             <input type='range' id='s{{statement.id}}' name='s{{statement.id}}' value='50' min='0' max='100' animate='true'/> 
-          </div>-->
-          {% endifnotequal %}
-          <br/>
-        </td>
-        
-        <td style="vertical-align:middle;width: 45px;">
-          <div id='g{{statement.id}}' class="grade"></div>
-        </td>
-        
-        <td style="vertical-align:middle;width: 45px;">
-          <div id='o{{statement.id}}' class="grade2"></div>
-        </td>
-        
-        
-      </tr>
-    
-      <tr>
-        <td colspan="3">
-                        {% ifnotequal statement.statement '' %}
-                <!-- <div id="grades" class="slider-agree-labels">
-                  <div style="text-align: left;width: 10%;">A<span></span></div>
-                  <div style="text-align: center;width: 26.2%;">B<span></span></div>
-                  <div style="text-align: center;width: 26.2%;">C<span></span></div>
-                  <div style="text-align: center;width: 26.2%;">D<span></span></div>
-                  <div style="text-align: right;width: 10%;">F<span></span></div>
-            <!--<div class="alignleft">&larr; <i>F</i></div>
-            <div class="alignright"><i>A+</i> &rarr;</div>--/
-          </div> -->
-          <!--<div style="clear: both;"></div>-->
-
-          <br><div id="s{{statement.id}}" data-statement="{{statement.id}}" class="endslider-slider{{statement.id}} statement-slider" style="">
-
-          </div>
-          <!-- <input type='range' id='s{{statement.id}}' data-theme="d" name='s{{statement.id}}' class='s{{statement.id}}' value='50' min='0' max='100' step="5" style=""/> -->
-
-          {% else %}
-          <div style='display:none;'>
-              <br><div id="s{{statement.id}}" data-statement="{{statement.id}}"  class="endslider-slider"></div>
-            <!-- <input type='range' id='s{{statement.id}}' name='s{{statement.id}}' value='50' min='0' max='100' animate='true'/> -->
-          </div>
-          {% endifnotequal %}
-          <br/>
-          </td>
-      </tr>
- </table>
-            <br>
-      {% endfor %}
-          </center>
-
-    <center>
-          <div style="width: 100%; max-width: 300px;padding-bottom:30px;">
-      <button type='submit' data-theme='b' class='done-endsliders-btn' ><font size="5">Next</font></button>
-    </div> 
-    </center>
-       
 
   </div>
-</div>
-</div>
 
-</div>
 
-<div class='my-comment'>
-   <div class='edit-comment-panel'>
-    <div class='row'>
-      <!--<div class='span6'>
-        <br><br>
-        <img src='./../media/mobile/img/bloom.png' width='10%'>
-      </div>-->
-        <div class="basic-header">My Statistics</div>
-        <span class='username' style="display: none;"></span>
-        <span class='score-label'></span> <span class='score-value'></span><br>
-        <span class='num-label'>Idea Rated By:</span> <span class='num-rated-by'></span> Participants<br>
-<hr/>
-              <div class="basic-header" style="font-size: 22px;">Aggregate Statistics</div>
-      <center>
-      <div class="aggstat1">
-        <br/>
+  <div id='rating'>
+    <div class='endsliders'>
+        <div class='reportcard'>
+          <div class="basic-header">Grade California's State Government</div>
+
+          <center>
+
+            <div class="rc-sub-header">
+                Drag the yellow handle to grade from A to F how well you feel California's elected officials are working to address the following 6 subjects:
+            </div>
+
+
+            <table class='cardtable title-table'>
+                <tr>
+                    <td class="title-table-label1">
+                        <strong>Subject</strong>
+                    </td>
+
+                    <td class="title-table-label2">
+                        <strong>My Grade</strong>
+                    </td>
+
+                    <td class="title-table-label2">
+                        <a href="#" onclick="$('.endsliders').hide();$('.dialog-avggrade').show();" style="color:#0000FF;">Avg. Grade</a>
+                    </td>
+                </tr>
+           </table>
+
+
+          {% for statement in statements %}
+             <table id="tr1{{statement.id}}" class='cardtable' style="width:95%;">
+                <tr>
+                    <td style="height: 60px;">
+                        {% ifnotequal statement.statement '' %}
+                            <div class='slider-question'>
+                                <script>var sid={{statement.id}}-1;var total={{statements|length}};document.write(total-sid);</script>. {{ statement.statement }}
+                            </div>
+                        {% else %}
+                        {% endifnotequal %}
+                    </td>
         
-        <table style="width: 90%;">
-        <tr style="background-color: #04376c;">
-          <td>
-          <font style="color: #FFFFFF;">
-            Subject
-          </font>
-          </td>
-          <td>
-          <font style="color: #FFFFFF;">
-            Avg. Grade
-          </font>
-          </td>
-        </tr>
-       {% for statement in statements %}
-       <tr>
-        <td>
-          {{ statement.statement }}
-        </td>
-        <td>
-          <script>
-            document.write(score_to_grade(medians[{{statement.id}}]*100));
-          </script>
-        </td>
-       </tr>
-       {%endfor%}
-      </table>
-      <div style="width:300px;">
-        <button data-theme='b'  onclick="$('.aggstat1').hide();$('.aggstat2').show();">Next</button>
-      </div>
-      
-    </div>          
+                    <td class="title-table-label2">
+                        <div id='g{{statement.id}}' class="grade"></div>
+                    </td>
         
-    <div class="aggstat2" style="display:none;">
-        Changes in the mug positions<br/>      
-    <!--<iframe width="300" height="225" src="//www.youtube.com/embed/Vufcqe7f3hE" frameborder="0" allowfullscreen></iframe>-->
-    <canvas id="MugAnimation" width="250" height="200" style="background-image:url('{{ url_root }}/media/mobile/img/cafe/cafe_bg.png');background-repeat:repeat;
-			background-size: 100% 100%;	"></canvas>
-			
-       <div style="width:300px;">
-	   <button type="button" onclick="clickreset()" data-mini="true" data-inline="true">Play</button>
-           <button type="button" onclick="reset()" data-mini="true" data-inline="true"> Reset</button>
-       </div>
-
-       <script type="text/javascript" src="{{ url_root }}/media/mobile/js/timelineMug_animation_json.js"></script> 
-    <div style="width:300px;">
-     <button data-theme='b'  onclick="$('.aggstat2').hide();$('.aggstat3').show();">Next</button>
-    </div>
-    </div>
+                    <td class="title-table-label2">
+                        <div id='o{{statement.id}}' class="grade2"></div>
+                    </td>
+        
+        
+                </tr>
     
-    <div class="aggstat3" style="display:none;">
-        California map <br/>
+                <tr>
+                    <td colspan="3" class="slider-row">
+                        {% ifnotequal statement.statement '' %}
+                            <div id="s{{statement.id}}" data-statement="{{statement.id}}" class="endslider-slider{{statement.id}} statement-slider" style=""></div>
+                        {% else %}
+                            <div style='display:none;'>
+                                <br><div id="s{{statement.id}}" data-statement="{{statement.id}}"  class="endslider-slider"></div>
+                            </div>
+                        {% endifnotequal %}
+                    </td>
+                </tr>
+             </table>
+            <br>
+          {% endfor %}
+
+          <div class="standard-btn-div">
+             <button type='submit' data-theme='b' class='done-endsliders-btn' ><font size="5">Next</font></button>
+          </div>
+        </center>
+       </div>
+    </div>
+  </div>
+
+  <div class='my-comment'>
+    <div class='edit-comment-panel'>
+        <div class='row'>
+            <div class="basic-header">My Statistics</div>
+            <span class='username' style="display: none;"></span>
+            <span class='score-label'></span> <span class='score-value'></span><br>
+            <span class='num-label'>Idea Rated By:</span> <span class='num-rated-by'></span> Participants<br>
+
+            <hr/>
+
+            <div class="basic-sub-header">Aggregate Statistics</div>
+
+            <center>
+
+                <div class="aggstat1">
+
+                    <table style="width: 90%;">
+                        <tr class="stats-table-title">
+                            <td>Subject</td>
+                            <td>Avg. Grade</td>
+                        </tr>
+
+                        {% for statement in statements %}
+                            <tr>
+                                <td>{{ statement.statement }}</td>
+                                <td><script>document.write(score_to_grade(medians[{{statement.id}}]*100));</script></td>
+                            </tr>
+                        {%endfor%}
+                    </table>
+
+                    <div class="standard-btn-div">
+                        <button data-theme='b'  onclick="$('.aggstat1').hide();$('.aggstat2').show();">Next</button>
+                    </div>
+      
+                </div>
         
-    <!--<iframe width="300" height="225" src="//www.youtube.com/embed/hDsu_R2odOA" frameborder="0" allowfullscreen></iframe>-->
+                <div class="aggstat2" style="display:none;">
+                    Changes in the mug positions<br/>
+                    <canvas id="MugAnimation" width="250" height="200" style="background-image:url('{{ url_root }}/media/mobile/img/cafe/cafe_bg.png');background-repeat:repeat; background-size: 100% 100%;	"></canvas>
+                    <script type="text/javascript" src="{{ url_root }}/media/mobile/js/timelineMug_animation_json.js"></script>
+
+                    <div class="standard-btn-div">
+	                    <button type="button" onclick="clickreset()" data-mini="true" data-inline="true">Play</button>
+                        <button type="button" onclick="reset()" data-mini="true" data-inline="true"> Reset</button>
+                        <button data-theme='b' onclick="$('.aggstat2').hide();$('.aggstat1').show();">Next</button>
+                    </div>
+                </div>
+    
+    <!--<div class="aggstat3" style="display:none;">California map <br/>
     <div style="width:300px;">
     <button data-theme='b'   onclick="$('.aggstat3').hide();$('.aggstat1').show();">Next</button>
     </div>
-    </div>
-    <div style="width:300px;">
-      <button type='submit' data-theme='b' class='edit-comment-done-btn'>Back to Discussion</button>
-    </div>
-      </center>
-  </div>      
-    
-    <div class='comment-region' style="display:none;">
-      <div class='comment-text'></div>
-
-      <!--{% if client_settings.ALLOW_EDIT_COMMENT == "true" %}
-      <button type='submit' data-theme='b' class='edit-comment-btn'>Change Your Response</button>
-      {% endif %}-->
-
-
-      <br/>
-    </div>
-
-    <div class='edit-comment' style='display:none'>
-      <textarea class='edit-comment-box'></textarea>
-      {% for statement in statements %}
-      {% ifnotequal statement.statement '' %}
-      <p class='slider-question'> {{ statement.statement }} </p>
-
-<!--
-      <div id="grades" class="slider-agree-labels">
-        <div style="text-align: left;width: 10%;">A<span></span></div>
-        <div style="text-align: center;width: 26.2%;">B<span></span></div>
-        <div style="text-align: center;width: 26.2%;">C<span></span></div>
-        <div style="text-align: center;width: 26.2%;">D<span></span></div>
-        <div style="text-align: right;width: 10%;">F<span></span></div>
-            <!--<div class="alignleft">&larr; <i>F</i></div>
-            <div class="alignright"><i>A+</i> &rarr;</div>--/
-          </div>
-          <div style="clear: both;"></div>
-          -->
-          
-            <div id="c{{statement.id}}" class="change-rating-slider"></div>
-
-          <!-- <input type='range' id='c{{statement.id}}' name='s{{statement.id}}' value='50' min='0' max='100' animate='true' data-highlight="true" onchange=""/><hr> -->
-
-          {% else %}
-          <div style='display:none;'>
-            <div id="c{{statement.id}}" class="change-rating-slider"></div>
-
-            <!-- <input type='range' id=cs{{statement.id}}' name='s{{statement.id}}' value='50' min='0' max='100' animate='true'/><hr> -->
-          </div>
-          {% endifnotequal %}
-          {% endfor %}
-          <button data-theme='b' class='edit-comment-save-btn'>Save</button>
-          <button data-theme='b' class='edit-comment-cancel-btn'>Cancel</button>
-          <br/>
-        </div>
-
+    </div>-->
+            <div class="standard-btn-div">
+                <button type='submit' data-theme='b' class='edit-comment-done-btn'>Back to Discussion</button>
+            </div>
+        </center>
       </div>
-
+    </div>
   </div>
 
-  <div class='stats'>
-    <div class='row' style='text-align:center;'>
-      <!--<div class='span6'>
-        <img src='./../media/mobile/img/bloom.png' width='10%' alt='bloom'>
-      </div>-->
-      <div class='span6'>
-        <br>
-        <strong>Username:</strong><span class='username'></span><br>
-        <strong><span class='score-label'></span></strong> <span class='score-value'></span><br>
-        <strong>Idea Rated By: </strong><span class='num-rated-by'></span> Participants<br>
-      </div>
-    </div>
-    <hr>
+  <div id='d3'></div>
+  <div class='frame'></div>
 
-    <div class='graphs-wrap' style='text-align:center;'>
+  <div class = 'register' id='register'>
+     <center>
+       <div class= 'registerpanel'>
+        <div class="basic-header2" style="width: 100%">Enter your zip code to save your grades and join the discussion</div>
 
-      <div class='graphs-insufficient' style='display:none;'>You can see a graph of the ratings you've received after you have been rated by 5 people.<br>
-        Now please rate more mugs to earn more points.  Just click Done and choose any mugs..."</div>
+         <form id='reg_form' class='form-horizontal' method='post' action='{{ url_root }}/accountsjson/register/'>
+             <div data-role="fieldcontain">
+                 <input type ='tel' id='regzip' name='regzip' class='regforminput' value="" placeholder="Zip Code" onblur="$('#reg_form').submit();">
+                 <div class='alert-error' id='zipcode-error' style='display:none;'></div>
+             </div>
 
-        <div class='graphs'>
-          <strong>Ratings Received</strong>
-          <div class='row' style='text-align:center;'>
-            <div id='graph-1' class='span6'></div>
-            <div id='graph-2' class='span6'></div>
-          </div>
-        </div>
-      </div>    
-      <br>
-      <div id="timeline"></div>
-      <br>
-      {% if client_settings.LEADERBOARD_ENABLED == "true" %}
-      <button data-theme='b' onClick="$('.leaderboard').slideDown();">Leaderboard</button>
-      {% endif %}
-      <button data-theme='b' class="stats-done-btn">Back</button>
-    </div>
+             <!--These are hidden dummy attributes for book-keeping-->
 
-    <div class='leaderboard'>
-      <br><br>
-      <center><h1>Leaderboard</h1></center>
-
-      <table class='pretty'>
-        <tr>
-          <th>Username</th><th>Points</th>
-        </tr>
-        {% for leader in leaderboard%}
-        <tr>
-          <td>{{ leader.username }}</td><td> {{ leader.total_score|add:'0' }}</td>
-        </tr>
-        {% endfor %}
-      </table>
-
-      <br><br>
-      <button data-theme='b' onClick="$('.leaderboard').slideUp();">Back</button>
-
-    </div>
-
-    <div id='d3'>
-      <!--    <div class='loading'><img src='img/ajax-loader-gray.gif'>&nbsp; Loading opinions...</div>-->
-    </div>
-
-    <!-- it is important for the frame to be after the d3 div -->
-    <div class='frame'></div>
-    <div class = 'register' id='register'>
-      <!--<div class = 'reg-header'>{{ client_settings.INSTRUCTIONS_5 }}</div>-->
-      
-        <div class= 'registerpanel'>
-            <div class="basic-header" style="font-size: 30px;padding-top: 5px;padding-bottom: 0px; width: 100%">Enter your zip code to save your grades and join the discussion</div>
-          <br>
-          <form id='reg_form' class='form-horizontal' method='post' action='{{ url_root }}/accountsjson/register/' style="width: 95%; padding-left: 5px;">
             <input type='hidden' value='{{ topic }}' name='question'>
             <input type='hidden' value='{{ url_root }}' name='url'>
-              
             <div data-role="fieldcontain" style="display: none;">
              <label for="regusername" class='regforminput'>Email:</label>
              <input type="hidden" id='regusername' name='regusername' class='regforminput' value='{{ random_username }}' placeholder="Email" data-theme="b"/>
              <div class='alert-error' id='username-error' style='display:none;'></div>
             </div>
-
            <div data-role="fieldcontain" style='display:none;'>
             <label for="regpassword1" class='regforminput' style="display: none;">Password:</label>
             <input type ='hidden' id='regpassword1' name='regpassword1' class='regforminput' value='{{ random_password }}' placeholder="Password">
             <div class='alert-error' id='password-error'></div>
           </div>
 
-          <div data-role="fieldcontain">
-            <input type ='tel' id='regzip' name='regzip' class='regforminput' value="" placeholder="Zip Code" onblur="$('#reg_form').submit();">
-            <div class='alert-error' id='zipcode-error' style='display:none;'></div>
-          </div>
-
-<!--        <label>Age Group:  </label>   
-            <select>
-            <option>18-25</option>
-            <option>26-35</option>
-            <option>36-45</option>
-            <option>46-55</option>
-            <option>56-65</option>
-            <option>66+</option>
-            </select>
-            
-            <label>Gender:  </label>    
-            <select>
-            <option>Male</option>
-            <option>Female</option>
-            </select>
-    -->
-
-      <!--<div style="display: none;">
-        <input type='submit' value='Save and Join' id='finishRegistration' data-theme="a" data-icon="check" class="regFormSubmit">
-      </div>-->
-      
-      <center>
-        <div style="width: 100%; max-width: 300px;" onclick="document.getElementById('registerb').focus();">
-        <button type='submit' data-theme='b' id="registerb"><font size="5">Save and Join</font></button>
-       </div>
-      </center>
-
-
-<!--       <img src="{{url_root}}/media/mobile/img/cafe/discuss.png" style="width: 200px;"/><br/>
-      After you submit your grades, you will join a discussion about the California government. -->
-  </form>
-  <br/>
-</div>
-</div>
-
-<div class='comment-input'>
-  <!--<div class = 'reg-header'>{{ client_settings.INSTRUCTIONS_6 }}</div>-->
-    <div class='comment-panel'>
-        <div style="font-size: 18px;padding-left: 7px;padding-right: 7px;font-family: Arial, sans-serif;line-height:18px;">{{topic}}<br/>
-        <textarea name='answer' id='entered-comment' style="width: 300px !important;height: 180px !important;font-size: 18px;"> </textarea>
-        </div>
-
-        <div style="padding-left: 7px;width: 300px;padding-bottom:15px;font-size:12px;color: #888888;">
-        <button type='submit' data-theme='b' class='comment-submit-btn'><font size="5">Save</font></button>
-        <button type='submit' data-theme='b' class='comment-cancel-btn'><font size="5">Cancel</font></button>
-      </div>
-        
-  </div>
-</div>
-
-<div class='login' id='login'>
-
-  <!--<div class='login-header'>Please Login</div>-->
-  <div class="basic-header">About The Project</div>
-Under Construction<br/>
-The Citizen Report Card for California is a new UC Berkeley project in collaboration with the CITRIS Data & Democracy Initiative that integrates our CAFE technology into a mobile phone platform that allows Californians to grade (from A to F) how well they feel California's elected officials are working to address 6 key subjects.  The interface is designed to track changes over time and to encourage online dialogues about key issues. 
-
-    <center>
-    <div style="width: 300px;">
-        <button type='submit' data-theme='b' class='login-form-go-back'><font size="5">Back</font></button>
+        <center>
+            <div class="standard-btn-div" onclick="document.getElementById('registerb').focus();">
+                <button type='submit' data-theme='b' id="registerb"><font size="5">Save and Join</font></button>
+            </div>
+        </center>
+       </form>
       </div>
     </center>
-    
-    <div class="loginpanel" style="display: none;">
-            
-      <div class="basic-header">Welcome Back</div>
-      
-      <div class='alert-error' id='login-error' style='display:none;'>
-        Please check your username and password and try again.
-      </div>
+  </div>
 
-      <form id='login_form'>
-        <br>
-        <p class="regforminput">Email</p>
-        <input type='text' name='username' class="regforminput" placeholder="Email">
-        <p class="regforminput">Password</p>
-        <input type='password' name='password' class="regforminput" placeholder="Password">
-        <!-- <button type='submit' data-theme='b' id='login-button'>Login</button>  -->
+  <div class='comment-input'>
+   <center>
+    <div class='comment-panel'>
+        <div class="basic-sub-sub-header" style="text-align:left;">{{topic}}<br/>
+        <textarea name='answer' id='entered-comment'> </textarea>
+        </div>
+
+        <div class="standard-btn-div">
+            <button type='submit' data-theme='b' class='comment-submit-btn'><font size="5">Save</font></button>
+            <button type='submit' data-theme='b' class='comment-cancel-btn'><font size="5">Cancel</font></button>
+        </div>
+    </div>
+   </center>
+  </div>
+
+
+    <div class='logout'>
+        <div class='landing-intro'>
+            <div class='landing-header'>
+                Thank you for participating!
+            </div>
+        </div>
+    
+        <div class='landing-desc'>
+            <center>
+                <div class="standard-btn-div">
+                    <button data-theme='b' class='logout-start-over'><font size="5">Start Over</font></button>
+                </div>
+            </center>
+        </div>
+    </div>
+
+  <div class='welcome-back'>
+     <div class='landing-intro'>
+        <div class='landing-header'>
+            California<br/>Report Card
+        </div>
+     </div>
+
+    <div class='landing-desc'>
         <center>
-          <div style="width: 100%; max-width: 300px;">
-            <button type='submit' data-theme='b'><font size="5">Login</font></button>
-          </div>
+            <div class="standard-btn-div">
+                <button type='submit' data-theme='b' id='regrade-btn' ><font size="5">Enter new grades</font></button>
+                <button type='cancel' data-theme='b' id='garden-btn' ><font size="5">Read more ideas</font></button>
+            </div>
         </center>
-
-      </form>
-
     </div>
-  </center>
 
-</div>
+  </div>
 
-</div>
+  <div class='landing'>
+        <div class='landing-intro'>
+            <div class='landing-header'>
+                California<br/>Report Card
+            </div>
+        </div>
 
-<div class='logout'>
-    <div class='landing-intro'>
-      <div class='landing-header'>
-        Thank you for participating!
-      </div>
-
-      {% if client_settings.HEADER_IMAGE == "true" %}
-      <img class="header-img-topic" src={{ client_settings.HEADER_IMAGE_SOURCE }} class="center" style="width:150px;"><br>
-      {% endif %}
-    </div>
-    
       <div class='landing-desc'>
         <center>
-        <div style="width: 100%; max-width: 300px;text-align:left;">
-        <button data-theme='b' class='logout-start-over'><font size="5">Start Over</font></button>
+            <div class="standard-btn-div">
+                Grade and discuss California's government
+                <button type='submit' data-theme='b' class='first-time-btn'><font size="5">Enter</font></button>
+            </div>
+        </center>
+        
+        <div class="basic-fine-print">
+          Please take 3-5 minutes to share your perspectives on key issues facing California.
+          Your input will help assess public opinion. We respect your privacy.
         </div>
-        </center>
-      </div>
-    
-</div>
 
-<div class='welcome-back'> 
-     <div class='landing-intro'>
-      <div class='landing-header'>
-        California<br/>Report Card
-      </div>
-     </div>
-     <div class='landing-desc'>
-        <center>
-        <div style="width: 100%; max-width: 300px;text-align:left;">
-     <button type='submit' data-theme='b' id='regrade-btn' ><font size="5">Enter new grades</font></button>
-     <button type='cancel' data-theme='b' id='garden-btn' ><font size="5">Read more ideas</font></button>
-       </div>
-        </center>
-      </div>
-</div>
-
-<div class='landing'>
-    <div class='landing-intro'>
-      <div class='landing-header'>
-        California<br/>Report Card
+        <div class="comment-admin-text">
+          <a class="comment-admin-text-a" href="http://citizenreportcard.org/" target="_blank">About</a>
+        </div>
       </div>
   </div>
-      <div class='landing-desc'>
-        <center>
-        <div style="width: 100%; max-width: 300px;text-align:left;">
-        <center>Grade and discuss California's government</center>
-        <button type='submit' data-theme='b' class='first-time-btn'><font size="5">Enter</font></button>
-         </div>
-        </center>
-        
-        <div style="font-size: 14px;color: #CCCCCC;font-weight:bold;line-height:16px;text-align:left;padding-right: 5px; padding-left: 5px;">
-          Please take 3-5 minutes to share your perspectives on key issues facing California. Your input will help assess public opinion. We respect your privacy.
-        </div>
-        <div style="text-align: right;">
-          <a href="http://citizenreportcard.org/"><font style="color: #FFFFFF;font-size: 16px;padding-right: 7px;">About</font></a>
-        </div>
-      </div>
-</div>
 
-<div class='dialog' style="display: none;">
-    <div class='dialog-text1'>
+  <div class='dialog dialog-style'>
+    <div class='dialog-text1 dialog-text-style'>
+
       <center>
-      <div class="basic-header" style="width:100%;">The Discussion</div>
-      <img class="header-img-topic" src="{{ url_root }}/media/mobile/img/cafe/map_teaser.png" class="center" style="position:relative;left: -10px;width:100%;max-width:400px;max-height:210px;padding-top:3px;"><br>
+        <div class="basic-header" style="width:100%;">The Discussion</div>
+        <img class="header-img-topic center" src="{{ url_root }}/media/mobile/img/cafe/map_teaser.png"><br>
       </center>
+
       The current topic is:<br/>
-      <div style="width: 300px;">
-        "{{ topic }}"
-        <button type='submit' data-theme='b' class='dialog-next'  onclick="$('.dialog-text1').hide();$('.dialog-text2').show();"><font size="5">Next</font></button>
-      </div>
+
+        <div class="standard-btn-div">
+            "{{ topic }}"
+            <button type='submit' data-theme='b' class='dialog-next'  onclick="$('.dialog-text1').hide();$('.dialog-text2').show();"><font size="5">Next</font></button>
+        </div>
+
     </div>
 
-    <div class='dialog-text2' style="display:none;">
+    <div class='dialog-text2 dialog-text-style'>
       <center>
-      <div class="basic-header" style="width:100%;">The Discussion</div>
-      <img class="header-img-topic" src="{{ url_root }}/media/mobile/img/cafe/map_teaser.png" class="center" style="position:relative;left: -10px;width:100%;max-width:400px;max-height:210px;padding-top:3px;"><br>
+        <div class="basic-header" style="width:100%;">The Discussion</div>
+        <img class="header-img-topic center" src="{{ url_root }}/media/mobile/img/cafe/map_teaser.png"><br>
       </center>
       Each mug represents a participant's response to the discussion topic.<br/>
-      <!--<a href="#" onclick="$('.dialog-text2').hide();$('.dialog-vis-text').show();" style="font-size: 14px;">More about visualization</a>-->
-
-      <div style="width: 300px;">
+      <div class="standard-btn-div">
         <button type='submit' data-theme='b' class='dialog-ready' ><font size="5">Next</font></button>
       </div>
     </div>
-    
-      <div class='dialog-vis-text' style="display:none;">
-      <center>
-      <div class="basic-header" style="width:100%;">About the Visualization</div>
-      <img class="header-img-topic" src="{{ url_root }}/media/mobile/img/cafe/map_teaser.png" class="center" style="position:relative;left: -10px;width:100%;max-width:400px;max-height:210px;padding-top:3px;"><br>
-      </center>
-      The location of each participant's mug is based on how he or she graded.
-      Participants that graded similarly are close, and ones that differed are far apart.
-      <center>
-      <div style="width: 300px;">
-        <button type='submit' data-theme='b' class='dialog-ready' ><font size="5">Next</font></button>
-      </div>
-      </center>
-    </div>
-        
-    <!--<div class='dialog-text3' style="display:none;">
-      <button type='submit' data-theme='b' data-icon="star">The Discussion</button>
-      <img class="header-img-topic" src="{{ url_root }}/media/mobile/img/cafe/rating_teaser.png" class="center" style="width:250px;"><br>
-      You can evaluate a participant's response on two sliders.
-      After rating two responses, you can leave a response of your own.
-      As you rate more responses and other participants rate you, you will earn points.
-      <div style="width: 150px;">
-        <button type='submit' data-theme='b' class='dialog-ready' data-icon="check">Ready!</button>
-      </div>
-    </div>-->
-</div>
 
-<div class='dialog-score' style="display: none;">
-    <div class='dialog-score-text1'>
-      <br/>
+  </div>
+
+  <div class='dialog-score dialog-style'>
+    <div class='dialog-text-notitle'>
       <center>
-        <div class="scorebox-fake" style="width: 250px;">
+        <div class="scorebox-fake">
           Your Score is 100
         </div>
-      <!--<div style="width:100%;font-size:32px;">Earning Points</div>-->
-      <!--<img class="header-img-topic" src="{{ url_root }}/media/mobile/img/cafe/points_teaser.png" class="center" style="width:200px;padding-top:3px;"><br>-->
-      </center>
-      <div style="padding-top: 10px;"></div>
-      You earn points by rating others and when others rate your idea.
-      Rate one more person's idea before entering your own...
-      <div style="width: 300px;">
-        <button type='submit' data-theme='b' class='dialog-score-ready' ><font size="5">Next</font></button>
-      </div>
-    </div>
-</div>
 
-<div class='dialog-yourmug' style="display: none;">
-    <div class='dialog-yourmug-text1'>
-      <center>
-      <div class="basic-header" style="width:100%;">Your Mug</div>
-      <img class="header-img-topic" src="{{ url_root }}/media/mobile/img/cafe/yourmug-teaser.png" class="center" style="position:relative;left: -10px;width:100%;max-width:400px;max-height:210px;padding-top:3px;"><br>
+          <br/>
+
       </center>
-      <div style="width: 300px;">
+        <div class="standard-btn-div">
+            You earn points by rating others and when others rate your idea.
+            Rate one more person's idea before entering your own...<br/>
+            <button type='submit' data-theme='b' class='dialog-score-ready' ><font size="5">Next</font></button>
+        </div>
+    </div>
+  </div>
+
+  <div class='dialog-yourmug dialog-style'>
+    <div class='dialog-text-style'>
+      <center>
+        <div class="basic-header" style="width:100%;">Your Mug</div>
+        <img class="header-img-topic center" src="{{ url_root }}/media/mobile/img/cafe/yourmug-teaser.png"><br>
+      </center>
+
+      <div class="standard-btn-div">
         To enter your own idea, click on your mug (highlighted in yellow).<br/>
         <button type='submit' data-theme='b' class='dialog-yourmug-ready' ><font size="5">Next</font></button>
       </div>
-    </div>
-</div>
 
-<div class='dialog-continue' style="display: none;">
-    <div class='dialog-continue-text1'>
+    </div>
+  </div>
+
+  <div class='dialog-continue dialog-style'>
+    <div class='dialog-text-style'>
       <center>
-      <div class="basic-header" style="width:100%;">Response Saved!</div>
-      <!--<img class="header-img-topic" src="{{ url_root }}/media/mobile/img/cafe/continue_teaser.png" class="center" style="width:150px;padding-top:3px;"><br>-->
+        <div class="basic-header" style="width:100%;">Response Saved!</div>
       </center>
-      Continue to read and evaluate other's ideas to earn more points.
-      You can see detailed statistics in the stats page.
-      <div style="width: 300px;">
-        <button type='submit' data-theme='b' class='dialog-continue-ready' ><font size="5">Next</font></button>
-      </div>
-    </div>
-</div>
 
-<div class='dialog-email' style="display: none;">
-    <div class='dialog-email-text1'>
-            <!--<div class="basic-header" style="width:100%;"></div>-->
-            <!--<img class="header-img-topic" src="{{ url_root }}/media/mobile/img/cafe/continue_teaser.png" class="center" style="width:150px;padding-top:3px;"><br>-->
-        <div style="width: 300px;">
+      <div class="standard-btn-div">
+          Continue to read and evaluate other's ideas to earn more points.
+          You can see detailed statistics in the stats page.<br/>
+          <button type='submit' data-theme='b' class='dialog-continue-ready' ><font size="5">Next</font></button>
+      </div>
+
+    </div>
+  </div>
+
+  <div class='dialog-email dialog-style'>
+    <div class='dialog-text-notitle'>
+        <div class="standard-btn-div">
             Please provide your email address.
             We will not share it with any third parties.
             We will send you a unique link so you can see how others have rated your ideas and how the grades and ideas are evolving.
-            <a href="http://opinion.berkeley.edu/privacy.html" target="_blank" style="color: #FFC501;">Privacy Policy</a>
-            <input type="email" id='regemail' name='regemail' style="font-size: 16px !important;" placeholder="Email (Optional)" data-theme="b"/>
+            <a href="http://opinion.berkeley.edu/privacy.html" target="_blank" class="comment-admin-text-a">Privacy Policy</a>
+            <input type="email" id='regemail' name='regemail' style="font-size: 16px !important; line-height: 30px !important;" placeholder="Email (Optional)" data-theme="b"/>
             <button type='submit' data-theme='b' class='dialog-email-ready' ><font size="5">Next</font></button>
         </div>
     </div>
-</div>
+  </div>
 
-<div class='dialog-avggrade' style="display: none;">
-    <div class='dialog-avggrade-text'>
+  <div class='dialog-avggrade dialog-style'>
+    <div class='dialog-text-style'>
       <center>
-      <div class="basic-header" style="width:100%;">Average Grades</div>
-      <img class="header-img-topic" src="{{ url_root }}/media/mobile/img/cafe/avggrade.png" class="center" style="width:150px;padding-top:3px;"><br>
+        <div class="basic-header" style="width:100%;">Average Grades</div>
+        <img src="{{ url_root }}/media/mobile/img/cafe/avggrade.png" class="center" style="width:150px;padding-top:3px;"><br>
       </center>
-      The Average Grade is based on the grades from all participants thusfar.
-      <div style="width: 300px;">
+
+      <div class="standard-btn-div">
+        The Average Grade is based on the grades from all participants thusfar.
         <button type='submit' data-theme='b'  onclick="$('.dialog-avggrade').hide();$('.endsliders').show();"><font size="5">Back</font></button>
       </div>
     </div>
-</div>
+  </div>
 
-</div>
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

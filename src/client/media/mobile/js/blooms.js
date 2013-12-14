@@ -398,11 +398,11 @@ var _blooms = blooms = (function($, d3, console) {
                 var cid = commentData.cid;
                 window.current_cid = cid;
                 window.current_uid = d.uid;
-                $('.rate').slideDown();
-                $('.rate-loading').slideDown();
+                $('.rate').show();
+                $('.rate-loading').show();
                 rate.updateDescriptions(document.getElementById('commentInput'), content);
                 $('.rate').slideDown(function() {
-                    $('.rate-loading').slideUp();
+                    $('.rate-loading').hide();
                     $('.rate').data('cid', cid);
                 });
                 $('#go-back').click(function() {
