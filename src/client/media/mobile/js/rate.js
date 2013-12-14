@@ -381,7 +381,7 @@ var rate = (function($, d3, console) {
 })($, d3, console);
 
 $(document).ready(function() {
-    $('.score-label').text(utils.toTitleCase(window.conf['YOUR_SCORE_LANGUAGE']).trim().replace(':', '') + ': ');
+    $('.score-label').text(utils.toTitleCase(window.conf['YOUR_SCORE_LANGUAGE']).trim().replace(':', '') + ' is ');
 
     $('.done-endsliders-btn').click(function() {
         rate.logUserEvent(5,'sliders finished');

@@ -406,7 +406,11 @@ var _blooms = blooms = (function($, d3, console) {
                     $('.rate').data('cid', cid);
                 });
                 $('#go-back').click(function() {
-                    _this.remove();    
+                    try{
+                    _this.transition().duration(1500).style("opacity", "0").remove();
+                    }catch(err){
+                    console.log(err);
+                    }
                     //_this.transition().duration(500).style("opacity", "0");
                     /* Remove this bloom from our bookkeeping array. */
                     var index = $.inArray(window.current_uid, window.blooms);
