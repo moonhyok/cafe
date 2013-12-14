@@ -110,23 +110,23 @@ var rate = (function($, d3, console) {
             
             //TODO FIX!!!
             if (window.user_score == 2) {
-                $('.rate').slideUp();
+                $('.rate').hide();
                 hideMenubar();
-                $('.dialog-yourmug').slideDown();
+                $('.dialog-yourmug').show();
                 //$('.comment-input').slideDown();
             }
             else if (window.user_score == 1)
             {
-                $('.rate').slideUp();
+                $('.rate').hide();
                 hideMenubar();
 
                 // ui has changed!
                 $('.top-bar').trigger('height');
 
-                $('.dialog-score').slideDown();
+                $('.dialog-score').show();
             }
             else{
-                $('.rate').slideUp();
+                $('.rate').hide();
             }
             
     }
@@ -135,7 +135,7 @@ var rate = (function($, d3, console) {
         //note: this done-rating button is mapped twice, see below in populateBlooms #go-back.
         resetRatingSliders();
         logUserEvent(4,'rated');
-        $('.rate').slideUp();
+        $('.rate').hide();
     }
 
     // pulls a live comment text from the database. id is either the cid or the uid,
@@ -247,7 +247,7 @@ var rate = (function($, d3, console) {
         if(!accounts.setAuthenticated()){// if user enter with valid entry code, no need to show Register
         accounts.showRegister();
         }
-        $('.endsliders').slideUp();
+        $('.endsliders').hide();
     }
     //This function just pulls up the registration sliders form, right before prompting the 
     //  user to register. Once sliders are filled, once done will only cause the registration prompt
@@ -255,10 +255,10 @@ var rate = (function($, d3, console) {
 
     function showSliders() {
         if (!accounts.mustRegister()) {
-            $('.endsliders').slideDown();
+            $('.endsliders').show();
             $('.frame').show();
             $('.frame').click(function() {
-                $('.endsliders').slideUp();
+                $('.endsliders').hide();
                 $(this).hide();
             });
         } else {
@@ -396,7 +396,7 @@ $(document).ready(function() {
 
     $('.comment-submit-btn').click(function() {
         window.comment = $('#entered-comment').val();
-        $('.comment-input').slideUp();
+        $('.comment-input').hide();
         $('.dialog-continue').show();
         $('.scorebox').hide();
         $('.menubar').hide();
@@ -409,7 +409,7 @@ $(document).ready(function() {
     });
     
     $('.comment-cancel-btn').click(function() {
-        $('.comment-input').slideUp();
+        $('.comment-input').hide();
         rate.logUserEvent(6,'comment cancelled');
     });
 
