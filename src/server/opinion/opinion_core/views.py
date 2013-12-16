@@ -171,17 +171,17 @@ def confirmation_mail(request):
       json_error("Please enter a valid email")
 
 def app(request, username=None):
-	if True:
+	if request.mobile:
 		return HttpResponseRedirect(URL_ROOT + "/mobile/")
-	create_visitor(request)
-	if username != None:
-		if not Settings.objects.boolean('SOFT_ENTRY_CODES'):
-			users = User.objects.filter(username = username)
-			if users.count()==0:
-				username = NULL_USER_INDICATOR
-			elif len(DiscussionComment.objects.filter(user = users[0])) == 0:
-				username = NULL_USER_INDICATOR
-		return render_to_response('app.html', context_instance = RequestContext(request, {'username': username, 'client_settings':get_client_settings()}))
+# 	create_visitor(request)
+# 	if username != None:
+# 		if not Settings.objects.boolean('SOFT_ENTRY_CODES'):
+# 			users = User.objects.filter(username = username)
+# 			if users.count()==0:
+# 				username = NULL_USER_INDICATOR
+# 			elif len(DiscussionComment.objects.filter(user = users[0])) == 0:
+# 				username = NULL_USER_INDICATOR
+# 		return render_to_response('app.html', context_instance = RequestContext(request, {'username': username, 'client_settings':get_client_settings()}))
 	else:
 		return render_to_response('app.html', context_instance = RequestContext(request, {'client_settings':get_client_settings()}))
 
