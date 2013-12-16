@@ -493,7 +493,7 @@ $(document).ready(function() {
     });
 
     $('.logout-start-over').click(function() {
-        location.reload();
+	    window.location = window.url_root + "/mobile/";
     });
 
     $('.logout-login-again').click(function() {
