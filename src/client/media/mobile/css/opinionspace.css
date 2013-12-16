@@ -61,7 +61,7 @@
 	display:inline;
 	color: #000000;
 	text-shadow: none;
-	width: 300px !important;
+	width: 90% !important;
 	height: 180px !important;
 	font-size: 18px;
 }
@@ -700,12 +700,12 @@ padding-right: 7px;
 
 .standard-btn-div .ui-btn-inner{
     font-family: Arial, sans-serif;
-    line-height: 19px;
+    line-height: 25px;
 }
 
 .standard-btn-div .ui-btn{
     font-family: Arial, sans-serif;
-    line-height: 20px;
+    line-height: 25px;
     border-radius: 10px !important;
 }
 

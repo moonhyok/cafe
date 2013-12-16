@@ -389,6 +389,8 @@ var _blooms = blooms = (function($, d3, console) {
                 
                 if (d.uid == "curUser" && window.user_score >= 2) {
                     $('.comment-input').slideDown();
+                    $('.scorebox').hide();
+                    $('.menubar').hide();
                     return;
                 }
                 

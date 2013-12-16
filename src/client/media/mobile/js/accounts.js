@@ -58,7 +58,6 @@ var accounts = (function($, d3, console) {
                 window.authenticated = data['is_user_authenticated'];
             });
         });
-
         return window.authenticated;
     }
 
@@ -75,6 +74,7 @@ var accounts = (function($, d3, console) {
             success: function(data) {
                 if (data.hasOwnProperty('success')) {
                     console.log("successful login detected!!");
+                    window.authenticated = true;
                     //rate.sendComment(window.comment);
                     rate.logUserEvent(0,'login');
                     for (var i = 1; i <= window.num_sliders; i++) {
@@ -418,9 +418,15 @@ $(document).ready(function() {
     $('.dialog-continue-ready').click(function() {
         rate.logUserEvent(8,'dialog 3');
         $('.dialog-continue').hide();
-         $('.dialog-email').show();
-        //rate.initMenubar();
-        //$('.scorebox').show();
+        if(! window.email_saved)
+        {
+            $('.dialog-email').show();
+        }
+        else
+        {
+            rate.initMenubar();
+            $('.scorebox').show();
+        }
     });
 
     $('.dialog-email-ready').click(function() {
@@ -428,9 +434,10 @@ $(document).ready(function() {
             $('.dialog-email').hide();
             rate.initMenubar();
             $('.scorebox').show();
-            //if ($('#regemail').val()){
+            if ($('#regemail').val()){
            //		accounts.sendEmail($('#regemail').val());
-           //	}
+                    window.email_saved = true;
+           	}
         });
     
     $('.dialog-yourmug-ready').click(function() {
