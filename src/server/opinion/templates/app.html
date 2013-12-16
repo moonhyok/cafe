@@ -9,29 +9,37 @@
 	<style>
 	  * {
 	  background-color: #04376C;
-}
+	  }
+
+	  #frame {
+	  overflow: scroll; 
+	  }
+
+	  #message {
+	  color: white;
+	  font-family: sans-serif;
+	  }
 	  </style>
 	
         <title>California Report Card</title>
     </head>
     <body>
 	<center>
-	  <!-- iPhone 4<br/> 
-	  <iframe src="{{ url_root }}/mobile/" height="480" width="320" ></iframe><br/> -->
+	  <!-- 
+	       Common phone screen sizes (h, w):
+	       iPhone 4: (480, 320)
+	       iPhone 5: (560, 320)
+	       iPad portrait: (981, 644)
+	       iPad landscape: (644, 981)
+	    -->
+	  
+	  <iframe id="frame" src="{{ url_root }}/mobile/" height="560" width="320" >
+	  </iframe>
+	  <br/> <br/>
+	  <div id="message">
+	    The California Report Card is optimized for mobile screen sizes.
+	  </div>
 
-	  <iframe src="{{ url_root }}/mobile/" height="560" width="320" ></iframe><br/>
-	  <br>
-	    <div style="color:white; font-family:sans-serif;">
-	  The California Report Card is optimized for mobile screen sizes.
-	  <div>
-	<!-- 
-	iPhone 5<br/>
-	<iframe src="{{ url_root }}/mobile/" height="560" width="320" ></iframe><br/>
-        iPad Potrait<br/>
-        <iframe src="{{ url_root }}/mobile/" height="981" width="644" ></iframe><br/>
-        iPad Landscape<br/>
-        <iframe src="{{ url_root }}/mobile/" height="644" width="981" ></iframe> -->
-<br/>
 	</center>
     </body>
 </html>
