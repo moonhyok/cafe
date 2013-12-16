@@ -357,6 +357,19 @@ $(document).ready(function() {
         accounts.showLogin();
     });
 
+    $('.home-btn-dialog').click(function() {
+           window.no_menubar = true;
+           if (window.authenticated){
+              $('.welcome-back').show();
+              $('.menubar').hide();
+              $('.scorebox').hide();
+           }
+           else{
+              $('.landing').show();
+              $('.menubar').hide();
+           }
+        });
+
     $('.login-form-go-back').click(function() {
         $('.landing').show();
         $('.login').hide();
@@ -398,6 +411,7 @@ $(document).ready(function() {
         rate.logUserEvent(8,'dialog 2');
         $('.dialog-score').hide();
         $('.scorebox').show();
+        rate.initMenubar();
         //rate.initMenubar();
     });
     
@@ -422,8 +436,8 @@ $(document).ready(function() {
     $('.dialog-yourmug-ready').click(function() {
         rate.logUserEvent(8,'dialog 4');
         $('.dialog-yourmug').hide();
-        rate.initMenubar();
         $('.scorebox').show();
+        $('.menubar').show();
         try{
             window.your_mug.transition().duration(1000).style("opacity", "1");
         }catch(err){
@@ -494,6 +508,11 @@ $(document).ready(function() {
 	
 	$('#garden-btn').click(function(){
 		$('.welcome-back').hide();
-                $('.menubar').show();
+		if(!window.no_menubar)
+           {
+               $('.menubar').show();
+               $('.scorebox').show();
+           }
+        window.no_menubar = false;
 	});
 });

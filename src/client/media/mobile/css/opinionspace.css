@@ -251,9 +251,7 @@ table.pretty caption {
 		left: 0;
 
 		display: none;
-
-		background-color: transparent;
-		background-color: rgba(0, 0, 0, .2);
+		background: #04376c;
 	}
 
 	.header {
@@ -263,9 +261,8 @@ table.pretty caption {
 		font-size: 16px;
 		/*padding: 5px 0px;*/
 		text-align: left;
-		line-height: 19px;
-		padding-left: 5px;
-		padding-right: 3px;
+		line-height: 16px;
+		padding-left: 10px;
 		padding-bottom: 5px;
 		padding-top: 5px;
 		font-family: futura, verdana, sans-serif;
@@ -291,9 +288,19 @@ table.pretty caption {
 		/*font-family: "Courier New", Courier, monospace;*/
 		color: white;
 		text-shadow: none;
-		width: 100%;
 		height: 100%;
+
 	}
+
+	.default-left-padding{
+	    padding-left: 10px;
+	    width: 95% !important;
+	}
+
+	.small-left-padding{
+    	    padding-left: 5px;
+    	    width: 97% !important;
+    	}
 	
 	.comment-panel{
 		/*background: url('../img/cafe/cafe_notebook.png') repeat-y;*/
@@ -404,7 +411,8 @@ table.pretty caption {
 		display: none;
 	}
 
-	.login, .endsliders, .my-comment, .stats, .help, .leaderboard, .comment-input{ /* piggy backing the the new divs here for now,  .stats, .help*/
+	.login, .endsliders, .my-comment, .stats, .help, .leaderboard, .comment-input, .register, .rate{
+	 /* piggy backing the the new divs here for now,  .stats, .help*/
 		display: none;
 		position: fixed;
 		top: 0;
@@ -448,6 +456,7 @@ table.pretty caption {
 		color: #000000;
 		padding-top: 5px;
 		padding-bottom: 5px;
+		text-align: center;
 		background-color: rgba(255,255,255,.7);
 	}
 
@@ -460,26 +469,10 @@ table.pretty caption {
 		/*background-color: rgba(200,200,200,0.3);*/
 	}
 
-	.register {
-		display: none;
-		position: fixed;
-		top: 0;
-		right: 0;
-		width: 100%;
-		height: 100%;
-		background: #04376c;
-		z-index: 999;
-		overflow-y: auto;
-		overflow-x: hidden;
-	}
-	
 	.registerpanel{
 		color: white;
 		text-shadow: none;
-		width: 95%;
 		height: 100%;
-		padding-right: 7px;
-		padding-left: 7px;
 	}
 	
 	.edit-comment-panel{
@@ -572,10 +565,8 @@ table.pretty caption {
 	text-shadow: none;
 	color: #FFFFFF;
 	font-size: 42px;
-	text-align: left;
 	text-align: center;
 	width: 100%;
-	padding-left: 5px;
 	line-height: 42px;
 }
 
@@ -653,14 +644,12 @@ padding-right: 7px;
 	color: #FFFFFF;
 	font-size: 28px;
 	height: 100%;
-	width: 100%;
 	left: 0;
 	text-align: left;
 }
 
 .landing-intro {
-	width: 100%;
-	text-align: left;
+	text-align: center;
 	background-color: #04376c;
 	padding-top: 30px;
 	padding-bottom: 10px;
@@ -704,14 +693,14 @@ padding-right: 7px;
 
 .standard-btn-div {
     width: 100%;
-    max-width: 300px;
+    max-width: 295px;
     height: auto;
     padding-bottom: 10px;
 }
 
 .standard-btn-div .ui-btn-inner{
     font-family: Arial, sans-serif;
-    line-height: 20px;
+    line-height: 19px;
 }
 
 .standard-btn-div .ui-btn{
@@ -720,31 +709,30 @@ padding-right: 7px;
     border-radius: 10px !important;
 }
 
+.home-btn-dialog-box {
+    width:55px;
+    padding-left: 10px;
+    padding-bottom: 3px;
+}
+
+.home-btn-dialog-box .ui-btn-inner{
+    font-family: Arial, sans-serif;
+    line-height: 20px;
+    padding: 0px;
+}
+
+.home-btn-dialog-box .ui-btn{
+    font-family: Arial, sans-serif;
+    line-height: 20px;
+    border-radius: 10px !important;
+}
+
 .answerwrapper {
 	/*background-color: #E7E1D8;*/
 	/*background: url('../img/cafe/cafe_notebook.png') repeat-y;*/
-	width: 100%;
 	text-shadow: none;
 	color: #FFFFFF;
-	padding-right: 10px;
-	padding-left: 7px;
 	padding-top: 7px;
-}
-
-.rate {
-	display: none;
-	position: fixed;
-	top: 0;
-	right: 0;
-	width: 100%;
-	height: 100%;
-	/*background-color: #E7E1D8;*/
-	/*background-color: #FAEBCD;*/
-	background: #04376c;
-	/*background-image:url('../img/cafe/cafe_bg.jpg');*/
-	z-index: 999;
-	overflow-y: auto;
-	overflow-x: hidden;
 }
 
 .rate-warp {
@@ -797,7 +785,7 @@ padding-right: 7px;
 }
 
 .dialog-style{
-	background-color: rgba(0, 0, 0, 0.7);
+	background: #04376c;
 	width: 100%;
 	height: 100%;
 	position: absolute;
@@ -812,13 +800,23 @@ padding-right: 7px;
         font-family: Arial, sans-serif;
 	color: #FFFFFF;
 	background: #04376c;
-	width: 100%;
 	height: 100%;
 	text-decoration: none;
 	text-shadow: none;
-	padding-left: 10px;
 	font-size: 18px;
 	line-height: 18px;
+}
+
+.dialog-text-style-noflow {
+	position: relative;
+        vertical-align: middle;
+        font-family: Arial, sans-serif;
+	color: #FFFFFF;
+	background: #04376c;
+	text-decoration: none;
+	text-shadow: none;
+	font-size: 16px;
+	line-height: 16px;
 }
 
 .dialog-text-notitle {
@@ -927,9 +925,9 @@ background-image: -webkit-gradient(linear, left top, left bottom, from( #FFd401 
     padding-bottom: 0px;
     position:relative;
     left: -10px;
-    width:100%;
+    width:106%;
     max-width:400px;
-    max-height:210px;
+    max-height:200px;
     padding-top:3px;
 }
 

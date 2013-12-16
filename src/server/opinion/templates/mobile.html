@@ -40,6 +40,8 @@
 
   window.registration_in_progress = false;
 
+  window.landing = true;
+
   window.num_sliders = {{ statements|length }};
 
   window.user_score = {{init_score}};
@@ -180,7 +182,7 @@
 
         <div data-role='navbar' class='menubar'>
             <ul>
-                <li style="width: 20%;"><a data-theme='b' id='home-btn' class='home-btn' onclick="$('.welcome-back').show();$('.menubar').hide();"><img width="25px;" src="{{url_root}}/media/mobile/img/cafe/home-icon.png"></a></li>
+                <li style="width: 20%;"><a data-theme='b' id='home-btn' class='home-btn' onclick="$('.welcome-back').show();$('.menubar').hide();$('.scorebox').hide();"><img width="26px;" src="{{url_root}}/media/mobile/img/cafe/home-icon.png"></a></li>
                 <li style="width: 40%;"><a data-theme='b' class='my-comment-btn'><span class='stats-label'>Stats</span></a></li>
                 <li style="width: 40%;"><a data-theme='b' class='logout-btn'><span class='logout-label'>Logout</span></a></li>
             </ul>
@@ -198,7 +200,7 @@
   <div class="margin"></div>
 
   <div class='rate'>
-    <div class="answerwrapper">
+    <div class="answerwrapper default-left-padding">
 
       <span class="rate-username"></span>
 
@@ -247,10 +249,13 @@
 
   </div>
 
+    <div id='rating' class='endsliders'>
+        <div class='reportcard default-left-padding'>
 
-  <div id='rating'>
-    <div class='endsliders'>
-        <div class='reportcard'>
+          <div class="home-btn-dialog-box">
+              <button data-theme='b' class='home-btn-dialog'><img width="30px;" src="{{url_root}}/media/mobile/img/cafe/home-icon.png"></button>
+          </div>
+
           <div class="basic-header">Grade California's State Government</div>
 
           <center>
@@ -321,7 +326,6 @@
         </center>
        </div>
     </div>
-  </div>
 
   <div class='my-comment'>
     <div class='edit-comment-panel'>
@@ -384,12 +388,15 @@
     </div>
   </div>
 
-  <div id='d3'></div>
+  <div id='d3' class="d3-canvas"></div>
   <div class='frame'></div>
 
   <div class = 'register' id='register'>
-     <center>
-       <div class= 'registerpanel'>
+      <div class="home-btn-dialog-box">
+          <button data-theme='b' class='home-btn-dialog'><img width="30px;" src="{{url_root}}/media/mobile/img/cafe/home-icon.png"></button>
+      </div>
+
+       <div class= 'registerpanel default-left-padding'>
         <div class="basic-header2" style="width: 100%">Enter your zip code to save your grades and join the discussion</div>
 
          <form id='reg_form' class='form-horizontal' method='post' action='{{ url_root }}/accountsjson/register/'>
@@ -420,10 +427,14 @@
         </center>
        </form>
       </div>
-    </center>
   </div>
 
   <div class='comment-input'>
+
+      <div class="home-btn-dialog-box">
+          <button data-theme='b' class='home-btn-dialog'><img width="30px;" src="{{url_root}}/media/mobile/img/cafe/home-icon.png"></button>
+      </div>
+
    <center>
     <div class='comment-panel'>
         <div class="basic-sub-sub-header" style="text-align:left;">{{topic}}<br/>
@@ -456,28 +467,34 @@
     </div>
 
   <div class='welcome-back'>
-     <div class='landing-intro'>
+     <div class='landing-intro default-left-padding'>
         <div class='landing-header'>
             California<br/>Report Card
         </div>
      </div>
 
-    <div class='landing-desc'>
+    <div class='landing-desc default-left-padding'>
         <center>
             <div class="standard-btn-div">
-                <button type='submit' data-theme='b' id='regrade-btn' ><font size="5">Enter new grades</font></button>
-                <button type='cancel' data-theme='b' id='garden-btn' ><font size="5">Read more ideas</font></button>
+                <button type='submit' data-theme='b' id='regrade-btn' ><font size="5">Change grades</font></button>
+                <button type='cancel' data-theme='b' id='garden-btn' ><font size="5">Back to discussion</font></button>
             </div>
         </center>
+        <div class="basic-fine-print">
+            Please take 3-5 mins to grade and discuss key issues facing California.<br/><br/>
+            - The UC Berkeley CITRIS Data and Democracy Initiative.
+        </div>
+
+        <div class="comment-admin-text">
+            <a class="comment-admin-text-a" href="#" onclick="$('.dialog-about').show();$('.welcome-back').hide();window.landing=false;" target="_blank">About</a>
+        </div>
     </div>
 
   </div>
 
   <div class='landing'>
-        <div class='landing-intro'>
-            <div class='landing-header'>
+        <div class='landing-intro landing-header'>
                 California<br/>Report Card
-            </div>
         </div>
 
       <div class='landing-desc'>
@@ -489,119 +506,161 @@
         </center>
         
         <div class="basic-fine-print">
-          Please take 3-5 minutes to share your perspectives on key issues facing California.
-          Your input will help assess public opinion. We respect your privacy.
+            Please take 3-5 mins to grade and discuss key issues facing California.<br/><br/>
+            - The UC Berkeley CITRIS Data and Democracy Initiative.
         </div>
 
         <div class="comment-admin-text">
-          <a class="comment-admin-text-a" href="http://citizenreportcard.org/" target="_blank">About</a>
+          <a class="comment-admin-text-a" href="#" onclick="$('.dialog-about').show();$('.landing').hide();window.landing=true;" target="_blank">About</a>
         </div>
       </div>
   </div>
 
   <div class='dialog dialog-style'>
-    <div class='dialog-text1 dialog-text-style'>
 
-      <center>
+      <div class="home-btn-dialog-box">
+          <button data-theme='b' class='home-btn-dialog'><img width="30px;" src="{{url_root}}/media/mobile/img/cafe/home-icon.png"></button>
+      </div>
+
+    <div class='dialog-text1 dialog-text-style default-left-padding'>
         <div class="basic-header" style="width:100%;">The Discussion</div>
         <img class="header-img-topic center" src="{{ url_root }}/media/mobile/img/cafe/map_teaser.png"><br>
-      </center>
-
       The current topic is:<br/>
-
+        "{{ topic }}"
+        <center>
         <div class="standard-btn-div">
-            "{{ topic }}"
             <button type='submit' data-theme='b' class='dialog-next'  onclick="$('.dialog-text1').hide();$('.dialog-text2').show();"><font size="5">Next</font></button>
         </div>
+        </center>
 
     </div>
 
-    <div class='dialog-text2 dialog-text-style' style="display: none">
-      <center>
+    <div class='dialog-text2 dialog-text-style default-left-padding' style="display: none">
         <div class="basic-header" style="width:100%;">The Discussion</div>
         <img class="header-img-topic center" src="{{ url_root }}/media/mobile/img/cafe/map_teaser.png"><br>
-      </center>
-      Each mug represents a participant's response to the discussion topic.<br/>
+      Each mug represents a participant's response to the discussion topic.
+        <center>
       <div class="standard-btn-div">
         <button type='submit' data-theme='b' class='dialog-ready' ><font size="5">Next</font></button>
       </div>
+        </center>
     </div>
 
   </div>
 
   <div class='dialog-score dialog-style'>
-    <div class='dialog-text-notitle'>
-      <center>
+
+      <div class="home-btn-dialog-box">
+          <button data-theme='b' class='home-btn-dialog'><img width="30px;" src="{{url_root}}/media/mobile/img/cafe/home-icon.png"></button>
+      </div>
+
+    <div class='dialog-text-notitle default-left-padding'>
         <div class="scorebox-fake">
           Your Score is 100
         </div>
 
-          <br/>
+        <br/>
+        You earn points by rating others and when others rate your idea.
+        Rate one more person's idea before entering your own...
 
-      </center>
+      <center>
         <div class="standard-btn-div">
-            You earn points by rating others and when others rate your idea.
-            Rate one more person's idea before entering your own...<br/>
             <button type='submit' data-theme='b' class='dialog-score-ready' ><font size="5">Next</font></button>
         </div>
+      </center>
     </div>
   </div>
 
   <div class='dialog-yourmug dialog-style'>
-    <div class='dialog-text-style'>
-      <center>
-        <div class="basic-header" style="width:100%;">Your Mug</div>
-        <img class="header-img-topic center" src="{{ url_root }}/media/mobile/img/cafe/yourmug-teaser.png"><br>
-      </center>
 
-      <div class="standard-btn-div">
-        To enter your own idea, click on your mug (highlighted in yellow).<br/>
-        <button type='submit' data-theme='b' class='dialog-yourmug-ready' ><font size="5">Next</font></button>
+      <div class="home-btn-dialog-box">
+          <button data-theme='b' class='home-btn-dialog'><img width="30px;" src="{{url_root}}/media/mobile/img/cafe/home-icon.png"></button>
       </div>
+
+    <div class='dialog-text-style default-left-padding'>
+        <div class="basic-header" style="width:100%;">Your Mug</div>
+        <img class="header-img-topic center" src="{{ url_root }}/media/mobile/img/cafe/map_teaser.png"><br>
+
+        To enter your own idea, click on your mug (highlighted in yellow).
+
+      <center>
+        <div class="standard-btn-div">
+            <button type='submit' data-theme='b' class='dialog-yourmug-ready' ><font size="5">Next</font></button>
+        </div>
+      </center>
 
     </div>
   </div>
 
   <div class='dialog-continue dialog-style'>
-    <div class='dialog-text-style'>
-      <center>
-        <div class="basic-header" style="width:100%;">Response Saved!</div>
-      </center>
 
-      <div class="standard-btn-div">
-          Continue to read and evaluate other's ideas to earn more points.
-          You can see detailed statistics in the stats page.<br/>
-          <button type='submit' data-theme='b' class='dialog-continue-ready' ><font size="5">Next</font></button>
+      <div class="home-btn-dialog-box">
+          <button data-theme='b' class='home-btn-dialog'><img width="30px;" src="{{url_root}}/media/mobile/img/cafe/home-icon.png"></button>
       </div>
+
+    <div class='dialog-text-style default-left-padding'>
+
+        <div class="basic-header" style="width:100%;">Response Saved!</div>
+        Continue to read and evaluate other's ideas to earn more points.
+        You can see detailed statistics in the stats page.
+        <center>
+            <div class="standard-btn-div">
+                <button type='submit' data-theme='b' class='dialog-continue-ready' ><font size="5">Next</font></button>
+            </div>
+      </center>
 
     </div>
   </div>
 
   <div class='dialog-email dialog-style'>
-    <div class='dialog-text-notitle'>
-        <div class="standard-btn-div">
-            Please provide your email address.
-            We will not share it with any third parties.
-            We will send you a unique link so you can see how others have rated your ideas and how the grades and ideas are evolving.
-            <a href="http://opinion.berkeley.edu/privacy.html" target="_blank" class="comment-admin-text-a">Privacy Policy</a>
-            <input type="email" id='regemail' name='regemail' style="font-size: 16px !important; line-height: 30px !important;" placeholder="Email (Optional)" data-theme="b"/>
-            <button type='submit' data-theme='b' class='dialog-email-ready' ><font size="5">Next</font></button>
-        </div>
+
+      <div class="home-btn-dialog-box">
+          <button data-theme='b' class='home-btn-dialog'><img width="30px;" src="{{url_root}}/media/mobile/img/cafe/home-icon.png"></button>
+      </div>
+
+    <div class='dialog-text-notitle default-left-padding'>
+        Please enter your email to receive a unique link that will display evolving information including how others are rating your idea.
+        <center>
+            <div class="standard-btn-div">
+                <a href="http://opinion.berkeley.edu/privacy.html" target="_blank" class="comment-admin-text-a">Privacy Policy</a>
+                <input type="email" id='regemail' name='regemail' style="font-size: 16px !important; line-height: 30px !important;" placeholder="Email" data-theme="b"/>
+                <button type='submit' data-theme='b' class='dialog-email-ready' ><font size="5">Next</font></button>
+            </div>
+        </center>
     </div>
   </div>
 
   <div class='dialog-avggrade dialog-style'>
-    <div class='dialog-text-style'>
-      <center>
-        <div class="basic-header" style="width:100%;">Average Grades</div>
-        <img src="{{ url_root }}/media/mobile/img/cafe/avggrade.png" class="center" style="width:150px;padding-top:3px;"><br>
-      </center>
 
+      <div class="home-btn-dialog-box">
+          <button data-theme='b' class='home-btn-dialog'><img width="30px;" src="{{url_root}}/media/mobile/img/cafe/home-icon.png"></button>
+      </div>
+
+    <div class='dialog-text-style default-left-padding'>
+
+      <div class="basic-header" style="width:100%;">Average Grades</div>
+     <center>
+      <img src="{{ url_root }}/media/mobile/img/cafe/avggrade.png" class="center" style="width:150px;padding-top:3px;"><br>
       <div class="standard-btn-div">
         The Average Grade is based on the grades from all participants thusfar.
         <button type='submit' data-theme='b'  onclick="$('.dialog-avggrade').hide();$('.endsliders').show();"><font size="5">Back</font></button>
       </div>
+     </center>
     </div>
+  </div>
+
+  <div class='dialog-about dialog-style'>
+      <div class='dialog-text-style-noflow small-left-padding'>
+          <div class="basic-header">About</div>
+          <p>The California Report Card is based on a new interactive platform that engages public interest in government.
+          In this experiment, developed by the CITRIS Data and Democracy Initiative at UC Berkeley with advice from Lt. Governor Gavin Newsom and other public officials, visitors are invited to grade how effectively state representatives are working to address 6 key subjects. Visitors are then asked for suggestions on how California should spend the 2014 budget surplus. The platform is designed to engage visitors by providing instant feedback, a unique visualization of opinions, and a new approach to eliciting and rating suggestions.
+          The Report Card uses CAFE, a "Collective Assessment and Feedback Engine," modeled after grassroots discussions over coffee, to assess changes over time and to engage public interest in state government.</p>
+      <center>
+        <div class="standard-btn-div">
+          <button data-theme='b'  onclick="$('.dialog-about').hide();if(window.landing){$('.landing').show();}else{$('.welcome-back').show()}"><font size="5">Back</font></button>
+        </div>
+      </center>
+      </div>
   </div>
 
 <script>
