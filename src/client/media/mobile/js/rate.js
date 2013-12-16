@@ -390,7 +390,13 @@ $(document).ready(function() {
             for (var i = 1; i <= window.num_sliders; i++) {
                 rate.sendSlider(window.sliders[i], i);
             }
-            $('.menubar').show();
+
+            if(!window.no_menubar)
+            {
+                $('.menubar').show();
+                $('.scorebox').show();
+            }
+
         }
     });
 
@@ -411,6 +417,8 @@ $(document).ready(function() {
     $('.comment-cancel-btn').click(function() {
         $('.comment-input').hide();
         rate.logUserEvent(6,'comment cancelled');
+        $('.menubar').show();
+        $('.scorebox').show();
     });
 
 

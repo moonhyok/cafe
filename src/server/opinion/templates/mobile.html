@@ -38,6 +38,8 @@
 
   window.sliders = [];
 
+  window.email_saved = false;
+
   window.registration_in_progress = false;
 
   window.landing = true;
@@ -182,7 +184,7 @@
 
         <div data-role='navbar' class='menubar'>
             <ul>
-                <li style="width: 20%;"><a data-theme='b' id='home-btn' class='home-btn' onclick="$('.welcome-back').show();$('.menubar').hide();$('.scorebox').hide();"><img width="26px;" src="{{url_root}}/media/mobile/img/cafe/home-icon.png"></a></li>
+                <li style="width: 20%;"><a data-theme='b' id='home-btn' class='home-btn' onclick="$('.welcome-back').show();$('.menubar').hide();$('.scorebox').hide();"><img width="25px;" src="{{url_root}}/media/mobile/img/cafe/home-icon.png"></a></li>
                 <li style="width: 40%;"><a data-theme='b' class='my-comment-btn'><span class='stats-label'>Stats</span></a></li>
                 <li style="width: 40%;"><a data-theme='b' class='logout-btn'><span class='logout-label'>Logout</span></a></li>
             </ul>
@@ -430,17 +432,13 @@
   </div>
 
   <div class='comment-input'>
-
       <div class="home-btn-dialog-box">
           <button data-theme='b' class='home-btn-dialog'><img width="30px;" src="{{url_root}}/media/mobile/img/cafe/home-icon.png"></button>
       </div>
-
    <center>
     <div class='comment-panel'>
-        <div class="basic-sub-sub-header" style="text-align:left;">{{topic}}<br/>
+        <div class="basic-sub-sub-header" style="text-align:left;">{{topic}}<br/></div>
         <textarea name='answer' id='entered-comment'> </textarea>
-        </div>
-
         <div class="standard-btn-div">
             <button type='submit' data-theme='b' class='comment-submit-btn'><font size="5">Save</font></button>
             <button type='submit' data-theme='b' class='comment-cancel-btn'><font size="5">Cancel</font></button>
@@ -649,7 +647,7 @@
     </div>
   </div>
 
-  <div class='dialog-about dialog-style'>
+  <div class='dialog-about dialog-style' style="z-index:999">
       <div class='dialog-text-style-noflow small-left-padding'>
           <div class="basic-header">About</div>
           <p>The California Report Card is based on a new interactive platform that engages public interest in government.
