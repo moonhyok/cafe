@@ -108,7 +108,8 @@ urlpatterns = patterns('',
     
     #send confirmation email with entry code
     #(r'^confirmationmail/$','opinion.opinion_core.views.confirmation_mail'),
-    
+        #get neighborhood statistic
+    (r'^neighborhoodStat/$','opinion.opinion_core.views.neighbor_stat'),
     # Admin
     #(r'^admin/comments/$', 'opinion.opinion_core.admin.comment_admin'),
 	# New Logs
