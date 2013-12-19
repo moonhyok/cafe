@@ -12,7 +12,7 @@
 <link rel='stylesheet' type='text/css' href='{{url_root}}/media/mobile/css/reset.css?nonce={{random_password}}' />
 <link rel='stylesheet' type='text/css' href='{{url_root}}/media/mobile/bootstrap/css/bootstrap-responsive.min.css?nonce={{random_password}}' />
 <link rel='stylesheet' type='text/css' href='http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css' />
-<link rel='stylesheet' type='text/css' href='{{url_root}}/media/mobile/css/themes/cafe_jquery.css'/>
+<link rel='stylesheet' type='text/css' href='{{url_root}}/media/mobile/css/themes/cafe-jquery-new.min.css'/>
 <link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Belleza'/>
 <link href="{{url_root}}/media/mobile/css/jquery.nouislider.min.css" rel="stylesheet">
 <link rel='stylesheet' type='text/css' href='{{url_root}}/media/mobile/css/opinionspace.css?nonce={{random_password}}' />
@@ -34,7 +34,7 @@
 <!--Java script that needs to be run on init-->
 <script type='text/javascript'>
 
-  window.url_root = '{{ url_root }}'; //setting the url_root
+  window.url_root = '{{ url_root }}';
 
   window.sliders = [];
 
@@ -52,7 +52,8 @@
                   'YOUR_SCORE_LANGUAGE' : "Your Score",
                   'INSTRUCTIONS_3'      : "{{ client_settings.INSTRUCTIONS_3 }}",
                   'FUN_COLORS'          : {{ client_settings.FUN_COLORS }},
-                  'RETURN_USER_FIRST_TIME': {{return_user_first_time}}
+                  'RETURN_USER_FIRST_TIME': {{return_user_first_time}},
+                  'ZIPCODE': {{ zipcode }},
                 };
 
 
@@ -184,9 +185,9 @@
 
         <div data-role='navbar' class='menubar'>
             <ul>
-                <li style="width: 20%;"><a data-theme='b' id='home-btn' class='home-btn' onclick="$('.welcome-back').show();$('.menubar').hide();$('.scorebox').hide();"><img width="25px;" src="{{url_root}}/media/mobile/img/cafe/home-icon.png"></a></li>
-                <li style="width: 40%;"><a data-theme='b' class='my-comment-btn'><span class='stats-label'>Stats</span></a></li>
-                <li style="width: 40%;"><a data-theme='b' class='logout-btn'><span class='logout-label'>Logout</span></a></li>
+                <li style="width: 20%;"><a data-theme='a' id='home-btn' class='home-btn' onclick="$('.welcome-back').show();$('.menubar').hide();$('.scorebox').hide();"><img width="25px;" src="{{url_root}}/media/mobile/img/cafe/home-icon.png"></a></li>
+                <li style="width: 40%;"><a data-theme='a' class='my-comment-btn'><span class='stats-label'>Stats</span></a></li>
+                <li style="width: 40%;"><a data-theme='a' class='logout-btn'><span class='logout-label'>Logout</span></a></li>
             </ul>
         </div>
   
@@ -221,7 +222,7 @@
 
         <div style="clear: both;padding-bottom: 12px;"></div>
 
-        <div id="slider1" class="rating-slider rating-slider1"></div><br/>
+        <div id="slider1" class="rating-slider rating-slider1"></div><br/><hr/>
 
         How beneficial is this for your community?<br/>
 
@@ -231,7 +232,7 @@
 
         <center>
           <div class="standard-btn-div">
-            <button type='submit' data-theme='b' id='go-back' onClick='rate.doneRating()'><font size="5">Next</font></button>
+            <button type='submit' data-theme='a' id='go-back' onClick='rate.doneRating()'><font size="4">Next</font></button>
           </div>
         </center>
         
@@ -255,7 +256,7 @@
         <div class='reportcard default-left-padding'>
 
           <div class="home-btn-dialog-box">
-              <button data-theme='b' class='home-btn-dialog'><img width="30px;" src="{{url_root}}/media/mobile/img/cafe/home-icon.png"></button>
+              <button data-theme='a' class='home-btn-dialog'><img width="30px;" src="{{url_root}}/media/mobile/img/cafe/home-icon.png"></button>
           </div>
 
           <div class="basic-header">Grade California's State Government</div>
@@ -285,7 +286,8 @@
 
 
           {% for statement in statements %}
-             <table id="tr1{{statement.id}}" class='cardtable' style="width:95%;">
+              <br/>
+             <table id="tr1{{statement.id}}" class='cardtable grade-table'>
                 <tr>
                     <td style="height: 60px;">
                         {% ifnotequal statement.statement '' %}
@@ -323,7 +325,7 @@
           {% endfor %}
 
           <div class="standard-btn-div">
-             <button type='submit' data-theme='b' class='done-endsliders-btn' ><font size="5">Next</font></button>
+             <button type='submit' data-theme='a' class='done-endsliders-btn' ><font size="4">Next</font></button>
           </div>
         </center>
        </div>
@@ -360,7 +362,7 @@
                     </table>
 
                     <div class="standard-btn-div">
-                        <button data-theme='b'  onclick="$('.aggstat1').hide();$('.aggstat2').show();">Next</button>
+                        <button data-theme='a'  onclick="$('.aggstat1').hide();$('.aggstat2').show();">Next</button>
                     </div>
       
                 </div>
@@ -373,17 +375,24 @@
                     <div class="standard-btn-div">
 	                    <button type="button" onclick="clickreset()" data-mini="true" data-inline="true">Play</button>
                         <button type="button" onclick="reset()" data-mini="true" data-inline="true"> Reset</button>
-                        <button data-theme='b' onclick="$('.aggstat2').hide();$('.aggstat1').show();">Next</button>
+                        <button data-theme='a' onclick="$('.aggstat2').hide();$('#neighborhoodStat').show();">Next</button>
                     </div>
                 </div>
     
+                <div id="neighborhoodStat" style="display:none;">
+		        <div id="neighborhoodTable"></div>
+		
+                  <div class="standard-btn-div">
+                        <button data-theme='a'  onclick="$('#neighborhoodStat').hide();$('.aggstat1').show();">Next</button>
+                    </div>
+                </div>
     <!--<div class="aggstat3" style="display:none;">California map <br/>
     <div style="width:300px;">
-    <button data-theme='b'   onclick="$('.aggstat3').hide();$('.aggstat1').show();">Next</button>
+    <button data-theme='a'   onclick="$('.aggstat3').hide();$('.aggstat1').show();">Next</button>
     </div>
     </div>-->
             <div class="standard-btn-div">
-                <button type='submit' data-theme='b' class='edit-comment-done-btn'>Back to Discussion</button>
+                <button type='submit' data-theme='a' class='edit-comment-done-btn'>Back to Discussion</button>
             </div>
         </center>
       </div>
@@ -395,7 +404,7 @@
 
   <div class = 'register' id='register'>
       <div class="home-btn-dialog-box">
-          <button data-theme='b' class='home-btn-dialog'><img width="30px;" src="{{url_root}}/media/mobile/img/cafe/home-icon.png"></button>
+          <button data-theme='a' class='home-btn-dialog'><img width="30px;" src="{{url_root}}/media/mobile/img/cafe/home-icon.png"></button>
       </div>
 
        <div class= 'registerpanel default-left-padding'>
@@ -413,7 +422,7 @@
             <input type='hidden' value='{{ url_root }}' name='url'>
             <div data-role="fieldcontain" style="display: none;">
              <label for="regusername" class='regforminput'>Email:</label>
-             <input type="hidden" id='regusername' name='regusername' class='regforminput' value='{{ random_username }}' placeholder="Email" data-theme="b"/>
+             <input type="hidden" id='regusername' name='regusername' class='regforminput' value='{{ random_username }}' placeholder="Email" data-theme='a'/>
              <div class='alert-error' id='username-error' style='display:none;'></div>
             </div>
            <div data-role="fieldcontain" style='display:none;'>
@@ -424,7 +433,7 @@
 
         <center>
             <div class="standard-btn-div" onclick="document.getElementById('registerb').focus();">
-                <button type='submit' data-theme='b' id="registerb"><font size="5">Save and Join</font></button>
+                <button type='submit' data-theme='a' id="registerb"><font size="4">Save and Join</font></button>
             </div>
         </center>
        </form>
@@ -433,15 +442,15 @@
 
   <div class='comment-input'>
       <div class="home-btn-dialog-box">
-          <button data-theme='b' class='home-btn-dialog'><img width="30px;" src="{{url_root}}/media/mobile/img/cafe/home-icon.png"></button>
+          <button data-theme='a' class='home-btn-dialog'><img width="30px;" src="{{url_root}}/media/mobile/img/cafe/home-icon.png"></button>
       </div>
    <center>
     <div class='comment-panel'>
         <div class="basic-sub-sub-header" style="text-align:left;">{{topic}}<br/></div>
         <textarea name='answer' id='entered-comment'> </textarea>
         <div class="standard-btn-div">
-            <button type='submit' data-theme='b' class='comment-submit-btn'><font size="5">Save</font></button>
-            <button type='submit' data-theme='b' class='comment-cancel-btn'><font size="5">Cancel</font></button>
+            <button type='submit' data-theme='a' class='comment-submit-btn'><font size="4">Save</font></button>
+            <button type='submit' data-theme='a' class='comment-cancel-btn'><font size="4">Cancel</font></button>
         </div>
     </div>
    </center>
@@ -458,7 +467,7 @@
         <div class='landing-desc'>
             <center>
                 <div class="standard-btn-div">
-                    <button data-theme='b' class='logout-start-over'><font size="5">Start Over</font></button>
+                    <button data-theme='a' class='logout-start-over'><font size="4">Start Over</font></button>
                 </div>
             </center>
         </div>
@@ -474,13 +483,12 @@
     <div class='landing-desc default-left-padding'>
         <center>
             <div class="standard-btn-div">
-                <button type='submit' data-theme='b' id='regrade-btn' ><font size="5">Change grades</font></button>
-                <button type='cancel' data-theme='b' id='garden-btn' ><font size="5">Back to discussion</font></button>
+                <button type='submit' data-theme='a' id='regrade-btn' ><font size="4">Change grades</font></button>
+                <button type='cancel' data-theme='a' id='garden-btn' ><font size="4">Back to discussion</font></button>
             </div>
         </center>
         <div class="basic-fine-print">
             Please take 3-5 mins to grade and discuss key issues facing California.<br/><br/>
-            - The UC Berkeley CITRIS Data and Democracy Initiative.
         </div>
 
         <div class="comment-admin-text">
@@ -491,33 +499,36 @@
   </div>
 
   <div class='landing'>
-        <div class='landing-intro landing-header'>
+        <!--<div class='landing-intro landing-header'>
                 California<br/>Report Card
-        </div>
+        </div>-->
+      <center>
+          <img src="{{url_root}}/media/mobile/img/cafe/cafe-title-cropped.png" width="250px" style="padding-top: 10px;"/>
+      </center>
 
       <div class='landing-desc'>
-        <center>
-            <div class="standard-btn-div">
-                Grade and discuss California's government
-                <button type='submit' data-theme='b' class='first-time-btn'><font size="5">Enter</font></button>
-            </div>
-        </center>
-        
-        <div class="basic-fine-print">
-            Please take 3-5 mins to grade and discuss key issues facing California.<br/><br/>
-            - The UC Berkeley CITRIS Data and Democracy Initiative.
-        </div>
+          <div style="width: 25%;float: left;position:relative;top: -80px;">
+                <img src="{{url_root}}/media/mobile/img/cafe/spoon-and-pencil-draft.png" width="100px"/>
+          </div>
+          <div style="font-size: 14px; text-align: right;line-height: 14px;float: right;width: 70%;padding-right: 10px;">
+              <div>
+                  Please take 3-5 minutes to grade and discuss key issues facing California.<br/><br/>
+              </div>
+              <div>
+                  <button type='submit' data-theme='a' class='first-time-btn' data-inline="true"><font size="3">Enter</font></button>
+                  <button type='submit' data-theme='a' data-inline="true" onclick="$('.dialog-about').show();$('.landing').hide();window.landing=true;"><font size="3">About</font></button>
+              </div>
+            <!--<div class="standard-btn-div">-->
 
-        <div class="comment-admin-text">
-          <a class="comment-admin-text-a" href="#" onclick="$('.dialog-about').show();$('.landing').hide();window.landing=true;" target="_blank">About</a>
-        </div>
+            <!--</div>-->
+          </div>
       </div>
   </div>
 
   <div class='dialog dialog-style'>
 
       <div class="home-btn-dialog-box">
-          <button data-theme='b' class='home-btn-dialog'><img width="30px;" src="{{url_root}}/media/mobile/img/cafe/home-icon.png"></button>
+          <button data-theme='a' class='home-btn-dialog'><img width="30px;" src="{{url_root}}/media/mobile/img/cafe/home-icon.png"></button>
       </div>
 
     <div class='dialog-text1 dialog-text-style default-left-padding'>
@@ -527,7 +538,7 @@
         "{{ topic }}"
         <center>
         <div class="standard-btn-div">
-            <button type='submit' data-theme='b' class='dialog-next'  onclick="$('.dialog-text1').hide();$('.dialog-text2').show();"><font size="5">Next</font></button>
+            <button type='submit' data-theme='a' class='dialog-next'  onclick="$('.dialog-text1').hide();$('.dialog-text2').show();"><font size="4">Next</font></button>
         </div>
         </center>
 
@@ -539,7 +550,7 @@
       Each mug represents a participant's response to the discussion topic.
         <center>
       <div class="standard-btn-div">
-        <button type='submit' data-theme='b' class='dialog-ready' ><font size="5">Next</font></button>
+        <button type='submit' data-theme='a' class='dialog-ready' ><font size="4">Next</font></button>
       </div>
         </center>
     </div>
@@ -549,7 +560,7 @@
   <div class='dialog-score dialog-style'>
 
       <div class="home-btn-dialog-box">
-          <button data-theme='b' class='home-btn-dialog'><img width="30px;" src="{{url_root}}/media/mobile/img/cafe/home-icon.png"></button>
+          <button data-theme='a' class='home-btn-dialog'><img width="30px;" src="{{url_root}}/media/mobile/img/cafe/home-icon.png"></button>
       </div>
 
     <div class='dialog-text-notitle default-left-padding'>
@@ -563,7 +574,7 @@
 
       <center>
         <div class="standard-btn-div">
-            <button type='submit' data-theme='b' class='dialog-score-ready' ><font size="5">Next</font></button>
+            <button type='submit' data-theme='a' class='dialog-score-ready' ><font size="4">Next</font></button>
         </div>
       </center>
     </div>
@@ -572,7 +583,7 @@
   <div class='dialog-yourmug dialog-style'>
 
       <div class="home-btn-dialog-box">
-          <button data-theme='b' class='home-btn-dialog'><img width="30px;" src="{{url_root}}/media/mobile/img/cafe/home-icon.png"></button>
+          <button data-theme='a' class='home-btn-dialog'><img width="30px;" src="{{url_root}}/media/mobile/img/cafe/home-icon.png"></button>
       </div>
 
     <div class='dialog-text-style default-left-padding'>
@@ -583,7 +594,7 @@
 
       <center>
         <div class="standard-btn-div">
-            <button type='submit' data-theme='b' class='dialog-yourmug-ready' ><font size="5">Next</font></button>
+            <button type='submit' data-theme='a' class='dialog-yourmug-ready' ><font size="4">Next</font></button>
         </div>
       </center>
 
@@ -593,7 +604,7 @@
   <div class='dialog-continue dialog-style'>
 
       <div class="home-btn-dialog-box">
-          <button data-theme='b' class='home-btn-dialog'><img width="30px;" src="{{url_root}}/media/mobile/img/cafe/home-icon.png"></button>
+          <button data-theme='a' class='home-btn-dialog'><img width="30px;" src="{{url_root}}/media/mobile/img/cafe/home-icon.png"></button>
       </div>
 
     <div class='dialog-text-style default-left-padding'>
@@ -603,7 +614,7 @@
         You can see detailed statistics in the stats page.
         <center>
             <div class="standard-btn-div">
-                <button type='submit' data-theme='b' class='dialog-continue-ready' ><font size="5">Next</font></button>
+                <button type='submit' data-theme='a' class='dialog-continue-ready' ><font size="4">Next</font></button>
             </div>
       </center>
 
@@ -613,7 +624,7 @@
   <div class='dialog-email dialog-style'>
 
       <div class="home-btn-dialog-box">
-          <button data-theme='b' class='home-btn-dialog'><img width="30px;" src="{{url_root}}/media/mobile/img/cafe/home-icon.png"></button>
+          <button data-theme='a' class='home-btn-dialog'><img width="30px;" src="{{url_root}}/media/mobile/img/cafe/home-icon.png"></button>
       </div>
 
     <div class='dialog-text-notitle default-left-padding'>
@@ -621,8 +632,8 @@
         <center>
             <div class="standard-btn-div">
                 <a href="http://opinion.berkeley.edu/privacy.html" target="_blank" class="comment-admin-text-a">Privacy Policy</a>
-                <input type="email" id='regemail' name='regemail' style="font-size: 16px !important; line-height: 30px !important;" placeholder="Email" data-theme="b"/>
-                <button type='submit' data-theme='b' class='dialog-email-ready' ><font size="5">Next</font></button>
+                <input type="email" id='regemail' name='regemail' style="font-size: 16px !important; line-height: 30px !important;" placeholder="Email" data-theme='a'/>
+                <button type='submit' data-theme='a' class='dialog-email-ready' ><font size="4">Next</font></button>
             </div>
         </center>
     </div>
@@ -631,7 +642,7 @@
   <div class='dialog-avggrade dialog-style'>
 
       <div class="home-btn-dialog-box">
-          <button data-theme='b' class='home-btn-dialog'><img width="30px;" src="{{url_root}}/media/mobile/img/cafe/home-icon.png"></button>
+          <button data-theme='a' class='home-btn-dialog'><img width="30px;" src="{{url_root}}/media/mobile/img/cafe/home-icon.png"></button>
       </div>
 
     <div class='dialog-text-style default-left-padding'>
@@ -641,7 +652,7 @@
       <img src="{{ url_root }}/media/mobile/img/cafe/avggrade.png" class="center" style="width:150px;padding-top:3px;"><br>
       <div class="standard-btn-div">
         The Average Grade is based on the grades from all participants thusfar.
-        <button type='submit' data-theme='b'  onclick="$('.dialog-avggrade').hide();$('.endsliders').show();"><font size="5">Back</font></button>
+        <button type='submit' data-theme='a'  onclick="$('.dialog-avggrade').hide();$('.endsliders').show();"><font size="4">Back</font></button>
       </div>
      </center>
     </div>
@@ -655,7 +666,7 @@
           The Report Card uses CAFE, a "Collective Assessment and Feedback Engine," modeled after grassroots discussions over coffee, to assess changes over time and to engage public interest in state government.</p>
       <center>
         <div class="standard-btn-div">
-          <button data-theme='b'  onclick="$('.dialog-about').hide();if(window.landing){$('.landing').show();}else{$('.welcome-back').show()}"><font size="5">Back</font></button>
+          <button data-theme='a'  onclick="$('.dialog-about').hide();if(window.landing){$('.landing').show();}else{$('.welcome-back').show()}"><font size="4">Back</font></button>
         </div>
       </center>
       </div>

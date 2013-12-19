@@ -178,6 +178,26 @@ var accounts = (function($, d3, console) {
             }
         });
 	}
+	
+	function getNeighborStat(){
+		
+		$.ajax({
+          type: "POST",
+          dataType: 'json',
+          url: window.url_root + "/neighborhoodStat/",
+          data: {'zipcode':window.conf.ZIPCODE},
+          success: function(data) {
+	      
+		  $('#neighborhoodTable').html(data.html);
+          if (data.hasOwnProperty('success')) {
+            //console.log("data was sent!")
+            }
+          },
+          error: function() {
+			  console.log("code error");
+               }
+          });						
+	}
     return {
         'showCommentInput': showCommentInput,
         'showRegister': showRegister,
@@ -189,7 +209,8 @@ var accounts = (function($, d3, console) {
         'loginAfterRegister': loginAfterRegister,
         'loadMyCommentDiv': loadMyCommentDiv,
         'initLoggedInFeatures': initLoggedInFeatures,
-        'sendEmail': sendEmail
+        'sendEmail': sendEmail,
+        'getNeighborStat': getNeighborStat
     };
 
 })($, d3, console);
@@ -256,6 +277,8 @@ $(document).ready(function() {
                             blooms.populateBlooms();
                             $('.register').hide();
                             utils.hideLoading();
+                            window.conf.ZIPCODE=registrationData.zipcode;
+			    accounts.getNeighborStat();
                             /*setTimeout(function() { //give d3 some extra time
                                 $('.register').slideUp('fast', function() {
                                     utils.hideLoading(500);
@@ -500,7 +523,7 @@ $(document).ready(function() {
     });
 
     $('.logout-start-over').click(function() {
-        location.reload();
+	    window.location = window.url_root + "/mobile/";
     });
 
     $('.logout-login-again').click(function() {

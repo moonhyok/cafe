@@ -95,6 +95,12 @@ def return_user_first_time(request,entrycode):
         else: 
            return False
 
+def return_zipcode(request):
+    if request.user.is_authenticated():
+       return ZipCodeLog.objects.filter(user__exact=request.user)[0].location.code
+    else:
+       return '0'
+
 @cache_control(no_cache=True)
 def mobile(request,entry_code=None):
     create_visitor(request)
@@ -127,6 +133,7 @@ def mobile(request,entry_code=None):
 
     return render_to_response('mobile.html', context_instance = RequestContext(request, {'url_root' : settings.URL_ROOT,
                                                                                          'return_user_first_time':str(return_user_first_time(request,entry_code)).lower(),
+                                                                                         'zipcode': str(return_zipcode(request)),
 											 'loggedIn' : str(request.user.is_authenticated()).lower(),
 											 'change_prompt' : str(request.user.is_authenticated()).lower(),
 											 'client_data': mobile_client_data(request),
@@ -169,6 +176,77 @@ def confirmation_mail(request):
          return json_success()
     except:
       json_error("Please enter a valid email")
+
+def neighbor_stat(request):
+    zipcode=request.REQUEST.get('zipcode')
+    zipcode_object=ZipCode.objects.filter(code__exact=zipcode)
+    city=zipcode_object[0].city
+    
+    zipcode_in_city=ZipCode.objects.filter(city__exact=city)
+    statements = OpinionSpaceStatement.objects.all().order_by('id')
+    
+    neighbor={}
+   
+    for s in statements:
+       s_grade=[]
+       for i in range(0, len(zipcode_in_city)):
+           log=ZipCodeLog.objects.filter(location__exact=zipcode_in_city[i])
+           
+           for j in range(0, len(log)):
+               user_grade_s=log[j].user.userrating_set.filter(opinion_space_statement=s,is_current=True)
+               if len(user_grade_s)>0:
+                  s_grade.append(user_grade_s[0].rating)
+       neighbor[str(s.id)]=numpy.median(s_grade)
+       
+    neighbor['city']=city
+    html_code='<span>Grades in your neighborhood: </span>'+city+\
+        '<table style="width: 90%;">'+\
+        '<tr class="stats-table-title">'+\
+        '<td>'+\
+        'Subject'+\
+        '</td>'+\
+        '<td>'+\
+        'Avg. Grade'+\
+        '</td>'+'</tr>'
+    for s in statements:
+        
+        html_code=html_code+'<tr>'+'<td>'+s.statement+'</td>'+'<td>'+\
+            score_to_grade(neighbor[str(s.id)]*100)+'</td>'+'</tr>'
+    html_code=html_code+'</table>'
+    data={}
+    data['html']=html_code
+    return HttpResponse((json.dumps(data)))
+    
+def score_to_grade(score1):
+
+  score = 100 - score1;
+  
+  if score == 100:
+    return 'A+'
+  elif score > 92:
+    return 'A'
+  elif score > 86:
+    return 'A-'
+  elif score > 81:
+    return 'B+'
+  elif score > 69 :
+    return 'B'
+  elif score > 63 :
+    return 'B-'
+  elif score > 56:
+    return 'C+'
+  elif score > 44:
+    return 'C'
+  elif score > 38:
+    return 'C-'
+  elif score > 32: 
+    return 'D+'
+  elif score > 19 :
+    return 'D'
+  elif score == 0 :
+    return 'F'
+  else:
+    return 'D-'
 
 def app(request, username=None):
 	if request.mobile:
