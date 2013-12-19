@@ -52,7 +52,8 @@
                   'YOUR_SCORE_LANGUAGE' : "Your Score",
                   'INSTRUCTIONS_3'      : "{{ client_settings.INSTRUCTIONS_3 }}",
                   'FUN_COLORS'          : {{ client_settings.FUN_COLORS }},
-                  'RETURN_USER_FIRST_TIME': {{return_user_first_time}}
+                  'RETURN_USER_FIRST_TIME': {{return_user_first_time}},
+                  'ZIPCODE': {{ zipcode }},
                 };
 
 
@@ -373,10 +374,17 @@
                     <div class="standard-btn-div">
 	                    <button type="button" onclick="clickreset()" data-mini="true" data-inline="true">Play</button>
                         <button type="button" onclick="reset()" data-mini="true" data-inline="true"> Reset</button>
-                        <button data-theme='b' onclick="$('.aggstat2').hide();$('.aggstat1').show();">Next</button>
+                        <button data-theme='b' onclick="$('.aggstat2').hide();$('#neighborhoodStat').show();">Next</button>
                     </div>
                 </div>
     
+                <div id="neighborhoodStat" style="display:none;">
+		        <div id="neighborhoodTable"></div>
+		
+                  <div class="standard-btn-div">
+                        <button data-theme='b'  onclick="$('#neighborhoodStat').hide();$('.aggstat1').show();">Next</button>
+                    </div>
+                </div>
     <!--<div class="aggstat3" style="display:none;">California map <br/>
     <div style="width:300px;">
     <button data-theme='b'   onclick="$('.aggstat3').hide();$('.aggstat1').show();">Next</button>
