@@ -322,19 +322,21 @@ table.pretty caption {
 	}
 
 	.title-table {
-	    width:302px;
+	    width:299px;
 	    background-color: #FFFFFF;
 	    border: solid 0px #88ADAA;
+	    position: relative;
+	    left: -1px;
 	}
 
 	.title-table td{
-    	    border: solid 6px #88ADAA;
+    	    border: solid 3px #88ADAA;
     	}
 
     .grade-table {
     	    width: 290px;
     	    background-color: #88ADAA;
-    	    border: solid 3px #FFFFFF;
+    	    border: solid 0px #FFFFFF;
     	}
 
     	.grade-table td{
