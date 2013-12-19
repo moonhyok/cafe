@@ -1,5 +1,5 @@
 /* opinionspace.css - contains styles for the Opinion Space project */
-
+/*old color 0x04376c*/
 .margin{
 	background-color: #DDDDDD
 	position: absolute;
@@ -14,13 +14,13 @@
 .top-bar{
     display:none;
     width: 100%;
-    background-color: #04376c;
+    background-color: #88ADAA;
 }
 
 .slider-agree-labels{
 	font-size:11px;
 	font-weight: bold;
-	color: #000000;
+	color: #FFFFFFF;
 }
 
 .slider-range-labels{
@@ -29,7 +29,7 @@
     z-index: -1;
     font-size:11px;
     font-weight: bold;
-    color: #000000;
+    color: #FFFFFF;
 }
 
 .grade-labels {
@@ -38,7 +38,7 @@
     top: -2px;
     font-size:11px;
     font-weight: bold;
-    color: #000000;
+    color: #FFFFFF;
     background:none;
 }
 
@@ -69,7 +69,7 @@
 /* This prevents the jQuery navbar buttons from staying pressed */
 .ui-navbar .ui-btn-active {
 	border: 1px solid       #222;
-	background:             #04376c;
+	background:             #88ADAA;
 	font-weight: bold;
 	color:                     #fff;
 	background-image: -webkit-gradient(linear, left top, left bottom, from( #555), to( #333));
@@ -163,7 +163,7 @@ table.pretty caption {
 	}
 	
 	.stats-label,.logout-label{
-		font-size: 18px;
+		font-size: 16px;
 		padding-bottom: 5px;
 	}
 	
@@ -184,8 +184,7 @@ table.pretty caption {
 	}
 
 	.my-comment-btn, .logout-btn {
-	    padding-bottom: 4px;
-	    padding-top: 3px;
+	    padding-bottom: 7px;
 	}
 
 	.home-btn{
@@ -220,8 +219,8 @@ table.pretty caption {
 	}
 
 	body {
-		/*font-family: "Helvetica Neue", Arial, sans-serif;*/
-		background: #04376c;
+		/*font-family: "Helvetica Neue", verdana, sans-serif;*/
+		background: #88ADAA;
 		height: 100%;
 		padding: 0 !important;
 		/* use helvetica neue, bootstrap style */
@@ -251,11 +250,11 @@ table.pretty caption {
 		left: 0;
 
 		display: none;
-		background: #04376c;
+		background: #88ADAA;
 	}
 
 	.header {
-		color: white;
+		color: #FFFFFF;
 		text-shadow: none;
 		width: 95%;
 		font-size: 16px;
@@ -265,14 +264,14 @@ table.pretty caption {
 		padding-left: 10px;
 		padding-bottom: 5px;
 		padding-top: 5px;
-		font-family: futura, verdana, sans-serif;
+		font-family: verdana, sans-serif;
 		/*margin-bottom: 20px; */
 	}
 
 	.instructions{
 		/*position: absolute;*/
 		background-color: #FFC501;
-		font-family: futura, verdana, sans-serif;
+		font-family: verdana, sans-serif;
 		top: 250;
 		left: 0px;
 		z-index: 999;
@@ -313,7 +312,6 @@ table.pretty caption {
 	}
 	
 	.cardtable, tr, th, td{
-		border: 1px solid white;
 		padding-right: 10px;
 		padding-left: 10px;
 	}
@@ -324,11 +322,24 @@ table.pretty caption {
 	}
 
 	.title-table {
-	    width:95%;
-	    color:#000000;
-	    background-color: #FFC501;
-	    font-size:15px;
+	    width:302px;
+	    background-color: #FFFFFF;
+	    border: solid 0px #88ADAA;
 	}
+
+	.title-table td{
+    	    border: solid 6px #88ADAA;
+    	}
+
+    .grade-table {
+    	    width: 290px;
+    	    background-color: #88ADAA;
+    	    border: solid 3px #FFFFFF;
+    	}
+
+    	.grade-table td{
+        	    border: solid 3px #FFFFFF;
+        	}
 
 	.stats-table {
     	    width:95%;
@@ -343,6 +354,8 @@ table.pretty caption {
 	.title-table-label1 {
     	    text-align: center;
     	    vertical-align: middle;
+    	    color: #88ADAA;
+            font-size:14px;
     }
 
     .title-table-label2 {
@@ -350,11 +363,13 @@ table.pretty caption {
             width: 45px;
             text-align: center;
             vertical-align: middle;
+            color: #88ADAA;
+            font-size:14px;
     }
 	
 	.grade{
 		font-family: "Comic Sans MS", sans-serif;
-		color: #FFC501;
+		color: #FFFFFF;
 		font-weight:bold;
 		text-shadow: none;
 		font-size: 30px;
@@ -362,7 +377,7 @@ table.pretty caption {
 	
 	.grade2{
 		font-family: "Comic Sans MS", sans-serif;
-		color: #FFC501;
+		color: #FFFFFF;
 		font-weight:bold;
 		text-shadow: none;
 		font-size: 30px;
@@ -420,7 +435,7 @@ table.pretty caption {
 		width: 100%;
 		height: 100%;
 		/*background-color: #FAEBCD;*/
-		background: #04376c;
+		background: #88ADAA;
 		z-index: 999;
 		overflow-y: auto;
 		overflow-x: hidden;
@@ -466,6 +481,7 @@ table.pretty caption {
 		width: 95%;
 		font-size: 16px;
 		padding-bottom: 3px;
+		color: #FFFFFF;
 		/*background-color: rgba(200,200,200,0.3);*/
 	}
 
@@ -522,7 +538,7 @@ table.pretty caption {
 		right: 0;
 		width: 100%;
 		height: 100%;
-		background: #04376c;
+		background: #88ADAA;
 		overflow: auto;
 		z-index: 999;
 	}
@@ -536,7 +552,7 @@ table.pretty caption {
 		height: 100%;
 		/*background-image:url('../img/cafe/cafe_bg.jpg');*/
 		/*background-color: #FAEBCD;*/
-		background: #04376c; /* Old browsers */
+		background: #88ADAA; /* Old browsers */
 		overflow: auto;
 		z-index: 999;
 	}
@@ -551,7 +567,7 @@ table.pretty caption {
 	color: white;
 	width: 100%;
 	height: 100%;
-	background-color: #04376c;
+	background-color: #88ADAA;
 
 	padding-top: 20px;
 	padding-bottom: 20px;
@@ -561,7 +577,7 @@ table.pretty caption {
 	}
 
 .landing-header {
-	font-family: futura, verdana, sans-serif;
+	font-family: verdana, sans-serif;
 	text-shadow: none;
 	color: #FFFFFF;
 	font-size: 42px;
@@ -574,33 +590,33 @@ table.pretty caption {
     width:95%;
     text-align: left;
     padding-bottom:5px;
-    font-size: 16px;
+    font-size: 14px;
 }
 
 .basic-header {
-	font-family: futura, verdana, sans-serif;
+	font-family: verdana, sans-serif;
 	text-shadow: none;
 	text-align: center;
-	color: #FFFFFF;
-	font-size: 34px;
+	color: #594027;
+	font-size: 30px;
 	line-height: 34px;
 	padding-bottom: 10px;
 	padding-top: 5px;
 }
 
 .basic-header2 {
-	font-family: futura, verdana, sans-serif;
+	font-family: verdana, sans-serif;
 	text-shadow: none;
 	text-align: center;
-	color: #FFFFFF;
-	font-size: 28px;
+	color: #594027;
+	font-size: 26px;
 	line-height: 28px;
 	padding-bottom: 10px;
 	padding-top: 5px;
 }
 
 .basic-sub-header {
-	font-family: futura, verdana, sans-serif;
+	font-family: verdana, sans-serif;
 	text-shadow: none;
 	text-align: center;
 	color: #FFFFFF;
@@ -614,18 +630,19 @@ table.pretty caption {
 font-size: 18px;
 padding-left: 7px;
 padding-right: 7px;
-font-family: Arial, sans-serif;
+font-family: verdana, sans-serif;
+color: #FFFFFF;
 line-height:18px;
 }
 
 .basic-fine-print{
 font-size: 14px;
-color: #DDDDDD;
+color: #FFFFFF;
 font-weight:bold;
 line-height:16px;
-text-align:left;
+text-align:right;
 padding-right: 5px;
-font-family: Arial, sans-serif;
+font-family: verdana, sans-serif;
 padding-left: 5px;
 }
 
@@ -639,7 +656,7 @@ padding-right: 7px;
 	padding-top: 10px;
 	padding-bottom: 10px;
 	line-height: 27px;
-	font-family: futura, verdana, sans-serif;
+	font-family: verdana, sans-serif;
 	text-shadow: none;
 	color: #FFFFFF;
 	font-size: 28px;
@@ -650,7 +667,7 @@ padding-right: 7px;
 
 .landing-intro {
 	text-align: center;
-	background-color: #04376c;
+	background-color: #88ADAA;
 	padding-top: 30px;
 	padding-bottom: 10px;
 	vertical-align: middle;
@@ -677,7 +694,7 @@ padding-right: 7px;
 .comment-admin-text-a{
     font-size: 13px !important;
     color: #FFFFFF !important;
-    font-family: Arial, sans-serif;
+    font-family: verdana, sans-serif;
 }
 
 .answer {
@@ -686,27 +703,28 @@ padding-right: 7px;
 	height: 150px !important;
 	padding-right: 10px;
 	font-size: 16px !important;
-	font-family: Arial, sans-serif;
+	font-family: verdana, sans-serif;
 	text-shadow: none !important;
 	overflow-y:scroll !important;
 }
 
 .standard-btn-div {
     width: 100%;
-    max-width: 295px;
+    max-width: 220px;
     height: auto;
     padding-bottom: 10px;
 }
 
 .standard-btn-div .ui-btn-inner{
-    font-family: Arial, sans-serif;
+    font-family: verdana, sans-serif;
     line-height: 25px;
+    corner-radius: 0px !important;
 }
 
 .standard-btn-div .ui-btn{
-    font-family: Arial, sans-serif;
+    font-family: verdana, sans-serif;
     line-height: 25px;
-    border-radius: 10px !important;
+    border-radius: 0px !important;
 }
 
 .home-btn-dialog-box {
@@ -716,15 +734,15 @@ padding-right: 7px;
 }
 
 .home-btn-dialog-box .ui-btn-inner{
-    font-family: Arial, sans-serif;
+    font-family: verdana, sans-serif;
     line-height: 20px;
     padding: 0px;
 }
 
 .home-btn-dialog-box .ui-btn{
-    font-family: Arial, sans-serif;
+    font-family: verdana, sans-serif;
     line-height: 20px;
-    border-radius: 10px !important;
+    border-radius: 0px !important;
 }
 
 .answerwrapper {
@@ -765,7 +783,7 @@ padding-right: 7px;
 	bottom: 0;
 	right: 0;
 	width: 100%;
-	background-color: #04376c;
+	background-color: #88ADAA;
 	color: white;
 	padding: 20px 0;
 	text-align: center;
@@ -785,7 +803,7 @@ padding-right: 7px;
 }
 
 .dialog-style{
-	background: #04376c;
+	background: #88ADAA;
 	width: 100%;
 	height: 100%;
 	position: absolute;
@@ -797,9 +815,9 @@ padding-right: 7px;
 .dialog-text-style {
 	position: relative;
         vertical-align: middle;
-        font-family: Arial, sans-serif;
+        font-family: verdana, sans-serif;
 	color: #FFFFFF;
-	background: #04376c;
+	background: #88ADAA;
 	height: 100%;
 	text-decoration: none;
 	text-shadow: none;
@@ -810,9 +828,9 @@ padding-right: 7px;
 .dialog-text-style-noflow {
 	position: relative;
         vertical-align: middle;
-        font-family: Arial, sans-serif;
+        font-family: verdana, sans-serif;
 	color: #FFFFFF;
-	background: #04376c;
+	background: #88ADAA;
 	text-decoration: none;
 	text-shadow: none;
 	font-size: 16px;
@@ -822,9 +840,9 @@ padding-right: 7px;
 .dialog-text-notitle {
 	position: relative;
         vertical-align: middle;
-        font-family: Arial, sans-serif;
+        font-family: verdana, sans-serif;
 	color: #FFFFFF;
-	background: #04376c;
+	background: #88ADAA;
 	width: 100%;
 	height: 100%;
 	text-decoration: none;
@@ -843,12 +861,12 @@ padding-right: 7px;
     }
 
     .axis text {
-      font-family: futura, verdana, sans-serif;
+      font-family: verdana, sans-serif;
       font-size: 10px;
     }
 
     .timeline-label {
-      font-family: futura, verdana, sans-serif;
+      font-family: verdana, sans-serif;
       font-size: 12px;
     }
     
@@ -866,7 +884,8 @@ padding-right: 7px;
    
    .rate-username{
 	 font-size: 16px;
-	 font-family: Arial, sans-serif;
+	 font-family: verdana, sans-serif;
+	 color: #FFFFFF;
    }
 
   .avg-grades div {
@@ -880,8 +899,8 @@ padding-right: 7px;
 
 
 .noUi-base {
-	background-color: #cFcFcF;
-	border: 2px solid #cFcFcF;
+	background-color: #6b8583;
+	border: 2px solid #6b8583;
 	border-radius:35px;
 	height: 12px !important;
 }
@@ -891,8 +910,8 @@ padding-right: 7px;
 }
 
 .noUi-handle {
-	border: 1px solid #FF5700 /*{b-bup-border}*/;
-	background: #FFC501 /*{b-bup-background-color}*/;
+	border: 1px solid #FFFFF0 /*{b-bup-border}*/;
+	background: #FFFFF0 /*{b-bup-background-color}*/;
 	/*border: 1px solid #AAAAAA;
 
 	background-image:-webkit-gradient(linear,left top,left bottom,from(#E8B91A),to(#FFC501));
@@ -902,12 +921,12 @@ padding-right: 7px;
 	background-image:-o-linear-gradient(#E8B91A,#FFC501);
 	background-image:linear-gradient(#E8B91A,#FFC501);*/
 	
-background-image: -webkit-gradient(linear, left top, left bottom, from( #FFd401 /*{b-bup-background-start}*/), to( #eab500 /*{b-bup-background-end}*/)); /* Saf4 , Chrome */
-	background-image: -webkit-linear-gradient( #FFd401 /*{b-bup-background-start}*/, #eab500 /*{b-bup-background-end}*/); /* Chrome 10 , Saf5.1  */
-	background-image:    -moz-linear-gradient( #FFd401 /*{b-bup-background-start}*/, #eab500 /*{b-bup-background-end}*/); /* FF3.6 */
-	background-image:     -ms-linear-gradient( #FFd401 /*{b-bup-background-start}*/, #eab500 /*{b-bup-background-end}*/); /* IE10 */
-	background-image:      -o-linear-gradient( #FFd401 /*{b-bup-background-start}*/, #eab500 /*{b-bup-background-end}*/); /* Opera 11.10  */
-	background-image:         linear-gradient( #FFd401 /*{b-bup-background-start}*/, #eab500 /*{b-bup-background-end}*/);
+background-image: -webkit-gradient(linear, left top, left bottom, from( #FFFFF0 /*{b-bup-background-start}*/), to( #FFFFFF /*{b-bup-background-end}*/)); /* Saf4 , Chrome */
+	background-image: -webkit-linear-gradient( #FFFFF0 /*{b-bup-background-start}*/, #FFFFFF /*{b-bup-background-end}*/); /* Chrome 10 , Saf5.1  */
+	background-image:    -moz-linear-gradient( #FFFFF0 /*{b-bup-background-start}*/, #FFFFFF /*{b-bup-background-end}*/); /* FF3.6 */
+	background-image:     -ms-linear-gradient( #FFFFF0 /*{b-bup-background-start}*/, #FFFFFF /*{b-bup-background-end}*/); /* IE10 */
+	background-image:      -o-linear-gradient( #FFFFF0 /*{b-bup-background-start}*/, #FFFFFF /*{b-bup-background-end}*/); /* Opera 11.10  */
+	background-image:         linear-gradient( #FFFFF0 /*{b-bup-background-start}*/, #FFFFFF /*{b-bup-background-end}*/);
 
 	margin: -10px 0px 0px -10px;
 
@@ -918,7 +937,7 @@ background-image: -webkit-gradient(linear, left top, left bottom, from( #FFd401 
 	-webkit-box-shadow:0 1px 3px rgba(0,0,0,.2);
 	box-shadow:0 1px 3px rgba(0,0,0,.2);
 
-	border-radius: 45%;
+	/*border-radius: 45%;*/
 }
 
 .header-img-topic{
@@ -941,7 +960,7 @@ background-image: -webkit-gradient(linear, left top, left bottom, from( #FFd401 
 		display: none;
 		/*background-image:url('../img/cafe/cafe_bg.jpg');*/
 		/*background-color: #FAEBCD;*/
-		background-color: #04376c;
+		background-color: #88ADAA;
 		overflow: auto;
 		z-index: 999;
 	}
