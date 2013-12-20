@@ -190,7 +190,7 @@
                 <li style="width: 40%;"><a data-theme='a' class='logout-btn'><span class='logout-label'>Logout</span></a></li>
             </ul>
         </div>
-  
+
         <div class="scorebox">
             <span class='score-label'></span><span class='score-value'></span>
         </div>
@@ -235,7 +235,7 @@
             <button type='submit' data-theme='a' id='go-back' onClick='rate.doneRating()'><font size="4">Next</font></button>
           </div>
         </center>
-        
+
         <!--begin gtranslate-->
         <!--
         <div id="google_translate_element"></div>
@@ -245,7 +245,7 @@
         }
         </script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>-->
         <!--end gtranslate-->
-        
+
       </div>
 
     </div>
@@ -253,7 +253,7 @@
   </div>
 
     <div id='rating' class='endsliders'>
-        <div class='reportcard default-left-padding'>
+        <div class='reportcard default-left-padding responsive-max-width'>
 
           <div class="home-btn-dialog-box">
               <button data-theme='a' class='home-btn-dialog'><img width="30px;" src="{{url_root}}/media/mobile/img/cafe/home-icon.png"></button>
@@ -297,18 +297,18 @@
                         {% else %}
                         {% endifnotequal %}
                     </td>
-        
+
                     <td class="title-table-label2">
                         <div id='g{{statement.id}}' class="grade"></div>
                     </td>
-        
+
                     <td class="title-table-label2">
                         <div id='o{{statement.id}}' class="grade2"></div>
                     </td>
-        
-        
+
+
                 </tr>
-    
+
                 <tr>
                     <td colspan="3" class="slider-row">
                         {% ifnotequal statement.statement '' %}
@@ -364,9 +364,9 @@
                     <div class="standard-btn-div">
                         <button data-theme='a'  onclick="$('.aggstat1').hide();$('.aggstat2').show();">Next</button>
                     </div>
-      
+
                 </div>
-        
+
                 <div class="aggstat2" style="display:none;">
                     Changes in the mug positions<br/>
                     <canvas id="MugAnimation" width="250" height="200" style="background-image:url('{{ url_root }}/media/mobile/img/cafe/cafe_bg.png');background-repeat:repeat; background-size: 100% 100%;	"></canvas>
@@ -378,10 +378,10 @@
                         <button data-theme='a' onclick="$('.aggstat2').hide();$('#neighborhoodStat').show();">Next</button>
                     </div>
                 </div>
-    
+
                 <div id="neighborhoodStat" style="display:none;">
 		        <div id="neighborhoodTable"></div>
-		
+
                   <div class="standard-btn-div">
                         <button data-theme='a'  onclick="$('#neighborhoodStat').hide();$('.aggstat1').show();">Next</button>
                     </div>
@@ -403,11 +403,12 @@
   <div class='frame'></div>
 
   <div class = 'register' id='register'>
+
       <div class="home-btn-dialog-box">
           <button data-theme='a' class='home-btn-dialog'><img width="30px;" src="{{url_root}}/media/mobile/img/cafe/home-icon.png"></button>
       </div>
 
-       <div class= 'registerpanel default-left-padding'>
+       <div class= 'registerpanel default-left-padding responsive-max-width'>
         <div class="basic-header2" style="width: 100%">Enter your zip code to save your grades and join the discussion</div>
 
          <form id='reg_form' class='form-horizontal' method='post' action='{{ url_root }}/accountsjson/register/'>
@@ -463,7 +464,7 @@
                 Thank you for participating!
             </div>
         </div>
-    
+
         <div class='landing-desc'>
             <center>
                 <div class="standard-btn-div">
@@ -499,9 +500,9 @@
   </div>
 
   <div class='landing'>
-        <!--<div class='landing-intro landing-header'>
-                California<br/>Report Card
-        </div>-->
+
+    <div class="responsive-max-width">
+
       <center>
           <img src="{{url_root}}/media/mobile/img/cafe/cafe-title-cropped.png" width="250px" style="padding-top: 10px;"/>
       </center>
@@ -518,11 +519,11 @@
                   <button type='submit' data-theme='a' class='first-time-btn' data-inline="true"><font size="3">Enter</font></button>
                   <button type='submit' data-theme='a' data-inline="true" onclick="$('.dialog-about').show();$('.landing').hide();window.landing=true;"><font size="3">About</font></button>
               </div>
-            <!--<div class="standard-btn-div">-->
-
-            <!--</div>-->
           </div>
       </div>
+
+    </div>
+
   </div>
 
   <div class='dialog dialog-style'>
@@ -533,7 +534,7 @@
 
     <div class='dialog-text1 dialog-text-style default-left-padding'>
         <div class="basic-header" style="width:100%;">The Discussion</div>
-        <img class="header-img-topic center" src="{{ url_root }}/media/mobile/img/cafe/map_teaser.png"><br>
+        <img class="header-img-topic center" src="{{ url_root }}/media/mobile/img/cafe/map_teaser.png"/><br>
       The current topic is:<br/>
         "{{ topic }}"
         <center>
@@ -682,5 +683,6 @@
   ga('send', 'pageview');
 
 </script>
+
 </body>
 </html>

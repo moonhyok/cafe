@@ -441,6 +441,7 @@ table.pretty caption {
 		z-index: 999;
 		overflow-y: auto;
 		overflow-x: hidden;
+		text-align: center;
 
 	}
 
@@ -546,7 +547,7 @@ table.pretty caption {
 	}
 
 	.landing {
-		text-align: left;
+		text-align: center;
 		position: absolute;
 		top: 0;
 		right: 0;
@@ -966,6 +967,11 @@ background-image: -webkit-gradient(linear, left top, left bottom, from( #FFFFF0 
 		overflow: auto;
 		z-index: 999;
 	}
+
+.responsive-max-width{
+        max-width: 500px;
+        margin: auto;
+}
 /*.loading {
 	display: block;
 	height: 100%;
