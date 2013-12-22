@@ -96,7 +96,7 @@ def return_user_first_time(request,entrycode):
            return False
 
 def return_zipcode(request):
-    if request.user.is_authenticated():
+    if request.user.is_authenticated() and ZipCodeLog.objects.filter(user__exact=request.user).count() > 0:
        return ZipCodeLog.objects.filter(user__exact=request.user)[0].location.code
     else:
        return '0'
