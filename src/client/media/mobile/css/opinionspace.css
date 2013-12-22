@@ -257,11 +257,11 @@ table.pretty caption {
 		color: #FFFFFF;
 		text-shadow: none;
 		width: 95%;
-		font-size: 14px;
+		font-size: 13px;
 		/*padding: 5px 0px;*/
 		text-align: left;
-		line-height: 1p3x;
-		padding-left: 10px;
+		line-height: 13px;
+		padding-left: 6px;
 		padding-bottom: 5px;
 		padding-top: 5px;
 		font-family: verdana, sans-serif;
