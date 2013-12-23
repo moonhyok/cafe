@@ -164,7 +164,9 @@ table.pretty caption {
 	
 	.stats-label,.logout-label{
 		font-size: 16px;
-		padding-bottom: 5px;
+		font-family: sans-serif;
+		padding-top: 5px;
+		padding-bottom: 8px;
 	}
 	
 	.home-label{
