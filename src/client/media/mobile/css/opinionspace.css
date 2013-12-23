@@ -712,7 +712,7 @@ padding-right: 7px;
 
 .comment-admin-text-a{
     font-size: 13px !important;
-    color: #FFFFFF !important;
+    color: #594027 !important;
     font-family: verdana, sans-serif;
 }
 
@@ -744,6 +744,12 @@ padding-right: 7px;
     font-family: verdana, sans-serif;
     line-height: 25px;
     border-radius: 0px !important;
+}
+
+.first-time-btn .ui-btn-inner{
+    font-family: verdana, sans-serif;
+    line-height: 30px !important;
+    padding: 10px !important;
 }
 
 .home-btn-dialog-box {
