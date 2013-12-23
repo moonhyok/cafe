@@ -281,6 +281,20 @@ table.pretty caption {
 		line-height: 20px;
 		display:none;
 	}
+
+	.instructions2{
+    		/*position: absolute;*/
+    		background-color: #FFC501 !important;
+    		font-family: verdana, sans-serif;
+    		top: 250;
+    		left: 0px;
+    		z-index: 999;
+    		text-shadow: none;
+    		font-size: 16px !important;
+    		width: 100%;
+    		line-height: 160px;
+    		display:none;
+    }
 	
 	.reportcard{
 		/*background-color: #FAEBCD;*/

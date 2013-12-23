@@ -385,13 +385,17 @@ var _blooms = blooms = (function($, d3, console) {
             })
             .on('click', function(d) {
                 var _this = d3.select(this);
-                $('.instructions').hide();
                 
                 if (d.uid == "curUser" && window.user_score >= 2) {
                     $('.comment-input').slideDown();
                     $('.scorebox').hide();
                     $('.menubar').hide();
+                    $('.instructions2').hide();
                     return;
+                }
+                else
+                {
+                    $('.instructions').hide();
                 }
                 
                 $('.rate-username').html('Participant '+d.uid + '\'s response: ');

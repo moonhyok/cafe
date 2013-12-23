@@ -111,8 +111,14 @@ var rate = (function($, d3, console) {
             //TODO FIX!!!
             if (window.user_score == 2) {
                 $('.rate').hide();
-                hideMenubar();
-                $('.dialog-yourmug').show();
+                $('.instructions2').show();
+                try{
+                            window.your_mug.transition().duration(1500).style("opacity", "1");
+                   }catch(err){
+                            console.log(err);
+                   }
+                //hideMenubar();
+                //$('.dialog-yourmug').show();
                 //$('.comment-input').slideDown();
             }
             else if (window.user_score == 1)
