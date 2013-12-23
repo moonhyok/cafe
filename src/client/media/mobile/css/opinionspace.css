@@ -164,7 +164,8 @@ table.pretty caption {
 	
 	.stats-label,.logout-label{
 		font-size: 16px;
-		font-family: sans-serif;
+		font-family: Arial;
+		line-height: 18px;
 		padding-top: 5px;
 		padding-bottom: 8px;
 	}
