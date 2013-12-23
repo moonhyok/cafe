@@ -141,7 +141,9 @@ var accounts = (function($, d3, console) {
         justRegistered = typeof justRegistered !== 'undefined' ? justRegistered : false;
 
         utils.ajaxTempOff(function() {
-            stats.showGraphs(justRegistered);
+
+            //seems slow TODO
+            //stats.showGraphs(justRegistered);
 
             //var data = $.getJSON(window.url_root + '/os/show/1/');
             $.getJSON(window.url_root + '/os/show/1/', function(data) {
@@ -278,7 +280,10 @@ $(document).ready(function() {
                             $('.register').hide();
                             utils.hideLoading();
                             window.conf.ZIPCODE=registrationData.zipcode;
-			    accounts.getNeighborStat();
+
+			                //Slow TODO
+			                //accounts.getNeighborStat();
+
                             /*setTimeout(function() { //give d3 some extra time
                                 $('.register').slideUp('fast', function() {
                                     utils.hideLoading(500);
