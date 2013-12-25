@@ -1,7 +1,14 @@
-Thank you for participating California Citizen Report Card! 
+Thank you for participating in the California Report Card! We appreciate your input.
 
-{{number_people}} people has graded California Government!
-
-You can join the system again via the following link anytime!
-
+To see how the California Report Card is progressing, including how others are rating your suggestion, please visit the following personalized link:
 {{ url_root }}/mobile/{{entrycode}}
+
+We will occasionally send you activity notifications and encourage you to enter new grades in response to the introduction of new policies or programs.
+
+For any questions, comments or concerns, our team can be reached at:
+Facebook: https://www.facebook.com/CaReportCard
+Twitter: @CaReportCard
+
+
+
+

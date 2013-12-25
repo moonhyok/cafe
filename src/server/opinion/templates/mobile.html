@@ -203,12 +203,13 @@
   <div class="margin"></div>
 
   <div class='rate'>
+
+    <center>
+       <span class="rate-username"></span>
+       <textarea id='commentInput' class='answer' readonly="true"></textarea>
+    </center>
+
     <div class="answerwrapper default-left-padding">
-
-      <span class="rate-username"></span>
-
-      <textarea id='commentInput' class='answer' readonly="true"></textarea>
-
       <div class='sliders'>
 
         <div class="comment-admin-text">
@@ -218,15 +219,15 @@
 
         <hr>
 
-          How important is this subject for your community?<br/>
+        How important is this subject for your community?<br/>
 
-        <div style="clear: both;padding-bottom: 12px;"></div>
+        <div class="slider-padding"></div>
 
         <div id="slider1" class="rating-slider rating-slider1"></div><br/><hr/>
 
-          How interested are you in this subject?<br/>
+        How interested are you in this subject?<br/>
 
-        <div style="clear: both;padding-bottom: 12px;"></div>
+        <div class="slider-padding"></div>
 
         <div id="slider2" class="rating-slider rating-slider2"></div><br/>
 
@@ -252,41 +253,43 @@
 
   </div>
 
-    <div id='rating' class='endsliders'>
-        <div class='reportcard default-left-padding responsive-max-width'>
+  <div id='rating' class='endsliders'>
+    <div class='reportcard default-left-padding responsive-max-width'>
 
-          <div class="home-btn-dialog-box">
-              <button data-theme='a' class='home-btn-dialog'><img width="30px;" src="{{url_root}}/media/mobile/img/cafe/home-icon.png"></button>
-          </div>
+      <div class="home-btn-dialog-box">
+         <button data-theme='a' class='home-btn-dialog'><img width="30px;" src="{{url_root}}/media/mobile/img/cafe/home-icon.png"></button>
+      </div>
 
-          <div class="basic-header">Grade California's State Government</div>
+      <div class="basic-header">Grade California's State Government</div>
 
-          <center>
+      <center>
 
-            <div class="rc-sub-header">
-                Drag the handle to grade from A to F how well you feel California's elected officials are working to address the following 6 subjects:
-            </div>
+        <div class="rc-sub-header">
+           Drag the handle to grade from A to F how well you feel California's elected officials are working to address the following 6 subjects:
+        </div>
 
 
-            <table class='cardtable title-table'>
-                <tr>
-                    <td class="title-table-label1">
-                        <strong>Subject</strong>
-                    </td>
+         <table class='cardtable title-table'>
+             <tr>
 
-                    <td class="title-table-label2">
-                        <strong>My Grade</strong>
-                    </td>
+                <td class="title-table-label1">
+                  <strong>Subject</strong>
+                </td>
 
-                    <td class="title-table-label2">
-                        <a href="#" onclick="$('.endsliders').hide();$('.dialog-avggrade').show();" style="color:#594027;">Avg. Grade</a>
-                    </td>
-                </tr>
-           </table>
+                <td class="title-table-label2">
+                  <strong>My Grade</strong>
+                </td>
+
+                <td class="title-table-label2">
+                  <a href="#" onclick="$('.endsliders').hide();$('.dialog-avggrade').show();" style="color:#594027;">Avg. Grade</a>
+                </td>
+
+             </tr>
+         </table>
 
 
           {% for statement in statements %}
-              <br/>
+           <br/>
              <table id="tr1{{statement.id}}" class='cardtable grade-table'>
                 <tr>
                     <td style="height: 60px;">
@@ -441,24 +444,7 @@
       </div>
   </div>
 
-  <div class='comment-input'>
-      <div class="home-btn-dialog-box">
-          <button data-theme='a' class='home-btn-dialog'><img width="30px;" src="{{url_root}}/media/mobile/img/cafe/home-icon.png"></button>
-      </div>
-   <center>
-    <div class='comment-panel'>
-        <div class="basic-sub-sub-header" style="text-align:left;">{{topic}}<br/></div>
-        <textarea name='answer' id='entered-comment'> </textarea>
-        <div class="standard-btn-div">
-            <button type='submit' data-theme='a' class='comment-submit-btn'><font size="4">Save</font></button>
-            <button type='submit' data-theme='a' class='comment-cancel-btn'><font size="4">Cancel</font></button>
-        </div>
-    </div>
-   </center>
-  </div>
-
-
-    <div class='logout'>
+  <div class='logout'>
         <div class='landing-intro'>
             <div class='landing-header'>
                 Thank you for participating!
@@ -504,19 +490,18 @@
       </center>
 
       <div class='landing-desc'>
-          <div style="width: 25%;float: left;position:relative;top: -70px;">
+          <div class="landing-img-div">
                 <img src="{{url_root}}/media/mobile/img/cafe/spoon-and-pencil-draft.png" width="100px"/>
           </div>
-          <div style="font-size: 14px; text-align: right;line-height: 14px;float: right;width: 70%;padding-right: 10px;">
+          <div class="landing-img-txt">
               <br/><br/>
-              <div style="padding-left: 10px;">
-                  <button type='submit' data-theme='a' class='first-time-btn'><font size="5">Enter</font></button>
+              <div style="padding-left: 10px;padding-bottom: 5px;">
+                  <button type='submit' data-theme='a' class='first-time-btn'><font size="5">Begin</font></button>
               </div>
               <div>
                   Take a moment to assign grades and share ideas about California's government.<br/>
                   <a href="#" class="comment-admin-text-a" onclick="$('.dialog-about').show();$('.landing').hide();window.landing=true;">About</a><br/><br/>
-                  (Works best when holding your
-                  mobile screen vertically.)
+                  (Works best when holding your mobile screen vertically.)
               </div>
           </div>
       </div>
@@ -533,7 +518,7 @@
 
     <div class='dialog-text1 dialog-text-style default-left-padding'>
         <div class="basic-header" style="width:100%;">The Discussion</div>
-        <img class="header-img-topic center" src="{{ url_root }}/media/mobile/img/cafe/map_teaser.png"/><br>
+        <img class="header-img-topic center" src="{{ url_root }}/media/mobile/img/cafe/map_teaser.png"/>
       The current topic is:
         "{{ topic }}".
         Each participant has a mug on the table.
@@ -630,7 +615,7 @@
       </div>
 
     <div class='dialog-text-notitle default-left-padding'>
-        Please enter your email to receive a unique link that will display evolving information including how others are rating your idea.
+        Please provide your email to receive a customized link where you can see how others rate your idea.
         <center>
             <input type="email" id='regemail' name='regemail' class='regforminput' style="font-size: 15px; background-color: #FFFFFF;color: #000000;" placeholder="Email" data-theme='a'></input>
             <div class="standard-btn-div">
@@ -663,16 +648,61 @@
   <div class='dialog-about dialog-style' style="z-index:999">
       <div class='dialog-text-style-noflow small-left-padding'>
           <div class="basic-header">About</div>
-          {{num_users}} participants so far.<br/>
-          <p>The California Report Card is based on a new interactive platform that engages public interest in government.
-          In this experiment, developed by the CITRIS Data and Democracy Initiative at UC Berkeley with advice from Lt. Governor Gavin Newsom and other public officials, visitors are invited to grade how effectively state representatives are working to address 6 key subjects. Visitors are then asked for suggestions on how California should spend the 2014 budget surplus. The platform is designed to engage visitors by providing instant feedback, a unique visualization of opinions, and a new approach to eliciting and rating suggestions.
-          The Report Card uses CAFE, a "Collective Assessment and Feedback Engine," modeled after grassroots discussions over coffee, to assess changes over time and to engage public interest in state government.</p>
+          <center>{{num_users}} participants so far.</center>
+          <br/>
+
+          <strong>Overview</strong><br/>
+          The California Report Card is based on a new interactive platform that engages public interest in government.
+          In this experiment, developed by the CITRIS Data and Democracy Initiative at UC Berkeley with advice from Lt. Governor Gavin Newsom and other public officials,
+          visitors are invited to grade how effectively state representatives are working to address 6 key subjects.
+          Visitors are then asked for suggestions on how California should spend the 2014 budget surplus.
+          The platform is designed to engage visitors by providing instant feedback, a unique visualization of opinions, and a new approach to eliciting and rating suggestions.
+          The Report Card uses CAFE, a "Collective Assessment and Feedback Engine," modeled after grassroots discussions over coffee, to assess changes over time and to engage public interest in state government.
+          <br/><br/>
+
+          <strong>Privacy</strong><br/>
+          Comments and suggestions will be scanned to omit identifiable information.
+          We respect your privacy and will not share your email address with third parties.<br/><br/>
+
+          <strong>Statistical Significance</strong><br/>
+
+          The California Report Card (CRC) aims to increase communication between elected officials and the public.
+          The CRC differs from randomized telephone polls and surveys.
+          Participation is self-selective and accessible so far only to English speakers with access to a smart phone or web browser.
+          We are working on extending the interface to Spanish speakers and persons with disabilities.
+
+          After you enter each grade, you see the Average Grade based on input from all previous participants.
+          This is intended to provide rapid feedback to each participant.
+          We realize this may have a biasing effect: some may adjust their grade to be closer to the average resulting in a form of regression toward the mean.
+          We will report the number of such adjustments and the before and after values in the public dataset.<br/><br/>
+
+          <strong>More</strong><br/>
+          Please see the CRC website for more about the project history, stats to date, related links, and to download anonymized data when it is available:<br/><br/>
+
+          The California Report Card<br/>
+          <a href="http://californiareportcard.org/">http://californiareportcard.org/</a>
       <center>
         <div class="standard-btn-div">
           <button data-theme='a'  onclick="$('.dialog-about').hide();if(window.landing){$('.landing').show();}else{$('.welcome-back').show()}"><font size="4">Back</font></button>
         </div>
       </center>
       </div>
+  </div>
+
+  <div class='comment-input'>
+      <div class="home-btn-dialog-box">
+          <button data-theme='a' class='home-btn-dialog'><img width="30px;" src="{{url_root}}/media/mobile/img/cafe/home-icon.png"></button>
+      </div>
+      <center>
+          <div class='comment-panel'>
+              <div class="basic-sub-sub-header" style="text-align:left;">{{topic}}<br/></div>
+              <textarea name='answer' id='entered-comment'> </textarea>
+              <div class="standard-btn-div">
+                  <button type='submit' data-theme='a' class='comment-submit-btn'><font size="4">Save</font></button>
+                  <button type='submit' data-theme='a' class='comment-cancel-btn'><font size="4">Cancel</font></button>
+              </div>
+          </div>
+      </center>
   </div>
 
 <script>

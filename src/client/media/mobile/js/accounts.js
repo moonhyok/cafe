@@ -463,7 +463,7 @@ $(document).ready(function() {
             rate.initMenubar();
             $('.scorebox').show();
             if ($('#regemail').val()){
-           //		accounts.sendEmail($('#regemail').val());
+           		    accounts.sendEmail($('#regemail').val());
                     window.email_saved = true;
            	}
         });

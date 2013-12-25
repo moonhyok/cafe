@@ -151,12 +151,10 @@ def mobile(request,entry_code=None):
 
 
 def confirmation_mail(request):
-    
     email=request.REQUEST.get('mail')
     try:
       validate_email(email)
       user=User.objects.get(username=request.user.username)
-      print user.username,user.email,len(user.email)
       if len(user.email)==0:
          user.email=email
          user.save()
@@ -165,18 +163,31 @@ def confirmation_mail(request):
          ECobject.save()	
     
          #send out confirmation email
-         subject = "Welcome to the CA report card"
+         subject = "Thank you for your participation"
          email_list = [user.email]
          message = render_to_string('registration/confirmation_email.txt', 
 									   { 'url_root': settings.URL_ROOT, 
 										 'entrycode': entrycode,
-                                         'number_people': len(User.objects.all()) })     
-         send_mail(subject, message, Settings.objects.string('DEFAULT_FROM_EMAIL'), email_list)
+                                         'number_people': User.objects.filter(id__gte = 310).count() })
+         #send_mail(subject, message, Settings.objects.string('DEFAULT_FROM_EMAIL'), email_list)
          return json_success()
       else:
          return json_success()
     except:
       json_error("Please enter a valid email")
+
+def crcstats(request):
+    statements = OpinionSpaceStatement.objects.all().order_by('id')
+    medians = []
+    for s in statements:
+        med = numpy.median(UserRating.objects.filter(opinion_space_statement=s,is_current=True).values_list('rating'))
+        if med <= 1e-5:
+            med = 0
+        medians.append({'statement': s.statement, 'avgG': score_to_grade(100*med), 'avg': int((1-med)*300)})
+    return render_to_response('crc_stats.html', context_instance = RequestContext(request, {'num_participants': User.objects.filter(id__gte=310).count(),
+                                                                                            'num_ratings': CommentAgreement.objects.filter(is_current=True).count()*2,
+                                                                                            'url_root' : settings.URL_ROOT,
+                                                                                            'medians': medians}))
 
 def neighbor_stat(request):
     zipcode=request.REQUEST.get('zipcode')
@@ -217,37 +228,6 @@ def neighbor_stat(request):
     data={}
     data['html']=html_code
     return HttpResponse((json.dumps(data)))
-    
-def score_to_grade(score1):
-
-  score = 100 - score1;
-  
-  if score == 100:
-    return 'A+'
-  elif score > 92:
-    return 'A'
-  elif score > 86:
-    return 'A-'
-  elif score > 81:
-    return 'B+'
-  elif score > 69 :
-    return 'B'
-  elif score > 63 :
-    return 'B-'
-  elif score > 56:
-    return 'C+'
-  elif score > 44:
-    return 'C'
-  elif score > 38:
-    return 'C-'
-  elif score > 32: 
-    return 'D+'
-  elif score > 19 :
-    return 'D'
-  elif score == 0 :
-    return 'F'
-  else:
-    return 'D-'
 
 def app(request, username=None):
 	if request.mobile:

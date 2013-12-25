@@ -1619,3 +1619,33 @@ def update_suggestion_score(suggestion):
 
 	suggestion_score.normalized_score_sum = normalized_score_sum
 	suggestion_score.save()
+
+def score_to_grade(score1):
+  score = 100 - score1;
+
+  if score == 100:
+    return 'A+'
+  elif score > 92:
+    return 'A'
+  elif score > 86:
+    return 'A-'
+  elif score > 81:
+    return 'B+'
+  elif score > 69 :
+    return 'B'
+  elif score > 63 :
+    return 'B-'
+  elif score > 56:
+    return 'C+'
+  elif score > 44:
+    return 'C'
+  elif score > 38:
+    return 'C-'
+  elif score > 32:
+    return 'D+'
+  elif score > 19 :
+    return 'D'
+  elif score == 0 :
+    return 'F'
+  else:
+    return 'D-'
