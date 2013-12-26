@@ -177,6 +177,22 @@ def confirmation_mail(request):
       json_error("Please enter a valid email")
 
 def crcstats(request):
+    uid = request.GET.get('username',-1)
+    auth = False
+    score = 0
+    given = 0
+    received = 0
+    os = get_os(1)
+    disc_stmt = get_disc_stmt(os, 1)
+    if uid != -1:
+        cur_user = User.objects.filter(id=uid)
+        if len(cur_user) > 0:
+            cur_user = cur_user[0]
+            auth = True
+            score = CommentAgreement.objects.filter(rater = cur_user,is_current=True).count()
+            given = 2*CommentAgreement.objects.filter(rater = cur_user,is_current=True).count()
+            received = 2*CommentAgreement.objects.filter(comment__in = DiscussionComment.objects.filter(user = cur_user),is_current=True).count()
+
     statements = OpinionSpaceStatement.objects.all().order_by('id')
     medians = []
     for s in statements:
@@ -185,6 +201,11 @@ def crcstats(request):
             med = 0
         medians.append({'statement': s.statement, 'avgG': score_to_grade(100*med), 'avg': int((1-med)*300)})
     return render_to_response('crc_stats.html', context_instance = RequestContext(request, {'num_participants': User.objects.filter(id__gte=310).count(),
+                                                                                            'auth': auth,
+                                                                                            'participant': uid,
+                                                                                            'given': given,
+                                                                                            'received': received,
+                                                                                            'score': score*float(get_client_settings(True)['SCORE_SCALE_FACTOR']),
                                                                                             'num_ratings': CommentAgreement.objects.filter(is_current=True).count()*2,
                                                                                             'url_root' : settings.URL_ROOT,
                                                                                             'medians': medians}))

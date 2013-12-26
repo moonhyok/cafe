@@ -1,0 +1,75 @@
+<html>
+<style>
+body{
+    font-family: verdana, sans-serif;
+    background-color: #88ADAA;
+    color: #594027;
+    }
+
+strong {
+        color: white;
+    }
+
+.grade-bar {
+font: 10px sans-serif;
+background-color: #FFFFFF;
+text-align: left;
+padding: 3px;
+margin: 1px;
+color: #594027;
+float: right;
+}
+
+.grade-chart{
+    max-width: 320px;
+    float: right;
+    margin:0;
+    background: #6b8583;
+    border: 1px solid black;
+ }
+
+.grade-labels{
+    background-color: #594027;
+    color: white;
+    }
+
+</style>
+<body>
+{% if auth %}
+<strong>Participant {{ participant }}'s Statistics</strong><br/>
+Score: {{ score }} <br/>
+Ratings Given: {{ given }} <br/>
+Ratings Received: {{ received }} <br/><br/>
+
+<!--add vertical bar chart for agree and insight ratings -->
+
+{% endif %}
+<strong>Report Card Overview</strong><br/>
+Participants so far: {{ num_participants }}<br/>
+Total number of ratings: {{ num_ratings }}<br/><br/>
+
+<strong>Average Grades</strong><br/>
+<div class="grade-chart">
+    {% for median in medians %}
+    <div class="grade-bar" style="width: {{ median.avg}}px;height: 50px;">{{ median.statement}}</div>
+    {% endfor %}
+    <div class="grade-labels" style="max-width: 320px;clear:both;">
+        <span style="position:relative; left:3%;">A</span>
+        <span style="position:relative; left:19%;">B</span>
+        <span style="position:relative; left:37%;">C</span>
+        <span style="position:relative; left:56%;">D</span>
+        <span style="position:relative; left:74%;">F</span>
+    </div>
+</div>
+<br/><br/>
+
+{% if auth %}
+<strong>Average Grades in <!--add city --></strong><br/>
+<!-- add bar graph like above for the grades in neighborhood -->
+{% endif %}
+
+
+
+</body>
+
+</html>
