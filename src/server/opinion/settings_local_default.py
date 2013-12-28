@@ -158,7 +158,7 @@ SEND_REVISIONS = False
 NULL_USER_INDICATOR = "~NULL"
 SESSION_COOKIE_NAME = "cookie"
 
-CHOICE_TF = (('true', 'Yes'), ('false', 'No')
+CHOICE_TF = (('true', 'Yes'), ('false', 'No'))
 
 CATEGORIES = [ ('Welcome Page Customizations',
                 ['WELCOME_PAGE_TITLE', 
