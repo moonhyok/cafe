@@ -390,7 +390,7 @@ var _blooms = blooms = (function($, d3, console) {
                     $('.comment-input').slideDown();
                     $('.scorebox').hide();
                     $('.menubar').hide();
-                    $('.instructions2').hide();
+                    $('.instructions3').hide();
                     return;
                 }
                 else
@@ -398,7 +398,7 @@ var _blooms = blooms = (function($, d3, console) {
                     $('.instructions').hide();
                 }
                 
-                $('.rate-username').html('Participant '+d.uid + '\'s response: ');
+                $('.rate-username').html('Participant '+d.uid + ' suggested:');
                 var commentData = rate.pullComment(d.uid, 'uid', comments);
                 var content = commentData.comment;
                 var cid = commentData.cid;
@@ -419,11 +419,10 @@ var _blooms = blooms = (function($, d3, console) {
                     }
                     //_this.transition().duration(500).style("opacity", "0");
                     /* Remove this bloom from our bookkeeping array. */
-                    var index = $.inArray(window.current_uid, window.blooms);
+                    var index = $.inArray(window.current_uid, window.blooms_list);
                     if (index >= 0) {
                         window.blooms_list.splice(index, 1);
                     }
-                    
                     /* Load more blooms if none left */
                     try {
                     if (window.blooms_list.length === 1) {

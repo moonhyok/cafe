@@ -433,6 +433,7 @@ $(document).ready(function() {
         //rate.initMenubar();
         $('.instructions').show();
         $('.dialog').hide();
+        $('.header').hide();
     });
     
     $('.dialog-score-ready').click(function() {
@@ -461,6 +462,7 @@ $(document).ready(function() {
             rate.logUserEvent(8,'dialog 4');
             $('.dialog-email').hide();
             rate.initMenubar();
+            $('.header').show();
             $('.scorebox').show();
             if ($('#regemail').val()){
            		    accounts.sendEmail($('#regemail').val());

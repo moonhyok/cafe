@@ -111,7 +111,8 @@ var rate = (function($, d3, console) {
             //TODO FIX!!!
             if (window.user_score == 2) {
                 $('.rate').hide();
-                $('.instructions2').show();
+                $('.instructions2').hide();
+                $('.instructions3').show();
                 try{
                             window.your_mug.transition().duration(1500).style("opacity", "1");
                    }catch(err){
@@ -128,8 +129,8 @@ var rate = (function($, d3, console) {
 
                 // ui has changed!
                 $('.top-bar').trigger('height');
-
-                $('.dialog-score').show();
+                $('.instructions2').show();
+                //$('.dialog-score').show();
             }
             else{
                 $('.rate').hide();
@@ -414,6 +415,7 @@ $(document).ready(function() {
         $('.menubar').hide();
         rate.logUserEvent(6,'comment submitted');
         rate.sendComment($('#entered-comment').val());
+        window.your_mug.transition().duration(1500).style("opacity", "0").remove();
         //if ($('#regemail').val()){
 	//		accounts.sendEmail($('#regemail').val());
 	//	}
