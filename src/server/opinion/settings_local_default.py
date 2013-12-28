@@ -158,103 +158,75 @@ SEND_REVISIONS = False
 NULL_USER_INDICATOR = "~NULL"
 SESSION_COOKIE_NAME = "cookie"
 
-CHOICE_TF = (('true', 'Yes'), ('false', 'No'))
+CHOICE_TF = (('true', 'Yes'), ('false', 'No')
+
 CATEGORIES = [ ('Welcome Page Customizations',
-                    ['WELCOME_PAGE_TITLE', 
-					 'WELCOME_PAGE_SUBLOGO_TEXT',
-                     'OPINIONS_EXPRESSED_NUM_USERS',
-                     'USER_POST_TEXT',
-                     'ANNOUNCEMENT',
-                     'ANNOUNCEMENT_TEXT',
-                    ],['2.jpg']),
-					
-				('Header Image',
-                    ['HEADER_IMAGE', 
-					 'HEADER_IMAGE_SOURCE',
-                     'HEADER_IMAGE_LINK',
-                    ],['1.jpg']),
-					
-			  ('Redesign Variables',
-                    ['SHOW_SCORE',
-                     'LEADERBOARD_ENABLED',
-                     'FUN_COLORS',  
-					 'SCORE_SCALE_FACTOR',
-					 'YOUR_SCORE_LANGUAGE',
-					 'SLIDER_SUBSET',
-					 'NO_SKIP',
-					 'UNIFIED_SCORE',
-					 'EXPLORE_THRESHOLD_RATINGS',
-					 'MAX_COMMENT_LENGTH',
-					 'BACKGROUND_POINT_MAX_ALPHA',
-					 'SHOW_LEADERBOARD_SCORE',
-					 'LEADERBOARD_ENABLED',
-					 'SOFT_ENTRY_CODES',
-					 'ALLOW_EDIT_COMMENT',
-					 'SCORE_SIZE',
-                    ],[]),
-              ('Help and Feedback',
-                    ['CONTACT_SUPPORT_EMAIL',
-					 'SHOW_FEEDBACK',
-					 'FEEDBACK_TEXT',
-					 'SHOW_HELP',
-					 'HELP_TEXT',
-					 'HELP_LOCATION',
-                    ],['3.jpg']),
-              ('Authentication',
-                    ['ALLOW_EXTERNAL_LOGIN',
-                     'INCLUDE_FACEBOOK',
-                     'FACEBOOK_APP_ID',
-                     'INCLUDE_TWITTER',
-					 'ALLOW_TWITTER_FB_POST',
-                    ],['4.jpg']),
-			  ('Sliders',
-					['SHOW_AGREEMENT_SLIDER',
-					 'AGREEMENT_TEXT',
-					 'AGREEMENT_LEFT_TEXT',
-					 'AGREEMENT_RIGHT_TEXT',
-					 'AGREEMENT_HISTOGRAM_TEXT',
-					 'LEGEND_AGREEMENT_LEFT',
-					 'LEGEND_AGREEMENT_RIGHT',
-					 'SHOW_INSIGHT_SLIDER',
-					 'INSIGHT_TEXT',
-					 'INSIGHT_LEFT_TEXT',
-					 'INSIGHT_RIGHT_TEXT',
-					 'INSIGHT_HISTOGRAM_TEXT',
-					 'LEGEND_INSIGHT_LEFT',
-					 'LEGEND_INSIGHT_RIGHT',
-					 ],[]),
-              ('Popup Description',
-                    ['SHOW_WALKTHROUGH',
-                     'WALKTHROUGH_INTRO_TEXT',
-                     'WALKTHROUGH_SEARCH_DESCRIPTION',
-                     'WALKTHROUGH_TOP_TEXT',
-                     'WALKTHROUGH_TEXT',
-                    ],['5.jpg']),
-			  ('Instruction Text',
-                    ['INSTRUCTIONS_1',
-                     'INSTRUCTIONS_2',
-                     'INSTRUCTIONS_3',
-                     'INSTRUCTIONS_4',
-                     'INSTRUCTIONS_5',
-					 'INSTRUCTIONS_6',
-					 'INSTRUCTIONS_7',
-                    ],['5.jpg']),
-			  ('Map Scaling',
-                    ['AFFINE_TRANSFORM_SCALEX',
-                     'AFFINE_TRANSFORM_SCALEY',
-                     'AFFINE_TRANSFORM_SHIFTX',
-                     'AFFINE_TRANSFORM_SHIFTY',
-                    ],[]),
-			  ('Server Variables',
-                    ['MAX_NUM_USER_RATED_DOTS',
-                     'MAX_NUM_TOTAL_DOTS',
-                     'CONFIDENCE_THRESHOLD',
-                     'MINIMUM_WORD_COUNT',        
-                     'NUM_BACKGROUND_POINTS',
-                     'DEFAULT_FROM_EMAIL',
-                     'FEEDBACK_EMAIL_FROM',
-                    ],[]),
-              ]
+                ['WELCOME_PAGE_TITLE', 
+                 'WELCOME_PAGE_TEXT1',
+                 'WELCOME_PAGE_TEXT2',
+                 'WELCOME_PAGE_ABOUT_LINK'
+                 ],['1.png']),
+               
+               ('About Page',
+                ['ABOUT_PAGE_HEADER', 
+                 'ABOUT_PAGE_TEXT',
+                 ],[]),
+               
+               ('Report Card',
+                ['REPORT_CARD_HEADER',                 
+                 'REPORT_CARD_NEXT_BUTTON',
+                 'REPORT_CARD_INST',
+                 'AVG_EXPLAIN_HEADER',
+                 'AVG_EXPLAIN_TEXT',
+                 ],['2.png']),
+
+               ('Zip Code',
+                ['ZIP_CODE_INSTRUCTIONS',
+                 'ZIP_CODE_BUTTON',
+
+                 ],['3.png']),
+
+               ('CAFE Interface',
+                ['DISCUSSION_DIALOG_HEADER',
+                 'DISCUSSION_DIALOG_TEXT1',
+                 'DISCUSSION_DIALOG_TEXT2',
+                 'INSTRUCTIONS_1',
+                 'INSTRUCTIONS_2',
+                 'YOUR_SCORE_LANGUAGE',
+                 'SCORE_DIALOG_TEXT',
+                 'RESPONSE_SAVED_HEADER',
+                 'RESPONSE_SAVED_TEXT',
+                 'EMAIL_ASK_TEXT',
+                 'STATS_BUTTON_TEXT',
+                 'LOGOUT_BUTTON_TEXT',
+                 'LOGOUT_DIALOG_TEXT',
+                 'START_OVER_BUTTON_TEXT'
+                 ],[]),
+
+               ('Sliders',
+                [ 'SLIDER1_LEFT',
+                 'SLIDER1_RIGHT',
+                 'SLIDER2_LEFT',
+                 'SLIDER2_RIGHT',
+                 ],[]),
+
+               ('Map Scaling',
+                ['AFFINE_TRANSFORM_SCALEX',
+                 'AFFINE_TRANSFORM_SCALEY',
+                 'AFFINE_TRANSFORM_SHIFTX',
+                 'AFFINE_TRANSFORM_SHIFTY',
+                 ],[]),
+               ('Server Variables',
+                ['MAX_NUM_USER_RATED_DOTS',
+                 'MAX_NUM_TOTAL_DOTS',
+                 'CONFIDENCE_THRESHOLD',
+                 'MINIMUM_WORD_COUNT',        
+                 'NUM_BACKGROUND_POINTS',
+                 'DEFAULT_FROM_EMAIL',
+                 'FEEDBACK_EMAIL_FROM',
+                 ],[]),
+               ]
+
 
 all = []
 for category in CATEGORIES:
@@ -263,7 +235,52 @@ for category in CATEGORIES:
     all.extend(category[1])
 #CATEGORIES.append(('OTHER',all))
 
+config_defaults = {
+    'WELCOME_PAGE_TEXT1' : "Take a moment to assign grades and share ideas about California's government.",
+    'WELCOME_PAGE_TEXT2' : "(Works best when holding your mobile screen vertically.)",
+    'ABOUT_PAGE_TEXT' : '''
+          <strong>Overview</strong><br/>
+          The California Report Card is based on a new interactive platform that engages public interest in government.
+          In this experiment, developed by the CITRIS Data and Democracy Initiative at UC Berkeley with advice from Lt. Governor Gavin Newsom and other public officials,
+          visitors are invited to grade how effectively state representatives are working to address 6 key subjects.
+          Visitors are then asked for suggestions on how California should spend the 2014 budget surplus.
+          The platform is designed to engage visitors by providing instant feedback, a unique visualization of opinions, and a new approach to eliciting and rating suggestions.
+          The Report Card uses CAFE, a "Collective Assessment and Feedback Engine," modeled after grassroots discussions over coffee, to assess changes over time and to engage public interest in state government.
+          <br/><br/>
 
+          <strong>Privacy</strong><br/>
+          Comments and suggestions will be scanned to omit identifiable information.
+          We respect your privacy and will not share your email address with third parties.<br/><br/>
+
+          <strong>Statistical Significance</strong><br/>
+
+          The California Report Card (CRC) aims to increase communication between elected officials and the public.
+          The CRC differs from randomized telephone polls and surveys.
+          Participation is self-selective and accessible so far only to English speakers with access to a smart phone or web browser.
+          We are working on extending the interface to Spanish speakers and persons with disabilities.
+
+          After you enter each grade, you see the Average Grade based on input from all previous participants.
+          This is intended to provide rapid feedback to each participant.
+          We realize this may have a biasing effect: some may adjust their grade to be closer to the average resulting in a form of regression toward the mean.
+          We will report the number of such adjustments and the before and after values in the public dataset.<br/><br/>
+
+          <strong>More</strong><br/>
+          Please see the CRC website for more about the project history, stats to date, related links, and to download anonymized data when it is available:<br/><br/>
+
+          The California Report Card<br/>
+          <a href="http://californiareportcard.org/">http://californiareportcard.org/</a>''',
+    'INSTRUCTIONS_1' : 'Click on any mug to begin',
+    'INSTRUCTIONS_2' : 'To enter your own idea, click on your mug (highlighted in yellow).',
+    'SCORE_DIALOG_TEXT' : "You earn points by rating others and when others rate your idea. Rate one more person's idea before entering your own...",
+    'RESPONSE_SAVED_TEXT': "Continue to read and evaluate other's ideas to earn more points. You can see detailed statistics in the stats page.", 
+    'EMAIL_ASK_TEXT' : "Please provide your email to receive a customized link where you can see how others rate your idea.",
+    'LOGOUT_DIALOG_TEXT' : """Thank you for participating!""",
+    'REPORT_CARD_INST' : "Drag the handle to grade from A to F how well you feel California's elected officials are working to address the following 6 subjects:",
+    'ZIP_CODE_INSTRUCTIONS' : "Enter your zip code to save your grades and join the discussion",
+    'DISCUSSION_DIALOG_TEXT1' : 'The current topic is:', 
+    'DISCUSSION_DIALOG_TEXT2' : 'Each participant has a mug on the table.',
+    'AVG_EXPLAIN_TEXT' : "The Average Grade is based on the grades from all participants thusfar."
+}
 
 """ 
 CONFIGURABLES README:
@@ -284,95 +301,144 @@ CONFIGURABLES README:
 """
 
 
-CONFIGURABLES = {   'PRODUCT_NAME':{'default':'Collective Discovery Engine','name':'Name of the Product'},
-					'HEADER_TITLE':{'default':'Opinion Space','name': 'Upper Left Header Main'},
-					'HEADER_TITLE_VERSION':{'default':'', 'name': 'Upper Left Header Subtitle'},
-					'HEADER_IMAGE':{'default':'false', 'choices':CHOICE_TF,'name':'Upper Left Image?'},
-                    'HEADER_IMAGE_SOURCE':{'default':"",'name':'Upper Left Image URL'},                        
-                    'HEADER_IMAGE_LINK':{'default':"",'name':'Upper Left Link'}, 
-					'WELCOME_PAGE_TITLE':{'default':'The Collective Discovery Engine','name':'Splash Page Title'},
+CONFIGURABLES = {   
+    'PRODUCT_NAME':{'default':'Collective Discovery Engine','name':'Name of the Product'},
+    'HEADER_TITLE':{'default':'Opinion Space','name': 'Upper Left Header Main'},
+    'HEADER_TITLE_VERSION':{'default':'', 'name': 'Upper Left Header Subtitle'},
+    'HEADER_IMAGE':{'default':'false', 'choices':CHOICE_TF,'name':'Upper Left Image?'},
+    'HEADER_IMAGE_SOURCE':{'default':"",'name':'Upper Left Image URL'},                        
+    'HEADER_IMAGE_LINK':{'default':"",'name':'Upper Left Link'}, 
+    'WELCOME_PAGE_TITLE':{'default':'The Collective Discovery Engine','name':'Splash Page Title'},
 
-					'WELCOME_PAGE_SUBLOGO_TEXT':{'default':'Question and Description Go Here','name':'Text under main title'}, 
-					'OPINIONS_EXPRESSED_NUM_USERS':{'default':'true', 'choices':CHOICE_TF,'name':'Show the number of users in space?'},
-					'USER_POST_TEXT':{'default':'PARTICIPANTS','name':'What to call users?'}, 
-					'ANNOUNCEMENT':{'default':'true', 'choices':CHOICE_TF,'name':'Text above user count?'},
-					'ANNOUNCEMENT_TEXT':{'display':'TEXTAREA','default':'Talk about project and possible incentives','name':'Text above user count'}, 
+    'WELCOME_PAGE_SUBLOGO_TEXT':{'default':'Question and Description Go Here','name':'Text under main title'}, 
+    'OPINIONS_EXPRESSED_NUM_USERS':{'default':'true', 'choices':CHOICE_TF,'name':'Show the number of users in space?'},
+    'USER_POST_TEXT':{'default':'PARTICIPANTS','name':'What to call users?'}, 
+    'ANNOUNCEMENT':{'default':'true', 'choices':CHOICE_TF,'name':'Text above user count?'},
+    'ANNOUNCEMENT_TEXT':{'display':'TEXTAREA','default':'Talk about project and possible incentives','name':'Text above user count'}, 
 
-                    'SHOW_FEEDBACK':{'default':'true', 'choices':CHOICE_TF,'name':'Feedback Link?'},    
-                    'CONTACT_SUPPORT_EMAIL':{'default':'sanjaykrishn@gmail.com','name':'Support Email'},
-                    'SHOW_HELP':{'default':'true', 'choices':CHOICE_TF,'name':'About Page?'},                        
-                    'HELP_TEXT':{'default':"ABOUT",'name':'What to call the about page'},
-					'FEEDBACK_TEXT':{'default':"FOUND A BUG?",'name':'Label for feeback link'},
-					
-					'ALLOW_EXTERNAL_LOGIN':{'default':'true', 'choices':CHOICE_TF,'name':'Enable Social Media Module'},
-					'INCLUDE_TWITTER':{'default':'false', 'choices':CHOICE_TF,'name':'Twitter logins'},
-					'INCLUDE_FACEBOOK':{'default':'true', 'choices':CHOICE_TF,'name':'Facebook logins'},
-					'FACEBOOK_APP_ID':{'default':'376089995779662','name':'Facebook Application ID'},
-					'ALLOW_TWITTER_FB_POST':{'default':'true', 'choices':CHOICE_TF,'name':'Allow Posting Ideas to Social Media'},
-					
-					'SHOW_WALKTHROUGH':{'default':'true', 'choices':CHOICE_TF,'name':'Walkthrough on first time click?'},
-					'WALKTHROUGH_INTRO_TEXT':{'display':'TEXTAREA','default':'Welcome to the\nCollaborative Discovery Engine','name':'Title for walkthrough slide 1'},
-					'WALKTHROUGH_SEARCH_DESCRIPTION':{'display':'TEXTAREA','default':'The Collective Discovery Engine is focused around a primary question of interest','name':'Walkthrough slide 1 main text'},
-                    'WALKTHROUGH_TOP_TEXT':{'display':'TEXTAREA','default':"Note the colorful circular \"blooms\" (like plants). Each bloom represents an idea or answer suggested by a participant. The bloom's position depends on the opinions of its author. Its size and color depend on how others have rated it.\n\nKindle Fires will be awarded for the three best ideas!",'name':'Walkthrough slide 1 paragraph 2'},
-					'WALKTHROUGH_TEXT':{'default':'Continue','name':'Walkthrough slide 1 next slide'},
-					'WALKTHROUGH_INTRO2_TEXT':{'display':'TEXTAREA','default':'Evaluate other participant\'s ideas by clicking on the blooms.','name':'Walkthrough slide 2 text'},
-					'STATEMENTS_INTRO_TEXT':{'display':'TEXTAREA','default':'Now plant your own idea!\nOn the right side there will be 5 propositions. Use the sliders to indicate your opinions on these propositions. Remember to scroll down if neccessary, and click "Done" when finished.','name':'Walkthrough slide after rating done'},
-					
-					'SHOW_AGREEMENT_SLIDER':{'default':'true', 'choices':CHOICE_TF,'name':'Show top slider(unscored)?'},
-					'SHOW_INSIGHT_SLIDER':{'default':'true', 'choices':CHOICE_TF,'name':'Show bottom slider (scored)?'},
-					'AGREEMENT_TEXT':{'default':'How innovative is this idea?','name':'Top slider text'},
-					'AGREEMENT_LEFT_TEXT':{'default':'Not Innovative','name':'Top slider left'},
-					'AGREEMENT_RIGHT_TEXT':{'default':'Very Innovative','name':'Top slider right'},
-					'AGREEMENT_HISTOGRAM_TEXT':{'default':'Innovative','name':'Top slider stats page description'},
-					'LEGEND_AGREEMENT_LEFT':{'default':'Less Innovative','name':'Top slider lengend left'},
-					'LEGEND_AGREEMENT_RIGHT':{'default':'More Innovative','name':'Top slider legend right'},
-					'INSIGHT_TEXT':{'default':'How effective is this idea?','name':'Bottom slider text'},
-					'INSIGHT_LEFT_TEXT':{'default':'Not Effective','name':'Bottom slider left'},
-					'INSIGHT_RIGHT_TEXT':{'default':'Very Effective','name':'Bottom slider right'},
-					'INSIGHT_HISTOGRAM_TEXT':{'default':'Effective','name':'Bottom slider stats page description'},
-					'LEGEND_INSIGHT_LEFT':{'default':'Less Effective','name':'Bottom slider legend left'},
-					'LEGEND_INSIGHT_RIGHT':{'default':'More Effective','name':'Bottom slider legend right'},
-					
-					'INSTRUCTIONS_1':{'display':'TEXTAREA','default':"Thanks for visiting!  Please start by evaluating the suggestions from\ntwo prior visitors. Click any bloom to start...",'name':'Instruction 1'}, 
-					'INSTRUCTIONS_2':{'display':'TEXTAREA','default':"Rating the ideas of other participants earns points.",'name':'Instruction 2'},
-					'INSTRUCTIONS_3':{'display':'TEXTAREA','default':"You've earned a point!  Now click another bloom...",'name':'Instruction 3'},
-					'INSTRUCTIONS_4':{'display':'TEXTAREA','default':"Great!  To join the discussion and create your own bloom,\njust tell us your opinions...",'name':'Instruction 4'},
-					'INSTRUCTIONS_5':{'display':'TEXTAREA','default':"Quickly create your own account...",'name':'Instruction 5'},
-					'INSTRUCTIONS_6':{'display':'TEXTAREA','default':"Now enter your own idea (to fill your bloom)!",'name':'Instruction 6'},
-					'INSTRUCTIONS_7':{'display':'TEXTAREA','default':"Super! You'll earn points by evaluating more blooms, and \nwhen other participants evaluate your bloom.",'name':'Instruction 7'}, 
-					
-					'SHOW_SCORE':{'default':'true', 'choices':CHOICE_TF,'name':'Show user score in the bottom left?'},
-					'FUN_COLORS':{'default':'true', 'choices':CHOICE_TF,'name':'Use new CDE color scheme?'},
-					'LEADERBOARD_ENABLED':{'default':'true', 'choices':CHOICE_TF,'name':'Show the leaderboard?'},  					
-					'SCORE_SCALE_FACTOR':{'default':'1.0', 'name':'Scale score by this number'},
-					'YOUR_SCORE_LANGUAGE': {'default':'SCORE', 'name':'Language for scoring system, note that this is not just number of ratings.'},
-					'NO_SKIP': {'default':'false', 'choices':CHOICE_TF,'name':'No Skipping Comment'},
-					'SLIDER_SUBSET': {'default':'5', 'name':'Show at most n of the sliders'},
-					'UNIFIED_SCORE':{'default':'true', 'choices':CHOICE_TF,'name':'Combine author and reviewer scores?'},
-					'EXPLORE_THRESHOLD_RATINGS':{'default':'2.0', 'name':'Threshold for tutorial score'},
-					'MAX_COMMENT_LENGTH':{'default':'1000', 'name':'Max comment length (in chars)'},
-					'ALLOW_EDIT_COMMENT':{'default':'true', 'choices':CHOICE_TF,'name':'Allow comment editing?'},
-					'SCORE_SIZE':{'default':'42', 'name':'Font size of score text'},
-					'BACKGROUND_POINT_MAX_ALPHA':{'default':'0.5', 'name':'Visibility of background points'},
-					'SHOW_LEADERBOARD_SCORE':{'default':'true', 'choices':CHOICE_TF,'name':'Leaderboard score?'},
-					'LEADERBOARD_ENABLED':{'default':'true', 'choices':CHOICE_TF,'name':'Show leaderboard'},
-					'HELP_LOCATION':{'default':'', 'name':'IFRAME to Help Content'},
-					
-					'AFFINE_TRANSFORM_SCALEX': {'default':'1.0', 'name':'Rescale X coordinate'},
-					'AFFINE_TRANSFORM_SCALEY': {'default':'1.0', 'name':'Rescale Y coordinate'},
-					'AFFINE_TRANSFORM_SHIFTX': {'default':'0', 'name':'Shift X coordinate right'},
-					'AFFINE_TRANSFORM_SHIFTY': {'default':'0', 'name':'Chift Y coordiante down'},
+    'SHOW_FEEDBACK':{'default':'true', 'choices':CHOICE_TF,'name':'Feedback Link?'},    
+    'CONTACT_SUPPORT_EMAIL':{'default':'sanjaykrishn@gmail.com','name':'Support Email'},
+    'SHOW_HELP':{'default':'true', 'choices':CHOICE_TF,'name':'About Page?'},                        
+    'HELP_TEXT':{'default':"ABOUT",'name':'What to call the about page'},
+    'FEEDBACK_TEXT':{'default':"FOUND A BUG?",'name':'Label for feeback link'},
+    
+    'ALLOW_EXTERNAL_LOGIN':{'default':'true', 'choices':CHOICE_TF,'name':'Enable Social Media Module'},
+    'INCLUDE_TWITTER':{'default':'false', 'choices':CHOICE_TF,'name':'Twitter logins'},
+    'INCLUDE_FACEBOOK':{'default':'true', 'choices':CHOICE_TF,'name':'Facebook logins'},
+    'FACEBOOK_APP_ID':{'default':'376089995779662','name':'Facebook Application ID'},
+    'ALLOW_TWITTER_FB_POST':{'default':'true', 'choices':CHOICE_TF,'name':'Allow Posting Ideas to Social Media'},
+    
+    'SHOW_WALKTHROUGH':{'default':'true', 'choices':CHOICE_TF,'name':'Walkthrough on first time click?'},
+    'WALKTHROUGH_INTRO_TEXT':{'display':'TEXTAREA','default':'Welcome to the\nCollaborative Discovery Engine','name':'Title for walkthrough slide 1'},
+    'WALKTHROUGH_SEARCH_DESCRIPTION':{'display':'TEXTAREA','default':'The Collective Discovery Engine is focused around a primary question of interest','name':'Walkthrough slide 1 main text'},
+    'WALKTHROUGH_TOP_TEXT':{'display':'TEXTAREA','default':"Note the colorful circular \"blooms\" (like plants). Each bloom represents an idea or answer suggested by a participant. The bloom's position depends on the opinions of its author. Its size and color depend on how others have rated it.\n\nKindle Fires will be awarded for the three best ideas!",'name':'Walkthrough slide 1 paragraph 2'},
+    'WALKTHROUGH_TEXT':{'default':'Continue','name':'Walkthrough slide 1 next slide'},
+    'WALKTHROUGH_INTRO2_TEXT':{'display':'TEXTAREA','default':'Evaluate other participant\'s ideas by clicking on the blooms.','name':'Walkthrough slide 2 text'},
+    'STATEMENTS_INTRO_TEXT':{'display':'TEXTAREA','default':'Now plant your own idea!\nOn the right side there will be 5 propositions. Use the sliders to indicate your opinions on these propositions. Remember to scroll down if neccessary, and click "Done" when finished.','name':'Walkthrough slide after rating done'},
+    
+    'SHOW_AGREEMENT_SLIDER':{'default':'true', 'choices':CHOICE_TF,'name':'Show top slider(unscored)?'},
+    'SHOW_INSIGHT_SLIDER':{'default':'true', 'choices':CHOICE_TF,'name':'Show bottom slider (scored)?'},
+    'AGREEMENT_TEXT':{'default':'How innovative is this idea?','name':'Top slider text'},
+    'AGREEMENT_LEFT_TEXT':{'default':'Not Innovative','name':'Top slider left'},
+    'AGREEMENT_RIGHT_TEXT':{'default':'Very Innovative','name':'Top slider right'},
+    'AGREEMENT_HISTOGRAM_TEXT':{'default':'Innovative','name':'Top slider stats page description'},
+    'LEGEND_AGREEMENT_LEFT':{'default':'Less Innovative','name':'Top slider lengend left'},
+    'LEGEND_AGREEMENT_RIGHT':{'default':'More Innovative','name':'Top slider legend right'},
+    'INSIGHT_TEXT':{'default':'How effective is this idea?','name':'Bottom slider text'},
+    'INSIGHT_LEFT_TEXT':{'default':'Not Effective','name':'Bottom slider left'},
+    'INSIGHT_RIGHT_TEXT':{'default':'Very Effective','name':'Bottom slider right'},
+    'INSIGHT_HISTOGRAM_TEXT':{'default':'Effective','name':'Bottom slider stats page description'},
+    'LEGEND_INSIGHT_LEFT':{'default':'Less Effective','name':'Bottom slider legend left'},
+    'LEGEND_INSIGHT_RIGHT':{'default':'More Effective','name':'Bottom slider legend right'},
+    
+    'INSTRUCTIONS_1':{'display':'TEXTAREA','default':"Thanks for visiting!  Please start by evaluating the suggestions from\ntwo prior visitors. Click any bloom to start...",'name':'Instruction 1'}, 
+    'INSTRUCTIONS_2':{'display':'TEXTAREA','default':"Rating the ideas of other participants earns points.",'name':'Instruction 2'},
+    'INSTRUCTIONS_3':{'display':'TEXTAREA','default':"You've earned a point!  Now click another bloom...",'name':'Instruction 3'},
+    'INSTRUCTIONS_4':{'display':'TEXTAREA','default':"Great!  To join the discussion and create your own bloom,\njust tell us your opinions...",'name':'Instruction 4'},
+    'INSTRUCTIONS_5':{'display':'TEXTAREA','default':"Quickly create your own account...",'name':'Instruction 5'},
+    'INSTRUCTIONS_6':{'display':'TEXTAREA','default':"Now enter your own idea (to fill your bloom)!",'name':'Instruction 6'},
+    'INSTRUCTIONS_7':{'display':'TEXTAREA','default':"Super! You'll earn points by evaluating more blooms, and \nwhen other participants evaluate your bloom.",'name':'Instruction 7'}, 
+    
+    'SHOW_SCORE':{'default':'true', 'choices':CHOICE_TF,'name':'Show user score in the bottom left?'},
+    'FUN_COLORS':{'default':'true', 'choices':CHOICE_TF,'name':'Use new CDE color scheme?'},
+    'LEADERBOARD_ENABLED':{'default':'true', 'choices':CHOICE_TF,'name':'Show the leaderboard?'},  					
+    'SCORE_SCALE_FACTOR':{'default':'1.0', 'name':'Scale score by this number'},
+    'YOUR_SCORE_LANGUAGE': {'default':'SCORE', 'name':'Language for scoring system, note that this is not just number of ratings.'},
+    'NO_SKIP': {'default':'false', 'choices':CHOICE_TF,'name':'No Skipping Comment'},
+    'SLIDER_SUBSET': {'default':'5', 'name':'Show at most n of the sliders'},
+    'UNIFIED_SCORE':{'default':'true', 'choices':CHOICE_TF,'name':'Combine author and reviewer scores?'},
+    'EXPLORE_THRESHOLD_RATINGS':{'default':'2.0', 'name':'Threshold for tutorial score'},
+    'MAX_COMMENT_LENGTH':{'default':'1000', 'name':'Max comment length (in chars)'},
+    'ALLOW_EDIT_COMMENT':{'default':'true', 'choices':CHOICE_TF,'name':'Allow comment editing?'},
+    'SCORE_SIZE':{'default':'42', 'name':'Font size of score text'},
+    'BACKGROUND_POINT_MAX_ALPHA':{'default':'0.5', 'name':'Visibility of background points'},
+    'SHOW_LEADERBOARD_SCORE':{'default':'true', 'choices':CHOICE_TF,'name':'Leaderboard score?'},
+    'LEADERBOARD_ENABLED':{'default':'true', 'choices':CHOICE_TF,'name':'Show leaderboard'},
+    'HELP_LOCATION':{'default':'', 'name':'IFRAME to Help Content'},
+    
+    'AFFINE_TRANSFORM_SCALEX': {'default':'1.0', 'name':'Rescale X coordinate'},
+    'AFFINE_TRANSFORM_SCALEY': {'default':'1.0', 'name':'Rescale Y coordinate'},
+    'AFFINE_TRANSFORM_SHIFTX': {'default':'0', 'name':'Shift X coordinate right'},
+    'AFFINE_TRANSFORM_SHIFTY': {'default':'0', 'name':'Chift Y coordiante down'},
 
-                    #server variables
-                    'MAX_NUM_USER_RATED_DOTS':{'default':'300','name':'Max points pulled by the rated query'},
-                    'MAX_NUM_TOTAL_DOTS':{'default':'21','name':'Points on the map'}, #for unrated points
-                    'MINIMUM_WORD_COUNT':{'default':'5','name':'Word count before shown on map'}, # Required minimum word count for responses returned in shuffle
-                    'NUM_BACKGROUND_POINTS':{'default':'500','name':'Background distribution'},
-                    'DEFAULT_FROM_EMAIL':{'default':'Hybrid Wisdom Support <support@hybridwisdom.com>','name':'Automated email from'}, # The from address of outgoing emails
-                    'FEEDBACK_EMAIL_FROM':{'default':'Hybrid Wisdom Support <support@hybridwisdom.com>','name':'User email from'},
-                    'CONFIDENCE_THRESHOLD':{'default':'.15','name':'Standard error thresh before on leaderboard'},
-                    'SOFT_ENTRY_CODES':{'default':'false', 'choices':CHOICE_TF,'name':'Use Entry Codes'},
-                    }        
+
+    ##########################
+    # NEW CAFE CONFIGURABLES
+    # (note: some of these are duplicated from above)
+    ##########################
+
+    'WELCOME_PAGE_TITLE':{'default':'California Report Card','name':'Welcome Page Title'},
+    'WELCOME_PAGE_TEXT1':{'display':'TEXTAREA', 'default':config_defaults['WELCOME_PAGE_TEXT1'],'name':'Welcome Page Top'},
+    'WELCOME_PAGE_TEXT2':{'display':'TEXTAREA', 'default':config_defaults['WELCOME_PAGE_TEXT2'],'name':'Welcome Page Bottom'},
+    'WELCOME_PAGE_ABOUT_LINK' : {'default':'About','name':'Welcome Page - About Link'},
+
+    'ABOUT_PAGE_HEADER':{'default':'About','name':'About Page Header'},
+    'ABOUT_PAGE_TEXT':{'display':'TEXTAREA', 'default':config_defaults['ABOUT_PAGE_TEXT'],'name':'About Page Text (HTML)'},
+
+    'REPORT_CARD_HEADER':{'default':"Grade California's State Government",'name':'Report Card Header'},
+    'REPORT_CARD_NEXT_BUTTON':{'default':'Next','name':'Report Card Next Button'},
+    'REPORT_CARD_INST' : {'display':'TEXTAREA', 'default':config_defaults['REPORT_CARD_INST'],'name':'Report Card Instructions'},
+    'AVG_EXPLAIN_HEADER' : {'default':"Average Grades",'name':'Averages Explanation Header'},
+    'AVG_EXPLAIN_TEXT' : {'display':'TEXTAREA', 'default':config_defaults['AVG_EXPLAIN_TEXT'],'name':'Avg Explanation Text'},
+    
+    'ZIP_CODE_INSTRUCTIONS':{'display':'TEXTAREA', 'default':config_defaults['ZIP_CODE_INSTRUCTIONS'],'name':'Zip Code Instructions'},
+    'ZIP_CODE_BUTTON':{'default':'Save and Join','name':'Zip Code Button'},
+
+    'DISCUSSION_DIALOG_HEADER':{'default':'The Discussion','name':'Discussion Dialog Header'},
+    'DISCUSSION_DIALOG_TEXT1':{'display':'TEXTAREA', 'default':config_defaults['DISCUSSION_DIALOG_TEXT1'],'name':'Discussion Text1'},
+    'DISCUSSION_DIALOG_TEXT2':{'display':'TEXTAREA', 'default':config_defaults['DISCUSSION_DIALOG_TEXT2'],'name':'Discussion Text2'},
+
+    'INSTRUCTIONS_1':{'display':'TEXTAREA', 'default':config_defaults['INSTRUCTIONS_1'],'name':'Instructions 1'},
+    'INSTRUCTIONS_2':{'display':'TEXTAREA', 'default':config_defaults['INSTRUCTIONS_2'],'name':'Instructions 2'},
+    
+    'SLIDER1_LEFT' : {'default':'Not Important','name':'Slider 1 Left'},
+    'SLIDER1_RIGHT' : {'default':'Very Important','name':'Slider 1 Right'},
+    'SLIDER2_LEFT' : {'default':'Not Interested','name':'Slider 2 Left'},
+    'SLIDER2_RIGHT' : {'default':'Very Interested','name':'Slider 2 Right'},
+
+    'YOUR_SCORE_LANGUAGE': {'default':'Your Score', 'name':'Language for scoring system, (Note: This is not just number of ratings.'},
+    'SCORE_DIALOG_TEXT' : {'display':'TEXTAREA', 'default':config_defaults['SCORE_DIALOG_TEXT'],'name':'Score Dialog Text'},
+
+    'RESPONSE_SAVED_HEADER' : {'default':'Response Saved!', 'name':'Response Saved Header'},
+    'RESPONSE_SAVED_TEXT' : {'display':'TEXTAREA', 'default':config_defaults['RESPONSE_SAVED_TEXT'],'name':'Response Saved Text'},
+
+    'EMAIL_ASK_TEXT' : {'display':'TEXTAREA', 'default':config_defaults['EMAIL_ASK_TEXT'],'name':'Ask for Email Text'},
+
+    'STATS_BUTTON_TEXT' : {'default':'Stats','name':'Stats Button Text'},
+    'LOGOUT_BUTTON_TEXT' : {'default':'Logout','name':'Logout Button Text'},    
+    'LOGOUT_DIALOG_TEXT' : {'display':'TEXTAREA', 'default':config_defaults['LOGOUT_DIALOG_TEXT'],'name':'Logout Dialog Text'},
+    'START_OVER_BUTTON_TEXT' : {'default':'Start Over','name':'Logout Page - Start Over Button Text'},    
+
+    #server variables
+    'MAX_NUM_USER_RATED_DOTS':{'default':'300','name':'Max points pulled by the rated query'},
+    'MAX_NUM_TOTAL_DOTS':{'default':'21','name':'Points on the map'}, #for unrated points
+    'MINIMUM_WORD_COUNT':{'default':'5','name':'Word count before shown on map'}, # Required minimum word count for responses returned in shuffle
+    'NUM_BACKGROUND_POINTS':{'default':'500','name':'Background distribution'},
+    'DEFAULT_FROM_EMAIL':{'default':'Hybrid Wisdom Support <support@hybridwisdom.com>','name':'Automated email from'}, # The from address of outgoing emails
+    'FEEDBACK_EMAIL_FROM':{'default':'Hybrid Wisdom Support <support@hybridwisdom.com>','name':'User email from'},
+    'CONFIDENCE_THRESHOLD':{'default':'.15','name':'Standard error thresh before on leaderboard'},
+    'SOFT_ENTRY_CODES':{'default':'false', 'choices':CHOICE_TF,'name':'Use Entry Codes'},
+    }        
 SEND_CLIENT_SETTINGS = True
 NEVER_SEEN_TIGHT_BOUND = True
 SHOW_ADVANCED_OPTIONS = True

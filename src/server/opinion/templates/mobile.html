@@ -3,7 +3,7 @@
 
 <head>
 
-<title>California Report Card</title>
+<title>{{client_settings.WELCOME_PAGE_TITLE}}</title>
 
 <!-- for best viewing on mobile phones -->
 <meta name='viewport' content='user-scalable=no, width=device-width,initial-scale=1, maximum-scale=1' />
@@ -30,9 +30,8 @@
 <script type="text/javascript" src="http://www.google.com/jsapi"></script>
 <script type='text/javascript' src='{{url_root}}/media/mobile/js/stats.js?nonce={{random_password}}'></script>
 
-<!--Java script that needs to be run on init-->
+<!--JavaScript that needs to be run on init-->
 <script type='text/javascript'>
-
   window.url_root = '{{ url_root }}';
 
   window.sliders = [];
@@ -84,10 +83,10 @@
     range: [0, 100], start: 50, step: 5, handles: 1,connect: false, behaviour: "none"
   });
   
-  var html_label ="<div class='slider-range-labels'><div class='alignleft'>&larr;Not Important</div><div class='alignright'>Very Important&rarr;</div></div>";
+  var html_label ="<div class='slider-range-labels'><div class='alignleft'>&larr;{{client_settings.SLIDER1_LEFT}}</div><div class='alignright'>{{client_settings.SLIDER1_RIGHT}}&rarr;</div></div>";
   $('.rating-slider1 > .noUi-base').append( html_label );
   
-  var html_label ="<div class='slider-range-labels'><div class='alignleft'>&larr;Not Interested</div><div class='alignright'>Very Interested&rarr;</div></div>";
+  var html_label ="<div class='slider-range-labels'><div class='alignleft'>&larr;{{client_settings.SLIDER2_LEFT}}</div><div class='alignright'>{{client_settings.SLIDER2_RIGHT}}&rarr;</div></div>";
   $('.rating-slider2 > .noUi-base').append( html_label );
   
   $(".change-rating-slider").noUiSlider({
@@ -185,8 +184,8 @@
         <div data-role='navbar' class='menubar'>
             <ul>
                 <li style="width: 20%;"><a data-theme='a' id='home-btn' class='home-btn' onclick="$('.welcome-back').show();$('.menubar').hide();$('.scorebox').hide();"><img width="22px;" src="{{url_root}}/media/mobile/img/cafe/home-icon.png"></a></li>
-                <li style="width: 40%;"><a data-theme='a' class='my-comment-btn'><span class='stats-label'>Stats</span></a></li>
-                <li style="width: 40%;"><a data-theme='a' class='logout-btn'><span class='logout-label'>Logout</span></a></li>
+                <li style="width: 40%;"><a data-theme='a' class='my-comment-btn'><span class='stats-label'>{{client_settings.STATS_BUTTON_TEXT}}</span></a></li>
+                <li style="width: 40%;"><a data-theme='a' class='logout-btn'><span class='logout-label'>{{client_settings.LOGOUT_BUTTON_TEXT}}</span></a></li>
             </ul>
         </div>
 
@@ -194,8 +193,8 @@
             <span class='score-label'></span><span class='score-value'></span>
         </div>
 
-        <div class='instructions'>Click on any mug to begin</div>
-        <div class='instructions2'>To enter your own idea, click on your mug (highlighted in yellow).</div>
+        <div class='instructions'>{{client_settings.INSTRUCTIONS_1}}</div>
+        <div class='instructions2'>{{client_settings.INSTRUCTIONS_2}}</div>
     </center>
   </div>
 
@@ -260,12 +259,12 @@
          <button data-theme='a' class='home-btn-dialog'><img width="30px;" src="{{url_root}}/media/mobile/img/cafe/home-icon.png"></button>
       </div>
 
-      <div class="basic-header">Grade California's State Government</div>
+      <div class="basic-header">{{client_settings.REPORT_CARD_HEADER}}</div>
 
       <center>
 
         <div class="rc-sub-header">
-           Drag the handle to grade from A to F how well you feel California's elected officials are working to address the following 6 subjects:
+          {{client_settings.REPORT_CARD_INST}}
         </div>
 
 
@@ -328,7 +327,7 @@
           {% endfor %}
 
           <div class="standard-btn-div">
-             <button type='submit' data-theme='a' class='done-endsliders-btn' ><font size="4">Next</font></button>
+             <button type='submit' data-theme='a' class='done-endsliders-btn' ><font size="4">{{client_settings.REPORT_CARD_NEXT_BUTTON}}</font></button>
           </div>
         </center>
        </div>
@@ -412,7 +411,7 @@
       </div>
 
        <div class= 'registerpanel default-left-padding responsive-max-width'>
-        <div class="basic-header2" style="width: 100%">Enter your zip code to save your grades and join the discussion</div>
+        <div class="basic-header2" style="width: 100%">{{client_settings.ZIP_CODE_INSTRUCTIONS}}</div>
 
          <form id='reg_form' class='form-horizontal' method='post' action='{{ url_root }}/accountsjson/register/'>
              <div data-role="fieldcontain">
@@ -437,7 +436,7 @@
 
         <center>
             <div class="standard-btn-div" onclick="document.getElementById('registerb').focus();">
-                <button type='submit' data-theme='a' id="registerb"><font size="4">Save and Join</font></button>
+                <button type='submit' data-theme='a' id="registerb"><font size="4">{{client_settings.ZIP_CODE_BUTTON}}</font></button>
             </div>
         </center>
        </form>
@@ -447,14 +446,14 @@
   <div class='logout'>
         <div class='landing-intro'>
             <div class='landing-header'>
-                Thank you for participating!
+              {{client_settings.LOGOUT_DIALOG_TEXT}}
             </div>
         </div>
 
         <div class='landing-desc'>
             <center>
                 <div class="standard-btn-div">
-                    <button data-theme='a' class='logout-start-over'><font size="4">Start Over</font></button>
+                    <button data-theme='a' class='logout-start-over'><font size="4">{{client_settings.START_OVER_BUTTON_TEXT}}</font></button>
                 </div>
             </center>
         </div>
@@ -499,9 +498,10 @@
                   <button type='submit' data-theme='a' class='first-time-btn'><font size="5">Begin</font></button>
               </div>
               <div>
-                  Take a moment to assign grades and share ideas about California's government.<br/>
-                  <a href="#" class="comment-admin-text-a" onclick="$('.dialog-about').show();$('.landing').hide();window.landing=true;">About</a><br/><br/>
-                  (Works best when holding your mobile screen vertically.)
+                {{client_settings.WELCOME_PAGE_TEXT1}}
+		<br>
+                <a href="#" class="comment-admin-text-a" onclick="$('.dialog-about').show();$('.landing').hide();window.landing=true;">{{client_settings.WELCOME_PAGE_ABOUT_LINK}}</a><br/><br/>
+		{{client_settings.WELCOME_PAGE_TEXT2}}
               </div>
           </div>
       </div>
@@ -517,11 +517,12 @@
       </div>
 
     <div class='dialog-text1 dialog-text-style default-left-padding'>
-        <div class="basic-header" style="width:100%;">The Discussion</div>
+        <div class="basic-header" style="width:100%;">{{client_settings.DISCUSSION_DIALOG_HEADER}}</div>
         <img class="header-img-topic center" src="{{ url_root }}/media/mobile/img/cafe/map_teaser.png"/>
-      The current topic is:
+	{{ client_settings.DISCUSSION_DIALOG_TEXT1 }}
         "{{ topic }}".
-        Each participant has a mug on the table.
+	<br><br>
+        {{ client_settings.DISCUSSION_DIALOG_TEXT2 }}
         <center>
         <div class="standard-btn-div">
             <button type='submit' data-theme='a' class='dialog-ready' ><font size="4">Next</font></button>
@@ -552,12 +553,11 @@
 
     <div class='dialog-text-notitle default-left-padding'>
         <div class="scorebox-fake">
-          Your Score is 100
+          {{client_settings.YOUR_SCORE_LANGUAGE}} is 100
         </div>
 
         <br/>
-        You earn points by rating others and when others rate your idea.
-        Rate one more person's idea before entering your own...
+        {{client_settings.SCORE_DIALOG_TEXT}}
 
       <center>
         <div class="standard-btn-div">
@@ -596,9 +596,8 @@
 
     <div class='dialog-text-style default-left-padding'>
 
-        <div class="basic-header" style="width:100%;">Response Saved!</div>
-        Continue to read and evaluate other's ideas to earn more points.
-        You can see detailed statistics in the stats page.
+        <div class="basic-header" style="width:100%;">{{client_settings.RESPONSE_SAVED_HEADER}}</div>
+        {{ client_settings.RESPONSE_SAVED_TEXT}}
         <center>
             <div class="standard-btn-div">
                 <button type='submit' data-theme='a' class='dialog-continue-ready' ><font size="4">Next</font></button>
@@ -615,7 +614,7 @@
       </div>
 
     <div class='dialog-text-notitle default-left-padding'>
-        Please provide your email to receive a customized link where you can see how others rate your idea.
+      {{client_settings.EMAIL_ASK_TEXT}}
         <center>
             <input type="email" id='regemail' name='regemail' class='regforminput' style="font-size: 15px; background-color: #FFFFFF;color: #000000;" placeholder="Email" data-theme='a'></input>
             <div class="standard-btn-div">
@@ -634,11 +633,11 @@
 
     <div class='dialog-text-style default-left-padding'>
 
-      <div class="basic-header" style="width:100%;">Average Grades</div>
+      <div class="basic-header" style="width:100%;">{{client_settings.AVG_EXPLAIN_HEADER}}</div>
      <center>
       <img src="{{ url_root }}/media/mobile/img/cafe/avggrade.png" class="center" style="width:150px;padding-top:3px;"><br>
       <div class="standard-btn-div">
-        The Average Grade is based on the grades from all participants thusfar.
+        {{client_settings.AVG_EXPLAIN_TEXT}}
         <button type='submit' data-theme='a'  onclick="$('.dialog-avggrade').hide();$('.endsliders').show();"><font size="4">Back</font></button>
       </div>
      </center>
@@ -647,40 +646,10 @@
 
   <div class='dialog-about dialog-style' style="z-index:999">
       <div class='dialog-text-style-noflow small-left-padding'>
-          <div class="basic-header">About</div>
-          <center>{{num_users}} participants so far.</center>
-          <br/>
+          <div class="basic-header">{{client_settings.ABOUT_PAGE_HEADER}}</div>
+	  <center>{{num_users}} participants so far.</center><br/>
+	  {% autoescape off %}{{client_settings.ABOUT_PAGE_TEXT }}{% endautoescape %}
 
-          <strong>Overview</strong><br/>
-          The California Report Card is based on a new interactive platform that engages public interest in government.
-          In this experiment, developed by the CITRIS Data and Democracy Initiative at UC Berkeley with advice from Lt. Governor Gavin Newsom and other public officials,
-          visitors are invited to grade how effectively state representatives are working to address 6 key subjects.
-          Visitors are then asked for suggestions on how California should spend the 2014 budget surplus.
-          The platform is designed to engage visitors by providing instant feedback, a unique visualization of opinions, and a new approach to eliciting and rating suggestions.
-          The Report Card uses CAFE, a "Collective Assessment and Feedback Engine," modeled after grassroots discussions over coffee, to assess changes over time and to engage public interest in state government.
-          <br/><br/>
-
-          <strong>Privacy</strong><br/>
-          Comments and suggestions will be scanned to omit identifiable information.
-          We respect your privacy and will not share your email address with third parties.<br/><br/>
-
-          <strong>Statistical Significance</strong><br/>
-
-          The California Report Card (CRC) aims to increase communication between elected officials and the public.
-          The CRC differs from randomized telephone polls and surveys.
-          Participation is self-selective and accessible so far only to English speakers with access to a smart phone or web browser.
-          We are working on extending the interface to Spanish speakers and persons with disabilities.
-
-          After you enter each grade, you see the Average Grade based on input from all previous participants.
-          This is intended to provide rapid feedback to each participant.
-          We realize this may have a biasing effect: some may adjust their grade to be closer to the average resulting in a form of regression toward the mean.
-          We will report the number of such adjustments and the before and after values in the public dataset.<br/><br/>
-
-          <strong>More</strong><br/>
-          Please see the CRC website for more about the project history, stats to date, related links, and to download anonymized data when it is available:<br/><br/>
-
-          The California Report Card<br/>
-          <a href="http://californiareportcard.org/">http://californiareportcard.org/</a>
       <center>
         <div class="standard-btn-div">
           <button data-theme='a'  onclick="$('.dialog-about').hide();if(window.landing){$('.landing').show();}else{$('.welcome-back').show()}"><font size="4">Back</font></button>
