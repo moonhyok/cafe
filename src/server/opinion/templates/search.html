@@ -24,10 +24,13 @@
 				{
 					if (response.success)
 					{
-						var searchResult = response.data[0];
+	                                 $("#loading").fadeOut();
+	                                 for (var i = 0; i < response.data.length; i += 1) {
+						var searchResult = response.data[i];
 						$("#osTable").show();
 						$("button").show();
 						populateTable(searchResult);					
+}
 					}
 					else
 					{
@@ -136,9 +139,16 @@
     <p>
       
    <input type="text" id="searchBar" class="inputTxt" />
-   <input type="button" id="searchBtn" value="Search" onClick="getSearchResults()" class="inputBtn" />
+   <input type="button" id="searchBtn" value="Search" onClick="$('#loading').fadeIn();getSearchResults()" class="inputBtn" />
    
-   <span onClick="getSearchResults()"> Test Search </span>
+   <!-- <span onClick="getSearchResults()"> Test Search </span> -->
+   <br>
+   Enter a username or a portion of a username to see matching results.<br>
+   A blank search returns all users (may take a few seconds to load).
+   
+   <div id="loading" style="display:none">
+     <h2> Loading...</h2>
+   </div>
    
    <div class="buttons">
     <button type="submit" class="negative" onClick="processComment('{{url_root}}/blacklist/')">
