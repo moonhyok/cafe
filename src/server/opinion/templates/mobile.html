@@ -195,7 +195,8 @@
         </div>
 
         <div class='instructions'>Click on any mug to begin</div>
-        <div class='instructions2'>To enter your own idea, click on your mug (highlighted in yellow).</div>
+        <div class='instructions2'>We want to hear your idea.  Please rate one more suggestion first.</div>
+        <div class='instructions3'>Now what's your idea?  Click on your mug (in yellow) to join the discussion.</div>
     </center>
   </div>
 
@@ -281,7 +282,7 @@
                 </td>
 
                 <td class="title-table-label2">
-                  <a href="#" onclick="$('.endsliders').hide();$('.dialog-avggrade').show();" style="color:#594027;">Avg. Grade</a>
+                  <a href="#" onclick="$('.endsliders').hide();$('.dialog-avggrade').show();" style="color:#594027;">Median Grade</a>
                 </td>
 
              </tr>
@@ -504,9 +505,7 @@
 
       </div>
 
-        <div style="clear: both;"></div>
-
-        <center>(Works best when holding your mobile screen vertically)</center>
+        <div class="landing-disclaimer">Works best when holding your mobile screen vertically</div>
     </div>
 
   </div>
@@ -520,9 +519,8 @@
     <div class='dialog-text1 dialog-text-style default-left-padding'>
         <div class="basic-header" style="width:100%;">The Discussion</div>
         <img class="header-img-topic center" src="{{ url_root }}/media/mobile/img/cafe/map_teaser.png"/>
-      The current topic is:
-        "{{ topic }}".
-        Each participant has a mug on the table.
+        Each participant has a mug on the table. We're discussing:
+        "{{ topic }}"
         <center>
         <div class="standard-btn-div">
             <button type='submit' data-theme='a' class='dialog-ready' ><font size="4">Next</font></button>
@@ -635,11 +633,11 @@
 
     <div class='dialog-text-style default-left-padding'>
 
-      <div class="basic-header" style="width:100%;">Average Grades</div>
+      <div class="basic-header" style="width:100%;">Median Grades</div>
      <center>
       <img src="{{ url_root }}/media/mobile/img/cafe/avggrade.png" class="center" style="width:150px;padding-top:3px;"><br>
       <div class="standard-btn-div">
-        The Average Grade is based on the grades from all participants thusfar.
+        The Median Grade is based on the grades from all participants thusfar.
         <button type='submit' data-theme='a'  onclick="$('.dialog-avggrade').hide();$('.endsliders').show();"><font size="4">Back</font></button>
       </div>
      </center>
