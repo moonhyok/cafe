@@ -1055,9 +1055,15 @@ def banish_user(request, user_id):
 def search(request, os_id, username):
 	#username = username.lower()
 	try:
-		user = User.objects.get(username = username)
+		if not username:
+                    user = User.objects.all()
+                    return json_result({'success':True, 
+                                        'data':[format_user_object(u, os_id) 
+                                                for u in user]})
+                user = User.objects.get(username__icontains= username)
 	except User.DoesNotExist:
-		return json_result({'success':False, 'error_message':'User does not exist.'})
+		return json_result({'success':False, 
+                                    'error_message':'User does not exist.'})
 	
 	return json_result({'success':True, 'data':[format_user_object(user, os_id)]})
 	
