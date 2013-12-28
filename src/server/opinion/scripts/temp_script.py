@@ -5,7 +5,7 @@ import numpy as np
 
 u = User.objects.filter(id = 1)[0]
 print u.username
-u.set_password('admin')
+u.set_password('a6b7Tuwq')
 u.save()
 
 
