@@ -32,7 +32,7 @@ def create_table_row_user(user):
     user_data_login = UserData.objects.filter(user = user, key = 'first_login')
     if len(user_data_login) > 0:
         time_joined_display = DateFormat(datetime.datetime.fromtimestamp(float(user_data_login[0].value))).format('h:i:s A')
-    username_display = user.username
+    username_display = user.id
     if user.email != '':
 		email_display = '--'
     else:
