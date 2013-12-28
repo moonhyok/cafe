@@ -19,7 +19,7 @@ html {
 .top-bar{
     display:none;
     width: 100%;
-    background-color: #88ADAA;
+    background-color: #96c6c5;
 }
 
 .slider-agree-labels{
@@ -74,7 +74,7 @@ html {
 /* This prevents the jQuery navbar buttons from staying pressed */
 .ui-navbar .ui-btn-active {
 	border: 1px solid       #222;
-	background:             #88ADAA;
+	background:             #96c6c5;
 	font-weight: bold;
 	color:                     #fff;
 	background-image: -webkit-gradient(linear, left top, left bottom, from( #555), to( #333));
@@ -228,7 +228,7 @@ table.pretty caption {
 
 	body {
 		/*font-family: "Helvetica Neue", verdana, sans-serif;*/
-		background: #88ADAA;
+		background: #96c6c5;
 		height: 100%;
 		padding: 0 !important;
 		/* use helvetica neue, bootstrap style */
@@ -258,7 +258,7 @@ table.pretty caption {
 		left: 0;
 
 		display: none;
-		background: #88ADAA;
+		background: #96c6c5;
 	}
 
 	.header {
@@ -303,9 +303,24 @@ table.pretty caption {
     		font-size: 14px !important;
             font-weight: bold;
             width: 100%;
-            line-height: 14px;
+            line-height: 20px;
     		display:none;
     }
+
+    .instructions3{
+        		/*position: absolute;*/
+        		background-color: #FFC501 !important;
+        		font-family: verdana, sans-serif;
+        		top: 250;
+        		left: 0px;
+        		z-index: 999;
+        		text-shadow: none;
+        		font-size: 14px !important;
+                font-weight: bold;
+                width: 100%;
+                line-height: 20px;
+        		display:none;
+        }
 	
 	.reportcard{
 		/*background-color: #FAEBCD;*/
@@ -350,18 +365,18 @@ table.pretty caption {
 	.title-table {
 	    width:299px;
 	    background-color: #FFFFFF;
-	    border: solid 0px #88ADAA;
+	    border: solid 0px #96c6c5;
 	    position: relative;
 	    left: -1px;
 	}
 
 	.title-table td{
-    	    border: solid 3px #88ADAA;
+    	    border: solid 3px #96c6c5;
     	}
 
     .grade-table {
     	    width: 290px;
-    	    background-color: #88ADAA;
+    	    background-color: #96c6c5;
     	    border: solid 0px #FFFFFF;
     	}
 
@@ -382,7 +397,7 @@ table.pretty caption {
 	.title-table-label1 {
     	    text-align: center;
     	    vertical-align: middle;
-    	    color: #88ADAA;
+    	    color: #96c6c5;
             font-size:14px;
     }
 
@@ -391,7 +406,7 @@ table.pretty caption {
             width: 45px;
             text-align: center;
             vertical-align: middle;
-            color: #88ADAA;
+            color: #96c6c5;
             font-size:14px;
     }
 	
@@ -423,22 +438,6 @@ table.pretty caption {
 	    width: 95%;
 	    padding-left: 5px;
 	}
-	
-	.instructions2{
-		/*position: absolute;*/
-		top: 250;
-		left: 0px;
-		background-color: #E2FFC6;
-		z-index: 2;
-
-		width: 100%;
-
-		line-height: 20px;
-		padding: 10px 0px;
-
-		text-align: center;
-	}
-
 
 	.login-header, .reg-header, .slider-header{
 		background-color: #ADD8E6;
@@ -465,7 +464,7 @@ table.pretty caption {
 		width: 100%;
 		height: 100%;
 		/*background-color: #FAEBCD;*/
-		background: #88ADAA;
+		background: #96c6c5;
 		z-index: 999;
 		overflow-y: auto;
 		overflow-x: hidden;
@@ -483,7 +482,7 @@ table.pretty caption {
     		width: 100%;
     		height: 100%;
     		/*background-color: #FAEBCD;*/
-    		background: #88ADAA;
+    		background: #96c6c5;
     		z-index: 998;
     		overflow-y: auto;
     		overflow-x: hidden;
@@ -497,26 +496,32 @@ table.pretty caption {
 	    padding-bottom: 12px;
 	}
 
+
 	.landing-img-div{
-
-	width: 25%;
-	float: left;
-	position:relative;
-	top: -70px;
-
+	text-align: right;
+	float: right;
+	width: 30%;
+	position: relative;
+	top: -60px;
 	}
 
 	.landing-img-txt{
-	position: relative;
-	text-align: right;
-	line-height: 14px;
-	top: -25px;
-	float: right;
-	width: 70%;
-	padding-right: 10px;
+	float: left;
+	width: 65%;
+	line-height: 21px;
+	padding-left: 10px;
 	color: #594027;
 	font-size: 15px;
-	font-weight: bold;
+	}
+
+	.landing-disclaimer{
+	clear: both;
+	text-align: center;
+	position: relative;
+	top: -50px;
+	color: #594027;
+    font-size: 11px;
+    text-shadow: none;
 	}
 
 	.error_username {
@@ -616,7 +621,7 @@ table.pretty caption {
 		right: 0;
 		width: 100%;
 		height: 100%;
-		background: #88ADAA;
+		background: #96c6c5;
 		overflow: auto;
 		z-index: 999;
 	}
@@ -630,7 +635,7 @@ table.pretty caption {
 		height: 100%;
 		/*background-image:url('../img/cafe/cafe_bg.jpg');*/
 		/*background-color: #FAEBCD;*/
-		background: #88ADAA; /* Old browsers */
+		background: #96c6c5; /* Old browsers */
 		overflow: auto;
 		z-index: 999;
 	}
@@ -645,7 +650,7 @@ table.pretty caption {
 	color: white;
 	width: 100%;
 	height: 100%;
-	background-color: #88ADAA;
+	background-color: #96c6c5;
 
 	padding-top: 20px;
 	padding-bottom: 20px;
@@ -734,8 +739,7 @@ padding-right: 7px;
 }
 
 .landing-desc {
-	padding-top: 10px;
-	padding-bottom: 10px;
+	padding-top: 5px;
 	line-height: 27px;
 	font-family: verdana, sans-serif;
 	text-shadow: none;
@@ -748,7 +752,7 @@ padding-right: 7px;
 
 .landing-intro {
 	text-align: center;
-	background-color: #88ADAA;
+	background-color: #96c6c5;
 	padding-top: 30px;
 	padding-bottom: 10px;
 	vertical-align: middle;
@@ -870,7 +874,7 @@ padding-right: 7px;
 	bottom: 0;
 	right: 0;
 	width: 100%;
-	background-color: #88ADAA;
+	background-color: #96c6c5;
 	color: white;
 	padding: 20px 0;
 	text-align: center;
@@ -890,7 +894,7 @@ padding-right: 7px;
 }
 
 .dialog-style{
-	background: #88ADAA;
+	background: #96c6c5;
 	width: 100%;
 	height: 100%;
 	position: absolute;
@@ -904,7 +908,7 @@ padding-right: 7px;
         vertical-align: middle;
         font-family: verdana, sans-serif;
 	color: #594027;
-	background: #88ADAA;
+	background: #96c6c5;
 	height: 100%;
 	text-decoration: none;
 	text-shadow: none;
@@ -918,7 +922,7 @@ padding-right: 7px;
         vertical-align: middle;
         font-family: verdana, sans-serif;
 	color: #594027;
-	background: #88ADAA;
+	background: #96c6c5;
 	text-decoration: none;
 	text-shadow: none;
 	font-size: 14px;
@@ -930,7 +934,7 @@ padding-right: 7px;
         vertical-align: middle;
         font-family: verdana, sans-serif;
 	color: #594027;
-	background: #88ADAA;
+	background: #96c6c5;
 	width: 100%;
 	height: 100%;
 	text-decoration: none;
@@ -1050,7 +1054,7 @@ background-image: -webkit-gradient(linear, left top, left bottom, from( #FFFFF0 
 		display: none;
 		/*background-image:url('../img/cafe/cafe_bg.jpg');*/
 		/*background-color: #FAEBCD;*/
-		background-color: #88ADAA;
+		background-color: #96c6c5;
 		overflow: auto;
 		z-index: 999;
 	}

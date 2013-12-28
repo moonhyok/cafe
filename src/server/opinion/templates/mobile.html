@@ -193,8 +193,11 @@
             <span class='score-label'></span><span class='score-value'></span>
         </div>
 
+
         <div class='instructions'>{{client_settings.INSTRUCTIONS_1}}</div>
         <div class='instructions2'>{{client_settings.INSTRUCTIONS_2}}</div>
+	<div class='instructions3'>{{client_settings.INSTRUCTIONS_3}}</div>
+
     </center>
   </div>
 
@@ -280,7 +283,7 @@
                 </td>
 
                 <td class="title-table-label2">
-                  <a href="#" onclick="$('.endsliders').hide();$('.dialog-avggrade').show();" style="color:#594027;">Avg. Grade</a>
+                  <a href="#" onclick="$('.endsliders').hide();$('.dialog-avggrade').show();" style="color:#594027;">Median Grade</a>
                 </td>
 
              </tr>
@@ -485,27 +488,25 @@
     <div class="responsive-max-width">
 
       <center>
-          <img src="{{url_root}}/media/mobile/img/cafe/cafe-title-cropped.png" width="250px" style="padding-top: 10px;"/>
+          <img src="{{url_root}}/media/mobile/img/cafe/cafe-title-cropped.png" width="250px" style="padding-top: 5px;"/>
       </center>
 
       <div class='landing-desc'>
-          <div class="landing-img-div">
-                <img src="{{url_root}}/media/mobile/img/cafe/spoon-and-pencil-draft.png" width="100px"/>
-          </div>
-          <div class="landing-img-txt">
-              <br/><br/>
-              <div style="padding-left: 10px;padding-bottom: 5px;">
-                  <button type='submit' data-theme='a' class='first-time-btn'><font size="5">Begin</font></button>
+
+          <div style="clear: both;"></div>
+
+          <div>
+              <div class="landing-img-txt">
+                  <button type='submit' data-theme='a' class='first-time-btn'><font size="4">Begin</font></button>
+                  {{client_settings.WELCOME_PAGE_TEXT1}}<br/>
+                  <a href="#" class="comment-admin-text-a" style="font-size: 16px;" onclick="$('.dialog-about').show();$('.landing').hide();window.landing=true;">{{client_settings.WELCOME_PAGE_ABOUT_LINK}}</a><br/>
               </div>
-              <div>
-                {{client_settings.WELCOME_PAGE_TEXT1}}
-		<br>
-                <a href="#" class="comment-admin-text-a" onclick="$('.dialog-about').show();$('.landing').hide();window.landing=true;">{{client_settings.WELCOME_PAGE_ABOUT_LINK}}</a><br/><br/>
-		{{client_settings.WELCOME_PAGE_TEXT2}}
-              </div>
+              <div class="landing-img-div"><img src="{{url_root}}/media/mobile/img/cafe/spoon-and-pencil-draft.png" width="80px"/></div>
           </div>
+
       </div>
 
+        <div class="landing-disclaimer">{{client_settings.WELCOME_PAGE_TEXT2}}</div>
     </div>
 
   </div>
@@ -519,10 +520,10 @@
     <div class='dialog-text1 dialog-text-style default-left-padding'>
         <div class="basic-header" style="width:100%;">{{client_settings.DISCUSSION_DIALOG_HEADER}}</div>
         <img class="header-img-topic center" src="{{ url_root }}/media/mobile/img/cafe/map_teaser.png"/>
+
 	{{ client_settings.DISCUSSION_DIALOG_TEXT1 }}
-        "{{ topic }}".
 	<br><br>
-        {{ client_settings.DISCUSSION_DIALOG_TEXT2 }}
+        "{{ topic }}"
         <center>
         <div class="standard-btn-div">
             <button type='submit' data-theme='a' class='dialog-ready' ><font size="4">Next</font></button>
@@ -632,6 +633,7 @@
       </div>
 
     <div class='dialog-text-style default-left-padding'>
+
 
       <div class="basic-header" style="width:100%;">{{client_settings.AVG_EXPLAIN_HEADER}}</div>
      <center>

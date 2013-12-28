@@ -192,6 +192,7 @@ CATEGORIES = [ ('Welcome Page Customizations',
                  'DISCUSSION_DIALOG_TEXT2',
                  'INSTRUCTIONS_1',
                  'INSTRUCTIONS_2',
+                 'INSTRUCTIONS_3',
                  'YOUR_SCORE_LANGUAGE',
                  'SCORE_DIALOG_TEXT',
                  'RESPONSE_SAVED_HEADER',
@@ -237,7 +238,7 @@ for category in CATEGORIES:
 
 config_defaults = {
     'WELCOME_PAGE_TEXT1' : "Take a moment to assign grades and share ideas about California's government.",
-    'WELCOME_PAGE_TEXT2' : "(Works best when holding your mobile screen vertically.)",
+    'WELCOME_PAGE_TEXT2' : "Works best when holding your mobile screen vertically.",
     'ABOUT_PAGE_TEXT' : '''
           <strong>Overview</strong><br/>
           The California Report Card is based on a new interactive platform that engages public interest in government.
@@ -271,15 +272,16 @@ config_defaults = {
           <a href="http://californiareportcard.org/">http://californiareportcard.org/</a>''',
     'INSTRUCTIONS_1' : 'Click on any mug to begin',
     'INSTRUCTIONS_2' : 'To enter your own idea, click on your mug (highlighted in yellow).',
+    'INSTRUCTIONS_3' : "Now what's your idea?  Click on your mug (in yellow) to join the discussion.",
     'SCORE_DIALOG_TEXT' : "You earn points by rating others and when others rate your idea. Rate one more person's idea before entering your own...",
     'RESPONSE_SAVED_TEXT': "Continue to read and evaluate other's ideas to earn more points. You can see detailed statistics in the stats page.", 
     'EMAIL_ASK_TEXT' : "Please provide your email to receive a customized link where you can see how others rate your idea.",
     'LOGOUT_DIALOG_TEXT' : """Thank you for participating!""",
     'REPORT_CARD_INST' : "Drag the handle to grade from A to F how well you feel California's elected officials are working to address the following 6 subjects:",
     'ZIP_CODE_INSTRUCTIONS' : "Enter your zip code to save your grades and join the discussion",
-    'DISCUSSION_DIALOG_TEXT1' : 'The current topic is:', 
-    'DISCUSSION_DIALOG_TEXT2' : 'Each participant has a mug on the table.',
-    'AVG_EXPLAIN_TEXT' : "The Average Grade is based on the grades from all participants thusfar."
+    'DISCUSSION_DIALOG_TEXT1' : "Each participant has a mug on the table. We're discussing:", 
+    'DISCUSSION_DIALOG_TEXT2' : '',
+    'AVG_EXPLAIN_TEXT' : "The Median Grade is based on the grades from all participants thusfar."
 }
 
 """ 
@@ -390,7 +392,7 @@ CONFIGURABLES = {
     'WELCOME_PAGE_TITLE':{'default':'California Report Card','name':'Welcome Page Title'},
     'WELCOME_PAGE_TEXT1':{'display':'TEXTAREA', 'default':config_defaults['WELCOME_PAGE_TEXT1'],'name':'Welcome Page Top'},
     'WELCOME_PAGE_TEXT2':{'display':'TEXTAREA', 'default':config_defaults['WELCOME_PAGE_TEXT2'],'name':'Welcome Page Bottom'},
-    'WELCOME_PAGE_ABOUT_LINK' : {'default':'About','name':'Welcome Page - About Link'},
+    'WELCOME_PAGE_ABOUT_LINK' : {'default':'ABOUT','name':'Welcome Page - About Link'},
 
     'ABOUT_PAGE_HEADER':{'default':'About','name':'About Page Header'},
     'ABOUT_PAGE_TEXT':{'display':'TEXTAREA', 'default':config_defaults['ABOUT_PAGE_TEXT'],'name':'About Page Text (HTML)'},
@@ -398,7 +400,7 @@ CONFIGURABLES = {
     'REPORT_CARD_HEADER':{'default':"Grade California's State Government",'name':'Report Card Header'},
     'REPORT_CARD_NEXT_BUTTON':{'default':'Next','name':'Report Card Next Button'},
     'REPORT_CARD_INST' : {'display':'TEXTAREA', 'default':config_defaults['REPORT_CARD_INST'],'name':'Report Card Instructions'},
-    'AVG_EXPLAIN_HEADER' : {'default':"Average Grades",'name':'Averages Explanation Header'},
+    'AVG_EXPLAIN_HEADER' : {'default':"Median Grades",'name':'Averages Explanation Header'},
     'AVG_EXPLAIN_TEXT' : {'display':'TEXTAREA', 'default':config_defaults['AVG_EXPLAIN_TEXT'],'name':'Avg Explanation Text'},
     
     'ZIP_CODE_INSTRUCTIONS':{'display':'TEXTAREA', 'default':config_defaults['ZIP_CODE_INSTRUCTIONS'],'name':'Zip Code Instructions'},
@@ -410,6 +412,7 @@ CONFIGURABLES = {
 
     'INSTRUCTIONS_1':{'display':'TEXTAREA', 'default':config_defaults['INSTRUCTIONS_1'],'name':'Instructions 1'},
     'INSTRUCTIONS_2':{'display':'TEXTAREA', 'default':config_defaults['INSTRUCTIONS_2'],'name':'Instructions 2'},
+    'INSTRUCTIONS_3':{'display':'TEXTAREA', 'default':config_defaults['INSTRUCTIONS_3'],'name':'Instructions 3'},
     
     'SLIDER1_LEFT' : {'default':'Not Important','name':'Slider 1 Left'},
     'SLIDER1_RIGHT' : {'default':'Very Important','name':'Slider 1 Right'},
