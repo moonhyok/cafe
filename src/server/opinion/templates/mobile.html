@@ -196,7 +196,7 @@
 
         <div class='instructions'>{{client_settings.INSTRUCTIONS_1}}</div>
         <div class='instructions2'>{{client_settings.INSTRUCTIONS_2}}</div>
-	<div class='instructions3'>{{client_settings.INSTRUCTIONS_3}}</div>
+	    <div class='instructions3'>{{client_settings.INSTRUCTIONS_3}}</div>
 
     </center>
   </div>
@@ -367,12 +367,12 @@
                     </table>
 
                     <div class="standard-btn-div">
-                        <button data-theme='a'  onclick="$('.aggstat1').hide();$('.aggstat2').show();">Next</button>
+                        <button data-theme='a'  onclick="$('.aggstat1').hide();$('#neighborhoodStat').show();">Next</button>
                     </div>
 
                 </div>
 
-                <div class="aggstat2" style="display:none;">
+                <!--<div class="aggstat2" style="display:none;">
                     Changes in the mug positions<br/>
                     <canvas id="MugAnimation" width="250" height="200" style="background-image:url('{{ url_root }}/media/mobile/img/cafe/cafe_bg.png');background-repeat:repeat; background-size: 100% 100%;	"></canvas>
                     <script type="text/javascript" src="{{ url_root }}/media/mobile/js/timelineMug_animation_json.js"></script>
@@ -382,7 +382,7 @@
                         <button type="button" onclick="reset()" data-mini="true" data-inline="true"> Reset</button>
                         <button data-theme='a' onclick="$('.aggstat2').hide();$('#neighborhoodStat').show();">Next</button>
                     </div>
-                </div>
+                </div>-->
 
                 <div id="neighborhoodStat" style="display:none;">
 		        <div id="neighborhoodTable"></div>
