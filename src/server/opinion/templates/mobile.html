@@ -80,13 +80,13 @@
    }
 
   $(".rating-slider").noUiSlider({
-    range: [0, 100], start: 50, step: 5, handles: 1,connect: false, behaviour: "none"
+    range: [0, 100], start: 50, step: 10, handles: 1,connect: false, behaviour: "none"
   });
   
-  var html_label ="<div class='slider-range-labels'><div class='alignleft'>&larr;{{client_settings.SLIDER1_LEFT}}</div><div class='alignright'>{{client_settings.SLIDER1_RIGHT}}&rarr;</div></div>";
+  var html_label ="<div class='slider-range-labels'><div class='alignleft'>{{client_settings.SLIDER1_LEFT}}</div><div class='alignright'>{{client_settings.SLIDER1_RIGHT}}</div></div>";
   $('.rating-slider1 > .noUi-base').append( html_label );
   
-  var html_label ="<div class='slider-range-labels'><div class='alignleft'>&larr;{{client_settings.SLIDER2_LEFT}}</div><div class='alignright'>{{client_settings.SLIDER2_RIGHT}}&rarr;</div></div>";
+  var html_label ="<div class='slider-range-labels'><div class='alignleft'>{{client_settings.SLIDER2_LEFT}}</div><div class='alignright'>{{client_settings.SLIDER2_RIGHT}}</div></div>";
   $('.rating-slider2 > .noUi-base').append( html_label );
   
   $(".change-rating-slider").noUiSlider({
@@ -98,6 +98,13 @@
   $.map( _grades, function(position, letter) {
     var span = '<span class="grade-labels" style="left:'+position+'%;">'+letter+'</span>';
     $('.statement-slider > .noUi-base').append( span );
+  });
+
+
+  var _grades = {'1' : 30, '2' : 40, '3': 50, '4': 60, '5': 70};
+  $.map( _grades, function(position, letter) {
+    var span = '<span class="rate-dot-labels" style="left:'+position+'%;">.</span>';
+    $('.rating-slider > .noUi-base').append( span );
   });
 
  });
@@ -310,7 +317,6 @@
                     <td class="title-table-label2">
                         <div id='o{{statement.id}}' class="grade2"></div>
                     </td>
-
 
                 </tr>
 

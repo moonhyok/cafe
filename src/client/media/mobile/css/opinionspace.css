@@ -47,6 +47,16 @@ html {
     background:none;
 }
 
+.rate-dot-labels {
+    position: absolute;
+    z-index: -1;
+    top: -15px;
+    font-size:24px;
+
+    color: #fff8f0;
+    background:none;
+}
+
 #grades div {
 	float: left;
 	padding-right: 0px;
@@ -54,11 +64,11 @@ html {
 }
 
 .alignleft {
-	padding-left: 10px;
+	padding-left: 1px;
 	float: left;
 }
 .alignright {
-	padding-right: 10px;
+	padding-right: 1px;
 	float: right;
 }
 
