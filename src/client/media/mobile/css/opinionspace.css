@@ -13,7 +13,7 @@ html {
 
 .inst-score {
 	display:none;
-	font-weight:bold;
+	
 }
 
 .top-bar{
@@ -24,7 +24,7 @@ html {
 
 .slider-agree-labels{
 	font-size:11px;
-	font-weight: bold;
+	
 	color: #fff8f0F;
 }
 
@@ -33,7 +33,7 @@ html {
     top: -3px;
     z-index: -1;
     font-size:11px;
-    font-weight: bold;
+    
     color: #fff8f0;
 }
 
@@ -42,7 +42,7 @@ html {
     z-index: -1;
     top: -2px;
     font-size:11px;
-    font-weight: bold;
+    
     color: #fff8f0;
     background:none;
 }
@@ -75,7 +75,7 @@ html {
 .ui-navbar .ui-btn-active {
 	border: 1px solid       #222;
 	background:             #96c6c5;
-	font-weight: bold;
+	
 	color:                     #fff;
 	background-image: -webkit-gradient(linear, left top, left bottom, from( #555), to( #333));
 	background-image: -webkit-linear-gradient(#555, #333);
@@ -87,6 +87,10 @@ html {
 
 .ui-navbar .ui-btn-inner {
 	padding: 0px !important;
+}
+
+.ui-navbar .ui-btn {
+	border: 1px solid       #222;
 }
 
 /** Testing out leaderboard*/
@@ -168,11 +172,10 @@ table.pretty caption {
 	}
 	
 	.stats-label,.logout-label{
-		font-size: 16px;
+		font-size: 15px;
 		font-family: Arial;
 		line-height: 18px;
-		padding-top: 5px;
-		padding-bottom: 8px;
+		padding-top: 7px;
 	}
 	
 	.home-label{
@@ -236,7 +239,7 @@ table.pretty caption {
 
 
 	strong {
-		font-weight: bold;
+		
 		color: #444444;
 	}
 	strong.go-back {
@@ -245,7 +248,7 @@ table.pretty caption {
 	}
 
 	#score{
-		font-weight: bold;
+		
 	}
 
 	.frame {
@@ -264,7 +267,7 @@ table.pretty caption {
 	.header {
 		color: #fff8f0;
 		text-shadow: none;
-		font-weight: bold;
+		
 		width: 95%;
 		font-size: 13px;
 		/*padding: 5px 0px;*/
@@ -285,8 +288,8 @@ table.pretty caption {
 		left: 0px;
 		z-index: 999;
 		text-shadow: none;
-		font-size: 14px !important;
-		font-weight: bold;
+		font-size: 16px !important;
+		
 		width: 100%;
 		line-height: 25px;
 		display:none;
@@ -300,8 +303,8 @@ table.pretty caption {
     		left: 0px;
     		z-index: 999;
     		text-shadow: none;
-    		font-size: 14px !important;
-            font-weight: bold;
+    		font-size: 16px !important;
+            
             width: 100%;
             line-height: 20px;
     		display:none;
@@ -315,8 +318,8 @@ table.pretty caption {
         		left: 0px;
         		z-index: 999;
         		text-shadow: none;
-        		font-size: 14px !important;
-                font-weight: bold;
+        		font-size: 16px !important;
+                
                 width: 100%;
                 line-height: 20px;
         		display:none;
@@ -328,7 +331,7 @@ table.pretty caption {
 		color: #594027;
 		text-shadow: none;
 		height: 100%;
-		font-weight: bold;
+		
 
 	}
 
@@ -354,20 +357,22 @@ table.pretty caption {
 	
 	.cardtable{
 		padding-right: 10px;
-		padding-left: 10px;
+		padding-left: 6px;
+		border-collapse:collapse;
 	}
 
 	.slider-row{
-	padding-top: 15px;
-	padding-bottom: 15px;
+	padding-top: 20px;
+	padding-bottom: 10px;
 	}
 
 	.title-table {
-	    width:301px;
+	    width:306px;
 	    background-color: #4b6d6c;
 	    border: solid 0px #96c6c5;
 	    color: #fff8f0;
 	    position: relative;
+	    left: -2px;
 	}
 
 	.title-table td{
@@ -414,7 +419,7 @@ table.pretty caption {
 	.grade{
 		font-family: verdana, sans-serif;
 		color: #594027;
-		font-weight:bold;
+		
 		text-shadow: none;
 		font-size: 28px;
 		line-height: 30px;
@@ -423,7 +428,7 @@ table.pretty caption {
 	.grade2{
 		font-family: verdana, sans-serif;
 		color: #594027;
-		font-weight:bold;
+		
 		text-shadow: none;
 		font-size: 28px;
 		line-height: 30px;
@@ -537,7 +542,7 @@ table.pretty caption {
 	
 	.scorebox{
 		text-shadow: none;
-		font-weight: bold;
+		
 		display: none;
 		color: #000000;
 		position: absolute;
@@ -549,7 +554,7 @@ table.pretty caption {
 	
 	.scorebox-fake{
 		text-shadow: none;
-		font-weight: bold;
+		
 		width: 250px;
 		color: #000000;
 		padding-top: 5px;
@@ -563,7 +568,7 @@ table.pretty caption {
 		text-shadow: none;
 		width: 95%;
 		font-size: 14px;
-		font-weight: bold;
+		
 		padding-bottom: 3px;
 		color: #594027;
 		/*background-color: rgba(200,200,200,0.3);*/
@@ -584,7 +589,7 @@ table.pretty caption {
 	.loginpanel{
 		background-color: #FAEBCD;
 		color: #fff8f0;
-		font-weight:bold;
+		
 		text-shadow: none;
 		text-align: center;
 		width: 90%;
@@ -671,33 +676,32 @@ table.pretty caption {
 }
 
 .rc-sub-header {
-    width:95%;
     text-align: left;
-    padding-bottom:5px;
+    padding-bottom: 5px;
     font-family: verdana, sans-serif;
-    font-size: 14px;
+    font-size: 16px;
+    line-height: 20px;
     color: #594027;
-    font-weight: bold;
 }
 
 .basic-header {
 	font-family: verdana, sans-serif;
 	text-shadow: none;
-	text-align: center;
+	text-align: left !important;
 	color: #fff8f0;
-	font-size: 30px;
-	line-height: 34px;
+	font-size: 24px;
+	line-height: 30px;
 	padding-bottom: 10px;
 	padding-top: 5px;
+	font-weight: bold;
 }
 
 .basic-header2 {
 	font-family: verdana, sans-serif;
 	text-shadow: none;
-	text-align: center;
 	color: #fff8f0;
-	font-size: 26px;
-	line-height: 28px;
+	font-size: 20px;
+	line-height: 26px;
 	padding-bottom: 10px;
 	padding-top: 5px;
 }
@@ -705,7 +709,6 @@ table.pretty caption {
 .basic-sub-header {
 	font-family: verdana, sans-serif;
 	text-shadow: none;
-	text-align: center;
 	color: #fff8f0;
 	font-size: 18px;
 	line-height: 20px;
@@ -725,7 +728,7 @@ line-height:18px;
 .basic-fine-print{
 font-size: 14px;
 color: #fff8f0;
-font-weight:bold;
+
 line-height:16px;
 text-align:right;
 padding-right: 5px;
@@ -784,19 +787,19 @@ padding-right: 7px;
 }
 
 .answer {
-	background-color: #6b8583;
+	background-color: #4b6d6c;
 	width: 95% !important;
 	min-height: 150px !important;
 	font-size: 14px !important;
 	font-family: verdana, sans-serif;
 	color: #fff8f0;
-	font-weight: bold;
+	
 	text-shadow: none !important;
 }
 
 .standard-btn-div {
     width: 100%;
-    max-width: 250px;
+    max-width: 200px;
     height: auto;
     padding-bottom: 10px;
 }
@@ -804,13 +807,11 @@ padding-right: 7px;
 .standard-btn-div .ui-btn-inner{
     font-family: verdana, sans-serif;
     line-height: 25px;
-    corner-radius: 0px !important;
 }
 
 .standard-btn-div .ui-btn{
     font-family: verdana, sans-serif;
     line-height: 25px;
-    border-radius: 0px !important;
 }
 
 .first-time-btn .ui-btn-inner{
@@ -834,7 +835,7 @@ padding-right: 7px;
 .home-btn-dialog-box .ui-btn{
     font-family: verdana, sans-serif;
     line-height: 20px;
-    border-radius: 0px !important;
+    /*border-radius: 0px !important;*/
 }
 
 .answerwrapper {
@@ -851,8 +852,9 @@ padding-right: 7px;
 
 .slider-question {
 	width: 100%;
-	font-size: 13px;
+	font-size: 15px;
 	padding-left: 5px;
+	padding-right: 5px;
 	padding-top: 3px;
 }
 
@@ -917,7 +919,7 @@ padding-right: 7px;
 	text-shadow: none;
 	font-size: 16px;
 	line-height: 16px;
-	font-weight: bold;
+	
 }
 
 .dialog-text-style-noflow {
@@ -945,7 +947,7 @@ padding-right: 7px;
 	padding-left: 10px;
 	font-size: 16px;
     line-height: 16px;
-    font-weight: bold;
+    
 	padding-top: 10px;
 }
 
@@ -982,7 +984,7 @@ padding-right: 7px;
 	 font-size: 14px;
 	 font-family: verdana, sans-serif;
 	 color: #fff8f0;
-	 font-weight: bold;
+	 
    }
 
   .avg-grades div {
@@ -996,8 +998,8 @@ padding-right: 7px;
 
 
 .noUi-base {
-	background-color: #6b8583;
-	border: 2px solid #6b8583;
+	background-color: #4b6d6c;
+	border: 2px solid #4b6d6c;
 	border-radius:0px;
 	height: 12px !important;
 }
