@@ -405,6 +405,7 @@ $(document).ready(function() {
 
     $('.my-comment-btn').click(function() {
         accounts.loadMyCommentDiv();
+        $('.scorebox').hide();
     });
 
     $('.edit-comment-btn').click(function() {
@@ -498,6 +499,7 @@ $(document).ready(function() {
     $('.edit-comment-done-btn').click(function() {
         $('.menubar').find('.ui-btn-active').removeClass('ui-btn-active ui-focus');
         $('.my-comment').hide();
+        $('.scorebox').show();
     });
 
     $('.logout-btn').click(function(e) {
