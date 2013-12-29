@@ -275,15 +275,15 @@
              <tr>
 
                 <td class="title-table-label1">
-                  <strong>Subject</strong>
+                  Subject
                 </td>
 
                 <td class="title-table-label2">
-                  <strong>My Grade</strong>
+                  My Grade
                 </td>
 
                 <td class="title-table-label2">
-                  <a href="#" onclick="$('.endsliders').hide();$('.dialog-avggrade').show();" style="color:#594027;">Median Grade</a>
+                  <a href="#" onclick="$('.endsliders').hide();$('.dialog-avggrade').show();" style="color: #fff8f0 !important;">Median Grade</a>
                 </td>
 
              </tr>
@@ -291,7 +291,7 @@
 
 
           {% for statement in statements %}
-           <br/>
+           <div style="height: 6px;"></div>
              <table id="tr1{{statement.id}}" class='cardtable grade-table'>
                 <tr>
                     <td style="height: 60px;">
@@ -637,7 +637,7 @@
 
       <div class="basic-header" style="width:100%;">{{client_settings.AVG_EXPLAIN_HEADER}}</div>
      <center>
-      <img src="{{ url_root }}/media/mobile/img/cafe/avggrade.png" class="center" style="width:150px;padding-top:3px;"><br>
+      <img src="{{ url_root }}/media/mobile/img/cafe/avggrade.png" class="center" style="width:100px;padding-top:3px;"><br>
       <div class="standard-btn-div">
         {{client_settings.AVG_EXPLAIN_TEXT}}
         <button type='submit' data-theme='a'  onclick="$('.dialog-avggrade').hide();$('.endsliders').show();"><font size="4">Back</font></button>

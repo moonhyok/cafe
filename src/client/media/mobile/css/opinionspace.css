@@ -25,7 +25,7 @@ html {
 .slider-agree-labels{
 	font-size:11px;
 	font-weight: bold;
-	color: #FFFFFFF;
+	color: #fff8f0F;
 }
 
 .slider-range-labels{
@@ -34,7 +34,7 @@ html {
     z-index: -1;
     font-size:11px;
     font-weight: bold;
-    color: #FFFFFF;
+    color: #fff8f0;
 }
 
 .grade-labels {
@@ -43,7 +43,7 @@ html {
     top: -2px;
     font-size:11px;
     font-weight: bold;
-    color: #FFFFFF;
+    color: #fff8f0;
     background:none;
 }
 
@@ -262,7 +262,7 @@ table.pretty caption {
 	}
 
 	.header {
-		color: #FFFFFF;
+		color: #fff8f0;
 		text-shadow: none;
 		font-weight: bold;
 		width: 95%;
@@ -344,7 +344,7 @@ table.pretty caption {
 	
 	.comment-panel{
 		/*background: url('../img/cafe/cafe_notebook.png') repeat-y;*/
-		color: white;
+		color: #fff8f0;
 		text-shadow: none;
 		width: 95%;
 		height: 100%;
@@ -363,25 +363,26 @@ table.pretty caption {
 	}
 
 	.title-table {
-	    width:299px;
-	    background-color: #FFFFFF;
+	    width:301px;
+	    background-color: #4b6d6c;
 	    border: solid 0px #96c6c5;
+	    color: #fff8f0;
 	    position: relative;
-	    left: -1px;
 	}
 
 	.title-table td{
-    	    border: solid 3px #96c6c5;
+    	    border: solid 4px #96c6c5;
+    	    color: #fff8f0 !important;
     	}
 
     .grade-table {
     	    width: 299px;
     	    background-color: #96c6c5;
-    	    border: solid 0px #FFFFFF;
+    	    border: solid 0px #fff8f0;
     	}
 
     	.grade-table td{
-        	    border: solid 3px #FFFFFF;
+        	    border: solid 3px #fff8f0;
         	}
 
 	.stats-table {
@@ -569,20 +570,20 @@ table.pretty caption {
 	}
 
 	.registerpanel{
-		color: white;
+		color: #fff8f0;
 		text-shadow: none;
 		height: 100%;
 	}
 	
 	.edit-comment-panel{
-		color: white;
+		color: #fff8f0;
 		text-shadow: none;
 		width: 100%;
 	}
 	
 	.loginpanel{
 		background-color: #FAEBCD;
-		color: white;
+		color: #fff8f0;
 		font-weight:bold;
 		text-shadow: none;
 		text-align: center;
@@ -647,7 +648,7 @@ table.pretty caption {
 		top: 0;
 	/*bottom: 0;
 	right: 0; */
-	color: white;
+	color: #fff8f0;
 	width: 100%;
 	height: 100%;
 	background-color: #96c6c5;
@@ -662,7 +663,7 @@ table.pretty caption {
 .landing-header {
 	font-family: verdana, sans-serif;
 	text-shadow: none;
-	color: #FFFFFF;
+	color: #fff8f0;
 	font-size: 42px;
 	text-align: center;
 	width: 100%;
@@ -683,7 +684,7 @@ table.pretty caption {
 	font-family: verdana, sans-serif;
 	text-shadow: none;
 	text-align: center;
-	color: white;
+	color: #fff8f0;
 	font-size: 30px;
 	line-height: 34px;
 	padding-bottom: 10px;
@@ -694,7 +695,7 @@ table.pretty caption {
 	font-family: verdana, sans-serif;
 	text-shadow: none;
 	text-align: center;
-	color: white;
+	color: #fff8f0;
 	font-size: 26px;
 	line-height: 28px;
 	padding-bottom: 10px;
@@ -705,7 +706,7 @@ table.pretty caption {
 	font-family: verdana, sans-serif;
 	text-shadow: none;
 	text-align: center;
-	color: #FFFFFF;
+	color: #fff8f0;
 	font-size: 18px;
 	line-height: 20px;
 	padding-bottom: 10px;
@@ -717,13 +718,13 @@ font-size: 18px;
 padding-left: 7px;
 padding-right: 7px;
 font-family: verdana, sans-serif;
-color: #FFFFFF;
+color: #fff8f0;
 line-height:18px;
 }
 
 .basic-fine-print{
 font-size: 14px;
-color: #FFFFFF;
+color: #fff8f0;
 font-weight:bold;
 line-height:16px;
 text-align:right;
@@ -733,7 +734,7 @@ padding-left: 5px;
 }
 
 .about-link a {
-color: #FFFFFF;
+color: #fff8f0;
 font-size: 16px;
 padding-right: 7px;
 }
@@ -743,7 +744,7 @@ padding-right: 7px;
 	line-height: 27px;
 	font-family: verdana, sans-serif;
 	text-shadow: none;
-	color: #FFFFFF;
+	color: #fff8f0;
 	font-size: 28px;
 	height: 100%;
 	left: 0;
@@ -778,7 +779,7 @@ padding-right: 7px;
 
 .comment-admin-text-a{
     font-size: 14px !important;
-    color: white !important;
+    color: #fff8f0 !important;
     font-family: verdana, sans-serif;
 }
 
@@ -788,7 +789,7 @@ padding-right: 7px;
 	min-height: 150px !important;
 	font-size: 14px !important;
 	font-family: verdana, sans-serif;
-	color: white;
+	color: #fff8f0;
 	font-weight: bold;
 	text-shadow: none !important;
 }
@@ -840,7 +841,7 @@ padding-right: 7px;
 	/*background-color: #E7E1D8;*/
 	/*background: url('../img/cafe/cafe_notebook.png') repeat-y;*/
 	text-shadow: none;
-	color: #FFFFFF;
+	color: #fff8f0;
 	padding-top: 7px;
 }
 
@@ -850,7 +851,9 @@ padding-right: 7px;
 
 .slider-question {
 	width: 100%;
-	font-size: 15px;
+	font-size: 13px;
+	padding-left: 5px;
+	padding-top: 3px;
 }
 
 .rated, .rated-thanks {
@@ -865,7 +868,7 @@ padding-right: 7px;
 
 	position: absolute;
 	top: -50px;
-	background-color: white;
+	background-color: #fff8f0;
 }
 
 .rate-loading {
@@ -875,7 +878,7 @@ padding-right: 7px;
 	right: 0;
 	width: 100%;
 	background-color: #96c6c5;
-	color: white;
+	color: #fff8f0;
 	padding: 20px 0;
 	text-align: center;
 }
@@ -978,7 +981,7 @@ padding-right: 7px;
    .rate-username{
 	 font-size: 14px;
 	 font-family: verdana, sans-serif;
-	 color: #FFFFFF;
+	 color: #fff8f0;
 	 font-weight: bold;
    }
 
@@ -988,14 +991,14 @@ padding-right: 7px;
 	text-align: right;
 	 padding: 3px;
 	margin: 1px;
-	color: white;
+	color: #fff8f0;
  	}
 
 
 .noUi-base {
 	background-color: #6b8583;
 	border: 2px solid #6b8583;
-	border-radius:35px;
+	border-radius:0px;
 	height: 12px !important;
 }
 
@@ -1015,12 +1018,12 @@ padding-right: 7px;
 	background-image:-o-linear-gradient(#E8B91A,#FFC501);
 	background-image:linear-gradient(#E8B91A,#FFC501);*/
 	
-background-image: -webkit-gradient(linear, left top, left bottom, from( #FFFFF0 /*{b-bup-background-start}*/), to( #FFFFFF /*{b-bup-background-end}*/)); /* Saf4 , Chrome */
-	background-image: -webkit-linear-gradient( #FFFFF0 /*{b-bup-background-start}*/, #FFFFFF /*{b-bup-background-end}*/); /* Chrome 10 , Saf5.1  */
-	background-image:    -moz-linear-gradient( #FFFFF0 /*{b-bup-background-start}*/, #FFFFFF /*{b-bup-background-end}*/); /* FF3.6 */
-	background-image:     -ms-linear-gradient( #FFFFF0 /*{b-bup-background-start}*/, #FFFFFF /*{b-bup-background-end}*/); /* IE10 */
-	background-image:      -o-linear-gradient( #FFFFF0 /*{b-bup-background-start}*/, #FFFFFF /*{b-bup-background-end}*/); /* Opera 11.10  */
-	background-image:         linear-gradient( #FFFFF0 /*{b-bup-background-start}*/, #FFFFFF /*{b-bup-background-end}*/);
+background-image: -webkit-gradient(linear, left top, left bottom, from( #FFFFF0 /*{b-bup-background-start}*/), to( #fff8f0 /*{b-bup-background-end}*/)); /* Saf4 , Chrome */
+	background-image: -webkit-linear-gradient( #FFFFF0 /*{b-bup-background-start}*/, #fff8f0 /*{b-bup-background-end}*/); /* Chrome 10 , Saf5.1  */
+	background-image:    -moz-linear-gradient( #FFFFF0 /*{b-bup-background-start}*/, #fff8f0 /*{b-bup-background-end}*/); /* FF3.6 */
+	background-image:     -ms-linear-gradient( #FFFFF0 /*{b-bup-background-start}*/, #fff8f0 /*{b-bup-background-end}*/); /* IE10 */
+	background-image:      -o-linear-gradient( #FFFFF0 /*{b-bup-background-start}*/, #fff8f0 /*{b-bup-background-end}*/); /* Opera 11.10  */
+	background-image:         linear-gradient( #FFFFF0 /*{b-bup-background-start}*/, #fff8f0 /*{b-bup-background-end}*/);
 
 	margin: -13px 0px 0px -10px;
 
