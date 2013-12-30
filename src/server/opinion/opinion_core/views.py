@@ -66,22 +66,6 @@ def index(request):
     return render_to_response('app.html', context_instance = RequestContext(request, {'client_settings':get_client_settings()}))
 
 #check if we should display report card for user with entry code( deal with refreshing and revisiting)
-def prompt_report_card(user):
-    if user.is_authenticated():
-       last_rating=UserRating.objects.filter(user__exact=user).filter(is_current__exact=True)
-       if len(last_rating)==0:
-           return False
-       last_visit_day=datetime.datetime.now()-last_rating[0].created
-       for i in range(1,len(last_rating)):
-           difference=datetime.datetime.now()-last_rating[i].created
-           if difference<last_visit_day:
-              last_visit_day=difference
-       if last_visit_day.seconds<=60*60*24*30:
-          return False
-       else:
-          return True
-    else:
-       return True
 
 def return_user_first_time(request,entrycode):
     if entrycode==None: #first time user
@@ -208,48 +192,82 @@ def crcstats(request):
                                                                                             'score': score*float(get_client_settings(True)['SCORE_SCALE_FACTOR']),
                                                                                             'num_ratings': CommentAgreement.objects.filter(is_current=True).count()*2,
                                                                                             'url_root' : settings.URL_ROOT,
-                                                                                            'medians': medians}))
+                                                                                            'medians': medians,
+                                                                                            'city':neighbor_city(request),
+                                                                                            'neighbors': neighbor_stat(request),
+                                                                                            'cur_user_rating': participant_stat(request)}))
+
 
 def neighbor_stat(request):
-    zipcode=request.REQUEST.get('zipcode')
-    zipcode_object=ZipCode.objects.filter(code__exact=zipcode)
-    city=zipcode_object[0].city
-    
-    zipcode_in_city=ZipCode.objects.filter(city__exact=city)
+    zipcode=request.REQUEST.get('zipcode',-1)
     statements = OpinionSpaceStatement.objects.all().order_by('id')
-    
-    neighbor={}
+    if zipcode!=-1:
+       city=ZipCode.objects.filter(code__exact=zipcode)[0].city
+       zipcode_in_city=ZipCode.objects.filter(city__exact=city)
+       neighbors=[]
    
-    for s in statements:
-       s_grade=[]
-       for i in range(0, len(zipcode_in_city)):
-           log=ZipCodeLog.objects.filter(location__exact=zipcode_in_city[i])
+       for s in statements:
+          s_grade=[]
+          for i in range(0, len(zipcode_in_city)):
+             log=ZipCodeLog.objects.filter(location__exact=zipcode_in_city[i])
            
-           for j in range(0, len(log)):
-               user_grade_s=log[j].user.userrating_set.filter(opinion_space_statement=s,is_current=True)
-               if len(user_grade_s)>0:
+             for j in range(0, len(log)):
+                user_grade_s=log[j].user.userrating_set.filter(opinion_space_statement=s,is_current=True)
+                if len(user_grade_s)>0:
                   s_grade.append(user_grade_s[0].rating)
-       neighbor[str(s.id)]=numpy.median(s_grade)
-       
-    neighbor['city']=city
-    html_code='<span>Grades in your neighborhood: </span>'+city+\
-        '<table style="width: 90%;">'+\
-        '<tr class="stats-table-title">'+\
-        '<td>'+\
-        'Subject'+\
-        '</td>'+\
-        '<td>'+\
-        'Avg. Grade'+\
-        '</td>'+'</tr>'
-    for s in statements:
-        
-        html_code=html_code+'<tr>'+'<td>'+s.statement+'</td>'+'<td>'+\
-            score_to_grade(neighbor[str(s.id)]*100)+'</td>'+'</tr>'
-    html_code=html_code+'</table>'
-    data={}
-    data['html']=html_code
-    return HttpResponse((json.dumps(data)))
+          neighbors.append({'statement':s.statement,'avgG':score_to_grade(100*numpy.median(s_grade)),'avg': int((1-numpy.median(s_grade))*300)})
+       return neighbors
+    else:
+       return None
 
+
+def neighbor_city(request):
+    zipcode=request.REQUEST.get('zipcode',-1)
+    if zipcode!=-1:
+       city=ZipCode.objects.filter(code__exact=zipcode)[0].city
+       return city
+    else:
+       return None
+
+def participant_stat(request):
+    uid = request.GET.get('username',-1)
+    auth = False
+    os = get_os(1)
+    disc_stmt = get_disc_stmt(os, 1)
+    participant_rating={}
+    participant_rating['s1_avg']='NA'
+    participant_rating['s2_avg']='NA'
+    if uid != -1:
+        cur_user = User.objects.filter(id=uid)
+        if len(cur_user) > 0:
+            cur_user = cur_user[0]
+            auth = True
+            cur_user_comment=DiscussionComment.objects.filter(user=cur_user,discussion_statement= disc_stmt,is_current = True)
+            if len(cur_user_comment)>0:
+               participant_rating['comment']=cur_user_comment[0].comment
+               participant_rating['date']=cur_user_comment[0].created
+               slider1=CommentAgreement.objects.filter(comment=cur_user_comment[0])
+               slider2=CommentRating.objects.filter(comment=cur_user_comment[0])
+               slider1_rating=[]
+               slider2_rating=[]
+               
+               
+               for i in range(0, len(slider1)):
+                   slider1_rating.append(slider1[i].agreement)
+               for i in range(0, len(slider2)):
+                   slider2_rating.append(slider2[i].rating)
+               
+               
+               participant_rating['s1_rating']=slider1_rating
+               participant_rating['s2_rating']=slider2_rating
+               return participant_rating
+            else:
+               return participant_rating
+        else:
+            return participant_rating
+    else:
+      return participant_rating
+      
 def app(request, username=None):
 	if request.mobile:
 		return HttpResponseRedirect(URL_ROOT + "/mobile/")
