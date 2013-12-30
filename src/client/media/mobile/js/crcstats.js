@@ -37,7 +37,7 @@ function generate_s1_hist()
     var data = d3.layout.histogram()
     .bins(x.ticks(20))
     (s1_rating);
-    
+    var s1_median=d3.median(s1_rating);
     var y = d3.scale.linear()
     .domain([0, d3.max(data, function(d) { return d.y; })])
     .range([height-textheight, 0]);
@@ -65,7 +65,11 @@ function generate_s1_hist()
     bar.append("rect")
     .attr("x", 0)
     .attr("width", x(data[0].dx) - 1)
-    .attr("height", function(d) { return height - y(d.y)-textheight; });
+    .attr("height", function(d) { return height - y(d.y)-textheight; })
+    .attr("fill",
+    function(d){if (d.x<=s1_median && d.x+d.dx>s1_median)
+                {return "brown"} 
+                else{return "white"}});
     
     /*bar.append("text")
     .attr("y", 10)
@@ -120,7 +124,7 @@ function generate_s2_hist()
     var data = d3.layout.histogram()
     .bins(x.ticks(20))
     (s2_rating);
-    
+    var s2_median=d3.median(s2_rating);
     var y = d3.scale.linear()
     .domain([0, d3.max(data, function(d) { return d.y; })])
     .range([height-textheight, 0]);
@@ -148,7 +152,11 @@ function generate_s2_hist()
     bar.append("rect")
     .attr("x", 0)
     .attr("width", x(data[0].dx) - 1)
-    .attr("height", function(d) { return height - y(d.y)-textheight; });
+    .attr("height", function(d) { return height - y(d.y)-textheight; })
+    .attr("fill",
+    function(d){if (d.x<=s2_median && d.x+d.dx>s2_median)
+                {return "brown"} 
+                else{return "white"}});
     
     /*bar.append("text")
     .attr("y", 10)
