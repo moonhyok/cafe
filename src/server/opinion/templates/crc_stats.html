@@ -1,4 +1,4 @@
-<html>
+<!DOCTYPE html>
 <style>
 body{
     font-family: verdana, sans-serif;
@@ -8,6 +8,7 @@ body{
 
 strong {
         color: white;
+        float:left;
     }
 
 .grade-bar {
@@ -33,23 +34,59 @@ float: right;
     color: white;
     }
 
+.bar rect {
+  fill: white;
+  shape-rendering: crispEdges;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: black;
+    shape-rendering: crispEdges;
+}
+
+.axis text {
+    font-family: sans-serif;
+    font-size: 11px;
+}
 </style>
+<script type='text/javascript'>
+window.conf = { 'S1_RATING':{{cur_user_rating.s1_rating}},
+                'S2_RATING':{{cur_user_rating.s2_rating}}};
+</script>
 <body>
+<script src="http://d3js.org/d3.v3.min.js"></script>
 {% if auth %}
 <strong>Participant {{ participant }}'s Statistics</strong><br/>
+Comment: {{ cur_user_rating.comment }}  <br/>
+Comment Date: {{ cur_user_rating.date}} <br/>
 Score: {{ score }} <br/>
 Ratings Given: {{ given }} <br/>
 Ratings Received: {{ received }} <br/><br/>
 
+  {% if received %}
+   <strong>Histogram Analysis of Participant {{ participant }}'s Comment</strong><br/>
+   How important is this subject for your community?<br/>
+   <div id="s1hist">
+
+   </div>
+   How interested are you in this subject?<br/>
+   <div id="s2hist">
+
+   </div>
+   
+  {% endif %}
 <!--add vertical bar chart for agree and insight ratings -->
 
 {% endif %}
+<br/>
 <strong>Report Card Overview</strong><br/>
 Participants so far: {{ num_participants }}<br/>
 Total number of ratings: {{ num_ratings }}<br/><br/>
 
 <strong>Average Grades</strong><br/>
-<div class="grade-chart">
+<div class="grade-chart" style="float:left">
     {% for median in medians %}
     <div class="grade-bar" style="width: {{ median.avg}}px;height: 50px;">{{ median.statement}}</div>
     {% endfor %}
@@ -64,12 +101,25 @@ Total number of ratings: {{ num_ratings }}<br/><br/>
 <br/><br/>
 
 {% if auth %}
-<strong>Average Grades in <!--add city --></strong><br/>
-<!-- add bar graph like above for the grades in neighborhood -->
+<strong>Average Grades in Your Neighborhood : {{city}}</strong><br/>
+<div class="grade-chart" style="float:left">
+    {% for neighbor in neighbors %}
+    <div class="grade-bar" style="width: {{ neighbor.avg}}px;height: 50px;">{{ neighbor.statement}}</div>
+    {% endfor %}
+    <div class="grade-labels" style="max-width: 320px;clear:both;">
+        <span style="position:relative; left:3%;">A</span>
+        <span style="position:relative; left:19%;">B</span>
+        <span style="position:relative; left:37%;">C</span>
+        <span style="position:relative; left:56%;">D</span>
+        <span style="position:relative; left:74%;">F</span>
+    </div>
+</div>
+
 {% endif %}
 
 
 
+<script type='text/javascript' src='{{url_root}}/media/mobile/js/crcstats.js'></script>  
 </body>
 
 </html>
