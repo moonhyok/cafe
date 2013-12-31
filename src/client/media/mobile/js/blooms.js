@@ -328,7 +328,7 @@ var _blooms = blooms = (function($, d3, console) {
 
             var width = $(window).width() - margin.right - margin.left;
 
-            var topBarHeight = $('.top-bar').height() || 90;
+            var topBarHeight = $('.top-bar').height();
 
             var height = $(window).height()- margin.bottom - margin.top - topBarHeight;
 

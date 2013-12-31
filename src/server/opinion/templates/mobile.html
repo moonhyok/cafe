@@ -295,10 +295,9 @@
 
 
           {% for statement in statements %}
-           <div style="height: 6px;"></div>
              <table class='cardtable grade-table'>
                 <tr id="tr{{statement.id}}">
-                    <td style="height: 60px;">
+                    <td style="height: 60px;background-color:#cbe2e2;">
                         {% ifnotequal statement.statement '' %}
                             <div class='slider-question'>
                                 <script>var sid={{statement.id}}-1;var total={{statements|length}};document.write(total-sid);</script>. {{ statement.statement }}
@@ -307,11 +306,11 @@
                         {% endifnotequal %}
                     </td>
 
-                    <td class="title-table-label2">
+                    <td class="title-table-label2" style="background-color:#cbe2e2;">
                         <div id='g{{statement.id}}' class="grade"></div>
                     </td>
 
-                    <td class="title-table-label2">
+                    <td class="title-table-label2" style="background-color:#cbe2e2;">
                         <div id='o{{statement.id}}' class="grade2"></div>
                     </td>
 
@@ -329,7 +328,7 @@
                     </td>
                 </tr>
              </table>
-            <br>
+            <br/>
           {% endfor %}
 
           <div class="standard-btn-div">
