@@ -6,6 +6,7 @@ class ZipCode(Model):
     code = CharField(max_length=5, db_index = True)
     city = TextField()
     state = CharField(max_length=2)
+    county = TextField()
 
 class ZipCodeLog(Model):
     user = ForeignKey(User)
