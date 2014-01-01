@@ -66,6 +66,10 @@ report_from = 'messages@californiareportcard.org'
 # Recipients
 if EMAIL_RECIPIENTS:
 	report_recipients = EMAIL_RECIPIENTS
+else:
+	error_sub = "Error sending nightly report"
+        error_body = "%s\nEMAIL_RECIPIENTS not set in settings_local.py\n%s" % (error_sub, URL_ROOT)
+	send_mail(error_sub, error_body, report_from, TROUBLESHOOT_EMAIL_RECIPIENTS)
 
 # Body
 report_body = ''

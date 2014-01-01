@@ -102,7 +102,7 @@ SESSION_COOKIE_AGE = 5184000 # Keep sessions open for 2 months
 # Settings for the feedback form
 FEEDBACK_MIN_LENGTH = 10
 FEEDBACK_MAX_LENGTH = 5000
-FEEDBACK_EMAIL_TO = 'Hybrid Wisdom Feedback <support@hybridwisdom.com>'
+FEEDBACK_EMAIL_TO = 'California Report Card Feedback <messages@californiareportcard.org>'
 FEEDBACK_EMAIL_SUBJECT = 'User has left feedback'
 
 # Some meta options for the user settings
@@ -133,7 +133,8 @@ IMAGE_WIDTH = 49
 IMAGE_HEIGHT = 65
 
 # Email report recipients
-EMAIL_RECIPIENTS = ['sanjaykrishn@gmail.com', 'sirdavidwong@gmail.com', 'thomaslam.hm@gmail.com', 'goldberg@berkeley.edu']
+EMAIL_RECIPIENTS = None
+TROUBLESHOOT_EMAIL_RECIPIENTS = ['patel.jay@berkeley.edu']
 
 # Social media keys
 FB_APP_ID = "122406921176585"
