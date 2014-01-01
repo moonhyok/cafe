@@ -534,9 +534,7 @@ table.pretty caption {
 
 	.landing-disclaimer{
 	clear: both;
-	text-align: center;
 	position: relative;
-	top: -50px;
 	color: #594027;
     font-size: 11px;
     text-shadow: none;
