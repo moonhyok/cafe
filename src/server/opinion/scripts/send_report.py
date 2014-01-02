@@ -7,9 +7,49 @@ from django.core.mail import send_mail
 from django.utils.dateformat import DateFormat
 from opinion.includes.queryutils import *
 
+## Functions
+# Utility for displaying demographics
+def display_demographic(line, demographic):
+    if demographic != None and demographic != '':
+        return '\t' + demographic
+    else:
+        return '\t' + '--'
+
+# Table row function
+def create_table_row_user(user):
+    table_row = ''
+    
+    time_joined_display = DateFormat(user.date_joined).format('h:i:s A')
+    user_data_login = UserData.objects.filter(user = user, key = 'first_login')
+    if len(user_data_login) > 0:
+        time_joined_display = DateFormat(datetime.datetime.fromtimestamp(float(user_data_login[0].value))).format('h:i:s A')
+
+    username_display = user.username
+    if user.email != '':
+		email_display = user.email
+    else:
+		email_display = '--'
+
+    zip_qs = ZipCodeLog.objects.filter(user=user)
+    if zip_qs:
+	    zipcode, location = zip_qs[0].location.code, zip_qs[0].location.city + ", " + zip_qs[0].location.state
+    else:
+	    zipcode, location = "--", "--"
+
+    num_ideas_rated = CommentRating.objects.filter(rater = user).count()
+    
+    ## Did they leave a comment?
+    # TODO: make sure it is the current discussion questions
+    commented = "yes" if DiscussionComment.objects.filter(user = user).exists() else "no"    
+    
+    row = [time_joined_display, username_display, zipcode, location, num_ideas_rated, commented, email_display]
+    row = map(lambda x: str(x), row)
+    return "\t".join(row)
+
 def list_to_td(L):
     row_data = map(lambda x: "<td>" + x + "</td>", L)
     return  "".join(row_data)
+################################################
 
 TIME_FRAME = datetime.date.today() - datetime.timedelta(days=1)		
 url_list = string.split(URL_ROOT,'/')
@@ -39,7 +79,7 @@ report_body += "<h2>%s</h2>" % report_header
 report_body += "californiareportcard.org"
 
 ## Quick stats
-report_body += "<h3>Number of users so far: %s</h3>" % User.objects.filter(id__gte = 310).count()
+report_body += "<h3>Number of users so far: %s</h3><hr>" % User.objects.filter(id__gte = 310).count()
 
 # TODO: add number of users who gave us their email?
 
@@ -87,8 +127,8 @@ participation_reached = {
 	1 : LogUserEvents.objects.filter(details='first time',log_type=7, created__gte=TIME_FRAME).count(),
 	2 : LogUserEvents.objects.filter(details='sliders finished',log_type=5, created__gte=TIME_FRAME).count(),
 	3 : len(users),
-	4 : len(filter(lambda u: u.location.state == 'CA', users)), 
-	5 : sum([CommentRating.objects.filter(user = u).count() >= 2 for u in users]),
+	4 : sum([ZipCodeLog.objects.filter(user = u)[0].location.state == 'CA' for u in users]),
+	5 : sum([CommentRating.objects.filter(rater = u).count() >= 2 for u in users]),
 	6 : sum([DiscussionComment.objects.filter(user = u).exists() for u in users]),
 	7 : sum([bool(u.email) for u in users]),
 	8 : sum([bool(u.email) for u in users]),
@@ -124,7 +164,7 @@ report_body += participation_table
 ## New users
 table_body = ''
 
-table_body += '<h3>New users that registered today:</h3>'
+table_body += '<h3>New users that registered today: (%s) </h3>' % (len(users))
 
 table_body += '<table border="1">'
 
@@ -145,10 +185,11 @@ table_body += "</table>"
 report_body += table_body
 
 ## Daily Statistics
-daily_statistics = ""
-daily_statistics += '<h3>Total new users: ' + str(len(users)) + '</h3>'
-report_body += daily_statistics
+# daily_statistics = ""
+# daily_statistics += '<h3>Total new users: ' + str(len(users)) + '</h3>'
+# report_body += daily_statistics
 
+report_body += "<hr>"
 ## Top comments
 OS_ID = 1
 report_body += "<h3>Top comments from the past week:</h3>" 
@@ -162,8 +203,9 @@ for comment in comments:
 		report_body += "\n"+str(count)+". Username: "+comment.user.username + "\nEmail: " + comment.user.email  + "\nComment:"  + decode_to_unicode(comment.comment) + "\nNormalized Score: " + str(comment.normalized_score_sum) + "\n"
 		count+=1
 
+
 ## Flagged comments
-report_body += ""
+report_body += "<hr>"
 report_body += "<h3>Flagged comments:</h3>" 
 
 flagged = FlaggedComment.objects.all().order_by('comment')
@@ -184,41 +226,4 @@ html_content = report_body.replace("\n", "<br>")
 msg.attach_alternative(html_content, "text/html")
 msg.send()
 
-
-## Functions
-# Utility for displaying demographics
-def display_demographic(line, demographic):
-    if demographic != None and demographic != '':
-        return '\t' + demographic
-    else:
-        return '\t' + '--'
-
-# Table row function
-def create_table_row_user(user):
-    table_row = ''
-    
-    time_joined_display = DateFormat(user.date_joined).format('h:i:s A')
-    user_data_login = UserData.objects.filter(user = user, key = 'first_login')
-    if len(user_data_login) > 0:
-        time_joined_display = DateFormat(datetime.datetime.fromtimestamp(float(user_data_login[0].value))).format('h:i:s A')
-
-    username_display = user.username
-    if user.email != '':
-		email_display = '--'
-    else:
-		email_display = '--'
-
-    zip_qs = ZipCodeLog.objects.filter(user=user)
-    if zip_qs:
-	    zipcode, location = zip_qs[0].location.code, zip_qs[0].location.city + ", " + zip_qs[0].location.state
-    else:
-	    zipcode, location = "--", "--"
-
-    num_ideas_rated = CommentRating.objects.filter(user = user).count()
-    
-    ## Did they leave a comment?
-    # TODO: make sure it is the current discussion questions
-    commented = "yes" if DiscussionComment.objects.filter(user = user).exists() else no
-
-    return "\t".join([time_joined_display, username_display, zipcode, location, num_ideas_ratied, commented])
 
