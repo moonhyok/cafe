@@ -17,10 +17,12 @@ for i, line in enumerate(csv.reader(open(fname))):
     if i == 0: # header row
         continue
     else:
-        #if line[5] in ['CA']: # add more states here if wanted
+        if i % 1000 == 0:
+            print str(i) + " completed"
+
         code, city, state, county  = line[0], line[2], line[5], line[6]
         
-        z = ZipCode(code=code, city=city, state=state)
+        z = ZipCode(code=code, city=city, state=state, county=county)
         z.save()
                 
             

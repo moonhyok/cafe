@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from opinion.settings_local import CONFIGURABLES
 
 class ZipCode(Model):
+    # TODO: should be primary key next time we rebuild database
     code = CharField(max_length=5, db_index = True)
     city = TextField()
     state = CharField(max_length=2)
