@@ -150,6 +150,7 @@ var accounts = (function($, d3, console) {
                 $('.score-value').text("" + ~~(data['cur_user_rater_score'] * window.conf.SCORE_SCALE_FACTOR));
                 window.user_score = data['cur_user_rater_score'];
                 $('.username').text(' ' + data['cur_username']);
+                document.getElementById('stats-iframe').src = window.url_root + '/crcstats/?username='+ data['cur_user_id'];
             });
 
         });
@@ -200,6 +201,22 @@ var accounts = (function($, d3, console) {
                }
           });						
 	}
+
+	function hideAll(){
+	    $('.register').hide();
+	    $('.landing').hide();
+        $('.endsliders').hide();
+        $('.dialog').hide();
+        $('.dialog-avggrade').hide();
+        $('.dialog-about').hide();
+        $('.comment-input').hide();
+        $('.menubar').hide();
+        $('.rate').hide();
+        $('.dialog-continue').hide();
+        $('.dialog-email').hide();
+        $('.my-comment').hide();
+	}
+
     return {
         'showCommentInput': showCommentInput,
         'showRegister': showRegister,
@@ -212,7 +229,8 @@ var accounts = (function($, d3, console) {
         'loadMyCommentDiv': loadMyCommentDiv,
         'initLoggedInFeatures': initLoggedInFeatures,
         'sendEmail': sendEmail,
-        'getNeighborStat': getNeighborStat
+        'getNeighborStat': getNeighborStat,
+        'hideAll': hideAll
     };
 
 })($, d3, console);
@@ -278,8 +296,10 @@ $(document).ready(function() {
                             accounts.loginAfterRegister(loginData);
                             blooms.populateBlooms();
                             $('.register').hide();
+                            $("#regzip").attr("disabled", true);
                             utils.hideLoading();
                             window.conf.ZIPCODE=registrationData.zipcode;
+                            window.prev_state = 'register';
 
 			                //Slow TODO
 			                //accounts.getNeighborStat();
@@ -387,8 +407,9 @@ $(document).ready(function() {
 
     $('.home-btn-dialog').click(function() {
            window.no_menubar = true;
+           accounts.hideAll();
            if (window.authenticated){
-              $('.welcome-back').show();
+              $('.landing').show();
               $('.menubar').hide();
               $('.scorebox').hide();
            }
@@ -398,6 +419,59 @@ $(document).ready(function() {
            }
         });
 
+    $('.back-btn-dialog').click(function() {
+               accounts.hideAll();
+               if (window.prev_state == 'home'){
+                  $('.landing').show();
+                  window.prev_state = 'home';
+               }
+               else if (window.prev_state == 'grade')
+               {
+                  $('.endsliders').show();
+                  window.prev_state = 'home';
+                }
+                else if (window.prev_state == 'register')
+                {
+                  $('.register').show();
+                  window.prev_state = 'grade';
+                }
+                else if (window.prev_state == 'dialog')
+                {
+                  $('.dialog').show();
+                  window.prev_state = 'register';
+                }
+                else if (window.prev_state == 'map')
+                {
+                    window.prev_state = 'dialog';
+                    $('.menubar').show();
+                    $('.scorebox').show();
+                }
+                else if (window.prev_state == 'comment')
+                {
+                    window.prev_state = 'map';
+                    $('.comment-input').show();
+                }
+                else if (window.prev_state == 'continue')
+                {
+                   window.prev_state = 'comment';
+                   $('.dialog-continue').show();
+                }
+                else if (window.prev_state == 'email')
+                {
+                   window.prev_state = 'continue';
+                   $('.dialog-email').show();
+                 }
+                else if (window.prev_state == 'welcome_back')
+                {
+                    window.prev_state = 'welcome_back';
+                    $('.menubar').show();
+                    $('.scorebox').show();
+                }
+
+               window.scrollTo(0,0);
+
+            });
+
     $('.login-form-go-back').click(function() {
         $('.landing').show();
         $('.login').hide();
@@ -406,6 +480,8 @@ $(document).ready(function() {
     $('.my-comment-btn').click(function() {
         accounts.loadMyCommentDiv();
         $('.scorebox').hide();
+        $('.menubar').hide();
+        window.prev_state = 'map';
     });
 
     $('.edit-comment-btn').click(function() {
@@ -431,10 +507,16 @@ $(document).ready(function() {
 
     $('.dialog-ready').click(function() {
         rate.logUserEvent(8,'dialog 1');
-        //rate.initMenubar();
-        $('.instructions').show();
+        rate.initMenubar();
+        $('.scorebox').show();
+
+        if(window.user_score == 0)
+        {
+            $('.instructions').show();
+        }
+
         $('.dialog').hide();
-        $('.header').hide();
+        window.prev_state = 'dialog';
     });
     
     $('.dialog-score-ready').click(function() {
@@ -448,6 +530,7 @@ $(document).ready(function() {
     $('.dialog-continue-ready').click(function() {
         rate.logUserEvent(8,'dialog 3');
         $('.dialog-continue').hide();
+        window.prev_state = 'continue';
         if(! window.email_saved)
         {
             $('.dialog-email').show();
@@ -463,7 +546,7 @@ $(document).ready(function() {
             rate.logUserEvent(8,'dialog 4');
             $('.dialog-email').hide();
             rate.initMenubar();
-            $('.header').show();
+            window.prev_state = 'email';
             $('.scorebox').show();
             if ($('#regemail').val()){
            		    accounts.sendEmail($('#regemail').val());

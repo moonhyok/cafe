@@ -385,7 +385,8 @@ var _blooms = blooms = (function($, d3, console) {
             })
             .on('click', function(d) {
                 var _this = d3.select(this);
-                
+                window.prev_state = 'map';
+
                 if (d.uid == "curUser" && window.user_score >= 2) {
                     $('.comment-input').slideDown();
                     $('.scorebox').hide();
@@ -396,6 +397,8 @@ var _blooms = blooms = (function($, d3, console) {
                 else
                 {
                     $('.instructions').hide();
+                    $('.scorebox').hide();
+                    $('.menubar').hide();
                 }
                 
                 $('.rate-username').html('Participant '+d.uid + ' suggested:');
@@ -412,6 +415,10 @@ var _blooms = blooms = (function($, d3, console) {
                     $('.rate').data('cid', cid);
                 });
                 $('#go-back').click(function() {
+
+                    $('.scorebox').show();
+                    $('.menubar').show();
+
                     try{
                     _this.transition().duration(1500).style("opacity", "0").remove();
                     }catch(err){
@@ -452,6 +459,7 @@ var _blooms = blooms = (function($, d3, console) {
         //TOFIX utils.hideLoading();
         $('.landing').hide();
         accounts.getNeighborStat();
+        window.prev_state = 'welcome_back';
         if(window.conf.RETURN_USER_FIRST_TIME){
 		$('.welcome-back').slideDown();
 		}

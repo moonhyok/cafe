@@ -38,6 +38,8 @@
 
   window.email_saved = false;
 
+  window.prev_state = 'home';
+
   window.registration_in_progress = false;
 
   window.landing = true;
@@ -170,7 +172,7 @@
    $('#g' + statement).css('opacity', 1);
    $('#o' + statement).html(score_to_grade(medians[statement]*100))
    window.sliders[statement] = $('#s' + statement).val();
-   document.getElementById('tr'+statement).style.backgroundColor = "rgba(255, 255, 255, 0.25)";
+   document.getElementById('tr'+statement).style.backgroundColor = "rgba(255, 255, 0, 0.8)";
    finishedStatements[statement-1]= 1;
 }
 
@@ -182,24 +184,241 @@
 
 <body>
 
+  <div class='landing'>
+
+    <div class="responsive-max-width">
+
+        <center>
+            <img src="{{url_root}}/media/mobile/img/cafe/cafe-title-cropped.png" width="250px" style="padding-top: 5px;"/>
+        </center>
+
+        <div class='landing-desc'>
+
+            <div style="clear: both;"></div>
+
+            <div>
+                <div class="landing-img-txt">
+
+                    <center>
+                        <div style="width: 120px;">
+                            <button type='submit' data-theme='a' class='first-time-btn'><font style="font-size: 16px;">Begin</font></button>
+                        </div>
+                    </center>
+
+
+                    {{client_settings.WELCOME_PAGE_TEXT1}}
+
+                    <div class="byline">Source: UC Berkeley CITRIS Data and Democracy Initiative</div>
+
+                </div>
+                <div class="landing-img-div"><img src="{{url_root}}/media/mobile/img/cafe/spoon-and-pencil-draft.png" width="80px"/></div>
+
+                <div class="landing-disclaimer">
+                    {{client_settings.WELCOME_PAGE_TEXT2}}<br/>
+                    <a href="#" class="comment-admin-text-a" style="font-size: 10px;" onclick="$('.dialog-about').show();$('.landing').hide();window.landing=true;">{{client_settings.WELCOME_PAGE_ABOUT_LINK}}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <div id='rating' class='endsliders'>
+      <div class='reportcard default-left-padding responsive-max-width'>
+          <div class="basic-header">{{client_settings.REPORT_CARD_HEADER}}</div>
+
+          <center>
+
+              <div class="rc-sub-header">
+                  {{client_settings.REPORT_CARD_INST}}
+              </div>
+
+
+              <table class='cardtable title-table'>
+                  <tr>
+
+                      <td class="title-table-label1">
+                          Subject
+                      </td>
+
+                      <td class="title-table-label2">
+                          My<br/>Grade
+                      </td>
+
+                      <td class="title-table-label2">
+                          <a href="#" onclick="$('.endsliders').hide();$('.dialog-avggrade').show();window.prev_state='grade';" style="color: #fff8f0 !important;">Median Grade</a>
+                      </td>
+
+                  </tr>
+              </table>
+
+
+              {% for statement in statements %}
+              <table class='cardtable grade-table'>
+                  <tr id="tr{{statement.id}}">
+                      <td style="height: 60px;background-color:#cbe2e2;">
+                          {% ifnotequal statement.statement '' %}
+                          <div class='slider-question'>
+                              <script>var sid={{statement.id}}-1;var total={{statements|length}};document.write(total-sid);</script>. {{ statement.statement }}
+                          </div>
+                          {% else %}
+                          {% endifnotequal %}
+                      </td>
+
+                      <td class="title-table-label2" style="background-color:#cbe2e2;">
+                          <div id='g{{statement.id}}' class="grade"></div>
+                      </td>
+
+                      <td class="title-table-label2" style="background-color:#cbe2e2;">
+                          <div id='o{{statement.id}}' class="grade2"></div>
+                      </td>
+
+                  </tr>
+
+                  <tr>
+                      <td colspan="3" class="slider-row" style="border: none;">
+                          {% ifnotequal statement.statement '' %}
+                          <div id="s{{statement.id}}" data-statement="{{statement.id}}" class="endslider-slider{{statement.id}} statement-slider" style=""></div>
+                          {% else %}
+                          <div style='display:none;'>
+                              <br><div id="s{{statement.id}}" data-statement="{{statement.id}}"  class="endslider-slider"></div>
+                          </div>
+                          {% endifnotequal %}
+                      </td>
+                  </tr>
+              </table>
+              <br/>
+              {% endfor %}
+
+              <div class="standard-btn-div">
+                  <button type='submit' data-theme='b' class='done-endsliders-btn' ><font style="font-size: 16px;">{{client_settings.REPORT_CARD_NEXT_BUTTON}}</font></button>
+              </div>
+
+              <div class="home-btn-dialog-box">
+                  <hr class="full-width-hr"/>
+                  <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+                  &nbsp;
+                  <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+                  &nbsp;
+                  <img width="30px;" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+              </div>
+
+          </center>
+      </div>
+  </div>
+
+  <div class = 'register' id='register'>
+      <div class= 'registerpanel default-left-padding responsive-max-width'>
+          <div class="basic-header2" style="width: 100%">{{client_settings.ZIP_CODE_INSTRUCTIONS}}</div>
+
+          <form id='reg_form' class='form-horizontal' method='post' action='{{ url_root }}/accountsjson/register/'>
+              <center>
+              <div data-role="fieldcontain">
+                  <input type ='tel' id='regzip' name='regzip' class='regforminput' value="" placeholder="Zip Code" onblur="$('#reg_form').submit();">
+                  <div class='alert-error' id='zipcode-error' style='display:none;'></div>
+              </div>
+
+              <!--These are hidden dummy attributes for book-keeping-->
+
+              <input type='hidden' value='{{ topic }}' name='question'>
+              <input type='hidden' value='{{ url_root }}' name='url'>
+              <div data-role="fieldcontain" style="display: none;">
+                  <label for="regusername" class='regforminput'>Email:</label>
+                  <input type="hidden" id='regusername' name='regusername' class='regforminput' value='{{ random_username }}' placeholder="Email" data-theme='b'/>
+                  <div class='alert-error' id='username-error' style='display:none;'></div>
+              </div>
+              <div data-role="fieldcontain" style='display:none;'>
+                  <label for="regpassword1" class='regforminput' style="display: none;">Password:</label>
+                  <input type ='hidden' id='regpassword1' name='regpassword1' class='regforminput' value='{{ random_password }}' placeholder="Password">
+                  <div class='alert-error' id='password-error'></div>
+              </div>
+
+
+                  <div class="standard-btn-div" onclick="document.getElementById('registerb').focus();">
+                      <button type='submit' data-theme='b' id="registerb"><font style="font-size: 16px;">{{client_settings.ZIP_CODE_BUTTON}}</font></button>
+                  </div>
+              </center>
+          </form>
+      </div>
+      <center>
+      <div class="home-btn-dialog-box" style="position: fixed; bottom: 0px;text-align: center;">
+          <hr class="full-width-hr"/>
+          <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+          &nbsp;
+          <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+          &nbsp;
+          <img width="30px;" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+      </div>
+      </center>
+  </div>
+
+  <div class='dialog dialog-style'>
+      <div class='dialog-text1 dialog-text-style default-left-padding'>
+          <div class="basic-header" style="width:100%;">{{client_settings.DISCUSSION_DIALOG_HEADER}}</div>
+          <img class="header-img-topic center" src="{{ url_root }}/media/mobile/img/cafe/map_teaser.png"/>
+
+          {{ client_settings.DISCUSSION_DIALOG_TEXT1 }}
+          <br><br>
+          "{{ topic }}"
+          <center>
+              <div class="standard-btn-div">
+                  <button type='submit' data-theme='b' class='dialog-ready' ><font style="font-size: 16px;">Next</font></button>
+                  <!--<button type='submit' data-theme='b' class='dialog-next'  onclick="$('.dialog-text1').hide();$('.dialog-text2').show();"><font style="font-size: 16px;">Next</font></button>-->
+              </div>
+          </center>
+      </div>
+
+      <center>
+      <div class="home-btn-dialog-box">
+          <hr/>
+          <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+          &nbsp;
+          <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+          &nbsp;
+          <img width="30px;" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+      </div>
+      </center>
+
+  </div>
+
+  <div class='comment-input'>
+      <center>
+          <div class='comment-panel'>
+              <div class="basic-sub-sub-header" style="text-align:left;">{{topic}}<br/></div>
+              <textarea name='answer' id='entered-comment'> </textarea>
+              <div class="standard-btn-div">
+                  <button type='submit' data-theme='b' class='comment-submit-btn'><font style="font-size: 16px;">Save</font></button>
+                  <button type='submit' data-theme='b' class='comment-cancel-btn'><font style="font-size: 16px;">Cancel</font></button>
+              </div>
+              <div class="home-btn-dialog-box">
+                  <hr class="full-width-hr"/>
+                  <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+                  &nbsp;
+                  <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+                  &nbsp;
+                  <img width="30px;" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+              </div>
+          </div>
+      </center>
+  </div>
+
+
   <div class="top-bar">
     <center>
-        <div class='header'>
-            {{ short_topic }}
-        </div>
+        <div class='menubar'>
+            <div class="scorebox">
+                <span class='score-label'></span><span class='score-value'></span>
+            </div>
 
-        <div data-role='navbar' class='menubar'>
-            <ul>
-                <li style="width: 20%;"><a data-theme='b' id='home-btn' class='home-btn' onclick="$('.welcome-back').show();$('.menubar').hide();$('.scorebox').hide();"><img width="22px;" src="{{url_root}}/media/mobile/img/cafe/home-icon.png"></a></li>
-                <li style="width: 40%;"><a data-theme='b' class='my-comment-btn'><span class='stats-label'>{{client_settings.STATS_BUTTON_TEXT}}</span></a></li>
-                <li style="width: 40%;"><a data-theme='b' class='logout-btn'><span class='logout-label'>{{client_settings.LOGOUT_BUTTON_TEXT}}</span></a></li>
-            </ul>
+            <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+            &nbsp;
+            <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+            &nbsp;
+            <img width="30px;" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+            &nbsp;
+            <img width="30px;" class='my-comment-btn' src="{{url_root}}/media/mobile/img/cafe/CRC_stats_bttn.png">
+            &nbsp;
+            <img width="30px;" class='logout-btn' src="{{url_root}}/media/mobile/img/cafe/CRC_logout_bttn.png">
         </div>
-
-        <div class="scorebox">
-            <span class='score-label'></span><span class='score-value'></span>
-        </div>
-
 
         <div class='instructions'>{{client_settings.INSTRUCTIONS_1}}</div>
         <div class='instructions2'>{{client_settings.INSTRUCTIONS_2}}</div>
@@ -255,93 +474,35 @@
 
       </div>
 
+        <center>
+        <div class="home-btn-dialog-box">
+            <hr class="full-width-hr"/>
+            <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+            &nbsp;
+            <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+            &nbsp;
+            <img width="30px;" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+        </div>
+        </center>
+
     </div>
 
   </div>
 
-  <div id='rating' class='endsliders'>
-    <div class='reportcard default-left-padding responsive-max-width'>
-
-      <div class="home-btn-dialog-box">
-         <button data-theme='b' class='home-btn-dialog'><img width="30px;" src="{{url_root}}/media/mobile/img/cafe/home-icon.png"></button>
-      </div>
-
-      <div class="basic-header">{{client_settings.REPORT_CARD_HEADER}}</div>
-
-      <center>
-
-        <div class="rc-sub-header">
-          {{client_settings.REPORT_CARD_INST}}
-        </div>
-
-
-         <table class='cardtable title-table'>
-             <tr>
-
-                <td class="title-table-label1">
-                  Subject
-                </td>
-
-                <td class="title-table-label2">
-                  My<br/>Grade
-                </td>
-
-                <td class="title-table-label2">
-                  <a href="#" onclick="$('.endsliders').hide();$('.dialog-avggrade').show();" style="color: #fff8f0 !important;">Median Grade</a>
-                </td>
-
-             </tr>
-         </table>
-
-
-          {% for statement in statements %}
-             <table class='cardtable grade-table'>
-                <tr id="tr{{statement.id}}">
-                    <td style="height: 60px;background-color:#cbe2e2;">
-                        {% ifnotequal statement.statement '' %}
-                            <div class='slider-question'>
-                                <script>var sid={{statement.id}}-1;var total={{statements|length}};document.write(total-sid);</script>. {{ statement.statement }}
-                            </div>
-                        {% else %}
-                        {% endifnotequal %}
-                    </td>
-
-                    <td class="title-table-label2" style="background-color:#cbe2e2;">
-                        <div id='g{{statement.id}}' class="grade"></div>
-                    </td>
-
-                    <td class="title-table-label2" style="background-color:#cbe2e2;">
-                        <div id='o{{statement.id}}' class="grade2"></div>
-                    </td>
-
-                </tr>
-
-                <tr>
-                    <td colspan="3" class="slider-row" style="border: none;">
-                        {% ifnotequal statement.statement '' %}
-                            <div id="s{{statement.id}}" data-statement="{{statement.id}}" class="endslider-slider{{statement.id}} statement-slider" style=""></div>
-                        {% else %}
-                            <div style='display:none;'>
-                                <br><div id="s{{statement.id}}" data-statement="{{statement.id}}"  class="endslider-slider"></div>
-                            </div>
-                        {% endifnotequal %}
-                    </td>
-                </tr>
-             </table>
-            <br/>
-          {% endfor %}
-
-          <div class="standard-btn-div">
-             <button type='submit' data-theme='b' class='done-endsliders-btn' ><font style="font-size: 16px;">{{client_settings.REPORT_CARD_NEXT_BUTTON}}</font></button>
-          </div>
-        </center>
-       </div>
-    </div>
-
   <div class='my-comment'>
     <div class='edit-comment-panel'>
-        <div class='row'>
-            <div class="basic-header">My Statistics</div>
+        <div class="basic-header">My Statistics (Under Construction)</div>
+        <iframe src="{{url_root}}/crcstats/" id="stats-iframe" class="stats-iframe"></iframe>
+        <div class="home-btn-dialog-box">
+            <hr class="full-width-hr"/>
+            <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+            &nbsp;
+            <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+            &nbsp;
+            <img width="30px;" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+        </div>
+        <div class='row' style="display: none;">
+
             <span class='username' style="display: none;"></span>
             <span class='score-label'></span> <span class='score-value'></span><br>
             <span class='num-label'>Idea Rated By:</span> <span class='num-rated-by'></span> Participants<br>
@@ -409,45 +570,6 @@
   <div id='d3' class="d3-canvas"></div>
   <div class='frame'></div>
 
-  <div class = 'register' id='register'>
-
-      <div class="home-btn-dialog-box">
-          <button data-theme='b' class='home-btn-dialog'><img width="30px;" src="{{url_root}}/media/mobile/img/cafe/home-icon.png"></button>
-      </div>
-
-       <div class= 'registerpanel default-left-padding responsive-max-width'>
-        <div class="basic-header2" style="width: 100%">{{client_settings.ZIP_CODE_INSTRUCTIONS}}</div>
-
-         <form id='reg_form' class='form-horizontal' method='post' action='{{ url_root }}/accountsjson/register/'>
-             <div data-role="fieldcontain">
-                 <input type ='tel' id='regzip' name='regzip' class='regforminput' value="" placeholder="Zip Code" onblur="$('#reg_form').submit();">
-                 <div class='alert-error' id='zipcode-error' style='display:none;'></div>
-             </div>
-
-             <!--These are hidden dummy attributes for book-keeping-->
-
-            <input type='hidden' value='{{ topic }}' name='question'>
-            <input type='hidden' value='{{ url_root }}' name='url'>
-            <div data-role="fieldcontain" style="display: none;">
-             <label for="regusername" class='regforminput'>Email:</label>
-             <input type="hidden" id='regusername' name='regusername' class='regforminput' value='{{ random_username }}' placeholder="Email" data-theme='b'/>
-             <div class='alert-error' id='username-error' style='display:none;'></div>
-            </div>
-           <div data-role="fieldcontain" style='display:none;'>
-            <label for="regpassword1" class='regforminput' style="display: none;">Password:</label>
-            <input type ='hidden' id='regpassword1' name='regpassword1' class='regforminput' value='{{ random_password }}' placeholder="Password">
-            <div class='alert-error' id='password-error'></div>
-          </div>
-
-        <center>
-            <div class="standard-btn-div" onclick="document.getElementById('registerb').focus();">
-                <button type='submit' data-theme='b' id="registerb"><font style="font-size: 16px;">{{client_settings.ZIP_CODE_BUTTON}}</font></button>
-            </div>
-        </center>
-       </form>
-      </div>
-  </div>
-
   <div class='logout'>
         <div class='landing-intro'>
             <div class='landing-header'>
@@ -481,82 +603,6 @@
         <div class="comment-admin-text">
             <a class="comment-admin-text-a" href="#" onclick="$('.dialog-about').show();$('.welcome-back').hide();window.landing=false;" target="_blank">About</a>
         </div>
-    </div>
-
-  </div>
-
-  <div class='landing'>
-
-    <div class="responsive-max-width">
-
-      <center>
-          <img src="{{url_root}}/media/mobile/img/cafe/cafe-title-cropped.png" width="250px" style="padding-top: 5px;"/>
-      </center>
-
-      <div class='landing-desc'>
-
-          <div style="clear: both;"></div>
-
-          <div>
-              <div class="landing-img-txt">
-
-                  <center>
-                      <div style="width: 120px;">
-                          <button type='submit' data-theme='a' class='first-time-btn'><font style="font-size: 16px;">Begin</font></button>
-                      </div>
-                  </center>
-
-
-                  {{client_settings.WELCOME_PAGE_TEXT1}}
-
-                  <div style="font-size: 11px; line-height: 13px;padding-top:5px;">Source: UC Berkeley CITRIS Data and Democracy Initiative</div>
-
-              </div>
-              <div class="landing-img-div"><img src="{{url_root}}/media/mobile/img/cafe/spoon-and-pencil-draft.png" width="80px"/></div>
-
-              <div style="clear: both;position:relative;color: #594027;line-height: 13px !important;font-size: 11px;padding-left: 10px; padding-top: 5px;">
-                  {{client_settings.WELCOME_PAGE_TEXT2}}<br/>
-                <a href="#" class="comment-admin-text-a" style="font-size: 10px;" onclick="$('.dialog-about').show();$('.landing').hide();window.landing=true;">{{client_settings.WELCOME_PAGE_ABOUT_LINK}}</a>
-              </div>
-
-          </div>
-
-      </div>
-    </div>
-
-  </div>
-
-  <div class='dialog dialog-style'>
-
-      <div class="home-btn-dialog-box">
-          <button data-theme='b' class='home-btn-dialog'><img width="30px;" src="{{url_root}}/media/mobile/img/cafe/home-icon.png"></button>
-      </div>
-
-    <div class='dialog-text1 dialog-text-style default-left-padding'>
-        <div class="basic-header" style="width:100%;">{{client_settings.DISCUSSION_DIALOG_HEADER}}</div>
-        <img class="header-img-topic center" src="{{ url_root }}/media/mobile/img/cafe/map_teaser.png"/>
-
-	{{ client_settings.DISCUSSION_DIALOG_TEXT1 }}
-	<br><br>
-        "{{ topic }}"
-        <center>
-        <div class="standard-btn-div">
-            <button type='submit' data-theme='b' class='dialog-ready' ><font style="font-size: 16px;">Next</font></button>
-            <!--<button type='submit' data-theme='b' class='dialog-next'  onclick="$('.dialog-text1').hide();$('.dialog-text2').show();"><font style="font-size: 16px;">Next</font></button>-->
-        </div>
-        </center>
-
-    </div>
-
-    <div class='dialog-text2 dialog-text-style default-left-padding' style="display: none">
-        <div class="basic-header" style="width:100%;">The Discussion</div>
-        <img class="header-img-topic center" src="{{ url_root }}/media/mobile/img/cafe/map_teaser.png"><br>
-      Each mug represents a participant's response to the discussion topic.
-        <center>
-      <div class="standard-btn-div">
-        <button type='submit' data-theme='b' class='dialog-ready' ><font style="font-size: 16px;">Next</font></button>
-      </div>
-        </center>
     </div>
 
   </div>
@@ -605,11 +651,6 @@
   </div>
 
   <div class='dialog-continue dialog-style'>
-
-      <div class="home-btn-dialog-box">
-          <button data-theme='b' class='home-btn-dialog'><img width="30px;" src="{{url_root}}/media/mobile/img/cafe/home-icon.png"></button>
-      </div>
-
     <div class='dialog-text-style default-left-padding'>
 
         <div class="basic-header" style="width:100%;">{{client_settings.RESPONSE_SAVED_HEADER}}</div>
@@ -621,44 +662,71 @@
       </center>
 
     </div>
+
+      <center>
+          <div class="home-btn-dialog-box" style="position: fixed; bottom: 0px;">
+              <hr/>
+              <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+              &nbsp;
+              <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+              &nbsp;
+              <img width="30px;" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+          </div>
+      </center>
+
   </div>
 
   <div class='dialog-email dialog-style'>
-
-      <div class="home-btn-dialog-box">
-          <button data-theme='b' class='home-btn-dialog'><img width="30px;" src="{{url_root}}/media/mobile/img/cafe/home-icon.png"></button>
-      </div>
-
     <div class='dialog-text-notitle default-left-padding'>
       {{client_settings.EMAIL_ASK_TEXT}}
         <center>
             <input type="email" id='regemail' name='regemail' class='regforminput' style="font-size: 15px; background-color: #FFFFFF;color: #000000;" placeholder="Email" data-theme='b'></input>
+            <div class="comment-admin-text-a">We promise not to share your email address with any third parties</a>
             <div class="standard-btn-div">
-                <a href="http://opinion.berkeley.edu/privacy.html" target="_blank" class="comment-admin-text-a">Privacy Policy</a>
+
                 <button type='submit' data-theme='b' class='dialog-email-ready' ><font style="font-size: 16px;">Next</font></button>
             </div>
         </center>
     </div>
+
+      <center>
+          <div class="home-btn-dialog-box" style="position: fixed; bottom: 0px;">
+              <hr/>
+              <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+              &nbsp;
+              <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+              &nbsp;
+              <img width="30px;" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+          </div>
+      </center>
+
   </div>
 
   <div class='dialog-avggrade dialog-style'>
-
-      <div class="home-btn-dialog-box">
-          <button data-theme='b' class='home-btn-dialog'><img width="30px;" src="{{url_root}}/media/mobile/img/cafe/home-icon.png"></button>
-      </div>
-
     <div class='dialog-text-style default-left-padding'>
 
 
       <div class="basic-header" style="width:100%;">{{client_settings.AVG_EXPLAIN_HEADER}}</div>
      <center>
-      <img src="{{ url_root }}/media/mobile/img/cafe/avggrade.png" class="center" style="width:100px;padding-top:3px;"><br>
+      <img src="{{ url_root }}/media/mobile/img/cafe/avggrade.png" class="center" style="width:300px;padding-top:3px;"><br>
+         {{client_settings.AVG_EXPLAIN_TEXT}}
       <div class="standard-btn-div">
-        {{client_settings.AVG_EXPLAIN_TEXT}}
         <button type='submit' data-theme='b'  onclick="$('.dialog-avggrade').hide();$('.endsliders').show();"><font style="font-size: 16px;">Back</font></button>
       </div>
      </center>
     </div>
+
+      <center>
+          <div class="home-btn-dialog-box">
+              <hr/>
+              <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+              &nbsp;
+              <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+              &nbsp;
+              <img width="30px;" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+          </div>
+      </center>
+
   </div>
 
   <div class='dialog-about dialog-style' style="z-index:999">
@@ -666,27 +734,15 @@
           <div class="basic-header">{{client_settings.ABOUT_PAGE_HEADER}}</div>
 	  <center>{{num_users}} participants so far.</center><br/>
 	  {% autoescape off %}{{client_settings.ABOUT_PAGE_TEXT }}{% endautoescape %}
-
-      <center>
-        <div class="standard-btn-div">
-          <button data-theme='b'  onclick="$('.dialog-about').hide();if(window.landing){$('.landing').show();}else{$('.welcome-back').show()}"><font style="font-size: 16px;">Back</font></button>
-        </div>
-      </center>
-      </div>
-  </div>
-
-  <div class='comment-input'>
-      <div class="home-btn-dialog-box">
-          <button data-theme='b' class='home-btn-dialog'><img width="30px;" src="{{url_root}}/media/mobile/img/cafe/home-icon.png"></button>
       </div>
       <center>
-          <div class='comment-panel'>
-              <div class="basic-sub-sub-header" style="text-align:left;">{{topic}}<br/></div>
-              <textarea name='answer' id='entered-comment'> </textarea>
-              <div class="standard-btn-div">
-                  <button type='submit' data-theme='b' class='comment-submit-btn'><font style="font-size: 16px;">Save</font></button>
-                  <button type='submit' data-theme='b' class='comment-cancel-btn'><font style="font-size: 16px;">Cancel</font></button>
-              </div>
+          <div class="home-btn-dialog-box">
+              <hr/>
+              <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+              &nbsp;
+              <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+              &nbsp;
+              <img width="30px;" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
           </div>
       </center>
   </div>

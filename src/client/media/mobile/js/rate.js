@@ -125,8 +125,6 @@ var rate = (function($, d3, console) {
             else if (window.user_score == 1)
             {
                 $('.rate').hide();
-                hideMenubar();
-
                 // ui has changed!
                 $('.top-bar').trigger('height');
                 $('.instructions2').show();
@@ -254,7 +252,16 @@ var rate = (function($, d3, console) {
         if(!accounts.setAuthenticated()){// if user enter with valid entry code, no need to show Register
         accounts.showRegister();
         }
+        else
+        {
+            if(window.user_score <= 2)
+            {
+               $('.dialog').show();
+            }
+        }
         $('.endsliders').hide();
+
+
     }
     //This function just pulls up the registration sliders form, right before prompting the 
     //  user to register. Once sliders are filled, once done will only cause the registration prompt
@@ -391,6 +398,7 @@ $(document).ready(function() {
     $('.score-label').text(utils.toTitleCase(window.conf['YOUR_SCORE_LANGUAGE']).trim().replace(':', '') + ' is ');
 
     $('.done-endsliders-btn').click(function() {
+        window.prev_state = 'grade';
         rate.logUserEvent(5,'sliders finished');
         rate.storeSliders(window.num_sliders);
         if (window.authenticated) {
@@ -398,11 +406,11 @@ $(document).ready(function() {
                 rate.sendSlider(window.sliders[i], i);
             }
 
-            if(!window.no_menubar)
+            /*if(!window.no_menubar)
             {
                 $('.menubar').show();
                 $('.scorebox').show();
-            }
+            }*/
 
         }
     });
@@ -413,6 +421,7 @@ $(document).ready(function() {
         $('.dialog-continue').show();
         $('.scorebox').hide();
         $('.menubar').hide();
+        window.prev_state = 'comment';
         rate.logUserEvent(6,'comment submitted');
         rate.sendComment($('#entered-comment').val());
         window.your_mug.transition().duration(1500).style("opacity", "0").remove();
