@@ -82,14 +82,14 @@
    }
 
   $(".rating-slider").noUiSlider({
-    range: [0, 100], start: 50, step: 10, handles: 1,connect: false, behaviour: "none"
+    range: [0, 100], start: 50, step: 5, handles: 1,connect: false, behaviour: "none"
   });
   
-  var html_label ="<div class='slider-range-labels'><div class='alignleft'>{{client_settings.SLIDER1_LEFT}}</div><div class='alignright'>{{client_settings.SLIDER1_RIGHT}}</div></div>";
+  /*var html_label ="<div class='slider-range-labels'><div class='alignleft'>{{client_settings.SLIDER1_LEFT}}</div><div class='alignright'>{{client_settings.SLIDER1_RIGHT}}</div></div>";
   $('.rating-slider1 > .noUi-base').append( html_label );
   
   var html_label ="<div class='slider-range-labels'><div class='alignleft'>{{client_settings.SLIDER2_LEFT}}</div><div class='alignright'>{{client_settings.SLIDER2_RIGHT}}</div></div>";
-  $('.rating-slider2 > .noUi-base').append( html_label );
+  $('.rating-slider2 > .noUi-base').append( html_label );*/
   
   $(".change-rating-slider").noUiSlider({
     range: [0, 100], start: 50, step: 5, handles: 1,connect: false, behaviour: "none"
@@ -100,14 +100,15 @@
   $.map( _grades, function(position, letter) {
     var span = '<span class="grade-labels" style="left:'+position+'%;">'+letter+'</span>';
     $('.statement-slider > .noUi-base').append( span );
+    $('.rating-slider > .noUi-base').append( span );
   });
 
 
-  var _grades = {'1' : 30, '2' : 40, '3': 50, '4': 60, '5': 70};
+ /* var _grades = {'1' : 30, '2' : 40, '3': 50, '4': 60, '5': 70};
   $.map( _grades, function(position, letter) {
     var span = '<span class="rate-dot-labels" style="left:'+position+'%;">.</span>';
     $('.rating-slider > .noUi-base').append( span );
-  });
+  });*/
 
  });
 
@@ -433,14 +434,16 @@
   <div class='rate'>
 
     <center>
+        <span id="flag"></span><br/>
        <span class="rate-username"></span>
        <textarea id='commentInput' class='answer' readonly="true"></textarea>
     </center>
 
     <div class="answerwrapper default-left-padding">
         <div class="comment-admin-text">
-            <a href="#" class="comment-admin-text-a" onclick="rate.doneRatingNoSave();">Skip</a>&nbsp;&nbsp;&nbsp;
-            <a href="#" class="comment-admin-text-a" id="flag">Inappropriate or Irrelevant?</a>
+            <a href="#" class="comment-admin-text-a" onclick="rate.doneRatingNoSave();">Skip</a>&nbsp;&nbsp;
+            <a href="#" class="comment-admin-text-a" id="flag1">Inappropriate</a>&nbsp;&nbsp;
+            <a href="#" class="comment-admin-text-a" id="flag2">Irrelevant</a>
         </div>
 
      <div class='sliders'>

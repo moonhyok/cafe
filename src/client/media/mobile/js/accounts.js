@@ -489,7 +489,7 @@ $(document).ready(function() {
         $('.edit-comment').show();
     });
     
-    $('#flag').click(function() {
+    $('#flag1').click(function() {
         document.getElementById('flag').innerHTML='<strong>Flagged for Review</strong>';
             $.ajax({
             type: "POST",
@@ -504,6 +504,22 @@ $(document).ready(function() {
             }
         });
     });
+
+    $('#flag2').click(function() {
+            document.getElementById('flag').innerHTML='<strong>Flagged for Review</strong>';
+                $.ajax({
+                type: "POST",
+                url: window.url_root + "/os/flagcomment/1/"+window.current_cid+"/",
+                success: function(data) {
+                    if (data.hasOwnProperty('success')) {
+                        console.log("flag successfully sent");
+                    }
+                },
+                error: function() {
+                    console.log("ERROR flag didn't get sent");
+                }
+            });
+        });
 
     $('.dialog-ready').click(function() {
         rate.logUserEvent(8,'dialog 1');
