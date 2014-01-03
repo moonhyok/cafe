@@ -150,7 +150,7 @@ var accounts = (function($, d3, console) {
                 $('.score-value').text("" + ~~(data['cur_user_rater_score'] * window.conf.SCORE_SCALE_FACTOR));
                 window.user_score = data['cur_user_rater_score'];
                 $('.username').text(' ' + data['cur_username']);
-                document.getElementById('stats-iframe').src = window.url_root + '/crcstats/?username='+ data['cur_user_id'];
+                //document.getElementById('stats-iframe').src = window.url_root + '/crcstats/?username='+ data['cur_user_id'];
             });
 
         });
