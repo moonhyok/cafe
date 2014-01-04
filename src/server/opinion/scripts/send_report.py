@@ -160,7 +160,7 @@ participation_stopped = {
 }
 
 for k in participation_stopped:
-    participation_stopped[k] = min(0, participation_stopped[k])
+    participation_stopped[k] = max(0, participation_stopped[k])
 
 participation_table_header = "<h3>Participation Summary:</h3>"
 participation_table = PrettyTable(['Level', 'Actions', '# Who Reached Level', '# Who Stopped At Level'])
