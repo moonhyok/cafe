@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.utils.dateformat import DateFormat
 from opinion.includes.queryutils import *
+from prettytable import *
 
 ## Functions
 # Utility for displaying demographics
@@ -24,7 +25,7 @@ def create_table_row_user(user):
     if len(user_data_login) > 0:
         time_joined_display = DateFormat(datetime.datetime.fromtimestamp(float(user_data_login[0].value))).format('h:i:s A')
 
-    username_display = user.username
+    username_display = str(user.id)
     if user.email != '':
 		email_display = user.email
     else:
@@ -71,17 +72,21 @@ else:
 	send_mail(error_sub, error_body, report_from, TROUBLESHOOT_EMAIL_RECIPIENTS)        
 
 # Body
-report_body = ''
+report_body_html = ''
+report_body_text = ''
 
 ## Header
 report_header = report_subject
-report_body += "<h2>%s</h2>" % report_header
-report_body += "californiareportcard.org"
+report_body_html += "<h2>%s</h2>" % report_header
+report_body_html += "californiareportcard.org"
+
+report_body_text += "<h2>%s</h2>" % report_header
+report_body_text += "californiareportcard.org"
+
 
 ## Quick stats
-report_body += "<h3>Number of users so far: %s</h3><hr>" % User.objects.filter(id__gte = 310).count()
-
-# TODO: add number of users who gave us their email?
+report_body_html += "<h3>Number of users so far: %s</h3><hr>" % User.objects.filter(id__gte = 310).count()
+report_body_text += "<h3>Number of users so far: %s</h3><hr>" % User.objects.filter(id__gte = 310).count()
 
 # We aren't collecting feedback now (12/26)
 """
@@ -123,11 +128,13 @@ participation_legend = {
 	10 : '9+ rates'
 }
 
+
+
 participation_reached = { 
 	1 : LogUserEvents.objects.filter(details='first time',log_type=7, created__gte=TIME_FRAME).count(),
 	2 : LogUserEvents.objects.filter(details='sliders finished',log_type=5, created__gte=TIME_FRAME).count(),
 	3 : len(users),
-	4 : sum([ZipCodeLog.objects.filter(user = u)[0].location.state == 'CA' for u in users]),
+	4 : sum([ZipCodeLog.objects.filter(user = u)[0].location.state == 'CA' if ZipCodeLog.objects.filter(user=u).exists() else False for u in users]),
 	5 : sum([CommentRating.objects.filter(rater = u).count() >= 2 for u in users]),
 	6 : sum([DiscussionComment.objects.filter(user = u).exists() for u in users]),
 	7 : sum([bool(u.email) for u in users]),
@@ -135,6 +142,7 @@ participation_reached = {
 	9 : 'under construction',
 	10 : 'under construction', 
 }
+
 
 pr = participation_reached
 
@@ -151,48 +159,43 @@ participation_stopped = {
 	10 : '--'
 }
 
-participation_table = "<h3>Participation Summary:</h3>"
-participation_table += "<table border='1'><tr><td>Level</td><td>Actions</td><td># Who Reached Level</td><td># Who Stopped At Level</td></tr>"
-for p in sorted(participation_legend.keys()):
-	r = list_to_td([str(p), participation_legend[p], str(participation_reached[p]), str(participation_stopped[p])])
-	line = "<tr>" + r + "</tr>"
-	participation_table += line
+for k in participation_stopped:
+    participation_stopped[k] = max(0, participation_stopped[k])
 
-participation_table += "</table>"
-report_body += participation_table
+participation_table_header = "<h3>Participation Summary:</h3>"
+participation_table = PrettyTable(['Level', 'Actions', '# Who Reached Level', '# Who Stopped At Level'])
+
+for p in sorted(participation_legend.keys()):
+    row = [str(p), participation_legend[p], 
+           str(participation_reached[p]), str(participation_stopped[p])]
+    participation_table.add_row(row)
+
+report_body_html += (participation_table_header + participation_table.get_html_string(attributes= {'border' : '1'}))
+report_body_text += (participation_table_header + participation_table.get_string())
 
 ## New users
-table_body = ''
 
-table_body += '<h3>New users that registered today: (%s) </h3>' % (len(users))
+new_user_table_header = '<h3>New users that registered today: (%s) </h3>' % (len(users))
+new_user_table = PrettyTable( ['Time Registered (PST)', 'User ID', 'Zip Code', 'Location', '# Ideas Rated', 'Submitted Idea?', 'Email address'])
 
-table_body += '<table border="1">'
-
-header_cols = ['Time Registered (PST)', 'User ID', 'Zip Code', 'Location', '# Ideas Rated', 'Submitted Idea?', 'Email address']
-header_row = "<tr>%s</tr>" % list_to_td(header_cols)
-table_body += header_row
-
-for user in users:
-	table_row = '<tr>'
+for user in users:	
         row_data = create_table_row_user(user).split("\t")
-        print row_data
-	table_row += list_to_td(row_data)
-	#row_data = map(lambda x: "<td>" + x + "</td>", row_data)
-	#table_row += "".join(row_data)
-        table_row += "</tr>"
-        table_body += table_row
-table_body += "</table>"
-report_body += table_body
+        new_user_table.add_row(row_data)
+
+report_body_html += (new_user_table_header +  new_user_table.get_html_string(attributes= {'border' : '1'}))
+report_body_text += (new_user_table_header +  new_user_table.get_string())
 
 ## Daily Statistics
 # daily_statistics = ""
 # daily_statistics += '<h3>Total new users: ' + str(len(users)) + '</h3>'
 # report_body += daily_statistics
 
-report_body += "<hr>"
+
+
 ## Top comments
 OS_ID = 1
-report_body += "<h3>Top comments from the past week:</h3>" 
+report_body_html += "<hr><h3>Top comments from the past week:</h3>" 
+report_body_text += "<hr><h3>Top comments from the past week:</h3>" 
 
 os = OpinionSpace.objects.get(pk = OS_ID)
 discussion_statement_objects = os.discussion_statements.filter(is_current = True)
@@ -200,13 +203,17 @@ comments = DiscussionComment.objects.filter(is_current = True, discussion_statem
 count = 1
 for comment in comments:
 	if comment.created.date() >= datetime.date.today() - datetime.timedelta(days=7):
-		report_body += "\n"+str(count)+". Username: "+comment.user.username + "\nEmail: " + comment.user.email  + "\nComment:"  + decode_to_unicode(comment.comment) + "\nNormalized Score: " + str(comment.normalized_score_sum) + "\n"
-		count+=1
+            #   "\nEmail: " + comment.user.email  + \
+            line = "\n"+str(count)+". User ID: "+ str(comment.user.id)   + "\nComment:"  + decode_to_unicode(comment.comment) + "\nNormalized Score: " + str(comment.normalized_score_sum) + "\n"
+            report_body_html += (line.replace("\n", "<br>"))
+            report_body_text += line
+            count+=1
 
 
 ## Flagged comments
-report_body += "<hr>"
-report_body += "<h3>Flagged comments:</h3>" 
+
+report_body_html += "<hr><h3>Flagged comments:</h3>" 
+report_body_text += "<hr><h3>Flagged comments:</h3>" 
 
 flagged = FlaggedComment.objects.all().order_by('comment')
 printed = []
@@ -214,16 +221,17 @@ for fcomment in flagged:
     if fcomment.created.date() >= datetime.date.today() - datetime.timedelta(days=7):
 	if fcomment.comment.discussion_statement == discussion_statement_objects[0]:
 		if fcomment.comment not in printed and not_admin_approved(fcomment.comment):
-			report_body += 'Username: ' + fcomment.comment.user.username + '\nEmail: ' \
-                            + fcomment.comment.user.email + "\nComment: " + decode_to_unicode(fcomment.comment.comment) + '\n\n'
+                    # + '\nEmail: ' + fcomment.comment.user.email + \
+			line= 'User ID: ' + str(fcomment.comment.user.id) + "\nComment: " + decode_to_unicode(fcomment.comment.comment) + '\n\n'
+                        report_body_html += (line.replace("\n", "<br>"))
+                        report_body_text += line
 			printed.append(fcomment.comment)
 
 #send_mail(report_subject, report_body, report_from, report_recipients)
 
 from django.core.mail import EmailMultiAlternatives
-msg = EmailMultiAlternatives(report_subject, report_body, report_from, report_recipients)
-html_content = report_body.replace("\n", "<br>")
-msg.attach_alternative(html_content, "text/html")
+msg = EmailMultiAlternatives(report_subject, report_body_text, report_from, report_recipients)
+msg.attach_alternative(report_body_html, "text/html")
 msg.send()
 
 
