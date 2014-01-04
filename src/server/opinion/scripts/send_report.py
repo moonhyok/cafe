@@ -203,7 +203,7 @@ comments = DiscussionComment.objects.filter(is_current = True, discussion_statem
 count = 1
 for comment in comments:
 	if comment.created.date() >= datetime.date.today() - datetime.timedelta(days=7):
-		line = "\n"+str(count)+". Username: "+comment.user.username + "\nEmail: " + comment.user.email  + "\nComment:"  + decode_to_unicode(comment.comment) + "\nNormalized Score: " + str(comment.normalized_score_sum) + "\n"
+		line = "\n"+str(count)+". User ID: "+comment.user.username + "\nEmail: " + comment.user.email  + "\nComment:"  + decode_to_unicode(comment.comment) + "\nNormalized Score: " + str(comment.normalized_score_sum) + "\n"
                 report_body_html += (line.replace("\n", "<br>"))
                 report_body_text += line
 		count+=1
@@ -220,7 +220,7 @@ for fcomment in flagged:
     if fcomment.created.date() >= datetime.date.today() - datetime.timedelta(days=7):
 	if fcomment.comment.discussion_statement == discussion_statement_objects[0]:
 		if fcomment.comment not in printed and not_admin_approved(fcomment.comment):
-			line= 'Username: ' + fcomment.comment.user.username + '\nEmail: ' \
+			line= 'User ID: ' + fcomment.comment.user.username + '\nEmail: ' \
                             + fcomment.comment.user.email + "\nComment: " + decode_to_unicode(fcomment.comment.comment) + '\n\n'
                         report_body_html += (line.replace("\n", "<br>"))
                         report_body_text += line
