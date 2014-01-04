@@ -318,10 +318,10 @@ var _blooms = blooms = (function($, d3, console) {
         var marginVal = 0;//$(window).width() < 500 ? 40 : 100;
 
         margin = {
-            top: 0,
+            top: 20,
             left: 0,
             right: 40,
-            bottom: 100
+            bottom: 60
             };
 
 
@@ -416,11 +416,11 @@ var _blooms = blooms = (function($, d3, console) {
                 });
                 $('#go-back').click(function() {
 
-                    $('.scorebox').show();
+                    //$('.scorebox').show();
                     $('.menubar').show();
 
                     try{
-                    _this.transition().duration(1500).style("opacity", "0").remove();
+                    _this.transition().duration(3000).style("opacity", "0").remove();
                     }catch(err){
                     console.log(err);
                     }

@@ -77,9 +77,9 @@ var rate = (function($, d3, console) {
         $('.menubar').show();
         $('.top-bar').trigger('height');
 
-        if (window.user_score >= 1) {
-            $('.scorebox').show();
-        }
+        //if (window.user_score >= 1) {
+        //    $('.scorebox').show();
+        //}
     }
     
     function hideMenubar() {
@@ -424,7 +424,7 @@ $(document).ready(function() {
         window.prev_state = 'comment';
         rate.logUserEvent(6,'comment submitted');
         rate.sendComment($('#entered-comment').val());
-        window.your_mug.transition().duration(1500).style("opacity", "0").remove();
+        window.your_mug.transition().duration(3000).style("opacity", "0").remove();
         //if ($('#regemail').val()){
 	//		accounts.sendEmail($('#regemail').val());
 	//	}
@@ -435,7 +435,7 @@ $(document).ready(function() {
         $('.comment-input').hide();
         rate.logUserEvent(6,'comment cancelled');
         $('.menubar').show();
-        $('.scorebox').show();
+        //$('.scorebox').show();
     });
 
 

@@ -444,7 +444,7 @@ $(document).ready(function() {
                 {
                     window.prev_state = 'dialog';
                     $('.menubar').show();
-                    $('.scorebox').show();
+                    //$('.scorebox').show();
                 }
                 else if (window.prev_state == 'comment')
                 {
@@ -465,7 +465,7 @@ $(document).ready(function() {
                 {
                     window.prev_state = 'welcome_back';
                     $('.menubar').show();
-                    $('.scorebox').show();
+                    //$('.scorebox').show();
                 }
 
                window.scrollTo(0,0);
@@ -524,7 +524,7 @@ $(document).ready(function() {
     $('.dialog-ready').click(function() {
         rate.logUserEvent(8,'dialog 1');
         rate.initMenubar();
-        $('.scorebox').show();
+        //$('.scorebox').show();
 
         if(window.user_score == 0)
         {
@@ -538,7 +538,7 @@ $(document).ready(function() {
     $('.dialog-score-ready').click(function() {
         rate.logUserEvent(8,'dialog 2');
         $('.dialog-score').hide();
-        $('.scorebox').show();
+        //$('.scorebox').show();
         rate.initMenubar();
         //rate.initMenubar();
     });
@@ -554,7 +554,7 @@ $(document).ready(function() {
         else
         {
             rate.initMenubar();
-            $('.scorebox').show();
+            //$('.scorebox').show();
         }
     });
 
@@ -563,7 +563,7 @@ $(document).ready(function() {
             $('.dialog-email').hide();
             rate.initMenubar();
             window.prev_state = 'email';
-            $('.scorebox').show();
+            //$('.scorebox').show();
             if ($('#regemail').val()){
            		    accounts.sendEmail($('#regemail').val());
                     window.email_saved = true;
@@ -573,7 +573,7 @@ $(document).ready(function() {
     $('.dialog-yourmug-ready').click(function() {
         rate.logUserEvent(8,'dialog 4');
         $('.dialog-yourmug').hide();
-        $('.scorebox').show();
+        //$('.scorebox').show();
         $('.menubar').show();
         try{
             window.your_mug.transition().duration(1000).style("opacity", "1");
@@ -598,7 +598,7 @@ $(document).ready(function() {
     $('.edit-comment-done-btn').click(function() {
         $('.menubar').find('.ui-btn-active').removeClass('ui-btn-active ui-focus');
         $('.my-comment').hide();
-        $('.scorebox').show();
+        //$('.scorebox').show();
     });
 
     $('.logout-btn').click(function(e) {

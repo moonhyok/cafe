@@ -213,7 +213,7 @@ table.pretty caption {
 	.menubar {
 		display: none;
 		width: 100%;
-		bottom:0px;
+		top:0px;
         position: fixed;
         padding-top: 3px;
         z-index: 999;
@@ -546,7 +546,8 @@ table.pretty caption {
 	line-height: 13px !important;
 	font-size: 11px;
 	padding-left: 10px;
-	padding-top: 5px;
+	padding-bottom: 7px;
+	top: -25px;
 	}
 
 	.error_username {
