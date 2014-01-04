@@ -25,7 +25,7 @@ def create_table_row_user(user):
     if len(user_data_login) > 0:
         time_joined_display = DateFormat(datetime.datetime.fromtimestamp(float(user_data_login[0].value))).format('h:i:s A')
 
-    username_display = user.username
+    username_display = str(user.id)
     if user.email != '':
 		email_display = user.email
     else:
@@ -203,10 +203,11 @@ comments = DiscussionComment.objects.filter(is_current = True, discussion_statem
 count = 1
 for comment in comments:
 	if comment.created.date() >= datetime.date.today() - datetime.timedelta(days=7):
-		line = "\n"+str(count)+". User ID: "+comment.user.username + "\nEmail: " + comment.user.email  + "\nComment:"  + decode_to_unicode(comment.comment) + "\nNormalized Score: " + str(comment.normalized_score_sum) + "\n"
-                report_body_html += (line.replace("\n", "<br>"))
-                report_body_text += line
-		count+=1
+            #   "\nEmail: " + comment.user.email  + \
+            line = "\n"+str(count)+". User ID: "+ str(comment.user.id)   + "\nComment:"  + decode_to_unicode(comment.comment) + "\nNormalized Score: " + str(comment.normalized_score_sum) + "\n"
+            report_body_html += (line.replace("\n", "<br>"))
+            report_body_text += line
+            count+=1
 
 
 ## Flagged comments
@@ -220,8 +221,8 @@ for fcomment in flagged:
     if fcomment.created.date() >= datetime.date.today() - datetime.timedelta(days=7):
 	if fcomment.comment.discussion_statement == discussion_statement_objects[0]:
 		if fcomment.comment not in printed and not_admin_approved(fcomment.comment):
-			line= 'User ID: ' + fcomment.comment.user.username + '\nEmail: ' \
-                            + fcomment.comment.user.email + "\nComment: " + decode_to_unicode(fcomment.comment.comment) + '\n\n'
+                    # + '\nEmail: ' + fcomment.comment.user.email + \
+			line= 'User ID: ' + str(fcomment.comment.user.id) + "\nComment: " + decode_to_unicode(fcomment.comment.comment) + '\n\n'
                         report_body_html += (line.replace("\n", "<br>"))
                         report_body_text += line
 			printed.append(fcomment.comment)
