@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.utils.dateformat import DateFormat
 from opinion.includes.queryutils import *
+from prettytable import *
 
 ## Functions
 # Utility for displaying demographics
@@ -151,38 +152,29 @@ participation_stopped = {
 	10 : '--'
 }
 
-participation_table = "<h3>Participation Summary:</h3>"
-participation_table += "<table border='1'><tr><td>Level</td><td>Actions</td><td># Who Reached Level</td><td># Who Stopped At Level</td></tr>"
-for p in sorted(participation_legend.keys()):
-	r = list_to_td([str(p), participation_legend[p], str(participation_reached[p]), str(participation_stopped[p])])
-	line = "<tr>" + r + "</tr>"
-	participation_table += line
+participation_table_header = "<h3>Participation Summary:</h3>"
+participation_table = PrettyTable(['Level', 'Actions', '# Who Reached Level', '# Who Stopped At Level'])
 
-participation_table += "</table>"
-report_body += participation_table
+for p in sorted(participation_legend.keys()):
+    row = [str(p), participation_legend[p], 
+           str(participation_reached[p]), str(participation_stopped[p])]
+    participation_table.add_row(row)
+
+report_body += participation_table_header
+
+report_body += participation_table.get_html_string(attributes= {'border' : '1'})
 
 ## New users
-table_body = ''
 
-table_body += '<h3>New users that registered today: (%s) </h3>' % (len(users))
+new_user_table_header = '<h3>New users that registered today: (%s) </h3>' % (len(users))
+new_user_table = PrettyTable( ['Time Registered (PST)', 'User ID', 'Zip Code', 'Location', '# Ideas Rated', 'Submitted Idea?', 'Email address'])
 
-table_body += '<table border="1">'
-
-header_cols = ['Time Registered (PST)', 'User ID', 'Zip Code', 'Location', '# Ideas Rated', 'Submitted Idea?', 'Email address']
-header_row = "<tr>%s</tr>" % list_to_td(header_cols)
-table_body += header_row
-
-for user in users:
-	table_row = '<tr>'
+for user in users:	
         row_data = create_table_row_user(user).split("\t")
-        print row_data
-	table_row += list_to_td(row_data)
-	#row_data = map(lambda x: "<td>" + x + "</td>", row_data)
-	#table_row += "".join(row_data)
-        table_row += "</tr>"
-        table_body += table_row
-table_body += "</table>"
-report_body += table_body
+        new_user_table.add_row(row_data)
+
+report_body += new_user_table_header
+report_body += new_user_table.get_html_string(attributes= {'border' : '1'})
 
 ## Daily Statistics
 # daily_statistics = ""
@@ -222,7 +214,7 @@ for fcomment in flagged:
 
 from django.core.mail import EmailMultiAlternatives
 msg = EmailMultiAlternatives(report_subject, report_body, report_from, report_recipients)
-html_content = report_body.replace("\n", "<br>")
+html_content = report_body#.replace("\n", "<br>")
 msg.attach_alternative(html_content, "text/html")
 msg.send()
 
