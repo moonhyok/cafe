@@ -213,7 +213,7 @@ table.pretty caption {
 	.menubar {
 		display: none;
 		width: 100%;
-		top:0px;
+		bottom:0px;
         position: fixed;
         padding-top: 3px;
         z-index: 999;
@@ -577,7 +577,7 @@ table.pretty caption {
 	}
 
 	.sliders, .reg-sliders{
-		text-align: center;
+		text-align: left;
 		text-shadow: none;
 		width: 95%;
 		font-size: 17px;
@@ -1013,7 +1013,16 @@ padding-right: 7px;
 	 font-size: 13px;
 	 font-family: verdana, sans-serif;
 	 color: #fff8f0;
+	 text-align: left !important;
 	 
+   }
+
+   .flag-style{
+    position: fixed;
+    top: 160px;
+    left: 20px;
+    font-size: 18px;
+    color: #FF0000;
    }
 
   .avg-grades div {

@@ -184,7 +184,7 @@ var accounts = (function($, d3, console) {
 	
 	function getNeighborStat(){
 		
-		$.ajax({
+		/*$.ajax({
           type: "POST",
           dataType: 'json',
           url: window.url_root + "/neighborhoodStat/",
@@ -199,7 +199,7 @@ var accounts = (function($, d3, console) {
           error: function() {
 			  console.log("code error");
                }
-          });						
+          });*/
 	}
 
 	function hideAll(){
@@ -490,7 +490,7 @@ $(document).ready(function() {
     });
     
     $('#flag1').click(function() {
-        document.getElementById('flag').innerHTML='<strong>Flagged for Review</strong>';
+        document.getElementById('flag').innerHTML='Flagged for Review';
             $.ajax({
             type: "POST",
             url: window.url_root + "/os/flagcomment/1/"+window.current_cid+"/",
@@ -506,7 +506,7 @@ $(document).ready(function() {
     });
 
     $('#flag2').click(function() {
-            document.getElementById('flag').innerHTML='<strong>Flagged for Review</strong>';
+            document.getElementById('flag').innerHTML='Flagged for Review';
                 $.ajax({
                 type: "POST",
                 url: window.url_root + "/os/flagcomment/1/"+window.current_cid+"/",

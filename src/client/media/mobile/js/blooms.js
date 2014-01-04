@@ -318,7 +318,7 @@ var _blooms = blooms = (function($, d3, console) {
         var marginVal = 0;//$(window).width() < 500 ? 40 : 100;
 
         margin = {
-            top: 20,
+            top: 0,
             left: 0,
             right: 40,
             bottom: 60

@@ -42,7 +42,7 @@ var rate = (function($, d3, console) {
             $("#slider2").val(50); //.slider("refresh");
         }, 1500);
         setTimeout(function() {
-            document.getElementById('flag').innerHTML='Inappropriate or Irrelevant?';
+            document.getElementById('flag').innerHTML='';
         }, 500);
     }
 
@@ -141,6 +141,7 @@ var rate = (function($, d3, console) {
         resetRatingSliders();
         logUserEvent(4,'rated');
         $('.rate').hide();
+        $('.menubar').show();
     }
 
     // pulls a live comment text from the database. id is either the cid or the uid,

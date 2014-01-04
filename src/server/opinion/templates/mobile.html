@@ -360,7 +360,7 @@
           {{ client_settings.DISCUSSION_DIALOG_TEXT1 }}
           <center>
               <div class="standard-btn-div">
-                  <button type='submit' data-theme='b' class='dialog-ready' ><font style="font-size: 16px;">Next</font></button>
+                  <button type='submit' data-theme='b' class='dialog-ready' ><font style="font-size: 16px;">Enter</font></button>
                   <!--<button type='submit' data-theme='b' class='dialog-next'  onclick="$('.dialog-text1').hide();$('.dialog-text2').show();"><font style="font-size: 16px;">Next</font></button>-->
               </div>
           </center>
@@ -433,11 +433,16 @@
 
   <div class='rate'>
 
+      <div class="default-left-padding" style="text-align: left;">
+          <span class="rate-username"></span>
+      </div>
+
+
     <center>
-        <span id="flag"></span><br/>
-       <span class="rate-username"></span>
        <textarea id='commentInput' class='answer' readonly="true"></textarea>
     </center>
+
+      <div id="flag" class="flag-style"></div>
 
     <div class="answerwrapper default-left-padding">
         <div class="comment-admin-text">
