@@ -44,6 +44,7 @@ import time
 import datetime
 import hashlib
 from django.core.validators import validate_email
+import matplotlib.pyplot as plt
 try:
     import json
 except ImportError:
@@ -146,14 +147,31 @@ def confirmation_mail(request):
          entrycode=hashlib.sha224(email).hexdigest()[0:7]
          ECobject=EntryCode(username=user.username,code=entrycode)
          ECobject.save()	
-    
+         
+         ordinal='th'
+         if user.id % 10 == 1:
+             ordinal='st'
+         elif user.id % 10 == 2:
+             ordinal='nd'
+         elif user.id % 10 ==3:
+             ordinal='rd'
+         if user.id % 100 == 11:
+             ordinal='th'
+         if user.id % 100 == 12:
+             ordinal='th'
+         if user.id % 100 == 13:
+             ordinal='th'
          #send out confirmation email
-         subject = "Thank you for your participation"
+         print user.id,ordinal
+         subject = "Your unique link to the California Report Card v1.0"
          email_list = [user.email]
          message = render_to_string('registration/confirmation_email.txt', 
 									   { 'url_root': settings.URL_ROOT, 
 										 'entrycode': entrycode,
-                                         'number_people': User.objects.filter(id__gte = 310).count() })
+										 'user_id': user.id,
+										 'ordinal': ordinal,
+                                          })
+          
          #send_mail(subject, message, Settings.objects.string('DEFAULT_FROM_EMAIL'), email_list)
          return json_success()
       else:
@@ -163,17 +181,17 @@ def confirmation_mail(request):
 
 def crcstats(request):
     uid = request.GET.get('username',-1)
-    auth = False
     score = 0
     given = 0
     received = 0
     os = get_os(1)
     disc_stmt = get_disc_stmt(os, 1)
+    level8= False
     if uid != -1:
         cur_user = User.objects.filter(id=uid)
         if len(cur_user) > 0:
             cur_user = cur_user[0]
-            auth = True
+            level8= True
             score = CommentAgreement.objects.filter(rater = cur_user,is_current=True).count()
             given = 2*CommentAgreement.objects.filter(rater = cur_user,is_current=True).count()
             received = 2*CommentAgreement.objects.filter(comment__in = DiscussionComment.objects.filter(user = cur_user),is_current=True).count()
@@ -185,8 +203,11 @@ def crcstats(request):
         if med <= 1e-5:
             med = 0
         medians.append({'statement': s.statement, 'avgG': score_to_grade(100*med), 'avg': int((1-med)*300)})
+        
+    issues_hist(request)
+    participant_hist(request)
     return render_to_response('crc_stats.html', context_instance = RequestContext(request, {'num_participants': User.objects.filter(id__gte=310).count(),
-                                                                                            'auth': auth,
+                                                                                            'level8':level8,
                                                                                             'participant': uid,
                                                                                             'given': given,
                                                                                             'received': received,
@@ -194,9 +215,121 @@ def crcstats(request):
                                                                                             'num_ratings': CommentAgreement.objects.filter(is_current=True).count()*2,
                                                                                             'url_root' : settings.URL_ROOT,
                                                                                             'medians': medians,
-                                                                                            'city':neighbor_city(request),
-                                                                                            'neighbors': neighbor_stat(request),
-                                                                                            'cur_user_rating': participant_stat(request)}))
+                                                                                            }))
+def issues_hist(request):
+   statements = OpinionSpaceStatement.objects.all().order_by('id')
+   bins=[0,0.01,0.19,0.32,0.38,0.44,0.56,0.63,0.69,0.81,0.86,0.92,0.99,1]  
+        # F    D-   D    D+   C-   C    C+   B-   B   B+    A-   A    A+
+   N=len(bins)-1
+   ind=numpy.arange(N)
+   width=0.35
+   
+   for s in statements:
+       s_rating=UserRating.objects.filter(opinion_space_statement=s,is_current=True)
+       s_rating_list=[]
+       for rating in s_rating:
+          s_rating_list.append(1-rating.rating)
+       
+       hist,bin_edges = numpy.histogram(s_rating_list,bins,normed=False)
+       hist_in_percent=(100*hist/float(sum(hist)))[::-1]
+       
+       fig, ax = plt.subplots()
+       rects1 = ax.bar(ind, hist_in_percent, width, color='r')
+       median=numpy.median(s_rating_list)
+       median_bar=median_index(request,median)
+       rects1[median_bar].set_color('b')
+       ax.set_ylabel('Percentages (%)')
+       ax.set_title(s.statement)
+       ax.set_xticks(ind+width/2)
+       ax.set_xticklabels( ('A+', 'A', 'A-', 'B+', 'B','B-','C+','C','C-','D+','D','D-','F') )
+       plt.savefig(s.statement+'.svg',dpi=300,format='svg')
+       
+def median_index(request,median):
+     if median<=1 and median>0.99:
+        return 0
+     if median<=0.99 and median>0.92:
+        return 1
+     if median<=0.92 and median>0.86:
+        return 2
+     if median<=0.86 and median>0.81:
+        return 3
+     if median<=0.81 and median>0.69:
+        return 4
+     if median<=0.69 and median>0.63:
+        return 5
+     if median<=0.63 and median>0.56:
+        return 6
+     if median<=0.56 and median>0.44:
+        return 7
+     if median<=0.44 and median>0.38:
+        return 8
+     if median<=0.38 and median>0.32:
+        return 9
+     if median<=0.32 and median>0.19:
+        return 10
+     if median<=0.19 and median>0.01:
+        return 11
+     if median<=0.01:
+        return 12
+
+
+def participant_hist(request):
+    uid = request.GET.get('username',-1)
+    auth = False
+    os = get_os(1)
+    disc_stmt = get_disc_stmt(os, 1)
+    
+    bins=[0,0.01,0.19,0.32,0.38,0.44,0.56,0.63,0.69,0.81,0.86,0.92,0.99,1]  
+        # F    D-   D    D+   C-   C    C+   B-   B   B+    A-   A    A+
+    N=len(bins)-1
+    ind=numpy.arange(N)
+    width=0.35
+
+    if uid != -1:
+        cur_user = User.objects.filter(id=uid)
+        if len(cur_user) > 0:
+            cur_user = cur_user[0]
+            auth = True
+            cur_user_comment=DiscussionComment.objects.filter(user=cur_user,discussion_statement= disc_stmt,is_current = True)
+            if len(cur_user_comment)>0:
+               slider1=CommentAgreement.objects.filter(comment=cur_user_comment[0])
+               slider2=CommentRating.objects.filter(comment=cur_user_comment[0])
+               slider1_rating=[]
+               slider2_rating=[]
+               
+               for i in range(0, len(slider1)):
+                   slider1_rating.append(1-slider1[i].agreement)
+               for i in range(0, len(slider2)):
+                   slider2_rating.append(1-slider2[i].rating)
+               slider1_hist,bin_edges_1 = numpy.histogram(slider1_rating,bins,normed=False)
+               slider2_hist,bin_edges_2 = numpy.histogram(slider2_rating,bins,normed=False)
+               slider1_hist_in_percent=(100*slider1_hist/float(sum(slider1_hist)))[::-1]
+               slider2_hist_in_percent=(100*slider2_hist/float(sum(slider2_hist)))[::-1]
+              
+               fig1, ax1=plt.subplots()
+               rects1 = ax1.bar(ind, slider1_hist_in_percent, width, color='r')
+               median1=numpy.median(slider1_rating)
+               
+               median_bar1=median_index(request,median1)
+               rects1[median_bar1].set_color('b')
+               ax1.set_ylabel('Percentages (%)')
+               ax1.set_title("How important is this issue for the next Report Card?")
+               ax1.set_xticks(ind+width/2)
+               ax1.set_xticklabels( ('A+', 'A', 'A-', 'B+', 'B','B-','C+','C','C-','D+','D','D-','F') )
+               plt.savefig(str(uid)+'_1.svg',dpi=300,format='svg')
+               
+               plt.figure()
+               fig2, ax2=plt.subplots()
+               rects2 = ax2.bar(ind, slider2_hist_in_percent, width, color='r')
+               median2=numpy.median(slider2_rating)
+               median_bar2=median_index(request,median2)
+               rects2[median_bar2].set_color('b')
+               ax2.set_ylabel('Percentages (%)')
+               ax2.set_title("How would you rate the State of California on this issue today?")
+               ax2.set_xticks(ind+width/2)
+               ax2.set_xticklabels( ('A+', 'A', 'A-', 'B+', 'B','B-','C+','C','C-','D+','D','D-','F') )
+               plt.savefig(str(uid)+'_2.svg',dpi=300,format='svg')
+
 
 
 def neighbor_stat(request):
