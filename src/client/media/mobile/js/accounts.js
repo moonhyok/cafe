@@ -215,6 +215,8 @@ var accounts = (function($, d3, console) {
         $('.dialog-continue').hide();
         $('.dialog-email').hide();
         $('.my-comment').hide();
+        $('.dialog-help-alt').hide();
+
 	}
 
     return {
@@ -482,7 +484,12 @@ $(document).ready(function() {
                 {
                    window.prev_state = 'continue';
                    $('.dialog-email').show();
-                 }
+                }
+                else if (window.prev_state.indexOf('help') != -1)
+                {
+                    $('.dialog-help-alt').show();
+                    window.prev_state = window.prev_state.substring(4);
+                }
                 else if (window.prev_state == 'welcome_back')
                 {
                     window.prev_state = 'welcome_back';
@@ -493,6 +500,20 @@ $(document).ready(function() {
                window.scrollTo(0,0);
 
             });
+
+    $('.help-btn-dialog').click(function() {
+                                 accounts.hideAll();
+                                 window.prev_state = window.cur_state;
+                                 window.cur_state = 'help-' + window.cur_state;
+                                 if (window.cur_state == 'help-home')
+                                 {
+                                    $('.dialog-about').show();
+                                 }
+                                 else{
+                                    $('.dialog-help-alt').show();
+                                 }
+
+                             });
 
     $('.login-form-go-back').click(function() {
         $('.landing').show();
