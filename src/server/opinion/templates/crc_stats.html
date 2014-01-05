@@ -8,121 +8,54 @@ body{
 
 strong {
         color: white;
-        float:left;
+        
     }
-
-.grade-bar {
-font: 10px sans-serif;
-background-color: #FFFFFF;
-text-align: left;
-padding: 3px;
-margin: 1px;
-color: #594027;
-float: right;
-}
-
-.grade-chart{
-    max-width: 320px;
-    float: right;
-    margin:0;
-    background: #6b8583;
-    border: 1px solid black;
- }
-
-.grade-labels{
-    background-color: #594027;
-    color: white;
-    }
-
-.bar rect {
-  fill: white;
-  shape-rendering: crispEdges;
-}
-
-.axis path,
-.axis line {
-    fill: none;
-    stroke: black;
-    shape-rendering: crispEdges;
-}
-
-.axis text {
-    font-family: sans-serif;
-    font-size: 11px;
-}
 </style>
-<script type='text/javascript'>
-window.conf = { 'S1_RATING':{{cur_user_rating.s1_rating}},
-                'S2_RATING':{{cur_user_rating.s2_rating}}};
-</script>
 <body>
 <script src="http://d3js.org/d3.v3.min.js"></script>
-{% if auth %}
-<strong>Participant {{ participant }}'s Statistics</strong><br/>
-Comment: {{ cur_user_rating.comment }}  <br/>
-Comment Date: {{ cur_user_rating.date}} <br/>
-Score: {{ score }} <br/>
-Ratings Given: {{ given }} <br/>
-Ratings Received: {{ received }} <br/><br/>
+<script type='text/javascript' src='{{url_root}}/media/mobile/jquery-mobile/jquery-1.10.2.min.js'></script>
 
-  {% if received %}
-   <strong>Histogram Analysis of Participant {{ participant }}'s Comment</strong><br/>
-   
-   <strong>Median marked in brown bar</strong>
-   <br/>
-   How important is this subject for your community?<br/>
-   <div id="s1hist">
+<strong>California Report Card v1.0 Daily Update</strong><br/>
+You are the {{participant}}{{ordinal}} participant.<br/>
+Participants so far: {{num_participants}}.<br/>
+Your Participation Score: {{score}}.<br/>
+Number of Participants who graded your suggestion: {{received}}.<br/><br/>
 
-   </div>
-   How interested are you in this subject?<br/>
-   <div id="s2hist">
-
-   </div>
-   
-  {% endif %}
-<!--add vertical bar chart for agree and insight ratings -->
-
+{% if level8 %}
+<strong>Your Grades so far:<strong><br/>
+<strong>Median marked in blue</strong>
+<div>
+  <select id="participant-grade-select">
+  <option value="1">How important is this issue for the next Report Card?</option>
+  <option value="2">How would you rate the State of California on this issue today?</option>
+  </select>
+</div>
+<div class="participant-grade">
+<img id="participant-grade-image" src="{{url_root}}/media/mobile/img/daily_update/3_1.svg" alt="Smiley face" height="400" width="400">
+</div>
 {% endif %}
+
+
 <br/>
-<strong>Report Card Overview</strong><br/>
-Participants so far: {{ num_participants }}<br/>
-Total number of ratings: {{ num_ratings }}<br/><br/>
-
-<strong>Average Grades</strong><br/>
-<div class="grade-chart" style="float:left">
-    {% for median in medians %}
-    <div class="grade-bar" style="width: {{ median.avg}}px;height: 50px;">{{ median.statement}}</div>
-    {% endfor %}
-    <div class="grade-labels" style="max-width: 320px;clear:both;">
-        <span style="position:relative; left:3%;">A</span>
-        <span style="position:relative; left:19%;">B</span>
-        <span style="position:relative; left:37%;">C</span>
-        <span style="position:relative; left:56%;">D</span>
-        <span style="position:relative; left:74%;">F</span>
-    </div>
+<strong>Histogram of Grades for each Issue:</strong><br/>
+<strong>Median marked in blue</strong>
+<div>
+  <select id="issue-select">
+  {% for median in medians %}
+  <option value="{{median.id}}">{{median.statement}}</option>
+  {% endfor %}
+  </select>
 </div>
-<br/><br/>
-
-{% if auth %}
-<strong>Average Grades in Your Neighborhood : {{city}}</strong><br/>
-<div class="grade-chart" style="float:left">
-    {% for neighbor in neighbors %}
-    <div class="grade-bar" style="width: {{ neighbor.avg}}px;height: 50px;">{{ neighbor.statement}}</div>
-    {% endfor %}
-    <div class="grade-labels" style="max-width: 320px;clear:both;">
-        <span style="position:relative; left:3%;">A</span>
-        <span style="position:relative; left:19%;">B</span>
-        <span style="position:relative; left:37%;">C</span>
-        <span style="position:relative; left:56%;">D</span>
-        <span style="position:relative; left:74%;">F</span>
-    </div>
+<div class="hist-issue">
+<img id="hist-issue-image" src="{{url_root}}/media/mobile/img/daily_update/Transportation.svg" alt="Smiley face" height="400" width="400">
 </div>
 
-{% endif %}
 
 
 
 <script type='text/javascript' src='{{url_root}}/media/mobile/js/crcstats.js'></script>  
+
+
 </body>
 
 </html>
