@@ -187,10 +187,18 @@
 
   <div class='landing'>
 
+      <div class="home-btn-dialog-box">
+          <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+          &nbsp;
+          <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+          &nbsp;
+          <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+      </div>
+
     <div class="responsive-max-width">
 
         <center>
-            <img src="{{url_root}}/media/mobile/img/cafe/cafe-title-cropped.png" width="250px" style="padding-top: 5px;"/>
+            <img src="{{url_root}}/media/mobile/img/cafe/cafe-title-cropped.png" width="220px" style="padding-top: 5px;"/>
         </center>
 
         <div class='landing-desc'>
@@ -212,11 +220,11 @@
                     <div class="byline">Source: UC Berkeley CITRIS Data and Democracy Initiative</div>
 
                 </div>
-                <div class="landing-img-div"><img src="{{url_root}}/media/mobile/img/cafe/spoon-and-pencil-draft.png" width="80px"/></div>
+                <div class="landing-img-div"><img src="{{url_root}}/media/mobile/img/cafe/spoon-and-pencil-draft.png" width="70px"/></div>
 
                 <div class="landing-disclaimer">
                     {{client_settings.WELCOME_PAGE_TEXT2}}<br/>
-                    <a href="#" class="comment-admin-text-a" style="font-size: 10px;" onclick="$('.dialog-about').show();$('.landing').hide();window.landing=true;">{{client_settings.WELCOME_PAGE_ABOUT_LINK}}</a>
+                    <!--<a href="#" class="comment-admin-text-a" style="font-size: 10px;" onclick="$('.dialog-about').show();$('.landing').hide();window.landing=true;">{{client_settings.WELCOME_PAGE_ABOUT_LINK}}</a>-->
                 </div>
             </div>
         </div>
@@ -224,6 +232,15 @@
   </div>
 
   <div id='rating' class='endsliders'>
+
+      <div class="home-btn-dialog-box">
+          <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+          &nbsp;
+          <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+          &nbsp;
+          <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+      </div>
+
       <div class='reportcard default-left-padding responsive-max-width'>
           <div class="basic-header">{{client_settings.REPORT_CARD_HEADER}}</div>
 
@@ -294,20 +311,19 @@
                   <button type='submit' data-theme='b' class='done-endsliders-btn' ><font style="font-size: 16px;">{{client_settings.REPORT_CARD_NEXT_BUTTON}}</font></button>
               </div>
 
-              <div class="home-btn-dialog-box">
-                  <hr class="full-width-hr"/>
-                  <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
-                  &nbsp;
-                  <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
-                  &nbsp;
-                  <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
-              </div>
-
           </center>
       </div>
   </div>
 
   <div class = 'register' id='register'>
+      <div class="home-btn-dialog-box">
+          <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+          &nbsp;
+          <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+          &nbsp;
+          <img width="30px;" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+      </div>
+
       <div class= 'registerpanel default-left-padding responsive-max-width'>
           <div class="basic-header2" style="width: 100%">{{client_settings.ZIP_CODE_INSTRUCTIONS}}</div>
 
@@ -340,19 +356,17 @@
               </center>
           </form>
       </div>
-      <center>
-      <div class="home-btn-dialog-box" style="position: fixed; bottom: 0px;text-align: center;">
-          <hr class="full-width-hr"/>
+  </div>
+
+  <div class='dialog dialog-style'>
+      <div class="home-btn-dialog-box">
           <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
           &nbsp;
           <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
           &nbsp;
           <img width="30px;" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
       </div>
-      </center>
-  </div>
 
-  <div class='dialog dialog-style'>
       <div class='dialog-text1 dialog-text-style default-left-padding'>
           <div class="basic-header" style="width:100%;">{{client_settings.DISCUSSION_DIALOG_HEADER}}</div>
           <img class="header-img-topic center" src="{{ url_root }}/media/mobile/img/cafe/map_teaser.png"/>
@@ -365,21 +379,17 @@
               </div>
           </center>
       </div>
+  </div>
 
-      <center>
+  <div class='comment-input'>
       <div class="home-btn-dialog-box">
-          <hr/>
           <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
           &nbsp;
           <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
           &nbsp;
           <img width="30px;" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
       </div>
-      </center>
 
-  </div>
-
-  <div class='comment-input'>
       <center>
           <div class='comment-panel'>
               <div class="basic-sub-sub-header" style="text-align:left;">{{topic}}<br/></div>
@@ -387,14 +397,6 @@
               <div class="standard-btn-div">
                   <button type='submit' data-theme='b' class='comment-submit-btn'><font style="font-size: 16px;">Save</font></button>
                   <button type='submit' data-theme='b' class='comment-cancel-btn'><font style="font-size: 16px;">Cancel</font></button>
-              </div>
-              <div class="home-btn-dialog-box">
-                  <hr class="full-width-hr"/>
-                  <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
-                  &nbsp;
-                  <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
-                  &nbsp;
-                  <img width="30px;" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
               </div>
           </div>
       </center>
@@ -423,7 +425,7 @@
 
         <div class='instructions'>{{client_settings.INSTRUCTIONS_1}}</div>
         <div class='instructions2'>{{client_settings.INSTRUCTIONS_2}}</div>
-	    <div class='instructions3'>{{client_settings.INSTRUCTIONS_3}}</div>
+	    <div class='instructions3'><div style="padding-right: 5px; padding-left: 5px;">{{client_settings.INSTRUCTIONS_3}}</div></div>
 
     </center>
   </div>
@@ -432,6 +434,14 @@
   <div class="margin"></div>
 
   <div class='rate'>
+
+      <div class="home-btn-dialog-box">
+          <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+          &nbsp;
+          <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+          &nbsp;
+          <img width="30px;" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+      </div>
 
       <div class="default-left-padding" style="text-align: left;">
           <span class="rate-username"></span>
@@ -482,24 +492,13 @@
 
       </div>
 
-        <center>
-        <div class="home-btn-dialog-box">
-            <hr class="full-width-hr"/>
-            <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
-            &nbsp;
-            <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
-            &nbsp;
-            <img width="30px;" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
-        </div>
-        </center>
-
     </div>
 
   </div>
 
   <div class='my-comment'>
     <div class='edit-comment-panel'>
-        <div class="basic-header">My Statistics (Under Construction)</div>
+        <div class="basic-header">My Statistics<br/>(Under Construction)</div>
         <!--<iframe src="{{url_root}}/crcstats/" id="stats-iframe" class="stats-iframe"></iframe>-->
         <div class="home-btn-dialog-box">
             <hr class="full-width-hr"/>
@@ -659,79 +658,67 @@
   </div>
 
   <div class='dialog-continue dialog-style'>
-    <div class='dialog-text-style default-left-padding'>
+      <div class="home-btn-dialog-box">
+          <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+          &nbsp;
+          <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+          &nbsp;
+          <img width="30px;" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+      </div>
 
+    <div class='dialog-text-style default-left-padding'>
         <div class="basic-header" style="width:100%;">{{client_settings.RESPONSE_SAVED_HEADER}}</div>
         {{ client_settings.RESPONSE_SAVED_TEXT}}
+        <br/><br/>
+        {{client_settings.EMAIL_ASK_TEXT}}
+        <input type="email" id='regemail' name='regemail' class='regforminput' style="font-size: 15px; background-color: #FFFFFF;color: #000000;" placeholder="Email" data-theme='b'></input>
+        <div class="comment-admin-text-a">We promise not to share your email address with any third parties</div>
         <center>
             <div class="standard-btn-div">
-                <button type='submit' data-theme='b' class='dialog-continue-ready' ><font style="font-size: 16px;">Next</font></button>
+                <button type='submit' data-theme='b' class='dialog-continue-ready' ><font style="font-size: 16px;">Enter</font></button>
             </div>
-      </center>
+        </center>
 
     </div>
-
-      <center>
-          <div class="home-btn-dialog-box" style="position: fixed; bottom: 0px;">
-              <hr/>
-              <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
-              &nbsp;
-              <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
-              &nbsp;
-              <img width="30px;" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
-          </div>
-      </center>
-
   </div>
 
-  <div class='dialog-email dialog-style'>
+ <div class='dialog-email dialog-style'>
+     <div class="home-btn-dialog-box">
+         <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+         &nbsp;
+         <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+         &nbsp;
+         <img width="30px;" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+     </div>
     <div class='dialog-text-notitle default-left-padding'>
-      {{client_settings.EMAIL_ASK_TEXT}}
+        Thank you!  Logout now or grade more suggestions for the next report card.
+        Sending your unique link now.
         <center>
-            <input type="email" id='regemail' name='regemail' class='regforminput' style="font-size: 15px; background-color: #FFFFFF;color: #000000;" placeholder="Email" data-theme='b'></input>
-            <div class="comment-admin-text-a">We promise not to share your email address with any third parties</a>
             <div class="standard-btn-div">
-
-                <button type='submit' data-theme='b' class='dialog-email-ready' ><font style="font-size: 16px;">Next</font></button>
+                <button type='submit' data-theme='b' class='dialog-email-ready' ><font style="font-size: 16px;">Continue Grading</font></button>
+                <button type='submit' data-theme='b' class='logout-btn' ><font style="font-size: 16px;">Logout</font></button>
             </div>
         </center>
     </div>
 
-      <center>
-          <div class="home-btn-dialog-box" style="position: fixed; bottom: 0px;">
-              <hr/>
-              <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
-              &nbsp;
-              <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
-              &nbsp;
-              <img width="30px;" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
-          </div>
-      </center>
-
   </div>
 
   <div class='dialog-avggrade dialog-style'>
+      <div class="home-btn-dialog-box">
+          <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+          &nbsp;
+          <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+          &nbsp;
+          <img width="30px;" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+      </div>
+
     <div class='dialog-text-style default-left-padding'>
-
-
       <div class="basic-header" style="width:100%;">{{client_settings.AVG_EXPLAIN_HEADER}}</div>
      <center>
       <img src="{{ url_root }}/media/mobile/img/cafe/avggrade.png" class="center" style="width:300px;padding-top:3px;"><br>
      </center>
         {{client_settings.AVG_EXPLAIN_TEXT}}
     </div>
-
-      <center>
-          <div class="home-btn-dialog-box">
-              <hr/>
-              <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
-              &nbsp;
-              <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
-              &nbsp;
-              <img width="30px;" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
-          </div>
-      </center>
-
   </div>
 
   <div class='dialog-about dialog-style' style="z-index:999">

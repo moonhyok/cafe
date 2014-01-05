@@ -519,9 +519,10 @@ table.pretty caption {
 	.landing-img-div{
 	text-align: right;
 	float: right;
-	width: 30%;
+	width: 25%;
 	position: relative;
-	top: -40px;
+	top: -70px;
+	left: -10px;
 	}
 
 	.landing-img-txt{
@@ -536,7 +537,7 @@ table.pretty caption {
 	.byline{
 	font-size: 11px;
 	line-height: 13px;
-	padding-top:10px;
+	padding-top: 5px;
 	}
 
 	.landing-disclaimer{
@@ -547,6 +548,7 @@ table.pretty caption {
 	font-size: 11px;
 	padding-left: 10px;
 	padding-bottom: 7px;
+	padding-top: 5px;
 	top: -25px;
 	}
 
@@ -580,7 +582,7 @@ table.pretty caption {
 		text-align: left;
 		text-shadow: none;
 		width: 95%;
-		font-size: 17px;
+		font-size: 15px;
 		
 		padding-bottom: 3px;
 		color: #594027;
@@ -797,6 +799,7 @@ padding-right: 7px;
 
 .comment-admin-text-a{
     font-size: 11px !important;
+    line-height: 11px;
     color: #fff8f0 !important;
     font-family: verdana, sans-serif;
 }
@@ -843,7 +846,9 @@ padding-right: 7px;
 
 .home-btn-dialog-box {
     width:100%;
-    padding-bottom: 5px;
+    padding-top: 10px;
+    text-align: left;
+    padding-left: 10px;
     background-color: #96c6c5;
 
 }
@@ -1010,9 +1015,9 @@ padding-right: 7px;
     }
    
    .rate-username{
-	 font-size: 13px;
+	 font-size: 14px;
 	 font-family: verdana, sans-serif;
-	 color: #fff8f0;
+	 color: #594027;
 	 text-align: left !important;
 	 
    }

@@ -542,33 +542,29 @@ $(document).ready(function() {
         rate.initMenubar();
         //rate.initMenubar();
     });
-    
-    $('.dialog-continue-ready').click(function() {
-        rate.logUserEvent(8,'dialog 3');
-        $('.dialog-continue').hide();
-        window.prev_state = 'continue';
-        if(! window.email_saved)
-        {
-            $('.dialog-email').show();
-        }
-        else
-        {
-            rate.initMenubar();
-            //$('.scorebox').show();
-        }
-    });
 
-    $('.dialog-email-ready').click(function() {
-            rate.logUserEvent(8,'dialog 4');
-            $('.dialog-email').hide();
-            rate.initMenubar();
-            window.prev_state = 'email';
+    $('.dialog-continue-ready').click(function() {
+            rate.logUserEvent(8,'dialog 3');
+            $('.dialog-continue').hide();
+            window.prev_state = 'continue';
             //$('.scorebox').show();
             if ($('#regemail').val()){
            		    accounts.sendEmail($('#regemail').val());
                     window.email_saved = true;
+                    $('.dialog-email').show();
+           	}
+           	else
+           	{
+           	    rate.initMenubar();
            	}
         });
+
+        $('.dialog-email-ready').click(function() {
+                rate.logUserEvent(8,'dialog 4');
+                $('.dialog-email').hide();
+                rate.initMenubar();
+                window.prev_state = 'email';
+            });
     
     $('.dialog-yourmug-ready').click(function() {
         rate.logUserEvent(8,'dialog 4');
