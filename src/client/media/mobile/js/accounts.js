@@ -620,6 +620,7 @@ $(document).ready(function() {
 
     $('.logout-btn').click(function(e) {
         rate.logUserEvent(1,'logout');
+        accounts.hideAll();
         $('.logout').show();
         e.preventDefault();
         e.stopPropagation();
