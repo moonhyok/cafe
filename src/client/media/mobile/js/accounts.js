@@ -307,7 +307,8 @@ $(document).ready(function() {
                             blooms.populateBlooms();
                             $('.register').hide();
                             $("#regzip").attr("disabled", true);
-                            utils.hideLoading();
+                            //utils.hideLoading();
+                            $('.loading-spinner').hide();
                             window.conf.ZIPCODE=registrationData.zipcode;
                             window.prev_state = 'register';
                             window.cur_state = 'dialog';

@@ -26,13 +26,14 @@ var utils = (function($, d3, console) {
                 html: ""
             });
         } else {
-            $.mobile.loading('show', {
+            /*$.mobile.loading('show', {
                 text: msg,
                 textVisible: true,
                 textonly: true,
                 theme: 'b',
                 html: ""
-            });
+            });*/
+            $('.loading-spinner').show();
             setTimeout(f, TIMEOUT_AFTER_LOADING);
         }
     }

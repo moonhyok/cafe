@@ -357,6 +357,7 @@
 
                   <div class="standard-btn-div" onclick="document.getElementById('registerb').focus();">
                       <button type='submit' data-theme='b' id="registerb"><font style="font-size: 16px;">{{client_settings.ZIP_CODE_BUTTON}}</font></button>
+                      <span class="loading-spinner" style="display: none;"><img src="{{url_root}}/media/mobile/img/cafe/loader.gif" style="width:50px;"></span>
                   </div>
               </center>
           </form>
@@ -398,7 +399,7 @@
       <center>
           <div class='comment-panel'>
               <div class="basic-sub-sub-header" style="text-align:left;">{{topic}}<br/></div>
-              <textarea name='answer' id='entered-comment'> </textarea>
+              <textarea name='answer' id='entered-comment'></textarea>
               <div class="standard-btn-div">
                   <button type='submit' data-theme='b' class='comment-submit-btn'><font style="font-size: 16px;">Save</font></button>
               </div>
@@ -585,9 +586,9 @@
           &nbsp;
           <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
       </div>
-        <div class='landing-img-txt default-left-padding' style="width: 95%;font-size: 18px;">
+        <div class='landing-img-txt default-left-padding' style="width: 95%;font-size: 24px;">
             {{client_settings.LOGOUT_DIALOG_TEXT}}<br/>
-            <a href="http://californiareportcard.org/">http://californiareportcard.org/</a>
+            <a href="http://californiareportcard.org/">californiareportcard.org</a>
         </div>
     </div>
 
@@ -716,7 +717,7 @@
      <center>
       <img src="{{ url_root }}/media/mobile/img/cafe/avggrade.png" class="center" style="width:300px;padding-top:3px;"><br>
      </center>
-        {{client_settings.AVG_EXPLAIN_TEXT}}
+        Based on the grades from {{num_users}} participants so far,{{client_settings.AVG_EXPLAIN_TEXT}}
     </div>
   </div>
 
