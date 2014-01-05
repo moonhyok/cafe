@@ -18,46 +18,43 @@ var utils = (function($, d3, console) {
 
     function showLoading(msg, f) {
         if (f === undefined) {
+
+        $.mobile.loading('show', {
+                        text: msg,
+                        textVisible: false,
+                        textonly: false,
+                        theme: 'b',
+                        html: ""
+                    });
+
+        } else {
             $.mobile.loading('show', {
                 text: msg,
-                textVisible: true,
-                textonly: true,
+                textVisible: false,
+                textonly: false,
                 theme: 'b',
                 html: ""
             });
-        } else {
-            /*$.mobile.loading('show', {
-                text: msg,
-                textVisible: true,
-                textonly: true,
-                theme: 'b',
-                html: ""
-            });*/
-            $('.loading-spinner').show();
             setTimeout(f, TIMEOUT_AFTER_LOADING);
         }
     }
+
+     function showLoadingNewPts(msg, f) {
+                $.mobile.loading('show', {
+                    text: msg,
+                    textVisible: true,
+                    textonly: true,
+                    theme: 'b',
+                    html: ""
+                });
+                setTimeout(f, TIMEOUT_AFTER_LOADING);
+            }
     
 
     /** Hides the loader with an artifical delay of DELAY milliseconds. */
 
     function hideLoading(delay) {
-        if (delay !== undefined) {
-            setTimeout(function() {
-                $.mobile.loading('hide', {
-                    textVisible: true,
-                    theme: 'a',
-                    html: ""
-                });
-            }, delay);
-        } else {
-            $.mobile.loading('hide', {
-                textVisible: true,
-                theme: 'a',
-                html: ""
-            });
-
-        }
+        $.mobile.loading( 'hide' );
         // $('.spinner').fadeOut('fast');
     }
 
@@ -90,6 +87,7 @@ var utils = (function($, d3, console) {
 
     return {
         'showLoading': showLoading,
+        'showLoadingNewPts': showLoadingNewPts,
         'hideLoading': hideLoading,
         'ajaxTempOff': ajaxTempOff,
         'toTitleCase': toTitleCase

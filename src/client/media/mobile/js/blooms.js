@@ -417,12 +417,13 @@ var _blooms = blooms = (function($, d3, console) {
                     $('.rate').data('cid', cid);
                 });
                 $('#go-back').click(function() {
-
                     //$('.scorebox').show();
+                    utils.showLoading("");
                     $('.menubar').show();
+                    rate.doneRating();
 
                     try{
-                    _this.transition().duration(3000).style("opacity", "0").remove();
+                    _this.transition().duration(2000).style("opacity", "0").remove();
                     }catch(err){
                     console.log(err);
                     }
@@ -434,10 +435,10 @@ var _blooms = blooms = (function($, d3, console) {
                     }
                     /* Load more blooms if none left */
                     try {
-                    if (window.blooms_list.length === 1) {
+                    if (window.blooms_list.length == 1) {
                         console.log("here");
                         window.blooms_list = undefined; //needed to avoid infinite recursing
-                        utils.showLoading("Loading more ideas...", function() {
+                        utils.showLoading("", function() {
                             populateBlooms();
                         });
                         utils.hideLoading(500);

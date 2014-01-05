@@ -302,13 +302,12 @@ $(document).ready(function() {
 
                     if (data.hasOwnProperty('success')) {
                         accounts.setAuthenticated();
-                        utils.showLoading("Loading...", function() {
+                        utils.showLoading("", function() {
                             accounts.loginAfterRegister(loginData);
                             blooms.populateBlooms();
                             $('.register').hide();
                             $("#regzip").attr("disabled", true);
-                            //utils.hideLoading();
-                            $('.loading-spinner').hide();
+                            utils.hideLoading();
                             window.conf.ZIPCODE=registrationData.zipcode;
                             window.prev_state = 'register';
                             window.cur_state = 'dialog';

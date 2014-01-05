@@ -132,8 +132,10 @@ var rate = (function($, d3, console) {
             }
             else{
                 $('.rate').hide();
+
             }
-            
+            utils.hideLoading();
+            //utils.hideLoading();
     }
     
     function doneRatingNoSave() {
@@ -425,8 +427,10 @@ $(document).ready(function() {
         $('.menubar').hide();
         window.prev_state = 'comment';
         window.cur_state = 'continue';
+        utils.showLoading('');
         rate.logUserEvent(6,'comment submitted');
         rate.sendComment($('#entered-comment').val());
+        utils.hideLoading('');
         window.your_mug.transition().duration(3000).style("opacity", "0").remove();
         //if ($('#regemail').val()){
 	//		accounts.sendEmail($('#regemail').val());
