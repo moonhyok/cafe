@@ -442,6 +442,11 @@ $(document).ready(function() {
                   $('.endsliders').show();
                   window.prev_state = 'home';
                 }
+                else if (window.prev_state == 'median')
+                 {
+                    $('.dialog-avggrade').show();
+                    window.prev_state = 'grade';
+                }
                 else if (window.prev_state == 'rate')
                 {
                   $('.rate').show();
