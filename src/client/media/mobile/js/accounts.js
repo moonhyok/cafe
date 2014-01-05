@@ -54,7 +54,7 @@ var accounts = (function($, d3, console) {
 
     function setAuthenticated() {
         utils.ajaxTempOff(function() {
-            $.getJSON(window.url_root + '/os/show/1/', function(data) {
+            $.getJSON(window.url_root + '/os/testAuth/', function(data) {
                 window.authenticated = data['is_user_authenticated'];
             });
         });
@@ -139,7 +139,7 @@ var accounts = (function($, d3, console) {
     function initLoggedInFeatures(justRegistered) {
         $('.top-bar').show();
         justRegistered = typeof justRegistered !== 'undefined' ? justRegistered : false;
-
+        $('#regzip').prop('disabled', true);
         utils.ajaxTempOff(function() {
 
             //seems slow TODO
@@ -240,8 +240,16 @@ $(document).ready(function() {
         $('#register').find('.ui-btn-active').removeClass('ui-btn-active ui-focus');
         e.preventDefault();
         e.stopPropagation();
+
+        if(window.authenticated)
+        {
+            accounts.hideAll();
+            $('.dialog').show();
+            return;
+        }
+
         rate.logUserEvent(9,'register');
-        
+
         if (window.registration_in_progress) {
             return;
         }
@@ -300,6 +308,7 @@ $(document).ready(function() {
                             utils.hideLoading();
                             window.conf.ZIPCODE=registrationData.zipcode;
                             window.prev_state = 'register';
+                            window.cur_state = 'dialog';
 
 			                //Slow TODO
 			                //accounts.getNeighborStat();
@@ -396,6 +405,7 @@ $(document).ready(function() {
         //accounts.firstTime();
         $('.landing').hide();
         $('.endsliders').show();
+        window.cur_state = 'grade';
         rate.logUserEvent(7,'first time');
         //$('.top-bar').show();
         //rate.initScore();
@@ -408,6 +418,7 @@ $(document).ready(function() {
     $('.home-btn-dialog').click(function() {
            window.no_menubar = true;
            accounts.hideAll();
+           window.prev_state = window.cur_state;
            if (window.authenticated){
               $('.landing').show();
               $('.menubar').hide();
@@ -421,6 +432,7 @@ $(document).ready(function() {
 
     $('.back-btn-dialog').click(function() {
                accounts.hideAll();
+               window.cur_state = window.prev_state;
                if (window.prev_state == 'home'){
                   $('.landing').show();
                   window.prev_state = 'home';
@@ -429,6 +441,11 @@ $(document).ready(function() {
                {
                   $('.endsliders').show();
                   window.prev_state = 'home';
+                }
+                else if (window.prev_state == 'rate')
+                {
+                  $('.rate').show();
+                  window.prev_state = 'map';
                 }
                 else if (window.prev_state == 'register')
                 {
@@ -533,6 +550,7 @@ $(document).ready(function() {
 
         $('.dialog').hide();
         window.prev_state = 'dialog';
+        window.cur_state = 'map';
     });
     
     $('.dialog-score-ready').click(function() {
@@ -552,10 +570,12 @@ $(document).ready(function() {
            		    accounts.sendEmail($('#regemail').val());
                     window.email_saved = true;
                     $('.dialog-email').show();
+                    window.cur_state = 'email';
            	}
            	else
            	{
            	    rate.initMenubar();
+           	    window.cur_state = 'map';
            	}
         });
 
@@ -564,6 +584,7 @@ $(document).ready(function() {
                 $('.dialog-email').hide();
                 rate.initMenubar();
                 window.prev_state = 'email';
+                window.cur_state = 'map';
             });
     
     $('.dialog-yourmug-ready').click(function() {

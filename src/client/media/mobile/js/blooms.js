@@ -392,6 +392,7 @@ var _blooms = blooms = (function($, d3, console) {
                     $('.scorebox').hide();
                     $('.menubar').hide();
                     $('.instructions3').hide();
+                    window.cur_state = 'comment';
                     return;
                 }
                 else
@@ -399,6 +400,7 @@ var _blooms = blooms = (function($, d3, console) {
                     $('.instructions').hide();
                     $('.scorebox').hide();
                     $('.menubar').hide();
+                    window.cur_state = 'rate';
                 }
                 
                 $('.rate-username').html('The '+d.uid + 'th participant suggested this issue for the next report card:');

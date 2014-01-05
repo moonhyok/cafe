@@ -121,6 +121,7 @@ def mobile(request,entry_code=None):
 											 'loggedIn' : str(request.user.is_authenticated()).lower(),
 											 'change_prompt' : str(request.user.is_authenticated()).lower(),
 											 'client_data': mobile_client_data(request),
+											 'entry_code': str(entry_code!=None).lower(),
 											 'client_settings': get_client_settings(True),
 											 'leaderboard': get_top_scores(os, disc_stmt, request, 10),
 											 'topic': DiscussionStatement.objects.filter(is_current=True)[0].statement,
@@ -1203,6 +1204,9 @@ def log_landmark_view(request):
 #
 def os_list(request):
     return json_result(tuple(OpinionSpace.objects.all().values_list('id', 'name')))
+
+def os_test_auth(request):
+    return json_result({'is_user_authenticated': request.user.is_authenticated()})
 
 def os_show(request, os_id, disc_stmt_id = None):
     """

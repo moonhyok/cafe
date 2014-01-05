@@ -532,6 +532,7 @@ table.pretty caption {
 	padding-left: 10px;
 	color: #594027;
 	font-size: 15px;
+	text-shadow: none;
 	}
 
 	.byline{

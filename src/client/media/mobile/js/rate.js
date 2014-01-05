@@ -250,7 +250,7 @@ var rate = (function($, d3, console) {
 
         window.sliders.push(slider_values);*/
         //$('.endsliders').slideUp();
-        if(!accounts.setAuthenticated()){// if user enter with valid entry code, no need to show Register
+        if(!window.entry_code){// if user enter with valid entry code, no need to show Register
         accounts.showRegister();
         }
         else
@@ -400,6 +400,7 @@ $(document).ready(function() {
 
     $('.done-endsliders-btn').click(function() {
         window.prev_state = 'grade';
+        window.cur_state = 'register';
         rate.logUserEvent(5,'sliders finished');
         rate.storeSliders(window.num_sliders);
         if (window.authenticated) {
@@ -423,6 +424,7 @@ $(document).ready(function() {
         $('.scorebox').hide();
         $('.menubar').hide();
         window.prev_state = 'comment';
+        window.cur_state = 'continue';
         rate.logUserEvent(6,'comment submitted');
         rate.sendComment($('#entered-comment').val());
         window.your_mug.transition().duration(3000).style("opacity", "0").remove();
@@ -434,6 +436,7 @@ $(document).ready(function() {
     
     $('.comment-cancel-btn').click(function() {
         $('.comment-input').hide();
+        window.cur_state = 'map';
         rate.logUserEvent(6,'comment cancelled');
         $('.menubar').show();
         //$('.scorebox').show();

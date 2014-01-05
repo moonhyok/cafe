@@ -57,6 +57,7 @@ urlpatterns = patterns('',
     #(r'^os/list/$', 'opinion.opinion_core.views.os_list'),
     (r'^os/show/(\d+)/$', 'opinion.opinion_core.views.os_show'),
     (r'^os/show/(\d+)/(\d+)/$', 'opinion.opinion_core.views.os_show'),
+    (r'^os/testAuth/$', 'opinion.opinion_core.views.os_test_auth'),
     #(r'^os/otherusers/(\d+)/$', 'opinion.opinion_core.views.os_other_users'),
     #(r'^os/otherusers/(\d+)/(\d+)/$', 'opinion.opinion_core.views.os_other_users'),
 

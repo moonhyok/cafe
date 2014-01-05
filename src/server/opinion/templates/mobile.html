@@ -40,6 +40,10 @@
 
   window.prev_state = 'home';
 
+  window.cur_state = 'home';
+
+  window.entry_code = {{ entry_code }} ;
+
   window.registration_in_progress = false;
 
   window.landing = true;
@@ -193,6 +197,7 @@
           <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
           &nbsp;
           <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+          <!--<span class="logout-wrapper">&nbsp;<img width="30px;" class='logout-btn' src="{{url_root}}/media/mobile/img/cafe/CRC_logout_bttn.png"></span>-->
       </div>
 
     <div class="responsive-max-width">
@@ -263,7 +268,7 @@
                       </td>
 
                       <td class="title-table-label2">
-                          <a href="#" onclick="$('.endsliders').hide();$('.dialog-avggrade').show();window.prev_state='grade';" style="color: #fff8f0 !important;">Median Grade</a>
+                          <a href="#" onclick="$('.endsliders').hide();$('.dialog-avggrade').show();window.prev_state='grade';window.cur_state='median';" style="color: #fff8f0 !important;">Median Grade</a>
                       </td>
 
                   </tr>
@@ -396,12 +401,10 @@
               <textarea name='answer' id='entered-comment'> </textarea>
               <div class="standard-btn-div">
                   <button type='submit' data-theme='b' class='comment-submit-btn'><font style="font-size: 16px;">Save</font></button>
-                  <button type='submit' data-theme='b' class='comment-cancel-btn'><font style="font-size: 16px;">Cancel</font></button>
               </div>
           </div>
       </center>
   </div>
-
 
   <div class="top-bar">
     <center>
@@ -416,11 +419,8 @@
             &nbsp;
             <img width="30px;" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
 
-            <span class="my-comment-spacing" style="display: none;">&nbsp;</span>
-            <img width="30px;" class='my-comment-btn' style="display: none;" src="{{url_root}}/media/mobile/img/cafe/CRC_stats_bttn.png">
-
-            &nbsp;
-            <img width="30px;" class='logout-btn' src="{{url_root}}/media/mobile/img/cafe/CRC_logout_bttn.png">
+            <span class="stats-wrapper" style="display: none;">&nbsp;<img width="30px;" class='my-comment-btn' src="{{url_root}}/media/mobile/img/cafe/CRC_stats_bttn.png"></span>
+            <span class="logout-wrapper">&nbsp;<img width="30px;" class='logout-btn' src="{{url_root}}/media/mobile/img/cafe/CRC_logout_bttn.png"></span>
         </div>
 
         <div class='instructions'>{{client_settings.INSTRUCTIONS_1}}</div>
@@ -578,18 +578,16 @@
   <div class='frame'></div>
 
   <div class='logout'>
-        <div class='landing-intro'>
-            <div class='landing-header'>
-              {{client_settings.LOGOUT_DIALOG_TEXT}}
-            </div>
-        </div>
-
-        <div class='landing-desc'>
-            <center>
-                <div class="standard-btn-div">
-                    <button data-theme='b' class='logout-start-over'><font style="font-size: 16px;">{{client_settings.START_OVER_BUTTON_TEXT}}</font></button>
-                </div>
-            </center>
+      <div class="home-btn-dialog-box">
+          <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+          &nbsp;
+          <img width="30px;" class='logout-start-over' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+          &nbsp;
+          <img width="30px;" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+      </div>
+        <div class='landing-img-txt default-left-padding' style="width: 95%;font-size: 18px;">
+            {{client_settings.LOGOUT_DIALOG_TEXT}}<br/>
+            <a href="http://californiareportcard.org/">http://californiareportcard.org/</a>
         </div>
     </div>
 
@@ -722,21 +720,18 @@
   </div>
 
   <div class='dialog-about dialog-style' style="z-index:999">
+      <div class="home-btn-dialog-box">
+          <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+          &nbsp;
+          <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+          &nbsp;
+          <img width="30px;" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+      </div>
       <div class='dialog-text-style-noflow small-left-padding'>
           <div class="basic-header">{{client_settings.ABOUT_PAGE_HEADER}}</div>
 	  <center>{{num_users}} participants so far.</center><br/>
 	  {% autoescape off %}{{client_settings.ABOUT_PAGE_TEXT }}{% endautoescape %}
       </div>
-      <center>
-          <div class="home-btn-dialog-box">
-              <hr/>
-              <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
-              &nbsp;
-              <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
-              &nbsp;
-              <img width="30px;" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
-          </div>
-      </center>
   </div>
 
 <script>
