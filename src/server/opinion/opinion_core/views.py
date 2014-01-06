@@ -1204,20 +1204,16 @@ def banish_user(request, user_id):
 		return json_result({'success':True})
 		
 #@admin_required
-def search(request, os_id, username):
-	#username = username.lower()
-	try:
-		if not username:
-                    user = User.objects.all()
-                    return json_result({'success':True, 
-                                        'data':[format_user_object(u, os_id) 
-                                                for u in user]})
-                user = User.objects.get(username__icontains= username)
-	except User.DoesNotExist:
-		return json_result({'success':False, 
-                                    'error_message':'User does not exist.'})
+def search(request, os_id, username=''):
+
+    user = User.objects.filter(username__icontains= username)
+    if not len(user):
+      return json_result({'success':False, 
+                          'error_message':'No users matching that username.'})
 	
-	return json_result({'success':True, 'data':[format_user_object(user, os_id)]})
+    return json_result({'success':True, 
+                        'data':[format_user_object(u, os_id) for u in user]})
+
 	
 @admin_required
 def get_new_users(request, os_id, time):
