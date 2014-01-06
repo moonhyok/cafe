@@ -2,134 +2,124 @@
 
 {% block scripts %}
 <script type="text/javascript">
-	$(document).ready(function()
-	{
+	$(document).ready(function() {
 		$("#osTable").hide();
 		$("button").hide();
 		$("#message").hide();
 	});
-	
-	function getSearchResults()
-	{
-		var userid = dojo.byId("searchBar").value;		
+
+	function getSearchResults() {
+		var userid = dojo.byId("searchBar").value;
 		$("#message").hide();
 		$("#osTable").hide();
 		$("button").hide();
 
 		// Get  Feedback Comments Data
 		dojo.xhrGet({
-				url: "{{url_root}}/search/1/" + userid + "/",
-				handleAs: "json",
-				load:function(response, ioArgs)
-				{
-					if (response.success)
-					{
-	                                 $("#loading").fadeOut();
-	                                 for (var i = 0; i < response.data.length; i += 1) {
+			url: "{{url_root}}/search/1/" + userid + "/",
+			handleAs: "json",
+			load: function(response, ioArgs) {
+				$('#loading').fadeOut()
+				if (response.success) {
+					for (var i = 0; i < response.data.length; i += 1) {
 						var searchResult = response.data[i];
 						$("#osTable").show();
 						$("button").show();
-						populateTable(searchResult);					
-}
+						populateTable(searchResult);
 					}
-					else
-					{
-						//alert("Your search did not match any users");
-						$("#message").show();
-					}
-				},
-				error:function(error, ioArgs)
-				{ // This happens on a 500 error or alikes.
-					alert('Error: failed sending data');
-					
-                    switch(ioArgs.xhr.status) {
-                        case 404: //page not found error
-                            alert('404');
-                            break;
-                        case 500: // server side error
-                            alert('500');
-                            break;
-                        case 407: // proxy authentication
-                            alert('407');
-                            break;
-                        default: // default action
-                            alert('default')
-                    };
-
-                    alert("HTTP Error code:" + ioArgs.xhr.status);
-                    alert("Error Condition:" + error.responseText);
-            	    alert("Error Message:  " + error.message);					
+				} else {
+					//alert("Your search did not match any users");
+					$("#message").show();
 				}
-			});
+			},
+			error: function(error, ioArgs) { // This happens on a 500 error or alikes.
+				alert('Error: failed sending data');
+
+				switch (ioArgs.xhr.status) {
+					case 404: //page not found error
+						alert('404');
+						break;
+					case 500: // server side error
+						alert('500');
+						break;
+					case 407: // proxy authentication
+						alert('407');
+						break;
+					default: // default action
+						alert('default')
+				};
+
+				alert("HTTP Error code:" + ioArgs.xhr.status);
+				alert("Error Condition:" + error.responseText);
+				alert("Error Message:  " + error.message);
+			}
+		});
 	}
-	
-	function populateTable(searchResult) 
-	{
+
+	function populateTable(searchResult) {
 		dojo.byId('tableBodyWrapper').innerHTML = "";
-		if(searchResult != "")
-		{
+		if (searchResult != "") {
 			// display the comments
 			var row = document.createElement('tr');
-			var id = searchResult.uid + "-" + searchResult.cid; 
+			var id = searchResult.uid + "-" + searchResult.cid;
 			row.setAttribute("id", id);
-											
+
 			var inputTd = document.createElement('td');
 			var checkBox = document.createElement('input');
 			checkBox.setAttribute("type", "checkbox");
 			inputTd.appendChild(checkBox);
-				
+
 			var user = document.createElement('td');
-			user.innerHTML = searchResult.username + ' <a href="'+searchResult.reset_link+'"> PW reset link</a>';
-			
+			user.innerHTML = searchResult.username + ' <a href="' + searchResult.reset_link + '"> PW reset link</a>';
+
 			var email = document.createElement('td');
 			email.innerHTML = searchResult.email;
-				
+
 			var comment = document.createElement('td');
 			comment.innerHTML = searchResult.comment;
-				
+
 			row.appendChild(inputTd);
 			row.appendChild(user);
 			row.appendChild(email);
 			row.appendChild(comment);
 			dojo.byId('tableBody').appendChild(row);
 		}
-		$("#osTable:has(tbody tr)").tablesorter({headers: { 0:{sorter: false}}, widgets: ['zebra']});
+		$("#osTable:has(tbody tr)").tablesorter({
+			headers: {
+				0: {
+					sorter: false
+				}
+			},
+			widgets: ['zebra']
+		});
 	}
-	
-	function banUser()
-	{
-		try 
-		{
+
+	function banUser() {
+		try {
 			var table = dojo.byId('osTable');
 			var rowCount = table.rows.length;
 			var rowId = "";
 			var row = table.rows[1];
 			var chkbox = row.cells[0].childNodes[0];
-			if(null != chkbox && true == chkbox.checked) 
-			{
+			if (null != chkbox && true == chkbox.checked) {
 				rowId = row.id.split("-")[0];
 				dojo.xhrGet({
 					url: "{{url_root}}/banish/" + rowId + "/",
 					handleAs: "json",
-					load:function(response, ioArgs)
-					{
-						if (response.success)
-						{
-							alert("Operation successful!");									
+					load: function(response, ioArgs) {
+						if (response.success) {
+							alert("Operation successful!");
 						}
-					},	
-					error:function(data)
-					{ // This happens on a 500 error or alikes.
+					},
+					error: function(data) { // This happens on a 500 error or alikes.
 						alert('Error: failed sending data');
 					}
-				});			
+				});
 			}
 			deleteRow(table);
-		}
-		catch(e) 
-		{
+		} catch (e) {
 			alert(e);
-		}		
+		}
 	}
 </script>
 {% endblock %}
