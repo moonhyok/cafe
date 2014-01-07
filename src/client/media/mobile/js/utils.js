@@ -58,26 +58,6 @@ var utils = (function($, d3, console) {
         // $('.spinner').fadeOut('fast');
     }
 
-    function ajaxTempOff(f) {
-        // if (!ajaxStatus) {
-        //     f();
-        // } else {
-
-        $.ajaxSetup({
-            async: false
-        });
-
-        // ajaxStatus = false;
-
-        f();
-
-        //     $.ajaxSetup({
-        //         async: true
-        //     });
-
-        //     ajaxStatus = true;
-        // }
-    }
 
     function toTitleCase(str) {
         return str.replace(/\w\S*/g, function(txt) {
@@ -89,7 +69,6 @@ var utils = (function($, d3, console) {
         'showLoading': showLoading,
         'showLoadingNewPts': showLoadingNewPts,
         'hideLoading': hideLoading,
-        'ajaxTempOff': ajaxTempOff,
         'toTitleCase': toTitleCase
     };
 

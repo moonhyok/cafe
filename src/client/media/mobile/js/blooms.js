@@ -30,12 +30,19 @@ var _blooms = blooms = (function($, d3, console) {
         sorted_comments_ids = data['sorted_comments_ids'];
         sorted_avg_agreement = data['sorted_avg_agreement'];
 
-        // utils.ajaxTempOff(function() {
-        //     $.getJSON(window.url_root + '/os/all/1/', function(data) {
+
+        // $.ajax({
+        //     async: false,
+        //     url: window.url_root + '/os/all/1/',
+        //     type: 'GET',
+        //     dataType: 'json',
+        //     success: function(data) {
         //         sorted_comments_ids = data['sorted_comments_ids'];
         //         sorted_avg_agreement = data['sorted_avg_agreement'];
-        //     });
-
+        //     },
+        //     error: function() {
+        //         console.log("ERROR posting authenticated request. Abort!");
+        //     }
         // });
 
         storeSortedIDsToBuckets(sorted_comments_ids, window.visuals.userIdToCommentScoreBucket, window.visuals.POINT_SIZES.length);
@@ -455,9 +462,7 @@ var _blooms = blooms = (function($, d3, console) {
     function alreadyAuthenticated() {
         //TOFIX utils.showLoading("Loading...");
 
-        //utils.ajaxTempOff(function() {
         populateBlooms();
-        //});
         accounts.initLoggedInFeatures();
         //TOFIX utils.hideLoading();
         $('.landing').hide();
@@ -479,8 +484,9 @@ var _blooms = blooms = (function($, d3, console) {
 })($, d3, console);
 
 $(document).ready(function() {
-    if (accounts.setAuthenticated()) {
-        _blooms.alreadyAuthenticated();
+    accounts.setAuthenticated();
+    if (window.authenticated) {
+        blooms.alreadyAuthenticated();
     }
     else{
 		$('.welcome-back').hide();

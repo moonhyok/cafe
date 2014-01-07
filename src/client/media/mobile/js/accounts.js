@@ -41,7 +41,7 @@ var accounts = (function($, d3, console) {
 
     function firstTime() {
         utils.showLoading("Loading the garden...", function() {
-            utils.ajaxTempOff(blooms.populateBlooms);
+            blooms.populateBlooms();
 
             setTimeout(function() { // d3 needs a little extra time to load
                 $('.landing').hide();
@@ -53,11 +53,19 @@ var accounts = (function($, d3, console) {
     // that have logged in. (Mostly to send data to server immediately)
 
     function setAuthenticated() {
-        utils.ajaxTempOff(function() {
-            $.getJSON(window.url_root + '/os/testAuth/', function(data) {
+        $.ajax({
+            async:false,
+            type: "GET",
+            dataType: 'json',
+            url: window.url_root + '/os/testAuth/',
+            success: function(data) {
                 window.authenticated = data['is_user_authenticated'];
-            });
+            },
+            error: function() {
+                console.log("didn't get sent!");
+            }
         });
+
         return window.authenticated;
     }
 
@@ -67,6 +75,7 @@ var accounts = (function($, d3, console) {
 
     function loginAfterRegister(loginData) {
         $.ajax({
+            async : false,
             url: window.url_root + '/accountsjson/login/',
             type: 'POST',
             dataType: 'json',
@@ -104,19 +113,27 @@ var accounts = (function($, d3, console) {
 
 
     function loadMyCommentDiv() {
-        utils.ajaxTempOff(function() {
-            $.getJSON(window.url_root + '/os/show/1/', function(data) {
+        $.ajax({
+            async:false,
+            type: "GET",
+            dataType: 'json',
+            url: window.url_root + '/os/show/1/',
+            success: function(data) {
                 try {
                     var comment = data['cur_user_comment'][0][0];
                     $('#entered-comment').html(comment);
                 } catch (err) {
                     // probably an admin user or something. they didn't have a comment
                 }
-            });
+                $('.my-comment').show();
+        $('.menubar').find('.ui-btn-active').removeClass('ui-btn-active ui-focus');
+                
+            },
+            error: function() {
+                console.log("didn't get sent!");
+            }
         });
 
-        $('.my-comment').show();
-        $('.menubar').find('.ui-btn-active').removeClass('ui-btn-active ui-focus');
 
     }
 
@@ -124,11 +141,17 @@ var accounts = (function($, d3, console) {
      *  users comment. */
 
     function setNumRatedBy() {
-        utils.ajaxTempOff(function() {
-            $.getJSON(window.url_root + '/os/ratedby/1/', function(data) {
+        $.ajax({
+            async:false,
+            type: "GET",
+            dataType: 'json',
+            url: window.url_root + '/os/ratedby/1/',
+            success: function(data) {
                 $('.num-rated-by').text(data['sorted_comments_ids'].length);
-            });
-
+            },
+            error: function() {
+                console.log("didn't get sent!");
+            }
         });
     }
 
@@ -140,27 +163,36 @@ var accounts = (function($, d3, console) {
         $('.top-bar').show();
         justRegistered = typeof justRegistered !== 'undefined' ? justRegistered : false;
         $('#regzip').prop('disabled', true);
-        utils.ajaxTempOff(function() {
+        //utils.ajaxTempOff(function() {
 
             //seems slow TODO
             //stats.showGraphs(justRegistered);
 
-            //var data = $.getJSON(window.url_root + '/os/show/1/');
-            $.getJSON(window.url_root + '/os/show/1/', function(data) {
+
+        $.ajax({
+            async:false,
+            type: "GET",
+            dataType: 'json',
+            url: window.url_root + '/os/show/1/',
+            success: function(data) {
                 $('.score-value').text("" + ~~(data['cur_user_rater_score'] * window.conf.SCORE_SCALE_FACTOR));
                 window.user_score = data['cur_user_rater_score'];
                 $('.username').text(' ' + data['cur_username']);
-                //document.getElementById('stats-iframe').src = window.url_root + '/crcstats/?username='+ data['cur_user_id'];
-            });
-
+            },
+            error: function() {
+                console.log("didn't get sent!");
+            }
         });
+
+
+        //});
         
         if (window.user_score == 0) {
             $('.dialog').show();
         } else {
             rate.initMenubar();
         }
-        setNumRatedBy();
+        //setNumRatedBy();
     }
     
     function sendEmail(mail){
@@ -286,8 +318,9 @@ $(document).ready(function() {
             "password": registrationData.password,
         };
 
-        utils.ajaxTempOff(function() {
+        //utils.ajaxTempOff(function() {
             $.ajax({
+                async:false,
                 url: window.url_root + '/accountsjson/register/',
                 type: 'POST',
                 dataType: 'json',
@@ -358,7 +391,7 @@ $(document).ready(function() {
                     console.log("ERROR posting registration request. Abort!");
                 },
             });
-        });
+        //});
     });
 
     $('#login_form').submit(function(e) {
@@ -367,8 +400,8 @@ $(document).ready(function() {
 
         var serializedFormData = $(this).serialize();
 
-        utils.ajaxTempOff(function() {
             $.ajax({
+                async: false,
                 url: window.url_root + '/accountsjson/login/',
                 type: 'POST',
                 dataType: 'json',
@@ -399,7 +432,7 @@ $(document).ready(function() {
                     console.log("ERROR posting login request. Abort!");
                 }
             });
-        });
+        
 
     });
 
