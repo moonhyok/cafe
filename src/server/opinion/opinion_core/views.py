@@ -179,14 +179,23 @@ def confirmation_mail(request):
     except:
       json_error("Please enter a valid email")
 
-def crcstats(request):
-    uid = request.GET.get('username',-1)
+def crcstats(request,entry_code=None):
+    if entry_code!=None:         #entry code user relogin "first time"
+       user=authenticate(entrycode=entry_code)
+       print user.email
+       if user !=None:
+          login(request,user)
+          uid=request.user.id
+    else:
+       uid = request.GET.get('username',-1)
     score = 0
     given = 0
     received = 0
     os = get_os(1)
     disc_stmt = get_disc_stmt(os, 1)
-    level8= False
+    level8 = False
+    ordinal=''
+    comment=''
     if uid != -1:
         cur_user = User.objects.filter(id=uid)
         if len(cur_user) > 0:
@@ -195,6 +204,23 @@ def crcstats(request):
             score = CommentAgreement.objects.filter(rater = cur_user,is_current=True).count()
             given = 2*CommentAgreement.objects.filter(rater = cur_user,is_current=True).count()
             received = 2*CommentAgreement.objects.filter(comment__in = DiscussionComment.objects.filter(user = cur_user),is_current=True).count()
+            comment=DiscussionComment.objects.filter(user=cur_user,is_current=True)
+            if len(comment) > 0:
+               comment=comment[0].comment
+           
+            ordinal='th'
+            if cur_user.id % 10 == 1:
+               ordinal='st'
+            elif cur_user.id % 10 == 2:
+               ordinal='nd'
+            elif cur_user.id % 10 ==3:
+               ordinal='rd'
+            if cur_user.id % 100 == 11:
+               ordinal='th'
+            if cur_user.id % 100 == 12:
+               ordinal='th'
+            if cur_user.id % 100 == 13:
+               ordinal='th'
 
     statements = OpinionSpaceStatement.objects.all().order_by('id')
     medians = []
@@ -202,21 +228,77 @@ def crcstats(request):
         med = numpy.median(UserRating.objects.filter(opinion_space_statement=s,is_current=True).values_list('rating'))
         if med <= 1e-5:
             med = 0
-        medians.append({'statement': s.statement, 'avgG': score_to_grade(100*med), 'avg': int((1-med)*300)})
-        
-    issues_hist(request)
-    participant_hist(request)
+        medians.append({'statement': s.statement, 'avgG': score_to_grade(100*med), 'avg': int((1-med)*300),'id':s.id})
+    
+    participant_id=uid-309
     return render_to_response('crc_stats.html', context_instance = RequestContext(request, {'num_participants': User.objects.filter(id__gte=310).count(),
                                                                                             'level8':level8,
-                                                                                            'participant': uid,
+                                                                                            'ordinal':ordinal,
+                                                                                            'date':datetime.date.today(),
+                                                                                            'comment':comment,
+                                                                                            'participant': participant_id,
                                                                                             'given': given,
                                                                                             'received': received,
-                                                                                            'score': score*float(get_client_settings(True)['SCORE_SCALE_FACTOR']),
+                                                                                            'score': score*100,
                                                                                             'num_ratings': CommentAgreement.objects.filter(is_current=True).count()*2,
                                                                                             'url_root' : settings.URL_ROOT,
                                                                                             'medians': medians,
                                                                                             }))
+
+def getallstats(request):
+    issues_hist(request)
+    participant_hist(request)
+    geostats(request)
+    return render_to_response('getallstats.html')
+
+def geostats(request):
+    """produce geojson file for leaflet"""
+    geo_json=open(os.path.join(GEOJSON_ROOT, 'geo.json'))
+    geo_data=json.load(geo_json)
+    
+    statements = OpinionSpaceStatement.objects.all().order_by('id')
+    for s in statements:
+       for i in range(0,len(geo_data['features'])-1):
+          county=geo_data['features'][i]['properties']['NAME']
+          zipcode_in_county=ZipCode.objects.filter(state='CA').filter(county__startswith=county)
+          s_grade=[]
+          for j in range(0, len(zipcode_in_county)):
+             log=ZipCodeLog.objects.filter(location__exact=zipcode_in_county[j])
+             for k in range(0, len(log)):
+                user_grade_s=log[k].user.userrating_set.filter(opinion_space_statement=s,is_current=True)
+                if len(user_grade_s)>0:
+                   s_grade.append(user_grade_s[0].rating)
+          if len(s_grade)==0:
+             geo_data['features'][i]['properties']["s"+str(s.id)]=10
+             geo_data['features'][i]['properties']['PARTICIPANTS']=0
+          if len(s_grade)>0:
+             geo_data['features'][i]['properties']["s"+str(s.id)]=numpy.median(s_grade)
+             geo_data['features'][i]['properties']['PARTICIPANTS']=len(s_grade)
+    
+    #find median for non ca zipcode
+    zipcode_nonca=ZipCode.objects.exclude(state='CA')
+    for s in statements:
+        s_grade=[]
+        for j in range(0, len(zipcode_nonca)):
+            log=ZipCodeLog.objects.filter(location__exact=zipcode_nonca[j])
+            for k in range(0, len(log)):
+                user_grade_s=log[k].user.userrating_set.filter(opinion_space_statement=s,is_current=True)
+                if len(user_grade_s)>0:
+                   s_grade.append(user_grade_s[0].rating)
+        if len(s_grade)==0:
+            geo_data['features'][len(geo_data['features'])-1]['properties']["s"+str(s.id)]=10
+            geo_data['features'][len(geo_data['features'])-1]['properties']['PARTICIPANTS']=0
+        if len(s_grade)>0:
+            geo_data['features'][len(geo_data['features'])-1]['properties']["s"+str(s.id)]=numpy.median(s_grade)
+            geo_data['features'][len(geo_data['features'])-1]['properties']['PARTICIPANTS']=len(s_grade)
+
+    with open('geostat.js', 'w') as outfile:
+         outfile.write('var geostat=')
+         json.dump(geo_data, outfile)
+         outfile.write(';')
+
 def issues_hist(request):
+   """produce histogram for each issue"""
    statements = OpinionSpaceStatement.objects.all().order_by('id')
    bins=[0,0.01,0.19,0.32,0.38,0.44,0.56,0.63,0.69,0.81,0.86,0.92,0.99,1]  
         # F    D-   D    D+   C-   C    C+   B-   B   B+    A-   A    A+
@@ -242,7 +324,7 @@ def issues_hist(request):
        ax.set_title(s.statement)
        ax.set_xticks(ind+width/2)
        ax.set_xticklabels( ('A+', 'A', 'A-', 'B+', 'B','B-','C+','C','C-','D+','D','D-','F') )
-       plt.savefig(s.statement+'.svg',dpi=300,format='svg')
+       plt.savefig(s.statement+'.png',dpi=300,format='png')
        
 def median_index(request,median):
      if median<=1 and median>0.99:
@@ -274,6 +356,7 @@ def median_index(request,median):
 
 
 def participant_hist(request):
+    """produce histogram for all participant above level 8"""
     uid = request.GET.get('username',-1)
     auth = False
     os = get_os(1)
@@ -316,7 +399,7 @@ def participant_hist(request):
                ax1.set_title("How important is this issue for the next Report Card?")
                ax1.set_xticks(ind+width/2)
                ax1.set_xticklabels( ('A+', 'A', 'A-', 'B+', 'B','B-','C+','C','C-','D+','D','D-','F') )
-               plt.savefig(str(uid)+'_1.svg',dpi=300,format='svg')
+               plt.savefig(str(uid)+'_1.svg',dpi=300,format='png')
                
                plt.figure()
                fig2, ax2=plt.subplots()
@@ -328,7 +411,7 @@ def participant_hist(request):
                ax2.set_title("How would you rate the State of California on this issue today?")
                ax2.set_xticks(ind+width/2)
                ax2.set_xticklabels( ('A+', 'A', 'A-', 'B+', 'B','B-','C+','C','C-','D+','D','D-','F') )
-               plt.savefig(str(uid)+'_2.svg',dpi=300,format='svg')
+               plt.savefig(str(uid)+'_2.svg',dpi=300,format='png')
 
 
 
