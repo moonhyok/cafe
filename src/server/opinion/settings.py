@@ -117,3 +117,6 @@ OS_ID_DEFAULT = 1
 
 #if DATABASE_ENGINE == 'mysql':
 #  DATABASE_OPTIONS = {"init_command": "SET storage_engine=INNODB"}
+
+#read geojson locally
+GEOJSON_ROOT = os.path.abspath(os.path.dirname(__file__))
