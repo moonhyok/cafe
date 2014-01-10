@@ -10,7 +10,6 @@ strong {
         color: white;
         
     }
-<<<<<<< HEAD
     #map {
 			width: 200x;
 			height: 400px;
@@ -78,36 +77,11 @@ Distribution of Grades for "How would you grade California on this issue?"<br/>
    
 {% else %}
 Please provide your email and see grades assigned to your suggestion to date!!!<br/>
-=======
-</style>
-<body>
-<script src="http://d3js.org/d3.v3.min.js"></script>
-<script type='text/javascript' src='{{url_root}}/media/mobile/jquery-mobile/jquery-1.10.2.min.js'></script>
 
-<strong>California Report Card v1.0 Daily Update</strong><br/>
-You are the {{participant}}{{ordinal}} participant.<br/>
-Participants so far: {{num_participants}}.<br/>
-Your Participation Score: {{score}}.<br/>
-Number of Participants who graded your suggestion: {{received}}.<br/><br/>
-
-{% if level8 %}
-<strong>Your Grades so far:<strong><br/>
-<strong>Median marked in blue</strong>
-<div>
-  <select id="participant-grade-select">
-  <option value="1">How important is this issue for the next Report Card?</option>
-  <option value="2">How would you rate the State of California on this issue today?</option>
-  </select>
-</div>
-<div class="participant-grade">
-<img id="participant-grade-image" src="{{url_root}}/media/mobile/img/daily_update/3_1.svg" alt="Smiley face" height="400" width="400">
-</div>
->>>>>>> 9f0f89c73e7af7ca1d39c0760fa0d445fb7ed9e5
 {% endif %}
 
 
 <br/>
-<<<<<<< HEAD
 <strong>Grades Assigned to the State of California to date:</strong><br/>
 <strong>Median marked in blue</strong>
 
@@ -115,19 +89,7 @@ Number of Participants who graded your suggestion: {{received}}.<br/><br/>
 Distribution of Grades for Issue {{median.id}}: {{median.statement}}
 <div class="hist-issue">
 <img src="{{url_root}}/media/mobile/img/dailyupdate/{{median.statement}}.png" alt="Smiley face" height="400" width="400">
-=======
-<strong>Histogram of Grades for each Issue:</strong><br/>
-<strong>Median marked in blue</strong>
-<div>
-  <select id="issue-select">
-  {% for median in medians %}
-  <option value="{{median.id}}">{{median.statement}}</option>
-  {% endfor %}
-  </select>
-</div>
-<div class="hist-issue">
-<img id="hist-issue-image" src="{{url_root}}/media/mobile/img/daily_update/Transportation.svg" alt="Smiley face" height="400" width="400">
->>>>>>> 9f0f89c73e7af7ca1d39c0760fa0d445fb7ed9e5
+
 </div>
 {% endfor %}
 
@@ -160,13 +122,10 @@ http://californiareportcard.org/<br/>
           <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
       
 
-<script type='text/javascript' src='{{url_root}}/media/mobile/js/crcstats.js'></script>  
-<<<<<<< HEAD
+<script type='text/javascript' src='{{url_root}}/media/mobile/js/crcstats.js'></script>
 <script type='text/javascript' src='{{url_root}}/media/mobile/js/geostat.js'></script>  
 <script type='text/javascript' src='{{url_root}}/media/mobile/js/map.js'></script>  
-=======
 
->>>>>>> 9f0f89c73e7af7ca1d39c0760fa0d445fb7ed9e5
 
 </body>
 
