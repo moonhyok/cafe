@@ -44,6 +44,7 @@ import time
 import datetime
 import hashlib
 from django.core.validators import validate_email
+
 os.environ['MPLCONFIGDIR'] = "/tmp"
 import matplotlib
 matplotlib.use('Agg')
@@ -105,14 +106,15 @@ def mobile(request,entry_code=None):
     #print get_client_settings(True)
     os = get_os(1)
     disc_stmt = get_disc_stmt(os, 1)
-    
+    active_users = list(User.objects.filter(is_active=True)) #forces eval so lazy eval doesn't act too smart!!!
+
     statements = OpinionSpaceStatement.objects.all().order_by('id')
     medians = {}
     statement_labels = {};
  #.values_list('id', 'statement', 'short_version'))
 
     for s in statements:
-        medians[str(s.id)] = numpy.median(UserRating.objects.filter(opinion_space_statement=s,is_current=True).values_list('rating'))
+        medians[str(s.id)] = numpy.median(UserRating.objects.filter(user__in = active_users,opinion_space_statement=s,is_current=True).values_list('rating'))
         if medians[str(s.id)] <= 1e-5:
             medians[str(s.id)] = 0
         statement_labels[str(s.id)] = s.statement
@@ -135,7 +137,7 @@ def mobile(request,entry_code=None):
 											 'init_score': len(get_fully_rated_responses(request, disc_stmt)),
 											 'random_username': random_username,
 											 'random_password': random_password,
-											 'num_users': User.objects.filter(id__gte = 310).count(),
+											 'num_users': len(active_users),
                                              'statement_labels': json.dumps(statement_labels),
 											 'medians': json.dumps(medians)}))
 
@@ -165,17 +167,17 @@ def confirmation_mail(request):
          if user.id % 100 == 13:
              ordinal='th'
          #send out confirmation email
-         
+         print user.id,ordinal
          subject = "Your unique link to the California Report Card v1.0"
          email_list = [user.email]
          message = render_to_string('registration/confirmation_email.txt', 
 									   { 'url_root': settings.URL_ROOT, 
 										 'entrycode': entrycode,
-										 'user_id': user.id-309,
+										 'user_id': user.id,
 										 'ordinal': ordinal,
                                           })
           
-         send_mail(subject, message, Settings.objects.string('DEFAULT_FROM_EMAIL'), email_list)
+         #send_mail(subject, message, Settings.objects.string('DEFAULT_FROM_EMAIL'), email_list)
          return json_success()
       else:
          return json_success()
@@ -186,14 +188,12 @@ def confirmation_mail(request):
 def crcstats(request,entry_code=None):
     if entry_code!=None:         #entry code user relogin "first time"
        user=authenticate(entrycode=entry_code)
+       print user.email
        if user !=None:
           login(request,user)
           uid=request.user.id
-          print user.email
     else:
-       uid = request.user.id
-    
-    
+       uid = request.GET.get('username',-1)
     score = 0
     given = 0
     received = 0
@@ -202,27 +202,17 @@ def crcstats(request,entry_code=None):
     level8 = False
     ordinal=''
     comment=''
-    show_hist1=False
-    show_hist2=False
     if uid != -1:
         cur_user = User.objects.filter(id=uid)
         if len(cur_user) > 0:
             cur_user = cur_user[0]
-            print cur_user.email
-            if len(cur_user.email)>0:
-               level8= True
+            level8= True
             score = CommentAgreement.objects.filter(rater = cur_user,is_current=True).count()
             given = 2*CommentAgreement.objects.filter(rater = cur_user,is_current=True).count()
             received = 2*CommentAgreement.objects.filter(comment__in = DiscussionComment.objects.filter(user = cur_user),is_current=True).count()
-            cur_user_comment=DiscussionComment.objects.filter(user=cur_user,is_current=True)
-            if len(cur_user_comment) > 0:
-               comment=cur_user_comment[0].comment
-               slider1=CommentAgreement.objects.filter(comment=cur_user_comment[0])
-               slider2=CommentRating.objects.filter(comment=cur_user_comment[0])
-               if len(slider1)>0:
-                  show_hist1=True
-               if len(slider2)>0:
-                  show_hist2=True
+            comment=DiscussionComment.objects.filter(user=cur_user,is_current=True)
+            if len(comment) > 0:
+               comment=comment[0].comment
            
             ordinal='th'
             if cur_user.id % 10 == 1:
@@ -246,18 +236,13 @@ def crcstats(request,entry_code=None):
             med = 0
         medians.append({'statement': s.statement, 'avgG': score_to_grade(100*med), 'avg': int((1-med)*300),'id':s.id})
     
-    participant_order=uid-309
-    
-    
+    participant_id=uid-309
     return render_to_response('crc_stats.html', context_instance = RequestContext(request, {'num_participants': User.objects.filter(id__gte=310).count(),
                                                                                             'level8':level8,
                                                                                             'ordinal':ordinal,
                                                                                             'date':datetime.date.today(),
-                                                                                            'uid':uid,
                                                                                             'comment':comment,
-                                                                                            'participant_order': participant_order,
-                                                                                            'show_hist1':show_hist1,
-                                                                                            'show_hist2':show_hist2,
+                                                                                            'participant': participant_id,
                                                                                             'given': given,
                                                                                             'received': received,
                                                                                             'score': score*100,
@@ -266,11 +251,10 @@ def crcstats(request,entry_code=None):
                                                                                             'medians': medians,
                                                                                             }))
 
-
 def getallstats(request):
-    #issues_hist(request)
+    issues_hist(request)
     participant_hist(request)
-    #geostats(request)
+    geostats(request)
     return render_to_response('getallstats.html')
 
 def geostats(request):
@@ -314,7 +298,7 @@ def geostats(request):
             geo_data['features'][len(geo_data['features'])-1]['properties']["s"+str(s.id)]=numpy.median(s_grade)
             geo_data['features'][len(geo_data['features'])-1]['properties']['PARTICIPANTS']=len(s_grade)
 
-    with open('/var/www/cafe-v11-ms/src/client/media/mobile/js/geostat.js', 'w') as outfile:
+    with open('geostat.js', 'w') as outfile:
          outfile.write('var geostat=')
          json.dump(geo_data, outfile)
          outfile.write(';')
@@ -346,7 +330,7 @@ def issues_hist(request):
        ax.set_title(s.statement)
        ax.set_xticks(ind+width/2)
        ax.set_xticklabels( ('A+', 'A', 'A-', 'B+', 'B','B-','C+','C','C-','D+','D','D-','F') )
-       plt.savefig('/var/www/cafe-v11-ms/src/client/media/mobile/img/dailyupdate/'+s.statement+'.png',dpi=300,format='png')
+       plt.savefig(s.statement+'.png',dpi=300,format='png')
        
 def median_index(request,median):
      if median<=1 and median>0.99:
@@ -377,11 +361,10 @@ def median_index(request,median):
         return 12
 
 
-
 def participant_hist(request):
     """produce histogram for all participant above level 8"""
-    
-    
+    uid = request.GET.get('username',-1)
+    auth = False
     os = get_os(1)
     disc_stmt = get_disc_stmt(os, 1)
     
@@ -390,52 +373,50 @@ def participant_hist(request):
     N=len(bins)-1
     ind=numpy.arange(N)
     width=0.35
-    alluser=User.objects.all()
-    print len(alluser)
-    for cur_user in alluser:
-        if len(cur_user.email)>0:
-           cur_user_comment=DiscussionComment.objects.filter(user=cur_user,discussion_statement= disc_stmt,is_current = True)
-           if len(cur_user_comment)>0:
-              slider1=CommentAgreement.objects.filter(comment=cur_user_comment[0])
-              slider2=CommentRating.objects.filter(comment=cur_user_comment[0])
-              slider1_rating=[]
-              slider2_rating=[]
+    if uid != -1:
+        cur_user = User.objects.filter(id=uid)
+        if len(cur_user) > 0:
+            cur_user = cur_user[0]
+            auth = True
+            cur_user_comment=DiscussionComment.objects.filter(user=cur_user,discussion_statement= disc_stmt,is_current = True)
+            if len(cur_user_comment)>0:
+               slider1=CommentAgreement.objects.filter(comment=cur_user_comment[0])
+               slider2=CommentRating.objects.filter(comment=cur_user_comment[0])
+               slider1_rating=[]
+               slider2_rating=[]
                
-              for i in range(0, len(slider1)):
-                 slider1_rating.append(1-slider1[i].agreement)
-              for i in range(0, len(slider2)):
-                 slider2_rating.append(1-slider2[i].rating)
-              #produce png only if len(slider) >0
-              if len(slider1)>0:
-                 slider1_hist,bin_edges_1 = numpy.histogram(slider1_rating,bins,normed=False)
-                 slider1_hist_in_percent=(100*slider1_hist/float(sum(slider1_hist)))[::-1]
-                 fig1, ax1=plt.subplots()
-                 rects1 = ax1.bar(ind, slider1_hist_in_percent, width, color='r')
-                 median1=numpy.median(slider1_rating)
-                 median_bar1=median_index(request,median1)
-                 rects1[median_bar1].set_color('b')
-                 ax1.set_ylabel('Percentages (%)')
-                 ax1.set_title("How important is this issue for the next Report Card?")
-                 ax1.set_xticks(ind+width/2)
-                 ax1.set_xticklabels( ('A+', 'A', 'A-', 'B+', 'B','B-','C+','C','C-','D+','D','D-','F') )
-                 plt.savefig('/var/www/cafe-v11-ms/src/client/media/mobile/img/dailyupdate/'+str(cur_user.id)+'_1.png',dpi=300,format='png')
+               for i in range(0, len(slider1)):
+                   slider1_rating.append(1-slider1[i].agreement)
+               for i in range(0, len(slider2)):
+                   slider2_rating.append(1-slider2[i].rating)
+               slider1_hist,bin_edges_1 = numpy.histogram(slider1_rating,bins,normed=False)
+               slider2_hist,bin_edges_2 = numpy.histogram(slider2_rating,bins,normed=False)
+               slider1_hist_in_percent=(100*slider1_hist/float(sum(slider1_hist)))[::-1]
+               slider2_hist_in_percent=(100*slider2_hist/float(sum(slider2_hist)))[::-1]
               
-              if len(slider2)>0:
-                 slider2_hist,bin_edges_2 = numpy.histogram(slider2_rating,bins,normed=False)              
-                 slider2_hist_in_percent=(100*slider2_hist/float(sum(slider2_hist)))[::-1]
-                 plt.figure()
-                 fig2, ax2=plt.subplots()
-                 rects2 = ax2.bar(ind, slider2_hist_in_percent, width, color='r')
-                 median2=numpy.median(slider2_rating)
-                 median_bar2=median_index(request,median2)
-                 rects2[median_bar2].set_color('b')
-                 ax2.set_ylabel('Percentages (%)')
-                 ax2.set_title("How would you rate the State of California on this issue today?")
-                 ax2.set_xticks(ind+width/2)
-                 ax2.set_xticklabels( ('A+', 'A', 'A-', 'B+', 'B','B-','C+','C','C-','D+','D','D-','F') )
-                 plt.savefig('/var/www/cafe-v11-ms/src/client/media/mobile/img/dailyupdate/'+str(cur_user.id)+'_2.png',dpi=300,format='png')
-
-
+               fig1, ax1=plt.subplots()
+               rects1 = ax1.bar(ind, slider1_hist_in_percent, width, color='r')
+               median1=numpy.median(slider1_rating)
+               
+               median_bar1=median_index(request,median1)
+               rects1[median_bar1].set_color('b')
+               ax1.set_ylabel('Percentages (%)')
+               ax1.set_title("How important is this issue for the next Report Card?")
+               ax1.set_xticks(ind+width/2)
+               ax1.set_xticklabels( ('A+', 'A', 'A-', 'B+', 'B','B-','C+','C','C-','D+','D','D-','F') )
+               plt.savefig(str(uid)+'_1.svg',dpi=300,format='png')
+               
+               plt.figure()
+               fig2, ax2=plt.subplots()
+               rects2 = ax2.bar(ind, slider2_hist_in_percent, width, color='r')
+               median2=numpy.median(slider2_rating)
+               median_bar2=median_index(request,median2)
+               rects2[median_bar2].set_color('b')
+               ax2.set_ylabel('Percentages (%)')
+               ax2.set_title("How would you rate the State of California on this issue today?")
+               ax2.set_xticks(ind+width/2)
+               ax2.set_xticklabels( ('A+', 'A', 'A-', 'B+', 'B','B-','C+','C','C-','D+','D','D-','F') )
+               plt.savefig(str(uid)+'_2.svg',dpi=300,format='png')
 
 def neighbor_stat(request):
     zipcode=request.REQUEST.get('zipcode',-1)
@@ -1309,20 +1290,16 @@ def banish_user(request, user_id):
 		return json_result({'success':True})
 		
 #@admin_required
-def search(request, os_id, username):
-	#username = username.lower()
-	try:
-		if not username:
-                    user = User.objects.all()
-                    return json_result({'success':True, 
-                                        'data':[format_user_object(u, os_id) 
-                                                for u in user]})
-                user = User.objects.get(username__icontains= username)
-	except User.DoesNotExist:
-		return json_result({'success':False, 
-                                    'error_message':'User does not exist.'})
+def search(request, os_id, username=''):
+
+    user = User.objects.filter(username__icontains= username)
+    if not len(user):
+      return json_result({'success':False, 
+                          'error_message':'No users matching that username.'})
 	
-	return json_result({'success':True, 'data':[format_user_object(user, os_id)]})
+    return json_result({'success':True, 
+                        'data':[format_user_object(u, os_id) for u in user]})
+
 	
 @admin_required
 def get_new_users(request, os_id, time):

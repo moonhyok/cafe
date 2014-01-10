@@ -1,5 +1,9 @@
 /* opinionspace.css - contains styles for the Opinion Space project */
-/*old color 0x04376c*/
+/*
+BG- 76b9b6
+White- f5ebdf
+Brown- 4e300f
+*/
 html {
   width: 320px;
   overflow-x: hidden;
@@ -19,13 +23,13 @@ html {
 .top-bar{
     display:none;
     width: 100%;
-    background-color: #96c6c5;
+    background-color: #76b9b6;
 }
 
 .slider-agree-labels{
 	font-size:11px;
 	
-	color: #fff8f0F;
+	color: #f5ebdf;
 }
 
 .slider-range-labels{
@@ -35,17 +39,17 @@ html {
     font-size:10px;
     font-weight: bold;
     
-    color: #fff8f0;
+    color: #f5ebdf;
 }
 
 .grade-labels {
     position: absolute;
     z-index: -1;
-    top: -2px;
-    font-size:10px;
+    top: -1px;
+    font-size:12px;
     font-weight: bold;
     
-    color: #fff8f0;
+    color: #f5ebdf;
     background:none;
 }
 
@@ -55,7 +59,7 @@ html {
     top: -15px;
     font-size:24px;
 
-    color: #fff8f0;
+    color: #f5ebdf;
     background:none;
 }
 
@@ -86,7 +90,7 @@ html {
 /* This prevents the jQuery navbar buttons from staying pressed */
 .ui-navbar .ui-btn-active {
 	border: 1px solid       #222;
-	background:             #96c6c5;
+	background:             #76b9b6;
 	
 	color:                     #fff;
 	background-image: -webkit-gradient(linear, left top, left bottom, from( #555), to( #333));
@@ -244,7 +248,7 @@ table.pretty caption {
 
 	body {
 		/*font-family: "Helvetica Neue", verdana, sans-serif;*/
-		background: #96c6c5;
+		background: #76b9b6;
 		height: 100%;
 		padding: 0 !important;
 		/* use helvetica neue, bootstrap style */
@@ -274,11 +278,11 @@ table.pretty caption {
 		left: 0;
 
 		display: none;
-		background: #96c6c5;
+		background: #76b9b6;
 	}
 
 	.header {
-		color: #fff8f0;
+		color: #f5ebdf;
 		text-shadow: none;
 		
 		width: 95%;
@@ -341,7 +345,7 @@ table.pretty caption {
 	.reportcard{
 		/*background-color: #FAEBCD;*/
 		/*font-family: "Courier New", Courier, monospace;*/
-		color: #594027;
+		color: #4e300f;
 		text-shadow: none;
 		height: 100%;
 		
@@ -360,7 +364,7 @@ table.pretty caption {
 	
 	.comment-panel{
 		/*background: url('../img/cafe/cafe_notebook.png') repeat-y;*/
-		color: #fff8f0;
+		color: #f5ebdf;
 		text-shadow: none;
 		width: 95%;
 		height: 100%;
@@ -376,31 +380,35 @@ table.pretty caption {
 	}
 
 	.slider-row{
-	padding-top: 15px;
-	padding-bottom: 15px;
+	padding-top: 20px;
+	padding-bottom: 10px;
+	}
+
+	.ui-loader{
+	    z-index: 999 !important;
 	}
 
 	.title-table {
 	    width:299px;
 	    background-color: #4b6d6c;
-	    border: solid 0px #96c6c5;
-	    color: #fff8f0;
+	    border: solid 0px #76b9b6;
+	    color: #f5ebdf;
 	}
 
 	.title-table td{
-    	    border: solid 3px #96c6c5;
-    	    color: #fff8f0 !important;
+    	    border: solid 3px #76b9b6;
+    	    color: #f5ebdf !important;
     	}
 
     .grade-table {
     	    width: 299px;
-    	    background-color: #96c6c5;
+    	    background-color: #76b9b6;
     	    /*cbe2e2*/
-    	    border: solid 0px #fff8f0;
+    	    border: solid 0px #f5ebdf;
     	}
 
     	.grade-table td{
-        	    border: solid 3px #96c6c5;
+        	    border: solid 3px #76b9b6;
         	}
 
 	.stats-table {
@@ -416,7 +424,7 @@ table.pretty caption {
 	.title-table-label1 {
     	    text-align: center;
     	    vertical-align: middle;
-    	    color: #96c6c5;
+    	    color: #76b9b6;
             font-size:13px;
     }
 
@@ -425,13 +433,13 @@ table.pretty caption {
             width: 60px;
             text-align: center;
             vertical-align: middle;
-            color: #96c6c5;
+            color: #76b9b6;
             font-size:13px;
     }
 	
 	.grade{
 		font-family: verdana, sans-serif;
-		color: #594027;
+		color: #4e300f;
 		
 		text-shadow: none;
 		font-size: 28px;
@@ -440,7 +448,7 @@ table.pretty caption {
 	
 	.grade2{
 		font-family: verdana, sans-serif;
-		color: #594027;
+		color: #4e300f;
 		
 		text-shadow: none;
 		font-size: 28px;
@@ -483,7 +491,7 @@ table.pretty caption {
 		width: 100%;
 		height: 100%;
 		/*background-color: #FAEBCD;*/
-		background: #96c6c5;
+		background: #76b9b6;
 		z-index: 998;
 		overflow-y: auto;
 		overflow-x: hidden;
@@ -501,7 +509,7 @@ table.pretty caption {
     		width: 100%;
     		height: 100%;
     		/*background-color: #FAEBCD;*/
-    		background: #96c6c5;
+    		background: #76b9b6;
     		z-index: 997;
     		overflow-y: auto;
     		overflow-x: hidden;
@@ -530,7 +538,7 @@ table.pretty caption {
 	width: 65%;
 	line-height: 21px;
 	padding-left: 10px;
-	color: #594027;
+	color: #4e300f;
 	font-size: 15px;
 	text-shadow: none;
 	}
@@ -544,7 +552,7 @@ table.pretty caption {
 	.landing-disclaimer{
 	clear: both;
 	position:relative;
-	color: #594027;
+	color: #4e300f;
 	line-height: 13px !important;
 	font-size: 11px;
 	padding-left: 10px;
@@ -586,25 +594,25 @@ table.pretty caption {
 		font-size: 15px;
 		
 		padding-bottom: 3px;
-		color: #594027;
+		color: #4e300f;
 		/*background-color: rgba(200,200,200,0.3);*/
 	}
 
 	.registerpanel{
-		color: #fff8f0;
+		color: #f5ebdf;
 		text-shadow: none;
 		height: 100%;
 	}
 	
 	.edit-comment-panel{
-		color: #fff8f0;
+		color: #f5ebdf;
 		text-shadow: none;
 		width: 100%;
 	}
 	
 	.loginpanel{
 		background-color: #FAEBCD;
-		color: #fff8f0;
+		color: #f5ebdf;
 		
 		text-shadow: none;
 		text-align: center;
@@ -643,7 +651,7 @@ table.pretty caption {
 		right: 0;
 		width: 100%;
 		height: 100%;
-		background: #96c6c5;
+		background: #76b9b6;
 		overflow: auto;
 		z-index: 999;
 	}
@@ -657,7 +665,7 @@ table.pretty caption {
 		height: 100%;
 		/*background-image:url('../img/cafe/cafe_bg.jpg');*/
 		/*background-color: #FAEBCD;*/
-		background: #96c6c5; /* Old browsers */
+		background: #76b9b6; /* Old browsers */
 		overflow: auto;
 		z-index: 999;
 	}
@@ -669,10 +677,10 @@ table.pretty caption {
 		top: 0;
 	/*bottom: 0;
 	right: 0; */
-	color: #fff8f0;
+	color: #f5ebdf;
 	width: 100%;
 	height: 100%;
-	background-color: #96c6c5;
+	background-color: #76b9b6;
 
 	padding-top: 20px;
 	padding-bottom: 20px;
@@ -684,7 +692,7 @@ table.pretty caption {
 .landing-header {
 	font-family: verdana, sans-serif;
 	text-shadow: none;
-	color: #fff8f0;
+	color: #f5ebdf;
 	font-size: 42px;
 	text-align: center;
 	width: 100%;
@@ -697,14 +705,14 @@ table.pretty caption {
     font-family: verdana, sans-serif;
     font-size: 16px;
     line-height: 20px;
-    color: #594027;
+    color: #4e300f;
 }
 
 .basic-header {
 	font-family: verdana, sans-serif;
 	text-shadow: none;
 	text-align: left !important;
-	color: #fff8f0;
+	color: #f5ebdf;
 	font-size: 24px;
 	line-height: 30px;
 	padding-bottom: 6px;
@@ -715,7 +723,7 @@ table.pretty caption {
 .basic-header2 {
 	font-family: verdana, sans-serif;
 	text-shadow: none;
-	color: #fff8f0;
+	color: #f5ebdf;
 	font-size: 20px;
 	line-height: 26px;
 	padding-bottom: 10px;
@@ -725,7 +733,7 @@ table.pretty caption {
 .basic-sub-header {
 	font-family: verdana, sans-serif;
 	text-shadow: none;
-	color: #fff8f0;
+	color: #f5ebdf;
 	font-size: 18px;
 	line-height: 20px;
 	padding-bottom: 10px;
@@ -737,13 +745,13 @@ font-size: 18px;
 padding-left: 7px;
 padding-right: 7px;
 font-family: verdana, sans-serif;
-color: #fff8f0;
+color: #f5ebdf;
 line-height:18px;
 }
 
 .basic-fine-print{
 font-size: 14px;
-color: #fff8f0;
+color: #f5ebdf;
 
 line-height:16px;
 text-align:right;
@@ -753,7 +761,7 @@ padding-left: 5px;
 }
 
 .about-link a {
-color: #fff8f0;
+color: #f5ebdf;
 font-size: 16px;
 padding-right: 7px;
 }
@@ -763,7 +771,7 @@ padding-right: 7px;
 	line-height: 27px;
 	font-family: verdana, sans-serif;
 	text-shadow: none;
-	color: #fff8f0;
+	color: #f5ebdf;
 	font-size: 28px;
 	height: 100%;
 	left: 0;
@@ -772,7 +780,7 @@ padding-right: 7px;
 
 .landing-intro {
 	text-align: center;
-	background-color: #96c6c5;
+	background-color: #76b9b6;
 	padding-top: 30px;
 	padding-bottom: 10px;
 	vertical-align: middle;
@@ -801,7 +809,14 @@ padding-right: 7px;
 .comment-admin-text-a{
     font-size: 11px !important;
     line-height: 11px;
-    color: #fff8f0 !important;
+    color: #f5ebdf !important;
+    font-family: verdana, sans-serif;
+}
+
+.comment-admin-text-b{
+    font-size: 14px !important;
+    line-height: 14px;
+    color: #4e300f !important;
     font-family: verdana, sans-serif;
 }
 
@@ -811,7 +826,7 @@ padding-right: 7px;
 	min-height: 150px !important;
 	font-size: 14px !important;
 	font-family: verdana, sans-serif;
-	color: #fff8f0;
+	color: #f5ebdf;
 	
 	text-shadow: none !important;
 }
@@ -850,7 +865,7 @@ padding-right: 7px;
     padding-top: 10px;
     text-align: left;
     padding-left: 10px;
-    background-color: #96c6c5;
+    background-color: #76b9b6;
 
 }
 
@@ -870,7 +885,7 @@ padding-right: 7px;
 	/*background-color: #E7E1D8;*/
 	/*background: url('../img/cafe/cafe_notebook.png') repeat-y;*/
 	text-shadow: none;
-	color: #fff8f0;
+	color: #f5ebdf;
 	padding-top: 7px;
 }
 
@@ -898,7 +913,7 @@ padding-right: 7px;
 
 	position: absolute;
 	top: -50px;
-	background-color: #fff8f0;
+	background-color: #f5ebdf;
 }
 
 .rate-loading {
@@ -907,8 +922,8 @@ padding-right: 7px;
 	bottom: 0;
 	right: 0;
 	width: 100%;
-	background-color: #96c6c5;
-	color: #fff8f0;
+	background-color: #76b9b6;
+	color: #f5ebdf;
 	padding: 20px 0;
 	text-align: center;
 }
@@ -927,7 +942,7 @@ padding-right: 7px;
 }
 
 .dialog-style{
-	background: #96c6c5;
+	background: #76b9b6;
 	width: 100%;
 	position: absolute;
 	top:0;
@@ -947,8 +962,8 @@ padding-right: 7px;
 	position: relative;
         vertical-align: middle;
         font-family: verdana, sans-serif;
-	color: #594027;
-	background: #96c6c5;
+	color: #4e300f;
+	background: #76b9b6;
 	height: 100%;
 	text-decoration: none;
 	text-shadow: none;
@@ -961,8 +976,8 @@ padding-right: 7px;
 	position: relative;
         vertical-align: middle;
         font-family: verdana, sans-serif;
-	color: #594027;
-	background: #96c6c5;
+	color: #4e300f;
+	background: #76b9b6;
 	text-decoration: none;
 	text-shadow: none;
 	font-size: 14px;
@@ -973,8 +988,8 @@ padding-right: 7px;
 	position: relative;
         vertical-align: middle;
         font-family: verdana, sans-serif;
-	color: #594027;
-	background: #96c6c5;
+	color: #4e300f;
+	background: #76b9b6;
 	width: 100%;
 	height: 100%;
 	text-decoration: none;
@@ -1018,16 +1033,16 @@ padding-right: 7px;
    .rate-username{
 	 font-size: 14px;
 	 font-family: verdana, sans-serif;
-	 color: #594027;
+	 color: #4e300f;
 	 text-align: left !important;
 	 
    }
 
    .flag-style{
     position: fixed;
-    top: 160px;
+    top: 180px;
     left: 20px;
-    font-size: 18px;
+    font-size: 14px;
     color: #FF0000;
    }
 
@@ -1037,13 +1052,13 @@ padding-right: 7px;
 	text-align: right;
 	 padding: 3px;
 	margin: 1px;
-	color: #fff8f0;
+	color: #f5ebdf;
  	}
 
 
 .noUi-base {
 	background-color: #4b6d6c;
-	border: 2px solid #4b6d6c;
+	border: 0px solid #4b6d6c;
 	border-radius:0px;
 	height: 12px !important;
 }
@@ -1053,8 +1068,8 @@ padding-right: 7px;
 }
 
 .noUi-handle {
-	border: 5px solid #fff8f0 /*{b-bup-border}*/;
-	background-color: #885c26 /*{b-bup-background-color}*/;
+	border: 5px solid #f5ebdf /*{b-bup-border}*/;
+	background-color: #4e300f /*{b-bup-background-color}*/;
 	/*border: 1px solid #AAAAAA;
 
 	background-image:-webkit-gradient(linear,left top,left bottom,from(#E8B91A),to(#FFC501));
@@ -1096,7 +1111,7 @@ padding-right: 7px;
 		display: none;
 		/*background-image:url('../img/cafe/cafe_bg.jpg');*/
 		/*background-color: #FAEBCD;*/
-		background-color: #96c6c5;
+		background-color: #76b9b6;
 		overflow: auto;
 		z-index: 999;
 	}

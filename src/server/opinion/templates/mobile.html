@@ -12,7 +12,7 @@
 <link rel='stylesheet' type='text/css' href='{{url_root}}/media/mobile/css/reset.css?nonce={{random_password}}' />
 <link rel='stylesheet' type='text/css' href='{{url_root}}/media/mobile/bootstrap/css/bootstrap-responsive.min.css?nonce={{random_password}}' />
 <link rel='stylesheet' type='text/css' href='{{url_root}}/media/mobile/jquery-mobile/jquery.mobile-1.3.2.min.css' />
-<link rel='stylesheet' type='text/css' href='{{url_root}}/media/mobile/css/themes/cafe-jquery-new.min.css'/>
+ <link rel='stylesheet' type='text/css' href='{{url_root}}/media/mobile/css/themes/cafe-jquery-new-v2.min.css'/> 
 <link href="{{url_root}}/media/mobile/css/jquery.nouislider.min.css" rel="stylesheet">
 <link rel='stylesheet' type='text/css' href='{{url_root}}/media/mobile/css/opinionspace.css?nonce={{random_password}}' />
 
@@ -36,11 +36,17 @@
 
   window.sliders = [];
 
+  window.skipped = [];
+
   window.email_saved = false;
 
   window.prev_state = 'home';
 
   window.cur_state = 'home';
+
+  window.toggle_flag1 = false;
+
+  window.toggle_flag2 = false;
 
   window.entry_code = {{ entry_code }} ;
 
@@ -61,12 +67,12 @@
                 };
 
 
-  // TURNING OFF ALL AJAX
-  $.ajaxSetup({async: false});
+
 
  jQuery(document).ready(function(){
    for (var i = 0; i <= window.num_sliders; i++) {
-     window.sliders[i] = 40+(i%2)*20;
+     window.sliders[i] = 50;
+     window.skipped[i] = false;
      $(".endslider-slider"+(i+1)).noUiSlider({
        range: [0, 100],
        start: window.sliders[i] ,
@@ -179,6 +185,7 @@
    window.sliders[statement] = $('#s' + statement).val();
    document.getElementById('tr'+statement).style.backgroundColor = "rgba(255, 255, 0, 0.8)";
    finishedStatements[statement-1]= 1;
+   rate.logUserEvent(11,'slider_set ' + statement + ' ' + window.sliders[statement]/100);
 }
 
 </script>
@@ -268,7 +275,7 @@
                       </td>
 
                       <td class="title-table-label2">
-                          <a href="#" onclick="$('.endsliders').hide();$('.dialog-avggrade').show();window.prev_state='grade';window.cur_state='median';" style="color: #fff8f0 !important;">Median Grade</a>
+                          <a href="#" onclick="$('.endsliders').hide();$('.dialog-avggrade').show();window.prev_state='grade';window.cur_state='median';" style="color: #f5ebdf !important;">Median Grade</a>
                       </td>
 
                   </tr>
@@ -278,26 +285,27 @@
               {% for statement in statements %}
               <table class='cardtable grade-table'>
                   <tr id="tr{{statement.id}}">
-                      <td style="height: 60px;background-color:#cbe2e2;">
+                      <td style="height: 60px;background-color:#f5ebdf;" id="tr-label{{statement.id}}">
                           {% ifnotequal statement.statement '' %}
                           <div class='slider-question'>
-                              <script>var sid={{statement.id}}-1;var total={{statements|length}};document.write(total-sid);</script>. {{ statement.statement }}
+                              <!--<script>var sid={{statement.id}}-1;var total={{statements|length}};document.write(total-sid);</script>-->
+                              {{statement.id}}. {{ statement.statement }}
                           </div>
                           {% else %}
                           {% endifnotequal %}
                       </td>
 
-                      <td class="title-table-label2" style="background-color:#cbe2e2;">
+                      <td class="title-table-label2" style="background-color:#f5ebdf;" id="tr-1grade{{statement.id}}">
                           <div id='g{{statement.id}}' class="grade"></div>
                       </td>
 
-                      <td class="title-table-label2" style="background-color:#cbe2e2;">
+                      <td class="title-table-label2" style="background-color:#f5ebdf;" id="tr-2grade{{statement.id}}">
                           <div id='o{{statement.id}}' class="grade2"></div>
                       </td>
 
                   </tr>
 
-                  <tr>
+                  <tr id="tr-slider{{statement.id}}">
                       <td colspan="3" class="slider-row" style="border: none;">
                           {% ifnotequal statement.statement '' %}
                           <div id="s{{statement.id}}" data-statement="{{statement.id}}" class="endslider-slider{{statement.id}} statement-slider" style=""></div>
@@ -309,7 +317,8 @@
                       </td>
                   </tr>
               </table>
-              <br/>
+
+              <img id="skip-img{{statement.id}}" src="{{url_root}}/media/mobile/img/cafe/skip.png" style="position:relative;width: 50px;padding-top: 7px;left: 4px;" onclick="accounts.skipStatement({{statement.id}});"> <br/><br/>
               {% endfor %}
 
               <div class="standard-btn-div">
@@ -443,16 +452,15 @@
           <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
       </div>
 
-      <div class="default-left-padding" style="text-align: left;">
-          <span class="rate-username"></span>
-      </div>
-
-
     <center>
        <textarea id='commentInput' class='answer' readonly="true"></textarea>
     </center>
 
-      <div id="flag" class="flag-style"></div>
+    <div class="default-left-padding" style="text-align: left;padding-bottom: 3px;">
+        <span class="rate-username"></span>
+    </div>
+
+    <div id="flag" class="flag-style"></div>
 
     <div class="answerwrapper default-left-padding">
         <div class="comment-admin-text">
@@ -670,10 +678,10 @@
     <div class='dialog-text-style default-left-padding'>
         <div class="basic-header" style="width:100%;">{{client_settings.RESPONSE_SAVED_HEADER}}</div>
         {{ client_settings.RESPONSE_SAVED_TEXT}}
-        <br/>
+        <br/><br/>
         {{client_settings.EMAIL_ASK_TEXT}}
         <input type="email" id='regemail' name='regemail' class='regforminput' style="font-size: 15px; background-color: #FFFFFF;color: #000000;" placeholder="Email" data-theme='b'></input>
-        <div class="comment-admin-text-a">We promise not to share your email address with any third parties</div>
+        <div class="comment-admin-text-b">We promise not to share your email address with any third parties</div>
         <center>
             <div class="standard-btn-div">
                 <button type='submit' data-theme='b' class='dialog-continue-ready' ><font style="font-size: 16px;">Enter</font></button>

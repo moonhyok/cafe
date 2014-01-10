@@ -30,12 +30,19 @@ var _blooms = blooms = (function($, d3, console) {
         sorted_comments_ids = data['sorted_comments_ids'];
         sorted_avg_agreement = data['sorted_avg_agreement'];
 
-        // utils.ajaxTempOff(function() {
-        //     $.getJSON(window.url_root + '/os/all/1/', function(data) {
+
+        // $.ajax({
+        //     async: false,
+        //     url: window.url_root + '/os/all/1/',
+        //     type: 'GET',
+        //     dataType: 'json',
+        //     success: function(data) {
         //         sorted_comments_ids = data['sorted_comments_ids'];
         //         sorted_avg_agreement = data['sorted_avg_agreement'];
-        //     });
-
+        //     },
+        //     error: function() {
+        //         console.log("ERROR posting authenticated request. Abort!");
+        //     }
         // });
 
         storeSortedIDsToBuckets(sorted_comments_ids, window.visuals.userIdToCommentScoreBucket, window.visuals.POINT_SIZES.length);
@@ -224,29 +231,25 @@ var _blooms = blooms = (function($, d3, console) {
         //make this it's own function
         // hack to allow own bloom - should be cleaned up later
         //var curr_user_id = data1[0]['cur_user_id'];
-        if (window.sliders.length == window.num_sliders+1) {
-                var users_ratings = [];
-                for (var i = 1; i <= window.num_sliders; i += 1) {
-                    users_ratings[i-1] = new Array("curUser", i+1, parseFloat(window.sliders[i])/100);
-                }
-                // console.log(users_ratings);
-                ratings = ratings.concat(users_ratings);
-            }
-        else{
-            
-            if (window.authenticated) {
-            var users_statements = data1['cur_user_ratings'];
+        if (window.authenticated) {
+                    var users_statements = data1['cur_user_ratings'];
+                    var users_ratings = [];
+                    for (var i = 0; i < users_statements.length; i += 1) {
+                        users_ratings[i] = new Array("curUser", users_statements[i][0], users_statements[i][1]);
+                    }
+                        ratings = ratings.concat(users_ratings);
+                    }
+        else
+        {
             var users_ratings = [];
-            for (var i = 0; i < users_statements.length; i += 1) {
-                users_ratings[i] = new Array("curUser", users_statements[i][0], users_statements[i][1]);
+            for (var i = 1; i <= window.num_sliders; i += 1) {
+                users_ratings[i-1] = new Array("curUser", i+1, parseFloat(window.sliders[i])/100);
             }
-                ratings = ratings.concat(users_ratings);
-            }
-            
         }
 
         //end of hack
-        //ratings.reverse();
+        if (window.user_score <= 2)
+            ratings.reverse();
         
         result = compileEigenvectorsAndRatings(eigens, ratings);
         showfunc({
@@ -395,6 +398,10 @@ var _blooms = blooms = (function($, d3, console) {
                     window.cur_state = 'comment';
                     return;
                 }
+                else if (d.uid == "curUser" && window.user_score < 2)
+                {
+                    return;
+                }
                 else
                 {
                     $('.instructions').hide();
@@ -403,7 +410,7 @@ var _blooms = blooms = (function($, d3, console) {
                     window.cur_state = 'rate';
                 }
                 
-                $('.rate-username').html('The '+d.uid + 'th participant suggested this issue for the next report card:');
+                $('.rate-username').html('- Suggested by the '+d.uid + 'th participant.');
                 var commentData = rate.pullComment(d.uid, 'uid', comments);
                 var content = commentData.comment;
                 var cid = commentData.cid;
@@ -418,7 +425,7 @@ var _blooms = blooms = (function($, d3, console) {
                 });
                 $('#go-back').click(function() {
                     //$('.scorebox').show();
-                    utils.showLoading("");
+                    //utils.showLoading("");
                     $('.menubar').show();
                     rate.doneRating();
 
@@ -435,18 +442,28 @@ var _blooms = blooms = (function($, d3, console) {
                     }
                     /* Load more blooms if none left */
                     try {
-                    if (window.blooms_list.length == 1) {
+                    if (window.blooms_list.length <= 2) {
                         console.log("here");
+                        utils.showLoading("Loading More Ideas...");
                         window.blooms_list = undefined; //needed to avoid infinite recursing
-                        utils.showLoading("", function() {
-                            populateBlooms();
-                        });
-                        utils.hideLoading(500);
+                        setTimeout(populateBlooms, 1000);
+                        //utils.hideLoading();
+                       // utils.showLoading("Loading More Ideas...", function() {
+                       //     populateBlooms();
+                        //});
+                        //utils.hideLoading(5000);
                     } } catch(err){ /* undefined variable blooms. */ }
 
                 });
             });
         });
+
+     try{
+      utils.hideLoading(0);
+      }catch(err){
+         console.log(err);
+      }
+
     $('#d3').height($(window).height() - $('.top-bar').height());
     }
 
@@ -455,9 +472,7 @@ var _blooms = blooms = (function($, d3, console) {
     function alreadyAuthenticated() {
         //TOFIX utils.showLoading("Loading...");
 
-        //utils.ajaxTempOff(function() {
         populateBlooms();
-        //});
         accounts.initLoggedInFeatures();
         //TOFIX utils.hideLoading();
         $('.landing').hide();
@@ -479,8 +494,9 @@ var _blooms = blooms = (function($, d3, console) {
 })($, d3, console);
 
 $(document).ready(function() {
-    if (accounts.setAuthenticated()) {
-        _blooms.alreadyAuthenticated();
+    accounts.setAuthenticated();
+    if (window.authenticated) {
+        blooms.alreadyAuthenticated();
     }
     else{
 		$('.welcome-back').hide();
