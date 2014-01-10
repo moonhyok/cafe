@@ -274,7 +274,7 @@
                       </td>
 
                       <td class="title-table-label2">
-                          <a href="#" onclick="$('.endsliders').hide();$('.dialog-avggrade').show();window.prev_state='grade';window.cur_state='median';" style="color: #fff8f0 !important;">Median Grade</a>
+                          <a href="#" onclick="$('.endsliders').hide();$('.dialog-avggrade').show();window.prev_state='grade';window.cur_state='median';" style="color: #f5ebdf !important;">Median Grade</a>
                       </td>
 
                   </tr>
@@ -284,7 +284,7 @@
               {% for statement in statements %}
               <table class='cardtable grade-table'>
                   <tr id="tr{{statement.id}}">
-                      <td style="height: 60px;background-color:#cbe2e2;" id="tr-label{{statement.id}}">
+                      <td style="height: 60px;background-color:#f5ebdf;" id="tr-label{{statement.id}}">
                           {% ifnotequal statement.statement '' %}
                           <div class='slider-question'>
                               <!--<script>var sid={{statement.id}}-1;var total={{statements|length}};document.write(total-sid);</script>-->
@@ -294,11 +294,11 @@
                           {% endifnotequal %}
                       </td>
 
-                      <td class="title-table-label2" style="background-color:#cbe2e2;" id="tr-1grade{{statement.id}}">
+                      <td class="title-table-label2" style="background-color:#f5ebdf;" id="tr-1grade{{statement.id}}">
                           <div id='g{{statement.id}}' class="grade"></div>
                       </td>
 
-                      <td class="title-table-label2" style="background-color:#cbe2e2;" id="tr-2grade{{statement.id}}">
+                      <td class="title-table-label2" style="background-color:#f5ebdf;" id="tr-2grade{{statement.id}}">
                           <div id='o{{statement.id}}' class="grade2"></div>
                       </td>
 

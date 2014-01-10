@@ -161,9 +161,9 @@ var accounts = (function($, d3, console) {
     {
     $('#s'+id).removeAttr('disabled');
         document.getElementById('tr-slider'+id).style.backgroundColor='transparent';
-        document.getElementById('tr-label'+id).style.backgroundColor='#cbe2e2';
-        document.getElementById('tr-1grade'+id).style.backgroundColor='#cbe2e2';
-        document.getElementById('tr-2grade'+id).style.backgroundColor='#cbe2e2';
+        document.getElementById('tr-label'+id).style.backgroundColor='#f5ebdf';
+        document.getElementById('tr-1grade'+id).style.backgroundColor='#f5ebdf';
+        document.getElementById('tr-2grade'+id).style.backgroundColor='#f5ebdf';
         document.getElementById('skip-img'+id).src = window.url_root + '/media/mobile/img/cafe/skip.png';
         document.getElementById('skip-img'+id).style.width = '50px';
         window.skipped[id-1] = false;

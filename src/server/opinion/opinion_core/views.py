@@ -101,14 +101,15 @@ def mobile(request,entry_code=None):
     #print get_client_settings(True)
     os = get_os(1)
     disc_stmt = get_disc_stmt(os, 1)
-    
+    active_users = User.objects.filter(is_active=True).list() #forces eval so lazy eval doesn't act too smart!!!
+
     statements = OpinionSpaceStatement.objects.all().order_by('id')
     medians = {}
     statement_labels = {};
  #.values_list('id', 'statement', 'short_version'))
 
     for s in statements:
-        medians[str(s.id)] = numpy.median(UserRating.objects.filter(opinion_space_statement=s,is_current=True).values_list('rating'))
+        medians[str(s.id)] = numpy.median(UserRating.objects.filter(user__in = active_users,opinion_space_statement=s,is_current=True).values_list('rating'))
         if medians[str(s.id)] <= 1e-5:
             medians[str(s.id)] = 0
         statement_labels[str(s.id)] = s.statement
@@ -131,7 +132,7 @@ def mobile(request,entry_code=None):
 											 'init_score': len(get_fully_rated_responses(request, disc_stmt)),
 											 'random_username': random_username,
 											 'random_password': random_password,
-											 'num_users': User.objects.filter(id__gte = 310).count(),
+											 'num_users': len(active_users),
                                              'statement_labels': json.dumps(statement_labels),
 											 'medians': json.dumps(medians)}))
 
