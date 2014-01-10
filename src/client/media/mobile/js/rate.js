@@ -134,7 +134,7 @@ var rate = (function($, d3, console) {
                 $('.rate').hide();
 
             }
-            utils.hideLoading();
+            //utils.hideLoading();
             //utils.hideLoading();
     }
     

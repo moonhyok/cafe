@@ -402,6 +402,10 @@ var _blooms = blooms = (function($, d3, console) {
                     window.cur_state = 'comment';
                     return;
                 }
+                else if (d.uid == "curUser" && window.user_score < 2)
+                {
+                    return;
+                }
                 else
                 {
                     $('.instructions').hide();
@@ -410,7 +414,7 @@ var _blooms = blooms = (function($, d3, console) {
                     window.cur_state = 'rate';
                 }
                 
-                $('.rate-username').html('The '+d.uid + 'th participant suggested this issue for the next report card:');
+                $('.rate-username').html('- Suggested by the '+d.uid + 'th participant.');
                 var commentData = rate.pullComment(d.uid, 'uid', comments);
                 var content = commentData.comment;
                 var cid = commentData.cid;
@@ -425,7 +429,7 @@ var _blooms = blooms = (function($, d3, console) {
                 });
                 $('#go-back').click(function() {
                     //$('.scorebox').show();
-                    utils.showLoading("");
+                    //utils.showLoading("");
                     $('.menubar').show();
                     rate.doneRating();
 
@@ -442,18 +446,28 @@ var _blooms = blooms = (function($, d3, console) {
                     }
                     /* Load more blooms if none left */
                     try {
-                    if (window.blooms_list.length == 1) {
+                    if (window.blooms_list.length <= 2) {
                         console.log("here");
+                        utils.showLoading("Loading More Ideas...");
                         window.blooms_list = undefined; //needed to avoid infinite recursing
-                        utils.showLoading("", function() {
-                            populateBlooms();
-                        });
-                        utils.hideLoading(500);
+                        setTimeout(populateBlooms, 1000);
+                        //utils.hideLoading();
+                       // utils.showLoading("Loading More Ideas...", function() {
+                       //     populateBlooms();
+                        //});
+                        //utils.hideLoading(5000);
                     } } catch(err){ /* undefined variable blooms. */ }
 
                 });
             });
         });
+
+     try{
+      utils.hideLoading(0);
+      }catch(err){
+         console.log(err);
+      }
+
     $('#d3').height($(window).height() - $('.top-bar').height());
     }
 

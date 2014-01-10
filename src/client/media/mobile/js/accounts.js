@@ -155,6 +155,33 @@ var accounts = (function($, d3, console) {
         });
     }
 
+    function skipStatement(id) {
+
+    if(window.skipped[id-1])
+    {
+    $('#s'+id).removeAttr('disabled');
+        document.getElementById('tr-slider'+id).style.backgroundColor='transparent';
+        document.getElementById('tr-label'+id).style.backgroundColor='#cbe2e2';
+        document.getElementById('tr-1grade'+id).style.backgroundColor='#cbe2e2';
+        document.getElementById('tr-2grade'+id).style.backgroundColor='#cbe2e2';
+        document.getElementById('skip-img'+id).src = window.url_root + '/media/mobile/img/cafe/skip.png';
+        document.getElementById('skip-img'+id).style.width = '50px';
+        window.skipped[id-1] = false;
+    }
+    else
+    {
+    $('#s'+id).attr('disabled', 'disabled');
+    document.getElementById('tr-slider'+id).style.backgroundColor='#BFBFBF';
+    document.getElementById('tr-label'+id).style.backgroundColor='#BFBFBF';
+    document.getElementById('tr-1grade'+id).style.backgroundColor='#BFBFBF';
+    document.getElementById('tr-2grade'+id).style.backgroundColor='#BFBFBF';
+    document.getElementById('skip-img'+id).src = window.url_root + '/media/mobile/img/cafe/grade.png';
+    document.getElementById('skip-img'+id).style.width = '55px';
+    window.skipped[id-1] = true;
+    }
+
+    }
+
     /** Sets up all the stuff that loggedIn users expect and need. 
      *  JUSTREGISTERED is a boolean and optional. Used to shortcircuit showGraphs.
      */
@@ -257,6 +284,7 @@ var accounts = (function($, d3, console) {
         'showLogin': showLogin,
         'readyToLogin': readyToLogin,
         'mustRegister': mustRegister,
+        'skipStatement':skipStatement,
         'firstTime': firstTime,
         'setAuthenticated': setAuthenticated,
         'loginAfterRegister': loginAfterRegister,
@@ -335,7 +363,7 @@ $(document).ready(function() {
 
                     if (data.hasOwnProperty('success')) {
                         accounts.setAuthenticated();
-                        utils.showLoading("", function() {
+                        utils.showLoading("Loading", function() {
                             accounts.loginAfterRegister(loginData);
                             blooms.populateBlooms();
                             $('.register').hide();
@@ -566,7 +594,18 @@ $(document).ready(function() {
     });
     
     $('#flag1').click(function() {
+
+        if(window.toggle_flag1)
+        {
+            window.toggle_flag1 = false;
+            document.getElementById('flag').innerHTML='';
+            document.getElementById('flag1').innerHTML='Inappropriate';
+            return;
+        }
+
+        window.toggle_flag1 = true;
         document.getElementById('flag').innerHTML='Flagged for Review';
+        document.getElementById('flag1').innerHTML='Undo';
             $.ajax({
             type: "POST",
             url: window.url_root + "/os/flagcomment/1/"+window.current_cid+"/",
@@ -582,7 +621,16 @@ $(document).ready(function() {
     });
 
     $('#flag2').click(function() {
+            if(window.toggle_flag2)
+                    {
+                        window.toggle_flag2 = false;
+                        document.getElementById('flag').innerHTML='';
+                        document.getElementById('flag2').innerHTML='Irrelevant';
+                        return;
+                    }
+            window.toggle_flag2 = true;
             document.getElementById('flag').innerHTML='Flagged for Review';
+            document.getElementById('flag2').innerHTML='Undo';
                 $.ajax({
                 type: "POST",
                 url: window.url_root + "/os/flagcomment/1/"+window.current_cid+"/",

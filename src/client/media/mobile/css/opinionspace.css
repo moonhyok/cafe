@@ -41,8 +41,8 @@ html {
 .grade-labels {
     position: absolute;
     z-index: -1;
-    top: -2px;
-    font-size:10px;
+    top: -1px;
+    font-size:12px;
     font-weight: bold;
     
     color: #fff8f0;
@@ -376,8 +376,12 @@ table.pretty caption {
 	}
 
 	.slider-row{
-	padding-top: 15px;
-	padding-bottom: 15px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	}
+
+	.ui-loader{
+	    z-index: 999 !important;
 	}
 
 	.title-table {
@@ -805,6 +809,13 @@ padding-right: 7px;
     font-family: verdana, sans-serif;
 }
 
+.comment-admin-text-b{
+    font-size: 14px !important;
+    line-height: 14px;
+    color: #594027 !important;
+    font-family: verdana, sans-serif;
+}
+
 .answer {
 	background-color: #4b6d6c;
 	width: 95% !important;
@@ -1025,9 +1036,9 @@ padding-right: 7px;
 
    .flag-style{
     position: fixed;
-    top: 160px;
+    top: 180px;
     left: 20px;
-    font-size: 18px;
+    font-size: 14px;
     color: #FF0000;
    }
 
@@ -1043,7 +1054,7 @@ padding-right: 7px;
 
 .noUi-base {
 	background-color: #4b6d6c;
-	border: 2px solid #4b6d6c;
+	border: 0px solid #4b6d6c;
 	border-radius:0px;
 	height: 12px !important;
 }

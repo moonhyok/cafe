@@ -21,7 +21,7 @@ var utils = (function($, d3, console) {
 
         $.mobile.loading('show', {
                         text: msg,
-                        textVisible: false,
+                        textVisible: true,
                         textonly: false,
                         theme: 'b',
                         html: ""
@@ -30,7 +30,7 @@ var utils = (function($, d3, console) {
         } else {
             $.mobile.loading('show', {
                 text: msg,
-                textVisible: false,
+                textVisible: true,
                 textonly: false,
                 theme: 'b',
                 html: ""
@@ -54,7 +54,7 @@ var utils = (function($, d3, console) {
     /** Hides the loader with an artifical delay of DELAY milliseconds. */
 
     function hideLoading(delay) {
-        $.mobile.loading( 'hide' );
+        setTimeout(function(){$.mobile.loading( 'hide' );}, delay);
         // $('.spinner').fadeOut('fast');
     }
 
