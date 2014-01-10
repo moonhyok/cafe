@@ -101,7 +101,7 @@ def mobile(request,entry_code=None):
     #print get_client_settings(True)
     os = get_os(1)
     disc_stmt = get_disc_stmt(os, 1)
-    active_users = User.objects.filter(is_active=True).list() #forces eval so lazy eval doesn't act too smart!!!
+    active_users = list(User.objects.filter(is_active=True)) #forces eval so lazy eval doesn't act too smart!!!
 
     statements = OpinionSpaceStatement.objects.all().order_by('id')
     medians = {}

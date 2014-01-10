@@ -83,10 +83,11 @@ report_body_html += "californiareportcard.org"
 report_body_text += "<h2>%s</h2>" % report_header
 report_body_text += "californiareportcard.org"
 
+active_users = list(User.objects.filter(is_active=True))
 
 ## Quick stats
-report_body_html += "<h3>Number of users so far: %s</h3><hr>" % User.objects.filter(id__gte = 310).count()
-report_body_text += "<h3>Number of users so far: %s</h3><hr>" % User.objects.filter(id__gte = 310).count()
+report_body_html += "<h3>Number of users so far: %s</h3><hr>" % len(active_users)
+report_body_text += "<h3>Number of users so far: %s</h3><hr>" % len(active_users)
 
 # We aren't collecting feedback now (12/26)
 """
@@ -111,7 +112,7 @@ if Settings.objects.boolean('USE_ENTRY_CODES'):
 	for ud in users_objects:
         	users.append(ud.user) 
 else:
-	users = User.objects.filter(date_joined__gte = datetime.datetime.now() - datetime.timedelta(days=1))
+	users = User.objects.filter(is_active=True,date_joined__gte = datetime.datetime.now() - datetime.timedelta(days=1))
 
 
 # Participation Statistics
@@ -199,7 +200,7 @@ report_body_text += "<hr><h3>Top comments from the past week:</h3>"
 
 os = OpinionSpace.objects.get(pk = OS_ID)
 discussion_statement_objects = os.discussion_statements.filter(is_current = True)
-comments = DiscussionComment.objects.filter(is_current = True, discussion_statement = discussion_statement_objects[0], confidence__lte = .15, confidence__isnull = False).order_by('-normalized_score_sum')[0:20]
+comments = DiscussionComment.objects.filter(user__in = active_users, is_current = True, discussion_statement = discussion_statement_objects[0], confidence__lte = .15, confidence__isnull = False).order_by('-normalized_score_sum')[0:20]
 count = 1
 for comment in comments:
 	if comment.created.date() >= datetime.date.today() - datetime.timedelta(days=7):
