@@ -4,13 +4,15 @@ import settings
 urlpatterns = patterns('',
     # Info pages
     (r'^$', 'opinion.opinion_core.views.app'),
-    (r'^(\w+)$', 'opinion.opinion_core.views.app'), 
+    #(r'^(\w+)$', 'opinion.opinion_core.views.app'), 
     (r'^app/$', 'opinion.opinion_core.views.app'), 
 
     (r'^mobile/$', 'opinion.opinion_core.views.mobile'),
     (r'^mobile/(?P<entry_code>\w+)/$', 'opinion.opinion_core.views.mobile'),
     (r'^app/(\w+)/$', 'opinion.opinion_core.views.app'),
     (r'^crcstats/$', 'opinion.opinion_core.views.crcstats'),
+    (r'^crcstats/(?P<entry_code>\w+)/$', 'opinion.opinion_core.views.crcstats'),
+    (r'^getallstats/$', 'opinion.opinion_core.views.getallstats'),
     #(r'^about/$', 'opinion.opinion_core.views.about'),
     #(r'^feedback/$', 'opinion.opinion_core.views.feedback'),
     #(r'^suggestion/$', 'opinion.opinion_core.views.suggestion'),
@@ -109,7 +111,7 @@ urlpatterns = patterns('',
     #(r'^os/updatecomment/(\d+)/(\d+)/(\d+)/$', 'opinion.opinion_core.views.os_update_comment'),
     
     #send confirmation email with entry code
-    #(r'^confirmationmail/$','opinion.opinion_core.views.confirmation_mail'),
+      (r'^confirmationmail/$','opinion.opinion_core.views.confirmation_mail'),
         #get neighborhood statistic
     (r'^neighborhoodStat/$','opinion.opinion_core.views.neighbor_stat'),
     # Admin

@@ -1,3 +1,4 @@
+	
 		var map = L.map('map').setView([37.47, -122.2], 5);
         
 		var cloudmade = L.tileLayer('http://{s}.tile.cloudmade.com/{key}/{styleId}/256/{z}/{x}/{y}.png', {
@@ -17,22 +18,25 @@
 		};
 
 		info.update = function (props) {
-			this._div.innerHTML = '<h4>Citizen Report Card Transportation Grade</h4>' +  (props ?
-				'<b>' + props.NAME + '</b><br>'+'Number of Participants  ' + props.PARTICIPANTS+
-				'<br>'+ "A:  " +props.A+"    "+"B:  "+props.B+"    "+"C:  "+props.C+"    "+"D:  "+props.D+"    "+"F:  "+props.F
+			this._div.innerHTML = '<h4>California Report Card Grade</h4>' +  (props ?
+				'<b>' + props.NAME + '</b><br>'+'Number of Participants  ' + props.PARTICIPANTS
+				
 				: 'Hover over a county');
 		};
 
 		info.addTo(map);
 
 
-		// get color depending on population density value
+		// get color depending on grade
 		function getColor(d) {
-		return	   d > 0.8 ?  "#006837" :
-			       d > 0.6  ? "#66bd63" :
-			       d > 0.4  ? "#f46d43" :
-			       d > 0.2  ? "#d73027" :
-			                  "#a50026";
+			score=100 - d*100;
+			
+		return	   score > 86 ?  "#1a9641" :
+			       score > 63  ? "#a6d96a" :
+			       score > 38  ? "#ffffbf" :
+			       score > 1   ? "#fdae61" :
+			       score >-1   ? "#d7191c" :
+			                     "#aaaaaa";
 		}
 		function style(feature) {
 			return {
@@ -41,7 +45,7 @@
 				color: 'white',
 				dashArray: '3',
 				fillOpacity: 0.7,
-				fillColor: getColor(feature.properties.AVERAGE)
+				fillColor: getColor(feature.properties.s1)
 			};
 		}
 
@@ -62,7 +66,7 @@
 			info.update(layer.feature.properties);
 		}
 
-		var geojson;
+	    
 
 		function resetHighlight(e) {
 			geojson.resetStyle(e.target);
@@ -81,11 +85,13 @@
 			});
 		}
 
-		geojson = L.geoJson(map_data0, {
+		
+        var geojson;
+	    geojson = L.geoJson(geostat, {
 			style: style,
 			onEachFeature: onEachFeature
-		}).addTo(map);
-
+		}).addTo(map);	
+		
 		map.attributionControl.addAttribution('Report card data &copy; <a href="http://citris-uc.org/">UC Berkeley CITRIS</a>');
 
 
@@ -94,7 +100,8 @@
 		legend.onAdd = function (map) {
 
 			var div = L.DomUtil.create('div', 'info legend'),
-				grades = ['A','B','C','D','F'],
+				grades = ['A','B','C','D','F','NA'],
+				legend_color=[0,0.3,0.5,0.8,0.99,1.01],
 				labels = [],
 				from;// to;
 
@@ -103,7 +110,7 @@
 				//to = grades[i + 1];
 
 				labels.push(
-					'<i style="background:' + getColor((9-i*2)/10) + '"></i> ' +
+					'<i style="background:' + getColor(legend_color[i]) + '"></i> ' +
 					from) ;//+ (to ? '&ndash;' + to : '+'));
 			}
 
@@ -113,23 +120,26 @@
 
 		legend.addTo(map); 
 
-function update(index){
-	switch(index)
-	{
-		case '0':
-		map.removeLayer( geojson );
-	    geojson = L.geoJson(map_data0, {
-			style: style,
+
+
+function changeData(sel)
+{
+	var value = "s"+sel.value;
+	map.removeLayer( geojson );
+	function Style(feature) {
+	    return {
+				weight: 1,
+				opacity: 1,
+				color: 'white',
+				dashArray: '3',
+				fillOpacity: 0.7,
+				fillColor: getColor(feature.properties[value])
+			};
+		}
+    geojson = L.geoJson(geostat, {
+			style: Style,
 			onEachFeature: onEachFeature
 		}).addTo(map);
-		break;
-		case '1':
-		map.removeLayer( geojson );
-		geojson = L.geoJson(map_data1, {
-			style: style,
-			onEachFeature: onEachFeature
-		}).addTo(map);
-		break;
-	}
-			
+    
+    
 }
