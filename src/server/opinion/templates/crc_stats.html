@@ -1,126 +1,117 @@
 <!DOCTYPE html>
 <style>
-body{
-    font-family: verdana, sans-serif;
-    background-color: #88ADAA;
-    color: #594027;
-    }
 
-strong {
-        color: white;
-        
-    }
-    #map {
-			width: 200x;
-			height: 400px;
-		}
-
-		.info {
-			padding: 6px 8px;
-			font: 14px/16px Arial, Helvetica, sans-serif;
-			background: white;
-			background: rgba(255,255,255,0.8);
-			box-shadow: 0 0 15px rgba(0,0,0,0.2);
-			border-radius: 5px;
-			color: #333
-		}
-		.info h4 {
-			margin: 0 0 5px;
-			color: #777;
-		}
-        
-		.legend {
-			text-align: left;
-			line-height: 18px;
-			color: #555;
-		}
-		.legend i {
-			width: 18px;
-			height: 18px;
-			float: left;
-			margin-right: 8px;
-			opacity: 0.7;
-		}
 </style>
 <body>
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.css" />
+<link rel="stylesheet" href="{{url_root}}/media/mobile/css/stats.css" />
 <script src="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.js?2"></script>
 <script type='text/javascript' src='{{url_root}}/media/mobile/jquery-mobile/jquery-1.10.2.min.js'></script>
 
-<strong>California Report Card v1.0 Daily Update</strong><br/>
-Data as of {{date}} <br/>
-You are the {{participant_order}}{{ordinal}} participant.<br/>
-Number of Participants: {{num_participants}}.<br/>
-Your Participation Score: {{score}}.<br/>
-Number of Participants who graded your suggestion: {{received}}.<br/><br/>
+<div class="home-btn-dialog-box">
+    <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+    &nbsp;
+    <a href="{{url_root}}/mobile/"><img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png"></a>
+    &nbsp;
+    <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+</div>
 
-<strong>The issue you suggested for version 2.0 of the CRC is:<strong><br/>
-{{comment}} <br/><br/>
+<div class="title-header">
+    California Report Card v1.0 Daily Update
+</div>
 
-{% if level8 %}
-<strong>Grades Assigned to your suggestion to date:</strong><br/><br/>
+<div class="stats-section">
+    Data as of <strong>{{date}}</strong>.<br/>
+    You are the <strong>{{participant}}{{ordinal}}</strong> participant.<br/>
+    Number of Participants: <strong> {{num_participants}}</strong>.<br/>
+    Your Participation Score: <strong> {{score}}</strong>.<br/>
+    Number of Participants who graded your suggestion: <strong>{{received}}</strong>.
+    <hr/>
+</div>
 
-Distribution of Grades for "How important is this issue for the next Report Card?"<br/>
-   {% if show_hist1 %}
-   <div><img src="{{url_root}}/media/mobile/img/dailyupdate/{{uid}}_1.png" alt="Smiley face" height="400" width="400"></div>
-   {% else %}
-   You haven't received any grade<br/>
-   {% endif %}
 
-Distribution of Grades for "How would you grade California on this issue?"<br/>
-   {% if show_hist2 %}
-   <div><img src="{{url_root}}/media/mobile/img/dailyupdate/{{uid}}_2.png" alt="Smiley face" height="400" width="400"></div>
-   {% else %}
-   You haven't received any grade<br/>
-   {% endif %}
-   
-{% else %}
-Please provide your email and see grades assigned to your suggestion to date!!!<br/>
-
+{% if left_comment %}
+<div class="stats-section">
+    <div class="stats-label-big">
+        The issue you suggested for version 2.0 of the CRC is:
+    </div>
+        {{comment}}
+    <hr/>
+</div>
 {% endif %}
 
+{% if level8 %}
+<div class="stats-section">
+    <div class="stats-label-big">
+        Grades Assigned To Your Suggestion
+    </div>
+    "How important is this issue for the next Report Card?"<br/>
+    {% if show_hist1 %}
+    <div><img src="{{url_root}}/media/mobile/img/dailyupdate/{{uid}}_1.png" height="300" width="300"></div><br/>
+    {% else %}
+    <span class="fine-print">You have not received any grades yet</span><br/>
+    {% endif %}
 
-<br/>
-<strong>Grades Assigned to the State of California to date:</strong><br/>
-<strong>Median marked in blue</strong>
+    <br/>
 
-{% for median in medians %}
-Distribution of Grades for Issue {{median.id}}: {{median.statement}}
-<div class="hist-issue">
-<img src="{{url_root}}/media/mobile/img/dailyupdate/{{median.statement}}.png" alt="Smiley face" height="400" width="400">
+    "How would you grade California on this issue?"<br/>
+    {% if show_hist2 %}
+    <div><img src="{{url_root}}/media/mobile/img/dailyupdate/{{uid}}_2.png" height="300" width="300"></div><br/>
+    {% else %}
+    <span class="fine-print">You have not received any grades yet</span><br/>
+    {% endif %}
+    <hr/>
 
 </div>
-{% endfor %}
+{% else %}
+Please provide your email and see grades assigned to your suggestion to date!!!<br/>
+{% endif %}
 
+<div class="stats-section">
+    <div class="stats-label-big">
+        Grades Assigned to the State of California
+    </div>
 
-<strong>California Map</strong><br/>
+    The median grade is marked in blue.<br/><br/>
+
+    {% for median in medians %}
+    Distribution of Grades for Issue {{median.id}}: {{median.statement}}
+    <div class="hist-issue">
+        <img src="{{url_root}}/media/mobile/img/dailyupdate/{{median.statement}}.png" height="400" width="400">
+
+    </div>
+    {% endfor %}
+
+    <hr>
+
+</div>
+
+<div class="stats-section">
+    <div class="stats-label-big">
+        California Map
+    </div>
+
 <select id="CA_selector" onchange="changeData(this)" >
 	{% for median in medians %}
 	<option value="{{median.id}}">{{ median.statement}}</option>
 	{% endfor %}
 </select>
-<div id="map"></div>
 
-======<br/>
-<br/>
+<div id="map"></div>
+<hr>
+</div>
+
+<div class="stats-section">
 Thanks for participating! You can return anytime using this URL to check your grades.<br/>
 <br/>
-=======<br/>
 Lt. Gov. Gavin Newsom and UC Berkeley Professor Ken Goldberg will present the data and lessons learned from version 1.0 in a public forum at UC Berkeley on 20 March 2014 that will include participants who actively contribute to identifying the most important issues for version 2.0.<br/>
-=======<br/>
 <br/>
 For more information:<br/>
 http://californiareportcard.org/<br/>
 <br/>
-=======<br/>
-      <div class="home-btn-dialog-box">
-          <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
-          &nbsp;
-          <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
-          &nbsp;
-          <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
-      
+<div>
+
 
 <script type='text/javascript' src='{{url_root}}/media/mobile/js/crcstats.js'></script>
 <script type='text/javascript' src='{{url_root}}/media/mobile/js/geostat.js'></script>  

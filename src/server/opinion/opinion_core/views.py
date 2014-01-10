@@ -218,30 +218,34 @@ def crcstats(request,entry_code=None):
         score = CommentAgreement.objects.filter(rater = user,is_current=True).count()
         given = 2*CommentAgreement.objects.filter(rater = user,is_current=True).count()
         received = 2*CommentAgreement.objects.filter(comment__in = DiscussionComment.objects.filter(user = user),is_current=True).count()
-        comment=DiscussionComment.objects.filter(user=user,is_current=True)
+        comment_list=DiscussionComment.objects.filter(user=user,is_current=True)
         if len(comment) > 0:
-            comment=comment[0].comment
+            comment=comment_list[0].comment
+
         ordinal = number_to_ordinal(user.id)
         uid = user.id
+
+    active_users = list(User.objects.filter(is_active = True))
 
     statements = OpinionSpaceStatement.objects.all().order_by('id')
     medians = []
     for s in statements:
-        med = numpy.median(UserRating.objects.filter(opinion_space_statement=s,is_current=True).values_list('rating'))
+        med = numpy.median(UserRating.objects.filter(user__in = active_users, opinion_space_statement=s,is_current=True).values_list('rating'))
         if med <= 1e-5:
             med = 0
         medians.append({'statement': s.statement, 'avgG': score_to_grade(100*med), 'avg': int((1-med)*300),'id':s.id})
 
-    return render_to_response('crc_stats.html', context_instance = RequestContext(request, {'num_participants': User.objects.filter(id__gte=310).count(),
+    return render_to_response('crc_stats.html', context_instance = RequestContext(request, {'num_participants': len(active_users),
                                                                                             'level8':level8,
                                                                                             'ordinal':ordinal,
                                                                                             'date':datetime.date.today(),
                                                                                             'comment':comment,
+                                                                                            'left_comment': (comment != ''),
                                                                                             'participant': uid,
                                                                                             'given': given,
                                                                                             'received': received,
                                                                                             'score': score*100,
-                                                                                            'num_ratings': CommentAgreement.objects.filter(is_current=True).count()*2,
+                                                                                            'num_ratings': CommentAgreement.objects.filter(rater__in = active_users, is_current=True).count()*2,
                                                                                             'url_root' : settings.URL_ROOT,
                                                                                             'medians': medians,
                                                                                             }))
