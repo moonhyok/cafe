@@ -185,6 +185,7 @@
    window.sliders[statement] = $('#s' + statement).val();
    document.getElementById('tr'+statement).style.backgroundColor = "rgba(255, 255, 0, 0.8)";
    finishedStatements[statement-1]= 1;
+   rate.logUserEvent(11,'slider_set ' + statement + ' ' + window.sliders[statement]/100);
 }
 
 </script>
