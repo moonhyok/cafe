@@ -494,6 +494,7 @@ $(document).ready(function() {
            window.no_menubar = true;
            accounts.hideAll();
            window.prev_state = window.cur_state;
+           window.cur_state = 'home';
            if (window.authenticated){
               $('.landing').show();
               $('.menubar').hide();

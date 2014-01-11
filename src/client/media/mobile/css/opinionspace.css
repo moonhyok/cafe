@@ -311,6 +311,7 @@ table.pretty caption {
 		
 		width: 100%;
 		line-height: 25px;
+		padding-bottom: 3px;
 		display:none;
 	}
 
@@ -326,6 +327,7 @@ table.pretty caption {
             
             width: 100%;
             line-height: 20px;
+            padding-bottom: 3px;
     		display:none;
     }
 
@@ -341,6 +343,7 @@ table.pretty caption {
                 
                 width: 100%;
                 line-height: 20px;
+                padding-bottom: 3px;
         		display:none;
         }
 	
@@ -539,10 +542,10 @@ table.pretty caption {
 	.landing-img-txt{
 	float: left;
 	width: 65%;
-	line-height: 18px;
-	padding-left: 15px;
+	line-height: 15px;
+	padding-left: 10px;
 	color: #4e300f;
-	font-size: 13px;
+	font-size: 14px;
 	text-shadow: none;
 	}
 
@@ -555,12 +558,12 @@ table.pretty caption {
 
 	.landing-disclaimer{
 	position: relative;
-	top: -70px;
+	top: -66px;
 	clear: both;
 	line-height: 13px !important;
 	font-size: 10px;
 	font-family: verdana, sans-serif;
-    color: #315d5b;
+    color: #083434;
     text-shadow: none;
     line-height: 13px;
 	text-align: center;
@@ -850,11 +853,13 @@ padding-right: 7px;
 
 .standard-btn-div .ui-btn-inner{
     font-family: verdana, sans-serif;
-    line-height: 25px;
+    text-transform:uppercase;
+    line-height: 26px;
 }
 
 .standard-btn-div .ui-btn{
     font-family: verdana, sans-serif;
+    text-transform:uppercase;
     line-height: 25px;
 }
 
@@ -879,7 +884,7 @@ padding-right: 7px;
 
 .home-btn-dialog-box .ui-btn-inner{
     font-family: verdana, sans-serif;
-    line-height: 24px;
+    line-height: 20px;
     padding: 0px;
 }
 
@@ -903,8 +908,8 @@ padding-right: 7px;
 
 .slider-question {
 	width: 90%;
-	font-size: 13px;
-	line-height: 13px;
+	font-size: 14px;
+	line-height: 14px;
 	padding-left: 10px;
 	padding-right: 5px;
 	padding-top: 3px;
@@ -989,7 +994,7 @@ padding-right: 7px;
 	background: #76b9b6;
 	text-decoration: none;
 	text-shadow: none;
-	font-size: 14px;
+	font-size: 16px;
 	line-height: 18px;
 }
 
