@@ -381,7 +381,7 @@ table.pretty caption {
 
 	.slider-row{
 	padding-top: 20px;
-	padding-bottom: 10px;
+	padding-bottom: 15px;
 	}
 
 	.ui-loader{
@@ -530,35 +530,39 @@ table.pretty caption {
 	width: 25%;
 	position: relative;
 	top: -70px;
-	left: -10px;
+	left: -9px;
 	}
 
 	.landing-img-txt{
 	float: left;
 	width: 65%;
-	line-height: 21px;
-	padding-left: 10px;
+	line-height: 18px;
+	padding-left: 15px;
 	color: #4e300f;
-	font-size: 15px;
+	font-size: 13px;
 	text-shadow: none;
 	}
 
 	.byline{
 	font-size: 11px;
+	font-color: #396d6b;
 	line-height: 13px;
 	padding-top: 5px;
 	}
 
 	.landing-disclaimer{
+	position: relative;
+	top: -70px;
 	clear: both;
-	position:relative;
-	color: #4e300f;
 	line-height: 13px !important;
-	font-size: 11px;
-	padding-left: 10px;
-	padding-bottom: 7px;
-	padding-top: 5px;
-	top: -25px;
+	font-size: 10px;
+	font-family: verdana, sans-serif;
+    color: #396d6b;
+    text-shadow: none;
+    line-height: 13px;
+	text-align: center;
+	width: 100%;
+	padding-bottom: 10px;
 	}
 
 	.error_username {
@@ -861,12 +865,9 @@ padding-right: 7px;
 }
 
 .home-btn-dialog-box {
-    width:95%;
-    padding-top: 10px;
-    text-align: left;
-    padding-left: 10px;
+    padding-top: 8px;
+    text-align: center;
     background-color: #76b9b6;
-
 }
 
 .home-btn-dialog-box .ui-btn-inner{

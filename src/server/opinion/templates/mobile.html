@@ -207,40 +207,33 @@
           <!--<span class="logout-wrapper">&nbsp;<img width="30px;" class='logout-btn' src="{{url_root}}/media/mobile/img/cafe/CRC_logout_bttn.png"></span>-->
       </div>
 
+      <center>
+          <img src="{{url_root}}/media/mobile/img/cafe/cafe-title-cropped.png" style="padding-top: 5px;border: none;width: 250px;" />
+      </center>
+
     <div class="responsive-max-width">
-
-        <center>
-            <img src="{{url_root}}/media/mobile/img/cafe/cafe-title-cropped.png" width="220px" style="padding-top: 5px;"/>
-        </center>
-
         <div class='landing-desc'>
 
             <div style="clear: both;"></div>
 
             <div>
                 <div class="landing-img-txt">
-
-                    <center>
-                        <div style="width: 120px;">
+                        <div style="width: 160px;">
                             <button type='submit' data-theme='a' class='first-time-btn'><font style="font-size: 16px;">Begin</font></button>
                         </div>
-                    </center>
-
-
                     {{client_settings.WELCOME_PAGE_TEXT1}}
-
-                    <div class="byline">Source: UC Berkeley CITRIS Data and Democracy Initiative</div>
-
                 </div>
-                <div class="landing-img-div"><img src="{{url_root}}/media/mobile/img/cafe/spoon-and-pencil-draft.png" width="70px"/></div>
-
-                <div class="landing-disclaimer">
-                    {{client_settings.WELCOME_PAGE_TEXT2}}<br/>
-                    <!--<a href="#" class="comment-admin-text-a" style="font-size: 10px;" onclick="$('.dialog-about').show();$('.landing').hide();window.landing=true;">{{client_settings.WELCOME_PAGE_ABOUT_LINK}}</a>-->
-                </div>
+                <div class="landing-img-div"><img src="{{url_root}}/media/mobile/img/cafe/spoon-and-pencil-draft.png" style="width: 75px;"/></div>
             </div>
         </div>
     </div>
+
+      <div class="landing-disclaimer">
+          Source: UC Berkeley CITRIS Data and Democracy Initiative<br/>
+          {{client_settings.WELCOME_PAGE_TEXT2}}
+          <!--<a href="#" class="comment-admin-text-a" style="font-size: 10px;" onclick="$('.dialog-about').show();$('.landing').hide();window.landing=true;">{{client_settings.WELCOME_PAGE_ABOUT_LINK}}</a>-->
+      </div>
+
   </div>
 
   <div id='rating' class='endsliders'>
