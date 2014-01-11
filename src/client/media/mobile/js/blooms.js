@@ -248,8 +248,8 @@ var _blooms = blooms = (function($, d3, console) {
         }
 
         //end of hack
-        if (window.user_score <= 2)
-            ratings.reverse();
+        /*if (window.user_score <= 2)
+            ratings.reverse();*/
         
         result = compileEigenvectorsAndRatings(eigens, ratings);
         showfunc({

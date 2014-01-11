@@ -759,6 +759,207 @@
       </div>
   </div>
 
+  <div class='dialog-help-grade dialog-style' style="z-index:999">
+      <div class="home-btn-dialog-box">
+          <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+          &nbsp;
+          <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+          &nbsp;
+          <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+      </div>
+      <div class='dialog-text-style-noflow small-left-padding'>
+          <div class="basic-header">Help</div>
+          The CRC allows visitors to grade issues facing California.
+          Drag the slider handles to assign grades to these 6 issues facing California (click the skip button for issues where you don't want to assign a grade.)
+          Click "Median Grade" at the top of the far right column to learn more about how this is determined.<br/>
+
+          Q: How can I learn more about the six issues we are grading?<br/>
+          A: To learn more about the six issues, please visit californiareportcard.org/issues/<br/><br/>
+
+          Q: Do I have to grade all issues?<br/>
+          A: No, just click the skip button for issues where you don't want to assign a grade.<br/><br/>
+
+          Q: Why do the the sliders require dragging?  If I tap on A, it should go there.<br/>
+          A: We decided to remove the tap feature since as you slide down to see more issues you may accidentally tap the sliders.<br/><br/>
+
+          Q: How can I grade K-12 Education when there are so many aspects, the effectiveness of the teachers, or the quality of school facilities, etc.?<br/>
+          A: That's a great point; we're asking people to give an overall grade, which is indeed a coarse measure!  But it's also like grading a student for a class, they may have done well on some things, poorly on others, etc…<br/><br/>
+      </div>
+  </div>
+
+  <div class='dialog-help-median dialog-style' style="z-index:999">
+      <div class="home-btn-dialog-box">
+          <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+          &nbsp;
+          <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+          &nbsp;
+          <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+      </div>
+      <div class='dialog-text-style-noflow small-left-padding'>
+          <div class="basic-header">Help</div>
+          Q:  After I enter each grade, the Median Grade based on input from all previous participants is revealed.
+          Then I can change my grade: Won’t this bias me and other participants?<br/>
+
+          A: Revealing the Median values is intended to provide instant feedback in contrast to traditional polls and surveys. We realize this may have a biasing effect:
+          some may adjust their grade to be closer to the average resulting in a form of regression toward the mean. We believe this will be rare, especially for Californians;).
+      </div>
+  </div>
+
+  <div class='dialog-help-zipcode dialog-style' style="z-index:999">
+      <div class="home-btn-dialog-box">
+          <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+          &nbsp;
+          <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+          &nbsp;
+          <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+      </div>
+      <div class='dialog-text-style-noflow small-left-padding'>
+          <div class="basic-header">Help</div>
+          Q. Why do I need to enter my zip code?<br/>
+          A. This will allow participants to compare results by region on a geographic map.
+      </div>
+  </div>
+
+  <div class='dialog-help-dialog dialog-style' style="z-index:999">
+      <div class="home-btn-dialog-box">
+          <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+          &nbsp;
+          <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+          &nbsp;
+          <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+      </div>
+      <div class='dialog-text-style-noflow small-left-padding'>
+          <div class="basic-header">Help</div>
+          You are invited to enter an online “cafe” where you can propose issues that you’d like to see included in the next report card (version 2.0 will come out later this Spring).
+          You’ll be asked to grade other participants’ suggestions. Each participant’s suggestion is represented by a mug on the table.
+      </div>
+  </div>
+
+  <div class='dialog-help-map1 dialog-style' style="z-index:999">
+      <div class="home-btn-dialog-box">
+          <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+          &nbsp;
+          <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+          &nbsp;
+          <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+      </div>
+      <div class='dialog-text-style-noflow small-left-padding'>
+          <div class="basic-header">Help</div>
+          Q: What should I do on this page?<br/>
+          A: Click any mug (each participant has a mug, we display only 8 at a time)<br/><br/>
+
+          Q: How are the mugs arranged on the table?<br/>
+          A: The placement of each participant's mug is based on how he or she graded the first 6 issues.
+          Think of each issue as one dimension of a 6-dimensional space.
+          The grades you assign define a point in this space.
+          We use dimensionality reduction (currently Principal Component Analysis) to project that space onto the table.
+          If you and another participant assigned very similar grades, your mugs will be close together.
+          Mugs that are distant from yours belong to participants who graded very differently than you.<br/><br/>
+
+          Q: Why do I only see 8-10 mugs arranged on the table?<br/>
+          A: To avoid overcrowding, we display only a few mugs at a time for grading.
+          The selection of which participants’ mugs to display is random but biased toward newer mugs, those that have received fewer ratings.
+          Specifically, the likelihood of displaying a mug is based on its standard error = stdev / sqrt(k) where k is the number of times it has been graded so far, and stdev is the variance of those grades. Over time, this ensures that the confidence, or error-bar on the estimated grade for each mug, tends to be the same length for all mugs. Each time you finish grading a set of mugs, the table will be refreshed with more mugs.<br/><br/>
+      </div>
+  </div>
+
+  <div class='dialog-help-map2 dialog-style' style="z-index:999">
+      <div class="home-btn-dialog-box">
+          <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+          &nbsp;
+          <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+          &nbsp;
+          <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+      </div>
+      <div class='dialog-text-style-noflow small-left-padding'>
+          <div class="basic-header">Help</div>
+          You can continue grading more mugs and whenever you’re ready, just click on your mug (with the blue coaster) to enter an issue that you’d like to see on the next report card (version 2.0 will come out later this Spring).<br/><br/>
+
+          Q: Why is my mug located at this position on the table?<br/>
+          A: The placement of each participant's mug is based on how he or she graded the first 6 issues.
+          Think of each issue as one dimension of a 6-dimensional space.
+          The grades you assign define a point in this space. We use dimensionality reduction (currently Principal Component Analysis) to project that space onto the table.
+          If you and another participant assigned very similar grades, your mugs will be close together.
+          Mugs that are distant from yours belong to participants who graded very differently than you.
+      </div>
+  </div>
+
+  <div class='dialog-help-map3 dialog-style' style="z-index:999">
+      <div class="home-btn-dialog-box">
+          <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+          &nbsp;
+          <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+          &nbsp;
+          <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+      </div>
+      <div class='dialog-text-style-noflow small-left-padding'>
+          <div class="basic-header">Help</div>
+          You can either log out now (and return anytime using the unique link we emailed you.
+          Or you are welcome to continue grading participants’ suggestions for the next report card (version 2.0 will come out later this Spring).
+      </div>
+  </div>
+
+
+  <div class='dialog-help-comment dialog-style' style="z-index:999">
+      <div class="home-btn-dialog-box">
+          <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+          &nbsp;
+          <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+          &nbsp;
+          <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+      </div>
+      <div class='dialog-text-style-noflow small-left-padding'>
+          <div class="basic-header">Help</div>
+          Please propose an issue you’d like to see on the next report card (version 2.0 will come out later this Spring).  Click Save when you’re done.
+      </div>
+  </div>
+
+  <div class='dialog-help-rate dialog-style' style="z-index:999">
+      <div class="home-btn-dialog-box">
+          <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+          &nbsp;
+          <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+          &nbsp;
+          <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+      </div>
+      <div class='dialog-text-style-noflow small-left-padding'>
+          <div class="basic-header">Help</div>
+          Q. How do I grade a suggestion?<br/>
+          A. After clicking a mug, that participant’s suggestion is displayed.
+          You can skip to another one or mark this suggestion as irrelevant or inaccurate.
+          (click again to undo).  Otherwise, drag the two slider handles to assign grades.<br/><br/>
+      </div>
+  </div>
+
+  <div class='dialog-help-continue dialog-style' style="z-index:999">
+      <div class="home-btn-dialog-box">
+          <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+          &nbsp;
+          <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+          &nbsp;
+          <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+      </div>
+      <div class='dialog-text-style-noflow small-left-padding'>
+          <div class="basic-header">Help</div>
+          Q. Why should I enter my email address?<br/>
+          A. So we can send you a unique link to see the grades your suggested issue receives.
+      </div>
+  </div>
+
+  <div class='dialog-help-logout dialog-style' style="z-index:999">
+      <div class="home-btn-dialog-box">
+          <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+          &nbsp;
+          <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+          &nbsp;
+          <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+      </div>
+      <div class='dialog-text-style-noflow small-left-padding'>
+          <div class="basic-header">Help</div>
+          To learn more about this project, its history, related projects, and the team that built it, visit californiareportcard.org.
+      </div>
+  </div>
+
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

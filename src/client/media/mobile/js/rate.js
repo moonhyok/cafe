@@ -95,6 +95,7 @@ var rate = (function($, d3, console) {
         resetRatingSliders();
         logScore();
         logUserEvent(4,'rated');
+        window.cur_state = 'map';
 
             sendAgreementRating({
                 'r1': $("#slider1").val(),

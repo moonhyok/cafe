@@ -218,6 +218,8 @@ var accounts = (function($, d3, console) {
             $('.dialog').show();
         } else {
             rate.initMenubar();
+            window.cur_state = 'map';
+            window.prev_state = 'map';
         }
         //setNumRatedBy();
     }
@@ -275,7 +277,17 @@ var accounts = (function($, d3, console) {
         $('.dialog-email').hide();
         $('.my-comment').hide();
         $('.dialog-help-alt').hide();
-
+        $('.dialog-help-grade').hide();
+        $('.dialog-help-median').hide();
+        $('.dialog-help-zipcode').hide();
+        $('.dialog-help-dialog').hide();
+        $('.dialog-help-map1').hide();
+        $('.dialog-help-map2').hide();
+        $('.dialog-help-map3').hide();
+        $('.dialog-help-rate').hide();
+        $('.dialog-help-comment').hide();
+        $('.dialog-help-continue').hide();
+        $('.dialog-help-logout').hide();
 	}
 
     return {
@@ -570,6 +582,49 @@ $(document).ready(function() {
                                  {
                                     $('.dialog-about').show();
                                  }
+                                 else if (window.cur_state == 'help-grade')
+                                 {
+                                    $('.dialog-help-grade').show();
+                                 }
+                                 else if (window.cur_state == 'help-median')
+                                  {
+                                     $('.dialog-help-median').show();
+                                  }
+                                 else if (window.cur_state == 'help-register')
+                                  {
+                                     $('.dialog-help-zipcode').show();
+                                  }
+                                 else if (window.cur_state == 'help-dialog')
+                                  {
+                                      $('.dialog-help-dialog').show();
+                                  }
+                                 else if (window.cur_state == 'help-map')
+                                 {
+                                      if(window.user_score < 2)
+                                        $('.dialog-help-map1').show();
+                                      else if ($('.instructions3').css('display') != 'none')
+                                        $('.dialog-help-map2').show();
+                                      else
+                                        $('.dialog-help-map3').show();
+
+                                      console.log(window.user_score)
+                                 }
+                                 else if (window.cur_state == 'help-rate')
+                                 {
+                                       $('.dialog-help-rate').show();
+                                 }
+                                 else if (window.cur_state == 'help-comment')
+                                 {
+                                      $('.dialog-help-comment').show();
+                                 }
+                                 else if (window.cur_state == 'help-continue')
+                                 {
+                                      $('.dialog-help-continue').show();
+                                 }
+                                 else if (window.cur_state == 'help-logout')
+                                 {
+                                     $('.dialog-help-logout').show();
+                                 }
                                  else{
                                     $('.dialog-help-alt').show();
                                  }
@@ -728,6 +783,9 @@ $(document).ready(function() {
     $('.logout-btn').click(function(e) {
         rate.logUserEvent(1,'logout');
         accounts.hideAll();
+        window.cur_state = 'logout';
+        window.prev_state = 'logout';
+
         $('.logout').show();
         e.preventDefault();
         e.stopPropagation();
