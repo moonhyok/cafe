@@ -115,6 +115,7 @@ var rate = (function($, d3, console) {
                 $('.instructions2').hide();
                 $('.instructions3').show();
                 try{
+                            blooms.addYourMug();
                             window.your_mug.transition().duration(1500).style("opacity", "1");
                    }catch(err){
                             console.log(err);
