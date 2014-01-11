@@ -91,21 +91,21 @@ def geostats(request):
 def issues_hist(request):
    """produce histogram for each issue"""
    statements = OpinionSpaceStatement.objects.all().order_by('id')
-   bins=[0,0.01,0.19,0.32,0.38,0.44,0.56,0.63,0.69,0.81,0.86,0.92,0.99,1]
+   bins=[0,0.01,0.19,0.32,0.38,0.44,0.56,0.63,0.69,0.81,0.86,0.92,0.99,1]  
         # F    D-   D    D+   C-   C    C+   B-   B   B+    A-   A    A+
    N=len(bins)-1
    ind=numpy.arange(N)
    width=0.35
-
+   
    for s in statements:
        s_rating=UserRating.objects.filter(opinion_space_statement=s,is_current=True)
        s_rating_list=[]
        for rating in s_rating:
           s_rating_list.append(1-rating.rating)
-
+       
        hist,bin_edges = numpy.histogram(s_rating_list,bins,normed=False)
        hist_in_percent=(100*hist/float(sum(hist)))[::-1]
-
+       
        fig, ax = plt.subplots()
        rects1 = ax.bar(ind, hist_in_percent, width, color='r')
        median=numpy.median(s_rating_list)
@@ -148,60 +148,60 @@ def median_index(request,median):
 
 def participant_hist(request):
     """produce histogram for all participant above level 8"""
-    uid = request.GET.get('username',-1)
-    auth = False
+    
+    
     os = get_os(1)
     disc_stmt = get_disc_stmt(os, 1)
-
-    bins=[0,0.01,0.19,0.32,0.38,0.44,0.56,0.63,0.69,0.81,0.86,0.92,0.99,1]
+    
+    bins=[0,0.01,0.19,0.32,0.38,0.44,0.56,0.63,0.69,0.81,0.86,0.92,0.99,1]  
         # F    D-   D    D+   C-   C    C+   B-   B   B+    A-   A    A+
     N=len(bins)-1
     ind=numpy.arange(N)
     width=0.35
-    if uid != -1:
-        cur_user = User.objects.filter(id=uid)
-        if len(cur_user) > 0:
-            cur_user = cur_user[0]
-            auth = True
-            cur_user_comment=DiscussionComment.objects.filter(user=cur_user,discussion_statement= disc_stmt,is_current = True)
-            if len(cur_user_comment)>0:
-               slider1=CommentAgreement.objects.filter(comment=cur_user_comment[0])
-               slider2=CommentRating.objects.filter(comment=cur_user_comment[0])
-               slider1_rating=[]
-               slider2_rating=[]
-
-               for i in range(0, len(slider1)):
-                   slider1_rating.append(1-slider1[i].agreement)
-               for i in range(0, len(slider2)):
-                   slider2_rating.append(1-slider2[i].rating)
-               slider1_hist,bin_edges_1 = numpy.histogram(slider1_rating,bins,normed=False)
-               slider2_hist,bin_edges_2 = numpy.histogram(slider2_rating,bins,normed=False)
-               slider1_hist_in_percent=(100*slider1_hist/float(sum(slider1_hist)))[::-1]
-               slider2_hist_in_percent=(100*slider2_hist/float(sum(slider2_hist)))[::-1]
-
-               fig1, ax1=plt.subplots()
-               rects1 = ax1.bar(ind, slider1_hist_in_percent, width, color='r')
-               median1=numpy.median(slider1_rating)
-
-               median_bar1=median_index(request,median1)
-               rects1[median_bar1].set_color('b')
-               ax1.set_ylabel('Percentages (%)')
-               ax1.set_title("How important is this issue for the next Report Card?")
-               ax1.set_xticks(ind+width/2)
-               ax1.set_xticklabels( ('A+', 'A', 'A-', 'B+', 'B','B-','C+','C','C-','D+','D','D-','F') )
-               plt.savefig(str(uid)+'_1.svg',dpi=300,format='png')
-
-               plt.figure()
-               fig2, ax2=plt.subplots()
-               rects2 = ax2.bar(ind, slider2_hist_in_percent, width, color='r')
-               median2=numpy.median(slider2_rating)
-               median_bar2=median_index(request,median2)
-               rects2[median_bar2].set_color('b')
-               ax2.set_ylabel('Percentages (%)')
-               ax2.set_title("How would you rate the State of California on this issue today?")
-               ax2.set_xticks(ind+width/2)
-               ax2.set_xticklabels( ('A+', 'A', 'A-', 'B+', 'B','B-','C+','C','C-','D+','D','D-','F') )
-               plt.savefig(str(uid)+'_2.svg',dpi=300,format='png')
+    alluser=User.objects.all()
+    print len(alluser)
+    for cur_user in alluser:
+        if len(cur_user.email)>0:
+           cur_user_comment=DiscussionComment.objects.filter(user=cur_user,discussion_statement= disc_stmt,is_current = True)
+           if len(cur_user_comment)>0:
+              slider1=CommentAgreement.objects.filter(comment=cur_user_comment[0])
+              slider2=CommentRating.objects.filter(comment=cur_user_comment[0])
+              slider1_rating=[]
+              slider2_rating=[]
+               
+              for i in range(0, len(slider1)):
+                 slider1_rating.append(1-slider1[i].agreement)
+              for i in range(0, len(slider2)):
+                 slider2_rating.append(1-slider2[i].rating)
+              #produce png only if len(slider) >0
+              if len(slider1)>0:
+                 slider1_hist,bin_edges_1 = numpy.histogram(slider1_rating,bins,normed=False)
+                 slider1_hist_in_percent=(100*slider1_hist/float(sum(slider1_hist)))[::-1]
+                 fig1, ax1=plt.subplots()
+                 rects1 = ax1.bar(ind, slider1_hist_in_percent, width, color='r')
+                 median1=numpy.median(slider1_rating)
+                 median_bar1=median_index(request,median1)
+                 rects1[median_bar1].set_color('b')
+                 ax1.set_ylabel('Percentages (%)')
+                 ax1.set_title("How important is this issue for the next Report Card?")
+                 ax1.set_xticks(ind+width/2)
+                 ax1.set_xticklabels( ('A+', 'A', 'A-', 'B+', 'B','B-','C+','C','C-','D+','D','D-','F') )
+                 plt.savefig(str(cur_user.id)+'_1.png',dpi=300,format='png')
+              
+              if len(slider2)>0:
+                 slider2_hist,bin_edges_2 = numpy.histogram(slider2_rating,bins,normed=False)              
+                 slider2_hist_in_percent=(100*slider2_hist/float(sum(slider2_hist)))[::-1]
+                 plt.figure()
+                 fig2, ax2=plt.subplots()
+                 rects2 = ax2.bar(ind, slider2_hist_in_percent, width, color='r')
+                 median2=numpy.median(slider2_rating)
+                 median_bar2=median_index(request,median2)
+                 rects2[median_bar2].set_color('b')
+                 ax2.set_ylabel('Percentages (%)')
+                 ax2.set_title("How would you rate the State of California on this issue today?")
+                 ax2.set_xticks(ind+width/2)
+                 ax2.set_xticklabels( ('A+', 'A', 'A-', 'B+', 'B','B-','C+','C','C-','D+','D','D-','F') )
+                 plt.savefig(str(cur_user.id)+'_2.png',dpi=300,format='png')
 
 def neighbor_stat(request):
     zipcode=request.REQUEST.get('zipcode',-1)
