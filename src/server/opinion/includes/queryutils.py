@@ -1194,8 +1194,8 @@ def format_general_discussion_comment(response):
 		'comment': response.comment,
 		'rev_score': get_reviewer_score(response.user),
 		'vis_vars': get_visual_variables(response),
-		'zipcode' : (z.code) if z else "None",
-		'city_state' : (z.city + ", " + z.state) if z else "None"
+		'zipcode' : (z.code) if z else "--",
+		'city_state' : (z.city + ", " + z.state) if z else "--"
 		}
 
 def format_user_object(user, os_id, ds_id = None):

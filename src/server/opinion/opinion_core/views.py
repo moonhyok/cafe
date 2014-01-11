@@ -313,6 +313,14 @@ def soft_launch(request, username=None):
 # Admin panel html pages
 # Added by Dhawal M
 #
+@admin_required
+def get_csv_report(request):
+    from django.core.servers.basehttp import FileWrapper
+    f = open(MEDIA_ROOT + "../report.csv")
+    response = HttpResponse(FileWrapper(f), content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename=report.csv'
+    return response
+
 
 @admin_required
 def get_overview(request):
