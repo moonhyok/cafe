@@ -390,7 +390,7 @@ table.pretty caption {
 
 	.title-table {
 	    width:299px;
-	    background-color: #4b6d6c;
+	    background-color: #396d6b;
 	    border: solid 0px #76b9b6;
 	    color: #f5ebdf;
 	}
@@ -398,6 +398,7 @@ table.pretty caption {
 	.title-table td{
     	    border: solid 3px #76b9b6;
     	    color: #f5ebdf !important;
+    	    padding-bottom: 5px;
     	}
 
     .grade-table {
@@ -426,6 +427,7 @@ table.pretty caption {
     	    vertical-align: middle;
     	    color: #76b9b6;
             font-size:13px;
+            font-weight: bold;
     }
 
     .title-table-label2 {
@@ -435,12 +437,12 @@ table.pretty caption {
             vertical-align: middle;
             color: #76b9b6;
             font-size:13px;
+            font-weight: bold;
     }
 	
 	.grade{
 		font-family: verdana, sans-serif;
 		color: #4e300f;
-		
 		text-shadow: none;
 		font-size: 28px;
 		line-height: 30px;
@@ -449,7 +451,6 @@ table.pretty caption {
 	.grade2{
 		font-family: verdana, sans-serif;
 		color: #4e300f;
-		
 		text-shadow: none;
 		font-size: 28px;
 		line-height: 30px;
@@ -704,34 +705,38 @@ table.pretty caption {
 }
 
 .rc-sub-header {
-    text-align: left;
-    padding-bottom: 5px;
+    text-align: center;
+    padding-bottom: 10px;
     font-family: verdana, sans-serif;
-    font-size: 16px;
+    font-size: 14px;
     line-height: 20px;
+    width: 95%;
     color: #4e300f;
 }
 
 .basic-header {
 	font-family: verdana, sans-serif;
 	text-shadow: none;
-	text-align: left !important;
-	color: #f5ebdf;
-	font-size: 24px;
-	line-height: 30px;
-	padding-bottom: 6px;
-	padding-top: 5px;
+	text-align: center !important;
+	color: #4e300f;
+	font-size: 23px;
+	line-height: 26px;
+	padding-bottom: 10px;
+	padding-top: 8px;
 	font-weight: bold;
+	text-transform:uppercase;
 }
 
 .basic-header2 {
 	font-family: verdana, sans-serif;
-	text-shadow: none;
-	color: #f5ebdf;
-	font-size: 20px;
-	line-height: 26px;
-	padding-bottom: 10px;
-	padding-top: 5px;
+    	text-shadow: none;
+    	text-align: center !important;
+    	color: #4e300f;
+    	font-size: 23px;
+    	line-height: 21px;
+    	padding-bottom: 10px;
+    	padding-top: 8px;
+    	text-transform:uppercase;
 }
 
 .basic-sub-header {
@@ -866,6 +871,7 @@ padding-right: 7px;
 
 .home-btn-dialog-box {
     padding-top: 8px;
+    letter-spacing: 2px;
     text-align: center;
     background-color: #76b9b6;
 }
@@ -895,9 +901,10 @@ padding-right: 7px;
 }
 
 .slider-question {
-	width: 100%;
-	font-size: 15px;
-	padding-left: 5px;
+	width: 90%;
+	font-size: 13px;
+	line-height: 13px;
+	padding-left: 10px;
 	padding-right: 5px;
 	padding-top: 3px;
 }
@@ -1058,8 +1065,8 @@ padding-right: 7px;
 
 
 .noUi-base {
-	background-color: #4b6d6c;
-	border: 0px solid #4b6d6c;
+	background-color: #396d6b;
+	border: 0px solid #396d6b;
 	border-radius:0px;
 	height: 12px !important;
 }

@@ -148,7 +148,7 @@ table.tablesorter thead tr th, table.tablesorter tfoot tr th
 }
 table.tablesorter thead tr .header 
 {
-	background-image: url(../../media/images/bg.gif);
+	background-image: url(../../media/images/sort.svg);
 	background-repeat: no-repeat;
 	background-position: center right;
 	cursor: pointer;

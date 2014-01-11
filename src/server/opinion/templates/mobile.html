@@ -246,15 +246,18 @@
           <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
       </div>
 
+      <div class="basic-header">{{client_settings.REPORT_CARD_HEADER}}</div>
+
+      <center>
+        <div class="rc-sub-header">
+            {{client_settings.REPORT_CARD_INST}}
+        </div>
+      </center>
+
       <div class='reportcard default-left-padding responsive-max-width'>
-          <div class="basic-header">{{client_settings.REPORT_CARD_HEADER}}</div>
+
 
           <center>
-
-              <div class="rc-sub-header">
-                  {{client_settings.REPORT_CARD_INST}}
-              </div>
-
 
               <table class='cardtable title-table'>
                   <tr>
@@ -274,6 +277,7 @@
                   </tr>
               </table>
 
+              <div style="height: 7px;"></div>
 
               {% for statement in statements %}
               <table class='cardtable grade-table'>

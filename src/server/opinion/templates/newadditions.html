@@ -119,9 +119,17 @@
 				
 				var comment = document.createElement('td');
 				comment.innerHTML = topAuthors[i].comment;
+
+				var zipcode = document.createElement('td');
+				zipcode.innerHTML = topAuthors[i].zipcode;
+
+				var city_state = document.createElement('td');
+				city_state.innerHTML = topAuthors[i].city_state;
 				
 				row.appendChild(inputTd);
 				row.appendChild(user);
+				row.appendChild(zipcode);
+				row.appendChild(city_state);
 				row.appendChild(comment);
 				dojo.byId('tableBody').appendChild(row);
 			}
@@ -160,8 +168,10 @@
     <thead> 
     <tr> 
         <th width="5%"><input type="checkbox" id="checkAll"/></th>
-        <th width="25%">User ID</th>  
-        <th width="70%">Response</th>                 
+        <th width="15%">User ID</th>
+        <th width="15%">Zipcode</th>
+        <th width="15%">City, State</th>
+        <th width="50%">Response</th>                 
     </tr> 
     </thead> 
     <tbody id="tableBody"> 

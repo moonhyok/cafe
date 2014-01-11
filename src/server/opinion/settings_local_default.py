@@ -438,7 +438,7 @@ CONFIGURABLES = {
     'MAX_NUM_TOTAL_DOTS':{'default':'21','name':'Points on the map'}, #for unrated points
     'MINIMUM_WORD_COUNT':{'default':'5','name':'Word count before shown on map'}, # Required minimum word count for responses returned in shuffle
     'NUM_BACKGROUND_POINTS':{'default':'500','name':'Background distribution'},
-    'DEFAULT_FROM_EMAIL':{'default':'Hybrid Wisdom Support <support@hybridwisdom.com>','name':'Automated email from'}, # The from address of outgoing emails
+    'DEFAULT_FROM_EMAIL':{'default':'California Report Card Admin <CRC-admin@californiareportcard.org>','name':'Automated email from'}, # The from address of outgoing emails
     'FEEDBACK_EMAIL_FROM':{'default':'Hybrid Wisdom Support <support@hybridwisdom.com>','name':'User email from'},
     'CONFIDENCE_THRESHOLD':{'default':'.15','name':'Standard error thresh before on leaderboard'},
     'SOFT_ENTRY_CODES':{'default':'false', 'choices':CHOICE_TF,'name':'Use Entry Codes'},
