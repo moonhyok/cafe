@@ -388,6 +388,7 @@ var _blooms = blooms = (function($, d3, console) {
             })
             .on('click', function(d) {
                 var _this = d3.select(this);
+		window.cur_clicked_mug = _this;
                 window.prev_state = 'map';
 
                 if (d.uid == "curUser" && window.user_score >= 2) {
@@ -483,7 +484,7 @@ $(document).ready(function() {
         rate.doneRating();
 
         try {
-            _this.transition().duration(2000).style("opacity", "0").remove();
+            window.cur_clicked_mug.transition().duration(2000).style("opacity", "0").remove();
         } catch (err) {
             console.log(err);
         }
