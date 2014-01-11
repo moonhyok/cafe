@@ -379,8 +379,7 @@
       </div>
 
       <div class='dialog-text1 dialog-text-style default-left-padding'>
-          <div class="basic-header" style="width:100%;">{{client_settings.DISCUSSION_DIALOG_HEADER}}</div>
-          <img class="header-img-topic center" src="{{ url_root }}/media/mobile/img/cafe/map_teaser.png"/>
+          <img class="header-img-topic center" src="{{ url_root }}/media/mobile/img/cafe/CRC_join.png"/>
 
           {{ client_settings.DISCUSSION_DIALOG_TEXT1 }}
           <center>
@@ -419,14 +418,17 @@
                 <span class='score-label'></span><span class='score-value'></span>
             </div>
 
-            <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
-            &nbsp;
-            <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
-            &nbsp;
-            <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+            <div style="position: relative; top: 9px;letter-spacing: 2px;">
+                <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+                &nbsp;
+                <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+                 &nbsp;
+                 <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+                &nbsp;
+                <img width="30px;" class='logout-btn' src="{{url_root}}/media/mobile/img/cafe/CRC_logout_bttn.png">
+            </div>
 
             <span class="stats-wrapper" style="display: none;">&nbsp;<img width="30px;" class='my-comment-btn' src="{{url_root}}/media/mobile/img/cafe/CRC_stats_bttn.png"></span>
-            <span class="logout-wrapper">&nbsp;<img width="30px;" class='logout-btn' src="{{url_root}}/media/mobile/img/cafe/CRC_logout_bttn.png"></span>
         </div>
 
         <div class='instructions'>{{client_settings.INSTRUCTIONS_1}}</div>
@@ -453,13 +455,14 @@
        <textarea id='commentInput' class='answer' readonly="true"></textarea>
     </center>
 
-    <div class="default-left-padding" style="text-align: left;padding-bottom: 3px;">
+    <div class="default-left-padding" style="text-align: left;position:relative; top: -4px;">
         <span class="rate-username"></span>
     </div>
 
     <div id="flag" class="flag-style"></div>
 
     <div class="answerwrapper default-left-padding">
+
         <div class="comment-admin-text">
             <a href="#" class="comment-admin-text-a" onclick="rate.doneRatingNoSave();">Skip</a>&nbsp;&nbsp;
             <a href="#" class="comment-admin-text-a" id="flag1">Inappropriate</a>&nbsp;&nbsp;
@@ -471,7 +474,7 @@
 
         <div class="slider-padding"></div>
 
-        <div id="slider1" class="rating-slider rating-slider1"></div><br/><hr/>
+        <div id="slider1" class="rating-slider rating-slider1"></div><br/>
 
          How would you rate the State of California on this issue today?<br/>
 

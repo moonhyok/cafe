@@ -324,7 +324,7 @@ var _blooms = blooms = (function($, d3, console) {
             top: 0,
             left: 0,
             right: 40,
-            bottom: 60
+            bottom: 100
             };
 
 
