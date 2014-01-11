@@ -423,38 +423,6 @@ var _blooms = blooms = (function($, d3, console) {
                     $('.rate-loading').hide();
                     $('.rate').data('cid', cid);
                 });
-                $('#go-back').click(function() {
-                    //$('.scorebox').show();
-                    //utils.showLoading("");
-                    $('.menubar').show();
-                    rate.doneRating();
-
-                    try{
-                    _this.transition().duration(2000).style("opacity", "0").remove();
-                    }catch(err){
-                    console.log(err);
-                    }
-                    //_this.transition().duration(500).style("opacity", "0");
-                    /* Remove this bloom from our bookkeeping array. */
-                    var index = $.inArray(window.current_uid, window.blooms_list);
-                    if (index >= 0) {
-                        window.blooms_list.splice(index, 1);
-                    }
-                    /* Load more blooms if none left */
-                    try {
-                    if (window.blooms_list.length <= 2) {
-                        console.log("here");
-                        utils.showLoading("Loading More Ideas...");
-                        window.blooms_list = undefined; //needed to avoid infinite recursing
-                        setTimeout(populateBlooms, 1000);
-                        //utils.hideLoading();
-                       // utils.showLoading("Loading More Ideas...", function() {
-                       //     populateBlooms();
-                        //});
-                        //utils.hideLoading(5000);
-                    } } catch(err){ /* undefined variable blooms. */ }
-
-                });
             });
         });
 
@@ -506,6 +474,43 @@ $(document).ready(function() {
 
     $('.top-bar').on('height', function() {
         //_blooms.populateBlooms();
+    });
+
+    $('#go-back').click(function() {
+        //$('.scorebox').show();
+        //utils.showLoading("");
+        $('.menubar').show();
+        rate.doneRating();
+
+        try {
+            _this.transition().duration(2000).style("opacity", "0").remove();
+        } catch (err) {
+            console.log(err);
+        }
+        //_this.transition().duration(500).style("opacity", "0");
+        /* Remove this bloom from our bookkeeping array. */
+        var index = $.inArray(window.current_uid, window.blooms_list);
+        if (index >= 0) {
+            window.blooms_list.splice(index, 1);
+        }
+        /* Load more blooms if none left */
+        try {
+            if (window.blooms_list.length <= 2) {
+                console.log("here");
+                utils.showLoading("Loading More Ideas...");
+                window.blooms_list = undefined; //needed to avoid infinite recursing
+                setTimeout(populateBlooms, 1000);
+                //utils.hideLoading();
+                // utils.showLoading("Loading More Ideas...", function() {
+                //     populateBlooms();
+                //});
+                //utils.hideLoading(5000);
+            }
+        } catch (err) {
+         /* undefined variable blooms. */
+         console.log(err);
+        }
+
     });
 
     $(window).resize(function() {
