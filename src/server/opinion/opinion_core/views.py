@@ -250,11 +250,6 @@ def crcstats(request,entry_code=None):
                                                                                             'medians': medians,
                                                                                             }))
 
-def getallstats(request):
-    issues_hist(request)
-    participant_hist(request)
-    geostats(request)
-    return render_to_response('getallstats.html')
 
 def app(request, username=None):
 	if request.mobile:
