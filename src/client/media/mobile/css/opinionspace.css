@@ -710,7 +710,7 @@ table.pretty caption {
 }
 
 .rc-sub-header {
-    text-align: center;
+    text-align: left;
     padding-bottom: 10px;
     font-family: verdana, sans-serif;
     font-size: 14px;
