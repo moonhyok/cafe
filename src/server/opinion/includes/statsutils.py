@@ -159,7 +159,7 @@ def participant_hist(request):
     ind=numpy.arange(N)
     width=0.35
     alluser=User.objects.all()
-    print len(alluser)
+   
     for cur_user in alluser:
         if len(cur_user.email)>0:
            cur_user_comment=DiscussionComment.objects.filter(user=cur_user,discussion_statement= disc_stmt,is_current = True)
