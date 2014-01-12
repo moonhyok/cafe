@@ -328,20 +328,24 @@ var _blooms = blooms = (function($, d3, console) {
             };
 
 
-
             var width = $(window).width() - margin.right - margin.left;
 
             var topBarHeight = $('.top-bar').height();
 
             var height = $(window).height()- margin.bottom - margin.top - topBarHeight;
 
-            var canvasx = d3.scale.linear().domain(d3.extent(data, function(d) {return d.x;})).range([margin.left, width-margin.right]);
-            var canvasy = d3.scale.linear().domain(d3.extent(data, function(d) {return d.y;})).range([margin.top, height-margin.bottom]);
-
             // Stashing away your_mug_data so it can be added after 2 mugs have been rated
             window.your_mug_data = data.splice(data.length-1, 1)[0];
-            window.your_mug_data.x = canvasx(window.your_mug_data.x);
-            window.your_mug_data.y = canvasy(window.your_mug_data.y);
+            window.your_mug_data.ox = window.your_mug_data.x; //keep the original untransformed values
+            window.your_mug_data.oy = window.your_mug_data.y;
+            window.your_mug_data.x = (margin.left + width-margin.right)/2;//canvasx(window.your_mug_data.x);
+            window.your_mug_data.y = (margin.top + height-margin.bottom)/2;//canvasy(window.your_mug_data.y);
+
+            //center the scaling appropriately
+            var max_x_dev = d3.max(data, function(d) {return Math.abs(d.x-window.your_mug_data.ox);});
+            var max_y_dev = d3.max(data, function(d) {return Math.abs(d.y-window.your_mug_data.oy);});
+            var canvasx = d3.scale.linear().domain([-max_x_dev,max_x_dev]).range([margin.left, width-margin.right]);
+            var canvasy = d3.scale.linear().domain([-max_y_dev,max_y_dev]).range([margin.top, height-margin.bottom]);
 
             $('svg').remove();
             // clear anything that's in the div already (e.g. loading button)
@@ -366,10 +370,10 @@ var _blooms = blooms = (function($, d3, console) {
                 return window.url_root + "/media/mobile/img/cafe/cafe" + Math.floor((Math.random()*6)).toString() + ".png";
             })
             .attr('x', function(d) {
-                return canvasx(d.x);
+                return canvasx(d.x-window.your_mug_data.ox);
             })
             .attr('y', function(d) {
-                return canvasy(d.y);
+                return canvasy(d.y-window.your_mug_data.oy);
             })
             .attr("width", "90") //if this changes, change the margin above
             .attr("height", "90")
