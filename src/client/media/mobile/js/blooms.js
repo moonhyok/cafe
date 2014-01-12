@@ -375,8 +375,8 @@ var _blooms = blooms = (function($, d3, console) {
             .attr('y', function(d) {
                 return canvasy(d.y-window.your_mug_data.oy);
             })
-            .attr("width", "90") //if this changes, change the margin above
-            .attr("height", "90")
+            .attr("width", "80") //if this changes, change the margin above
+            .attr("height", "80")
             .attr("opacity", function(d) {
                         return "1";
                 })
@@ -456,7 +456,6 @@ var _blooms = blooms = (function($, d3, console) {
 
     function alreadyAuthenticated() {
         //TOFIX utils.showLoading("Loading...");
-
         populateBlooms();
         accounts.initLoggedInFeatures();
         //TOFIX utils.hideLoading();
@@ -517,7 +516,7 @@ $(document).ready(function() {
                 console.log("here");
                 utils.showLoading("Loading More Ideas...");
                 window.blooms_list = undefined; //needed to avoid infinite recursing
-                setTimeout(populateBlooms, 1000);
+                setTimeout(blooms.populateBlooms, 500);
                 //utils.hideLoading();
                 // utils.showLoading("Loading More Ideas...", function() {
                 //     populateBlooms();

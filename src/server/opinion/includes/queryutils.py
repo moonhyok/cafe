@@ -1510,48 +1510,75 @@ def get_user_recent_ratings_from_all_revisions(user,os,disc_stmt,type='insight',
 				ratings_tuples_filtered_list.append(t)
 	
 	return ratings_tuples_filtered_list
+
+def ratings_2_vector(user):
+    result_vector = {}
+    for u in UserRating.objects.filter(user = user, is_current=True):
+        result_vector[u.id] = u.rating
+    return result_vector
+
+def user_2_user_dist(vector1,vector2):
+    dist = 0
+    for k in vector1:
+        if k in vector2:
+            dist = dist + abs(vector1[k] - vector2[k])
+
+    for k in vector2:
+        if k in vector2 and k not in vector1:
+            dist = dist + abs(vector2[k])
+
+    return dist
 	
 def get_never_seen_comments(user,os,disc_stmt,max_num=None,efficient_count=False, no_statements=False):
-	users_with_ratings = UserData.objects.filter(key = 'first_rating').values_list('user')
-	users_with_no_ratings = User.objects.all().exclude(id__in = users_with_ratings)
+    users_with_ratings = UserData.objects.filter(key = 'first_rating').values_list('user')
+    users_with_no_ratings = User.objects.all().exclude(id__in = users_with_ratings)
 
-	rated_users = set()	
+    rated_users = set()
 	
-	if user.is_authenticated():
-		insight_rated_comments = CommentRating.objects.filter(rater = user, is_current=True)
-		agreement_rated_comments = CommentAgreement.objects.filter(rater = user, is_current=True)
+    if user.is_authenticated():
+        insight_rated_comments = CommentRating.objects.filter(rater = user, is_current=True)
+        agreement_rated_comments = CommentAgreement.objects.filter(rater = user, is_current=True)
+        my_ratings = ratings_2_vector(user)
 		
-		if NEVER_SEEN_TIGHT_BOUND: # a single rating counts as seeing the user		
-			for i in insight_rated_comments:
-				if i.comment.discussion_statement == disc_stmt:
-					rated_users.add(i.comment.user)
-			for a in agreement_rated_comments:
-				if a.comment.discussion_statement == disc_stmt:
-					rated_users.add(a.comment.user)
-		else:
-			insight_rated_users = set([c.comment.user for c in insight_rated_comments if c.comment.discussion_statement == disc_stmt])
-			agreement_rated_users = set([c.comment.user for c in agreement_rated_comments if c.comment.discussion_statement == disc_stmt])
-			rated_users = insight_rated_users.intersection(agreement_rated_users)
+        if NEVER_SEEN_TIGHT_BOUND: # a single rating counts as seeing the user
+            for i in insight_rated_comments:
+                if i.comment.discussion_statement == disc_stmt:
+                    rated_users.add(i.comment.user)
+            for a in agreement_rated_comments:
+                if a.comment.discussion_statement == disc_stmt:
+                   rated_users.add(a.comment.user)
+        else:
+            insight_rated_users = set([c.comment.user for c in insight_rated_comments if c.comment.discussion_statement == disc_stmt])
+            agreement_rated_users = set([c.comment.user for c in agreement_rated_comments if c.comment.discussion_statement == disc_stmt])
+            rated_users = insight_rated_users.intersection(agreement_rated_users)
 
-		rated_users.add(user) #exlude self too
+        rated_users.add(user) #exlude self too
 		
-		current_comments = DiscussionComment.objects.filter(is_current = True, blacklisted = False, opinion_space = os, discussion_statement = disc_stmt).exclude(user__in = list(rated_users)).exclude(user__in = users_with_no_ratings)
+        current_comments = DiscussionComment.objects.filter(is_current = True, blacklisted = False, opinion_space = os, discussion_statement = disc_stmt).exclude(user__in = list(rated_users)).exclude(user__in = users_with_no_ratings)
 		
-		if DATABASE_ENGINE == 'sqlite3':	
-			current_comments =  current_comments.extra(select={'rand_weight': "query_weight * random()"}).extra(order_by=['-rand_weight'])
-		else:
-			current_comments =  current_comments.extra(select={'rand_weight': "query_weight * rand()"}).extra(where=["LENGTH(comment) - LENGTH(REPLACE(comment, ' ', '')) >= %s"], params=[str(2)]).extra(order_by=['-rand_weight'])
-	else:
+		#if DATABASE_ENGINE == 'sqlite3':
+		#	current_comments =  current_comments.extra(select={'rand_weight': "query_weight * random()"}).extra(order_by=['-rand_weight'])
+		#else:
+		#	current_comments =  current_comments.extra(select={'rand_weight': "query_weight * rand()"}).extra(where=["LENGTH(comment) - LENGTH(REPLACE(comment, ' ', '')) >= %s"], params=[str(2)]).extra(order_by=['-rand_weight'])
+
+        ordered_comments = []
+        for c in current_comments:
+            ordered_comments.append((user_2_user_dist(my_ratings,ratings_2_vector(c.user)),c))
+
+        ordered_comments.sort()
+        current_comments = [c[1] for c in ordered_comments]
+
+    else:
 		current_comments = DiscussionComment.objects.filter(is_current = True, blacklisted = False, opinion_space = os, discussion_statement = disc_stmt).order_by('-query_weight')
 		
 	#print users_with_no_ratings
-	if max_num != None:
-		current_comments = current_comments[:max_num]
+    if max_num != None:
+        current_comments = current_comments[:max_num]
 	
-	if efficient_count:
-		return current_comments.count()
-	else:
-		return [format_discussion_comment(user, current_comment) for current_comment in current_comments]
+    if efficient_count:
+        return current_comments.count()
+    else:
+        return [format_discussion_comment(user, current_comment) for current_comment in current_comments]
 
 def get_rated_updated_comments(user,os,disc_stmt,max_num=None):
 	agreement_ratings = get_user_recent_ratings_from_all_revisions(user,os,disc_stmt,'agreement') #get most recent agreement ratings
