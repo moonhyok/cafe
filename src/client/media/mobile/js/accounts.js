@@ -576,6 +576,11 @@ $(document).ready(function() {
             });
 
     $('.help-btn-dialog').click(function() {
+                                 if (window.cur_state.indexOf('help') != -1)
+                                 {
+                                    return;
+                                 }
+
                                  accounts.hideAll();
                                  window.prev_state = window.cur_state;
                                  window.cur_state = 'help-' + window.cur_state;
