@@ -213,14 +213,22 @@ def crcstats(request,entry_code=None):
     ordinal=''
     comment=''
     uid = -1
+    show_hist1=False
+    show_hist2=False
 
     if level8:
         score = CommentAgreement.objects.filter(rater = user,is_current=True).count()
         given = 2*CommentAgreement.objects.filter(rater = user,is_current=True).count()
         received = 2*CommentAgreement.objects.filter(comment__in = DiscussionComment.objects.filter(user = user),is_current=True).count()
         comment_list=DiscussionComment.objects.filter(user=user,is_current=True)
-        if len(comment) > 0:
+        if len(comment_list) > 0:
             comment=comment_list[0].comment
+            slider1=CommentAgreement.objects.filter(comment=comment_list[0])
+            slider2=CommentRating.objects.filter(comment=comment_list[0])
+            if len(slider1)>0:
+                show_hist1=True
+            if len(slider2)>0:
+                show_hist2=True
 
         ordinal = number_to_ordinal(user.id)
         uid = user.id
