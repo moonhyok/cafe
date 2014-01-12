@@ -989,15 +989,41 @@ padding-right: 7px;
 
 .dialog-text-style-noflow {
 	position: relative;
-        vertical-align: middle;
-        font-family: verdana, sans-serif;
+    vertical-align: middle;
+    font-family: verdana, sans-serif;
 	color: #4e300f;
 	background: #76b9b6;
 	text-decoration: none;
 	text-shadow: none;
 	font-size: 16px;
 	line-height: 18px;
+	padding-bottom: 10px;
 }
+
+.dialog-text-style-noflow a:link {
+    color: #f5ebdf;
+    text-decoration: underline;
+    text-shadow: none;
+    font-size: 16px;
+    line-height: 18px;
+}
+
+.dialog-text-style-noflow strong {
+    color: #4e300f;
+    text-decoration: none;
+    text-shadow: none;
+    font-size: 20px;
+    line-height: 18px;
+}
+
+.dialog-text-style-noflow em {
+    color: #f5ebdf;
+    text-decoration: none;
+    text-shadow: none;
+    font-size: 16px;
+    line-height: 18px;
+}
+
 
 .dialog-text-notitle {
 	position: relative;
