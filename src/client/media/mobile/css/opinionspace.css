@@ -716,6 +716,7 @@ table.pretty caption {
     font-size: 14px;
     line-height: 20px;
     width: 95%;
+    max-width: 400px;
     color: #4e300f;
     padding-left: 7px;
 }
@@ -1001,7 +1002,7 @@ padding-right: 7px;
 }
 
 .dialog-text-style-noflow a:link {
-    color: #f5ebdf;
+    color: #f5ebdf !important;
     text-decoration: underline;
     text-shadow: none;
     font-size: 16px;
