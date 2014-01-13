@@ -170,8 +170,8 @@ var _blooms = blooms = (function($, d3, console) {
 
         for (var i = 0; i < ratings.length; i += window.num_sliders) {
             rating = compileIndexedElementsToList(ratings.slice(i, i + window.num_sliders), rating_value_index);
-            x = dotProduct(ex, rating);
-            y = dotProduct(ey, rating);
+            x = dotProduct(ex, rating) + (Math.random()-.5); //perturb values to prevent bunching
+            y = dotProduct(ey, rating) + (Math.random()-.5);
             uid = ratings[i][rating_uid_index];
             result.push({
                 'uid': uid,
