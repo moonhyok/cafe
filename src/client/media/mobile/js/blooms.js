@@ -341,6 +341,8 @@ var _blooms = blooms = (function($, d3, console) {
             window.your_mug_data.x = (margin.left + width-margin.right)/2;//canvasx(window.your_mug_data.x);
             window.your_mug_data.y = (margin.top + height-margin.bottom)/2;//canvasy(window.your_mug_data.y);
 
+
+
             //center the scaling appropriately
             var max_x_dev = d3.max(data, function(d) {return Math.abs(d.x-window.your_mug_data.ox);});
             var max_y_dev = d3.max(data, function(d) {return Math.abs(d.y-window.your_mug_data.oy);});
@@ -430,6 +432,17 @@ var _blooms = blooms = (function($, d3, console) {
                     $('.rate').data('cid', cid);
                 });
             });
+
+                    if(window.user_score >= 2)
+                    {
+                         try{
+                             blooms.addYourMug();
+                             window.your_mug.transition().duration(100).style("opacity", "1");
+                            }catch(err){
+                              console.log(err);
+                           }
+                    }
+
         });
 
      try{
@@ -482,6 +495,7 @@ var _blooms = blooms = (function($, d3, console) {
         $('.landing').hide();
         accounts.getNeighborStat();
         window.prev_state = 'welcome_back';
+
         if(window.conf.RETURN_USER_FIRST_TIME){
 		$('.welcome-back').slideDown();
 		}

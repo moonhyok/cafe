@@ -760,11 +760,11 @@ $(document).ready(function() {
         $('.dialog-yourmug').hide();
         //$('.scorebox').show();
         $('.menubar').show();
-        try{
+        /*try{
             window.your_mug.transition().duration(1000).style("opacity", "1");
         }catch(err){
             console.log(err);
-        }
+        }*/
     });
 
 

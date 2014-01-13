@@ -433,7 +433,7 @@ $(document).ready(function() {
         rate.logUserEvent(6,'comment submitted');
         rate.sendComment($('#entered-comment').val());
         utils.hideLoading('');
-        window.your_mug.transition().duration(3000).style("opacity", "0").remove();
+        //window.your_mug.transition().duration(3000).style("opacity", "0").remove();
         //if ($('#regemail').val()){
 	//		accounts.sendEmail($('#regemail').val());
 	//	}
