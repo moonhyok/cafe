@@ -324,7 +324,7 @@ var _blooms = blooms = (function($, d3, console) {
             top: 0,
             left: 0,
             right: 40,
-            bottom: 100
+            bottom: 80
             };
 
 
@@ -344,8 +344,8 @@ var _blooms = blooms = (function($, d3, console) {
             //center the scaling appropriately
             var max_x_dev = d3.max(data, function(d) {return Math.abs(d.x-window.your_mug_data.ox);});
             var max_y_dev = d3.max(data, function(d) {return Math.abs(d.y-window.your_mug_data.oy);});
-            var canvasx = d3.scale.linear().domain([-max_x_dev,max_x_dev]).range([margin.left, width-margin.right]);
-            var canvasy = d3.scale.linear().domain([-max_y_dev,max_y_dev]).range([margin.top, height-margin.bottom]);
+            var canvasx = d3.scale.linear().domain([-max_x_dev,max_x_dev]).range([margin.left, width-margin.right]).clamp(true);
+            var canvasy = d3.scale.linear().domain([-max_y_dev,max_y_dev]).range([margin.top, height-margin.bottom]).clamp(true);
 
             $('svg').remove();
             // clear anything that's in the div already (e.g. loading button)
@@ -370,16 +370,30 @@ var _blooms = blooms = (function($, d3, console) {
                 return window.url_root + "/media/mobile/img/cafe/cafe" + Math.floor((Math.random()*6)).toString() + ".png";
             })
             .attr('x', function(d) {
+                var scale = Math.abs(d.x-window.your_mug_data.ox);//set min distance add perturbation to prevent overlap
+                scale = Math.max(scale,.15);
+
                 if (Math.random() >= .5) //evenly split over x axis
-                    return canvasx(d.x-window.your_mug_data.ox);
+                    {
+                        return canvasx(scale);
+                    }
                 else
-                    return canvasx(-d.x+window.your_mug_data.ox);
+                    {
+                        return canvasx(-scale);
+                    }
             })
             .attr('y', function(d) {
-                if (Math.random() >= .5) //evenly split over y axis
-                    return canvasy(d.y-window.your_mug_data.oy);
-                else
-                    return canvasy(-d.y+window.your_mug_data.oy);
+                var scale = Math.abs(d.y-window.your_mug_data.oy);//set min distance
+                scale = Math.max(scale,.15);
+
+                 if (Math.random() >= .5) //evenly split over y axis
+                 {
+                     return canvasy(scale);
+                 }
+                 else
+                 {
+                     return canvasy(-scale);
+                 }
             })
             .attr("width", "80") //if this changes, change the margin above
             .attr("height", "80")
