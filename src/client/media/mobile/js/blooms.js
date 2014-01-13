@@ -370,10 +370,16 @@ var _blooms = blooms = (function($, d3, console) {
                 return window.url_root + "/media/mobile/img/cafe/cafe" + Math.floor((Math.random()*6)).toString() + ".png";
             })
             .attr('x', function(d) {
-                return canvasx(d.x-window.your_mug_data.ox);
+                if (Math.random() >= .5) //evenly split over x axis
+                    return canvasx(d.x-window.your_mug_data.ox);
+                else
+                    return canvasx(-d.x+window.your_mug_data.ox);
             })
             .attr('y', function(d) {
-                return canvasy(d.y-window.your_mug_data.oy);
+                if (Math.random() >= .5) //evenly split over y axis
+                    return canvasy(d.y-window.your_mug_data.oy);
+                else
+                    return canvasy(-d.y+window.your_mug_data.oy);
             })
             .attr("width", "80") //if this changes, change the margin above
             .attr("height", "80")
