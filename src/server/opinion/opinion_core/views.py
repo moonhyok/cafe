@@ -246,6 +246,8 @@ def crcstats(request,entry_code=None):
     return render_to_response('crc_stats.html', context_instance = RequestContext(request, {'num_participants': len(active_users),
                                                                                             'level8':level8,
                                                                                             'ordinal':ordinal,
+                                                                                            'show_hist1':show_hist1,
+                                                                                            'show_hist2':show_hist2,
                                                                                             'date':datetime.date.today(),
                                                                                             'comment':comment,
                                                                                             'left_comment': (comment != ''),
