@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <style>
 
 </style>
@@ -28,7 +29,7 @@
 </div>
 
 <div class="seperate-lines">
-<canvas id="seperate-lines1" width="348" height="3"> 
+<canvas id="seperate-lines1" width="348" height="5"> 
 <script>
       var canvas = document.getElementById('seperate-lines1');
       var context = canvas.getContext('2d');
@@ -39,8 +40,8 @@
       context.lineWidth = 1;
       context.stroke();
       context.beginPath();
-      context.moveTo(0, 3);
-      context.lineTo(348, 3);
+      context.moveTo(0, 4);
+      context.lineTo(348, 4);
       context.strokeStyle = '#ffffff';
       context.lineWidth = 1;
       context.stroke();
@@ -60,7 +61,7 @@
 {% endif %}
 
 <div class="seperate-lines">
-<canvas id="seperate-lines2" width="348" height="3"> 
+<canvas id="seperate-lines2" width="348" height="5"> 
 <script>
       var canvas = document.getElementById('seperate-lines2');
       var context = canvas.getContext('2d');
@@ -71,8 +72,8 @@
       context.lineWidth = 1;
       context.stroke();
       context.beginPath();
-      context.moveTo(0, 3);
-      context.lineTo(348, 3);
+      context.moveTo(0, 4);
+      context.lineTo(348, 4);
       context.strokeStyle = '#ffffff';
       context.lineWidth = 1;
       context.stroke();
@@ -88,7 +89,7 @@
     </div>
     "How important is this issue for the <br/> next Report Card?"<br/>
     {% if show_hist1 %}
-    <div class="stat-img"><img src="{{url_root}}/media/mobile/img/dailyupdate/{{participant}}_1.png" height="300" width="300"></div><br/>
+    <div class="stat-img"><img src="{{url_root}}/media/mobile/img/dailyupdate/{{participant}}_1.png" height="330" width="330"></div><br/>
     {% else %}
     <span class="fine-print">You have not received any grades yet</span><br/>
     {% endif %}
@@ -97,7 +98,7 @@
 
     "How would you grade California on <br/>this issue?"<br/>
     {% if show_hist2 %}
-    <div class="stat-img"><img src="{{url_root}}/media/mobile/img/dailyupdate/{{participant}}_2.png" height="300" width="300"></div><br/>
+    <div class="stat-img"><img src="{{url_root}}/media/mobile/img/dailyupdate/{{participant}}_2.png" height="330" width="330"></div><br/>
     {% else %}
     <span class="fine-print">You have not received any grades yet</span><br/>
     {% endif %}
@@ -108,7 +109,7 @@
 {% endif %}
 
 <div class="seperate-lines">
-<canvas id="seperate-lines3" width="348" height="3"> 
+<canvas id="seperate-lines3" width="348" height="5"> 
 <script>
       var canvas = document.getElementById('seperate-lines3');
       var context = canvas.getContext('2d');
@@ -119,8 +120,8 @@
       context.lineWidth = 1;
       context.stroke();
       context.beginPath();
-      context.moveTo(0, 3);
-      context.lineTo(348, 3);
+      context.moveTo(0, 4);
+      context.lineTo(348, 4);
       context.strokeStyle = '#ffffff';
       context.lineWidth = 1;
       context.stroke();
@@ -139,26 +140,26 @@
     <strong>Distribution of Grades for Issue {{median.id}}:</strong><br/>
         <div class="issue-text">{{median.statement}}</div>
     <div class="stat-img">
-        <img src="{{url_root}}/media/mobile/img/dailyupdate/{{median.statement}}.png" height="300" width="300">
+        <img src="{{url_root}}/media/mobile/img/dailyupdate/{{median.statement}}.png" height="330" width="330">
 
     </div>
     {% endfor %}
 
 </div>
 <div class="seperate-lines">
-<canvas id="seperate-lines4" width="348" height="3"> 
+<canvas id="seperate-lines4" width="348" height="5"> 
 <script>
       var canvas = document.getElementById('seperate-lines4');
       var context = canvas.getContext('2d');
       context.beginPath();
       context.moveTo(0, 0);
-      context.lineTo(348, 0);
+      context.lineTo(50, 0);
       context.strokeStyle = '#ffffff';
       context.lineWidth = 1;
       context.stroke();
       context.beginPath();
-      context.moveTo(0, 3);
-      context.lineTo(348, 3);
+      context.moveTo(0, 4);
+      context.lineTo(348, 4);
       context.strokeStyle = '#ffffff';
       context.lineWidth = 1;
       context.stroke();
