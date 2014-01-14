@@ -84,15 +84,21 @@ def issues_hist():
        hist_in_percent=(100*hist/float(sum(hist)))[::-1]
        
        fig, ax = plt.subplots()
-       rects1 = ax.bar(ind, hist_in_percent, width, color='r')
+       rects1 = ax.bar(ind, hist_in_percent, width, facecolor='#74b9b7', 
+       align='center',edgecolor = "none")
+       fig.patch.set_facecolor('#74b9b7')
+       ax.patch.set_facecolor('#f5ebde')
        median=numpy.median(s_rating_list)
        median_bar=median_index(median)
-       rects1[median_bar].set_color('b')
-       ax.set_ylabel('Percentages (%)')
-       ax.set_title(s.statement)
-       ax.set_xticks(ind+width/2)
+       rects1[median_bar].set_color('#4f300b')
+       ax.set_xticks(ind)
+       for i in plt.gca().get_xticklabels():
+           i.set_color("#4f300b")
+       for i in plt.gca().get_yticklabels():
+           i.set_color("#4f300b")
+       plt.figtext(.91,.31,"PERCENTAGE(%)",family='sans-serif',color="#4f300b",rotation='vertical')
        ax.set_xticklabels( ('A+', 'A', 'A-', 'B+', 'B','B-','C+','C','C-','D+','D','D-','F') )
-       plt.savefig(imagepath+s.statement+'.png',dpi=300,format='png')
+       plt.savefig(imagepath+s.statement+'.png',facecolor=fig.get_facecolor(),edgecolor='none',dpi=300,format='png')
 
 def median_index(median):
      if median<=1 and median>0.99:
