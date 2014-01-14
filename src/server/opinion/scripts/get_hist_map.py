@@ -72,7 +72,7 @@ def issues_hist():
         # F    D-   D    D+   C-   C    C+   B-   B   B+    A-   A    A+
    N=len(bins)-1
    ind=numpy.arange(N)
-   width=0.35
+   width=0.5
    
    for s in statements:
        s_rating=UserRating.objects.filter(opinion_space_statement=s,is_current=True)
@@ -82,17 +82,27 @@ def issues_hist():
        
        hist,bin_edges = numpy.histogram(s_rating_list,bins,normed=False)
        hist_in_percent=(100*hist/float(sum(hist)))[::-1]
-       
+       #overcome xscale issue in pyplot 
+       if hist_in_percent[0]==0:
+          hist_in_percent[0]=0.001
+       if hist_in_percent[len(hist_in_percent)-1]==0:
+          hist_in_percent[len(hist_in_percent)-1]=0.001
        fig, ax = plt.subplots()
-       rects1 = ax.bar(ind, hist_in_percent, width, color='r')
+       rects1 = ax.bar(ind, hist_in_percent, width, facecolor='#74b9b7', 
+       align='center',edgecolor = "none")
+       fig.patch.set_facecolor('#74b9b7')
+       ax.patch.set_facecolor('#f5ebde')
        median=numpy.median(s_rating_list)
        median_bar=median_index(median)
-       rects1[median_bar].set_color('b')
-       ax.set_ylabel('Percentages (%)')
-       ax.set_title(s.statement)
-       ax.set_xticks(ind+width/2)
+       rects1[median_bar].set_color('#4f300b')
+       ax.set_xticks(ind)
+       for i in plt.gca().get_xticklabels():
+           i.set_color("#4f300b")
+       for i in plt.gca().get_yticklabels():
+           i.set_color("#4f300b")
+       plt.figtext(.91,.31,"PERCENTAGE(%)",family='sans-serif',color="#4f300b",rotation='vertical')
        ax.set_xticklabels( ('A+', 'A', 'A-', 'B+', 'B','B-','C+','C','C-','D+','D','D-','F') )
-       plt.savefig(imagepath+s.statement+'.png',dpi=300,format='png')
+       plt.savefig(imagepath+s.statement+'.png',facecolor=fig.get_facecolor(),edgecolor='none',dpi=300,format='png')
 
 def median_index(median):
      if median<=1 and median>0.99:
@@ -123,7 +133,7 @@ def median_index(median):
         return 12
 
 
-def participant_hist():
+def participant_slider1_hist():
     """produce histogram for all participant above level 8"""
     
     
@@ -134,7 +144,7 @@ def participant_hist():
         # F    D-   D    D+   C-   C    C+   B-   B   B+    A-   A    A+
     N=len(bins)-1
     ind=numpy.arange(N)
-    width=0.35
+    width=0.5
     alluser=User.objects.all()
    
     for cur_user in alluser:
@@ -142,45 +152,90 @@ def participant_hist():
            cur_user_comment=DiscussionComment.objects.filter(user=cur_user,discussion_statement= disc_stmt,is_current = True)
            if len(cur_user_comment)>0:
               slider1=CommentAgreement.objects.filter(comment=cur_user_comment[0])
-              slider2=CommentRating.objects.filter(comment=cur_user_comment[0])
               slider1_rating=[]
-              slider2_rating=[]
                
               for i in range(0, len(slider1)):
                  slider1_rating.append(1-slider1[i].agreement)
-              for i in range(0, len(slider2)):
-                 slider2_rating.append(1-slider2[i].rating)
               #produce png only if len(slider) >0
               if len(slider1)>0:
                  slider1_hist,bin_edges_1 = numpy.histogram(slider1_rating,bins,normed=False)
                  slider1_hist_in_percent=(100*slider1_hist/float(sum(slider1_hist)))[::-1]
+                 #overcome xscale issue in pyplot 
+                 if slider1_hist_in_percent[0]==0:
+                    slider1_hist_in_percent[0]=0.001
+                 if slider1_hist_in_percent[len(slider1_hist_in_percent)-1]==0:
+                    slider1_hist_in_percent[len(slider1_hist_in_percent)-1]=0.001
                  fig1, ax1=plt.subplots()
-                 rects1 = ax1.bar(ind, slider1_hist_in_percent, width, color='r')
+
+
+                 rects1 = ax1.bar(ind, slider1_hist_in_percent, width, facecolor='#74b9b7', 
+                 align='center',edgecolor = "none")
+                 fig1.patch.set_facecolor('#74b9b7')
+                 ax1.patch.set_facecolor('#f5ebde')
+                 
                  median1=numpy.median(slider1_rating)
                  median_bar1=median_index(median1)
-                 rects1[median_bar1].set_color('b')
-                 ax1.set_ylabel('Percentages (%)')
-                 ax1.set_title("How important is this issue for the next Report Card?")
-                 ax1.set_xticks(ind+width/2)
+                 rects1[median_bar1].set_color('#4f300b')
+                 ax1.set_xticks(ind)
+                 for i in plt.gca().get_xticklabels():
+                    i.set_color("#4f300b")
+                 for i in plt.gca().get_yticklabels():
+                    i.set_color("#4f300b")
+                 plt.figtext(.91,.31,"PERCENTAGE(%)",family='sans-serif',color="#4f300b",rotation='vertical')
                  ax1.set_xticklabels( ('A+', 'A', 'A-', 'B+', 'B','B-','C+','C','C-','D+','D','D-','F') )
-                 plt.savefig(imagepath+str(cur_user.id)+'_1.png',dpi=300,format='png')
+                 plt.savefig(imagepath+str(cur_user.id)+'_1.png',facecolor=fig1.get_facecolor(),edgecolor='none',dpi=300,format='png')
+              
+          
+
+def participant_slider2_hist():
+    os = get_os(1)
+    disc_stmt = get_disc_stmt(os, 1)
+    
+    bins=[0,0.01,0.19,0.32,0.38,0.44,0.56,0.63,0.69,0.81,0.86,0.92,0.99,1]  
+        # F    D-   D    D+   C-   C    C+   B-   B   B+    A-   A    A+
+    N=len(bins)-1
+    ind=range(N)
+	
+    alluser=User.objects.all()
+   
+    for cur_user in alluser:
+        if len(cur_user.email)>0:
+           cur_user_comment=DiscussionComment.objects.filter(user=cur_user,discussion_statement= disc_stmt,is_current = True)
+           if len(cur_user_comment)>0:           
+              slider2=CommentRating.objects.filter(comment=cur_user_comment[0])
+              slider2_rating=[]
+               
+              for i in range(0, len(slider2)):
+                 slider2_rating.append(1-slider2[i].rating)
+              #produce png only if len(slider) >0
               
               if len(slider2)>0:
                  slider2_hist,bin_edges_2 = numpy.histogram(slider2_rating,bins,normed=False)              
                  slider2_hist_in_percent=(100*slider2_hist/float(sum(slider2_hist)))[::-1]
+                 #overcome xscale issue in pyplot 
+                 if slider2_hist_in_percent[0]==0:
+                    slider2_hist_in_percent[0]=0.001
+                 if slider2_hist_in_percent[len(slider2_hist_in_percent)-1]==0:
+                    slider2_hist_in_percent[len(slider2_hist_in_percent)-1]=0.001
                  plt.figure()
                  fig2, ax2=plt.subplots()
-                 rects2 = ax2.bar(ind, slider2_hist_in_percent, width, color='r')
+                 rects2 = ax2.bar(ind, slider2_hist_in_percent, width=0.5, facecolor='#74b9b7', 
+                 align='center',edgecolor = "none")
+                 fig2.patch.set_facecolor('#74b9b7')
+                 ax2.patch.set_facecolor('#f5ebde')
                  median2=numpy.median(slider2_rating)
                  median_bar2=median_index(median2)
-                 rects2[median_bar2].set_color('b')
-                 ax2.set_ylabel('Percentages (%)')
-                 ax2.set_title("How would you rate the State of California on this issue today?")
-                 ax2.set_xticks(ind+width/2)
+                 rects2[median_bar2].set_color('#4f300b')
+                 for i in plt.gca().get_xticklabels():
+                    i.set_color("#4f300b")
+                 for i in plt.gca().get_yticklabels():
+                    i.set_color("#4f300b")
+                 plt.figtext(.91,.31,"PERCENTAGE(%)",family='sans-serif',color="#4f300b",rotation='vertical')
+                 ax2.set_xticks(ind)
                  ax2.set_xticklabels( ('A+', 'A', 'A-', 'B+', 'B','B-','C+','C','C-','D+','D','D-','F') )
-                 plt.savefig(imagepath+str(cur_user.id)+'_2.png',dpi=300,format='png')
-
+                 plt.savefig(imagepath+str(cur_user.id)+'_2.png',facecolor=fig2.get_facecolor(),edgecolor='none',dpi=300,format='png')
 
 geostats()
-participant_hist()
+participant_slider1_hist()
+participant_slider2_hist()
 issues_hist()
