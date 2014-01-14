@@ -11,104 +11,186 @@
 
 <div class="home-btn-dialog-box">
     <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
-    &nbsp;
-    <a href="{{url_root}}/mobile/"><img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png"></a>
-    &nbsp;
-    <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+    <a href="{{url_root}}/mobile/"><img width="30px;" id="home-btn" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png"></a>
+    <img width="30px;" id="help-btn" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
 </div>
 
 <div class="title-header">
-    California Report Card v1.0 Daily Update
+    <img width="260px;" src="{{url_root}}/media/mobile/img/cafe/CRC_stat_title_01.png">
 </div>
 
 <div class="stats-section">
     Data as of <strong>{{date}}</strong>.<br/>
-    You are the <strong>{{participant}}{{ordinal}}</strong> participant.<br/>
+    You are the <strong>{{participant}}{{ordinal}} participant.</strong><br/>
     Number of Participants: <strong> {{num_participants}}</strong>.<br/>
     Your Participation Score: <strong> {{score}}</strong>.<br/>
-    Number of Participants who graded your suggestion: <strong>{{received}}</strong>.
-    <hr/>
+    Number of Participants who graded <br/>your suggestion: <strong>{{received}}</strong>.
 </div>
 
+<div class="seperate-lines">
+<canvas id="seperate-lines1" width="348" height="3"> 
+<script>
+      var canvas = document.getElementById('seperate-lines1');
+      var context = canvas.getContext('2d');
+      context.beginPath();
+      context.moveTo(0, 0);
+      context.lineTo(348, 0);
+      context.strokeStyle = '#ffffff';
+      context.lineWidth = 1;
+      context.stroke();
+      context.beginPath();
+      context.moveTo(0, 3);
+      context.lineTo(348, 3);
+      context.strokeStyle = '#ffffff';
+      context.lineWidth = 1;
+      context.stroke();
+    </script>
+</canvas>
+</div>
 
 {% if left_comment %}
 <div class="stats-section">
     <div class="stats-label-big">
-        The issue you suggested for version 2.0 of the CRC is:
+        THE ISSUE YOU SUGGESTED<br/> FOR VERSION 2.0 OF THE CRC:
     </div>
+    <div class="issue-text">
         {{comment}}
-    <hr/>
+        </div>
 </div>
 {% endif %}
+
+<div class="seperate-lines">
+<canvas id="seperate-lines2" width="348" height="3"> 
+<script>
+      var canvas = document.getElementById('seperate-lines2');
+      var context = canvas.getContext('2d');
+      context.beginPath();
+      context.moveTo(0, 0);
+      context.lineTo(348, 0);
+      context.strokeStyle = '#ffffff';
+      context.lineWidth = 1;
+      context.stroke();
+      context.beginPath();
+      context.moveTo(0, 3);
+      context.lineTo(348, 3);
+      context.strokeStyle = '#ffffff';
+      context.lineWidth = 1;
+      context.stroke();
+    </script>
+</canvas>
+</div>
+
 
 {% if level8 %}
 <div class="stats-section">
     <div class="stats-label-big">
-        Grades Assigned To Your Suggestion
+        GRADES ASSIGNED TO <br/>YOUR SUGGESTION
     </div>
-    "How important is this issue for the next Report Card?"<br/>
+    "How important is this issue for the <br/> next Report Card?"<br/>
     {% if show_hist1 %}
-    <div><img src="{{url_root}}/media/mobile/img/dailyupdate/{{participant}}_1.png" height="300" width="300"></div><br/>
+    <div class="stat-img"><img src="{{url_root}}/media/mobile/img/dailyupdate/{{participant}}_1.png" height="300" width="300"></div><br/>
     {% else %}
     <span class="fine-print">You have not received any grades yet</span><br/>
     {% endif %}
 
     <br/>
 
-    "How would you grade California on this issue?"<br/>
+    "How would you grade California on <br/>this issue?"<br/>
     {% if show_hist2 %}
-    <div><img src="{{url_root}}/media/mobile/img/dailyupdate/{{participant}}_2.png" height="300" width="300"></div><br/>
+    <div class="stat-img"><img src="{{url_root}}/media/mobile/img/dailyupdate/{{participant}}_2.png" height="300" width="300"></div><br/>
     {% else %}
     <span class="fine-print">You have not received any grades yet</span><br/>
     {% endif %}
-    <hr/>
 
 </div>
 {% else %}
-Please provide your email and see grades assigned to your suggestion to date!!!<br/>
+<span class="fine-print">Please provide your email and see grades assigned to your suggestion to date!!!</span><br/>
 {% endif %}
+
+<div class="seperate-lines">
+<canvas id="seperate-lines3" width="348" height="3"> 
+<script>
+      var canvas = document.getElementById('seperate-lines3');
+      var context = canvas.getContext('2d');
+      context.beginPath();
+      context.moveTo(0, 0);
+      context.lineTo(348, 0);
+      context.strokeStyle = '#ffffff';
+      context.lineWidth = 1;
+      context.stroke();
+      context.beginPath();
+      context.moveTo(0, 3);
+      context.lineTo(348, 3);
+      context.strokeStyle = '#ffffff';
+      context.lineWidth = 1;
+      context.stroke();
+    </script>
+</canvas>
+</div>
 
 <div class="stats-section">
     <div class="stats-label-big">
-        Grades Assigned to the State of California
+        GRADES ASSIGNED TO THE <br/>STATE OF CALIFORNIA
     </div>
 
-    The median grade is marked in blue.<br/><br/>
+    <span style="font-size:17px; font-style:Italic;">The median grade is marked in brown.</span><br/><br/>
 
     {% for median in medians %}
-    Distribution of Grades for Issue {{median.id}}: {{median.statement}}
-    <div class="hist-issue">
-        <img src="{{url_root}}/media/mobile/img/dailyupdate/{{median.statement}}.png" height="400" width="400">
+    <strong>Distribution of Grades for Issue {{median.id}}:</strong><br/>
+        <div class="issue-text">{{median.statement}}</div>
+    <div class="stat-img">
+        <img src="{{url_root}}/media/mobile/img/dailyupdate/{{median.statement}}.png" height="300" width="300">
 
     </div>
     {% endfor %}
 
-    <hr>
-
 </div>
+<div class="seperate-lines">
+<canvas id="seperate-lines4" width="348" height="3"> 
+<script>
+      var canvas = document.getElementById('seperate-lines4');
+      var context = canvas.getContext('2d');
+      context.beginPath();
+      context.moveTo(0, 0);
+      context.lineTo(348, 0);
+      context.strokeStyle = '#ffffff';
+      context.lineWidth = 1;
+      context.stroke();
+      context.beginPath();
+      context.moveTo(0, 3);
+      context.lineTo(348, 3);
+      context.strokeStyle = '#ffffff';
+      context.lineWidth = 1;
+      context.stroke();
+    </script>
+</canvas>
+</div>
+
 
 <div class="stats-section">
     <div class="stats-label-big">
-        California Map
+        GEOGRAPHIC DISTRIBUTION OF <br/>
+        MEDIAN GRADES ASSIGNED
     </div>
-
-<select id="CA_selector" onchange="changeData(this)" >
+    <strong>Issues:</strong><select id="CA_selector" onchange="changeData(this)" >
 	{% for median in medians %}
 	<option value="{{median.id}}">{{ median.statement}}</option>
 	{% endfor %}
-</select>
+</select><br/>
 
 <div id="map"></div>
-<hr>
+
 </div>
 
 <div class="stats-section">
-Thanks for participating! You can return anytime using this URL to check your grades.<br/>
+<strong>Thanks for participating!</strong> You can return <br/>anytime using this URL to check your grades.<br/>
 <br/>
-Lt. Gov. Gavin Newsom and UC Berkeley Professor Ken Goldberg will present the data and lessons learned from version 1.0 in a public forum at UC Berkeley on 20 March 2014 that will include participants who actively contribute to identifying the most important issues for version 2.0.<br/>
+Lt. Gov. Gavin Newsom and UC Berkeley <br/>Professor Ken Goldberg will present the data and <br/>lessons learned from version 1.0 in a public <br/>
+forum at UC Berkeley on 20 March 2014 that will <br/>include participants who actively contribute to <br/>
+identifying the most important issues for version 2.0.<br/>
 <br/>
-For more information:<br/>
-http://californiareportcard.org/<br/>
+<span style="font-style:Italic;">For more information:</span><br/>
+<a href="http://californiareportcard.org/">http://californiareportcard.org/</a><br/>
 <br/>
 <div>
 
