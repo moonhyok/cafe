@@ -1,5 +1,5 @@
 	
-		var map = L.map('map').setView([37.47, -122.2], 5);
+		var map = L.map('map').setView([37.47, -118], 5);
         
 		var cloudmade = L.tileLayer('http://{s}.tile.cloudmade.com/{key}/{styleId}/256/{z}/{x}/{y}.png', {
 			attribution: 'Map data &copy; 2011 OpenStreetMap contributors, Imagery &copy; 2011 CloudMade',
@@ -31,12 +31,20 @@
 		function getColor(d) {
 			score=100 - d*100;
 			
-		return	   score > 86 ?  "#1a9641" :
-			       score > 63  ? "#a6d96a" :
-			       score > 38  ? "#ffffbf" :
-			       score > 1   ? "#fdae61" :
-			       score >-1   ? "#d7191c" :
-			                     "#aaaaaa";
+		return	   score > 99.9 ? "#bc3160" :
+		           score > 92   ? "#e05e75" :
+		           score > 86   ? "#ff8ba1" :
+		           score > 81   ? "#fbbd88" :
+		           score > 69   ? "#fef391" :
+ 			       score > 63   ? "#c1e9a3" :
+			       score > 56   ? "#61b392" :
+			       score > 44   ? "#5890a8" :
+			       score > 38   ? "#5e7dbc" :
+			       score > 32   ? "#59569e" :
+			       score > 19   ? "#8c75a9" :
+			       score > 1    ? "#c3c3c3" :
+			       score >-1    ? "#7d625f" :
+			                      "#3d3333";
 		}
 		function style(feature) {
 			return {
@@ -53,8 +61,8 @@
 			var layer = e.target;
 
 			layer.setStyle({
-				weight: 3,
-				color: '#666',
+				weight: 2,
+				color: 'white',
 				dashArray: '',
 				fillOpacity: 0.7
 			});
@@ -100,21 +108,16 @@
 		legend.onAdd = function (map) {
 
 			var div = L.DomUtil.create('div', 'info legend'),
-				grades = ['A','B','C','D','F','NA'],
-				legend_color=[0,0.3,0.5,0.8,0.99,1.01],
+				grades = ['A+','A','A-','B+','B','B-','C+','C','C-','D+','D','D-','F','NA'],
+				legend_color=[0,0.05,0.1,0.17,0.25,0.35,0.4,0.5,0.6,0.65,0.8,0.9,0.99,1.01],
 				labels = [],
 				from;// to;
+                for (var i = 0; i < grades.length; i++) {
+        div.innerHTML +=
+            '<i style="background:' + getColor(legend_color[i]) + '"></i> ' +
+            grades[i] + '<br>';
+    }
 
-			for (var i = 0; i < grades.length; i++) {
-				from = grades[i];
-				//to = grades[i + 1];
-
-				labels.push(
-					'<i style="background:' + getColor(legend_color[i]) + '"></i> ' +
-					from) ;//+ (to ? '&ndash;' + to : '+'));
-			}
-
-			div.innerHTML = labels.join('<br>');
 			return div;
 		};
 
