@@ -1,23 +1,73 @@
 body{
     font-family: verdana, sans-serif;
-    background-color: #76b9b6;
-    color: #4e300f;
+    background-color: #76b9b7;
+    color: #4f300b;
+    font-size:17px;
     }
 
 .title-header{
-    color: #f5ebdf;
-    font-family: cursive, sans-serif;
-    font-size: 24px;
-    line-height: 24px;
+   position:relative;
+    left:40px;
+    margin-top:15px;
 }
 
-hr { display: block; height: 2px;
-    border: 0; border-top: 2px solid #f5ebdf;
-    margin: 0.3em 0; padding: 0; }
+.home-btn-dialog-box{
+    position:relative;
+    left:48px;
+    margin-top:20px;
+}
 
+#home-btn{
+   position:relative;
+   left: 15px;
+}
+
+#help-btn{
+position:relative;
+   left: 30px;
+}
+
+strong{
+font-weight:bold;
+}
+
+.stats-section{
+position:relative;
+   left: 48px;
+   margin-top: 10px;
+   font-size:17px;
+}
+
+.seperate-lines{
+   position:relative;
+   margin-top:20px;
+   left:25px;
+}
+
+.stats-label-big{
+                   font-size: 23px;
+                   line-height: 20px;
+                   font-family: verdana, sans-serif;
+                   color: #4f300b;
+                   font-weight: bold;
+                   margin-bottom:10px;
+               }
+
+.stat-img{
+position:relative;
+
+margin-top:15px;
+margin-bottom:15px;
+}
+
+.issue-text{
+   width:300px;
+   word-break: break-word;
+   white-space: pre-line;
+}
 #map {
 		width: 200x;
-		height: 400px;
+		height: 100%;
 	 }
 
 .info {
@@ -31,29 +81,11 @@ hr { display: block; height: 2px;
      }
 
 .fine-print {
-    font-size: 12px;
-    color: #f5ebdf;
+    font-size: 17px;
+    color: #f5ebde;
 }
 
-.home-btn-dialog-box{
-    padding-bottom: 10px;
-}
 
-.stats-section{
-    font-size: 15px;
-    line-height: 18px;
-    font-family: verdana, sans-serif;
-    padding-top: 10px;
-
-}
-
-.stats-label-big{
-                   font-size: 16px;
-                   line-height: 20px;
-                   font-family: verdana, sans-serif;
-                   padding-bottom: 5px;
-                   color: #f5ebdf;
-               }
 
 .info h4 {
 		margin: 0 0 5px;
