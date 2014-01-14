@@ -50,14 +50,14 @@ position:relative;
                    font-family: verdana, sans-serif;
                    color: #4f300b;
                    font-weight: bold;
-                   margin-bottom:10px;
+                   margin-bottom:4px;
                }
 
 .stat-img{
 position:relative;
 
-margin-top:15px;
-margin-bottom:15px;
+margin-top:0px;
+margin-bottom:0px;
 }
 
 .issue-text{
@@ -66,8 +66,8 @@ margin-bottom:15px;
    white-space: pre-line;
 }
 #map {
-		width: 200x;
-		height: 100%;
+		width: 360px;
+		height: 400px;
 	 }
 
 .info {
@@ -101,7 +101,7 @@ margin-bottom:15px;
 
 .legend i {
 		width: 18px;
-		height: 18px;
+		height: 14px;
 		float: left;
 		margin-right: 8px;
 		opacity: 0.7;
