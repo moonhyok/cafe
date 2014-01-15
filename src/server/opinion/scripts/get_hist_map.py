@@ -150,7 +150,6 @@ def participant_slider1_hist():
     alluser=User.objects.filter(is_active = True)
    
     for cur_user in alluser:
-        if len(cur_user.email)>0:
            cur_user_comment=DiscussionComment.objects.filter(user=cur_user,discussion_statement= disc_stmt,is_current = True)
            if len(cur_user_comment)>0:
               slider1=CommentAgreement.objects.filter(comment=cur_user_comment[0])
@@ -201,7 +200,6 @@ def participant_slider2_hist():
     alluser=User.objects.filter(is_active = True)
    
     for cur_user in alluser:
-        if len(cur_user.email)>0:
            cur_user_comment=DiscussionComment.objects.filter(user=cur_user,discussion_statement= disc_stmt,is_current = True)
            if len(cur_user_comment)>0:           
               slider2=CommentRating.objects.filter(comment=cur_user_comment[0])
