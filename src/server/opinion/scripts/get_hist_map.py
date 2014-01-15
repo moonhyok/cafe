@@ -33,9 +33,10 @@ def geostats():
           for j in range(0, len(zipcode_in_county)):
              log=ZipCodeLog.objects.filter(location__exact=zipcode_in_county[j])
              for k in range(0, len(log)):
-                user_grade_s=log[k].user.userrating_set.filter(opinion_space_statement=s,is_current=True)
-                if len(user_grade_s)>0:
-                   s_grade.append(user_grade_s[0].rating)
+             	if log[k].user.is_active:
+                   user_grade_s=log[k].user.userrating_set.filter(opinion_space_statement=s,is_current=True)
+                   if len(user_grade_s)>0:
+                      s_grade.append(user_grade_s[0].rating)
           if len(s_grade)==0:
              geo_data['features'][i]['properties']["s"+str(s.id)]=10
              geo_data['features'][i]['properties']['PARTICIPANTS']=0
@@ -50,9 +51,10 @@ def geostats():
         for j in range(0, len(zipcode_nonca)):
             log=ZipCodeLog.objects.filter(location__exact=zipcode_nonca[j])
             for k in range(0, len(log)):
-                user_grade_s=log[k].user.userrating_set.filter(opinion_space_statement=s,is_current=True)
-                if len(user_grade_s)>0:
-                   s_grade.append(user_grade_s[0].rating)
+            	if log[k].user.is_active:
+                   user_grade_s=log[k].user.userrating_set.filter(opinion_space_statement=s,is_current=True)
+                   if len(user_grade_s)>0:
+                      s_grade.append(user_grade_s[0].rating)
         if len(s_grade)==0:
             geo_data['features'][len(geo_data['features'])-1]['properties']["s"+str(s.id)]=10
             geo_data['features'][len(geo_data['features'])-1]['properties']['PARTICIPANTS']=0
