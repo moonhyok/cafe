@@ -80,7 +80,8 @@ def issues_hist():
        s_rating=UserRating.objects.filter(opinion_space_statement=s,is_current=True)
        s_rating_list=[]
        for rating in s_rating:
-          s_rating_list.append(1-rating.rating)
+       	  if rating.user.is_active:
+             s_rating_list.append(1-rating.rating)
        
        hist,bin_edges = numpy.histogram(s_rating_list,bins,normed=False)
        hist_in_percent=(100*hist/float(sum(hist)))[::-1]
