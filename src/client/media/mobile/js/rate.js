@@ -146,6 +146,11 @@ var rate = (function($, d3, console) {
         logUserEvent(4,'rated');
         $('.rate').hide();
         $('.menubar').show();
+        try {
+               window.cur_clicked_mug.transition().duration(2000).style("opacity", "0").remove();
+            } catch (err) {
+                    console.log(err);
+            }
     }
 
     // pulls a live comment text from the database. id is either the cid or the uid,
