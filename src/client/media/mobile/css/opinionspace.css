@@ -302,7 +302,6 @@ table.pretty caption {
 		/*position: absolute;*/
 		background-color: #74b9b7;
 		font-family: verdana, sans-serif;
-		top: 250;
 		left: 0px;
 		z-index: 999;
 		text-shadow: none;
@@ -318,7 +317,6 @@ table.pretty caption {
     		/*position: absolute;*/
     		background-color: #74b9b7 !important;
     		font-family: verdana, sans-serif;
-    		top: 250;
     		left: 0px;
     		z-index: 999;
     		text-shadow: none;
@@ -334,7 +332,6 @@ table.pretty caption {
         		/*position: absolute;*/
         		background-color: #74b9b7 !important;
         		font-family: verdana, sans-serif;
-        		top: 250;
         		left: 0px;
         		z-index: 999;
         		text-shadow: none;
