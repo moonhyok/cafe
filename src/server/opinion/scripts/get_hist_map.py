@@ -145,7 +145,7 @@ def participant_slider1_hist():
     N=len(bins)-1
     ind=numpy.arange(N)
     width=0.5
-    alluser=User.objects.all()
+    alluser=User.objects.filter(is_active = True)
    
     for cur_user in alluser:
         if len(cur_user.email)>0:
@@ -196,7 +196,7 @@ def participant_slider2_hist():
     N=len(bins)-1
     ind=range(N)
 	
-    alluser=User.objects.all()
+    alluser=User.objects.filter(is_active = True)
    
     for cur_user in alluser:
         if len(cur_user.email)>0:
