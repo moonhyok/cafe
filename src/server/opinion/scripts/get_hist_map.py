@@ -156,7 +156,8 @@ def participant_slider1_hist():
               slider1_rating=[]
                
               for i in range(0, len(slider1)):
-                 slider1_rating.append(1-slider1[i].agreement)
+              	 if slider1[i].rater.is_active:
+                    slider1_rating.append(1-slider1[i].agreement)
               #produce png only if len(slider) >0
               if len(slider1)>0:
                  slider1_hist,bin_edges_1 = numpy.histogram(slider1_rating,bins,normed=False)
@@ -206,7 +207,8 @@ def participant_slider2_hist():
               slider2_rating=[]
                
               for i in range(0, len(slider2)):
-                 slider2_rating.append(1-slider2[i].rating)
+              	 if slider2[i].rater.is_active:
+                    slider2_rating.append(1-slider2[i].rating)
               #produce png only if len(slider) >0
               
               if len(slider2)>0:
