@@ -559,7 +559,6 @@ table.pretty caption {
 	position: absolute;
 	bottom: 10px;
 	clear: both;
-	line-height: 15px !important;
 	font-size: 10px;
 	font-family: verdana, sans-serif;
     color: #083434;
