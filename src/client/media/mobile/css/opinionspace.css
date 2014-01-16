@@ -531,7 +531,7 @@ table.pretty caption {
 	float: right;
 	width: 25%;
 	position: relative;
-	top: -70px;
+	top: -45px;
 	left: -9px;
 	}
 
@@ -554,17 +554,17 @@ table.pretty caption {
 
 	.landing-disclaimer{
 	position: relative;
-	top: -66px;
+	top: -35px;
 	clear: both;
 	line-height: 13px !important;
-	font-size: 10px;
+	font-size: 9.5px;
 	font-family: verdana, sans-serif;
     color: #083434;
     text-shadow: none;
     line-height: 13px;
-	text-align: center;
-	width: 100%;
-	padding-bottom: 10px;
+	text-align: left;
+	width: 94%;
+	padding-left: 10px;
 	}
 
 	.error_username {
@@ -998,7 +998,7 @@ padding-right: 7px;
 }
 
 .dialog-text-style-noflow a:link {
-    color: #f5ebdf !important;
+    color: #4e300f; !important;
     text-decoration: underline;
     text-shadow: none;
     font-size: 16px;

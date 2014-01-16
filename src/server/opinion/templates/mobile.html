@@ -198,7 +198,7 @@
 
   <div class='landing'>
 
-      <div class="home-btn-dialog-box">
+      <div class="home-btn-dialog-box landing-navigation" style="display: none;">
           <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
           &nbsp;
           <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
@@ -208,7 +208,7 @@
       </div>
 
       <center>
-          <img src="{{url_root}}/media/mobile/img/cafe/cafe-title-cropped.png" style="padding-top: 5px;border: none;width: 250px;" />
+          <img src="{{url_root}}/media/mobile/img/cafe/cafe-title-cropped.png" style="padding-top: 5px;border: none;width: 233px;" />
       </center>
 
     <div class="responsive-max-width">
@@ -221,16 +221,18 @@
                         <div style="width: 140px;line-height: 26px;">
                             <button type='submit' data-theme='a' class='first-time-btn'><font style="font-size: 14px;">BEGIN</font></button>
                         </div>
-                    {{client_settings.WELCOME_PAGE_TEXT1}}
+                    Take a moment to join the {{num_users}} others who have graded the State of California on six timely issues.
+                    <!--{{client_settings.WELCOME_PAGE_TEXT1}}-->
                 </div>
-                <div class="landing-img-div"><img src="{{url_root}}/media/mobile/img/cafe/spoon-and-pencil-draft.png" style="width: 75px;"/></div>
+                <div class="landing-img-div"><img src="{{url_root}}/media/mobile/img/cafe/spoon-and-pencil-draft.png" style="width: 70px;"/></div>
             </div>
         </div>
     </div>
 
       <div class="landing-disclaimer">
-          Source: UC Berkeley CITRIS Data and Democracy Initiative<br/>
-          {{client_settings.WELCOME_PAGE_TEXT2}}
+          <a href="#" class="help-btn-dialog" style="font-size: 13px;line-height: 28px;color: #4e300f;">About</a><br/>
+          {{client_settings.WELCOME_PAGE_TEXT2}}<br>
+          Developed by the CITRIS Data & Democracy Initiative and the Office of the Lt. Gov of California.<br>
           <!--<a href="#" class="comment-admin-text-a" style="font-size: 10px;" onclick="$('.dialog-about').show();$('.landing').hide();window.landing=true;">{{client_settings.WELCOME_PAGE_ABOUT_LINK}}</a>-->
       </div>
 
@@ -398,6 +400,8 @@
           <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
           &nbsp;
           <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+          &nbsp;
+          <img width="30px;" class='logout-btn' src="{{url_root}}/media/mobile/img/cafe/CRC_logout_bttn.png">
       </div>
 
       <center>
@@ -405,7 +409,8 @@
               <div class="basic-sub-sub-header" style="text-align:left;">{{topic}}<br/></div>
               <textarea name='answer' id='entered-comment'></textarea>
               <div class="standard-btn-div">
-                  <button type='submit' data-theme='b' class='comment-submit-btn'><font style="font-size: 16px;">Save</font></button>
+                  <button type='submit' data-theme='b' class='comment-submit-btn'><font style="font-size: 16px;">Post</font></button>
+                  <button type='submit' data-theme='b' class='comment-cancel-btn'><font style="font-size: 16px;">Later</font></button>
               </div>
           </div>
       </center>
@@ -465,8 +470,7 @@
 
         <div class="comment-admin-text">
             <a href="#" class="comment-admin-text-a" onclick="rate.doneRatingNoSave();">Skip</a>&nbsp;&nbsp;
-            <a href="#" class="comment-admin-text-a" id="flag1">Inappropriate</a>&nbsp;&nbsp;
-            <a href="#" class="comment-admin-text-a" id="flag2">Irrelevant</a>
+            <a href="#" class="comment-admin-text-a" id="flag1">Inappropriate</a>
         </div>
 
      <div class='sliders'>
@@ -595,9 +599,9 @@
       </div>
         <div class='landing-img-txt default-left-padding' style="width: 95%;font-size: 20px;line-height: 23px;">
             {{client_settings.LOGOUT_DIALOG_TEXT}}<br/>
-            <a href="http://californiareportcard.org" target="_blank" style="color: #f5ebdf;">http://californiareportcard.org</a><br/><br/>
-	    Twitter: <a href="https://twitter.com/CaReportCard" target="_blank" style="color: #f5ebdf;">@CaReportCard</a><br/>
-	    Facebook: <a href="https://www.facebook.com/CaReportCard" target="_blank" style="color: #f5ebdf;">CaReportCard</a>
+            <a href="http://californiareportcard.org" target="_blank" style="color: #4e300f;">http://californiareportcard.org</a><br/><br/>
+	    Twitter: <a href="https://twitter.com/CaReportCard" target="_blank" style="color: #4e300f;">@CaReportCard</a><br/>
+	    Facebook: <a href="https://www.facebook.com/CaReportCard" target="_blank" style="color: #4e300f;">CaReportCard</a>
         </div>
     </div>
 
@@ -681,7 +685,7 @@
         <br/><br/>
         {{client_settings.EMAIL_ASK_TEXT}}
         <input type="email" id='regemail' name='regemail' class='regforminput' style="font-size: 15px; background-color: #FFFFFF;color: #000000;" placeholder="Email" data-theme='b'></input>
-        <div class="comment-admin-text-b">We promise not to share your email address with any third parties</div>
+        <div class="comment-admin-text-b">Your email address will not be displayed and we promise not to share your email address with any third parties.</div>
         <center>
             <div class="standard-btn-div">
                 <button type='submit' data-theme='b' class='dialog-continue-ready' ><font style="font-size: 16px;">Enter</font></button>
@@ -698,14 +702,16 @@
          <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
          &nbsp;
          <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+         &nbsp;
+         <img width="30px;" class='logout-btn' src="{{url_root}}/media/mobile/img/cafe/CRC_logout_bttn.png">
      </div>
     <div class='dialog-text-notitle default-left-padding'>
-        Thank you!  Logout now or grade more suggestions for the next report card.
+        Thank you!<br/>
+        Logout now or grade more suggestions for the next report card.
         Sending your unique link now.
         <center>
             <div class="standard-btn-div" style="max-width: 250px !important;">
                 <button type='submit' data-theme='b' class='dialog-email-ready' ><font style="font-size: 16px;">Continue Grading</font></button>
-                <button type='submit' data-theme='b' class='logout-btn' ><font style="font-size: 16px;">Logout</font></button>
             </div>
         </center>
     </div>
@@ -755,7 +761,7 @@
       </div>
       <div class='dialog-text-style-noflow small-left-padding'>
           <div class="basic-header">Help</div>
-          To learn more about this project, its history, related projects, and the team that built it, visit <a href="http://californiareportcard.org/" target="_blank" style="color: #f5ebdf;">californiareportcard.org</a>.<br/>
+          To learn more about this project, its history, related projects, and the team that built it, visit <a href="http://californiareportcard.org/" target="_blank" style="color: #4e300f;">californiareportcard.org</a>.<br/>
       </div>
   </div>
 
@@ -775,7 +781,7 @@
           Click "Median Grade" at the top of the far right column to learn more about how this is determined.<br/><br/>
 
           <em>Q:</em> How can I learn more about the six issues we are grading?<br/>
-          <em>A:</em> To learn more about the six issues, please visit <a href="http://californiareportcard.org/issues/" target="_blank" style="color: #f5ebdf;">californiareportcard.org/issues/</a>
+          <em>A:</em> To learn more about the six issues, please visit <a href="http://californiareportcard.org/issues/" target="_blank" style="color: #4e300f;">californiareportcard.org/issues/</a>
           <br/><br/>
 
           <em>Q:</em> Do I have to grade all issues?<br/>
@@ -927,8 +933,8 @@
       </div>
       <div class='dialog-text-style-noflow small-left-padding'>
           <div class="basic-header">Help</div>
-          Q. How do I grade a suggestion?<br/>
-          A. After clicking a mug, that participant’s suggestion is displayed.
+          <em>Q:</em> How do I grade a suggestion?<br/>
+          <em>A:</em> After clicking a mug, that participant’s suggestion is displayed.
           You can skip to another one or mark this suggestion as irrelevant or inaccurate
           (click again to undo).  Otherwise, drag the two slider handles to assign grades.<br/><br/>
       </div>
@@ -944,8 +950,8 @@
       </div>
       <div class='dialog-text-style-noflow small-left-padding'>
           <div class="basic-header">Help</div>
-          Q. Why should I enter my email address?<br/>
-          A. So we can send you a unique link to see the grades your suggested issue receives.
+          <em>Q:</em> Why should I enter my email address?<br/>
+          <em>A:</em> So we can send you a unique link to see the grades your suggested issue receives.
       </div>
   </div>
 
@@ -959,7 +965,7 @@
       </div>
       <div class='dialog-text-style-noflow small-left-padding'>
           <div class="basic-header">Help</div>
-          To learn more about this project, its history, related projects, and the team that built it, visit <a href="http://californiareportcard.org/" target="_blank" style="color: #f5ebdf;">californiareportcard.org</a>.
+          To learn more about this project, its history, related projects, and the team that built it, visit <a href="http://californiareportcard.org/" target="_blank" style="color: #4e300f;">californiareportcard.org</a>.
       </div>
   </div>
 

@@ -446,10 +446,12 @@ $(document).ready(function() {
     });
     
     $('.comment-cancel-btn').click(function() {
-        $('.comment-input').hide();
-        window.cur_state = 'map';
-        rate.logUserEvent(6,'comment cancelled');
-        $('.menubar').show();
+          $('.comment-input').hide();
+          $('.dialog-continue').show();
+          $('.scorebox').hide();
+          $('.menubar').hide();
+          window.prev_state = 'comment';
+          window.cur_state = 'continue';
         //$('.scorebox').show();
     });
 
