@@ -412,7 +412,7 @@ var _blooms = blooms = (function($, d3, console) {
                 var _this = d3.select(this);
 		        window.cur_clicked_mug = _this;
                 window.prev_state = 'map';
-                utils.showLoading("Loading Suggestion...");
+                //utils.showLoading("Loading Suggestion...");
                     $('.instructions').hide();
                     $('.scorebox').hide();
                     $('.menubar').hide();
@@ -424,14 +424,14 @@ var _blooms = blooms = (function($, d3, console) {
                 var cid = commentData.cid;
                 window.current_cid = cid;
                 window.current_uid = d.uid;
-                $('.rate').show();
                 //$('.rate-loading').show();
                 rate.updateDescriptions(document.getElementById('commentInput'), content);
+                $('.rate').show();
                 /*$('.rate').slideDown(function() {
                     $('.rate-loading').hide();
                     $('.rate').data('cid', cid);
                 });*/
-                utils.hideLoading(0);
+                //utils.hideLoading(0);
             });
 
                     if(window.user_score >= 2)
