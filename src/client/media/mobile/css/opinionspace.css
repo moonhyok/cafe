@@ -567,8 +567,8 @@ table.pretty caption {
     font-weight: bold;
     line-height: 13px;
 	text-align: left;
-	width: 95%;
-	padding-left: 7px;
+	max-width: 100%;
+	padding-left: 10px;
 	}
 
 	.error_username {
