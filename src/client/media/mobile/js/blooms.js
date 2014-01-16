@@ -541,7 +541,7 @@ $(document).ready(function() {
         }
         //_this.transition().duration(500).style("opacity", "0");
         /* Remove this bloom from our bookkeeping array. */
-        var index = $.inArray(window.current_uid, window.blooms_list);
+        var index = jQuery.inArray(window.current_uid, window.blooms_list);
         if (index >= 0) {
             window.blooms_list.splice(index, 1);
         }

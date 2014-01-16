@@ -144,13 +144,26 @@ var rate = (function($, d3, console) {
         //note: this done-rating button is mapped twice, see below in populateBlooms #go-back.
         resetRatingSliders();
         logUserEvent(4,'rated');
-        $('.rate').hide();
-        $('.menubar').show();
         try {
                window.cur_clicked_mug.transition().duration(2000).style("opacity", "0").remove();
+               var index = window.blooms_list.indexOf(window.current_uid);
+               console.log(index);
+               if (index >= 0) {
+                   window.blooms_list.splice(index, 1);
+               }
+
+               if (window.blooms_list.length <= 2) {
+               utils.showLoading("Loading More Mugs...");
+               window.blooms_list = undefined; //needed to avoid infinite recursing
+               setTimeout(blooms.populateBlooms, 500);
+               }
+
             } catch (err) {
                     console.log(err);
             }
+
+                $('.rate').hide();
+                $('.menubar').show();
     }
 
     // pulls a live comment text from the database. id is either the cid or the uid,
