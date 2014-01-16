@@ -492,6 +492,7 @@ $(document).ready(function() {
 
     $('.home-btn-dialog').click(function() {
            window.no_menubar = true;
+           $('.landing-navigation').show();
            accounts.hideAll();
            window.prev_state = window.cur_state;
            window.cur_state = 'home';
