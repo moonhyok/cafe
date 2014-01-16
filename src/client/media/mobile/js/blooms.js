@@ -170,8 +170,8 @@ var _blooms = blooms = (function($, d3, console) {
 
         for (var i = 0; i < ratings.length; i += window.num_sliders) {
             rating = compileIndexedElementsToList(ratings.slice(i, i + window.num_sliders), rating_value_index);
-            x = dotProduct(ex, rating) + (Math.random()-.5); //perturb values to prevent bunching
-            y = dotProduct(ey, rating) + (Math.random()-.5);
+            x = dotProduct(ex, rating) + (Math.random()-.5)*3; //perturb values to prevent bunching
+            y = dotProduct(ey, rating) + (Math.random()-.5)*3;
             uid = ratings[i][rating_uid_index];
             result.push({
                 'uid': uid,
@@ -324,7 +324,7 @@ var _blooms = blooms = (function($, d3, console) {
             top: 40,
             left: 0,
             right: 40,
-            bottom: 60
+            bottom: 40
             };
 
 
@@ -373,7 +373,7 @@ var _blooms = blooms = (function($, d3, console) {
             })
             .attr('x', function(d) {
                 var scale = Math.abs(d.x-window.your_mug_data.ox);//set min distance add perturbation to prevent overlap
-                scale = Math.max(scale,.15);
+                scale = Math.max(scale,.25);
 
                 if (Math.random() >= .5) //evenly split over x axis
                     {
@@ -386,7 +386,7 @@ var _blooms = blooms = (function($, d3, console) {
             })
             .attr('y', function(d) {
                 var scale = Math.abs(d.y-window.your_mug_data.oy);//set min distance
-                scale = Math.max(scale,.15);
+                scale = Math.max(scale,.25);
 
                  if (Math.random() >= .5) //evenly split over y axis
                  {
