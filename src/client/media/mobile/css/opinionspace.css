@@ -559,14 +559,15 @@ table.pretty caption {
 	bottom: 10px;
 	clear: both;
 	line-height: 13px !important;
-	font-size: 9.5px;
+	font-size: 10px;
 	font-family: verdana, sans-serif;
     color: #083434;
     text-shadow: none;
+    font-weight: bold;
     line-height: 13px;
 	text-align: left;
-	width: 94%;
-	padding-left: 10px;
+	width: 98%;
+	padding-left: 2px;
 	}
 
 	.error_username {
