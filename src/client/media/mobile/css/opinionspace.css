@@ -557,7 +557,7 @@ table.pretty caption {
 
 	.landing-disclaimer{
 	position: absolute;
-	bottom: 15px;
+	bottom: 10px;
 	clear: both;
 	line-height: 15px !important;
 	font-size: 10px;
