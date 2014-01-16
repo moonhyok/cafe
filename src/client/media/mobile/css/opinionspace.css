@@ -218,8 +218,7 @@ table.pretty caption {
 	.menubar {
 		display: none;
 		width: 100%;
-		bottom:0px;
-		padding-bottom: 10px;
+		top: 0px;
         position: fixed;
         z-index: 999;
         background-color: rgba(255,255,255,.7);
@@ -537,7 +536,7 @@ table.pretty caption {
 
 	.landing-img-txt{
 	float: left;
-	width: 65%;
+	width: 68%;
 	line-height: 15px;
 	padding-left: 10px;
 	color: #4e300f;
@@ -554,7 +553,7 @@ table.pretty caption {
 
 	.landing-disclaimer{
 	position: relative;
-	top: -35px;
+	top: -42px;
 	clear: both;
 	line-height: 13px !important;
 	font-size: 9.5px;
