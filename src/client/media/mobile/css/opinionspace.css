@@ -222,7 +222,7 @@ table.pretty caption {
 		left:0px;
         position: fixed;
         z-index: 999;
-        background-color: #f5ebdf;
+        background-color: rgba(245, 235, 223,0.7);
 	}
 
 	.ui-slider-input {
