@@ -213,15 +213,17 @@ for comment in comments:
 
 ## Flagged comments
 
-report_body_html += "<hr><h3>Flagged comments:</h3>" 
-report_body_text += "<hr><h3>Flagged comments:</h3>" 
+report_body_html += "<hr><h3>Unmoderated flagged comments:</h3>" 
+report_body_text += "<hr><h3>Unmoderated flagged comments:</h3>" 
 
 flagged = FlaggedComment.objects.all().order_by('comment')
 printed = []
 for fcomment in flagged:
-    if fcomment.created.date() >= datetime.date.today() - datetime.timedelta(days=7):
+    if not fcomment.comment.blacklisted:
+    #if fcomment.created.date() >= datetime.date.today() - datetime.timedelta(days=7):
 	if fcomment.comment.discussion_statement == discussion_statement_objects[0]:
 		if fcomment.comment not in printed and not_admin_approved(fcomment.comment):
+
                     # + '\nEmail: ' + fcomment.comment.user.email + \
 			line= 'User ID: ' + str(fcomment.comment.user.id) + "\nComment: " + decode_to_unicode(fcomment.comment.comment) + '\n\n'
                         report_body_html += (line.replace("\n", "<br>"))
