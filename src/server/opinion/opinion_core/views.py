@@ -197,6 +197,7 @@ def crcstats(request,entry_code=None):
     #Case 2: Entry using a code
     elif entry_code!=None:
         user = authenticate(entrycode=entry_code)
+        login(request,user)
     #Case 3: Testing argument based user id
     else:
         uid = request.GET.get('username',-1)
