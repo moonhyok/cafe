@@ -8,7 +8,6 @@ Here is your unique link that will let you login to continue to
 participate and to see how others are grading the issue you suggested
 for the next Report Card:
 
-Custom-URL to Stats Page:
 {{ url_root }}/crcstats/{{entrycode}}
 
 Please save this link.  You can use it anytime to view updates on the
