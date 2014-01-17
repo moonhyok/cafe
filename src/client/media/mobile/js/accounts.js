@@ -234,10 +234,17 @@ var accounts = (function($, d3, console) {
             success: function(data) {
                 if (data.hasOwnProperty('success')) {
                     //console.log("data was sent!")
+                    window.email_saved = true;
+                    $('.dialog-email').show();
+                    window.cur_state = 'email';
+                    $('.dialog-continue').hide();
+                    $("#email-error").hide();
+                    window.prev_state = 'continue';
                 }
             },
             error: function() {
-				
+		$("#email-error").html("Please enter a valid email");
+		$("#email-error").show();
                 console.log("email didn't get sent!");
             }
         });
@@ -732,14 +739,10 @@ $(document).ready(function() {
 
     $('.dialog-continue-ready').click(function() {
             rate.logUserEvent(8,'dialog 3');
-            $('.dialog-continue').hide();
-            window.prev_state = 'continue';
+            
             //$('.scorebox').show();
             if ($('#regemail').val()){
-           		    accounts.sendEmail($('#regemail').val());
-                    window.email_saved = true;
-                    $('.dialog-email').show();
-                    window.cur_state = 'email';
+                    accounts.sendEmail($('#regemail').val());
            	}
            	else
            	{
