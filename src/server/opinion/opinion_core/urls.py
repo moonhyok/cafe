@@ -54,6 +54,7 @@ urlpatterns = patterns('',
                        (r'^adminpanel/configure/$', 'opinion.opinion_core.views.configure_client'),
                        (r'^adminpanel/install/$', 'opinion.opinion_core.views.install_client'),
                        (r'^adminpanel/proofread/$', 'opinion.opinion_core.views.proof_read_comments'),
+                       (r'^admintagcomment/(\d+)/$', 'opinion.opinion_core.views.admin_tag_comment'),
                        (r'^adminpanel/$', 'opinion.opinion_core.views.admin_panel_login'),
 
                        # JSON pages

@@ -319,6 +319,7 @@ def soft_launch(request, username=None):
 # Admin panel html pages
 # Added by Dhawal M
 #
+
 @admin_required
 def get_csv_report(request):
     from django.core.servers.basehttp import FileWrapper
@@ -1034,6 +1035,26 @@ def approve_comment(request, comment_id):
 		approved_comment.save()
 		return json_result({'success':True})
 
+
+@admin_required
+def admin_tag_comment(request, comment_id):
+    comment = DiscussionComment.objects.filter(id = comment_id)
+    if not len(comment) == 1:
+        return json_result({'success':False, 'error_message':'Comment does not exist'})
+
+    new_tag = request.REQUEST.get('tag', '')
+    comment=comment[0]
+    existing_tags = AdminCommentTag.objects.filter(comment=comment)
+
+
+    if existing_tags:
+        existing_tags.update(tag=new_tag)
+        return json_result({'success':True})
+    else:
+        a = AdminCommentTag(comment=comment, tag=new_tag)
+        a.save()
+        return json_result({'success':True})     
+
 @admin_required
 def blacklist_comment(request, comment_id):
 	comment = DiscussionComment.objects.filter(id = comment_id)
@@ -1078,9 +1099,15 @@ def search(request, os_id, username=''):
     if not len(user):
       return json_result({'success':False, 
                           'error_message':'No users matching that username.'})
+
+    comments = []
+    for u in user:
+        comments.extend(list(DiscussionComment.objects.filter(user=u, is_current=True)))
 	
-    return json_result({'success':True, 
-                        'data':[format_user_object(u, os_id) for u in user]})
+    #return json_result({'success':True, 
+    #                    'data':[format_user_object(u, os_id) for u in user]})
+
+    return json_result({'success':True, 'data':[format_general_discussion_comment(c) for c in comments]})
 
 	
 @admin_required
