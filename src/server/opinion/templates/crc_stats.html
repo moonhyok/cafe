@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-
+<head>
+	<meta name='viewport' content='user-scalable=no, width=device-width,initial-scale=1, maximum-scale=1' />
+</head>
 <style>
 
 </style>
@@ -21,27 +23,27 @@
 </div>
 
 <div class="stats-section">
-    Data as of <strong>{{date}}</strong>.<br/>
-    You are the <strong>{{participant}}{{ordinal}} participant.</strong><br/>
-    Number of Participants: <strong> {{num_participants}}</strong>.<br/>
-    Your Participation Score: <strong> {{score}}</strong>.<br/>
-    Number of Participants Who Graded <br/>Your Suggestion: <strong>{{received}}</strong>.
+    Data as of <strong>{{date}}</strong><br/>
+    You are the <strong>{{participant}}{{ordinal}} participant</strong><br/>
+    Number of Participants: <strong> {{num_participants}}</strong><br/>
+    Your Participation Score: <strong> {{score}}</strong><br/>
+    Number of Participants who graded <br/>your suggestion: <strong>{{received}}</strong>
 </div>
 
 <div class="seperate-lines">
-<canvas id="seperate-lines1" width="348" height="5"> 
+<canvas id="seperate-lines1" width="260" height="4"> 
 <script>
       var canvas = document.getElementById('seperate-lines1');
       var context = canvas.getContext('2d');
       context.beginPath();
       context.moveTo(0, 0);
-      context.lineTo(348, 0);
+      context.lineTo(260, 0);
       context.strokeStyle = '#ffffff';
       context.lineWidth = 1;
       context.stroke();
       context.beginPath();
       context.moveTo(0, 4);
-      context.lineTo(348, 4);
+      context.lineTo(260, 4);
       context.strokeStyle = '#ffffff';
       context.lineWidth = 1;
       context.stroke();
@@ -50,59 +52,60 @@
 </div>
 
 {% if left_comment %}
-<div class="stats-section">
+<div class="stats-section-title">
     <div class="stats-label-big">
         THE ISSUE YOU SUGGESTED<br/> FOR VERSION 2.0 OF THE CRC:
     </div>
     <div class="issue-text">
         {{comment}}
         </div>
-              <div class="seperate-lines">
-        <canvas id="seperate-lines2" width="348" height="3"> 
-        <script>
-		if ({{left_comment}})
-        { var canvas = document.getElementById('seperate-lines2');
-          var context = canvas.getContext('2d');
-          context.beginPath();
-        context.moveTo(0, 0);
-        context.lineTo(348, 0);
-        context.strokeStyle = '#ffffff';
-        context.lineWidth = 1;
-      context.stroke();
+</div>
+{% endif %}
+
+{% if left_comment %}
+ <div class="seperate-lines">
+<canvas id="seperate-lines2" width="260" height="4"> 
+<script>
+      var canvas = document.getElementById('seperate-lines2');
+      var context = canvas.getContext('2d');
       context.beginPath();
-      context.moveTo(0, 3);
-      context.lineTo(348, 3);
+      context.moveTo(0, 0);
+      context.lineTo(260, 0);
       context.strokeStyle = '#ffffff';
       context.lineWidth = 1;
-      context.stroke();}
+      context.stroke();
+      context.beginPath();
+      context.moveTo(0, 4);
+      context.lineTo(260, 4);
+      context.strokeStyle = '#ffffff';
+      context.lineWidth = 1;
+      context.stroke();
     </script>
 </canvas>
-</div>
-
 </div>
 {% endif %}
 
 
 
 {% if level8 %}
-<div class="stats-section">
+<div class="stats-section-title">
     <div class="stats-label-big">
         GRADES ASSIGNED TO <br/>YOUR SUGGESTION
     </div>
     "How important is this issue for the <br/> next Report Card?"<br/>
     {% if show_hist1 %}
-    <div class="stat-img"><img src="{{url_root}}/media/mobile/img/dailyupdate/{{participant}}_1.png" height="330" width="330"></div><br/>
+    <div class="stat-img"><img src="{{url_root}}/media/mobile/img/dailyupdate/{{participant}}_1.png"  width="310"></div><br/>
     {% else %}
-    <span class="fine-print">You have not received any grades yet</span><br/>
+    <span class="fine-print">You have not received any <br>grades yet</span><br/>
     {% endif %}
 
     <br/>
 
     "How would you grade California on <br/>this issue?"<br/>
     {% if show_hist2 %}
-    <div class="stat-img"><img src="{{url_root}}/media/mobile/img/dailyupdate/{{participant}}_2.png" height="330" width="330"></div><br/>
+    <div class="stat-img"><img src="{{url_root}}/media/mobile/img/dailyupdate/{{participant}}_2.png"  width="310"></div><br/>
     {% else %}
-    <span class="fine-print">You have not received any grades yet</span><br/>
+    <span class="fine-print">You have not received any <br>grades yet</span><br/>
     {% endif %}
 
 </div>
@@ -111,19 +114,19 @@
 {% endif %}
 
 <div class="seperate-lines">
-<canvas id="seperate-lines3" width="348" height="5"> 
+<canvas id="seperate-lines3" width="360" height="4"> 
 <script>
       var canvas = document.getElementById('seperate-lines3');
       var context = canvas.getContext('2d');
       context.beginPath();
       context.moveTo(0, 0);
-      context.lineTo(348, 0);
+      context.lineTo(260, 0);
       context.strokeStyle = '#ffffff';
       context.lineWidth = 1;
       context.stroke();
       context.beginPath();
       context.moveTo(0, 4);
-      context.lineTo(348, 4);
+      context.lineTo(260, 4);
       context.strokeStyle = '#ffffff';
       context.lineWidth = 1;
       context.stroke();
@@ -131,37 +134,37 @@
 </canvas>
 </div>
 
-<div class="stats-section">
+<div class="stats-section-title">
     <div class="stats-label-big">
         GRADES ASSIGNED TO THE <br/>STATE OF CALIFORNIA
     </div>
 
-    <span style="font-size:17px; font-style:Italic;">The median grade is marked in brown.</span><br/><br/>
+    <span style="font-size:17px; font-style:Italic;">The median grade is marked in brown.</span>
 
     {% for median in medians %}
     <strong>Distribution of Grades for Issue {{median.id}}:</strong><br/>
         <div class="issue-text">{{median.statement}}</div>
     <div class="stat-img">
-        <img src="{{url_root}}/media/mobile/img/dailyupdate/{{median.statement}}.png" height="330" width="330">
+        <img src="{{url_root}}/media/mobile/img/dailyupdate/{{median.statement}}.png" width="310">
 
     </div>
     {% endfor %}
 
 </div>
 <div class="seperate-lines">
-<canvas id="seperate-lines4" width="348" height="5"> 
+<canvas id="seperate-lines4" width="348" height="4"> 
 <script>
       var canvas = document.getElementById('seperate-lines4');
       var context = canvas.getContext('2d');
       context.beginPath();
       context.moveTo(0, 0);
-      context.lineTo(50, 0);
+      context.lineTo(260, 0);
       context.strokeStyle = '#ffffff';
       context.lineWidth = 1;
       context.stroke();
       context.beginPath();
       context.moveTo(0, 4);
-      context.lineTo(348, 4);
+      context.lineTo(260, 4);
       context.strokeStyle = '#ffffff';
       context.lineWidth = 1;
       context.stroke();
@@ -170,9 +173,9 @@
 </div>
 
 
-<div class="stats-section">
+<div class="stats-section-title">
     <div class="stats-label-big">
-        GEOGRAPHIC DISTRIBUTION OF <br/>
+        GEOGRAPHIC DISTRIBUTION <br/> OF
         MEDIAN GRADES ASSIGNED
     </div>
     <strong>Issues:</strong><select id="CA_selector" onchange="changeData(this)" >
@@ -186,23 +189,25 @@
 </div>
 
 <div class="stats-section">
-<strong>Thanks for participating!</strong> You can return <br/>anytime using this URL to check your grades.<br/>
-<br/>
-Lt. Gov. Gavin Newsom and UC Berkeley <br/>Professor Ken Goldberg will present the data and <br/>lessons learned from version 1.0 in a public <br/>
-forum at UC Berkeley on 20 March 2014 that will <br/>include participants who actively contribute to <br/>
-identifying the most important issues for version 2.0.<br/>
-<br/>
-<span style="font-style:Italic;">For more information:</span><br/>
-<a href="http://californiareportcard.org/">http://californiareportcard.org/</a><br/>
-<br/>
+<strong>Thanks for participating!</strong> 
+   <div class="issue-txt" id="final-remark">
+   You can return anytime using this URL 
+   to check your grades.
+Lt. Gov. Gavin Newsom and UC Berkeley 
+Professor Ken Goldberg will present 
+the data and lessons learned from 
+version 1.0 in a public forum at UC 
+Berkeley on 20 March 2014 that will 
+include participants who actively 
+contribute to identifying the most 
+important issues for version 2.0.
+</div>
+
+<span style="font-style:Italic;">For more information:</span>
+<a href="http://californiareportcard.org/">http://californiareportcard.org/</a>
 <div>
-
-
-
 <script type='text/javascript' src='{{url_root}}/media/mobile/js/geostat.js'></script>  
 <script type='text/javascript' src='{{url_root}}/media/mobile/js/map.js'></script>  
-
-
 </body>
 
 </html>
