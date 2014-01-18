@@ -748,6 +748,7 @@ $(document).ready(function() {
            	{
            	    rate.initMenubar();
            	    window.cur_state = 'map';
+           	    $('.dialog-continue').hide();
            	}
         });
 
