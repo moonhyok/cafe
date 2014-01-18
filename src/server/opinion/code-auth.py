@@ -4,9 +4,9 @@ from opinion.opinion_core.models import *
 
 class EntryCodeModelBackend(object):
     def authenticate(self, entrycode):
-        candidate=EntryCode.objects.filter(code__exact=entrycode)
+        candidate=EntryCode.objects.filter(code__exact=entrycode).order_by('id')
         if len(candidate)>0:
-           user = User.objects.filter(username__exact=candidate[0].username).order_by('id')
+           user = User.objects.filter(username__exact=candidate[len(candidate)-1].username).order_by('id')
            if len(user)==0:
               return None
            else:

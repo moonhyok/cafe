@@ -25,7 +25,7 @@
     You are the <strong>{{participant}}{{ordinal}} participant.</strong><br/>
     Number of Participants: <strong> {{num_participants}}</strong>.<br/>
     Your Participation Score: <strong> {{score}}</strong>.<br/>
-    Number of Participants who graded <br/>your suggestion: <strong>{{received}}</strong>.
+    Number of Participants Who Graded <br/>Your Suggestion: <strong>{{received}}</strong>.
 </div>
 
 <div class="seperate-lines">
@@ -57,29 +57,31 @@
     <div class="issue-text">
         {{comment}}
         </div>
-</div>
-{% endif %}
-
-<div class="seperate-lines">
-<canvas id="seperate-lines2" width="348" height="5"> 
-<script>
-      var canvas = document.getElementById('seperate-lines2');
-      var context = canvas.getContext('2d');
-      context.beginPath();
-      context.moveTo(0, 0);
-      context.lineTo(348, 0);
-      context.strokeStyle = '#ffffff';
-      context.lineWidth = 1;
+              <div class="seperate-lines">
+        <canvas id="seperate-lines2" width="348" height="3"> 
+        <script>
+		if ({{left_comment}})
+        { var canvas = document.getElementById('seperate-lines2');
+          var context = canvas.getContext('2d');
+          context.beginPath();
+        context.moveTo(0, 0);
+        context.lineTo(348, 0);
+        context.strokeStyle = '#ffffff';
+        context.lineWidth = 1;
       context.stroke();
       context.beginPath();
-      context.moveTo(0, 4);
-      context.lineTo(348, 4);
+      context.moveTo(0, 3);
+      context.lineTo(348, 3);
       context.strokeStyle = '#ffffff';
       context.lineWidth = 1;
-      context.stroke();
+      context.stroke();}
     </script>
 </canvas>
 </div>
+
+</div>
+{% endif %}
+
 
 
 {% if level8 %}

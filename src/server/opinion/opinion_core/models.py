@@ -2,6 +2,7 @@ from django.db.models import *
 from django.contrib.auth.models import User
 from opinion.settings_local import CONFIGURABLES
 
+
 class ZipCode(Model):
     # TODO: should be primary key next time we rebuild database
     code = CharField(max_length=5, db_index = True)
@@ -143,6 +144,11 @@ class DiscussionComment(Model):
     
     class Meta:
         db_table = 'discussion_comment'
+
+# Represents an internal text-tag of a comment, for classification
+class AdminCommentTag(Model):
+    comment = ForeignKey(DiscussionComment)
+    tag = TextField()
 
 class CachedRisingComment(Model):
 	comment = ForeignKey(DiscussionComment, db_index = True)

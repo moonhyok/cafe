@@ -27,6 +27,7 @@
 						$("button").show();
 						populateTable(searchResult);
 					}
+					allowTagEditing();
 				} else {
 					//alert("Your search did not match any users");
 					$("#message").show();
@@ -70,18 +71,32 @@
 			inputTd.appendChild(checkBox);
 
 			var user = document.createElement('td');
-			user.innerHTML = searchResult.username + ' <a href="' + searchResult.reset_link + '"> PW reset link</a>';
+			user.innerHTML = searchResult.username // + ' <a href="' + searchResult.reset_link + '"> PW reset link</a>';
 
 			var email = document.createElement('td');
 			email.innerHTML = searchResult.email;
 
+			var zipcode = document.createElement('td');
+			zipcode.innerHTML = searchResult.zipcode;
+
+			var city_state = document.createElement('td');
+			city_state.innerHTML = searchResult.city_state;
+
 			var comment = document.createElement('td');
 			comment.innerHTML = searchResult.comment;
+
+			var tag = document.createElement('td');
+			tag.className = "tag"
+			tag.id = "tag-" + searchResult.cid.toString();
+			tag.innerHTML = searchResult.tag;
 
 			row.appendChild(inputTd);
 			row.appendChild(user);
 			row.appendChild(email);
+			row.appendChild(zipcode);
+			row.appendChild(city_state);
 			row.appendChild(comment);
+			row.appendChild(tag);
 			dojo.byId('tableBody').appendChild(row);
 		}
 		$("#osTable:has(tbody tr)").tablesorter({
@@ -121,6 +136,50 @@
 			alert(e);
 		}
 	}
+
+	function allowTagEditing() {
+
+		$(".tag").click(function() {
+			var new_tag = prompt("Tag this comment", $(this).html());
+			$(this).html(new_tag);
+			var cid = $(this).attr('id').replace('tag-', '');
+
+			dojo.xhrPost({
+				url: "{{url_root}}/admintagcomment/" + cid + "/",
+				content: {
+					tag: new_tag
+				},
+				handleAs: "json",
+				load: function(response) {
+					if (!response.success) {
+						alert("Error");
+					}
+				},
+				error: function(error, ioArgs) { // This happens on a 500 error or alikes.
+					alert('Error: failed sending data');
+
+					switch (ioArgs.xhr.status) {
+						case 404: //page not found error
+							alert('404');
+							break;
+						case 500: // server side error
+							alert('500');
+							break;
+						case 407: // proxy authentication
+							alert('407');
+							break;
+						default: // default action
+							alert('default');
+					};
+
+					alert("HTTP Error code:" + ioArgs.xhr.status);
+					alert("Error Condition:" + error.responseText);
+					alert("Error Message:  " + error.message);
+				}
+			});
+		});
+	}
+
 </script>
 {% endblock %}
 
@@ -156,9 +215,13 @@
     <thead> 
     <tr> 
         <th width="5%"><input type="checkbox" id="checkAll"/></th>
-        <th width="25%">User ID</th> 
-		<th width="25%">Email</th> 		
-        <th width="45%">Response</th>                 
+        <th width="10%">User ID</th> 
+		<th width="10%">Email</th>
+		<th width="10%">Zipcode</th> 
+        <th width="10%">City, State</th> 
+        <th width="35%">Response</th>
+        <th width="20%">Tag (click to edit)</th>
+
     </tr> 
     </thead> 
 	
@@ -169,3 +232,4 @@
 </table>
     </p>
 {% endblock %}
+

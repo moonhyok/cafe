@@ -5,6 +5,7 @@ import numpy as np
 import csv
 import settings
 import sys
+from django.utils.dateformat import DateFormat
 
 # If a file name is given as CL arg, then used.
 file_name = None
@@ -19,10 +20,12 @@ statements_headings_vector = ['S' + str(i+1) for i in range(NUM_STATEMENTS)]
 
 outfile = csv.writer(open(file_name, "wb"))
 outfile.writerow(['User ID',
+		'Data Joined'
 		  'Email',
 		  'Zipcode',
 		  'City, State',
 		  'Comment',
+		  'Comment Tag'
 		  'Rating2','Rating1'] 
 		 + statements_headings_vector +
 		  ['Rating2 Received','Rating1 Received',
@@ -45,6 +48,8 @@ for u in users:
 for u in users:
 	comment = DiscussionComment.objects.filter(is_current=True,user=u)
 	z = ZipCodeLog.objects.get(user=u).location if ZipCodeLog.objects.filter(user=u).exists() else None
+	tag = AdminCommentTag.objects.get(comment=comment) if AdminCommentTag.objects.filter(comment=comment).exists() else None
+
 	statements = [.5] * NUM_STATEMENTS
 	for i in range(0,NUM_STATEMENTS):
 		ur = UserRating.objects.filter(opinion_space_statement=OpinionSpaceStatement.objects.get(id=i+1),user=u,is_current=True)
@@ -80,10 +85,12 @@ for u in users:
 
 
 	outfile.writerow([u.id,
+			  DateFormat(u.date_joined).format('Y-m-d h:i:s A'),
 			  u.email,
-			  (z.code) if z else "--",
-			  (z.city + ", " + z.state) if z else "--",
+			  (z.code) if z else "",
+			  (z.city + ", " + z.state) if z else "",
 			  c,
+			  tag.tag if tag else "",
 			  str(score),
 			  str(ascore)] + list(map(str, statements)) + 			  
 			  [str(num_agreement),
