@@ -28,7 +28,6 @@
 <script type='text/javascript' src='{{url_root}}/media/mobile/js/utils.js'></script>
 <script type='text/javascript' src='{{url_root}}/media/mobile/jquery-mobile/jquery.mobile-1.3.2.min.js'></script>
 <script type="text/javascript" src="http://www.google.com/jsapi"></script>
-<script type='text/javascript' src='{{url_root}}/media/mobile/js/stats.js?nonce={{random_password}}'></script>
 
 <!--JavaScript that needs to be run on init-->
 <script type='text/javascript'>
@@ -122,13 +121,13 @@
 
  });
 
- stats.setConf("{{ client_settings.AGREEMENT_HISTOGRAM_TEXT }}",
+ /*stats.setConf("{{ client_settings.AGREEMENT_HISTOGRAM_TEXT }}",
                "{{ client_settings.LEGEND_AGREEMENT_LEFT }}",
                "{{ client_settings.LEGEND_AGREEMENT_RIGHT }}",
                "{{ client_settings.INSIGHT_HISTOGRAM_TEXT }}",
                "{{ client_settings.LEGEND_INSIGHT_LEFT }}",
                "{{ client_settings.LEGEND_INSIGHT_RIGHT }}"
-              );
+              );*/
 
  var finishedStatements=[];
 
@@ -203,7 +202,7 @@
       </div>
 
       <center>
-          <img src="{{url_root}}/media/mobile/img/cafe/cafe-title-cropped.png" style="padding-top: 5px;border: none;width: 233px;" />
+          <img src="{{url_root}}/media/mobile/img/cafe/cafe-title-cropped.png" style="padding-top: 5px;border: none;width: 250px;" />
       </center>
 
     <div class="responsive-max-width">
@@ -213,14 +212,14 @@
 
             <div>
                 <div class="landing-img-txt">
-                        <div style="width: 140px;line-height: 26px;">
+                        <div style="width: 140px;line-height: 24px;">
                             <button type='submit' data-theme='a' class='first-time-btn'><font style="font-size: 14px;">BEGIN</font></button>
                         </div>
-                    Take a moment to join the {{num_users}} others who have graded the State of California on six timely issues.<br/>
-                    <a href="#" class="help-btn-dialog" style="font-size: 15px;color: #4e300f;line-height: 20px;">About</a>
+                    Take a moment to join the {{num_users}} others who have graded the State of California on six timely issues.
+                    <a href="#" class="help-btn-dialog" style="font-size: 15px;color: #4e300f;text-transform:uppercase;">About</a>
                     <!--{{client_settings.WELCOME_PAGE_TEXT1}}-->
                 </div>
-                <div class="landing-img-div"><img src="{{url_root}}/media/mobile/img/cafe/spoon-and-pencil-draft.png" style="width: 75px;"/></div>
+                <div class="landing-img-div"><img src="{{url_root}}/media/mobile/img/cafe/spoon-and-pencil-draft.png" style="width: 83px;"/></div>
             </div>
         </div>
     </div>
@@ -332,7 +331,7 @@
           <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
       </div>
 
-      <div class= 'registerpanel default-left-padding responsive-max-width'>
+      <div class= 'registerpanel responsive-max-width' style="max-width: 90%;">
           <div class="basic-header2" style="width: 100%">{{client_settings.ZIP_CODE_INSTRUCTIONS}}</div>
 
           <form id='reg_form' class='form-horizontal' method='post' action='{{ url_root }}/accountsjson/register/'>
@@ -374,13 +373,12 @@
           &nbsp;
           <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
       </div>
+      <img class="header-img-topic center" src="{{ url_root }}/media/mobile/img/cafe/CRC_join.png"/>
 
       <div class='dialog-text1 dialog-text-style default-left-padding'>
-          <img class="header-img-topic center" src="{{ url_root }}/media/mobile/img/cafe/CRC_join.png"/>
-
           {{ client_settings.DISCUSSION_DIALOG_TEXT1 }}
           <center>
-              <div class="standard-btn-div">
+              <div class="standard-btn-div" style="padding-top:10px;">
                   <button type='submit' data-theme='b' class='dialog-ready' ><font style="font-size: 16px;">Enter</font></button>
                   <!--<button type='submit' data-theme='b' class='dialog-next'  onclick="$('.dialog-text1').hide();$('.dialog-text2').show();"><font style="font-size: 16px;">Next</font></button>-->
               </div>
@@ -451,11 +449,9 @@
 
     <center>
        <textarea id='commentInput' class='answer' readonly="true"></textarea>
+       <span class="rate-username"></span>
     </center>
 
-    <div class="default-left-padding" style="text-align: left;position:relative; top: -4px;">
-        <span class="rate-username"></span>
-    </div>
 
     <div id="flag" class="flag-style"></div>
 
@@ -499,84 +495,6 @@
 
     </div>
 
-  </div>
-
-  <div class='my-comment'>
-    <div class='edit-comment-panel'>
-        <div class="basic-header">My Statistics<br/>(Under Construction)</div>
-        <!--<iframe src="{{url_root}}/crcstats/" id="stats-iframe" class="stats-iframe"></iframe>-->
-        <div class="home-btn-dialog-box">
-            <hr class="full-width-hr"/>
-            <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
-            &nbsp;
-            <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
-            &nbsp;
-            <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
-        </div>
-        <div class='row' style="display: none;">
-
-            <span class='username' style="display: none;"></span>
-            <span class='score-label'></span> <span class='score-value'></span><br>
-            <span class='num-label'>Idea Rated By:</span> <span class='num-rated-by'></span> Participants<br>
-
-            <hr/>
-
-            <div class="basic-sub-header">Aggregate Statistics</div>
-
-            <center>
-
-                <div class="aggstat1">
-
-                    <table style="width: 90%;">
-                        <tr class="stats-table-title">
-                            <td>Subject</td>
-                            <td>Avg. Grade</td>
-                        </tr>
-
-                        {% for statement in statements %}
-                            <tr>
-                                <td>{{ statement.statement }}</td>
-                                <td><script>document.write(score_to_grade(medians[{{statement.id}}]*100));</script></td>
-                            </tr>
-                        {%endfor%}
-                    </table>
-
-                    <div class="standard-btn-div">
-                        <button data-theme='b'  onclick="$('.aggstat1').hide();$('#neighborhoodStat').show();">Next</button>
-                    </div>
-
-                </div>
-
-                <!--<div class="aggstat2" style="display:none;">
-                    Changes in the mug positions<br/>
-                    <canvas id="MugAnimation" width="250" height="200" style="background-image:url('{{ url_root }}/media/mobile/img/cafe/cafe_bg.png');background-repeat:repeat; background-size: 100% 100%;	"></canvas>
-                    <script type="text/javascript" src="{{ url_root }}/media/mobile/js/timelineMug_animation_json.js"></script>
-
-                    <div class="standard-btn-div">
-	                    <button type="button" onclick="clickreset()" data-mini="true" data-inline="true">Play</button>
-                        <button type="button" onclick="reset()" data-mini="true" data-inline="true"> Reset</button>
-                        <button data-theme='b' onclick="$('.aggstat2').hide();$('#neighborhoodStat').show();">Next</button>
-                    </div>
-                </div>-->
-
-                <div id="neighborhoodStat" style="display:none;">
-		        <div id="neighborhoodTable"></div>
-
-                  <div class="standard-btn-div">
-                        <button data-theme='b'  onclick="$('#neighborhoodStat').hide();$('.aggstat1').show();">Next</button>
-                    </div>
-                </div>
-    <!--<div class="aggstat3" style="display:none;">California map <br/>
-    <div style="width:300px;">
-    <button data-theme='b'   onclick="$('.aggstat3').hide();$('.aggstat1').show();">Next</button>
-    </div>
-    </div>-->
-            <div class="standard-btn-div">
-                <button type='submit' data-theme='b' class='edit-comment-done-btn'>Back</button>
-            </div>
-        </center>
-      </div>
-    </div>
   </div>
 
   <div id='d3' class="d3-canvas"></div>
@@ -674,8 +592,6 @@
 
     <div class='dialog-text-style default-left-padding'>
         <div class="basic-header" style="width:100%;">{{client_settings.RESPONSE_SAVED_HEADER}}</div>
-        {{ client_settings.RESPONSE_SAVED_TEXT}}
-        <br/>
         {{client_settings.EMAIL_ASK_TEXT}}
         <input type="email" id='regemail' name='regemail' class='regforminput' style="font-size: 15px; background-color: #FFFFFF;color: #000000;" placeholder="Email" data-theme='b'></input>
         <div class="comment-admin-text-b">Your email address will not be displayed and we promise not to share your email address with any third parties.</div>

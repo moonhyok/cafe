@@ -84,7 +84,7 @@ html {
 	text-shadow: none;
 	width: 95% !important;
 	height: 200px !important;
-	font-size: 14px;
+	font-size: 16px;
 	font-family: verdana, sans-serif;
 }
 
@@ -450,6 +450,7 @@ table.pretty caption {
 		text-shadow: none;
 		font-size: 28px;
 		line-height: 30px;
+		font-weight:normal;
 	}
 	
 	.grade2{
@@ -458,6 +459,7 @@ table.pretty caption {
 		text-shadow: none;
 		font-size: 28px;
 		line-height: 30px;
+		font-weight:normal;
 	}
 	
 	.regforminput{
@@ -540,11 +542,11 @@ table.pretty caption {
 
 	.landing-img-txt{
 	float: left;
-	width: 70%;
-	line-height: 16px;
+	width: 65%;
+	line-height: 18px;
 	padding-left: 10px;
 	color: #4e300f;
-	font-size: 15px;
+	font-size: 16px;
 	text-shadow: none;
 	}
 
@@ -558,14 +560,14 @@ table.pretty caption {
 	.landing-disclaimer{
 	clear: both;
 	position: relative;
-	top: -20px;
-	font-size: 10px;
-	font-family: verdana, sans-serif;
-    color: #083434;
+	top: -25px;
+	font-size: 11px;
+	font-family: sans-serif;
+    color: #2b5250;
     text-shadow: none;
-    line-height: 13px;
+    line-height: 15px;
 	text-align: left;
-	max-width: 95%;
+	max-width: 90%;
 	padding-left: 10px;
 	}
 
@@ -599,7 +601,8 @@ table.pretty caption {
 		text-align: left;
 		text-shadow: none;
 		width: 95%;
-		font-size: 14px;
+		font-size: 16px;
+		line-height: 17px;
 		
 		padding-bottom: 3px;
 		color: #4e300f;
@@ -708,7 +711,7 @@ table.pretty caption {
 }
 
 .rc-sub-header {
-    text-align: left;
+    text-align: center;
     padding-bottom: 10px;
     font-family: verdana, sans-serif;
     font-size: 16px;
@@ -822,7 +825,7 @@ padding-right: 7px;
 .comment-admin-text-a{
     font-size: 11px !important;
     line-height: 11px;
-    color: #f5ebdf !important;
+    color: #4e300f !important;
     font-family: verdana, sans-serif;
 }
 
@@ -837,7 +840,7 @@ padding-right: 7px;
 	background-color: #396d6b;
 	width: 95% !important;
 	min-height: 150px !important;
-	font-size: 14px !important;
+	font-size: 16px !important;
 	font-family: verdana, sans-serif;
 	color: #f5ebdf;
 	
@@ -876,7 +879,8 @@ padding-right: 7px;
 }
 
 .home-btn-dialog-box {
-    padding-top: 8px;
+    padding-top: 15px;
+    padding-bottom: 5px;
     letter-spacing: 2px;
     text-align: center;
     background-color: #76b9b6;
@@ -912,7 +916,7 @@ padding-right: 7px;
 	line-height: 14px;
 	padding-left: 10px;
 	padding-right: 5px;
-	padding-top: 3px;
+	padding-top: 8px;
 }
 
 .rated, .rated-thanks {
@@ -981,9 +985,10 @@ padding-right: 7px;
 	height: 100%;
 	text-decoration: none;
 	text-shadow: none;
-	font-size: 15px;
+	font-size: 16px;
 	line-height: 20px;
-	
+	max-width: 95%;
+
 }
 
 .dialog-text-style-noflow {
@@ -1001,7 +1006,21 @@ padding-right: 7px;
 	padding-bottom: 10px;
 }
 
+.dialog-text-style-noflow br {
+                             display: block;
+                             margin: 15px 0;
+                             line-height: 24px;
+                          }
+
 .dialog-text-style-noflow a:link {
+    color: #4e300f; !important;
+    text-decoration: underline;
+    text-shadow: none;
+    font-size: 15px;
+    line-height: 18px;
+}
+
+.dialog-text-style-noflow a:visited {
     color: #4e300f; !important;
     text-decoration: underline;
     text-shadow: none;
@@ -1073,10 +1092,10 @@ padding-right: 7px;
     }
    
    .rate-username{
-	 font-size: 13px;
+	 font-size: 12px;
 	 font-family: verdana, sans-serif;
 	 color: #4e300f;
-	 text-align: left !important;
+	 text-align: center !important;
 	 
    }
 
@@ -1134,12 +1153,12 @@ padding-right: 7px;
 }
 
 .header-img-topic{
-    padding-bottom: 0px;
+    padding-bottom: 10px;
     position:relative;
     left: -10px;
     width:106%;
     max-width:400px;
-    max-height:200px;
+    max-height:170px;
     padding-top:8px;
 }
 
