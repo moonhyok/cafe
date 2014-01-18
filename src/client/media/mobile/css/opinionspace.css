@@ -556,14 +556,13 @@ table.pretty caption {
 	}
 
 	.landing-disclaimer{
-	position: absolute;
-	bottom: 10px;
 	clear: both;
+	position: relative;
+	top: -20px;
 	font-size: 10px;
 	font-family: verdana, sans-serif;
     color: #083434;
     text-shadow: none;
-    font-weight: bold;
     line-height: 13px;
 	text-align: left;
 	max-width: 95%;
@@ -997,6 +996,8 @@ padding-right: 7px;
 	text-shadow: none;
 	font-size: 15px;
 	line-height: 18px;
+	padding-left: 10px;
+	max-width: 95%;
 	padding-bottom: 10px;
 }
 
