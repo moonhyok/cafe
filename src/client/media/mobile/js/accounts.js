@@ -743,12 +743,15 @@ $(document).ready(function() {
             //$('.scorebox').show();
             if ($('#regemail').val()){
                     accounts.sendEmail($('#regemail').val());
+                    window.prev_state = 'continue';
            	}
            	else
            	{
            	    rate.initMenubar();
+           	    window.prev_state = 'continue';
            	    window.cur_state = 'map';
            	    $('.dialog-continue').hide();
+           	    window.your_mug.transition().duration(2000).style("opacity", "0.4");
            	}
         });
 
@@ -758,6 +761,7 @@ $(document).ready(function() {
                 rate.initMenubar();
                 window.prev_state = 'email';
                 window.cur_state = 'map';
+                window.your_mug.transition().duration(2000).style("opacity", "0.4");
             });
     
     $('.dialog-yourmug-ready').click(function() {
