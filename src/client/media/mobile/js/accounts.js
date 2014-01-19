@@ -176,7 +176,7 @@ var accounts = (function($, d3, console) {
     document.getElementById('tr-1grade'+id).style.backgroundColor='#BFBFBF';
     document.getElementById('tr-2grade'+id).style.backgroundColor='#BFBFBF';
     document.getElementById('skip-img'+id).src = window.url_root + '/media/mobile/img/cafe/grade.png';
-    document.getElementById('skip-img'+id).style.width = '55px';
+    document.getElementById('skip-img'+id).style.width = '50px';
     window.skipped[id-1] = true;
     }
 

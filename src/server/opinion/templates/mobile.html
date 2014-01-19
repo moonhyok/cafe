@@ -311,7 +311,9 @@
                   </tr>
               </table>
 
-              <img id="skip-img{{statement.id}}" src="{{url_root}}/media/mobile/img/cafe/skip.png" style="position:relative;width: 50px;padding-top: 7px;left: 4px;" onclick="accounts.skipStatement({{statement.id}});"> <br/><br/>
+              <img src="{{url_root}}/media/mobile/img/cafe/skip_line.png"/>
+              <img id="skip-img{{statement.id}}" src="{{url_root}}/media/mobile/img/cafe/skip.png" style="position:relative;top: -19px;width: 50px;padding-top: 7px;left: 4px;" onclick="accounts.skipStatement({{statement.id}});"> <br/><br/>
+
               {% endfor %}
 
               <div class="standard-btn-div">
