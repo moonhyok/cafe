@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <head>
 	<meta name='viewport' content='user-scalable=no, width=device-width,initial-scale=1, maximum-scale=1' />
+	<script type='text/javascript'>
+		window.userhist1_url="{{url_root}}/media/mobile/img/dailyupdate/{{participant}}_1.png"
+		window.userhist2_url="{{url_root}}/media/mobile/img/dailyupdate/{{participant}}_2.png"
+		window.show_hist1={{show_hist1}}
+		window.show_hist2={{show_hist2}}	
+    </script>
 </head>
 <style>
 
@@ -11,6 +17,7 @@
 <link rel="stylesheet" href="{{url_root}}/media/mobile/css/stats.css" />
 <script src="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.js?2"></script>
 <script type='text/javascript' src='{{url_root}}/media/mobile/jquery-mobile/jquery-1.10.2.min.js'></script>
+
 
 <div class="home-btn-dialog-box">
     <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
@@ -23,114 +30,83 @@
 </div>
 
 <div class="stats-section">
-    Data as of <strong>{{date}}</strong><br/>
-    You are the <strong>{{participant}}{{ordinal}} participant</strong><br/>
-    Number of Participants: <strong> {{num_participants}}</strong><br/>
-    Your Participation Score: <strong> {{score}}</strong><br/>
+    Data as of <strong>{{date}}</strong>
+    {% if level8 %}
+    You are the <strong>{{participant}}{{ordinal}} participant</strong>
+    {% endif %}
+    Number of Participants: <strong> {{num_participants}}</strong>
+    {% if level8 %}
+    Your Participation Score: <strong> {{score}}</strong>
+    
     Number of Participants who graded <br/>your suggestion: <strong>{{received}}</strong>
+    {% endif %}
 </div>
 
 <div class="seperate-lines">
 <canvas id="seperate-lines1" width="260" height="4"> 
-<script>
-      var canvas = document.getElementById('seperate-lines1');
-      var context = canvas.getContext('2d');
-      context.beginPath();
-      context.moveTo(0, 0);
-      context.lineTo(260, 0);
-      context.strokeStyle = '#ffffff';
-      context.lineWidth = 1;
-      context.stroke();
-      context.beginPath();
-      context.moveTo(0, 4);
-      context.lineTo(260, 4);
-      context.strokeStyle = '#ffffff';
-      context.lineWidth = 1;
-      context.stroke();
-    </script>
+
 </canvas>
 </div>
 
-{% if left_comment %}
 <div class="stats-section-title">
     <div class="stats-label-big">
         THE ISSUE YOU SUGGESTED<br/> FOR VERSION 2.0 OF THE CRC:
     </div>
-    <div class="issue-text">
-        {{comment}}
-        </div>
 </div>
-{% endif %}
 
 {% if left_comment %}
- <div class="seperate-lines">
-<canvas id="seperate-lines2" width="260" height="4"> 
-<script>
-      var canvas = document.getElementById('seperate-lines2');
-      var context = canvas.getContext('2d');
-      context.beginPath();
-      context.moveTo(0, 0);
-      context.lineTo(260, 0);
-      context.strokeStyle = '#ffffff';
-      context.lineWidth = 1;
-      context.stroke();
-      context.beginPath();
-      context.moveTo(0, 4);
-      context.lineTo(260, 4);
-      context.strokeStyle = '#ffffff';
-      context.lineWidth = 1;
-      context.stroke();
-    </script>
-</canvas>
+<div class="stats-section-title">
+    <div class="issue-text">
+        {{comment}}
+    </div>
 </div>
+{% else %}
+  
+  <div class="stats-section-title">
+	   <span class="fine-print">Please visit the report card and <br>suggest an issue</span>
+  </div>
+
 {% endif %}
 
 
+ <div class="seperate-lines">
+<canvas id="seperate-lines2" width="260" height="4"> 
+</canvas>
+</div>
 
-{% if level8 %}
+
 <div class="stats-section-title">
     <div class="stats-label-big">
         GRADES ASSIGNED TO <br/>YOUR SUGGESTION
     </div>
-    "How important is this issue for the <br/> next Report Card?"<br/>
-    {% if show_hist1 %}
-    <div class="stat-img"><img src="{{url_root}}/media/mobile/img/dailyupdate/{{participant}}_1.png"  width="310"></div><br/>
-    {% else %}
-    <span class="fine-print">You have not received any <br>grades yet</span><br/>
-    {% endif %}
-
-    <br/>
-
-    "How would you grade California on <br/>this issue?"<br/>
-    {% if show_hist2 %}
-    <div class="stat-img"><img src="{{url_root}}/media/mobile/img/dailyupdate/{{participant}}_2.png"  width="310"></div><br/>
-    {% else %}
-    <span class="fine-print">You have not received any <br>grades yet</span><br/>
-    {% endif %}
-
 </div>
+
+{% if level8 %}
+   {% if left_comment %}
+     <div class="stats-section-title">
+     "How important is this issue for the <br/> next Report Card?"
+     
+     <div class="stat-img" id="userhist1"></div>     
+
+     "How would you grade California on <br/>this issue?"
+    
+     <div class="stat-img" id="userhist2"></div>
+     
+     </div>
+   {% else %}
+      <div class="stats-section-title">
+	  <span class="fine-print">Please visit the report card and <br>suggest an issue</span>
+      </div>
+   {% endif %}
+
 {% else %}
-<span class="fine-print">Please provide your email and see grades assigned to your suggestion to date!!!</span><br/>
+  <div class="stats-section-title">
+	   <span class="fine-print">Please visit the report card, <br>suggest an issue, and leave <br>your email to see how others <br>grade your idea</span>
+  </div>
 {% endif %}
 
 <div class="seperate-lines">
 <canvas id="seperate-lines3" width="360" height="4"> 
-<script>
-      var canvas = document.getElementById('seperate-lines3');
-      var context = canvas.getContext('2d');
-      context.beginPath();
-      context.moveTo(0, 0);
-      context.lineTo(260, 0);
-      context.strokeStyle = '#ffffff';
-      context.lineWidth = 1;
-      context.stroke();
-      context.beginPath();
-      context.moveTo(0, 4);
-      context.lineTo(260, 4);
-      context.strokeStyle = '#ffffff';
-      context.lineWidth = 1;
-      context.stroke();
-    </script>
 </canvas>
 </div>
 
@@ -139,7 +115,7 @@
         GRADES ASSIGNED TO THE <br/>STATE OF CALIFORNIA
     </div>
 
-    <span style="font-size:17px; font-style:Italic;">The median grade is marked in brown.</span>
+    <span style="font-size:14px; font-style:Italic;">The median grade is marked in brown.</span>
 
     {% for median in medians %}
     <strong>Distribution of Grades for Issue {{median.id}}:</strong><br/>
@@ -153,22 +129,6 @@
 </div>
 <div class="seperate-lines">
 <canvas id="seperate-lines4" width="348" height="4"> 
-<script>
-      var canvas = document.getElementById('seperate-lines4');
-      var context = canvas.getContext('2d');
-      context.beginPath();
-      context.moveTo(0, 0);
-      context.lineTo(260, 0);
-      context.strokeStyle = '#ffffff';
-      context.lineWidth = 1;
-      context.stroke();
-      context.beginPath();
-      context.moveTo(0, 4);
-      context.lineTo(260, 4);
-      context.strokeStyle = '#ffffff';
-      context.lineWidth = 1;
-      context.stroke();
-    </script>
 </canvas>
 </div>
 
@@ -208,6 +168,7 @@ important issues for version 2.0.
 <div>
 <script type='text/javascript' src='{{url_root}}/media/mobile/js/geostat.js'></script>  
 <script type='text/javascript' src='{{url_root}}/media/mobile/js/map.js'></script>  
+<script type='text/javascript' src='{{url_root}}/media/mobile/js/crcstats.js'></script>
 </body>
 
 </html>
