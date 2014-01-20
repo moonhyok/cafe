@@ -197,7 +197,8 @@ def crcstats(request,entry_code=None):
     #Case 2: Entry using a code
     elif entry_code!=None:
         user = authenticate(entrycode=entry_code)
-        login(request,user)
+        if user!=None:
+           login(request,user)
     #Case 3: Testing argument based user id
     else:
         uid = request.GET.get('username',-1)
@@ -247,8 +248,8 @@ def crcstats(request,entry_code=None):
     return render_to_response('crc_stats.html', context_instance = RequestContext(request, {'num_participants': len(active_users),
                                                                                             'level8':level8,
                                                                                             'ordinal':ordinal,
-                                                                                            'show_hist1':show_hist1,
-                                                                                            'show_hist2':show_hist2,
+                                                                                            'show_hist1':str(show_hist1).lower(),
+                                                                                            'show_hist2':str(show_hist2).lower(),
                                                                                             'date':datetime.date.today(),
                                                                                             'comment':comment,
                                                                                             'left_comment': (comment != ''),

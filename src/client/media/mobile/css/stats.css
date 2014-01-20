@@ -110,8 +110,8 @@ font-weight:bold;
 .stat-img{
 position:relative;
 left:-23px;
-margin-top:0px;
-margin-bottom:0px;
+height:310px;
+
 }
 
 .issue-text{
@@ -139,7 +139,7 @@ margin-bottom:0px;
      }
 
 .fine-print {
-    font-size: 17px;
+    font-size: 14px;
     color: #f5ebde;
 }
 
