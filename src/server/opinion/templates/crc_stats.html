@@ -83,7 +83,7 @@
 
 {% if level8 %}
    {% if left_comment %}
-     <div class="stats-section-title">
+     <div class="stats-section-title" id="userhist">
      "How important is this issue for the <br/> next Report Card?"
      
      <div class="stat-img" id="userhist1"></div>     
@@ -118,10 +118,10 @@
     <span style="font-size:14px; font-style:Italic;">The median grade is marked in brown</span>
 
     {% for median in medians %}
-    <strong>Distribution of Grades for Issue {{median.id}}:</strong><br/>
+    <strong>Distribution of Grades for Issue {{median.id}}:</strong><br>
         <div class="issue-text">{{median.statement}}</div>
     <div class="stat-img">
-        <img src="{{url_root}}/media/mobile/img/dailyupdate/{{median.statement}}.png" width="310">
+        <img src="{{url_root}}/media/mobile/img/dailyupdate/{{median.statement}}.png" width="310" style="display:block;"/>
 
     </div>
     {% endfor %}
@@ -135,8 +135,7 @@
 
 <div class="stats-section-title">
     <div class="stats-label-big">
-        GEOGRAPHIC DISTRIBUTION <br/> OF
-        MEDIAN GRADES ASSIGNED
+        GEOGRAPHIC DISTRIBUTION <br/> OF MEDIAN GRADES ASSIGNED
     </div>
     <strong>Issues:</strong><select id="CA_selector" onchange="changeData(this)" >
 	{% for median in medians %}
@@ -153,6 +152,7 @@
    <div class="issue-txt" id="final-remark">
    You can return anytime using this URL 
    to check your grades.
+   
 Lt. Gov. Gavin Newsom and UC Berkeley 
 Professor Ken Goldberg will present 
 the data and lessons learned from 
@@ -164,11 +164,10 @@ important issues for version 2.0.
 </div>
 
 <span style="font-style:Italic;">For more information:</span>
-<a href="http://californiareportcard.org/">http://californiareportcard.org/</a>
+<a href="http://californiareportcard.org/">californiareportcard.org/</a>
 <div>
 <script type='text/javascript' src='{{url_root}}/media/mobile/js/geostat.js'></script>  
 <script type='text/javascript' src='{{url_root}}/media/mobile/js/map.js'></script>  
 <script type='text/javascript' src='{{url_root}}/media/mobile/js/crcstats.js'></script>
 </body>
-
 </html>
