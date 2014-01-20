@@ -193,21 +193,26 @@
         }
     });   
 
-var labelLocation1 = new L.LatLng(40.2, -118.8);
-var labelLocation2 = new L.LatLng(39.9, -118.8);
-var labelTitle1 = new L.LabelOverlay(labelLocation1, 'Outside');
+var labelLocation1 = new L.LatLng(40.5, -119.2);
+var labelLocation2 = new L.LatLng(40.2, -119.2);
+var labelLocation3 = new L.LatLng(39.9, -119.2);
+var labelTitle1 = new L.LabelOverlay(labelLocation1, 'Participants');
     map.addLayer(labelTitle1);
-    
-var labelTitle2 = new L.LabelOverlay(labelLocation2, 'California');
+var labelTitle2 = new L.LabelOverlay(labelLocation2, 'Outside');
     map.addLayer(labelTitle2);
+    
+var labelTitle3 = new L.LabelOverlay(labelLocation3, 'California');
+    map.addLayer(labelTitle3);
     
     map.on('movestart', function () {
         map.removeLayer(labelTitle1);
         map.removeLayer(labelTitle2);
+        map.removeLayer(labelTitle3);
     });
     map.on('moveend', function () {
         map.addLayer(labelTitle1);
         map.addLayer(labelTitle2);
+        map.addLayer(labelTitle3);
     });
 
 
