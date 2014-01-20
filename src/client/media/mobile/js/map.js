@@ -1,4 +1,5 @@
 	
+
 		var map = L.map('map').setView([37.9, -117.8], 5);
         
 		var cloudmade = L.tileLayer('http://{s}.tile.cloudmade.com/{key}/{styleId}/256/{z}/{x}/{y}.png', {
@@ -16,13 +17,23 @@
 			this.update();
 			return this._div;
 		};
-
-		info.update = function (props) {
-			this._div.innerHTML = '<h4>California Report Card Grade</h4>' +  (props ?
-				'<b>' + props.NAME + '</b><br>'+'Number of Participants  ' + props.PARTICIPANTS
+        
+        if (!L.Browser.touch){
+			info.update = function (props) {
+				this._div.innerHTML = '<h4>California Report Card Grade</h4>' +  (props ?
+					'<b>' + props.NAME + '</b><br>'+'Number of Participants  ' + props.PARTICIPANTS
 				
-				: 'Hover over a county');
-		};
+					: 'Hover over a county');
+				};
+		}
+		else{
+			info.update = function (props) {
+				this._div.innerHTML = '<h4>California Report Card Grade</h4>' +  (props ?
+					'<b>' + props.NAME + '</b><br>'+'Number of Participants  ' + props.PARTICIPANTS
+				
+					: 'Click a county');
+			};
+		}
 
 		info.addTo(map);
 
@@ -70,8 +81,10 @@
 			if (!L.Browser.ie && !L.Browser.opera) {
 				layer.bringToFront();
 			}
-
+            if (!L.Browser.touch)
+            {
 			info.update(layer.feature.properties);
+		    }
 		}
 
 	    
@@ -83,13 +96,19 @@
 
 		function zoomToFeature(e) {
 			map.fitBounds(e.target.getBounds());
-		}
+			
+		    if (L.Browser.touch) {
+            info.update(e.target.feature.properties);
+            }
 
+		}
+		
 		function onEachFeature(feature, layer) {
 			layer.on({
-				mouseover: highlightFeature,
-				mouseout: resetHighlight,
-				click: zoomToFeature
+                mouseover: highlightFeature,
+                mouseout: resetHighlight,
+				click: zoomToFeature,
+
 			});
 		}
 
