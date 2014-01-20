@@ -566,9 +566,10 @@ table.pretty caption {
     color: #2b5250;
     text-shadow: none;
     line-height: 15px;
-	text-align: left;
-	max-width: 90%;
-	padding-left: 10px;
+	text-align: center;
+	max-width: 100%;
+
+	/*padding-left: 10px;*/
 	}
 
 	.error_username {
