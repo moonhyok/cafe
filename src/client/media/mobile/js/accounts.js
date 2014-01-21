@@ -743,7 +743,6 @@ $(document).ready(function() {
             //$('.scorebox').show();
             if ($('#regemail').val()){
                     accounts.sendEmail($('#regemail').val());
-                    window.prev_state = 'continue';
            	}
            	else
            	{
