@@ -45,6 +45,8 @@ import time
 import datetime
 import hashlib
 from django.core.validators import validate_email
+from django.core.exceptions import *
+import smtplib
 
 os.environ['MPLCONFIGDIR'] = "/tmp"
 import matplotlib
@@ -148,7 +150,6 @@ def confirmation_mail(request):
       validate_email(email)#********************** check error
     except ValidationError:
       response = HttpResponse()
-      response.status_code=500
       response.write('Please enter a valid email')
       return response
 
@@ -159,7 +160,6 @@ def confirmation_mail(request):
        for cur_user in all_user:
            if cur_user.email==email:
               response = HttpResponse()
-              response.status_code=500 
               response.write("This email has been registered. Please use another email")
               return response
 
@@ -181,52 +181,45 @@ def confirmation_mail(request):
            ECobject.save()
        except smtplib.SMTPException:
            response = HttpResponse()
-           response.status_code=500
            response.write('The server is temporarily unavailable. Please try again later')
            return response
        except smtplib.SMTPServerDisconnected:
            response = HttpResponse()
-           response.status_code=500
            response.write("The server unexpectedly disconnects. Please contact the CRC team")
            return response
        except smtplib.SMTPResponseException:
            response = HttpResponse()
-           response.status_code=500
            response.write("The server returns an error code. Please contact the CRC team")
            return response
        except smtplib.SMTPSenderRefused:
            response = HttpResponse()
-           response.status_code=500
            response.write("The server is temporarily unavailable. Please contact the CRC team")
            return response
        except smtplib.SMTPRecipientsRefused:
            response = HttpResponse()
-           response.status_code=500
            response.write("The server cannot send email to your address. Please try another email")
            return response
        except smtplib.SMTPDataError:
            response = HttpResponse()
-           response.status_code=500
            response.write("The server is temporarily unavailable. Please contact the CRC team")
            return response
        except smtplib.SMTPConnectError:
            response = HttpResponse()
-           response.status_code=500
            response.write("The server unexpectedly disconnects. Please contact the CRC team")
            return response
        except smtplib.SMTPHeloError:
            response = HttpResponse()
-           response.status_code=500
            response.write("The server is temporarily unavailable. Please contact the CRC team")
            return response
        except smtplib.SMTPAuthenticationError:
            response = HttpResponse()
-           response.status_code=500
            response.write("The server is temporarily unavailable. Please contact the CRC team")
            return response
        return json_success()
     else:
-       return json_success()
+       response = HttpResponse()
+       response.write("You have already entered your email!")
+       return response
 
 def crcstats(request,entry_code=None):
 
