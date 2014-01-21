@@ -546,7 +546,7 @@ table.pretty caption {
 	line-height: 18px;
 	padding-left: 10px;
 	color: #4e300f;
-	font-size: 16px;
+	font-size: 15px;
 	text-shadow: none;
 	}
 
@@ -560,14 +560,14 @@ table.pretty caption {
 	.landing-disclaimer{
 	clear: both;
 	position: relative;
-	top: -25px;
-	font-size: 11px;
+	top: -35px;
+	font-size: 12px;
 	font-family: sans-serif;
-    color: #2b5250;
+    color: #4e300f;
     text-shadow: none;
     line-height: 15px;
 	text-align: center;
-	max-width: 100%;
+	max-width: 95%;
 
 	/*padding-left: 10px;*/
 	}
@@ -733,7 +733,6 @@ table.pretty caption {
 	padding-bottom: 10px;
 	padding-top: 8px;
 	font-weight: bold;
-	text-transform:uppercase;
 }
 
 .basic-header2 {
@@ -745,7 +744,6 @@ table.pretty caption {
     	line-height: 25px;
     	padding-bottom: 10px;
     	padding-top: 8px;
-    	text-transform:uppercase;
 }
 
 .basic-sub-header {
@@ -824,7 +822,7 @@ padding-right: 7px;
 }
 
 .comment-admin-text-a{
-    font-size: 11px !important;
+    font-size: 13px !important;
     line-height: 11px;
     color: #4e300f !important;
     font-family: verdana, sans-serif;
@@ -1093,10 +1091,12 @@ padding-right: 7px;
     }
    
    .rate-username{
-	 font-size: 12px;
+	 font-size: 13px;
 	 font-family: verdana, sans-serif;
 	 color: #4e300f;
 	 text-align: center !important;
+	 position: relative;
+	 top: -5px;
 	 
    }
 
