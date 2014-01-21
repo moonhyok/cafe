@@ -242,10 +242,10 @@ var accounts = (function($, d3, console) {
                     window.prev_state = 'continue';
                 }
             },
-            error: function() {
-		$("#email-error").html("Please enter a valid email");
-		$("#email-error").show();
-                console.log("email didn't get sent!");
+            error: function(data) {
+		$("#email-error").html(data.responseText);
+	        $("#email-error").show();
+     
             }
         });
 	}

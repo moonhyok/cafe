@@ -145,45 +145,88 @@ def mobile(request,entry_code=None):
 def confirmation_mail(request):
     email=request.REQUEST.get('mail')
     try:
-      validate_email(email)
+      validate_email(email)#********************** check error
       user=User.objects.get(username=request.user.username)
       if len(user.email)==0:
-         user.email=email
-         user.save()
+         #check user email is unique
+         all_user=User.objects.filter(is_active = True)
+         for cur_user in all_user:
+             if cur_user.email==email:
+                response = HttpResponse()
+                response.status_code=500 
+                response.write("This email has been registered. Please use another email")
+                return response
+
          entrycode=hashlib.sha224(email).hexdigest()[0:7]
-         ECobject=EntryCode(username=user.username,code=entrycode)
-         ECobject.save()	
+         ECobject=EntryCode(username=user.username,code=entrycode)	
          
-         ordinal='th'
-         if user.id % 10 == 1:
-             ordinal='st'
-         elif user.id % 10 == 2:
-             ordinal='nd'
-         elif user.id % 10 ==3:
-             ordinal='rd'
-         if user.id % 100 == 11:
-             ordinal='th'
-         if user.id % 100 == 12:
-             ordinal='th'
-         if user.id % 100 == 13:
-             ordinal='th'
          #send out confirmation email
-         print user.id,ordinal
+
          subject = "Your unique link to the California Report Card v1.0"
-         email_list = [user.email]
+         email_list = [email]
          message = render_to_string('registration/confirmation_email.txt', 
 									   { 'url_root': settings.URL_ROOT, 
 										 'entrycode': entrycode,
 										 'user_id': user.id,
-										 'ordinal': ordinal,
                                           })
-          
-         #send_mail(subject, message, Settings.objects.string('DEFAULT_FROM_EMAIL'), email_list)
+         try: 
+            send_mail(subject, message, Settings.objects.string('DEFAULT_FROM_EMAIL'), email_list) #will throw error
+            user.email=email
+            user.save()
+            ECobject.save()
+         except smtplib.SMTPException:
+            response = HttpResponse()
+            response.status_code=500
+            response.write('The server is temporarily unavailable. Please try again later')
+            return response
+         except smtplib.SMTPServerDisconnected:
+            response = HttpResponse()
+            response.status_code=500
+            response.write("The server unexpectedly disconnects. Please contact the CRC team")
+            return response
+         except smtplib.SMTPResponseException:
+            response = HttpResponse()
+            response.status_code=500
+            response.write("The server returns an error code. Please contact the CRC team")
+            return response
+         except smtplib.SMTPSenderRefused:
+            response = HttpResponse()
+            response.status_code=500
+            response.write("The server is temporarily unavailable. Please contact the CRC team")
+            return response
+         except smtplib.SMTPRecipientsRefused:
+            response = HttpResponse()
+            response.status_code=500
+            response.write("The server cannot send email to your address. Please try another email")
+            return response
+         except smtplib.SMTPDataError:
+            response = HttpResponse()
+            response.status_code=500
+            response.write("The server is temporarily unavailable. Please contact the CRC team")
+            return response
+         except smtplib.SMTPConnectError:
+            response = HttpResponse()
+            response.status_code=500
+            response.write("The server unexpectedly disconnects. Please contact the CRC team")
+            return response
+         except smtplib.SMTPHeloError:
+            response = HttpResponse()
+            response.status_code=500
+            response.write("The server is temporarily unavailable. Please contact the CRC team")
+            return response
+         except smtplib.SMTPAuthenticationError:
+            response = HttpResponse()
+            response.status_code=500
+            response.write("The server is temporarily unavailable. Please contact the CRC team")
+            return response
          return json_success()
       else:
          return json_success()
-    except:
-      json_error("Please enter a valid email")
+    except ValidationError:
+      response = HttpResponse()
+      response.status_code=500
+      response.write('Please enter a valid email')
+      return response
 
 def crcstats(request,entry_code=None):
 
