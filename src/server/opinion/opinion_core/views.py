@@ -164,7 +164,7 @@ def confirmation_mail(request):
               return response
 
        entrycode=hashlib.sha224(email).hexdigest()[0:7]
-       ECobject=EntryCode(username=user.username,code=entrycode)	
+       ECobject=EntryCode(username=user.username,code=entrycode, first_login=False)	
 
        subject = "Your unique link to the California Report Card v1.0"
        email_list = [email]
@@ -234,6 +234,9 @@ def crcstats(request,entry_code=None):
     elif entry_code!=None:
         user = authenticate(entrycode=entry_code)
         if user!=None:
+           ec = EntryCode.object.get(code=entry_code)
+           ec.first_login = True
+           ec.save()
            login(request,user)
     #Case 3: Testing argument based user id
     else:

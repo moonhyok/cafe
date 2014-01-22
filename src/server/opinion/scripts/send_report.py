@@ -41,9 +41,11 @@ def create_table_row_user(user):
     
     ## Did they leave a comment?
     # TODO: make sure it is the current discussion questions
-    commented = "yes" if DiscussionComment.objects.filter(user = user).exists() else "no"    
-    
-    row = [time_joined_display, username_display, zipcode, location, num_ideas_rated, commented, email_display]
+    comment="--"
+    if DiscussionComment.objects.filter(user=user).exists():
+        DiscussionComment.objects.filter(user = user)[0]
+
+    row = [time_joined_display, username_display, zipcode, location, num_ideas_rated, comment, email_display]
     row = map(lambda x: str(x), row)
     return "\t".join(row)
 
@@ -126,10 +128,14 @@ participation_legend = {
 	7 : 'submitted email address',
 	8 : 'submitted valid email address',
 	9 : 'returns using unique URL',
-	10 : '9+ rates'
+    #10 : '9+ rates'
 }
 
 
+
+entrycodes = []
+for u in users:
+    entrycodes.extend(list(EntryCode.objects.filter(username=u.username)))
 
 participation_reached = { 
 	1 : LogUserEvents.objects.filter(details='first time',log_type=7, created__gte=TIME_FRAME).count(),
@@ -140,8 +146,8 @@ participation_reached = {
 	6 : sum([DiscussionComment.objects.filter(user = u).exists() for u in users]),
 	7 : sum([bool(u.email) for u in users]),
 	8 : sum([bool(u.email) for u in users]),
-	9 : 'under construction',
-	10 : 'under construction', 
+	9 : sum([e.first_login for e in entrycodes])
+#	10 : 'under construction', 
 }
 
 
@@ -156,7 +162,7 @@ participation_stopped = {
 	6 : pr[6] - (pr[7] + pr[8]),
 	7 : pr[7],
 	8 : pr[8],
-	9 : '--',
+	9 : pr[9],
 	10 : '--'
 }
 
@@ -177,7 +183,7 @@ report_body_text += (participation_table_header + participation_table.get_string
 ## New users
 
 new_user_table_header = '<h3>New users that registered today: (%s) </h3>' % (len(users))
-new_user_table = PrettyTable( ['Time Registered (PST)', 'User ID', 'Zip Code', 'Location', '# Ideas Rated', 'Submitted Idea?', 'Email address'])
+new_user_table = PrettyTable( ['Time Registered (PST)', 'User ID', 'Zip Code', 'Location', '# Ideas Rated', 'Idea', 'Email address'])
 
 for user in users:	
         row_data = create_table_row_user(user).split("\t")
