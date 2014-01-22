@@ -114,10 +114,23 @@
     {% for median in medians %}
     <strong>Distribution of Grades for Issue {{median.id}}:</strong><br>
         <div class="issue-text">{{median.statement}}</div>
-    <div class="stat-img">
-        <img src="{{url_root}}/media/mobile/img/dailyupdate/{{median.statement}}.png"  style="display:block;"/>
 
+    <div class="stat-img" id="{{median.id}}">
+        
+        
     </div>
+        <script>
+			$.get("{{url_root}}/media/mobile/img/dailyupdate/{{median.statement}}.png")
+			.done(function() { 
+            var img = $('<img/>');
+            img.attr('src', "{{url_root}}/media/mobile/img/dailyupdate/{{median.statement}}.png");
+            img.appendTo('#{{median.id}}');
+            })
+            .fail(function() { 
+            $( "#{{median.id}}" ).html( "<br><span style=' font-size:14px;color: #f5ebde;'>We will present histograms soon</span><br/><br>" );
+            document.getElementById( "#{{median.id}}" ).style.height="20px";
+            })
+        </script>
     {% endfor %}
 
 <br>
