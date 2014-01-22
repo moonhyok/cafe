@@ -28,32 +28,30 @@
 <div class="title-header">
     <img width="270px;" src="{{url_root}}/media/mobile/img/cafe/CRC_stat_title_01.png">
 </div>
-
+<br>
+<center>
 <div class="stats-section">
-    Data as of <strong>{{date}}</strong>
+    Data as of <strong>{{date}}</strong><br>
     {% if level8 %}
-    Your participant number is <strong>{{participant}}</strong>
+    Your participant number is <strong>{{participant}}</strong><br>
     {% endif %}
-    Number of Participants: <strong> {{num_participants}}</strong>
+    Number of Participants: <strong> {{num_participants}}</strong><br>
     {% if level8 %}
-    Your Participation Score: <strong> {{score}}</strong>
+    Your Participation Score: <strong> {{score}}</strong><br>
     
     Number of Participants who graded <br/>your suggestion: <strong>{{received}}</strong>
     {% endif %}
 </div>
 
-<div class="seperate-lines">
-<canvas id="seperate-lines1" width="260" height="4"> 
-
-</canvas>
-</div>
+<br>
+<hr>
 
 <div class="stats-section-title">
     <div class="stats-label-big">
         THE ISSUE YOU SUGGESTED<br/> FOR VERSION 2.0 OF THE CRC:
     </div>
 </div>
-
+<br>
 {% if left_comment %}
 <div class="stats-section-title">
     <div class="issue-text">
@@ -69,11 +67,8 @@
 {% endif %}
 
 
- <div class="seperate-lines">
-<canvas id="seperate-lines2" width="260" height="4"> 
-</canvas>
-</div>
-
+<br>
+<hr>
 
 <div class="stats-section-title">
     <div class="stats-label-big">
@@ -83,17 +78,19 @@
 
 {% if level8 %}
    {% if left_comment %}
+     <br>
      <div class="stats-section-title" id="userhist">
-     "How important is this issue for the <br/> next Report Card?"
+     "How important is this issue for the <br/> next Report Card?"<br><br>
      
-     <div class="stat-img" id="userhist1"></div>     
+     <div class="stat-img" id="userhist1"></div>     <br><br>
 
-     "How would you grade California on <br/>this issue?"
+     "How would you grade California on <br/>this issue?"<br><br>
     
-     <div class="stat-img" id="userhist2"></div>
+     <div class="stat-img" id="userhist2"></div><br>
      
      </div>
    {% else %}
+      <br>
       <div class="stats-section-title">
 	  <span class="fine-print">Please visit the report card and <br>suggest an issue</span>
       </div>
@@ -105,53 +102,48 @@
   </div>
 {% endif %}
 
-<div class="seperate-lines">
-<canvas id="seperate-lines3" width="360" height="4"> 
-</canvas>
-</div>
-
+<br>
+<hr>
 <div class="stats-section-title">
     <div class="stats-label-big">
         GRADES ASSIGNED TO THE <br/>STATE OF CALIFORNIA
     </div>
 
-    <span style="font-size:14px; font-style:Italic;">The median grade is marked in brown</span>
+    <span style="font-size:14px; font-style:Italic;">The median grade is marked in brown</span><br><br>
 
     {% for median in medians %}
     <strong>Distribution of Grades for Issue {{median.id}}:</strong><br>
         <div class="issue-text">{{median.statement}}</div>
     <div class="stat-img">
-        <img src="{{url_root}}/media/mobile/img/dailyupdate/{{median.statement}}.png" width="310" style="display:block;"/>
+        <img src="{{url_root}}/media/mobile/img/dailyupdate/{{median.statement}}.png"  style="display:block;"/>
 
     </div>
     {% endfor %}
 
-</div>
-<div class="seperate-lines">
-<canvas id="seperate-lines4" width="348" height="4"> 
-</canvas>
-</div>
+<br>
+<hr>
 
 
 <div class="stats-section-title">
     <div class="stats-label-big">
         GEOGRAPHIC DISTRIBUTION <br/> OF MEDIAN GRADES ASSIGNED
-    </div>
-    <strong>Issues:</strong><select id="CA_selector" onchange="changeData(this)" >
+    </div><br>
+    <strong>Select an issue:</strong> <br>
+    <select id="CA_selector" onchange="changeData(this)" >
 	{% for median in medians %}
 	<option value="{{median.id}}">{{ median.statement}}</option>
 	{% endfor %}
-</select><br/>
+    </select><br/>
 
 <div id="map"></div>
 
 </div>
-
+<br>
 <div class="stats-section">
-<strong>Thanks for participating!</strong> 
+<strong>Thanks for participating!</strong> <br><br>
    <div class="issue-txt" id="final-remark">
    You can return anytime using this URL 
-   to check your grades.
+   to check your grades.<br><br>
    
 Lt. Gov. Gavin Newsom and UC Berkeley 
 Professor Ken Goldberg will present 
@@ -162,10 +154,11 @@ include participants who actively
 contribute to identifying the most 
 important issues for version 2.0.
 </div>
-
+<br>
 <span style="font-style:Italic;">For more information:</span>
 <a href="http://californiareportcard.org/">californiareportcard.org/</a>
 <div>
+	</center>
 <script type='text/javascript' src='{{url_root}}/media/mobile/js/geostat.js'></script>  
 <script type='text/javascript' src='{{url_root}}/media/mobile/js/map.js'></script>  
 <script type='text/javascript' src='{{url_root}}/media/mobile/js/crcstats.js'></script>
