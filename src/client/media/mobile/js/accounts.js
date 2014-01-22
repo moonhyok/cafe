@@ -241,11 +241,13 @@ var accounts = (function($, d3, console) {
                     $("#email-error").hide();
                     window.prev_state = 'continue';
                 }
-            },
-            error: function(data) {
-		$("#email-error").html(data.responseText);
-	        $("#email-error").show();
-     
+                else{
+
+                 $("#email-error").show();
+                 $("#email-error").text(data['error']);
+                 console.log(data['error']);
+
+                }
             }
         });
 	}

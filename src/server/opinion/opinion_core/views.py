@@ -145,81 +145,43 @@ def mobile(request,entry_code=None):
 											 'medians': json.dumps(medians)}))
 
 def confirmation_mail(request):
-    email=request.REQUEST.get('mail')
+    email = request.REQUEST.get('mail','')
     try:
-      validate_email(email)#********************** check error
+      validate_email(email)
     except ValidationError:
-      response = HttpResponse()
-      response.write('Please enter a valid email')
-      return response
+      return json_error("Please enter a valid email address or leave it blank to skip.")
 
-    user=User.objects.get(username=request.user.username)
-    if len(user.email)==0:
-         #check user email is unique
-       all_user=User.objects.filter(is_active = True)
-       for cur_user in all_user:
-           if cur_user.email==email:
-              response = HttpResponse()
-              response.write("This email has been registered. Please use another email")
-              return response
+    if not request.user.is_authenticated():
+        return json_error("Must be authenticated to run this command.")
 
-       entrycode=hashlib.sha224(email).hexdigest()[0:7]
-       ECobject=EntryCode(username=user.username,code=entrycode, first_login=False)	
+    if request.user.email == None or len(request.user.email)==0:
+        in_use = (User.objects.filter(is_active = True, email = email).count() >= 1)
 
-       subject = "Your unique link to the California Report Card v1.0"
-       email_list = [email]
-       message = render_to_string('registration/confirmation_email.txt', 
+        if in_use:
+            return json_error("This email address is already in use.")
+
+        request.user.email = email
+        request.user.save()
+
+        entrycode = hashlib.sha224(email).hexdigest()[0:7]
+        ECobject=EntryCode(username=request.user.username,code=entrycode, first_login=False)
+        ECobject.save()
+
+        subject = "Your unique link to the California Report Card v1.0"
+        email_list = [email]
+        message = render_to_string('registration/confirmation_email.txt',
                                         { 'url_root': settings.URL_ROOT, 
 										 'entrycode': entrycode,
-										 'user_id': user.id,
+										 'user_id': request.user.id,
                                           })
-       try: 
-           #send out confirmation email
-           send_mail(subject, message, Settings.objects.string('DEFAULT_FROM_EMAIL'), email_list) #will throw error
-           user.email=email
-           user.save()
-           ECobject.save()
-       except smtplib.SMTPException:
-           response = HttpResponse()
-           response.write('The server is temporarily unavailable. Please try again later')
-           return response
-       except smtplib.SMTPServerDisconnected:
-           response = HttpResponse()
-           response.write("The server unexpectedly disconnects. Please contact the CRC team")
-           return response
-       except smtplib.SMTPResponseException:
-           response = HttpResponse()
-           response.write("The server returns an error code. Please contact the CRC team")
-           return response
-       except smtplib.SMTPSenderRefused:
-           response = HttpResponse()
-           response.write("The server is temporarily unavailable. Please contact the CRC team")
-           return response
-       except smtplib.SMTPRecipientsRefused:
-           response = HttpResponse()
-           response.write("The server cannot send email to your address. Please try another email")
-           return response
-       except smtplib.SMTPDataError:
-           response = HttpResponse()
-           response.write("The server is temporarily unavailable. Please contact the CRC team")
-           return response
-       except smtplib.SMTPConnectError:
-           response = HttpResponse()
-           response.write("The server unexpectedly disconnects. Please contact the CRC team")
-           return response
-       except smtplib.SMTPHeloError:
-           response = HttpResponse()
-           response.write("The server is temporarily unavailable. Please contact the CRC team")
-           return response
-       except smtplib.SMTPAuthenticationError:
-           response = HttpResponse()
-           response.write("The server is temporarily unavailable. Please contact the CRC team")
-           return response
-       return json_success()
+        try:
+           send_mail(subject, message, Settings.objects.string('DEFAULT_FROM_EMAIL'), email_list)
+        except:
+           return json_error("We were unable to send an email. Try again later.")
+
+        return json_success()
     else:
-       response = HttpResponse()
-       response.write("You have already entered your email!")
-       return response
+        return json_error("You have already submitted an email address.")
 
 def crcstats(request,entry_code=None):
 
@@ -234,7 +196,7 @@ def crcstats(request,entry_code=None):
     elif entry_code!=None:
         user = authenticate(entrycode=entry_code)
         if user!=None:
-           ec = EntryCode.object.get(code=entry_code)
+           ec = EntryCode.objects.get(code=entry_code)
            ec.first_login = True
            ec.save()
            login(request,user)
