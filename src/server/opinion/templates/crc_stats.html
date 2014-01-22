@@ -61,7 +61,7 @@
 {% else %}
   
   <div class="stats-section-title">
-	   <span class="fine-print">Please visit the report card and <br>suggest an issue</span>
+	   <span class="fine-print">You haven't suggested an issue. <br>Please visit the report card and <br>suggest an issue</span>
   </div>
 
 {% endif %}
@@ -92,7 +92,7 @@
    {% else %}
       <br>
       <div class="stats-section-title">
-	  <span class="fine-print">Please visit the report card and <br>suggest an issue</span>
+	  <span class="fine-print">You haven't suggested an issue.<br> Please visit the report card and <br>suggest an issue</span>
       </div>
    {% endif %}
 
@@ -137,17 +137,24 @@
 <hr>
 
 
-<div class="stats-section-title">
+<div class="stats-section-title" id="geodistribution">
     <div class="stats-label-big">
         GEOGRAPHIC DISTRIBUTION <br/> OF MEDIAN GRADES ASSIGNED
     </div><br>
-    <strong>Select an issue:</strong> <br>
+    <span style="font-size:16px; font-weight:bold">Select an issue:</span> <br>
     <select id="CA_selector" onchange="changeData(this)" >
 	{% for median in medians %}
 	<option value="{{median.id}}">{{ median.statement}}</option>
 	{% endfor %}
     </select><br/>
 
+    <script>
+        $.get("{{url_root}}/media/mobile/js/geostat.js")
+            .fail(function() { 
+            $( "#geodistribution" ).html( "<div class='stats-label-big'>GEOGRAPHIC DISTRIBUTION <br/> OF MEDIAN GRADES ASSIGNED</div><br><br><span style=' font-size:14px;color: #f5ebde;'>We will present geographical distribution soon</span><br/><br>" );
+            document.getElementById( "#geodistribution" ).style.height="40px";
+            })
+    </script>
 <div id="map"></div>
 
 </div>
