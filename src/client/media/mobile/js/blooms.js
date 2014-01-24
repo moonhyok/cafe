@@ -170,8 +170,8 @@ var _blooms = blooms = (function($, d3, console) {
 
         for (var i = 0; i < ratings.length; i += window.num_sliders) {
             rating = compileIndexedElementsToList(ratings.slice(i, i + window.num_sliders), rating_value_index);
-            x = dotProduct(ex, rating) + (Math.random()-.5)*3; //perturb values to prevent bunching
-            y = dotProduct(ey, rating) + (Math.random()-.5)*3;
+            x = dotProduct(ex, rating); //perturb values to prevent bunching
+            y = dotProduct(ey, rating);
             uid = ratings[i][rating_uid_index];
             result.push({
                 'uid': uid,
@@ -321,9 +321,9 @@ var _blooms = blooms = (function($, d3, console) {
         var marginVal = 0;//$(window).width() < 500 ? 40 : 100;
 
         margin = {
-            top: 40,
+            top: 0,
             left: 0,
-            right: 40,
+            right: 80,
             bottom: 40
             };
 
@@ -338,8 +338,8 @@ var _blooms = blooms = (function($, d3, console) {
             window.your_mug_data = data.splice(data.length-1, 1)[0];
             window.your_mug_data.ox = window.your_mug_data.x; //keep the original untransformed values
             window.your_mug_data.oy = window.your_mug_data.y;
-            window.your_mug_data.x = (margin.left + width-margin.right)/2;//canvasx(window.your_mug_data.x);
-            window.your_mug_data.y = (margin.top + height-margin.bottom)/2;//canvasy(window.your_mug_data.y);
+            window.your_mug_data.x = (width)/2;//canvasx(window.your_mug_data.x);
+            window.your_mug_data.y = (height)/2;//canvasy(window.your_mug_data.y);
 
 
 
@@ -353,6 +353,11 @@ var _blooms = blooms = (function($, d3, console) {
             // clear anything that's in the div already (e.g. loading button)
             $('#d3 .loading').hide();
 
+             var force = d3.layout.force()
+                 .charge(-600)
+                 .size([width, height]);
+
+            window.force = force;
 
             window.coffeetable_svg = d3.select('#d3')
             .append('svg')
@@ -364,7 +369,9 @@ var _blooms = blooms = (function($, d3, console) {
 
             //var rescale = generateRescalingFactor();
 
-            window.coffeetable_svg.selectAll(".bloom")
+            force.nodes(data).start();
+
+            var mugs = window.coffeetable_svg.selectAll(".bloom")
             .data(data)
             .enter()
             .append("svg:image")
@@ -372,32 +379,6 @@ var _blooms = blooms = (function($, d3, console) {
                 window.blooms_list.push(d.uid);
                 // console.log({'uid': d.uid,'x':d.x,'y':d.y,'cx': canvasx(d.x),'cy': canvasy(d.y)});
                 return window.url_root + "/media/mobile/img/cafe/cafe" + Math.floor((Math.random()*6)).toString() + ".png";
-            })
-            .attr('x', function(d) {
-                var scale = Math.abs(d.x-window.your_mug_data.ox);//set min distance add perturbation to prevent overlap
-                scale = Math.max(scale,.25);
-
-                if (Math.random() >= .5) //evenly split over x axis
-                    {
-                        return canvasx(scale);
-                    }
-                else
-                    {
-                        return canvasx(-scale);
-                    }
-            })
-            .attr('y', function(d) {
-                var scale = Math.abs(d.y-window.your_mug_data.oy);//set min distance
-                scale = Math.max(scale,.25);
-
-                 if (Math.random() >= .5) //evenly split over y axis
-                 {
-                     return canvasy(scale);
-                 }
-                 else
-                 {
-                     return canvasy(-scale);
-                 }
             })
             .attr("width", "80") //if this changes, change the margin above
             .attr("height", "80")
@@ -446,7 +427,19 @@ var _blooms = blooms = (function($, d3, console) {
                            }
                     }
 
-        });
+                   force.on("tick", function() {
+                    mugs.attr('x', function(d) {
+                                    return Math.min(Math.max(d.x,margin.left),width);
+                                })
+                                .attr('y', function(d) {
+                                    return Math.min(Math.max(d.y,margin.bottom),height);
+                                })
+                                });
+
+                                for (var i = 0; i < 100; ++i) force.tick();
+                                force.stop();
+
+                                });
 
      try{
       utils.hideLoading(0);
@@ -570,5 +563,10 @@ $(document).ready(function() {
     $(window).resize(function() {
         // TODO: check if a ajax call
         //_blooms.populateBlooms();
+        try {
+            for (var i = 0; i < 100; ++i) window.force.tick();
+            window.force.stop();
+        } catch (err) {}
+
     });
 });
