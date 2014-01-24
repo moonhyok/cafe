@@ -176,6 +176,7 @@ def confirmation_mail(request):
                                           })
         try:
            send_mail(subject, message, Settings.objects.string('DEFAULT_FROM_EMAIL'), email_list)
+           print 'email'
         except:
            return json_error("We were unable to send an email. Try again later.")
 
@@ -196,7 +197,7 @@ def crcstats(request,entry_code=None):
     elif entry_code!=None:
         user = authenticate(entrycode=entry_code)
         if user!=None:
-           ec = EntryCode.objects.get(code=entry_code)
+           ec = list(EntryCode.objects.filter(code=entry_code))[-1]
            ec.first_login = True
            ec.save()
            login(request,user)
