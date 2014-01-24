@@ -119,11 +119,12 @@
         
         
     </div>
+        {% autoescape off %}
         <script>
-			$.get("{{url_root}}/media/mobile/img/dailyupdate/{{median.statement}}.png")
+			$.get('{{url_root}}/media/mobile/img/dailyupdate/{{median.statement}}.png')
 			.done(function() { 
             var img = $('<img/>');
-            img.attr('src', "{{url_root}}/media/mobile/img/dailyupdate/{{median.statement}}.png");
+            img.attr('src', '{{url_root}}/media/mobile/img/dailyupdate/{{median.statement}}.png');
             img.appendTo('#{{median.id}}');
             })
             .fail(function() { 
@@ -131,6 +132,7 @@
             document.getElementById( "#{{median.id}}" ).style.height="20px";
             })
         </script>
+        {% endautoescape %}
     {% endfor %}
 
 <br>
