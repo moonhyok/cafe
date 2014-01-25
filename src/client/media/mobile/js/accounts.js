@@ -167,6 +167,7 @@ var accounts = (function($, d3, console) {
         document.getElementById('skip-img'+id).src = window.url_root + '/media/mobile/img/cafe/skip.png';
         document.getElementById('skip-img'+id).style.width = '50px';
         window.skipped[id-1] = false;
+        rate.logUserEvent(11,'slider_set ' + id + ' ' + 'grade');
     }
     else
     {
@@ -178,6 +179,7 @@ var accounts = (function($, d3, console) {
     document.getElementById('skip-img'+id).src = window.url_root + '/media/mobile/img/cafe/grade.png';
     document.getElementById('skip-img'+id).style.width = '50px';
     window.skipped[id-1] = true;
+    rate.logUserEvent(11,'slider_set ' + id + ' ' + 'skip');
     }
 
     }
