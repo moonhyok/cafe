@@ -488,6 +488,7 @@ $(document).ready(function() {
 
     $('.first-time-btn').click(function() {
         //accounts.firstTime();
+        window.history.pushState("", "", '#');
         $('.landing').hide();
         $('.endsliders').show();
         window.cur_state = 'grade';
@@ -517,7 +518,8 @@ $(document).ready(function() {
            }
         });
 
-    $('.back-btn-dialog').click(function() {
+
+    var backButtonHandler = function() {
                accounts.hideAll();
                window.cur_state = window.prev_state;
                if (window.prev_state == 'home'){
@@ -583,8 +585,12 @@ $(document).ready(function() {
                 }
 
                window.scrollTo(0,0);
+                window.history.pushState("", "", '#');
 
-            });
+
+            }
+
+    $('.back-btn-dialog').click(backButtonHandler);
 
     $('.help-btn-dialog').click(function() {
                                  if (window.cur_state.indexOf('help') != -1)
@@ -853,4 +859,8 @@ $(document).ready(function() {
            }
         window.no_menubar = false;
 	});
+
+    window.onpopstate = function(event) {
+        backButtonHandler();
+    };
 });
