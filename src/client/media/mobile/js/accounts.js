@@ -381,7 +381,6 @@ $(document).ready(function() {
                     //$("#email-error").hide();
                     $("#password-error").hide();
 
-                    window.foo = data;
                     window.registration_in_progress = false;
 
                     if (data.hasOwnProperty('success')) {
