@@ -265,6 +265,28 @@ def crcstats(request,entry_code=None):
                                                                                             }))
 
 
+def crc_generic_stats(request):
+
+    os = get_os(1)
+    disc_stmt = get_disc_stmt(os, 1)   
+
+    active_users = list(User.objects.filter(is_active = True))
+
+    statements = OpinionSpaceStatement.objects.all().order_by('id')
+    medians = []
+    for s in statements:
+        med = numpy.median(UserRating.objects.filter(user__in = active_users, opinion_space_statement=s,is_current=True).values_list('rating'))
+        if med <= 1e-5:
+            med = 0
+        medians.append({'statement': s.statement, 'avgG': score_to_grade(100*med), 'avg': int((1-med)*300),'id':s.id})
+
+    return render_to_response('crc_generic_stats.html', context_instance = RequestContext(request, {'num_participants': len(active_users),
+                                                                                            'date':datetime.date.today(),
+                                                                                            'num_ratings': CommentAgreement.objects.filter(rater__in = active_users, is_current=True).count()*2,
+                                                                                            'url_root' : settings.URL_ROOT,
+                                                                                            'medians': medians,
+                                                                                            }))
+
 def app(request, username=None):
 	if request.mobile:
 		return HttpResponseRedirect(URL_ROOT + "/mobile/")

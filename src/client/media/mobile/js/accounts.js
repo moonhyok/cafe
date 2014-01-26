@@ -167,6 +167,7 @@ var accounts = (function($, d3, console) {
         document.getElementById('skip-img'+id).src = window.url_root + '/media/mobile/img/cafe/skip.png';
         document.getElementById('skip-img'+id).style.width = '50px';
         window.skipped[id-1] = false;
+        rate.logUserEvent(11,'slider_set ' + id + ' ' + 'grade');
     }
     else
     {
@@ -178,6 +179,7 @@ var accounts = (function($, d3, console) {
     document.getElementById('skip-img'+id).src = window.url_root + '/media/mobile/img/cafe/grade.png';
     document.getElementById('skip-img'+id).style.width = '50px';
     window.skipped[id-1] = true;
+    rate.logUserEvent(11,'slider_set ' + id + ' ' + 'skip');
     }
 
     }
@@ -379,7 +381,6 @@ $(document).ready(function() {
                     //$("#email-error").hide();
                     $("#password-error").hide();
 
-                    window.foo = data;
                     window.registration_in_progress = false;
 
                     if (data.hasOwnProperty('success')) {
@@ -487,6 +488,7 @@ $(document).ready(function() {
 
     $('.first-time-btn').click(function() {
         //accounts.firstTime();
+        window.history.pushState("", "", '#');
         $('.landing').hide();
         $('.endsliders').show();
         window.cur_state = 'grade';
@@ -516,7 +518,8 @@ $(document).ready(function() {
            }
         });
 
-    $('.back-btn-dialog').click(function() {
+
+    var backButtonHandler = function() {
                accounts.hideAll();
                window.cur_state = window.prev_state;
                if (window.prev_state == 'home'){
@@ -582,8 +585,12 @@ $(document).ready(function() {
                 }
 
                window.scrollTo(0,0);
+                window.history.pushState("", "", '#');
 
-            });
+
+            }
+
+    $('.back-btn-dialog').click(backButtonHandler);
 
     $('.help-btn-dialog').click(function() {
                                  if (window.cur_state.indexOf('help') != -1)
@@ -852,4 +859,8 @@ $(document).ready(function() {
            }
         window.no_menubar = false;
 	});
+
+    window.onpopstate = function(event) {
+        backButtonHandler();
+    };
 });

@@ -1,12 +1,7 @@
 <!DOCTYPE html>
 <head>
 	<meta name='viewport' content='user-scalable=no, width=device-width,initial-scale=1, maximum-scale=1' />
-	<script type='text/javascript'>
-		window.userhist1_url="{{url_root}}/media/mobile/img/dailyupdate/{{participant}}_1.png"
-		window.userhist2_url="{{url_root}}/media/mobile/img/dailyupdate/{{participant}}_2.png"
-		window.show_hist1={{show_hist1}}
-		window.show_hist2={{show_hist2}}	
-    </script>
+
 </head>
 <style>
 
@@ -32,78 +27,13 @@
 <center>
 <div class="stats-section">
     Data as of <strong>{{date}}</strong><br>
-    {% if level8 %}
-    Your participant number is <strong>{{participant}}</strong><br>
-    {% endif %}
     Number of Participants: <strong> {{num_participants}}</strong><br>
-    {% if level8 %}
-    Your Participation Score: <strong> {{score}}</strong><br>
-    
-    Number of Participants who graded <br/>your suggestion: <strong>{{received}}</strong>
-    {% endif %}
 </div>
-
-<br>
-<hr>
-
-<div class="stats-section-title">
-    <div class="stats-label-big">
-        THE ISSUE YOU SUGGESTED<br/> FOR VERSION 2.0 OF THE CRC:
-    </div>
-</div>
-<br>
-{% if left_comment %}
-<div class="stats-section-title">
-    <div class="issue-text">
-        {{comment}}
-    </div>
-</div>
-{% else %}
-  
-  <div class="stats-section-title">
-	   <span class="fine-print">You haven't suggested an issue. <br>Please visit the report card and <br>suggest an issue</span>
-  </div>
-
-{% endif %}
 
 
 <br>
 <hr>
 
-<div class="stats-section-title">
-    <div class="stats-label-big">
-        GRADES ASSIGNED TO <br/>YOUR SUGGESTION
-    </div>
-</div>
-
-{% if level8 %}
-   {% if left_comment %}
-     <br>
-     <div class="stats-section-title" id="userhist">
-     "How important is this issue for the <br/> next Report Card?"<br><br>
-     
-     <div class="stat-img" id="userhist1"></div>     <br><br>
-
-     "How would you grade California on <br/>this issue?"<br><br>
-    
-     <div class="stat-img" id="userhist2"></div><br>
-     
-     </div>
-   {% else %}
-      <br>
-      <div class="stats-section-title">
-	  <span class="fine-print">You haven't suggested an issue.<br> Please visit the report card and <br>suggest an issue</span>
-      </div>
-   {% endif %}
-
-{% else %}
-  <div class="stats-section-title">
-	   <span class="fine-print">Please visit the report card, <br>suggest an issue, and leave <br>your email to see how others <br>grade your idea</span>
-  </div>
-{% endif %}
-
-<br>
-<hr>
 <div class="stats-section-title">
     <div class="stats-label-big">
         GRADES ASSIGNED TO THE <br/>STATE OF CALIFORNIA
@@ -117,9 +47,9 @@
 
     <div class="stat-img" id="{{median.id}}">
         
-        
+    
     </div>
-        {% autoescape off %}
+    {% autoescape off %}
         <script>
 			$.get('{{url_root}}/media/mobile/img/dailyupdate/{{median.statement}}.png')
 			.done(function() { 
@@ -132,7 +62,7 @@
             document.getElementById( "#{{median.id}}" ).style.height="20px";
             })
         </script>
-        {% endautoescape %}
+    {% endautoescape %}
     {% endfor %}
 
 <br>
@@ -183,6 +113,6 @@ important issues for version 2.0.
 	</center>
 <script type='text/javascript' src='{{url_root}}/media/mobile/js/geostat.js'></script>  
 <script type='text/javascript' src='{{url_root}}/media/mobile/js/map.js'></script>  
-<script type='text/javascript' src='{{url_root}}/media/mobile/js/crcstats.js'></script>
+
 </body>
 </html>
