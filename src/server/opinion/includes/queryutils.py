@@ -1162,7 +1162,7 @@ def format_discussion_comment(request_user, response):
 	"""
 	#print len(response.comment.split()) > 3, response.query_weight
 	
-	return {'uid': response.user.id,
+	return {'uid': response.user.id-361,
 			'username': get_formatted_username(response.user),
 			#'location': get_location(response.user),
 			'cid': response.id,

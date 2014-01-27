@@ -401,7 +401,7 @@ var _blooms = blooms = (function($, d3, console) {
                     $('.menubar').hide();
                     window.cur_state = 'rate';
                 
-                $('.rate-username').html('Suggested by Participant #'+d.uid-361);
+                $('.rate-username').html('Suggested by Participant #'+d.uid);
                 var commentData = rate.pullComment(d.uid, 'uid', comments);
                 var content = commentData.comment;
                 var cid = commentData.cid;
