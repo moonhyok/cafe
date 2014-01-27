@@ -298,10 +298,7 @@ def crc_generic_stats(request):
     statements = OpinionSpaceStatement.objects.all().order_by('id')
     medians = []
     for s in statements:
-        med = numpy.median(UserRating.objects.filter(user__in = active_users, opinion_space_statement=s,is_current=True).values_list('rating'))
-        if med <= 1e-5:
-            med = 0
-        medians.append({'statement': s.statement, 'avgG': score_to_grade(100*med), 'avg': int((1-med)*300),'id':s.id})
+        medians.append({'statement': s.statement, 'id':s.id})
 
     return render_to_response('crc_generic_stats.html', context_instance = RequestContext(request, {'num_participants': len(active_users),
                                                                                             'date':datetime.date.today(),
