@@ -255,7 +255,7 @@ def crcstats(request,entry_code=None):
                                                                                             'date':datetime.date.today(),
                                                                                             'comment':comment,
                                                                                             'left_comment': (comment != ''),
-                                                                                            'participant': uid,
+                                                                                            'participant': uid-361,
                                                                                             'given': given,
                                                                                             'received': received,
                                                                                             'score': score*100,
