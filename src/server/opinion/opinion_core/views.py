@@ -221,7 +221,7 @@ def crcstats(request,entry_code=None):
     show_hist2=False
 
     if level8:
-        score = CommentAgreement.objects.filter(rater = user,is_current=True).count()
+        score = CommentAgreement.objects.filter(rater = user,is_current=True).count()*100 + user_author_score(user)
         given = 2*CommentAgreement.objects.filter(rater = user,is_current=True).count()
         received = 2*CommentAgreement.objects.filter(comment__in = DiscussionComment.objects.filter(user = user),is_current=True).count()
         comment_list=DiscussionComment.objects.filter(user=user,is_current=True)
@@ -258,7 +258,7 @@ def crcstats(request,entry_code=None):
                                                                                             'participant': uid-361,
                                                                                             'given': given,
                                                                                             'received': received,
-                                                                                            'score': score*100,
+                                                                                            'score': min(score,30000),
                                                                                             'num_ratings': CommentAgreement.objects.filter(rater__in = active_users, is_current=True).count()*2,
                                                                                             'url_root' : settings.URL_ROOT,
                                                                                             'medians': medians,
