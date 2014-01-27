@@ -65,12 +65,16 @@ def geostats():
                    else:
                       s_skip=s_skip+1
           skip_ca=skip_ca+s_skip
-          if len(s_grade)==0:
+          if len(s_grade)+s_skip==0:
              geo_data['features'][i]['properties']["s"+str(s.id)]=10  #for leaflet to show NA color
              geo_data['features'][i]['properties']['PARTICIPANTS']=0
-          if len(s_grade)>0:
-             geo_data['features'][i]['properties']["s"+str(s.id)]=numpy.median(s_grade)
-             geo_data['features'][i]['properties']['PARTICIPANTS']=len(s_grade)
+          if len(s_grade)+s_skip>0:
+             geo_data['features'][i]['properties']['PARTICIPANTS']=len(s_grade)+s_skip
+             if len(s_grade)>0:
+                geo_data['features'][i]['properties']["s"+str(s.id)]=numpy.median(s_grade)
+             else:
+                geo_data['features'][i]['properties']["s"+str(s.id)]=10
+				 
        f.write("skip ca user:"+str(skip_ca)+'\n')
 
     #find median for non ca zipcode
@@ -110,18 +114,21 @@ def geostats():
                       s_skip=s_skip+1
         
         f.write("skip non ca user:"+str(s_skip)+'\n')
-        if len(s_grade)==0:
+        if len(s_grade)+s_skip==0:
             geo_data['features'][len(geo_data['features'])-1]['properties']["s"+str(s.id)]=10
             geo_data['features'][len(geo_data['features'])-1]['properties']['PARTICIPANTS']=0
-        if len(s_grade)>0:
-            geo_data['features'][len(geo_data['features'])-1]['properties']["s"+str(s.id)]=numpy.median(s_grade)
-            geo_data['features'][len(geo_data['features'])-1]['properties']['PARTICIPANTS']=len(s_grade)
+        if len(s_grade)+s_skip>0:
+            geo_data['features'][len(geo_data['features'])-1]['properties']['PARTICIPANTS']=len(s_grade)+s_skip
+            if len(s_grade)>0:
+                geo_data['features'][len(geo_data['features'])-1]['properties']["s"+str(s.id)]=numpy.median(s_grade)
+            else:
+                geo_data['features'][len(geo_data['features'])-1]['properties']["s"+str(s.id)]=10
 
     with open(jspath+'geostat.js', 'w') as outfile:
          outfile.write('var geostat=')
          json.dump(geo_data, outfile)
          outfile.write(';')
-
+         
 def issues_hist():
    """produce histogram for each issue"""
    statements = OpinionSpaceStatement.objects.all().order_by('id')
