@@ -487,8 +487,8 @@ $(document).ready(function() {
 
     $('.first-time-btn').click(function() {
         //accounts.firstTime();
-        $('.landing').hide();
         $('.endsliders').show();
+        accounts.hideAll();
         window.cur_state = 'grade';
         rate.logUserEvent(7,'first time');
         //$('.top-bar').show();
