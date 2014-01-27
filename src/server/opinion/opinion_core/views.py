@@ -279,6 +279,7 @@ def crcstats(request,entry_code=None):
                                                                                             'comment':comment,
                                                                                             'left_comment': (comment != ''),
                                                                                             'participant': uid-361,
+                                                                                            'uid':uid,
                                                                                             'given': given,
                                                                                             'received': received,
                                                                                             'score': min(score,30000),
