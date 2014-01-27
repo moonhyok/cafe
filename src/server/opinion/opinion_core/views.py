@@ -198,7 +198,7 @@ def confirmation_mail(request):
         message = render_to_string('registration/confirmation_email.txt',
                                         { 'url_root': settings.URL_ROOT, 
 										 'entrycode': entrycode,
-										 'user_id': request.user.id,
+										 'user_id': request.user.id-361,
                                           })
         try:
            send_mail(subject, message, Settings.objects.string('DEFAULT_FROM_EMAIL'), email_list)
