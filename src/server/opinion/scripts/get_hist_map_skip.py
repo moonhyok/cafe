@@ -22,42 +22,94 @@ import datetime
 
 def geostats():
     """produce geojson file for leaflet"""
+    f=open(imagepath+'geotest.txt','w')
     geo_json=open('geo.json')
     geo_data=json.load(geo_json)
-
+    skip_begin_date=datetime.datetime(2014,1,9,0,0,0,0)
     statements = OpinionSpaceStatement.objects.all().order_by('id')
     for s in statements:
+       skip_ca=0
        for i in range(0,len(geo_data['features'])-1):
           county=geo_data['features'][i]['properties']['NAME']
           zipcode_in_county=ZipCode.objects.filter(state='CA').filter(county__startswith=county)
           s_grade=[]
+          s_skip=0
           for j in range(0, len(zipcode_in_county)):
              log=ZipCodeLog.objects.filter(location__exact=zipcode_in_county[j])
              for k in range(0, len(log)):
-             	if log[k].user.is_active:
-                   user_grade_s=log[k].user.userrating_set.filter(opinion_space_statement=s,is_current=True)
+             	if log[k].user.is_active:  #make sure active
+                   visitor=Visitor.objects.filter(user=log[k].user)  #connect to visitor
+                   user_grade_s=log[k].user.userrating_set.filter(opinion_space_statement=s,is_current=True) #filter grade
                    if len(user_grade_s)>0:
-                      s_grade.append(user_grade_s[0].rating)
+                      if len(visitor)>0:
+                         if user_grade_s[0].created>=skip_begin_date:
+                            s_log_skip=LogUserEvents.objects.filter(is_visitor=True, logger_id=visitor[0].id,log_type=11,details__contains='skip').filter(details__contains=str(s.id)).order_by('-created') #get issue skip log
+                            s_log_rating=LogUserEvents.objects.filter(is_visitor=True, logger_id=visitor[0].id,log_type=11).exclude(details__contains='skip').filter(details__startswith='slider_set '+str(s.id)).order_by('-created')
+                            if len(s_log_skip)==0: #no skip
+                               if len(s_log_rating)>0:
+                                  s_grade.append(user_grade_s[0].rating)
+                               else: #not click on skip, not move slider s, => skip
+                                  s_skip=s_skip+1
+                            else:
+                               if len(s_log_rating)==0:  #click skip, not move slider s => skip
+                                  s_skip=s_skip+1
+                               else:
+                                  if s_log_skip[0].created>s_log_rating[0].created: #final decision is skip
+                                     s_skip=s_skip+1
+                                  else:
+                                     s_grade.append(user_grade_s[0].rating)
+                         else:
+                            s_grade.append(user_grade_s[0].rating) 
+                      else: 
+                         s_grade.append(user_grade_s[0].rating)
+                   else:
+                      s_skip=s_skip+1
+          skip_ca=skip_ca+s_skip
           if len(s_grade)==0:
              geo_data['features'][i]['properties']["s"+str(s.id)]=10  #for leaflet to show NA color
              geo_data['features'][i]['properties']['PARTICIPANTS']=0
           if len(s_grade)>0:
              geo_data['features'][i]['properties']["s"+str(s.id)]=numpy.median(s_grade)
              geo_data['features'][i]['properties']['PARTICIPANTS']=len(s_grade)
-
+       f.write("skip ca user:"+str(skip_ca)+'\n')
 
     #find median for non ca zipcode
     zipcode_nonca=ZipCode.objects.exclude(state='CA')
     for s in statements:
         s_grade=[]
+        s_skip=0
         for j in range(0, len(zipcode_nonca)):
             log=ZipCodeLog.objects.filter(location__exact=zipcode_nonca[j])
             for k in range(0, len(log)):
             	if log[k].user.is_active:
-                   user_grade_s=log[k].user.userrating_set.filter(opinion_space_statement=s,is_current=True)
+                   visitor=Visitor.objects.filter(user=log[k].user)  #connect to visitor
+                   user_grade_s=log[k].user.userrating_set.filter(opinion_space_statement=s,is_current=True) #filter grade
                    if len(user_grade_s)>0:
-                      s_grade.append(user_grade_s[0].rating)
-
+                      if len(visitor)>0:
+                         if user_grade_s[0].created>=skip_begin_date:
+                            s_log_skip=LogUserEvents.objects.filter(is_visitor=True, logger_id=visitor[0].id,log_type=11,details__contains='skip').filter(details__contains=str(s.id)).order_by('-created') #get issue skip log
+                            s_log_rating=LogUserEvents.objects.filter(is_visitor=True, logger_id=visitor[0].id,log_type=11).exclude(details__contains='skip').filter(details__startswith='slider_set '+str(s.id)).order_by('-created')
+                            if len(s_log_skip)==0: #no skip
+                               if len(s_log_rating)>0:
+                                  s_grade.append(user_grade_s[0].rating)
+                               else: #not click on skip, not move slider s, => skip
+                                  s_skip=s_skip+1
+                            else:
+                               if len(s_log_rating)==0:  #click skip, not move slider s => skip
+                                  s_skip=s_skip+1
+                               else:
+                                  if s_log_skip[0].created>s_log_rating[0].created: #final decision is skip
+                                     s_skip=s_skip+1
+                                  else:
+                                     s_grade.append(user_grade_s[0].rating)
+                         else:
+                            s_grade.append(user_grade_s[0].rating) 
+                      else: 
+                         s_grade.append(user_grade_s[0].rating)
+                   else:
+                      s_skip=s_skip+1
+        
+        f.write("skip non ca user:"+str(s_skip)+'\n')
         if len(s_grade)==0:
             geo_data['features'][len(geo_data['features'])-1]['properties']["s"+str(s.id)]=10
             geo_data['features'][len(geo_data['features'])-1]['properties']['PARTICIPANTS']=0
@@ -75,13 +127,13 @@ def issues_hist():
    statements = OpinionSpaceStatement.objects.all().order_by('id')
    bins=[0,0.01,0.19,0.32,0.38,0.44,0.56,0.63,0.69,0.81,0.86,0.92,0.99,1]  
         # F    D-   D    D+   C-   C    C+   B-   B   B+    A-   A    A+
-   N=len(bins)-1
+   N=len(bins)# include "skip"
    ind=numpy.arange(N)
    width=0.5
    
    f=open(imagepath+'skiptest.txt','w')
    
-   f.write("active user:"+str(len(User.objects.filter(is_active=True)))+'\n')
+   
    skip_begin_date=datetime.datetime(2014,1,9,0,0,0,0)
    for s in statements:
        activeuser=0
@@ -113,23 +165,19 @@ def issues_hist():
                          else:
                             s_rating_list.append(1-rating.rating)
                 else: 
-                   user_no_visitor=user_no_visitor+1 
+                   s_rating_list.append(1-rating.rating)
           else:
              if rating.user.is_active:
                 activeuser=activeuser+1
                 s_rating_list.append(1-rating.rating)
        f.write("active_user:"+str(activeuser)+'\n')
-       f.write("user no skip:"+str(slogskip_0)+'\n')
-       f.write("user_no_visitor"+str(user_no_visitor)+'\n')
        f.write("active rating user:"+str(len(s_rating_list))+'\n')
        f.write("skip user:"+str(s_skip)+'\n')
-       
-         
-
-                   
-       
-       '''if len(s_rating_list)>0:
+      
+       if len(s_rating_list)>0:
           hist,bin_edges = numpy.histogram(s_rating_list,bins,normed=False)
+          skip=numpy.array([s_skip])
+          hist=numpy.concatenate((skip,hist), axis=1)
           hist_in_percent=(100*hist/float(sum(hist)))[::-1]
           #overcome xscale issue in pyplot 
           if hist_in_percent[0]==0:
@@ -137,6 +185,7 @@ def issues_hist():
           if hist_in_percent[len(hist_in_percent)-1]==0:
              hist_in_percent[len(hist_in_percent)-1]=0.001
           fig, ax = plt.subplots()
+         
           rects1 = ax.bar(ind, hist_in_percent, width, facecolor='#74b9b7', 
           align='center',edgecolor = "none")
           fig.patch.set_facecolor('#74b9b7')
@@ -144,15 +193,17 @@ def issues_hist():
           median=numpy.median(s_rating_list)
           median_bar=median_index(median)
           rects1[median_bar].set_color('#4f300b')
+          rects1[13].set_color('#0b294f')
           ax.set_xticks(ind)
           for i in plt.gca().get_xticklabels():
              i.set_color("#4f300b")
           for i in plt.gca().get_yticklabels():
              i.set_color("#4f300b")
           plt.figtext(.91,.31,"PERCENTAGE(%)",family='sans-serif',color="#4f300b",rotation='vertical')
-          ax.set_xticklabels( ('A+', 'A', 'A-', 'B+', 'B','B-','C+','C','C-','D+','D','D-','F') )
+          ax.set_xticklabels( ('A+', 'A', 'A-', 'B+', 'B','B-','C+','C','C-','D+','D','D-','F','Skip') )
+          plt.setp(ax.get_xticklabels(), fontsize=10)
           fig.set_size_inches(5,5)
-          plt.savefig(imagepath+s.statement+'.png',facecolor=fig.get_facecolor(),edgecolor='none',dpi=100,format='png')'''
+          plt.savefig(imagepath+s.statement+'.png',facecolor=fig.get_facecolor(),edgecolor='none',dpi=100,format='png')
 
 def median_index(median):
      if median<=1 and median>0.99:
@@ -287,7 +338,7 @@ def participant_slider2_hist():
                  fig2.set_size_inches(5,5)
                  plt.savefig(imagepath+str(cur_user.id)+'_2.png',facecolor=fig2.get_facecolor(),edgecolor='none',dpi=100,format='png')
 
-#geostats()
-#participant_slider1_hist()
-#participant_slider2_hist()
+geostats()
+participant_slider1_hist()
+participant_slider2_hist()
 issues_hist()
