@@ -133,18 +133,17 @@ def issues_hist():
    
    f=open(imagepath+'skiptest.txt','w')
    
-   
+   active_users = list(User.objects.filter(is_active=True)) 
    skip_begin_date=datetime.datetime(2014,1,9,0,0,0,0)
    for s in statements:
        activeuser=0
        user_no_visitor=0
-       s_rating=UserRating.objects.filter(opinion_space_statement=s,is_current=True)
+       s_rating=UserRating.objects.filter(opinion_space_statement=s,is_current=True,user__in = active_users)
        s_rating_list=[]
        s_skip=0
        slogskip_0=0
        for rating in s_rating:
           if rating.created>=skip_begin_date:
-       	     if rating.user.is_active:#determine if skip, only append to s_rating_list if non-skip
        	        activeuser=activeuser+1
                 visitor=Visitor.objects.filter(user=rating.user)  #get the visitor of the user
                 if len(visitor)>0:
@@ -167,7 +166,6 @@ def issues_hist():
                 else: 
                    s_rating_list.append(1-rating.rating)
           else:
-             if rating.user.is_active:
                 activeuser=activeuser+1
                 s_rating_list.append(1-rating.rating)
        f.write("active_user:"+str(activeuser)+'\n')
@@ -276,7 +274,34 @@ def participant_slider1_hist():
                  
                  median1=numpy.median(slider1_rating)
                  median_bar1=median_index(median1)
-                 rects1[median_bar1].set_color('#4f300b')
+                 if slider1_hist_in_percent[median_bar1]<0.001:
+                    if 	slider1_hist_in_percent[median_bar1-1]>0.001: 
+                        rects1[median_bar1-1].set_color('#4f300b')
+                    elif slider1_hist_in_percent[median_bar1+1]>0.001:
+                        rects1[median_bar1+1].set_color('#4f300b')
+                    elif slider1_hist_in_percent[median_bar1-2]>0.001: 
+                        rects1[median_bar1-2].set_color('#4f300b')
+                    elif slider1_hist_in_percent[median_bar1+2]>0.001: 
+                        rects1[median_bar1+2].set_color('#4f300b')
+                    elif slider1_hist_in_percent[median_bar1-3]>0.001: 
+                        rects1[median_bar1-3].set_color('#4f300b')
+                    elif slider1_hist_in_percent[median_bar1+3]>0.001: 
+                        rects1[median_bar1+3].set_color('#4f300b')
+                    elif slider1_hist_in_percent[median_bar1-4]>0.001: 
+                        rects1[median_bar1-4].set_color('#4f300b')
+                    elif slider1_hist_in_percent[median_bar1+4]>0.001: 
+                        rects1[median_bar1+4].set_color('#4f300b')
+                    elif slider1_hist_in_percent[median_bar1-5]>0.001: 
+                        rects1[median_bar1-5].set_color('#4f300b')
+                    elif slider1_hist_in_percent[median_bar1+5]>0.001: 
+                        rects1[median_bar1+5].set_color('#4f300b')
+                    elif slider1_hist_in_percent[median_bar1-6]>0.001: 
+                        rects1[median_bar1-6].set_color('#4f300b')
+                    else:
+                        rects1[median_bar1+6].set_color('#4f300b')
+                 else:    
+                    rects1[median_bar1].set_color('#4f300b')
+
                  ax1.set_xticks(ind)
                  for i in plt.gca().get_xticklabels():
                     i.set_color("#4f300b")
@@ -327,7 +352,33 @@ def participant_slider2_hist():
                  ax2.patch.set_facecolor('#f5ebde')
                  median2=numpy.median(slider2_rating)
                  median_bar2=median_index(median2)
-                 rects2[median_bar2].set_color('#4f300b')
+                 if slider2_hist_in_percent[median_bar2]<0.001:
+                    if 	slider2_hist_in_percent[median_bar2-1]>0.001: 
+                        rects2[median_bar2-1].set_color('#4f300b')
+                    elif slider2_hist_in_percent[median_bar2+1]>0.001:
+                        rects2[median_bar2+1].set_color('#4f300b')
+                    elif slider2_hist_in_percent[median_bar2-2]>0.001: 
+                        rects2[median_bar2-2].set_color('#4f300b')
+                    elif slider2_hist_in_percent[median_bar2+2]>0.001: 
+                        rects2[median_bar2+2].set_color('#4f300b')
+                    elif slider2_hist_in_percent[median_bar2-3]>0.001: 
+                        rects2[median_bar2-3].set_color('#4f300b')
+                    elif slider2_hist_in_percent[median_bar2+3]>0.001: 
+                        rects2[median_bar2+3].set_color('#4f300b')
+                    elif slider2_hist_in_percent[median_bar2-4]>0.001: 
+                        rects2[median_bar2-4].set_color('#4f300b')
+                    elif slider2_hist_in_percent[median_bar2+4]>0.001: 
+                        rects2[median_bar2+4].set_color('#4f300b')
+                    elif slider2_hist_in_percent[median_bar2-5]>0.001: 
+                        rects2[median_bar2-5].set_color('#4f300b')
+                    elif slider2_hist_in_percent[median_bar2+5]>0.001: 
+                        rects2[median_bar2+5].set_color('#4f300b')
+                    elif slider2_hist_in_percent[median_bar2-6]>0.001: 
+                        rects2[median_bar2-6].set_color('#4f300b')
+                    else:
+                        rects2[median_bar2+6].set_color('#4f300b')
+                 else:    
+                    rects2[median_bar2].set_color('#4f300b')
                  for i in plt.gca().get_xticklabels():
                     i.set_color("#4f300b")
                  for i in plt.gca().get_yticklabels():
