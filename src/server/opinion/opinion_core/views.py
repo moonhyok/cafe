@@ -115,9 +115,35 @@ def mobile(request,entry_code=None):
     medians = {}
     statement_labels = {};
  #.values_list('id', 'statement', 'short_version'))
-
+    skip_begin_date=datetime.datetime(2014,1,9,0,0,0,0)
     for s in statements:
-        medians[str(s.id)] = numpy.median(UserRating.objects.filter(user__in = active_users,opinion_space_statement=s,is_current=True).values_list('rating'))
+    	s_rating=UserRating.objects.filter(opinion_space_statement=s,is_current=True,user__in = active_users)
+        s_rating_list=[]
+        s_skip=0
+        for rating in s_rating:
+          if rating.created>=skip_begin_date:
+                visitor=Visitor.objects.filter(user=rating.user)  #get the visitor of the user
+                if len(visitor)>0:
+                   s_log_skip=LogUserEvents.objects.filter(is_visitor=True, logger_id=visitor[0].id,log_type=11,details__contains='skip').filter(details__contains=str(s.id)).order_by('-created') #get issue skip log
+                   s_log_rating=LogUserEvents.objects.filter(is_visitor=True, logger_id=visitor[0].id,log_type=11).exclude(details__contains='skip').filter(details__startswith='slider_set '+str(s.id)).order_by('-created')
+                   if len(s_log_skip)==0: #no skip
+                      if len(s_log_rating)>0:
+                         s_rating_list.append(rating.rating)
+                      else: #not click on skip, not move slider s, => skip
+                         s_skip=s_skip+1
+                   else:
+                      if len(s_log_rating)==0:  #click skip, not move slider s => skip
+                         s_skip=s_skip+1
+                      else:
+                         if s_log_skip[0].created>s_log_rating[0].created: #final decision is skip
+                            s_skip=s_skip+1
+                         else:
+                            s_rating_list.append(rating.rating)
+                else: 
+                   s_rating_list.append(rating.rating)
+          else:
+                s_rating_list.append(rating.rating)
+        medians[str(s.id)] = numpy.median(s_rating_list)
         if medians[str(s.id)] <= 1e-5:
             medians[str(s.id)] = 0
         statement_labels[str(s.id)] = s.statement
@@ -242,10 +268,7 @@ def crcstats(request,entry_code=None):
     statements = OpinionSpaceStatement.objects.all().order_by('id')
     medians = []
     for s in statements:
-        med = numpy.median(UserRating.objects.filter(user__in = active_users, opinion_space_statement=s,is_current=True).values_list('rating'))
-        if med <= 1e-5:
-            med = 0
-        medians.append({'statement': s.statement, 'avgG': score_to_grade(100*med), 'avg': int((1-med)*300),'id':s.id})
+        medians.append({'statement': s.statement,'id':s.id})
 
     return render_to_response('crc_stats.html', context_instance = RequestContext(request, {'num_participants': len(active_users),
                                                                                             'level8':level8,
