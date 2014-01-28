@@ -201,7 +201,7 @@ def confirmation_mail(request):
 										 'user_id': request.user.id-361,
                                           })
         try:
-           send_mail(subject, message, Settings.objects.string('DEFAULT_FROM_EMAIL'), email_list)
+           #send_mail(subject, message, Settings.objects.string('DEFAULT_FROM_EMAIL'), email_list)
            print 'email'
         except:
            return json_error("We were unable to send an email. Try again later.")
@@ -279,6 +279,7 @@ def crcstats(request,entry_code=None):
                                                                                             'comment':comment,
                                                                                             'left_comment': (comment != ''),
                                                                                             'participant': uid-361,
+                                                                                            'uid':uid,
                                                                                             'given': given,
                                                                                             'received': received,
                                                                                             'score': min(score,30000),
