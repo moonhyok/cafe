@@ -215,7 +215,7 @@ var _blooms = blooms = (function($, d3, console) {
                 data2 = data1['never_seen_comments'];
                 ratings = data2['ratings'];
                 generateBloomSizesAndColors(data2);
-                //console.log(eigens);
+                console.log(ratings);
 
             }
         });
@@ -377,7 +377,7 @@ var _blooms = blooms = (function($, d3, console) {
             .append("svg:image")
             .attr("xlink:href", function(d) {
                 window.blooms_list.push(d.uid);
-                // console.log({'uid': d.uid,'x':d.x,'y':d.y,'cx': canvasx(d.x),'cy': canvasy(d.y)});
+                console.log({'uid': d.uid,'x':d.x,'y':d.y,'cx': canvasx(d.x),'cy': canvasy(d.y)});
                 return window.url_root + "/media/mobile/img/cafe/cafe" + Math.floor((Math.random()*6)).toString() + ".png";
             })
             .attr("width", "80") //if this changes, change the margin above

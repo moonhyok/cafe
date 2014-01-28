@@ -2601,23 +2601,7 @@ def os_never_seen_comments_json(request,os_id,disc_stmt_id=None):
 	if os == None or len(disc_stmt) == 0:
 		return json_error('Invalid Request')
 	
-	"""    
-	cache = NeverSeenCache.objects.filter(created__gte=datetime.date.today()).order_by('-created')
-	if len(cache) > 0 and not request.user.is_authenticated():
-	    cache = cache[0]
-	    return json.loads(cache.value)
-	"""
-
-	#query = request.REQUEST.get('query', False)
-	#no_statements = request.REQUEST.get('no_statements', False)
-	#if no_statements == "false": # Flash booleans aren't transferred correctly
-	#	no_statements = False
-
 	never_seen_comments = get_never_seen_comments(request.user,os,disc_stmt[0],7, False)
-	# Check for an argument username -- this param is only sent on createOS
-	#username = request.REQUEST.get('username', False)
-	#if username:
-	#	never_seen_comments += get_comment_by_username(request, username, os, disc_stmt)
 	
 	# create log 
 	create_comments_returned_log(request, os, never_seen_comments, LogCommentsReturned.unrated)
