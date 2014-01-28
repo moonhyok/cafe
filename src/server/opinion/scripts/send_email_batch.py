@@ -7,15 +7,14 @@ from django.template.loader import render_to_string
 from django.core.mail import send_mail
 import time
 
-today_date=datetime.datetime(2014,1,28,0,0,0,0)
+today_date=datetime.datetime.today()-datetime.timedelta(days=1)
 user_today=User.objects.filter(date_joined__gte=today_date)
-print len(user_today)
+
 user_today_email=[]
 for user in user_today:
-    if len(user.email)!=0:
+    if len(user.email)>0:
+       print user.email
        user_today_email.append(user)
-
-print len(user_today_email)
 
 for user in user_today_email:
     entrycode=EntryCode.objects.filter(username=user.username,first_login=False)
@@ -29,6 +28,7 @@ for user in user_today_email:
                                     })
         try:
            send_mail(subject, message, Settings.objects.string('DEFAULT_FROM_EMAIL'), email_list)
+           print user.email
            time.sleep(0.3)
         except:
            pass
