@@ -13,7 +13,6 @@ user_today=User.objects.filter(date_joined__gte=today_date)
 user_today_email=[]
 for user in user_today:
     if len(user.email)>0:
-       print user.email
        user_today_email.append(user)
 
 for user in user_today_email:
