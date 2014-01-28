@@ -215,7 +215,6 @@ var accounts = (function($, d3, console) {
                         } else {
                             accounts.hideAll();
                             $('.menubar').show();
-                            blooms.addYourMug();
                             window.cur_state = 'map';
                             window.prev_state = 'map';
                         }
