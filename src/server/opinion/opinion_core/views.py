@@ -97,16 +97,6 @@ def return_zipcode(request):
 @cache_control(no_cache=True)
 def mobile(request,entry_code=None):
     create_visitor(request)
-    if request.user.is_authenticated(): 
-       if entry_code!=None: #entrycode user refresh page
-          request.session['refresh_times']=1
-    else:
-       if entry_code!=None:         #entry code user relogin "first time"
-          user=authenticate(entrycode=entry_code)
-          if user !=None:
-             login(request,user)
-             request.session['refresh_times']=0
-    #print get_client_settings(True)
     os = get_os(1)
     disc_stmt = get_disc_stmt(os, 1)
     active_users = list(User.objects.filter(is_active=True)) #forces eval so lazy eval doesn't act too smart!!!
