@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<head>
+	<meta name='viewport' content='user-scalable=no, width=device-width,initial-scale=1, maximum-scale=1' />
+
+</head>
+<style>
+
+</style>
+<body>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.css" />
+<link rel="stylesheet" href="{{url_root}}/media/mobile/css/stats.css" />
+<script src="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.js?2"></script>
+<script type='text/javascript' src='{{url_root}}/media/mobile/jquery-mobile/jquery-1.10.2.min.js'></script>
+
+
+<div class="home-btn-dialog-box">
+    <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+    <a href="{{url_root}}/mobile/"><img width="30px;" id="home-btn" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png"></a>
+    <img width="30px;" id="help-btn" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+</div>
+
+<div class="title-header">
+    <img width="270px;" src="{{url_root}}/media/mobile/img/cafe/CRC_stat_title_01.png">
+</div>
+<br>
+<center>
+<div class="stats-section">
+    Data as of <strong>{{date}}</strong><br>
+    Number of Participants: <strong> {{num_participants}}</strong><br>
+</div>
+
+
+<br>
+<hr>
+
+<div class="stats-section-title">
+    <div class="stats-label-big">
+        GRADES ASSIGNED TO THE <br/>STATE OF CALIFORNIA
+    </div>
+
+    <span style="font-size:14px; font-style:Italic;">The median grade is marked in brown</span><br><br>
+
+    {% for median in medians %}
+    <strong>Distribution of Grades for Issue {{median.id}}:</strong><br>
+        <div class="issue-text">{{median.statement}}</div>
+
+    <div class="stat-img" id="{{median.id}}">
+        
+    
+    </div>
+    {% autoescape off %}
+        <script>
+			$.get('{{url_root}}/media/mobile/img/dailyupdate/{{median.statement}}.png')
+			.done(function() { 
+            var img = $('<img/>');
+            img.attr('src', '{{url_root}}/media/mobile/img/dailyupdate/{{median.statement}}.png');
+            img.appendTo('#{{median.id}}');
+            })
+            .fail(function() { 
+            $( "#{{median.id}}" ).html( "<br><span style=' font-size:14px;color: #f5ebde;'>We will present histograms soon</span><br/><br>" );
+            document.getElementById( "#{{median.id}}" ).style.height="20px";
+            })
+        </script>
+    {% endautoescape %}
+    {% endfor %}
+
+<br>
+<hr>
+
+
+<div class="stats-section-title" id="geodistribution">
+    <div class="stats-label-big">
+        GEOGRAPHIC DISTRIBUTION <br/> OF MEDIAN GRADES ASSIGNED
+    </div><br>
+    <span style="font-size:16px; font-weight:bold">Select an issue:</span> <br>
+    <select id="CA_selector" onchange="changeData(this)" >
+	{% for median in medians %}
+	<option value="{{median.id}}">{{ median.statement}}</option>
+	{% endfor %}
+    </select><br/>
+
+    <script>
+        $.get("{{url_root}}/media/mobile/js/geostat.js")
+            .fail(function() { 
+            $( "#geodistribution" ).html( "<div class='stats-label-big'>GEOGRAPHIC DISTRIBUTION <br/> OF MEDIAN GRADES ASSIGNED</div><br><br><span style=' font-size:14px;color: #f5ebde;'>We will present geographical distribution soon</span><br/><br>" );
+            document.getElementById( "#geodistribution" ).style.height="40px";
+            })
+    </script>
+<div id="map"></div>
+
+</div>
+<br>
+<div class="stats-section">
+<strong>Thanks for participating!</strong> <br><br>
+   <div class="issue-txt" id="final-remark">
+   You can return anytime using this URL 
+   to check your grades.<br><br>
+   
+Lt. Gov. Gavin Newsom and UC Berkeley 
+Professor Ken Goldberg will present 
+the data and lessons learned from 
+version 1.0 in a public forum at UC 
+Berkeley on 20 March 2014 that will 
+include participants who actively 
+contribute to identifying the most 
+important issues for version 2.0.
+</div>
+<br>
+<span style="font-style:Italic;">For more information:</span>
+<a href="http://californiareportcard.org/">californiareportcard.org/</a>
+<div>
+	</center>
+<script type='text/javascript' src='{{url_root}}/media/mobile/js/geostat.js'></script>  
+<script type='text/javascript' src='{{url_root}}/media/mobile/js/map.js'></script>  
+
+</body>
+</html>

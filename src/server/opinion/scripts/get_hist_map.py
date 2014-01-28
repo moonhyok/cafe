@@ -21,7 +21,7 @@ jspath= settings.MEDIA_ROOT + "/mobile/js/"
 
 def geostats():
     """produce geojson file for leaflet"""
-    geo_json=open('geo.json')
+    geo_json=open('/var/www/latest-version/src/server/opinion/geo.json')
     geo_data=json.load(geo_json)
 
     statements = OpinionSpaceStatement.objects.all().order_by('id')

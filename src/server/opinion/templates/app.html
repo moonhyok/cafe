@@ -3,8 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <html>
-    <head>
-        <rel="stylesheet" type="text/css" href="css/main.css" />
+    <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
+        <link rel="stylesheet" type="text/css" href="css/main.css" />
         <meta http-equiv="content-type" content="text/php; charset=utf-8" />
 	<style>
 	  * {
@@ -20,6 +20,16 @@
 	  font-family: sans-serif;
 	  }
 	  </style>
+
+	  <!-- Social media stuff -->
+	  <meta property="og:title" content="California Report Card"/>
+	  <meta property="og:type" content="website"/>
+	  <meta property="og:image" content="{{ url_root }}/mobile/media/mobile/img/cafe/cafe-title-large.png" />
+	  <meta property="og:url" content="{{ url_root }}/mobile" />
+	  <meta property="og:description" content="The California Report Card allows visitors to grade issues facing California and to suggest issues for future report cards." />
+	  <meta property="fb:page_id" content="1435922646620655" />
+
+	  <link rel="image_src" href="{{ url_root }}/mobile/media/mobile/img/cafe/cafe-title-large.png"/>
 	
         <title>California Report Card</title>
     </head>

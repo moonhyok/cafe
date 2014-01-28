@@ -167,6 +167,7 @@ var accounts = (function($, d3, console) {
         document.getElementById('skip-img'+id).src = window.url_root + '/media/mobile/img/cafe/skip.png';
         document.getElementById('skip-img'+id).style.width = '50px';
         window.skipped[id-1] = false;
+        rate.logUserEvent(11,'slider_set ' + id + ' ' + 'grade');
     }
     else
     {
@@ -178,6 +179,7 @@ var accounts = (function($, d3, console) {
     document.getElementById('skip-img'+id).src = window.url_root + '/media/mobile/img/cafe/grade.png';
     document.getElementById('skip-img'+id).style.width = '50px';
     window.skipped[id-1] = true;
+    rate.logUserEvent(11,'slider_set ' + id + ' ' + 'skip');
     }
 
     }
@@ -205,23 +207,23 @@ var accounts = (function($, d3, console) {
                 $('.score-value').text("" + ~~(data['cur_user_rater_score'] * window.conf.SCORE_SCALE_FACTOR));
                 window.user_score = data['cur_user_rater_score'];
                 $('.username').text(' ' + data['cur_username']);
+                if (window.user_score == 0) {
+                            accounts.hideAll();
+                            $('.dialog').show();
+                            window.cur_state = 'register';
+                            window.prev_state = 'dialog';
+                        } else {
+                            accounts.hideAll();
+                            $('.menubar').show();
+                            blooms.addYourMug();
+                            window.cur_state = 'map';
+                            window.prev_state = 'map';
+                        }
             },
             error: function() {
                 console.log("didn't get sent!");
             }
         });
-
-
-        //});
-        
-        if (window.user_score == 0) {
-            $('.dialog').show();
-        } else {
-            rate.initMenubar();
-            window.cur_state = 'map';
-            window.prev_state = 'map';
-        }
-        //setNumRatedBy();
     }
     
     function sendEmail(mail){
@@ -379,7 +381,6 @@ $(document).ready(function() {
                     //$("#email-error").hide();
                     $("#password-error").hide();
 
-                    window.foo = data;
                     window.registration_in_progress = false;
 
                     if (data.hasOwnProperty('success')) {
@@ -487,8 +488,9 @@ $(document).ready(function() {
 
     $('.first-time-btn').click(function() {
         //accounts.firstTime();
-        $('.endsliders').show();
+        window.history.pushState("", "", '#');
         accounts.hideAll();
+        $('.endsliders').show();
         window.cur_state = 'grade';
         rate.logUserEvent(7,'first time');
         //$('.top-bar').show();
@@ -516,8 +518,8 @@ $(document).ready(function() {
            }
         });
 
-    $('.back-btn-dialog').click(function() {
-               accounts.hideAll();
+
+    var backButtonHandler = function() {
                window.cur_state = window.prev_state;
                if (window.prev_state == 'home'){
                   $('.landing').show();
@@ -574,23 +576,26 @@ $(document).ready(function() {
                     $('.dialog-help-alt').show();
                     window.prev_state = window.prev_state.substring(4);
                 }
-                else if (window.prev_state == 'welcome_back')
+                else if (window.prev_state == 'stats')
                 {
-                    window.prev_state = 'welcome_back';
                     $('.menubar').show();
+                    //window.location = window.url_root.substring(0,window.url_root.length)+'/crcstats/' + window.refer;
                     //$('.scorebox').show();
                 }
 
                window.scrollTo(0,0);
+                window.history.pushState("", "", '#');
 
-            });
+
+            }
+
+    $('.back-btn-dialog').click(function(){accounts.hideAll();backButtonHandler();});
 
     $('.help-btn-dialog').click(function() {
                                  if (window.cur_state.indexOf('help') != -1)
                                  {
                                     return;
                                  }
-
                                  accounts.hideAll();
                                  window.prev_state = window.cur_state;
                                  window.cur_state = 'help-' + window.cur_state;
@@ -852,4 +857,8 @@ $(document).ready(function() {
            }
         window.no_menubar = false;
 	});
+
+    window.onpopstate = function(event) {
+        backButtonHandler();
+    };
 });

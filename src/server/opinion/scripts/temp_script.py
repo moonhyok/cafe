@@ -3,9 +3,5 @@ import environ
 from opinion.opinion_core.models import *
 import numpy as np
 
-u = User.objects.filter(id = 1)[0]
-print u.username
-u.set_password('a6b7Tuwq')
-u.save()
-
-
+c = User.objects.filter(is_active = False).count()
+print c

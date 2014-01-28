@@ -110,14 +110,41 @@ def mobile(request,entry_code=None):
     os = get_os(1)
     disc_stmt = get_disc_stmt(os, 1)
     active_users = list(User.objects.filter(is_active=True)) #forces eval so lazy eval doesn't act too smart!!!
+    referrallink = request.GET.get('refer','')
 
     statements = OpinionSpaceStatement.objects.all().order_by('id')
     medians = {}
     statement_labels = {};
  #.values_list('id', 'statement', 'short_version'))
-
+    skip_begin_date=datetime.datetime(2014,1,9,0,0,0,0)
     for s in statements:
-        medians[str(s.id)] = numpy.median(UserRating.objects.filter(user__in = active_users,opinion_space_statement=s,is_current=True).values_list('rating'))
+    	s_rating=UserRating.objects.filter(opinion_space_statement=s,is_current=True,user__in = active_users)
+        s_rating_list=[]
+        s_skip=0
+        for rating in s_rating:
+          if rating.created>=skip_begin_date:
+                visitor=Visitor.objects.filter(user=rating.user)  #get the visitor of the user
+                if len(visitor)>0:
+                   s_log_skip=LogUserEvents.objects.filter(is_visitor=True, logger_id=visitor[0].id,log_type=11,details__contains='skip').filter(details__contains=str(s.id)).order_by('-created') #get issue skip log
+                   s_log_rating=LogUserEvents.objects.filter(is_visitor=True, logger_id=visitor[0].id,log_type=11).exclude(details__contains='skip').filter(details__startswith='slider_set '+str(s.id)).order_by('-created')
+                   if len(s_log_skip)==0: #no skip
+                      if len(s_log_rating)>0:
+                         s_rating_list.append(rating.rating)
+                      else: #not click on skip, not move slider s, => skip
+                         s_skip=s_skip+1
+                   else:
+                      if len(s_log_rating)==0:  #click skip, not move slider s => skip
+                         s_skip=s_skip+1
+                      else:
+                         if s_log_skip[0].created>s_log_rating[0].created: #final decision is skip
+                            s_skip=s_skip+1
+                         else:
+                            s_rating_list.append(rating.rating)
+                else: 
+                   s_rating_list.append(rating.rating)
+          else:
+                s_rating_list.append(rating.rating)
+        medians[str(s.id)] = numpy.median(s_rating_list)
         if medians[str(s.id)] <= 1e-5:
             medians[str(s.id)] = 0
         statement_labels[str(s.id)] = s.statement
@@ -132,6 +159,7 @@ def mobile(request,entry_code=None):
 											 'change_prompt' : str(request.user.is_authenticated()).lower(),
 											 'client_data': mobile_client_data(request),
 											 'entry_code': str(entry_code!=None).lower(),
+											 'refer': referrallink,
 											 'client_settings': get_client_settings(True),
 											 'leaderboard': get_top_scores(os, disc_stmt, request, 10),
 											 'topic': DiscussionStatement.objects.filter(is_current=True)[0].statement,
@@ -172,10 +200,11 @@ def confirmation_mail(request):
         message = render_to_string('registration/confirmation_email.txt',
                                         { 'url_root': settings.URL_ROOT, 
 										 'entrycode': entrycode,
-										 'user_id': request.user.id,
+										 'user_id': request.user.id-361,
                                           })
         try:
            send_mail(subject, message, Settings.objects.string('DEFAULT_FROM_EMAIL'), email_list)
+           print 'email'
         except:
            return json_error("We were unable to send an email. Try again later.")
 
@@ -196,7 +225,7 @@ def crcstats(request,entry_code=None):
     elif entry_code!=None:
         user = authenticate(entrycode=entry_code)
         if user!=None:
-           ec = EntryCode.objects.get(code=entry_code)
+           ec = list(EntryCode.objects.filter(code=entry_code))[-1]
            ec.first_login = True
            ec.save()
            login(request,user)
@@ -220,7 +249,7 @@ def crcstats(request,entry_code=None):
     show_hist2=False
 
     if level8:
-        score = CommentAgreement.objects.filter(rater = user,is_current=True).count()
+        score = CommentAgreement.objects.filter(rater = user,is_current=True).count()*100 + user_author_score(user)
         given = 2*CommentAgreement.objects.filter(rater = user,is_current=True).count()
         received = 2*CommentAgreement.objects.filter(comment__in = DiscussionComment.objects.filter(user = user),is_current=True).count()
         comment_list=DiscussionComment.objects.filter(user=user,is_current=True)
@@ -241,10 +270,7 @@ def crcstats(request,entry_code=None):
     statements = OpinionSpaceStatement.objects.all().order_by('id')
     medians = []
     for s in statements:
-        med = numpy.median(UserRating.objects.filter(user__in = active_users, opinion_space_statement=s,is_current=True).values_list('rating'))
-        if med <= 1e-5:
-            med = 0
-        medians.append({'statement': s.statement, 'avgG': score_to_grade(100*med), 'avg': int((1-med)*300),'id':s.id})
+        medians.append({'statement': s.statement,'id':s.id})
 
     return render_to_response('crc_stats.html', context_instance = RequestContext(request, {'num_participants': len(active_users),
                                                                                             'level8':level8,
@@ -254,15 +280,35 @@ def crcstats(request,entry_code=None):
                                                                                             'date':datetime.date.today(),
                                                                                             'comment':comment,
                                                                                             'left_comment': (comment != ''),
-                                                                                            'participant': uid,
+                                                                                            'participant': uid-361,
+                                                                                            'entrycode': entry_code,
                                                                                             'given': given,
                                                                                             'received': received,
-                                                                                            'score': score*100,
+                                                                                            'score': min(score,30000),
                                                                                             'num_ratings': CommentAgreement.objects.filter(rater__in = active_users, is_current=True).count()*2,
                                                                                             'url_root' : settings.URL_ROOT,
                                                                                             'medians': medians,
                                                                                             }))
 
+
+def crc_generic_stats(request):
+
+    os = get_os(1)
+    disc_stmt = get_disc_stmt(os, 1)   
+
+    active_users = list(User.objects.filter(is_active = True))
+
+    statements = OpinionSpaceStatement.objects.all().order_by('id')
+    medians = []
+    for s in statements:
+        medians.append({'statement': s.statement, 'id':s.id})
+
+    return render_to_response('crc_generic_stats.html', context_instance = RequestContext(request, {'num_participants': len(active_users),
+                                                                                            'date':datetime.date.today(),
+                                                                                            'num_ratings': CommentAgreement.objects.filter(rater__in = active_users, is_current=True).count()*2,
+                                                                                            'url_root' : settings.URL_ROOT,
+                                                                                            'medians': medians,
+                                                                                            }))
 
 def app(request, username=None):
 	if request.mobile:
@@ -2155,7 +2201,7 @@ def os_save_comment_agreement(request, os_id, user_id, disc_stmt_id = None):
     if agreement is None:
 		return json_error('Invalid value')
 	
-    return save_agreement_rating(request, agreement, user_id, os_id, disc_stmt)
+    return save_agreement_rating(request, agreement, int(user_id)+361, os_id, disc_stmt)
 	
 @auth_required
 def os_save_comment_rating(request, os_id, user_id, disc_stmt_id = None):
@@ -2175,7 +2221,7 @@ def os_save_comment_rating(request, os_id, user_id, disc_stmt_id = None):
     if rating is None:
 		return json_error('Invalid value')
 		
-    return save_insightful_rating(request, rating, user_id, os_id, disc_stmt)
+    return save_insightful_rating(request, rating, int(user_id)+361, os_id, disc_stmt)
 
 @auth_required
 def os_update_comment(request, os_id, user_id, disc_stmt_id = None):

@@ -8,17 +8,17 @@ Here is your unique link that will let you login to continue to
 participate and to see how others are grading the issue you suggested
 for the next Report Card:
 
-{{ url_root }}/crcstats/{{entrycode}}
+http://californiareportcard.org/mobile/crcstats/{{entrycode}}
 
 Please save this link.  You can use it anytime to view updates on the
-data collected so far to check your "Participation Score", which
-increases as you grade the issues others have suggested (100 points
-for each), and when others grade the issue you suggested (up to 20,000
-points).  Participants with the highest scores will be eligible to be
-invited to meet with Lt. Gov. Gavin Newsom, Professor Ken Goldberg,
-and the CRC team at UC Berkeley on 20 March 2014 to discuss the
-data and lessons learned from version 1.0 and the most important
-issues for version 2.0.
+data collected so far to check your "Participation Score", which 
+increases as you grade the issues others have suggested (100 points 
+for each up to 10,000 points), and when others grade the issue you 
+suggested (up to 30,000 points). Participants with the highest scores 
+will be eligible to be invited to meet with Lt. Gov. Gavin Newsom, 
+Professor Ken Goldberg, and the CRC team at UC Berkeley on 
+20 March 2014 to discuss the data and lessons learned from version 
+1.0 and the most important issues for version 2.0.
 
 Thanks again for participating!
 

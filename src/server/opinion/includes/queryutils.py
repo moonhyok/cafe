@@ -1162,7 +1162,7 @@ def format_discussion_comment(request_user, response):
 	"""
 	#print len(response.comment.split()) > 3, response.query_weight
 	
-	return {'uid': response.user.id,
+	return {'uid': response.user.id-361,
 			'username': get_formatted_username(response.user),
 			#'location': get_location(response.user),
 			'cid': response.id,
@@ -1684,3 +1684,44 @@ def score_to_grade(score1):
     return 'F'
   else:
     return 'D-'
+
+def score_to_int(score1):
+  score = 100 - score1;
+
+  if score == 100:
+    return 12
+  elif score > 92:
+    return 11
+  elif score > 86:
+    return 10
+  elif score > 81:
+    return 9
+  elif score > 69 :
+    return 8
+  elif score > 63 :
+    return 7
+  elif score > 56:
+    return 6
+  elif score > 44:
+    return 5
+  elif score > 38:
+    return 4
+  elif score > 32:
+    return 3
+  elif score > 19 :
+    return 2
+  elif score == 0 :
+    return 0
+  else:
+    return 1
+
+def user_author_score(user):
+  current_comment = DiscussionComment.objects.filter(user = user)
+  if len(current_comment) == 0:
+     return 0
+  else:
+     score = 0
+     for a in CommentAgreement.objects.filter(comment = current_comment[0]):
+         score = score + score_to_int(100*a.agreement)*100
+     return score
+
