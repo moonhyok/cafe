@@ -195,6 +195,7 @@
     /** Updates statement number STATEMENT (which is of type number). */
  function update_score(statement) {
    $('#g' + statement).css('opacity', 1);
+   console.log(medians[statement]);
    $('#o' + statement).html(score_to_grade(medians[statement]*100))
    window.sliders[statement] = $('#s' + statement).val();
    document.getElementById('tr'+statement).style.backgroundColor = "rgba(255, 255, 0, 0.8)";
