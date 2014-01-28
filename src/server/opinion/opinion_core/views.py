@@ -106,8 +106,7 @@ def mobile(request,entry_code=None):
     medians = {}
     statement_labels = {};
     for s in statements:
-    	ratings=UserRating.objects.filter(opinion_space_statement=s,is_current=True,user__in = active_users).values_list('rating')
-        medians[str(s.id)] = numpy.median(ratings)
+        medians[str(s.id)] = StatementMedians.objects.filter(statement = s)[0].rating
         if medians[str(s.id)] <= 1e-5:
             medians[str(s.id)] = 0
         statement_labels[str(s.id)] = s.statement
@@ -124,7 +123,6 @@ def mobile(request,entry_code=None):
 											 'entry_code': str(entry_code!=None).lower(),
 											 'refer': referrallink,
 											 'client_settings': get_client_settings(True),
-											 'leaderboard': get_top_scores(os, disc_stmt, request, 10),
 											 'topic': DiscussionStatement.objects.filter(is_current=True)[0].statement,
 											 'short_topic': DiscussionStatement.objects.filter(is_current=True)[0].short_version,
 											 'statements': statements,

@@ -2,7 +2,6 @@ from django.db.models import *
 from django.contrib.auth.models import User
 from opinion.settings_local import CONFIGURABLES
 
-
 class ZipCode(Model):
     # TODO: should be primary key next time we rebuild database
     code = CharField(max_length=5, db_index = True)
@@ -82,6 +81,12 @@ class OpinionSpaceStatement(Model):
     class Meta:
         db_table = 'opinion_space_statement'
         ordering = ['statement_number']
+
+class StatementMedians(Model):
+    statement = ForeignKey(OpinionSpaceStatement, db_index = True, blank = True, null = True)
+    rating = FloatField()
+    class Meta:
+    		db_table = 'statement_medians'
 
 class DiscussionStatement(Model):
     opinion_space = ForeignKey(OpinionSpace, related_name = 'discussion_statements', db_index = True)
