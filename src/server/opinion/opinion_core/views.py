@@ -1112,7 +1112,7 @@ def search(request, os_id, username=''):
 
     comments = []
     for u in user:
-        comments.extend(list(DiscussionComment.objects.filter(user=u, is_current=True)))
+        comments.extend(list(DiscussionComment.objects.filter(user=u, is_current=True, blacklisted=False)))
 	
     #return json_result({'success':True, 
     #                    'data':[format_user_object(u, os_id) for u in user]})
