@@ -28,6 +28,7 @@
 						populateTable(searchResult);
 					}
 					allowTagEditing();
+					allowCommentEditing();
 				} else {
 					//alert("Your search did not match any users");
 					$("#message").show();
@@ -84,6 +85,7 @@
 
 			var comment = document.createElement('td');
 			comment.innerHTML = searchResult.comment;
+			comment.className = "comment";
 
 			var tag = document.createElement('td');
 			tag.className = "tag"
@@ -138,7 +140,6 @@
 	}
 
 	function allowTagEditing() {
-
 		$(".tag").click(function() {
 			var new_tag = prompt("Tag this comment", $(this).html());
 			$(this).html(new_tag);
@@ -180,6 +181,16 @@
 		});
 	}
 
+	function allowCommentEditing() {
+		$(".comment").click(function() {
+			var cid = $(this).parent().attr('id').split("-")[1];
+			var url = "{{url_root}}/adminpanel/proofread/" + "?cid=" + cid;
+			var url = newwindow=window.open(url,'Edit Comment');
+			if (window.focus) {newwindow.focus()}
+		});
+	}
+
+
 </script>
 {% endblock %}
 
@@ -219,7 +230,7 @@
 		<th width="10%">Email</th>
 		<th width="10%">Zipcode</th> 
         <th width="10%">City, State</th> 
-        <th width="35%">Response</th>
+        <th width="35%">Response (click to edit)</th>
         <th width="20%">Tag (click to edit)</th>
 
     </tr> 
