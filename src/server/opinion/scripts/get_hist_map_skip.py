@@ -132,7 +132,8 @@ def geostats():
 def issues_hist():
    """produce histogram for each issue"""
    statements = OpinionSpaceStatement.objects.all().order_by('id')
-   bins=[0,0.01,0.19,0.32,0.38,0.44,0.56,0.63,0.69,0.81,0.86,0.92,0.99,1]  
+   #bins=[0,0.01,0.19,0.32,0.38,0.44,0.56,0.63,0.69,0.81,0.86,0.92,0.99,1]
+   bins=[0,0.001,0.08,0.14,0.19,0.31,0.37,0.44,0.56,0.62,0.68,0.81,0.999,1]  
         # F    D-   D    D+   C-   C    C+   B-   B   B+    A-   A    A+
    N=len(bins)# include "skip"
    ind=numpy.arange(N)
@@ -159,7 +160,7 @@ def issues_hist():
                    if len(s_log_skip)==0: #no skip
                       slogskip_0=slogskip_0+1
                       if len(s_log_rating)>0:
-                         s_rating_list.append(1-rating.rating)
+                         s_rating_list.append(rating.rating)
                       else: #not click on skip, not move slider s, => skip
                          s_skip=s_skip+1
                    else:
@@ -169,21 +170,33 @@ def issues_hist():
                          if s_log_skip[0].created>s_log_rating[0].created: #final decision is skip
                             s_skip=s_skip+1
                          else:
-                            s_rating_list.append(1-rating.rating)
+                            s_rating_list.append(rating.rating)
                 else: 
-                   s_rating_list.append(1-rating.rating)
+                   s_rating_list.append(rating.rating)
           else:
                 activeuser=activeuser+1
-                s_rating_list.append(1-rating.rating)
+                s_rating_list.append(rating.rating)
        f.write("active_user:"+str(activeuser)+'\n')
        f.write("active rating user:"+str(len(s_rating_list))+'\n')
        f.write("skip user:"+str(s_skip)+'\n')
-      
+       
+       ratings = UserRating.objects.filter(is_current=True,opinion_space_statement = s, user__in = active_users)
+       skip_logs = LogUserEvents.objects.filter(is_visitor=True, log_type=11,details__contains='slider_set',created__gte = skip_begin_date)
+       users_with_grades = []
+       for skip_log in skip_logs:
+         slider_set_args = skip_log.details[10:].lstrip()
+         visitor = Visitor.objects.filter(id = skip_log.logger_id)
+         if len(visitor) > 0:
+           visitor = visitor[0]
+           if visitor.user != None and visitor.user.is_active and int(slider_set_args[0]) == s.id:
+             users_with_grades.append(visitor.user)
+       
+       
        if len(s_rating_list)>0:
           hist,bin_edges = numpy.histogram(s_rating_list,bins,normed=False)
           skip=numpy.array([s_skip])
-          hist=numpy.concatenate((skip,hist), axis=1)
-          hist_in_percent=(100*hist/float(sum(hist)))[::-1]
+          hist=numpy.concatenate((hist,skip), axis=1)
+          hist_in_percent=(100*hist/float(sum(hist)))
           #overcome xscale issue in pyplot 
           if hist_in_percent[0]==0:
              hist_in_percent[0]=0.001
@@ -195,8 +208,10 @@ def issues_hist():
           align='center',edgecolor = "none")
           fig.patch.set_facecolor('#74b9b7')
           ax.patch.set_facecolor('#f5ebde')
-          median=numpy.median(s_rating_list)
-          median_bar=median_index(median)
+          median=numpy.median(ratings.filter(user__in = users_with_grades).values_list('rating'))
+          f.write(str(s.id))
+          f.write(str(median)+'\n')
+          median_bar=median_index(1-median)
           rects1[median_bar].set_color('#4f300b')
           rects1[13].set_color('#0b294f')
           ax.set_xticks(ind)
