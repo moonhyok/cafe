@@ -489,13 +489,6 @@ var _blooms = blooms = (function($, d3, console) {
         accounts.initLoggedInFeatures();
         //TOFIX utils.hideLoading();
         //accounts.getNeighborStat();
-        if (document.referrer.indexOf('crcstats') != -1)
-        {
-            window.prev_state = 'stats';
-        }
-
-        window.prev_state = 'map';
-
         /*if(window.conf.RETURN_USER_FIRST_TIME){
 		$('.welcome-back').slideDown();
 		}
