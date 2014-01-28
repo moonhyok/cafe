@@ -578,7 +578,7 @@ $(document).ready(function() {
                 }
                 else if (window.prev_state == 'stats')
                 {
-                    $('.menubar').show();
+
                     //window.location = window.url_root.substring(0,window.url_root.length)+'/crcstats/' + window.refer;
                     //$('.scorebox').show();
                 }
