@@ -207,23 +207,23 @@ var accounts = (function($, d3, console) {
                 $('.score-value').text("" + ~~(data['cur_user_rater_score'] * window.conf.SCORE_SCALE_FACTOR));
                 window.user_score = data['cur_user_rater_score'];
                 $('.username').text(' ' + data['cur_username']);
+                if (window.user_score == 0) {
+                            accounts.hideAll();
+                            $('.dialog').show();
+                            window.cur_state = 'register';
+                            window.prev_state = 'dialog';
+                        } else {
+                            accounts.hideAll();
+                            $('.menubar').show();
+                            blooms.addYourMug();
+                            window.cur_state = 'map';
+                            window.prev_state = 'map';
+                        }
             },
             error: function() {
                 console.log("didn't get sent!");
             }
         });
-
-
-        //});
-        
-        if (window.user_score == 0) {
-            $('.dialog').show();
-        } else {
-            rate.initMenubar();
-            window.cur_state = 'map';
-            window.prev_state = 'map';
-        }
-        //setNumRatedBy();
     }
     
     function sendEmail(mail){
@@ -489,7 +489,7 @@ $(document).ready(function() {
     $('.first-time-btn').click(function() {
         //accounts.firstTime();
         window.history.pushState("", "", '#');
-        $('.landing').hide();
+        accounts.hideAll();
         $('.endsliders').show();
         window.cur_state = 'grade';
         rate.logUserEvent(7,'first time');
@@ -520,7 +520,6 @@ $(document).ready(function() {
 
 
     var backButtonHandler = function() {
-               accounts.hideAll();
                window.cur_state = window.prev_state;
                if (window.prev_state == 'home'){
                   $('.landing').show();
@@ -577,10 +576,10 @@ $(document).ready(function() {
                     $('.dialog-help-alt').show();
                     window.prev_state = window.prev_state.substring(4);
                 }
-                else if (window.prev_state == 'welcome_back')
+                else if (window.prev_state == 'stats')
                 {
-                    window.prev_state = 'welcome_back';
                     $('.menubar').show();
+                    //window.location = window.url_root.substring(0,window.url_root.length)+'/crcstats/' + window.refer;
                     //$('.scorebox').show();
                 }
 
@@ -590,14 +589,13 @@ $(document).ready(function() {
 
             }
 
-    $('.back-btn-dialog').click(backButtonHandler);
+    $('.back-btn-dialog').click(function(){accounts.hideAll();backButtonHandler();});
 
     $('.help-btn-dialog').click(function() {
                                  if (window.cur_state.indexOf('help') != -1)
                                  {
                                     return;
                                  }
-
                                  accounts.hideAll();
                                  window.prev_state = window.cur_state;
                                  window.cur_state = 'help-' + window.cur_state;

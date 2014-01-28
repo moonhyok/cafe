@@ -488,16 +488,20 @@ var _blooms = blooms = (function($, d3, console) {
         populateBlooms();
         accounts.initLoggedInFeatures();
         //TOFIX utils.hideLoading();
-        $('.landing').hide();
-        accounts.getNeighborStat();
-        window.prev_state = 'welcome_back';
+        //accounts.getNeighborStat();
+        if (document.referrer.indexOf('crcstats') != -1)
+        {
+            window.prev_state = 'stats';
+        }
 
-        if(window.conf.RETURN_USER_FIRST_TIME){
+        window.prev_state = 'map';
+
+        /*if(window.conf.RETURN_USER_FIRST_TIME){
 		$('.welcome-back').slideDown();
 		}
 		else{
 		$('.welcome-back').hide();
-		}
+		}*/
         
     }
 
@@ -513,9 +517,6 @@ $(document).ready(function() {
     if (window.authenticated) {
         blooms.alreadyAuthenticated();
     }
-    else{
-		$('.welcome-back').hide();
-	}
 
     $('#d3').height($(window).height() - $('.top-bar').height());
 

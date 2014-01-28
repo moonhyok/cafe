@@ -110,40 +110,14 @@ def mobile(request,entry_code=None):
     os = get_os(1)
     disc_stmt = get_disc_stmt(os, 1)
     active_users = list(User.objects.filter(is_active=True)) #forces eval so lazy eval doesn't act too smart!!!
+    referrallink = request.GET.get('refer','')
 
     statements = OpinionSpaceStatement.objects.all().order_by('id')
     medians = {}
     statement_labels = {};
- #.values_list('id', 'statement', 'short_version'))
-    skip_begin_date=datetime.datetime(2014,1,9,0,0,0,0)
     for s in statements:
-    	s_rating=UserRating.objects.filter(opinion_space_statement=s,is_current=True,user__in = active_users)
-        s_rating_list=[]
-        s_skip=0
-        for rating in s_rating:
-          if rating.created>=skip_begin_date:
-                visitor=Visitor.objects.filter(user=rating.user)  #get the visitor of the user
-                if len(visitor)>0:
-                   s_log_skip=LogUserEvents.objects.filter(is_visitor=True, logger_id=visitor[0].id,log_type=11,details__contains='skip').filter(details__contains=str(s.id)).order_by('-created') #get issue skip log
-                   s_log_rating=LogUserEvents.objects.filter(is_visitor=True, logger_id=visitor[0].id,log_type=11).exclude(details__contains='skip').filter(details__startswith='slider_set '+str(s.id)).order_by('-created')
-                   if len(s_log_skip)==0: #no skip
-                      if len(s_log_rating)>0:
-                         s_rating_list.append(rating.rating)
-                      else: #not click on skip, not move slider s, => skip
-                         s_skip=s_skip+1
-                   else:
-                      if len(s_log_rating)==0:  #click skip, not move slider s => skip
-                         s_skip=s_skip+1
-                      else:
-                         if s_log_skip[0].created>s_log_rating[0].created: #final decision is skip
-                            s_skip=s_skip+1
-                         else:
-                            s_rating_list.append(rating.rating)
-                else: 
-                   s_rating_list.append(rating.rating)
-          else:
-                s_rating_list.append(rating.rating)
-        medians[str(s.id)] = numpy.median(s_rating_list)
+    	ratings=UserRating.objects.filter(opinion_space_statement=s,is_current=True,user__in = active_users).values_list('rating')
+        medians[str(s.id)] = numpy.median(ratings)
         if medians[str(s.id)] <= 1e-5:
             medians[str(s.id)] = 0
         statement_labels[str(s.id)] = s.statement
@@ -158,6 +132,7 @@ def mobile(request,entry_code=None):
 											 'change_prompt' : str(request.user.is_authenticated()).lower(),
 											 'client_data': mobile_client_data(request),
 											 'entry_code': str(entry_code!=None).lower(),
+											 'refer': referrallink,
 											 'client_settings': get_client_settings(True),
 											 'leaderboard': get_top_scores(os, disc_stmt, request, 10),
 											 'topic': DiscussionStatement.objects.filter(is_current=True)[0].statement,
@@ -279,6 +254,7 @@ def crcstats(request,entry_code=None):
                                                                                             'comment':comment,
                                                                                             'left_comment': (comment != ''),
                                                                                             'participant': uid-361,
+                                                                                            'entrycode': entry_code,
                                                                                             'uid':uid,
                                                                                             'given': given,
                                                                                             'received': received,
@@ -2199,7 +2175,7 @@ def os_save_comment_agreement(request, os_id, user_id, disc_stmt_id = None):
     if agreement is None:
 		return json_error('Invalid value')
 	
-    return save_agreement_rating(request, agreement, user_id, os_id, disc_stmt)
+    return save_agreement_rating(request, agreement, int(user_id)+361, os_id, disc_stmt)
 	
 @auth_required
 def os_save_comment_rating(request, os_id, user_id, disc_stmt_id = None):
@@ -2219,7 +2195,7 @@ def os_save_comment_rating(request, os_id, user_id, disc_stmt_id = None):
     if rating is None:
 		return json_error('Invalid value')
 		
-    return save_insightful_rating(request, rating, user_id, os_id, disc_stmt)
+    return save_insightful_rating(request, rating, int(user_id)+361, os_id, disc_stmt)
 
 @auth_required
 def os_update_comment(request, os_id, user_id, disc_stmt_id = None):

@@ -499,7 +499,7 @@ table.pretty caption {
 		height: 100%;
 		/*background-color: #FAEBCD;*/
 		background: #76b9b6;
-		z-index: 998;
+		z-index: 999;
 		overflow-y: auto;
 		overflow-x: hidden;
 		text-align: center;
