@@ -2625,7 +2625,7 @@ def os_never_seen_comments_json(request,os_id,disc_stmt_id=None):
 	# Get the user ratings
 	uids = []
 	for comment in never_seen_comments:
-		uids.append(comment['uid'])
+		uids.append(comment['uid']+361)
 	user_ratings = get_user_ratings(request, os, uids)
 	
 	# Get user data
