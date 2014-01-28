@@ -23,7 +23,6 @@ for s in OpinionSpaceStatement.objects.all():
     if cache.count() == 0:
         StatementMedians(statement = s, rating = value).save()
     else:
-        cache[0].rating = value
-        cache[0].save()
+	cache.update(rating = value)
 
     print s.id, value

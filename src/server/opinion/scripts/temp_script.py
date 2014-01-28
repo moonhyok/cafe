@@ -3,25 +3,10 @@ import environ
 from opinion.opinion_core.models import *
 import numpy as np
 
-active_users = list(User.objects.filter(is_active=True))
-skip_begin_date=datetime.datetime(2014,1,9,0,0,0,0)
+for u in User.objects.filter(id__lte = 361):
+	comment = DiscussionComment.objects.filter(is_current =True, user = u)
+	if len(comment) > 0:
+		comment[0].blacklisted = True
+		comment[0].save()
+		print "Pruned negative comment"
 
-for s in OpinionSpaceStatement.objects.all():
-    ratings = UserRating.objects.filter(is_current=True,opinion_space_statement = s, user__in = active_users)
-    skip_logs = LogUserEvents.objects.filter(is_visitor=True, log_type=11,details__contains='slider_set',created__gte = skip_begin_date)
-    users_to_skip = []
-    for skip_log in skip_logs:
-        slider_set_args = skip_log.details[10:].lstrip()
-        visitor = Visitor.objects.filter(id = skip_log.logger_id)[0]
-        if visitor.user != None and visitor.user.is_active and int(slider_set_args[0]) == s.id:
-            users_to_skip.append(visitor.user)
-
-    cache = StatementMedians.objects.filter(statement = s)
-    value = np.median(ratings.exclude(user__in = users_to_skip).values_list('rating'))
-    if cache.count() == 0:
-        StatementMedians(statement = s, rating = value).save()
-    else:
-        cache[0].rating = value
-        cache[0].save()
-
-    print s.id, value
