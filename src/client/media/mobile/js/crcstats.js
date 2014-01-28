@@ -1,4 +1,3 @@
-
 $.get(window.userhist1_url) // check if the histogram exists
     .done(function() { 
         var img = $('<img/>');
@@ -11,7 +10,7 @@ $.get(window.userhist1_url) // check if the histogram exists
            document.getElementById( "userhist1" ).style.height="20px";
 	    }
 	    else{
-			$( "#userhist1" ).html( "<span style=' font-size:14px;color: #f5ebde;'>You haven't received any grade</span><br/>" );
+			$( "#userhist1" ).html( "<span style=' font-size:14px;color: #f5ebde;'>You haven't received any grade on this question</span><br/>" );
 			document.getElementById( "userhist1" ).style.height="20px";
 		}
     })
@@ -28,7 +27,7 @@ $.get(window.userhist2_url) // check if the histogram exists
            document.getElementById( "userhist2" ).style.height="20px";
 	    }
 	    else{
-			$( "#userhist2" ).html( "<span style=' font-size:14px;color: #f5ebde;'>You haven't received any grade</span><br/>" );
+			$( "#userhist2" ).html( "<span style=' font-size:14px;color: #f5ebde;'>You haven't received any grade on this question</span><br/>" );
 			document.getElementById( "userhist2" ).style.height="20px";
 		}
     })
