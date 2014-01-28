@@ -90,6 +90,7 @@ def get_user_ratings(request, os, uids):
 	list_ratings = []
 	for ratings in other_ratings:
 		ratings_copy = list(ratings)
+		ratings_copy[0] = ratings_copy[0] - 361
 		if ratings_copy[2] < MIN_FLOAT:
 			ratings_copy[2] = handle_small_float(ratings[2])
 		list_ratings.append(ratings_copy)
