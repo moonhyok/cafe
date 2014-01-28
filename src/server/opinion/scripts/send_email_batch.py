@@ -4,6 +4,8 @@ import os
 from opinion.opinion_core.models import *
 import datetime
 from django.template.loader import render_to_string
+from django.core.mail import send_mail
+import time
 
 today_date=datetime.datetime(2014,1,28,0,0,0,0)
 user_today=User.objects.filter(date_joined__gte=today_date)
@@ -21,13 +23,12 @@ for user in user_today_email:
     if len(entrycode)>0:
         subject = "Your unique link to the California Report Card v1.0"
         email_list = [user.email]
-        
         message = render_to_string('registration/confirmation_email.txt',
                                   {'entrycode': entrycode[0].code,
                                    'user_id': user.id-361,
                                     })
         try:
-           print message
-           #send_mail(subject, message, Settings.objects.string('DEFAULT_FROM_EMAIL'), email_list)
+           send_mail(subject, message, Settings.objects.string('DEFAULT_FROM_EMAIL'), email_list)
+           time.sleep(0.3)
         except:
            pass
