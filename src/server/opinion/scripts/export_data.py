@@ -25,19 +25,19 @@ outfile.writerow(['User ID',
 		  'Zipcode',
 		  'City, State',
 		  'Comment',
-		  'Comment Tag'
+		  'Comment Tag',
 		  'Rating2','Rating1'] 
 		 + statements_headings_vector +
 		  ['Rating2 Received','Rating1 Received',
 		  'Rating2 Given','Rating1 Given',
 		  'Leaderboard Score'])
 
-users = User.objects.all()
+users = User.objects.filter(is_active=True)
 
 agreement = {}
 max = 0
 for u in users:	
-	comment = DiscussionComment.objects.filter(is_current=True,user=u)
+	comment = DiscussionComment.objects.filter(is_current=True,user=u, blacklisted=False)
 	if len(comment) > 0 and len(CommentAgreement.objects.filter(is_current=True,comment = comment[0])) > 4: 
 		agreement[u] = np.mean(CommentAgreement.objects.filter(is_current=True,comment = comment[0]).values_list('agreement'))
 		if agreement[u] > max:
@@ -46,7 +46,7 @@ for u in users:
 		agreement[u] = 0 
 
 for u in users:
-	comment = DiscussionComment.objects.filter(is_current=True,user=u)
+	comment = DiscussionComment.objects.filter(is_current=True,user=u, blacklisted=False)
 	z = ZipCodeLog.objects.get(user=u).location if ZipCodeLog.objects.filter(user=u).exists() else None
 	tag = AdminCommentTag.objects.get(comment=comment) if AdminCommentTag.objects.filter(comment=comment).exists() else None
 
