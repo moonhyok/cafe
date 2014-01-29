@@ -519,78 +519,76 @@ $(document).ready(function() {
 
 
     var backButtonHandler = function() {
-	accounts.hideAll();
-        window.cur_state = window.prev_state;
-        if (window.prev_state == 'home'){
-            $('.landing').show();
-            window.prev_state = 'home';
-        }
-        else if (window.prev_state == 'grade')
-        {
-            $('.endsliders').show();
-            window.prev_state = 'home';
-        }
-        else if (window.prev_state == 'median')
-        {
-            $('.dialog-avggrade').show();
-            window.prev_state = 'grade';
-        }
-        else if (window.prev_state == 'rate')
-        {
-            $('.rate').show();
-            window.prev_state = 'map';
-        }
-        else if (window.prev_state == 'register')
-        {
-            $('.register').show();
-            window.prev_state = 'grade';
-        }
-        else if (window.prev_state == 'dialog')
-        {
-            $('.dialog').show();
-            window.prev_state = 'register';
-        }
-        else if (window.prev_state == 'map')
-        {
-            window.prev_state = 'dialog';
-            $('.menubar').show();
-            //$('.scorebox').show();
-        }
-        else if (window.prev_state == 'comment')
-        {
-            window.prev_state = 'map';
-            $('.comment-input').show();
-        }
-        else if (window.prev_state == 'continue')
-        {
-            window.prev_state = 'comment';
-            $('.dialog-continue').show();
-        }
-        else if (window.prev_state == 'email')
-        {
-            window.prev_state = 'continue';
-            $('.dialog-email').show();
-        }
-        else if (window.prev_state.indexOf('help') != -1)
-        {
-            $('.dialog-help-alt').show();
-            window.prev_state = window.prev_state.substring(4);
-        }
-        else if (window.prev_state == 'stats')
-        {
+               window.cur_state = window.prev_state;
+               if (window.prev_state == 'home'){
+                  $('.landing').show();
+                  window.prev_state = 'home';
+               }
+               else if (window.prev_state == 'grade')
+               {
+                  $('.endsliders').show();
+                  window.prev_state = 'home';
+                }
+                else if (window.prev_state == 'median')
+                 {
+                    $('.dialog-avggrade').show();
+                    window.prev_state = 'grade';
+                }
+                else if (window.prev_state == 'rate')
+                {
+                  $('.rate').show();
+                  window.prev_state = 'map';
+                }
+                else if (window.prev_state == 'register')
+                {
+                  $('.register').show();
+                  window.prev_state = 'grade';
+                }
+                else if (window.prev_state == 'dialog')
+                {
+                  $('.dialog').show();
+                  window.prev_state = 'register';
+                }
+                else if (window.prev_state == 'map')
+                {
+                    window.prev_state = 'dialog';
+                    $('.menubar').show();
+                    //$('.scorebox').show();
+                }
+                else if (window.prev_state == 'comment')
+                {
+                    window.prev_state = 'map';
+                    $('.comment-input').show();
+                }
+                else if (window.prev_state == 'continue')
+                {
+                   window.prev_state = 'comment';
+                   $('.dialog-continue').show();
+                }
+                else if (window.prev_state == 'email')
+                {
+                   window.prev_state = 'continue';
+                   $('.dialog-email').show();
+                }
+                else if (window.prev_state.indexOf('help') != -1)
+                {
+                    $('.dialog-help-alt').show();
+                    window.prev_state = window.prev_state.substring(4);
+                }
+                else if (window.prev_state == 'stats')
+                {
 
-            //window.location = window.url_root.substring(0,window.url_root.length)+'/crcstats/' + window.refer;
-            //$('.scorebox').show();
-        }
+                    //window.location = window.url_root.substring(0,window.url_root.length)+'/crcstats/' + window.refer;
+                    //$('.scorebox').show();
+                }
 
-        window.scrollTo(0,0);
-        window.history.pushState("", "", '#');
-    }
+               window.scrollTo(0,0);
+                window.history.pushState("", "", '#');
 
-    $('.back-btn-dialog').click(function() { 
-	//accounts.hideAll();
-	backButtonHandler();
-    });
+
+            }
+
+    $('.back-btn-dialog').click(function(){accounts.hideAll();backButtonHandler();});
 
     $('.help-btn-dialog').click(function() {
                                  if (window.cur_state.indexOf('help') != -1)
