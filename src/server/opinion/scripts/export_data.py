@@ -20,7 +20,7 @@ statements_headings_vector = ['S' + str(i+1) for i in range(NUM_STATEMENTS)]
 
 outfile = csv.writer(open(file_name, "wb"))
 outfile.writerow(['User ID',
-		'Data Joined'
+		'Data Joined',
 		  'Email',
 		  'Zipcode',
 		  'City, State',
