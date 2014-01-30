@@ -7,19 +7,29 @@ active_users = list(User.objects.filter(is_active=True))
 skip_begin_date=datetime.datetime(2014,1,9,0,0,0,0)
 
 for s in OpinionSpaceStatement.objects.all():
-    ratings = UserRating.objects.filter(is_current=True,opinion_space_statement = s, user__in = active_users)
-    skip_logs = LogUserEvents.objects.filter(is_visitor=True, log_type=11,details__contains='slider_set',created__gte = skip_begin_date)
-    users_with_grades = []
-    for skip_log in skip_logs:
-        slider_set_args = skip_log.details[10:].lstrip()
-        visitor = Visitor.objects.filter(id = skip_log.logger_id)
-	if len(visitor) > 0:
-          visitor = visitor[0]
-          if visitor.user != None and visitor.user.is_active and int(slider_set_args[0]) == s.id:
-            users_with_grades.append(visitor.user)
 
+    s_rating=UserRating.objects.filter(opinion_space_statement=s,is_current=True,user__in = active_users)
+    s_rating_list=[]
+    for rating in s_rating:
+        if rating.created>=skip_begin_date:
+           visitor=Visitor.objects.filter(user=rating.user)  #get the visitor of the user
+           if len(visitor)>0:
+              s_log_skip=LogUserEvents.objects.filter(is_visitor=True, logger_id=visitor[0].id,log_type=11,details__contains='skip').filter(details__contains=str(s.id)).order_by('-created') #get issue skip log
+              s_log_rating=LogUserEvents.objects.filter(is_visitor=True, logger_id=visitor[0].id,log_type=11).exclude(details__contains='skip').filter(details__startswith='slider_set '+str(s.id)).order_by('-created')
+              if len(s_log_skip)==0: #no skip
+                  if len(s_log_rating)>0:
+                     s_rating_list.append(rating.rating)
+              else:
+                  if len(s_log_rating)>0:  #click skip, not move slider s => skip
+                     if s_log_skip[0].created<=s_log_rating[0].created: #final decision is skip
+                        s_rating_list.append(rating.rating)
+           else: 
+              s_rating_list.append(rating.rating)
+        else:
+           s_rating_list.append(rating.rating)
+    
     cache = StatementMedians.objects.filter(statement = s)
-    value = np.median(ratings.filter(user__in = users_with_grades).values_list('rating'))
+    value = np.median(s_rating_list)
     if cache.count() == 0:
         StatementMedians(statement = s, rating = value).save()
     else:
