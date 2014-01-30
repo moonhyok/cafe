@@ -208,7 +208,7 @@ def issues_hist():
           align='center',edgecolor = "none")
           fig.patch.set_facecolor('#74b9b7')
           ax.patch.set_facecolor('#f5ebde')
-          median=numpy.median(ratings.filter(user__in = users_with_grades).values_list('rating'))
+          median=numpy.median(s_rating_list)
           f.write(str(s.id))
           f.write(str(median)+'\n')
           median_bar=median_index(1-median)
