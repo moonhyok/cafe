@@ -78,7 +78,7 @@
 	{% for median in medians %}
 	<option value="{{median.id}}">{{median.id}}. {{ median.statement}}</option>
 	{% endfor %}
-    </select><br/>
+    </select><br/><br>
 
     <script>
         $.get("{{url_root}}/media/mobile/js/geostat.js")
