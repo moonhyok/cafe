@@ -42,8 +42,8 @@
     <span style="font-size:14px; font-style:Italic;">The median grade is marked in brown</span><br><br>
 
     {% for median in medians %}
-    <strong>Distribution of Grades for Issue {{median.id}}:</strong><br>
-        <div class="issue-text">{{median.statement}}</div>
+    <strong>Issue {{median.id}}:</strong><br>
+        <div class="issue-text"><b>{{median.statement}}</b></div>
 
     <div class="stat-img" id="{{median.id}}">
         
@@ -76,7 +76,7 @@
     <span style="font-size:16px; font-weight:bold">Select an issue:</span> <br>
     <select id="CA_selector" onchange="changeData(this)" >
 	{% for median in medians %}
-	<option value="{{median.id}}">{{ median.statement}}</option>
+	<option value="{{median.id}}">{{median.id}}. {{ median.statement}}</option>
 	{% endfor %}
     </select><br/>
 
@@ -94,8 +94,6 @@
 <div class="stats-section">
 <strong>Thanks for participating!</strong> <br><br>
    <div class="issue-txt" id="final-remark">
-   You can return anytime using this URL 
-   to check your grades.<br><br>
    
 Lt. Gov. Gavin Newsom and UC Berkeley 
 Professor Ken Goldberg will present 
