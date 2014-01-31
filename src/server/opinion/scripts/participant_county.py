@@ -68,7 +68,7 @@ def geostats():
                    else:
                       s_skip=s_skip+1
           skip_ca=skip_ca+s_skip
-          f.write(str(county)+" "+str(len(s_grade)+s_skip)+'\n')
+          f.write(str(county)+":"+str(len(s_grade)+s_skip)+'\n')
 
 
 geostats()
