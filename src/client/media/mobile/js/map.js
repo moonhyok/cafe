@@ -209,8 +209,8 @@ function changeData(sel)
 	    return {
 				weight: 1,
 				opacity: 1,
-				color: borderColor(feature),
-				dashArray: borderDash(feature),
+				color: '#170e03',
+				dashArray: '',
 				fillOpacity: 0.7,
 				fillColor: getColor(feature.properties[value])
 			};
