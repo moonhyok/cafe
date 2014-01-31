@@ -61,28 +61,13 @@
 			return {
 				weight: 1,
 				opacity: 1,
-				color: borderColor(feature),
-				dashArray: borderDash(feature),
+				color: '#170e03',
+				dashArray: '',
 				fillOpacity: 0.7,
 				fillColor: getColor(feature.properties.s1)
 			};
 		}
-        function borderColor(feature){
-					   if(feature.properties.NAME=="Participants Outside California"){
-					     return '#170e03';
-					    }
-					   else{
-						 return 'white';
-						 }
-		}
-		function borderDash(feature){
-			if(feature.properties.NAME=="Participants Outside California"){
-					     return '';
-					    }
-					   else{
-						 return '3';
-						 }
-		}
+        
 					   
 					   
 		function highlightFeature(e) {
