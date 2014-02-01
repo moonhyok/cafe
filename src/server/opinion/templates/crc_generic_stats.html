@@ -21,7 +21,8 @@
 </div>
 
 <div class="title-header">
-    <img width="270px;" src="{{url_root}}/media/mobile/img/cafe/CRC_stat_title_01.png">
+    <img width="270px;" src="{{url_root}}/media/mobile/img/cafe/CRC_stat_title_03.png"><br>
+    <img width="210px;" src="{{url_root}}/media/mobile/img/cafe/CRC_stat_title_02.png">
 </div>
 <br>
 <center>
@@ -33,7 +34,29 @@
 
 <br>
 <hr>
+<div class="stats-section-title" id="geodistribution">
+    <div class="stats-label-big">
+        GEOGRAPHIC DISTRIBUTION <br/> OF MEDIAN GRADES ASSIGNED
+    </div><br>
+    <span style="font-size:16px; font-weight:bold">Select an issue:</span> <br>
+    <select id="CA_selector" onchange="changeData(this)" >
+	{% for median in medians %}
+	<option value="{{median.id}}">{{median.id}}. {{ median.statement}}</option>
+	{% endfor %}
+    </select><br/><br>
 
+    <script>
+        $.get("{{url_root}}/media/mobile/js/geostat.js")
+            .fail(function() { 
+            $( "#geodistribution" ).html( "<div class='stats-label-big'>GEOGRAPHIC DISTRIBUTION <br/> OF MEDIAN GRADES ASSIGNED</div><br><br><span style=' font-size:14px;color: #f5ebde;'>We will present geographical distribution soon</span><br/><br>" );
+            document.getElementById( "#geodistribution" ).style.height="40px";
+            })
+    </script>
+<div id="map"></div>
+
+</div>
+<br>
+<hr>
 <div class="stats-section-title">
     <div class="stats-label-big">
         GRADES ASSIGNED TO THE <br/>STATE OF CALIFORNIA
@@ -67,29 +90,6 @@
 
 <br>
 <hr>
-
-
-<div class="stats-section-title" id="geodistribution">
-    <div class="stats-label-big">
-        GEOGRAPHIC DISTRIBUTION <br/> OF MEDIAN GRADES ASSIGNED
-    </div><br>
-    <span style="font-size:16px; font-weight:bold">Select an issue:</span> <br>
-    <select id="CA_selector" onchange="changeData(this)" >
-	{% for median in medians %}
-	<option value="{{median.id}}">{{median.id}}. {{ median.statement}}</option>
-	{% endfor %}
-    </select><br/><br>
-
-    <script>
-        $.get("{{url_root}}/media/mobile/js/geostat.js")
-            .fail(function() { 
-            $( "#geodistribution" ).html( "<div class='stats-label-big'>GEOGRAPHIC DISTRIBUTION <br/> OF MEDIAN GRADES ASSIGNED</div><br><br><span style=' font-size:14px;color: #f5ebde;'>We will present geographical distribution soon</span><br/><br>" );
-            document.getElementById( "#geodistribution" ).style.height="40px";
-            })
-    </script>
-<div id="map"></div>
-
-</div>
 <br>
 <div class="stats-section">
 <strong>Thanks for participating!</strong> <br><br>
