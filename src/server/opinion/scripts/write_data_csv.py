@@ -15,7 +15,7 @@ from opinion.includes.queryutils import *
 ofile  = open('cafe-data.csv', "wb")
 writer=csv.writer(ofile,delimiter=',')
 users=User.objects.filter(is_active=True)
-title=["User.id","Grade 1","Grade 2","Grade 3","Grade 4","Grade 5","Grade 6","Zipcode","City","County","State","Created Month","Created Day","Comment"]
+title=["UserId","Grade1","Grade2","Grade3","Grade4","Grade5","Grade6","Zipcode","City","County","State","CreatedMonth","CreatedDay","Comment"]
 writer.writerow(title)
 statements = OpinionSpaceStatement.objects.all().order_by('id')
 skip_begin_date=datetime.datetime(2014,1,9,0,0,0,0)
