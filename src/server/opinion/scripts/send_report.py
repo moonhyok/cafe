@@ -43,7 +43,7 @@ def create_table_row_user(user):
     # TODO: make sure it is the current discussion questions
     comment="--"
     if DiscussionComment.objects.filter(user=user).exists():
-        DiscussionComment.objects.filter(user = user)[0]
+        comment = DiscussionComment.objects.filter(user = user)[0]
 
     row = [time_joined_display, username_display, zipcode, location, num_ideas_rated, comment, email_display]
     row = map(lambda x: str(x), row)
