@@ -26,7 +26,7 @@ def geostats():
     """produce geojson file for leaflet"""
     f=open(imagepath+'participant_county.txt','w')
     f.write("all log zip "+str(len(ZipCodeLog.objects.all()))+'\n')
-    geo_json=open('/var/www/latest-version/src/server/opinion/geo-ca.json')
+    geo_json=open('geo-ca.json')
     geo_data=json.load(geo_json)
     skip_begin_date=datetime.datetime(2014,1,9,0,0,0,0)
     statements = OpinionSpaceStatement.objects.all().order_by('id')
@@ -72,12 +72,15 @@ def geostats():
           if len(s_grade)+s_skip==0:
              geo_data['features'][i]['properties']["s"+str(s.id)]=10  #for leaflet to show NA color
              geo_data['features'][i]['properties']['PARTICIPANTS']=0
+             geo_data['features'][i]['properties']["ratio"]=0
           if len(s_grade)+s_skip>0:
              geo_data['features'][i]['properties']['PARTICIPANTS']=len(s_grade)+s_skip
+             geo_data['features'][i]['properties']["ratio"]=(len(s_grade)+s_skip)/float(geo_data['features'][i]['properties']['Population'])
              if len(s_grade)>0:
                 geo_data['features'][i]['properties']["s"+str(s.id)]=numpy.median(s_grade)
              else:
                 geo_data['features'][i]['properties']["s"+str(s.id)]=10
+          
     with open(jspath+'geostat_population.js', 'w') as outfile:
          outfile.write('var geostat_population=')
          json.dump(geo_data, outfile)
