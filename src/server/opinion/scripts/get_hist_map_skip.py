@@ -134,7 +134,7 @@ def issues_hist():
    statements = OpinionSpaceStatement.objects.all().order_by('id')
    #bins=[0,0.01,0.19,0.32,0.38,0.44,0.56,0.63,0.69,0.81,0.86,0.92,0.99,1]
    bins=[0,0.001,0.08,0.14,0.19,0.31,0.37,0.44,0.56,0.62,0.68,0.81,0.999,1]  
-        # F    D-   D    D+   C-   C    C+   B-   B   B+    A-   A    A+
+        #A+   A   A-   B+   B    B-   C+   C    C-   D+   D    D-    F
    N=len(bins)# include "skip"
    ind=numpy.arange(N)
    width=0.5
