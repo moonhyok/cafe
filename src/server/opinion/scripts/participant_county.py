@@ -75,7 +75,7 @@ def geostats():
              geo_data['features'][i]['properties']["ratio"]=0
           if len(s_grade)+s_skip>0:
              geo_data['features'][i]['properties']['PARTICIPANTS']=len(s_grade)+s_skip
-             geo_data['features'][i]['properties']["ratio"]=(len(s_grade)+s_skip)/float(geo_data['features'][i]['properties']['Population'])
+             geo_data['features'][i]['properties']["ratio"]=10000*(len(s_grade)+s_skip)/float(geo_data['features'][i]['properties']['Population'])
              if len(s_grade)>0:
                 geo_data['features'][i]['properties']["s"+str(s.id)]=numpy.median(s_grade)
              else:
