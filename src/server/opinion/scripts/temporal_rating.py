@@ -33,7 +33,7 @@ change_record=[]
 def rating_change():
 	for s in statements:
 		change_s={}
-		for user in users
+		for user in users:
 			visitor=Visitor.objects.filter(user=user)
 			if len(visitor)>0:
 				s_log_skip=LogUserEvents.objects.filter(is_visitor=True, logger_id=visitor[0].id,log_type=11,details__contains='skip').filter(details__contains=str(s.id)).order_by('-created') #get issue skip log
