@@ -94,7 +94,6 @@ def rating_change_difference():
 				if len(s_log_skip)==0:
 					if len(s_log_rating)>1: # not skip user change rating
 						grade_initial=median_index(1-float(s_log_rating[len(s_log_rating)-1].details.split()[2])) #get initial grade
-						print grade_initial
 						grade_final=median_index(1-float(s_log_rating[0].details.split()[2]))
 						grade_diff=grade_final-grade_initial
 						rate_diff[grade_diff+12]=rate_diff[grade_diff+12]+1
