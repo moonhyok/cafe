@@ -90,7 +90,7 @@ def rating_change_difference():
 			visitor=Visitor.objects.filter(user=user)
 			if len(visitor)>0:
 				s_log_skip=LogUserEvents.objects.filter(is_visitor=True, logger_id=visitor[0].id,log_type=11,details__contains='skip').filter(details__contains=str(s.id)).order_by('-created') #get issue skip log
-				s_log_rating=LogUserEvents.objects.filter(is_visitor=True, logger_id=visitor[0].id,log_type=11).exclude(details__contains='skip').filter(details__startswith='slider_set '+str(s.id)).order_by('-created')
+				s_log_rating=LogUserEvents.objects.filter(is_visitor=True, logger_id=visitor[0].id,log_type=11).exclude(details__contains='skip').exclude(details__contains='grade').filter(details__startswith='slider_set '+str(s.id)).order_by('-created')
 				if len(s_log_skip)==0:
 					if len(s_log_rating)>1: # not skip user change rating
 						grade_initial=median_index(1-float(s_log_rating[len(s_log_rating)-1].details.split()[2])) #get initial grade
