@@ -104,7 +104,7 @@ def rating_change_difference():
 							grade_final=median_index(1-float(s_log_rating[0].details.split()[2]))
 							grade_diff=grade_final-grade_initial
 							rate_diff[grade_diff+12]=rate_diff[grade_diff+12]+1
-		rate_diff_record.append(rate_diff.reverse()) #final output is reversed 
+		rate_diff_record.append(rate_diff) 
 	for record in rate_diff_record:
 		print record
 						
