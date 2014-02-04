@@ -274,7 +274,8 @@ def crc_generic_stats(request):
 
 def app(request, username=None):
 	if request.mobile:
-		return HttpResponseRedirect(URL_ROOT + "/mobile/")
+		#return HttpResponseRedirect(URL_ROOT + "/mobile/")
+            return mobile(request)
 # 	create_visitor(request)
 # 	if username != None:
 # 		if not Settings.objects.boolean('SOFT_ENTRY_CODES'):
