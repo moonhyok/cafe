@@ -50,6 +50,6 @@ def rating_change():
 						change_s[len(s_log_skip)+len(s_log_rating)]=1
 		change_record.append(change_s)
 	for i in range(0,len(change_record)):
-	print "Issue",i," ",record
+		print "Issue",i," ",record
 	
 rating_change()			
