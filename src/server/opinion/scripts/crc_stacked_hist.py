@@ -67,6 +67,7 @@ def issues_stack_hist():
           skip=np.array([s_skip])
           hist=np.concatenate((hist,skip), axis=1)
           hist_in_percent=(100*hist/float(sum(hist)))
+          print s.id
        hist_all[s.id]=hist_in_percent
    
    hist_all=np.transpose(hist_all)
