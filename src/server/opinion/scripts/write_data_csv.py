@@ -63,8 +63,13 @@ for user in users:
 		row.append("NA")
 	row.append(str(user.date_joined.year)+"-"+str(user.date_joined.month)+"-"+str(user.date_joined.day))
 	cur_user_comment=DiscussionComment.objects.filter(user=user,discussion_statement= disc_stmt,is_current = True)
+	comment_tag=AdminCommentTag.objects.filter(comment=cur_user_comment[0])
 	if len(cur_user_comment)>0:
 		row.append(cur_user_comment[0].comment)
 	else:
+		row.append("NA")
+	if len(comment_tag)>0:
+		row.append(comment_tag[0].tag)
+	else
 		row.append("NA")
 	writer.writerow(row)
