@@ -73,7 +73,7 @@ def issues_stack_hist():
    
    fig, ax = plt.subplots()
    ax.set_ylim([0, 100])
-   plt.subplots_adjust(left=0.13, right=0.80, top=0.96, bottom=0.24)
+   plt.subplots_adjust(left=0.13, right=0.80, top=0.95, bottom=0.20)
    
    fig.patch.set_facecolor('#74b9b7')
    
@@ -99,8 +99,8 @@ def issues_stack_hist():
                                                                  +hist_all[6]+hist_all[5]+hist_all[4]+hist_all[3]+hist_all[2]+hist_all[1], align='center',edgecolor = "none")
    
    ax.set_xticks(ind)
-   ax.set_xticklabels( ('Affordable Care Act', 'K12 Funding', 'College Funding', 'Undocumented Immigrant', 'Marijuana','Same-sex') )
-   plt.setp(ax.get_xticklabels(), fontsize=16,rotation=37)
+   ax.set_xticklabels( ('Obamacare', 'K12 Funding', 'College Funding', 'Immigrant', 'Marijuana','Same-sex') )
+   plt.setp(ax.get_xticklabels(), fontsize=20,rotation=30)
    plt.setp(ax.get_yticklabels(), fontsize=20)
    legend=plt.legend( (p14[0], p13[0],p12[0],p11[0],p10[0],p9[0],p8[0],p7[0],p6[0],p5[0],p4[0],p3[0],p2[0],p1[0]), ('A+', 'A', 'A-', 'B+', 'B','B-','C+','C','C-','D+','D','D-','F','Skip'),bbox_to_anchor=(1.30, 1))
    for label in legend.get_texts():
