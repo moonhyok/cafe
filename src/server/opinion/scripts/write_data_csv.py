@@ -70,6 +70,6 @@ for user in users:
 		row.append("NA")
 	if len(comment_tag)>0:
 		row.append(comment_tag[0].tag)
-	else
+	else:
 		row.append("NA")
 	writer.writerow(row)
