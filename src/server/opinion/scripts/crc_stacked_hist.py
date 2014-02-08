@@ -73,17 +73,17 @@ def issues_stack_hist():
    
    fig, ax = plt.subplots()
    ax.set_ylim([0, 100])
-   plt.subplots_adjust(left=0.15, right=0.8, top=0.95, bottom=0.12)
+   plt.subplots_adjust(left=0.13, right=0.80, top=0.96, bottom=0.24)
    
    fig.patch.set_facecolor('#74b9b7')
    
    p1 = ax.bar(ind, hist_all[13],   width, color='#0b294f', align='center',edgecolor = "none")
    p2 = ax.bar(ind, hist_all[12], width, color='#7d625f', bottom=hist_all[13], align='center',edgecolor = "none")
    p3 = ax.bar(ind, hist_all[11], width, color='#c3c3c3', bottom=hist_all[13]+hist_all[12], align='center',edgecolor = "none")
-   p4 = ax.bar(ind, hist_all[10], width, color='#8c75a9', bottom=hist_all[13]+hist_all[12]+hist_all[11], align='center',edgecolor = "none")
-   p5 = ax.bar(ind, hist_all[9], width, color='#59569e', bottom=hist_all[13]+hist_all[12]+hist_all[11]+hist_all[10], align='center',edgecolor = "none")
-   p6 = ax.bar(ind, hist_all[8], width, color='#5e7dbc', bottom=hist_all[13]+hist_all[12]+hist_all[11]+hist_all[10]+hist_all[9], align='center',edgecolor = "none")
-   p7 = ax.bar(ind, hist_all[7], width, color='#5890a8', bottom=hist_all[13]+hist_all[12]+hist_all[11]+hist_all[10]+hist_all[9]+hist_all[8], align='center',edgecolor = "none")
+   p4 = ax.bar(ind, hist_all[10], width, color='#4E2E75', bottom=hist_all[13]+hist_all[12]+hist_all[11], align='center',edgecolor = "none")
+   p5 = ax.bar(ind, hist_all[9], width, color='#003A70', bottom=hist_all[13]+hist_all[12]+hist_all[11]+hist_all[10], align='center',edgecolor = "none")
+   p6 = ax.bar(ind, hist_all[8], width, color='#3C4CFF', bottom=hist_all[13]+hist_all[12]+hist_all[11]+hist_all[10]+hist_all[9], align='center',edgecolor = "none")
+   p7 = ax.bar(ind, hist_all[7], width, color='#80D2F4', bottom=hist_all[13]+hist_all[12]+hist_all[11]+hist_all[10]+hist_all[9]+hist_all[8], align='center',edgecolor = "none")
    p8 = ax.bar(ind, hist_all[6], width, color='#61b392', bottom=hist_all[13]+hist_all[12]+hist_all[11]+hist_all[10]+hist_all[9]+hist_all[8]+hist_all[7], align='center',edgecolor = "none")
    p9 = ax.bar(ind, hist_all[5], width, color='#c1e9a3', bottom=hist_all[13]+hist_all[12]+hist_all[11]+hist_all[10]+hist_all[9]+hist_all[8]+hist_all[7]
                                                                  +hist_all[6], align='center',edgecolor = "none")
@@ -99,16 +99,17 @@ def issues_stack_hist():
                                                                  +hist_all[6]+hist_all[5]+hist_all[4]+hist_all[3]+hist_all[2]+hist_all[1], align='center',edgecolor = "none")
    
    ax.set_xticks(ind)
-   ax.set_xticklabels( ('Issue 1', 'Issue 2', 'Issue 3', 'Issue 4', 'Issue 5','Issue 6') )
-   plt.setp(ax.get_xticklabels(), fontsize=22,rotation=45)
+   ax.set_xticklabels( ('Affordable Care Act', 'K12 Funding', 'College Funding', 'Undocumented Immigrant', 'Marijuana','Same-sex') )
+   plt.setp(ax.get_xticklabels(), fontsize=16,rotation=37)
    plt.setp(ax.get_yticklabels(), fontsize=20)
    legend=plt.legend( (p14[0], p13[0],p12[0],p11[0],p10[0],p9[0],p8[0],p7[0],p6[0],p5[0],p4[0],p3[0],p2[0],p1[0]), ('A+', 'A', 'A-', 'B+', 'B','B-','C+','C','C-','D+','D','D-','F','Skip'),bbox_to_anchor=(1.30, 1))
    for label in legend.get_texts():
-       label.set_fontsize('22')
+       label.set_fontsize('20')
    fig.set_size_inches(8,8)
    
    plt.ylabel('Percentage',fontsize=24)
-   
+   x=range(8)
+   plt.plot(x,[50]*8)
    plt.savefig(imagepath+'stacked.png',edgecolor='none',dpi=100,format='png')
 
 issues_stack_hist()
