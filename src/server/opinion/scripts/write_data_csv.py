@@ -8,14 +8,13 @@ jspath= settings.MEDIA_ROOT + "/mobile/js/"
 import datetime
 import csv
 from opinion.includes.queryutils import *
-'''write the following data in csv format'''
 
 '''get user.id, grades for each issue, including NA, Zipcode, City,County, State,Join time, comment'''
 
 ofile  = open('cafe-data.csv', "wb")
 writer=csv.writer(ofile,delimiter=',')
 users=User.objects.filter(is_active=True)
-title=["UserId","Grade1","Grade2","Grade3","Grade4","Grade5","Grade6","Zipcode","City","County","State","CreatedMonth","CreatedDay","Comment"]
+title=["UserId","Grade1","Grade2","Grade3","Grade4","Grade5","Grade6","Zipcode","City","County","State","Created","Comment"]
 writer.writerow(title)
 statements = OpinionSpaceStatement.objects.all().order_by('id')
 skip_begin_date=datetime.datetime(2014,1,9,0,0,0,0)
@@ -62,8 +61,7 @@ for user in users:
 		row.append("NA")
 		row.append("NA")
 		row.append("NA")
-	row.append(user.date_joined.month)
-	row.append(user.date_joined.day)
+	row.append(str(user.date_joined.year)+"-"+str(user.date_joined.month)+"-"+str(user.date_joined.day))
 	cur_user_comment=DiscussionComment.objects.filter(user=user,discussion_statement= disc_stmt,is_current = True)
 	if len(cur_user_comment)>0:
 		row.append(cur_user_comment[0].comment)
