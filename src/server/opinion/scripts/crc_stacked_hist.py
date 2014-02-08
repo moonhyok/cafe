@@ -108,8 +108,6 @@ def issues_stack_hist():
    fig.set_size_inches(8,8)
    
    plt.ylabel('Percentage',fontsize=24)
-   x=range(8)
-   plt.plot(x,[50]*8)
    plt.savefig(imagepath+'stacked.png',edgecolor='none',dpi=100,format='png')
 
 issues_stack_hist()
