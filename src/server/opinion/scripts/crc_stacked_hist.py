@@ -81,8 +81,8 @@ def issues_stack_hist():
    p2 = ax.bar(ind, hist_all[12], width, color='#7d625f', bottom=hist_all[13], align='center',edgecolor = "none")
    p3 = ax.bar(ind, hist_all[11], width, color='#c3c3c3', bottom=hist_all[13]+hist_all[12], align='center',edgecolor = "none")
    p4 = ax.bar(ind, hist_all[10], width, color='#4E2E75', bottom=hist_all[13]+hist_all[12]+hist_all[11], align='center',edgecolor = "none")
-   p5 = ax.bar(ind, hist_all[9], width, color='#003A70', bottom=hist_all[13]+hist_all[12]+hist_all[11]+hist_all[10], align='center',edgecolor = "none")
-   p6 = ax.bar(ind, hist_all[8], width, color='#3C4CFF', bottom=hist_all[13]+hist_all[12]+hist_all[11]+hist_all[10]+hist_all[9], align='center',edgecolor = "none")
+   p5 = ax.bar(ind, hist_all[9], width, color='#A186C1', bottom=hist_all[13]+hist_all[12]+hist_all[11]+hist_all[10], align='center',edgecolor = "none")
+   p6 = ax.bar(ind, hist_all[8], width, color='#003A70', bottom=hist_all[13]+hist_all[12]+hist_all[11]+hist_all[10]+hist_all[9], align='center',edgecolor = "none")
    p7 = ax.bar(ind, hist_all[7], width, color='#80D2F4', bottom=hist_all[13]+hist_all[12]+hist_all[11]+hist_all[10]+hist_all[9]+hist_all[8], align='center',edgecolor = "none")
    p8 = ax.bar(ind, hist_all[6], width, color='#61b392', bottom=hist_all[13]+hist_all[12]+hist_all[11]+hist_all[10]+hist_all[9]+hist_all[8]+hist_all[7], align='center',edgecolor = "none")
    p9 = ax.bar(ind, hist_all[5], width, color='#c1e9a3', bottom=hist_all[13]+hist_all[12]+hist_all[11]+hist_all[10]+hist_all[9]+hist_all[8]+hist_all[7]
