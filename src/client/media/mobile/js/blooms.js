@@ -30,12 +30,19 @@ var _blooms = blooms = (function($, d3, console) {
         sorted_comments_ids = data['sorted_comments_ids'];
         sorted_avg_agreement = data['sorted_avg_agreement'];
 
-        // utils.ajaxTempOff(function() {
-        //     $.getJSON(window.url_root + '/os/all/1/', function(data) {
+
+        // $.ajax({
+        //     async: false,
+        //     url: window.url_root + '/os/all/1/',
+        //     type: 'GET',
+        //     dataType: 'json',
+        //     success: function(data) {
         //         sorted_comments_ids = data['sorted_comments_ids'];
         //         sorted_avg_agreement = data['sorted_avg_agreement'];
-        //     });
-
+        //     },
+        //     error: function() {
+        //         console.log("ERROR posting authenticated request. Abort!");
+        //     }
         // });
 
         storeSortedIDsToBuckets(sorted_comments_ids, window.visuals.userIdToCommentScoreBucket, window.visuals.POINT_SIZES.length);
@@ -163,7 +170,7 @@ var _blooms = blooms = (function($, d3, console) {
 
         for (var i = 0; i < ratings.length; i += window.num_sliders) {
             rating = compileIndexedElementsToList(ratings.slice(i, i + window.num_sliders), rating_value_index);
-            x = dotProduct(ex, rating);
+            x = dotProduct(ex, rating); //perturb values to prevent bunching
             y = dotProduct(ey, rating);
             uid = ratings[i][rating_uid_index];
             result.push({
@@ -208,7 +215,7 @@ var _blooms = blooms = (function($, d3, console) {
                 data2 = data1['never_seen_comments'];
                 ratings = data2['ratings'];
                 generateBloomSizesAndColors(data2);
-                //console.log(eigens);
+                console.log(ratings);
 
             }
         });
@@ -221,32 +228,28 @@ var _blooms = blooms = (function($, d3, console) {
         //     ratings = data2[0]['ratings'];
 
 
-        //make this it's own function
         // hack to allow own bloom - should be cleaned up later
+        // Note: populateBlooms assumes CurUser's bloom is last in the array
         //var curr_user_id = data1[0]['cur_user_id'];
-        if (window.sliders.length == window.num_sliders+1) {
-                var users_ratings = [];
-                for (var i = 1; i <= window.num_sliders; i += 1) {
-                    users_ratings[i-1] = new Array("curUser", i+1, parseFloat(window.sliders[i])/100);
-                }
-                // console.log(users_ratings);
-                ratings = ratings.concat(users_ratings);
-            }
-        else{
-            
-            if (window.authenticated) {
-            var users_statements = data1['cur_user_ratings'];
+        if (window.authenticated) {
+                    var users_statements = data1['cur_user_ratings'];
+                    var users_ratings = [];
+                    for (var i = 0; i < users_statements.length; i += 1) {
+                        users_ratings[i] = new Array("curUser", users_statements[i][0], users_statements[i][1]);
+                    }
+                        ratings = ratings.concat(users_ratings);
+                    }
+        else
+        {
             var users_ratings = [];
-            for (var i = 0; i < users_statements.length; i += 1) {
-                users_ratings[i] = new Array("curUser", users_statements[i][0], users_statements[i][1]);
+            for (var i = 1; i <= window.num_sliders; i += 1) {
+                users_ratings[i-1] = new Array("curUser", i+1, parseFloat(window.sliders[i])/100);
             }
-                ratings = ratings.concat(users_ratings);
-            }
-            
         }
 
         //end of hack
-        //ratings.reverse();
+        /*if (window.user_score <= 2)
+            ratings.reverse();*/
         
         result = compileEigenvectorsAndRatings(eigens, ratings);
         showfunc({
@@ -320,10 +323,9 @@ var _blooms = blooms = (function($, d3, console) {
         margin = {
             top: 0,
             left: 0,
-            right: 40,
-            bottom: 60
+            right: 80,
+            bottom: 40
             };
-
 
 
             var width = $(window).width() - margin.right - margin.left;
@@ -332,13 +334,32 @@ var _blooms = blooms = (function($, d3, console) {
 
             var height = $(window).height()- margin.bottom - margin.top - topBarHeight;
 
-            var canvasx = d3.scale.linear().domain(d3.extent(data, function(d) {return d.x;})).range([margin.left, width-margin.right]);
-            var canvasy = d3.scale.linear().domain(d3.extent(data, function(d) {return d.y;})).range([margin.top, height-margin.bottom]);
+            // Stashing away your_mug_data so it can be added after 2 mugs have been rated
+            window.your_mug_data = data.splice(data.length-1, 1)[0];
+            window.your_mug_data.ox = window.your_mug_data.x; //keep the original untransformed values
+            window.your_mug_data.oy = window.your_mug_data.y;
+            window.your_mug_data.x = (width)/2;//canvasx(window.your_mug_data.x);
+            window.your_mug_data.y = (height)/2;//canvasy(window.your_mug_data.y);
+
+
+
+            //center the scaling appropriately
+            var max_x_dev = d3.max(data, function(d) {return Math.abs(d.x-window.your_mug_data.ox);});
+            var max_y_dev = d3.max(data, function(d) {return Math.abs(d.y-window.your_mug_data.oy);});
+            var canvasx = d3.scale.linear().domain([-max_x_dev,max_x_dev]).range([margin.left, width-margin.right]).clamp(true);
+            var canvasy = d3.scale.linear().domain([-max_y_dev,max_y_dev]).range([margin.top, height-margin.bottom]).clamp(true);
 
             $('svg').remove();
             // clear anything that's in the div already (e.g. loading button)
             $('#d3 .loading').hide();
-            var svg = d3.select('#d3')
+
+             var force = d3.layout.force()
+                 .charge(-600)
+                 .size([width, height]);
+
+            window.force = force;
+
+            window.coffeetable_svg = d3.select('#d3')
             .append('svg')
             .attr('width', width + margin.left + margin.right)
             .attr('height', height + margin.top + margin.bottom)
@@ -348,34 +369,21 @@ var _blooms = blooms = (function($, d3, console) {
 
             //var rescale = generateRescalingFactor();
 
-            svg.selectAll(".bloom")
+            force.nodes(data).start();
+
+            var mugs = window.coffeetable_svg.selectAll(".bloom")
             .data(data)
             .enter()
             .append("svg:image")
             .attr("xlink:href", function(d) {
                 window.blooms_list.push(d.uid);
-                // console.log({'uid': d.uid,'x':d.x,'y':d.y,'cx': canvasx(d.x),'cy': canvasy(d.y)});
-                if (d.uid == "curUser") {
-                    var _this = d3.select(this);
-                    window.your_mug = _this;
-                    return window.url_root + "/media/mobile/img/cafe/cafeCurUser.png";
-                }
+                console.log({'uid': d.uid,'x':d.x,'y':d.y,'cx': canvasx(d.x),'cy': canvasy(d.y)});
                 return window.url_root + "/media/mobile/img/cafe/cafe" + Math.floor((Math.random()*6)).toString() + ".png";
             })
-            .attr('x', function(d) {
-                return canvasx(d.x);
-            })
-            .attr('y', function(d) {
-                return canvasy(d.y);
-            })
-            .attr("width", "90") //if this changes, change the margin above
-            .attr("height", "90")
+            .attr("width", "80") //if this changes, change the margin above
+            .attr("height", "80")
             .attr("opacity", function(d) {
-                    if (window.user_score <= 1 && d.uid == "curUser") {
-                        return "0";
-                    } else {
                         return "1";
-                    }
                 })
             //.attr("transform", function(d) {
             //        return choice(["rotate(-65)", "rotate(-45)", "rotate(20)"]);
@@ -385,106 +393,123 @@ var _blooms = blooms = (function($, d3, console) {
             })
             .on('click', function(d) {
                 var _this = d3.select(this);
+		        window.cur_clicked_mug = _this;
                 window.prev_state = 'map';
-
-                if (d.uid == "curUser" && window.user_score >= 2) {
-                    $('.comment-input').slideDown();
-                    $('.scorebox').hide();
-                    $('.menubar').hide();
-                    $('.instructions3').hide();
-                    window.cur_state = 'comment';
-                    return;
-                }
-                else
-                {
+                //utils.showLoading("Loading Suggestion...");
                     $('.instructions').hide();
                     $('.scorebox').hide();
                     $('.menubar').hide();
                     window.cur_state = 'rate';
-                }
                 
-                $('.rate-username').html('The '+d.uid + 'th participant suggested this issue for the next report card:');
+                $('.rate-username').html('Suggested by Participant #'+d.uid);
                 var commentData = rate.pullComment(d.uid, 'uid', comments);
                 var content = commentData.comment;
                 var cid = commentData.cid;
                 window.current_cid = cid;
                 window.current_uid = d.uid;
-                $('.rate').show();
-                $('.rate-loading').show();
+                //$('.rate-loading').show();
                 rate.updateDescriptions(document.getElementById('commentInput'), content);
-                $('.rate').slideDown(function() {
+                $('.rate').show();
+                /*$('.rate').slideDown(function() {
                     $('.rate-loading').hide();
                     $('.rate').data('cid', cid);
-                });
-                $('#go-back').click(function() {
-                    //$('.scorebox').show();
-                    utils.showLoading("");
-                    $('.menubar').show();
-                    rate.doneRating();
-
-                    try{
-                    _this.transition().duration(2000).style("opacity", "0").remove();
-                    }catch(err){
-                    console.log(err);
-                    }
-                    //_this.transition().duration(500).style("opacity", "0");
-                    /* Remove this bloom from our bookkeeping array. */
-                    var index = $.inArray(window.current_uid, window.blooms_list);
-                    if (index >= 0) {
-                        window.blooms_list.splice(index, 1);
-                    }
-                    /* Load more blooms if none left */
-                    try {
-                    if (window.blooms_list.length == 1) {
-                        console.log("here");
-                        window.blooms_list = undefined; //needed to avoid infinite recursing
-                        utils.showLoading("", function() {
-                            populateBlooms();
-                        });
-                        utils.hideLoading(500);
-                    } } catch(err){ /* undefined variable blooms. */ }
-
-                });
+                });*/
+                //utils.hideLoading(0);
             });
-        });
+
+                    if(window.user_score >= 2)
+                    {
+                         try{
+                             blooms.addYourMug();
+                             window.your_mug.transition().duration(100).style("opacity", "1");
+                            }catch(err){
+                              console.log(err);
+                           }
+                    }
+
+                   force.on("tick", function() {
+                    mugs.attr('x', function(d) {
+                                    return Math.min(Math.max(d.x,margin.left),width);
+                                })
+                                .attr('y', function(d) {
+                                    return Math.min(Math.max(d.y,margin.bottom),height);
+                                })
+                                });
+
+                                for (var i = 0; i < 100; ++i) force.tick();
+                                force.stop();
+
+                                });
+
+     try{
+      utils.hideLoading(0);
+      }catch(err){
+         console.log(err);
+      }
+
     $('#d3').height($(window).height() - $('.top-bar').height());
+    }
+
+    /** Adds `yourMug` to the canvas as a hidden object. Change the opacity to make it appear */
+    function addYourMug() {
+        window.your_mug = window.coffeetable_svg.append('svg:image')
+        .attr("xlink:href", function(d) {
+                    return window.url_root + "/media/mobile/img/cafe/cafeCurUser.png";
+
+        })
+        .attr('x', function(d) {
+            return window.your_mug_data.x;
+        })
+        .attr('y', function(d) {
+            return window.your_mug_data.y;
+        })
+        .datum(function(d) {
+            return window.your_mug_data;
+        })
+        .attr("width", "90") //if this changes, change the margin above
+        .attr("height", "90")
+        .attr("opacity", function(d) {
+            return 0;
+        })
+        .on('click', function(d) {
+            $('.comment-input').slideDown();
+            $('.scorebox').hide();
+            $('.menubar').hide();
+            $('.instructions3').hide();
+            window.cur_state = 'comment';
+        })
+
     }
 
     /** Handles a users entrance into the garden if they are already authenticated. */
 
     function alreadyAuthenticated() {
         //TOFIX utils.showLoading("Loading...");
-
-        //utils.ajaxTempOff(function() {
         populateBlooms();
-        //});
         accounts.initLoggedInFeatures();
         //TOFIX utils.hideLoading();
-        $('.landing').hide();
-        accounts.getNeighborStat();
-        window.prev_state = 'welcome_back';
-        if(window.conf.RETURN_USER_FIRST_TIME){
+        //accounts.getNeighborStat();
+        /*if(window.conf.RETURN_USER_FIRST_TIME){
 		$('.welcome-back').slideDown();
 		}
 		else{
 		$('.welcome-back').hide();
-		}
+		}*/
         
     }
 
     return {
         'populateBlooms': populateBlooms,
-        'alreadyAuthenticated': alreadyAuthenticated
+        'alreadyAuthenticated': alreadyAuthenticated,
+        'addYourMug' : addYourMug
     };
 })($, d3, console);
 
 $(document).ready(function() {
-    if (accounts.setAuthenticated()) {
-        _blooms.alreadyAuthenticated();
+    accounts.setAuthenticated();
+    if (window.authenticated) {
+        blooms.alreadyAuthenticated();
     }
-    else{
-		$('.welcome-back').hide();
-	}
 
     $('#d3').height($(window).height() - $('.top-bar').height());
 
@@ -492,8 +517,50 @@ $(document).ready(function() {
         //_blooms.populateBlooms();
     });
 
+    $('#go-back').click(function() {
+        //$('.scorebox').show();
+        //utils.showLoading("");
+        $('.menubar').show();
+        rate.doneRating();
+
+        try {
+            window.cur_clicked_mug.transition().duration(2000).style("opacity", "0").remove();
+        } catch (err) {
+            console.log(err);
+        }
+        //_this.transition().duration(500).style("opacity", "0");
+        /* Remove this bloom from our bookkeeping array. */
+        var index = jQuery.inArray(window.current_uid, window.blooms_list);
+        if (index >= 0) {
+            window.blooms_list.splice(index, 1);
+        }
+        /* Load more blooms if none left */
+        try {
+            if (window.blooms_list.length <= 2) {
+                console.log("here");
+                utils.showLoading("Loading More Mugs...");
+                window.blooms_list = undefined; //needed to avoid infinite recursing
+                setTimeout(blooms.populateBlooms, 500);
+                //utils.hideLoading();
+                // utils.showLoading("Loading More Ideas...", function() {
+                //     populateBlooms();
+                //});
+                //utils.hideLoading(5000);
+            }
+        } catch (err) {
+         /* undefined variable blooms. */
+         console.log(err);
+        }
+
+    });
+
     $(window).resize(function() {
         // TODO: check if a ajax call
         //_blooms.populateBlooms();
+        try {
+            for (var i = 0; i < 100; ++i) window.force.tick();
+            window.force.stop();
+        } catch (err) {}
+
     });
 });

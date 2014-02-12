@@ -3,12 +3,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <html>
-    <head>
-        <rel="stylesheet" type="text/css" href="css/main.css" />
+    <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
+        <link rel="stylesheet" type="text/css" href="css/main.css" />
         <meta http-equiv="content-type" content="text/php; charset=utf-8" />
 	<style>
 	  * {
-	  background-color: #88ADAA; /*#04376C; */
+	  background-color: #76b9b6;  /* ; #04376C; */
 	  }
 
 	  #frame {
@@ -16,10 +16,19 @@
 	  }
 
 	  #message {
-	  color: white;
+	  color: rgb(78, 48, 15); /* white; */
 	  font-family: sans-serif;
 	  }
 	  </style>
+
+	  <!-- Social media stuff -->
+	  <meta property="og:title" content="California Report Card"/>
+	  <meta property="og:type" content="website"/>
+	  <meta property="og:image" content="{{ url_root }}/media/mobile/img/cafe/cafe-title-cropped.png" />
+	  <meta property="og:url" content="{{ url_root }}" />
+	  <meta property="og:description" content="The California Report Card allows visitors to grade issues facing California and to suggest issues for future report cards." />
+
+	  <link rel="image_src" href="{{ url_root }}/media/mobile/img/cafe/cafe-title-cropped.png"/>
 	
         <title>California Report Card</title>
     </head>
@@ -33,11 +42,12 @@
 	       iPad landscape: (644, 981)
 	    -->
 	  
-	  <iframe id="frame" src="{{ url_root }}/mobile/" height="560" width="320" >
+	  <iframe id="frame" src="{{ url_root }}/mobile/" height="480" width="320" >
 	  </iframe>
 	  <br/> <br/>
 	  <div id="message">
-	    The California Report Card is optimized for mobile screen sizes.
+	    The California Report Card is optimized for mobile screen sizes.</br></br>
+	    Learn more about the project at <b><a href="http://californiareportcard.org">http://californiareportcard.org</a></b>.
 	  </div>
 
 	</center>

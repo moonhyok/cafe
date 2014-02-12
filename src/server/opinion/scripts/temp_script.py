@@ -3,9 +3,10 @@ import environ
 from opinion.opinion_core.models import *
 import numpy as np
 
-u = User.objects.filter(id = 1)[0]
-print u.username
-u.set_password('a6b7Tuwq')
-u.save()
-
+for u in User.objects.filter(id__lte = 361):
+	comment = DiscussionComment.objects.filter(is_current =True, user = u)
+	if len(comment) > 0:
+		comment[0].blacklisted = True
+		comment[0].save()
+		print "Pruned negative comment"
 

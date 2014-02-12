@@ -565,10 +565,6 @@ def PCA_svd(X, standardize=True):
 
 
 
-
-
-
-
 ################### Correlation Loadings ###################
 def CorrelationLoadings(X, Scores):
     """

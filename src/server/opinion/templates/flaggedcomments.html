@@ -22,8 +22,11 @@
 				var flaggedComments = data.data.flagged_comments
 				populateTable(flaggedComments);
 			})
+			allowTagEditing();
+
 		}
 	}, discussion_id)
+
 
 	/*
 	// Get  Feedback Comments Data
@@ -70,17 +73,79 @@
 				
 				var user = document.createElement('td');
 				user.innerHTML = flaggedCommentsData[i].username;
+
+				var email = document.createElement('td');
+				email.innerHTML = flaggedCommentsData[i].email;
 				
+				var zipcode = document.createElement('td');
+				zipcode.innerHTML = flaggedCommentsData[i].zipcode;
+
+				var city_state = document.createElement('td');
+				city_state.innerHTML = flaggedCommentsData[i].city_state;
+
 				var comment = document.createElement('td');
 				comment.innerHTML = flaggedCommentsData[i].comment;
+
+				var tag = document.createElement('td');
+				tag.className = "tag"
+				tag.id = "tag-" + flaggedCommentsData[i].cid.toString();
+				tag.innerHTML = flaggedCommentsData[i].tag;
 				
 				row.appendChild(inputTd);
 				row.appendChild(user);
+				row.appendChild(email);
+				row.appendChild(zipcode);
+				row.appendChild(city_state);
 				row.appendChild(comment);
+				row.appendChild(tag);
+
 				dojo.byId('tableBody').appendChild(row);
 			}
 			$("#osTable:has(tbody tr)").tablesorter({headers: { 0:{sorter: false}}, widgets: ['zebra']});
 		}
+	}
+
+	function allowTagEditing() {
+
+		$(".tag").click(function() {
+			var new_tag = prompt("Tag this comment", $(this).html());
+			$(this).html(new_tag);
+			var cid = $(this).attr('id').replace('tag-', '');
+
+			dojo.xhrPost({
+				url: "{{url_root}}/admintagcomment/" + cid + "/",
+				content: {
+					tag: new_tag
+				},
+				handleAs: "json",
+				load: function(response) {
+					if (!response.success) {
+						alert("Error");
+					}
+				},
+				error: function(error, ioArgs) { // This happens on a 500 error or alikes.
+					alert('Error: failed sending data');
+
+					switch (ioArgs.xhr.status) {
+						case 404: //page not found error
+							alert('404');
+							break;
+						case 500: // server side error
+							alert('500');
+							break;
+						case 407: // proxy authentication
+							alert('407');
+							break;
+						default: // default action
+							alert('default');
+					};
+
+					alert("HTTP Error code:" + ioArgs.xhr.status);
+					alert("Error Condition:" + error.responseText);
+					alert("Error Message:  " + error.message);
+				}
+			});
+		});
 	}
 </script>
 {% endblock %}
@@ -105,8 +170,12 @@
     <thead> 
     <tr> 
         <th width="5%"><input type="checkbox" id="checkAll"/></th>
-        <th width="25%">User ID</th>  
-        <th width="70%">Response</th>                 
+        <th width="10%">User ID</th> 
+		<th width="10%">Email</th>
+		<th width="10%">Zipcode</th> 
+        <th width="10%">City, State</th> 
+        <th width="35%">Response</th>
+        <th width="20%">Tag (click to edit)</th>               
     </tr> 
     </thead> 
     <tbody id="tableBody"> 

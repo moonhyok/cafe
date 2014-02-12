@@ -11,6 +11,7 @@ from forms import *
 from opinion.includes.logutils import *
 from opinion.includes.jsonutils import *
 from opinion.includes.mathutils import *
+from opinion.includes.statsutils import *
 from opinion.includes.profanityutils import *
 from opinion.includes.queryutils import *
 from opinion.includes.smsutils import *
@@ -44,7 +45,14 @@ import time
 import datetime
 import hashlib
 from django.core.validators import validate_email
+from django.core.exceptions import *
+import smtplib
+
+os.environ['MPLCONFIGDIR'] = "/tmp"
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
+
 try:
     import json
 except ImportError:
@@ -89,26 +97,16 @@ def return_zipcode(request):
 @cache_control(no_cache=True)
 def mobile(request,entry_code=None):
     create_visitor(request)
-    if request.user.is_authenticated(): 
-       if entry_code!=None: #entrycode user refresh page
-          request.session['refresh_times']=1
-    else:
-       if entry_code!=None:         #entry code user relogin "first time"
-          user=authenticate(entrycode=entry_code)
-          if user !=None:
-             login(request,user)
-             request.session['refresh_times']=0
-    #print get_client_settings(True)
     os = get_os(1)
     disc_stmt = get_disc_stmt(os, 1)
-    
+    active_users = list(User.objects.filter(is_active=True)) #forces eval so lazy eval doesn't act too smart!!!
+    referrallink = request.GET.get('refer','')
+
     statements = OpinionSpaceStatement.objects.all().order_by('id')
     medians = {}
     statement_labels = {};
- #.values_list('id', 'statement', 'short_version'))
-
     for s in statements:
-        medians[str(s.id)] = numpy.median(UserRating.objects.filter(opinion_space_statement=s,is_current=True).values_list('rating'))
+        medians[str(s.id)] = StatementMedians.objects.filter(statement = s)[0].rating
         if medians[str(s.id)] <= 1e-5:
             medians[str(s.id)] = 0
         statement_labels[str(s.id)] = s.statement
@@ -123,288 +121,161 @@ def mobile(request,entry_code=None):
 											 'change_prompt' : str(request.user.is_authenticated()).lower(),
 											 'client_data': mobile_client_data(request),
 											 'entry_code': str(entry_code!=None).lower(),
+											 'refer': referrallink,
 											 'client_settings': get_client_settings(True),
-											 'leaderboard': get_top_scores(os, disc_stmt, request, 10),
 											 'topic': DiscussionStatement.objects.filter(is_current=True)[0].statement,
 											 'short_topic': DiscussionStatement.objects.filter(is_current=True)[0].short_version,
 											 'statements': statements,
 											 'init_score': len(get_fully_rated_responses(request, disc_stmt)),
 											 'random_username': random_username,
 											 'random_password': random_password,
-											 'num_users': User.objects.filter(id__gte = 310).count(),
+											 'num_users': len(active_users),
                                              'statement_labels': json.dumps(statement_labels),
 											 'medians': json.dumps(medians)}))
 
-
 def confirmation_mail(request):
-    email=request.REQUEST.get('mail')
+    email = request.REQUEST.get('mail','')
     try:
       validate_email(email)
-      user=User.objects.get(username=request.user.username)
-      if len(user.email)==0:
-         user.email=email
-         user.save()
-         entrycode=hashlib.sha224(email).hexdigest()[0:7]
-         ECobject=EntryCode(username=user.username,code=entrycode)
-         ECobject.save()	
-         
-         ordinal='th'
-         if user.id % 10 == 1:
-             ordinal='st'
-         elif user.id % 10 == 2:
-             ordinal='nd'
-         elif user.id % 10 ==3:
-             ordinal='rd'
-         if user.id % 100 == 11:
-             ordinal='th'
-         if user.id % 100 == 12:
-             ordinal='th'
-         if user.id % 100 == 13:
-             ordinal='th'
-         #send out confirmation email
-         print user.id,ordinal
-         subject = "Your unique link to the California Report Card v1.0"
-         email_list = [user.email]
-         message = render_to_string('registration/confirmation_email.txt', 
-									   { 'url_root': settings.URL_ROOT, 
-										 'entrycode': entrycode,
-										 'user_id': user.id,
-										 'ordinal': ordinal,
-                                          })
-          
-         #send_mail(subject, message, Settings.objects.string('DEFAULT_FROM_EMAIL'), email_list)
-         return json_success()
-      else:
-         return json_success()
-    except:
-      json_error("Please enter a valid email")
+    except ValidationError:
+      return json_error("Please enter a valid email address or leave it blank to skip.")
 
-def crcstats(request):
-    uid = request.GET.get('username',-1)
+    if not request.user.is_authenticated():
+        return json_error("Must be authenticated to run this command.")
+
+    if request.user.email == None or len(request.user.email)==0:
+        in_use = (User.objects.filter(is_active = True, email = email).count() >= 1)
+
+        if in_use:
+            return json_error("This email address is already in use.")
+
+        request.user.email = email
+        request.user.save()
+
+        entrycode = hashlib.sha224(email).hexdigest()[0:7]
+        ECobject=EntryCode(username=request.user.username,code=entrycode, first_login=False)
+        ECobject.save()
+
+        subject = "Your unique link to the California Report Card v1.0"
+        email_list = [email]
+        message = render_to_string('registration/confirmation_email.txt',
+                                        { 'url_root': settings.URL_ROOT, 
+										 'entrycode': entrycode,
+										 'user_id': request.user.id-361,
+                                          })
+        try:
+           #send_mail(subject, message, Settings.objects.string('DEFAULT_FROM_EMAIL'), email_list)
+           print 'email'
+        except:
+           return json_error("We were unable to send an email. Try again later.")
+
+        return json_success()
+    else:
+        return json_error("You have already submitted an email address.")
+
+def crcstats(request,entry_code=None):
+
+    os = get_os(1)
+    disc_stmt = get_disc_stmt(os, 1)
+
+    user = None
+    #Case 1: User is logged in
+    if request.user.is_authenticated():
+        user = request.user
+    #Case 2: Entry using a code
+    elif entry_code!=None:
+        user = authenticate(entrycode=entry_code)
+        if user!=None:
+           ec = list(EntryCode.objects.filter(code=entry_code))[-1]
+           ec.first_login = True
+           ec.save()
+           login(request,user)
+    #Case 3: Testing argument based user id
+    else:
+        uid = request.GET.get('username',-1)
+        user_list = User.objects.filter(id = uid)
+        if len(user_list) > 0:
+            user = user_list[0]
+
+    level8 = (user != None) # Do we have a valid user?
+
+    #initialize scores
     score = 0
     given = 0
     received = 0
-    os = get_os(1)
-    disc_stmt = get_disc_stmt(os, 1)
-    level8= False
-    if uid != -1:
-        cur_user = User.objects.filter(id=uid)
-        if len(cur_user) > 0:
-            cur_user = cur_user[0]
-            level8= True
-            score = CommentAgreement.objects.filter(rater = cur_user,is_current=True).count()
-            given = 2*CommentAgreement.objects.filter(rater = cur_user,is_current=True).count()
-            received = 2*CommentAgreement.objects.filter(comment__in = DiscussionComment.objects.filter(user = cur_user),is_current=True).count()
+    ordinal=''
+    comment=''
+    uid = -1
+    show_hist1=False
+    show_hist2=False
+
+    if level8:
+        score = CommentAgreement.objects.filter(rater = user,is_current=True).count()*100 + user_author_score(user)
+        given = 2*CommentAgreement.objects.filter(rater = user,is_current=True).count()
+        received = 2*CommentAgreement.objects.filter(comment__in = DiscussionComment.objects.filter(user = user),is_current=True).count()
+        comment_list=DiscussionComment.objects.filter(user=user,is_current=True)
+        if len(comment_list) > 0:
+            comment=comment_list[0].comment
+            slider1=CommentAgreement.objects.filter(comment=comment_list[0])
+            slider2=CommentRating.objects.filter(comment=comment_list[0])
+            if len(slider1)>0:
+                show_hist1=True
+            if len(slider2)>0:
+                show_hist2=True
+
+        ordinal = number_to_ordinal(user.id)
+        uid = user.id
+
+    active_users = list(User.objects.filter(is_active = True))
 
     statements = OpinionSpaceStatement.objects.all().order_by('id')
     medians = []
     for s in statements:
-        med = numpy.median(UserRating.objects.filter(opinion_space_statement=s,is_current=True).values_list('rating'))
-        if med <= 1e-5:
-            med = 0
-        medians.append({'statement': s.statement, 'avgG': score_to_grade(100*med), 'avg': int((1-med)*300)})
-        
-    issues_hist(request)
-    participant_hist(request)
-    return render_to_response('crc_stats.html', context_instance = RequestContext(request, {'num_participants': User.objects.filter(id__gte=310).count(),
+        medians.append({'statement': s.statement,'id':s.id})
+
+    return render_to_response('crc_stats.html', context_instance = RequestContext(request, {'num_participants': len(active_users),
                                                                                             'level8':level8,
-                                                                                            'participant': uid,
+                                                                                            'ordinal':ordinal,
+                                                                                            'show_hist1':str(show_hist1).lower(),
+                                                                                            'show_hist2':str(show_hist2).lower(),
+                                                                                            'date':datetime.date.today(),
+                                                                                            'comment':comment,
+                                                                                            'left_comment': (comment != ''),
+                                                                                            'participant': uid-361,
+                                                                                            'entrycode': entry_code,
+                                                                                            'uid':uid,
                                                                                             'given': given,
                                                                                             'received': received,
-                                                                                            'score': score*float(get_client_settings(True)['SCORE_SCALE_FACTOR']),
-                                                                                            'num_ratings': CommentAgreement.objects.filter(is_current=True).count()*2,
+                                                                                            'score': min(score,30000),
+                                                                                            'num_ratings': CommentAgreement.objects.filter(rater__in = active_users, is_current=True).count()*2,
                                                                                             'url_root' : settings.URL_ROOT,
                                                                                             'medians': medians,
                                                                                             }))
-def issues_hist(request):
-   statements = OpinionSpaceStatement.objects.all().order_by('id')
-   bins=[0,0.01,0.19,0.32,0.38,0.44,0.56,0.63,0.69,0.81,0.86,0.92,0.99,1]  
-        # F    D-   D    D+   C-   C    C+   B-   B   B+    A-   A    A+
-   N=len(bins)-1
-   ind=numpy.arange(N)
-   width=0.35
-   
-   for s in statements:
-       s_rating=UserRating.objects.filter(opinion_space_statement=s,is_current=True)
-       s_rating_list=[]
-       for rating in s_rating:
-          s_rating_list.append(1-rating.rating)
-       
-       hist,bin_edges = numpy.histogram(s_rating_list,bins,normed=False)
-       hist_in_percent=(100*hist/float(sum(hist)))[::-1]
-       
-       fig, ax = plt.subplots()
-       rects1 = ax.bar(ind, hist_in_percent, width, color='r')
-       median=numpy.median(s_rating_list)
-       median_bar=median_index(request,median)
-       rects1[median_bar].set_color('b')
-       ax.set_ylabel('Percentages (%)')
-       ax.set_title(s.statement)
-       ax.set_xticks(ind+width/2)
-       ax.set_xticklabels( ('A+', 'A', 'A-', 'B+', 'B','B-','C+','C','C-','D+','D','D-','F') )
-       plt.savefig(s.statement+'.svg',dpi=300,format='svg')
-       
-def median_index(request,median):
-     if median<=1 and median>0.99:
-        return 0
-     if median<=0.99 and median>0.92:
-        return 1
-     if median<=0.92 and median>0.86:
-        return 2
-     if median<=0.86 and median>0.81:
-        return 3
-     if median<=0.81 and median>0.69:
-        return 4
-     if median<=0.69 and median>0.63:
-        return 5
-     if median<=0.63 and median>0.56:
-        return 6
-     if median<=0.56 and median>0.44:
-        return 7
-     if median<=0.44 and median>0.38:
-        return 8
-     if median<=0.38 and median>0.32:
-        return 9
-     if median<=0.32 and median>0.19:
-        return 10
-     if median<=0.19 and median>0.01:
-        return 11
-     if median<=0.01:
-        return 12
 
 
-def participant_hist(request):
-    uid = request.GET.get('username',-1)
-    auth = False
+def crc_generic_stats(request):
+
     os = get_os(1)
-    disc_stmt = get_disc_stmt(os, 1)
-    
-    bins=[0,0.01,0.19,0.32,0.38,0.44,0.56,0.63,0.69,0.81,0.86,0.92,0.99,1]  
-        # F    D-   D    D+   C-   C    C+   B-   B   B+    A-   A    A+
-    N=len(bins)-1
-    ind=numpy.arange(N)
-    width=0.35
+    disc_stmt = get_disc_stmt(os, 1)   
 
-    if uid != -1:
-        cur_user = User.objects.filter(id=uid)
-        if len(cur_user) > 0:
-            cur_user = cur_user[0]
-            auth = True
-            cur_user_comment=DiscussionComment.objects.filter(user=cur_user,discussion_statement= disc_stmt,is_current = True)
-            if len(cur_user_comment)>0:
-               slider1=CommentAgreement.objects.filter(comment=cur_user_comment[0])
-               slider2=CommentRating.objects.filter(comment=cur_user_comment[0])
-               slider1_rating=[]
-               slider2_rating=[]
-               
-               for i in range(0, len(slider1)):
-                   slider1_rating.append(1-slider1[i].agreement)
-               for i in range(0, len(slider2)):
-                   slider2_rating.append(1-slider2[i].rating)
-               slider1_hist,bin_edges_1 = numpy.histogram(slider1_rating,bins,normed=False)
-               slider2_hist,bin_edges_2 = numpy.histogram(slider2_rating,bins,normed=False)
-               slider1_hist_in_percent=(100*slider1_hist/float(sum(slider1_hist)))[::-1]
-               slider2_hist_in_percent=(100*slider2_hist/float(sum(slider2_hist)))[::-1]
-              
-               fig1, ax1=plt.subplots()
-               rects1 = ax1.bar(ind, slider1_hist_in_percent, width, color='r')
-               median1=numpy.median(slider1_rating)
-               
-               median_bar1=median_index(request,median1)
-               rects1[median_bar1].set_color('b')
-               ax1.set_ylabel('Percentages (%)')
-               ax1.set_title("How important is this issue for the next Report Card?")
-               ax1.set_xticks(ind+width/2)
-               ax1.set_xticklabels( ('A+', 'A', 'A-', 'B+', 'B','B-','C+','C','C-','D+','D','D-','F') )
-               plt.savefig(str(uid)+'_1.svg',dpi=300,format='svg')
-               
-               plt.figure()
-               fig2, ax2=plt.subplots()
-               rects2 = ax2.bar(ind, slider2_hist_in_percent, width, color='r')
-               median2=numpy.median(slider2_rating)
-               median_bar2=median_index(request,median2)
-               rects2[median_bar2].set_color('b')
-               ax2.set_ylabel('Percentages (%)')
-               ax2.set_title("How would you rate the State of California on this issue today?")
-               ax2.set_xticks(ind+width/2)
-               ax2.set_xticklabels( ('A+', 'A', 'A-', 'B+', 'B','B-','C+','C','C-','D+','D','D-','F') )
-               plt.savefig(str(uid)+'_2.svg',dpi=300,format='svg')
+    active_users = list(User.objects.filter(is_active = True))
 
-
-
-def neighbor_stat(request):
-    zipcode=request.REQUEST.get('zipcode',-1)
     statements = OpinionSpaceStatement.objects.all().order_by('id')
-    if zipcode!=-1:
-       city=ZipCode.objects.filter(code__exact=zipcode)[0].city
-       zipcode_in_city=ZipCode.objects.filter(city__exact=city)
-       neighbors=[]
-   
-       for s in statements:
-          s_grade=[]
-          for i in range(0, len(zipcode_in_city)):
-             log=ZipCodeLog.objects.filter(location__exact=zipcode_in_city[i])
-           
-             for j in range(0, len(log)):
-                user_grade_s=log[j].user.userrating_set.filter(opinion_space_statement=s,is_current=True)
-                if len(user_grade_s)>0:
-                  s_grade.append(user_grade_s[0].rating)
-          neighbors.append({'statement':s.statement,'avgG':score_to_grade(100*numpy.median(s_grade)),'avg': int((1-numpy.median(s_grade))*300)})
-       return neighbors
-    else:
-       return None
+    medians = []
+    for s in statements:
+        medians.append({'statement': s.statement, 'id':s.id})
 
+    return render_to_response('crc_generic_stats.html', context_instance = RequestContext(request, {'num_participants': len(active_users),
+                                                                                            'date':datetime.date.today(),
+                                                                                            'num_ratings': CommentAgreement.objects.filter(rater__in = active_users, is_current=True).count()*2,
+                                                                                            'url_root' : settings.URL_ROOT,
+                                                                                            'medians': medians,
+                                                                                            }))
 
-def neighbor_city(request):
-    zipcode=request.REQUEST.get('zipcode',-1)
-    if zipcode!=-1:
-       city=ZipCode.objects.filter(code__exact=zipcode)[0].city
-       return city
-    else:
-       return None
-
-def participant_stat(request):
-    uid = request.GET.get('username',-1)
-    auth = False
-    os = get_os(1)
-    disc_stmt = get_disc_stmt(os, 1)
-    participant_rating={}
-    participant_rating['s1_avg']='NA'
-    participant_rating['s2_avg']='NA'
-    if uid != -1:
-        cur_user = User.objects.filter(id=uid)
-        if len(cur_user) > 0:
-            cur_user = cur_user[0]
-            auth = True
-            cur_user_comment=DiscussionComment.objects.filter(user=cur_user,discussion_statement= disc_stmt,is_current = True)
-            if len(cur_user_comment)>0:
-               participant_rating['comment']=cur_user_comment[0].comment
-               participant_rating['date']=cur_user_comment[0].created
-               slider1=CommentAgreement.objects.filter(comment=cur_user_comment[0])
-               slider2=CommentRating.objects.filter(comment=cur_user_comment[0])
-               slider1_rating=[]
-               slider2_rating=[]
-               
-               
-               for i in range(0, len(slider1)):
-                   slider1_rating.append(slider1[i].agreement)
-               for i in range(0, len(slider2)):
-                   slider2_rating.append(slider2[i].rating)
-               
-               
-               participant_rating['s1_rating']=slider1_rating
-               participant_rating['s2_rating']=slider2_rating
-               return participant_rating
-            else:
-               return participant_rating
-        else:
-            return participant_rating
-    else:
-      return participant_rating
-      
 def app(request, username=None):
 	if request.mobile:
-		return HttpResponseRedirect(URL_ROOT + "/mobile/")
+		#return HttpResponseRedirect(URL_ROOT + "/mobile/")
+            return mobile(request)
 # 	create_visitor(request)
 # 	if username != None:
 # 		if not Settings.objects.boolean('SOFT_ENTRY_CODES'):
@@ -459,6 +330,15 @@ def soft_launch(request, username=None):
 # Admin panel html pages
 # Added by Dhawal M
 #
+
+@admin_required
+def get_csv_report(request):
+    from django.core.servers.basehttp import FileWrapper
+    f = open(MEDIA_ROOT + "../report.csv")
+    response = HttpResponse(FileWrapper(f), content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename=report.csv'
+    return response
+
 
 @admin_required
 def get_overview(request):
@@ -1166,6 +1046,26 @@ def approve_comment(request, comment_id):
 		approved_comment.save()
 		return json_result({'success':True})
 
+
+@admin_required
+def admin_tag_comment(request, comment_id):
+    comment = DiscussionComment.objects.filter(id = comment_id)
+    if not len(comment) == 1:
+        return json_result({'success':False, 'error_message':'Comment does not exist'})
+
+    new_tag = request.REQUEST.get('tag', '')
+    comment=comment[0]
+    existing_tags = AdminCommentTag.objects.filter(comment=comment)
+
+
+    if existing_tags:
+        existing_tags.update(tag=new_tag)
+        return json_result({'success':True})
+    else:
+        a = AdminCommentTag(comment=comment, tag=new_tag)
+        a.save()
+        return json_result({'success':True})     
+
 @admin_required
 def blacklist_comment(request, comment_id):
 	comment = DiscussionComment.objects.filter(id = comment_id)
@@ -1204,20 +1104,22 @@ def banish_user(request, user_id):
 		return json_result({'success':True})
 		
 #@admin_required
-def search(request, os_id, username):
-	#username = username.lower()
-	try:
-		if not username:
-                    user = User.objects.all()
-                    return json_result({'success':True, 
-                                        'data':[format_user_object(u, os_id) 
-                                                for u in user]})
-                user = User.objects.get(username__icontains= username)
-	except User.DoesNotExist:
-		return json_result({'success':False, 
-                                    'error_message':'User does not exist.'})
+def search(request, os_id, username=''):
+
+    user = User.objects.filter(username__icontains= username)
+    if not len(user):
+      return json_result({'success':False, 
+                          'error_message':'No users matching that username.'})
+
+    comments = []
+    for u in user:
+        comments.extend(list(DiscussionComment.objects.filter(user=u, is_current=True, blacklisted=False)))
 	
-	return json_result({'success':True, 'data':[format_user_object(user, os_id)]})
+    #return json_result({'success':True, 
+    #                    'data':[format_user_object(u, os_id) for u in user]})
+
+    return json_result({'success':True, 'data':[format_general_discussion_comment(c) for c in comments]})
+
 	
 @admin_required
 def get_new_users(request, os_id, time):
@@ -2262,7 +2164,7 @@ def os_save_comment_agreement(request, os_id, user_id, disc_stmt_id = None):
     if agreement is None:
 		return json_error('Invalid value')
 	
-    return save_agreement_rating(request, agreement, user_id, os_id, disc_stmt)
+    return save_agreement_rating(request, agreement, int(user_id)+361, os_id, disc_stmt)
 	
 @auth_required
 def os_save_comment_rating(request, os_id, user_id, disc_stmt_id = None):
@@ -2282,7 +2184,7 @@ def os_save_comment_rating(request, os_id, user_id, disc_stmt_id = None):
     if rating is None:
 		return json_error('Invalid value')
 		
-    return save_insightful_rating(request, rating, user_id, os_id, disc_stmt)
+    return save_insightful_rating(request, rating, int(user_id)+361, os_id, disc_stmt)
 
 @auth_required
 def os_update_comment(request, os_id, user_id, disc_stmt_id = None):
@@ -2700,23 +2602,7 @@ def os_never_seen_comments_json(request,os_id,disc_stmt_id=None):
 	if os == None or len(disc_stmt) == 0:
 		return json_error('Invalid Request')
 	
-	"""    
-	cache = NeverSeenCache.objects.filter(created__gte=datetime.date.today()).order_by('-created')
-	if len(cache) > 0 and not request.user.is_authenticated():
-	    cache = cache[0]
-	    return json.loads(cache.value)
-	"""
-
-	#query = request.REQUEST.get('query', False)
-	#no_statements = request.REQUEST.get('no_statements', False)
-	#if no_statements == "false": # Flash booleans aren't transferred correctly
-	#	no_statements = False
-
 	never_seen_comments = get_never_seen_comments(request.user,os,disc_stmt[0],7, False)
-	# Check for an argument username -- this param is only sent on createOS
-	#username = request.REQUEST.get('username', False)
-	#if username:
-	#	never_seen_comments += get_comment_by_username(request, username, os, disc_stmt)
 	
 	# create log 
 	create_comments_returned_log(request, os, never_seen_comments, LogCommentsReturned.unrated)
@@ -2724,7 +2610,7 @@ def os_never_seen_comments_json(request,os_id,disc_stmt_id=None):
 	# Get the user ratings
 	uids = []
 	for comment in never_seen_comments:
-		uids.append(comment['uid'])
+		uids.append(comment['uid']+361)
 	user_ratings = get_user_ratings(request, os, uids)
 	
 	# Get user data

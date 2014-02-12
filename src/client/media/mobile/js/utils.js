@@ -21,7 +21,7 @@ var utils = (function($, d3, console) {
 
         $.mobile.loading('show', {
                         text: msg,
-                        textVisible: false,
+                        textVisible: true,
                         textonly: false,
                         theme: 'b',
                         html: ""
@@ -30,7 +30,7 @@ var utils = (function($, d3, console) {
         } else {
             $.mobile.loading('show', {
                 text: msg,
-                textVisible: false,
+                textVisible: true,
                 textonly: false,
                 theme: 'b',
                 html: ""
@@ -54,30 +54,10 @@ var utils = (function($, d3, console) {
     /** Hides the loader with an artifical delay of DELAY milliseconds. */
 
     function hideLoading(delay) {
-        $.mobile.loading( 'hide' );
+        setTimeout(function(){$.mobile.loading( 'hide' );}, delay);
         // $('.spinner').fadeOut('fast');
     }
 
-    function ajaxTempOff(f) {
-        // if (!ajaxStatus) {
-        //     f();
-        // } else {
-
-        $.ajaxSetup({
-            async: false
-        });
-
-        // ajaxStatus = false;
-
-        f();
-
-        //     $.ajaxSetup({
-        //         async: true
-        //     });
-
-        //     ajaxStatus = true;
-        // }
-    }
 
     function toTitleCase(str) {
         return str.replace(/\w\S*/g, function(txt) {
@@ -89,7 +69,6 @@ var utils = (function($, d3, console) {
         'showLoading': showLoading,
         'showLoadingNewPts': showLoadingNewPts,
         'hideLoading': hideLoading,
-        'ajaxTempOff': ajaxTempOff,
         'toTitleCase': toTitleCase
     };
 

@@ -1,7 +1,16 @@
 <!DOCTYPE html>
 <html lang='en'>
 
-<head>
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
+
+    <!-- Social media stuff -->
+    <meta property="og:title" content="California Report Card"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:image" content="{{ url_root }}/media/mobile/img/cafe/cafe-title-cropped.png" />
+    <meta property="og:url" content="{{ url_root }}/" />
+    <meta property="og:description" content="The California Report Card allows visitors to grade issues facing California and to suggest issues for future report cards." />
+
+    <link rel="image_src" href="{{ url_root }}/media/mobile/img/cafe/cafe-title-cropped.png"/>
 
 <title>{{client_settings.WELCOME_PAGE_TITLE}}</title>
 
@@ -12,7 +21,7 @@
 <link rel='stylesheet' type='text/css' href='{{url_root}}/media/mobile/css/reset.css?nonce={{random_password}}' />
 <link rel='stylesheet' type='text/css' href='{{url_root}}/media/mobile/bootstrap/css/bootstrap-responsive.min.css?nonce={{random_password}}' />
 <link rel='stylesheet' type='text/css' href='{{url_root}}/media/mobile/jquery-mobile/jquery.mobile-1.3.2.min.css' />
-<link rel='stylesheet' type='text/css' href='{{url_root}}/media/mobile/css/themes/cafe-jquery-new.min.css'/>
+ <link rel='stylesheet' type='text/css' href='{{url_root}}/media/mobile/css/themes/cafe-jquery-new-v2.min.css'/> 
 <link href="{{url_root}}/media/mobile/css/jquery.nouislider.min.css" rel="stylesheet">
 <link rel='stylesheet' type='text/css' href='{{url_root}}/media/mobile/css/opinionspace.css?nonce={{random_password}}' />
 
@@ -26,9 +35,12 @@
 <script type='text/javascript' src='{{url_root}}/media/mobile/js/rate.js?nonce={{random_password}}'></script>
 <script type='text/javascript' src='{{url_root}}/media/mobile/js/accounts.js?nonce={{random_password}}'></script>
 <script type='text/javascript' src='{{url_root}}/media/mobile/js/utils.js'></script>
+
 <script type='text/javascript' src='{{url_root}}/media/mobile/jquery-mobile/jquery.mobile-1.3.2.min.js'></script>
-<script type="text/javascript" src="http://www.google.com/jsapi"></script>
-<script type='text/javascript' src='{{url_root}}/media/mobile/js/stats.js?nonce={{random_password}}'></script>
+
+<!-- <script type="text/javascript" src="http://www.google.com/jsapi"></script> -->
+<script type='text/javascript' src='{{url_root}}/media/mobile/js/analytics-trk.js'></script>
+
 
 <!--JavaScript that needs to be run on init-->
 <script type='text/javascript'>
@@ -36,11 +48,17 @@
 
   window.sliders = [];
 
+  window.skipped = [];
+
   window.email_saved = false;
 
   window.prev_state = 'home';
 
   window.cur_state = 'home';
+
+  window.toggle_flag1 = false;
+
+  window.toggle_flag2 = false;
 
   window.entry_code = {{ entry_code }} ;
 
@@ -49,6 +67,8 @@
   window.landing = true;
 
   window.num_sliders = {{ statements|length }};
+
+  window.refer = '{{ refer }}';
 
   window.user_score = {{init_score}};
 
@@ -61,12 +81,12 @@
                 };
 
 
-  // TURNING OFF ALL AJAX
-  $.ajaxSetup({async: false});
+
 
  jQuery(document).ready(function(){
    for (var i = 0; i <= window.num_sliders; i++) {
-     window.sliders[i] = 40+(i%2)*20;
+     window.sliders[i] = 50;
+     window.skipped[i] = false;
      $(".endslider-slider"+(i+1)).noUiSlider({
        range: [0, 100],
        start: window.sliders[i] ,
@@ -116,13 +136,13 @@
 
  });
 
- stats.setConf("{{ client_settings.AGREEMENT_HISTOGRAM_TEXT }}",
+ /*stats.setConf("{{ client_settings.AGREEMENT_HISTOGRAM_TEXT }}",
                "{{ client_settings.LEGEND_AGREEMENT_LEFT }}",
                "{{ client_settings.LEGEND_AGREEMENT_RIGHT }}",
                "{{ client_settings.INSIGHT_HISTOGRAM_TEXT }}",
                "{{ client_settings.LEGEND_INSIGHT_LEFT }}",
                "{{ client_settings.LEGEND_INSIGHT_RIGHT }}"
-              );
+              );*/
 
  var finishedStatements=[];
 
@@ -175,10 +195,12 @@
     /** Updates statement number STATEMENT (which is of type number). */
  function update_score(statement) {
    $('#g' + statement).css('opacity', 1);
+   console.log(medians[statement]);
    $('#o' + statement).html(score_to_grade(medians[statement]*100))
    window.sliders[statement] = $('#s' + statement).val();
    document.getElementById('tr'+statement).style.backgroundColor = "rgba(255, 255, 0, 0.8)";
    finishedStatements[statement-1]= 1;
+   rate.logUserEvent(11,'slider_set ' + statement + ' ' + window.sliders[statement]/100);
 }
 
 </script>
@@ -191,49 +213,41 @@
 
   <div class='landing'>
 
-      <div class="home-btn-dialog-box">
+      <div class="home-btn-dialog-box landing-navigation" style="display: none;">
           <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
-          &nbsp;
-          <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
-          &nbsp;
-          <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
-          <!--<span class="logout-wrapper">&nbsp;<img width="30px;" class='logout-btn' src="{{url_root}}/media/mobile/img/cafe/CRC_logout_bttn.png"></span>-->
       </div>
 
+      <center>
+          <img src="{{url_root}}/media/mobile/img/cafe/cafe-title-cropped.png" style="padding-top: 5px;border: none;width: 250px;" />
+      </center>
+
     <div class="responsive-max-width">
-
-        <center>
-            <img src="{{url_root}}/media/mobile/img/cafe/cafe-title-cropped.png" width="220px" style="padding-top: 5px;"/>
-        </center>
-
         <div class='landing-desc'>
 
             <div style="clear: both;"></div>
 
             <div>
                 <div class="landing-img-txt">
-
-                    <center>
-                        <div style="width: 120px;">
-                            <button type='submit' data-theme='a' class='first-time-btn'><font style="font-size: 16px;">Begin</font></button>
+                        <div style="width: 140px;line-height: 24px;">
+                            <button type='submit' data-theme='a' class='first-time-btn'><font style="font-size: 14px;">BEGIN</font></button>
                         </div>
-                    </center>
-
-
-                    {{client_settings.WELCOME_PAGE_TEXT1}}
-
-                    <div class="byline">Source: UC Berkeley CITRIS Data and Democracy Initiative</div>
-
+                    Take a moment to join {{num_users}} others who have graded the State of California on six timely issues.<br/>
+                    <a href="#" class="help-btn-dialog" style="font-size: 15px;color: #4e300f;">About</a>
+                    <!--{{client_settings.WELCOME_PAGE_TEXT1}}-->
                 </div>
-                <div class="landing-img-div"><img src="{{url_root}}/media/mobile/img/cafe/spoon-and-pencil-draft.png" width="70px"/></div>
-
-                <div class="landing-disclaimer">
-                    {{client_settings.WELCOME_PAGE_TEXT2}}<br/>
-                    <!--<a href="#" class="comment-admin-text-a" style="font-size: 10px;" onclick="$('.dialog-about').show();$('.landing').hide();window.landing=true;">{{client_settings.WELCOME_PAGE_ABOUT_LINK}}</a>-->
-                </div>
+                <div class="landing-img-div"><img src="{{url_root}}/media/mobile/img/cafe/spoon-and-pencil-draft.png" style="width: 83px;"/></div>
             </div>
         </div>
     </div>
+
+      <center>
+      <div class="landing-disclaimer">
+          {{client_settings.WELCOME_PAGE_TEXT2}}.<br/>
+          Developed by the CITRIS Data & Democracy Initiative and the Office of the Lt. Gov of California.<br>
+          <!--<a href="#" class="comment-admin-text-a" style="font-size: 10px;" onclick="$('.dialog-about').show();$('.landing').hide();window.landing=true;">{{client_settings.WELCOME_PAGE_ABOUT_LINK}}</a>-->
+      </div>
+      </center>
+
   </div>
 
   <div id='rating' class='endsliders'>
@@ -246,15 +260,18 @@
           <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
       </div>
 
+      <div class="basic-header">{{client_settings.REPORT_CARD_HEADER}}</div>
+
+      <center>
+        <div class="rc-sub-header">
+            {{client_settings.REPORT_CARD_INST}}
+        </div>
+      </center>
+
       <div class='reportcard default-left-padding responsive-max-width'>
-          <div class="basic-header">{{client_settings.REPORT_CARD_HEADER}}</div>
+
 
           <center>
-
-              <div class="rc-sub-header">
-                  {{client_settings.REPORT_CARD_INST}}
-              </div>
-
 
               <table class='cardtable title-table'>
                   <tr>
@@ -268,36 +285,38 @@
                       </td>
 
                       <td class="title-table-label2">
-                          <a href="#" onclick="$('.endsliders').hide();$('.dialog-avggrade').show();window.prev_state='grade';window.cur_state='median';" style="color: #fff8f0 !important;">Median Grade</a>
+                          <a href="#" onclick="$('.endsliders').hide();$('.dialog-avggrade').show();window.prev_state='grade';window.cur_state='median';" style="color: #f5ebdf !important;">Median Grade</a>
                       </td>
 
                   </tr>
               </table>
 
+              <div style="height: 7px;"></div>
 
               {% for statement in statements %}
               <table class='cardtable grade-table'>
                   <tr id="tr{{statement.id}}">
-                      <td style="height: 60px;background-color:#cbe2e2;">
+                      <td style="height: 60px;background-color:#f5ebdf;" id="tr-label{{statement.id}}">
                           {% ifnotequal statement.statement '' %}
                           <div class='slider-question'>
-                              <script>var sid={{statement.id}}-1;var total={{statements|length}};document.write(total-sid);</script>. {{ statement.statement }}
+                              <!--<script>var sid={{statement.id}}-1;var total={{statements|length}};document.write(total-sid);</script>-->
+                              {{statement.id}}. {{ statement.statement }}
                           </div>
                           {% else %}
                           {% endifnotequal %}
                       </td>
 
-                      <td class="title-table-label2" style="background-color:#cbe2e2;">
+                      <td class="title-table-label2" style="background-color:#f5ebdf;" id="tr-1grade{{statement.id}}">
                           <div id='g{{statement.id}}' class="grade"></div>
                       </td>
 
-                      <td class="title-table-label2" style="background-color:#cbe2e2;">
+                      <td class="title-table-label2" style="background-color:#f5ebdf;" id="tr-2grade{{statement.id}}">
                           <div id='o{{statement.id}}' class="grade2"></div>
                       </td>
 
                   </tr>
 
-                  <tr>
+                  <tr id="tr-slider{{statement.id}}">
                       <td colspan="3" class="slider-row" style="border: none;">
                           {% ifnotequal statement.statement '' %}
                           <div id="s{{statement.id}}" data-statement="{{statement.id}}" class="endslider-slider{{statement.id}} statement-slider" style=""></div>
@@ -309,7 +328,10 @@
                       </td>
                   </tr>
               </table>
-              <br/>
+
+              <img src="{{url_root}}/media/mobile/img/cafe/skip_line.png" style="padding-top: 17px;"/><br/>
+              <img class="skip-img-btn" id="skip-img{{statement.id}}" src="{{url_root}}/media/mobile/img/cafe/skip.png" style="position:relative;top: -12px;width: 50px;left: 4px;" onclick="accounts.skipStatement({{statement.id}});"> <br/><br/>
+
               {% endfor %}
 
               <div class="standard-btn-div">
@@ -329,7 +351,7 @@
           <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
       </div>
 
-      <div class= 'registerpanel default-left-padding responsive-max-width'>
+      <div class= 'registerpanel responsive-max-width' style="max-width: 90%;">
           <div class="basic-header2" style="width: 100%">{{client_settings.ZIP_CODE_INSTRUCTIONS}}</div>
 
           <form id='reg_form' class='form-horizontal' method='post' action='{{ url_root }}/accountsjson/register/'>
@@ -371,14 +393,12 @@
           &nbsp;
           <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
       </div>
+      <img class="header-img-topic center" src="{{ url_root }}/media/mobile/img/cafe/CRC_join.png"/>
 
       <div class='dialog-text1 dialog-text-style default-left-padding'>
-          <div class="basic-header" style="width:100%;">{{client_settings.DISCUSSION_DIALOG_HEADER}}</div>
-          <img class="header-img-topic center" src="{{ url_root }}/media/mobile/img/cafe/map_teaser.png"/>
-
           {{ client_settings.DISCUSSION_DIALOG_TEXT1 }}
           <center>
-              <div class="standard-btn-div">
+              <div class="standard-btn-div" style="padding-top:10px;">
                   <button type='submit' data-theme='b' class='dialog-ready' ><font style="font-size: 16px;">Enter</font></button>
                   <!--<button type='submit' data-theme='b' class='dialog-next'  onclick="$('.dialog-text1').hide();$('.dialog-text2').show();"><font style="font-size: 16px;">Next</font></button>-->
               </div>
@@ -393,6 +413,8 @@
           <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
           &nbsp;
           <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+          &nbsp;
+          <img width="30px;" class='logout-btn' src="{{url_root}}/media/mobile/img/cafe/CRC_logout_bttn.png">
       </div>
 
       <center>
@@ -400,7 +422,8 @@
               <div class="basic-sub-sub-header" style="text-align:left;">{{topic}}<br/></div>
               <textarea name='answer' id='entered-comment'></textarea>
               <div class="standard-btn-div">
-                  <button type='submit' data-theme='b' class='comment-submit-btn'><font style="font-size: 16px;">Save</font></button>
+                  <button type='submit' data-theme='b' class='comment-submit-btn'><font style="font-size: 16px;">Post</font></button>
+                  <button type='submit' data-theme='b' class='comment-cancel-btn'><font style="font-size: 16px;">Later</font></button>
               </div>
           </div>
       </center>
@@ -413,20 +436,21 @@
                 <span class='score-label'></span><span class='score-value'></span>
             </div>
 
-            <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
-            &nbsp;
-            <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
-            &nbsp;
-            <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+            <div style="letter-spacing: 2px;padding-top: 5px;">
+                <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+                &nbsp;
+                <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+                 &nbsp;
+                 <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+                &nbsp;
+                <img width="30px;" class='logout-btn' src="{{url_root}}/media/mobile/img/cafe/CRC_logout_bttn.png">
+            </div>
 
             <span class="stats-wrapper" style="display: none;">&nbsp;<img width="30px;" class='my-comment-btn' src="{{url_root}}/media/mobile/img/cafe/CRC_stats_bttn.png"></span>
-            <span class="logout-wrapper">&nbsp;<img width="30px;" class='logout-btn' src="{{url_root}}/media/mobile/img/cafe/CRC_logout_bttn.png"></span>
+            <div class='instructions'>{{client_settings.INSTRUCTIONS_1}}</div>
+            <div class='instructions2'>{{client_settings.INSTRUCTIONS_2}}</div>
+            <div class='instructions3'><div style="padding-right: 5px; padding-left: 5px;">{{client_settings.INSTRUCTIONS_3}}</div></div>
         </div>
-
-        <div class='instructions'>{{client_settings.INSTRUCTIONS_1}}</div>
-        <div class='instructions2'>{{client_settings.INSTRUCTIONS_2}}</div>
-	    <div class='instructions3'><div style="padding-right: 5px; padding-left: 5px;">{{client_settings.INSTRUCTIONS_3}}</div></div>
-
     </center>
   </div>
 
@@ -443,22 +467,19 @@
           <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
       </div>
 
-      <div class="default-left-padding" style="text-align: left;">
-          <span class="rate-username"></span>
-      </div>
-
-
     <center>
        <textarea id='commentInput' class='answer' readonly="true"></textarea>
+       <span class="rate-username"></span>
     </center>
 
-      <div id="flag" class="flag-style"></div>
+
+    <div id="flag" class="flag-style"></div>
 
     <div class="answerwrapper default-left-padding">
+
         <div class="comment-admin-text">
             <a href="#" class="comment-admin-text-a" onclick="rate.doneRatingNoSave();">Skip</a>&nbsp;&nbsp;
-            <a href="#" class="comment-admin-text-a" id="flag1">Inappropriate</a>&nbsp;&nbsp;
-            <a href="#" class="comment-admin-text-a" id="flag2">Irrelevant</a>
+            <a href="#" class="comment-admin-text-a" id="flag1">Inappropriate</a>
         </div>
 
      <div class='sliders'>
@@ -466,7 +487,7 @@
 
         <div class="slider-padding"></div>
 
-        <div id="slider1" class="rating-slider rating-slider1"></div><br/><hr/>
+        <div id="slider1" class="rating-slider rating-slider1"></div><br/>
 
          How would you rate the State of California on this issue today?<br/>
 
@@ -496,84 +517,6 @@
 
   </div>
 
-  <div class='my-comment'>
-    <div class='edit-comment-panel'>
-        <div class="basic-header">My Statistics<br/>(Under Construction)</div>
-        <!--<iframe src="{{url_root}}/crcstats/" id="stats-iframe" class="stats-iframe"></iframe>-->
-        <div class="home-btn-dialog-box">
-            <hr class="full-width-hr"/>
-            <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
-            &nbsp;
-            <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
-            &nbsp;
-            <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
-        </div>
-        <div class='row' style="display: none;">
-
-            <span class='username' style="display: none;"></span>
-            <span class='score-label'></span> <span class='score-value'></span><br>
-            <span class='num-label'>Idea Rated By:</span> <span class='num-rated-by'></span> Participants<br>
-
-            <hr/>
-
-            <div class="basic-sub-header">Aggregate Statistics</div>
-
-            <center>
-
-                <div class="aggstat1">
-
-                    <table style="width: 90%;">
-                        <tr class="stats-table-title">
-                            <td>Subject</td>
-                            <td>Avg. Grade</td>
-                        </tr>
-
-                        {% for statement in statements %}
-                            <tr>
-                                <td>{{ statement.statement }}</td>
-                                <td><script>document.write(score_to_grade(medians[{{statement.id}}]*100));</script></td>
-                            </tr>
-                        {%endfor%}
-                    </table>
-
-                    <div class="standard-btn-div">
-                        <button data-theme='b'  onclick="$('.aggstat1').hide();$('#neighborhoodStat').show();">Next</button>
-                    </div>
-
-                </div>
-
-                <!--<div class="aggstat2" style="display:none;">
-                    Changes in the mug positions<br/>
-                    <canvas id="MugAnimation" width="250" height="200" style="background-image:url('{{ url_root }}/media/mobile/img/cafe/cafe_bg.png');background-repeat:repeat; background-size: 100% 100%;	"></canvas>
-                    <script type="text/javascript" src="{{ url_root }}/media/mobile/js/timelineMug_animation_json.js"></script>
-
-                    <div class="standard-btn-div">
-	                    <button type="button" onclick="clickreset()" data-mini="true" data-inline="true">Play</button>
-                        <button type="button" onclick="reset()" data-mini="true" data-inline="true"> Reset</button>
-                        <button data-theme='b' onclick="$('.aggstat2').hide();$('#neighborhoodStat').show();">Next</button>
-                    </div>
-                </div>-->
-
-                <div id="neighborhoodStat" style="display:none;">
-		        <div id="neighborhoodTable"></div>
-
-                  <div class="standard-btn-div">
-                        <button data-theme='b'  onclick="$('#neighborhoodStat').hide();$('.aggstat1').show();">Next</button>
-                    </div>
-                </div>
-    <!--<div class="aggstat3" style="display:none;">California map <br/>
-    <div style="width:300px;">
-    <button data-theme='b'   onclick="$('.aggstat3').hide();$('.aggstat1').show();">Next</button>
-    </div>
-    </div>-->
-            <div class="standard-btn-div">
-                <button type='submit' data-theme='b' class='edit-comment-done-btn'>Back</button>
-            </div>
-        </center>
-      </div>
-    </div>
-  </div>
-
   <div id='d3' class="d3-canvas"></div>
   <div class='frame'></div>
 
@@ -585,9 +528,13 @@
           &nbsp;
           <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
       </div>
-        <div class='landing-img-txt default-left-padding' style="width: 95%;font-size: 24px;">
-            {{client_settings.LOGOUT_DIALOG_TEXT}}<br/>
-            <a href="http://californiareportcard.org/">californiareportcard.org</a>
+        <div class='landing-img-txt default-left-padding' style="width: 95%;font-size: 20px;line-height: 23px;padding-top: 10px;">
+            {{client_settings.LOGOUT_DIALOG_TEXT}}<br/><br/>
+            <a href="http://californiareportcard.org" target="_blank" style="color: #4e300f;">http://californiareportcard.org</a><br/><br/>
+	    Twitter: <a href="http://twitter.com/home?status=How%20do%20you%20grade%20California?%20%20Try%20@CAReportCard%20developed%20by%20@Cal%20@GavinNewsom%20%26%20@Ken_Goldberg%20%20http://californiareportcard.org/mobile%20%23CA%20%23Gov" target="_blank" style="color: #4e300f;">@CAReportCard</a><br/>
+	    Facebook: <a href="http://on.fb.me/1jF60JL" target="_blank" style="color: #4e300f;">CAReportCard</a><br/><br/>
+
+            <center><img style="max-width: 220px;" src="{{url_root}}/media/mobile/img/cafe/cafe_teaser.png"></center>
         </div>
     </div>
 
@@ -667,15 +614,14 @@
 
     <div class='dialog-text-style default-left-padding'>
         <div class="basic-header" style="width:100%;">{{client_settings.RESPONSE_SAVED_HEADER}}</div>
-        {{ client_settings.RESPONSE_SAVED_TEXT}}
-        <br/>
         {{client_settings.EMAIL_ASK_TEXT}}
         <input type="email" id='regemail' name='regemail' class='regforminput' style="font-size: 15px; background-color: #FFFFFF;color: #000000;" placeholder="Email" data-theme='b'></input>
-        <div class="comment-admin-text-a">We promise not to share your email address with any third parties</div>
+        <div class="comment-admin-text-b">Your email address will not be displayed and we promise not to share your email address with any third parties.</div>
         <center>
             <div class="standard-btn-div">
                 <button type='submit' data-theme='b' class='dialog-continue-ready' ><font style="font-size: 16px;">Enter</font></button>
             </div>
+            <div class='alert-error' id='email-error' style='display:none;width: 250px;'></div>
         </center>
 
     </div>
@@ -688,18 +634,20 @@
          <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
          &nbsp;
          <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+         &nbsp;
+         <img width="30px;" class='logout-btn' src="{{url_root}}/media/mobile/img/cafe/CRC_logout_bttn.png">
      </div>
-    <div class='dialog-text-notitle default-left-padding'>
-        Thank you!  Logout now or grade more suggestions for the next report card.
-        Sending your unique link now.
-        <center>
-            <div class="standard-btn-div">
-                <button type='submit' data-theme='b' class='dialog-email-ready' ><font style="font-size: 16px;">Continue Grading</font></button>
-                <button type='submit' data-theme='b' class='logout-btn' ><font style="font-size: 16px;">Logout</font></button>
-            </div>
-        </center>
-    </div>
 
+     <div class='landing-img-txt default-left-padding' style="width: 95%;font-size: 20px;line-height: 23px;padding-top: 10px;">
+         Thank you!  Logout now or grade more mugs.
+         <div class="standard-btn-div" style="max-width: 250px !important;">
+             <button type='submit' data-theme='b' class='dialog-email-ready' ><font style="font-size: 16px;">Continue Grading</font></button>
+         </div>
+         Please tell your friends and colleagues:<br/>
+         <a href="http://californiareportcard.org" target="_blank" style="color: #4e300f;">http://californiareportcard.org</a><br/><br/>
+         Twitter: <a href="http://twitter.com/home?status=How%20do%20you%20grade%20California?%20%20Try%20@CAReportCard%20developed%20by%20@Cal%20@GavinNewsom%20%26%20@Ken_Goldberg%20%20http://californiareportcard.org/mobile%20%23CA%20%23Gov" target="_blank" style="color: #4e300f;">@CAReportCard</a><br/>
+         Facebook: <a href="http://on.fb.me/1jF60JL" target="_blank" style="color: #4e300f;">CAReportCard</a><br/><br/>
+     </div>
   </div>
 
   <div class='dialog-avggrade dialog-style'>
@@ -716,7 +664,7 @@
      <center>
       <img src="{{ url_root }}/media/mobile/img/cafe/avggrade.png" class="center" style="width:300px;padding-top:3px;"><br>
      </center>
-        Based on the grades from {{num_users}} participants so far,{{client_settings.AVG_EXPLAIN_TEXT}}
+        Based on the grades from {{num_users}} participants so far, {{client_settings.AVG_EXPLAIN_TEXT}}
     </div>
   </div>
 
@@ -745,7 +693,240 @@
       </div>
       <div class='dialog-text-style-noflow small-left-padding'>
           <div class="basic-header">Help</div>
-          <center>This help page is under construction.</center><br/>
+          To learn more about this project, its history, related projects, and the team that built it, visit <a href="http://californiareportcard.org/" target="_blank" style="color: #4e300f;">californiareportcard.org</a>.<br/>
+      </div>
+  </div>
+
+  <div class='dialog-help-grade dialog-style' style="z-index:999">
+      <div class="home-btn-dialog-box">
+          <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+          &nbsp;
+          <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+          &nbsp;
+          <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+      </div>
+      <div class='dialog-text-style-noflow small-left-padding'>
+          <div class="basic-header">Help</div>
+          The CRC allows visitors to grade issues facing California.
+          Drag the slider handles to assign grades to these 6 issues facing California (click the skip button for issues where you don't want to assign a grade.)
+          <br/><br/>
+          Click "Median Grade" at the top of the far right column to learn more about how this is determined.<br/><br/>
+          <em>Q:</em> How can I learn more about the six issues we are grading?<br/>
+          <em>A:</em> Here is an overview of each issue:<br/>
+
+          <div>
+              <em>Implementation of the Affordable Care Act (“Obamacare”)</em><br/>
+
+              California was the first state to pass legislation creating a health insurance marketplace--Covered California. As of Dec 2013, Covered California had over 630,000 enrollees.<br/>
+
+              <em>Quality of K-12 public education</em><br/>
+
+              California recently adopted the “common core” challenges, which emphasize critical thinking and analysis in K-12 education to better prepare students for college and the workforce.<br/>
+
+              <em>Affordability of state colleges and universities</em><br/>
+
+              The 2014-15 draft California budget calls for a 10.8% increase in higher education funding, which could keep current tuition costs stable.<br/>
+
+              <em>Access to state services for undocumented immigrants</em><br/>
+
+              Passed in 2006, California Senate Bill 1569 extends eligibility for undocumented immigrants in California for food assistance, supplemental security income, and health insurance.
+              Passed in 2011, The California Dream Act grants undocumented immigrant access to state aid at public universities and colleges.<br/>
+
+              <em>Laws and regulations regarding recreational marijuana</em><br/>
+
+              California was the first state to legalize the distribution of medical marijuana in 1996.
+              Recreational use of marijuana is illegal in the State of California. However, California lawmakers are currently considering legalizing, taxing, and regulating marijuana for recreational use.<br/>
+
+              <em>Marriage rights for same-sex partners</em><br/>
+
+              California legalized same sex marriage in 2008. However, Proposition 8, which revoked marriage rights for same sex couples, was also passed in 2008.
+              Proposition 8 was overturned in 2013.<br/><br/>
+          </div>
+
+          More information on the issues is available on our project website.<br/><br/>
+
+          <em>Q:</em> Do I have to grade all issues?<br/>
+          <em>A:</em> No, just click the skip button for issues where you don't want to assign a grade.<br/><br/>
+
+          <em>Q:</em> Why do the sliders require dragging?  If I tap on A, it should go there.<br/>
+          <em>A:</em> We decided to remove the tap feature since as you slide down to see more issues you may accidentally tap the sliders.<br/><br/>
+
+          <em>Q:</em> How can I grade K-12 Education when there are so many aspects, the effectiveness of the teachers, or the quality of school facilities, etc.?<br/>
+          <em>A:</em> That's a great point; we're asking people to give an overall grade, which is indeed a coarse measure!
+          But it's also like grading a student for a class, they may have done well on some things, poorly on others, etc…<br/><br/>
+      </div>
+  </div>
+
+  <div class='dialog-help-median dialog-style' style="z-index:999">
+      <div class="home-btn-dialog-box">
+          <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+          &nbsp;
+          <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+          &nbsp;
+          <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+      </div>
+      <div class='dialog-text-style-noflow small-left-padding'>
+          <div class="basic-header">Help</div>
+          <em>Q:</em>  After I enter each grade, the Median Grade based on input from all previous participants is revealed.
+          Then I can change my grade: Won’t this bias me and other participants?<br/>
+
+          <em>A:</em> Revealing the Median values is intended to provide instant feedback in contrast to traditional polls and surveys. We realize this may have a biasing effect:
+          some may adjust their grade to be closer to the average resulting in a form of regression toward the mean. We believe this will be rare, especially for Californians;).
+      </div>
+  </div>
+
+  <div class='dialog-help-zipcode dialog-style' style="z-index:999">
+      <div class="home-btn-dialog-box">
+          <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+          &nbsp;
+          <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+          &nbsp;
+          <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+      </div>
+      <div class='dialog-text-style-noflow small-left-padding'>
+          <div class="basic-header">Help</div>
+          <em>Q:</em> Why do I need to enter my zip code?<br/>
+          <em>A:</em> This will allow participants to compare results by region on a geographic map.
+      </div>
+  </div>
+
+  <div class='dialog-help-dialog dialog-style' style="z-index:999">
+      <div class="home-btn-dialog-box">
+          <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+          &nbsp;
+          <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+          &nbsp;
+          <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+      </div>
+      <div class='dialog-text-style-noflow small-left-padding'>
+          <div class="basic-header">Help</div>
+          You are invited to enter an online “cafe” where you can propose issues that you’d like to see included in the next report card (version 2.0 will come out later this Spring).
+          You’ll be asked to grade other participants’ suggestions. Each participant’s suggestion is represented by a mug on the table.
+      </div>
+  </div>
+
+  <div class='dialog-help-map1 dialog-style' style="z-index:999">
+      <div class="home-btn-dialog-box">
+          <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+          &nbsp;
+          <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+          &nbsp;
+          <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+      </div>
+      <div class='dialog-text-style-noflow small-left-padding'>
+          <div class="basic-header">Help</div>
+          <em>Q:</em> What should I do on this page?<br/>
+          <em>A:</em> Click any mug (each participant has a mug, we display only 8 at a time)<br/><br/>
+
+          <em>Q:</em> How are the mugs arranged on the table?<br/>
+          <em>A:</em> The placement of each participant's mug is based on how he or she graded the first 6 issues.
+          Think of each issue as one dimension of a 6-dimensional space.
+          The grades you assign define a point in this space.
+          We use dimensionality reduction (currently Principal Component Analysis) to project that space onto the table.
+          If you and another participant assigned very similar grades, your mugs will be close together.
+          Mugs that are distant from yours belong to participants who graded very differently than you.<br/><br/>
+
+          <em>Q:</em> Why do I only see 8-10 mugs arranged on the table?<br/>
+          <em>A:</em> To avoid overcrowding, we display only a few mugs at a time for grading.
+          The selection of which participants’ mugs to display is random but biased toward newer mugs, those that have received fewer ratings.
+          Specifically, the likelihood of displaying a mug is based on its standard error = stdev / sqrt(k) where k is the number of times it has been graded so far, and stdev is the variance of those grades. Over time, this ensures that the confidence, or error-bar on the estimated grade for each mug, tends to be the same length for all mugs. Each time you finish grading a set of mugs, the table will be refreshed with more mugs.<br/><br/>
+      </div>
+  </div>
+
+  <div class='dialog-help-map2 dialog-style' style="z-index:999">
+      <div class="home-btn-dialog-box">
+          <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+          &nbsp;
+          <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+          &nbsp;
+          <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+      </div>
+      <div class='dialog-text-style-noflow small-left-padding'>
+          <div class="basic-header">Help</div>
+          You can continue grading more mugs and whenever you’re ready, just click on your mug (with the blue coaster) to enter an issue that you’d like to see on the next report card (version 2.0 will come out later this Spring).<br/><br/>
+
+          <em>Q:</em> Why is my mug located at this position on the table?<br/>
+          <em>A:</em> The placement of each participant's mug is based on how he or she graded the first 6 issues.
+          Think of each issue as one dimension of a 6-dimensional space.
+          The grades you assign define a point in this space. We use dimensionality reduction (currently Principal Component Analysis) to project that space onto the table.
+          If you and another participant assigned very similar grades, your mugs will be close together.
+          Mugs that are distant from yours belong to participants who graded very differently than you.
+      </div>
+  </div>
+
+  <div class='dialog-help-map3 dialog-style' style="z-index:999">
+      <div class="home-btn-dialog-box">
+          <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+          &nbsp;
+          <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+          &nbsp;
+          <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+      </div>
+      <div class='dialog-text-style-noflow small-left-padding'>
+          <div class="basic-header">Help</div>
+          You can either log out now and return anytime using the unique link we emailed you.
+          Or you are welcome to continue grading participants’ suggestions for the next report card (version 2.0 will come out later this Spring).
+      </div>
+  </div>
+
+
+  <div class='dialog-help-comment dialog-style' style="z-index:999">
+      <div class="home-btn-dialog-box">
+          <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+          &nbsp;
+          <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+          &nbsp;
+          <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+      </div>
+      <div class='dialog-text-style-noflow small-left-padding'>
+          <div class="basic-header">Help</div>
+          Please propose an issue you’d like to see on the next report card (version 2.0 will come out later this Spring).  Click Save when you’re done.
+      </div>
+  </div>
+
+  <div class='dialog-help-rate dialog-style' style="z-index:999">
+      <div class="home-btn-dialog-box">
+          <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+          &nbsp;
+          <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+          &nbsp;
+          <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+      </div>
+      <div class='dialog-text-style-noflow small-left-padding'>
+          <div class="basic-header">Help</div>
+          <em>Q:</em> How do I grade a suggestion?<br/>
+          <em>A:</em> After clicking a mug, that participant’s suggestion is displayed.
+          You can skip to another one or mark this suggestion as irrelevant or inaccurate
+          (click again to undo).  Otherwise, drag the two slider handles to assign grades.<br/><br/>
+      </div>
+  </div>
+
+  <div class='dialog-help-continue dialog-style' style="z-index:999">
+      <div class="home-btn-dialog-box">
+          <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+          &nbsp;
+          <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+          &nbsp;
+          <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+      </div>
+      <div class='dialog-text-style-noflow small-left-padding'>
+          <div class="basic-header">Help</div>
+          <em>Q:</em> Why should I enter my email address?<br/>
+          <em>A:</em> So we can send you a unique link to see the grades your suggested issue receives.
+      </div>
+  </div>
+
+  <div class='dialog-help-logout dialog-style' style="z-index:999">
+      <div class="home-btn-dialog-box">
+          <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+          &nbsp;
+          <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+          &nbsp;
+          <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+      </div>
+      <div class='dialog-text-style-noflow small-left-padding'>
+          <div class="basic-header">Help</div>
+          To learn more about this project, its history, related projects, and the team that built it, visit <a href="http://californiareportcard.org/" target="_blank" style="color: #4e300f;">californiareportcard.org</a>.
       </div>
   </div>
 

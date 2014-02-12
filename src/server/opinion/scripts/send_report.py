@@ -41,9 +41,11 @@ def create_table_row_user(user):
     
     ## Did they leave a comment?
     # TODO: make sure it is the current discussion questions
-    commented = "yes" if DiscussionComment.objects.filter(user = user).exists() else "no"    
-    
-    row = [time_joined_display, username_display, zipcode, location, num_ideas_rated, commented, email_display]
+    comment="--"
+    if DiscussionComment.objects.filter(user=user).exists():
+        comment = DiscussionComment.objects.filter(user = user)[0]
+
+    row = [time_joined_display, username_display, zipcode, location, num_ideas_rated, comment, email_display]
     row = map(lambda x: str(x), row)
     return "\t".join(row)
 
@@ -83,10 +85,11 @@ report_body_html += "californiareportcard.org"
 report_body_text += "<h2>%s</h2>" % report_header
 report_body_text += "californiareportcard.org"
 
+active_users = list(User.objects.filter(is_active=True))
 
 ## Quick stats
-report_body_html += "<h3>Number of users so far: %s</h3><hr>" % User.objects.filter(id__gte = 310).count()
-report_body_text += "<h3>Number of users so far: %s</h3><hr>" % User.objects.filter(id__gte = 310).count()
+report_body_html += "<h3>Number of users so far: %s</h3><hr>" % len(active_users)
+report_body_text += "<h3>Number of users so far: %s</h3><hr>" % len(active_users)
 
 # We aren't collecting feedback now (12/26)
 """
@@ -111,7 +114,7 @@ if Settings.objects.boolean('USE_ENTRY_CODES'):
 	for ud in users_objects:
         	users.append(ud.user) 
 else:
-	users = User.objects.filter(date_joined__gte = datetime.datetime.now() - datetime.timedelta(days=1))
+	users = User.objects.filter(is_active=True,date_joined__gte = datetime.datetime.now() - datetime.timedelta(days=1))
 
 
 # Participation Statistics
@@ -125,10 +128,14 @@ participation_legend = {
 	7 : 'submitted email address',
 	8 : 'submitted valid email address',
 	9 : 'returns using unique URL',
-	10 : '9+ rates'
+    #10 : '9+ rates'
 }
 
 
+
+entrycodes = []
+for u in users:
+    entrycodes.extend(list(EntryCode.objects.filter(username=u.username)))
 
 participation_reached = { 
 	1 : LogUserEvents.objects.filter(details='first time',log_type=7, created__gte=TIME_FRAME).count(),
@@ -139,8 +146,8 @@ participation_reached = {
 	6 : sum([DiscussionComment.objects.filter(user = u).exists() for u in users]),
 	7 : sum([bool(u.email) for u in users]),
 	8 : sum([bool(u.email) for u in users]),
-	9 : 'under construction',
-	10 : 'under construction', 
+	9 : sum([e.first_login for e in entrycodes])
+#	10 : 'under construction', 
 }
 
 
@@ -155,7 +162,7 @@ participation_stopped = {
 	6 : pr[6] - (pr[7] + pr[8]),
 	7 : pr[7],
 	8 : pr[8],
-	9 : '--',
+	9 : pr[9],
 	10 : '--'
 }
 
@@ -176,7 +183,7 @@ report_body_text += (participation_table_header + participation_table.get_string
 ## New users
 
 new_user_table_header = '<h3>New users that registered today: (%s) </h3>' % (len(users))
-new_user_table = PrettyTable( ['Time Registered (PST)', 'User ID', 'Zip Code', 'Location', '# Ideas Rated', 'Submitted Idea?', 'Email address'])
+new_user_table = PrettyTable( ['Time Registered (PST)', 'User ID', 'Zip Code', 'Location', '# Ideas Rated', 'Idea', 'Email address'])
 
 for user in users:	
         row_data = create_table_row_user(user).split("\t")
@@ -199,7 +206,7 @@ report_body_text += "<hr><h3>Top comments from the past week:</h3>"
 
 os = OpinionSpace.objects.get(pk = OS_ID)
 discussion_statement_objects = os.discussion_statements.filter(is_current = True)
-comments = DiscussionComment.objects.filter(is_current = True, discussion_statement = discussion_statement_objects[0], confidence__lte = .15, confidence__isnull = False).order_by('-normalized_score_sum')[0:20]
+comments = DiscussionComment.objects.filter(user__in = active_users, is_current = True, discussion_statement = discussion_statement_objects[0], confidence__lte = .15, confidence__isnull = False).order_by('-normalized_score_sum')[0:20]
 count = 1
 for comment in comments:
 	if comment.created.date() >= datetime.date.today() - datetime.timedelta(days=7):
@@ -212,15 +219,17 @@ for comment in comments:
 
 ## Flagged comments
 
-report_body_html += "<hr><h3>Flagged comments:</h3>" 
-report_body_text += "<hr><h3>Flagged comments:</h3>" 
+report_body_html += "<hr><h3>Unmoderated flagged comments:</h3>" 
+report_body_text += "<hr><h3>Unmoderated flagged comments:</h3>" 
 
 flagged = FlaggedComment.objects.all().order_by('comment')
 printed = []
 for fcomment in flagged:
-    if fcomment.created.date() >= datetime.date.today() - datetime.timedelta(days=7):
+    if not fcomment.comment.blacklisted:
+    #if fcomment.created.date() >= datetime.date.today() - datetime.timedelta(days=7):
 	if fcomment.comment.discussion_statement == discussion_statement_objects[0]:
 		if fcomment.comment not in printed and not_admin_approved(fcomment.comment):
+
                     # + '\nEmail: ' + fcomment.comment.user.email + \
 			line= 'User ID: ' + str(fcomment.comment.user.id) + "\nComment: " + decode_to_unicode(fcomment.comment.comment) + '\n\n'
                         report_body_html += (line.replace("\n", "<br>"))

@@ -82,6 +82,12 @@ class OpinionSpaceStatement(Model):
         db_table = 'opinion_space_statement'
         ordering = ['statement_number']
 
+class StatementMedians(Model):
+    statement = ForeignKey(OpinionSpaceStatement, db_index = True, blank = True, null = True)
+    rating = FloatField()
+    class Meta:
+    		db_table = 'statement_medians'
+
 class DiscussionStatement(Model):
     opinion_space = ForeignKey(OpinionSpace, related_name = 'discussion_statements', db_index = True)
     statement = CharField(max_length = 512)
@@ -143,6 +149,11 @@ class DiscussionComment(Model):
     
     class Meta:
         db_table = 'discussion_comment'
+
+# Represents an internal text-tag of a comment, for classification
+class AdminCommentTag(Model):
+    comment = ForeignKey(DiscussionComment)
+    tag = TextField()
 
 class CachedRisingComment(Model):
 	comment = ForeignKey(DiscussionComment, db_index = True)

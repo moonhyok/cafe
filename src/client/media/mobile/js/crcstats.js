@@ -1,21 +1,33 @@
-$('#issue-select').on({
-    'change': function(){
-	var value = this.value;  
-	console.log(value);
-    if (value==1)
-    {
-		document.getElementById('hist-issue-image').src='{{url_root}}/media/mobile/img/daily_update/Sustainability, Environment, and Sanitation.svg';
-	}
-	if (value==2)
-    {
-		document.getElementById('hist-issue-image').src='{{url_root}}/media/mobile/img/daily_update/Transportation.svg';
-	}
-	if (value==3)
-    {
-		document.getElementById('hist-issue-image').src='{{url_root}}/media/mobile/img/daily_update/Education.svg';
-	}
+$.get(window.userhist1_url) // check if the histogram exists
+    .done(function() { 
+        var img = $('<img/>');
+        img.attr('src', window.userhist1_url);
+        img.appendTo('#userhist1');
 
-    }
-});
+    }).fail(function() { 
+		if (window.show_hist1){
+           $( "#userhist1" ).html( "<span style=' font-size:14px;color: #f5ebde;'>The statistics are calculated on a daily basis. Please revisit tomorrow</span><br/>" );
+           document.getElementById( "userhist1" ).style.height="20px";
+	    }
+	    else{
+			$( "#userhist1" ).html( "<span style=' font-size:14px;color: #f5ebde;'>You haven't received any grade on this question</span><br/>" );
+			document.getElementById( "userhist1" ).style.height="20px";
+		}
+    })
+    
+$.get(window.userhist2_url) // check if the histogram exists
+    .done(function() { 
+        var img = $('<img/>');
+        img.attr('src', window.userhist2_url);
+        img.appendTo('#userhist2');
 
-//todo  participant histogram
+    }).fail(function() { 
+		if (window.show_hist2){
+           $( "#userhist2" ).html( "<span style=' font-size:14px;color: #f5ebde;'>The statistics are calculated on a daily basis. Please revisit tomorrow</span><br/>" );
+           document.getElementById( "userhist2" ).style.height="20px";
+	    }
+	    else{
+			$( "#userhist2" ).html( "<span style=' font-size:14px;color: #f5ebde;'>You haven't received any grade on this question</span><br/>" );
+			document.getElementById( "userhist2" ).style.height="20px";
+		}
+    })

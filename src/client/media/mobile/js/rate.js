@@ -75,7 +75,7 @@ var rate = (function($, d3, console) {
     function initMenubar() {
         //$('.instructions').hide();
         $('.menubar').show();
-        $('.top-bar').trigger('height');
+        //$('.top-bar').trigger('height');
 
         //if (window.user_score >= 1) {
         //    $('.scorebox').show();
@@ -95,6 +95,7 @@ var rate = (function($, d3, console) {
         resetRatingSliders();
         logScore();
         logUserEvent(4,'rated');
+        window.cur_state = 'map';
 
             sendAgreementRating({
                 'r1': $("#slider1").val(),
@@ -114,6 +115,7 @@ var rate = (function($, d3, console) {
                 $('.instructions2').hide();
                 $('.instructions3').show();
                 try{
+                            blooms.addYourMug();
                             window.your_mug.transition().duration(1500).style("opacity", "1");
                    }catch(err){
                             console.log(err);
@@ -134,7 +136,7 @@ var rate = (function($, d3, console) {
                 $('.rate').hide();
 
             }
-            utils.hideLoading();
+            //utils.hideLoading();
             //utils.hideLoading();
     }
     
@@ -142,8 +144,26 @@ var rate = (function($, d3, console) {
         //note: this done-rating button is mapped twice, see below in populateBlooms #go-back.
         resetRatingSliders();
         logUserEvent(4,'rated');
-        $('.rate').hide();
-        $('.menubar').show();
+        try {
+               window.cur_clicked_mug.transition().duration(2000).style("opacity", "0").remove();
+               var index = window.blooms_list.indexOf(window.current_uid);
+               console.log(index);
+               if (index >= 0) {
+                   window.blooms_list.splice(index, 1);
+               }
+
+               if (window.blooms_list.length <= 2) {
+               utils.showLoading("Loading More Mugs...");
+               window.blooms_list = undefined; //needed to avoid infinite recursing
+               setTimeout(blooms.populateBlooms, 500);
+               }
+
+            } catch (err) {
+                    console.log(err);
+            }
+
+                $('.rate').hide();
+                $('.menubar').show();
     }
 
     // pulls a live comment text from the database. id is either the cid or the uid,
@@ -431,7 +451,6 @@ $(document).ready(function() {
         rate.logUserEvent(6,'comment submitted');
         rate.sendComment($('#entered-comment').val());
         utils.hideLoading('');
-        window.your_mug.transition().duration(3000).style("opacity", "0").remove();
         //if ($('#regemail').val()){
 	//		accounts.sendEmail($('#regemail').val());
 	//	}
@@ -439,10 +458,12 @@ $(document).ready(function() {
     });
     
     $('.comment-cancel-btn').click(function() {
-        $('.comment-input').hide();
-        window.cur_state = 'map';
-        rate.logUserEvent(6,'comment cancelled');
-        $('.menubar').show();
+          $('.comment-input').hide();
+          $('.dialog-continue').show();
+          $('.scorebox').hide();
+          $('.menubar').hide();
+          window.prev_state = 'comment';
+          window.cur_state = 'continue';
         //$('.scorebox').show();
     });
 
