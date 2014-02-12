@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 from numpy import abs, array, average, corrcoef, mat, shape, std, sum, transpose, zeros
 from numpy.linalg import svd
-from pca_class import PrincipalComponentAnalysis as pcamdp
 
 try:
     import c_nipals
@@ -566,34 +565,7 @@ def PCA_svd(X, standardize=True):
 
 
 
-################### Principal Component Analysis using MDP ##########################
 
-def pca_mdp(X, standardize=False, inputDim, desiredDim=10):
-    """
-    
-    PCA using MDP library and training nodes, code for which is in pca_class.PrincipalComponentAnalysis
-    
-    @param X: 2-dimensional matrix of number data. 
-    @type X: numpy array
-    
-    @param standardize: Wheter X should be standardized or not.
-    @type standardize: bool
-
-    @param inputDim: rank of X
-    @type inputDim: int
-
-    @param desiredDim: desired rank after PCA
-    @type desiredDim: int
-    
-    @return: 2-dimensional matrix after PCA
-    @type return: numpy array
-
-    """
-    if standardize: # not sure if standardization is actually helpful for mdp, so set to False by default
-        X = standardization(X)
-
-    pcaAlgo = pcamdp(inputDim, X, desiredDim)
-    return pcaAlgo.runAlgorithm()
 
 
 
