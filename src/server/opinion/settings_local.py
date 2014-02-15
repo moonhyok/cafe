@@ -10,11 +10,15 @@ URL_ROOT = 'http://localhost:8000'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'os.sqlite'
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'mydb',
+        'USER': 'mydb_user',
+        'PASSWORD': 'your_password',
+        'HOST': '',
+        'PORT': '',
     }
 }
-DATABASE_ENGINE = 'sqlite3'                     # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+DATABASE_ENGINE = 'mysql'                     # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
 
 EMAIL_HOST = 'localhost'
 EMAIL_HOST_PASSWORD = ''

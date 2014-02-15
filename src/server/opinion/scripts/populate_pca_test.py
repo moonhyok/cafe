@@ -37,8 +37,7 @@ with open('state_dept.csv', 'rb') as csvfile: #../../../../../L1Embedding/
                                         rating = float(number),
                                         is_current = True)
                     rating.save()
-                    if i < 10:
-                        print number
+            print number
 
         i += 1
 
