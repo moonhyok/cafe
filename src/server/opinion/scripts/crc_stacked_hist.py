@@ -28,7 +28,7 @@ def issues_stack_hist():
    bins=[0,0.001,0.08,0.14,0.19,0.31,0.37,0.44,0.56,0.62,0.68,0.81,0.999,1]  
           #A+   A   A-   B+   B    B-   C+   C    C-   D+   D    D-    F
    N=6 # six issue
-   ind=numpy.arange(N)
+   ind=np.arange(N)
    width=0.5
    hist_all=np.zeros((6,14))
    

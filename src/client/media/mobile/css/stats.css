@@ -1,5 +1,4 @@
 
-
 body{
     font-family: verdana, sans-serif;
     background-color: #76b9b7;
@@ -101,6 +100,14 @@ width:30px;
 }
 
 #map {
+		
+		height: 390px;
+		position:relative;
+		left:0px;
+
+max-width:320px;
+	 }
+#map_capita {
 		
 		height: 390px;
 		position:relative;

@@ -162,6 +162,22 @@
 
 </div>
 <br>
+<hr>
+<div class="stat-section-title" id="geopercapita">
+     <div class="stats-label-big">
+        PARTICIPANTS PER  <br/> 10000 POPULATION BY COUNTY
+    </div><br>
+    <script>
+        $.get("{{url_root}}/media/mobile/js/geostat_population.js")
+            .fail(function() { 
+            $( "#geopercapita" ).html( "<div class='stats-label-big'>PARTICIPANTS PER  <br/> 10000 POPULATION</div><br><br><span style=' font-size:14px;color: #f5ebde;'>We will present geographical participantion soon</span><br/><br>" );
+            document.getElementById( "#geodistribution" ).style.height="40px";
+            })
+    </script>
+    <div id="map_capita"></div>
+</div>
+
+<br>
 <div class="stats-section">
 <strong>Thanks for participating!</strong> <br><br>
    <div class="issue-txt" id="final-remark">
@@ -185,5 +201,6 @@ important issues for version 2.0.
 <script type='text/javascript' src='{{url_root}}/media/mobile/js/geostat.js'></script>  
 <script type='text/javascript' src='{{url_root}}/media/mobile/js/map.js'></script>  
 <script type='text/javascript' src='{{url_root}}/media/mobile/js/crcstats.js'></script>
+<script type='text/javascript' src='{{url_root}}/media/mobile/js/map_capita.js'></script>  
 </body>
 </html>

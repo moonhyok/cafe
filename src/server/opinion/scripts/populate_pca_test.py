@@ -11,73 +11,36 @@ import csv
 first_os = OpinionSpace.objects.get(pk = 1)
 
 # Get the OS statements for the first OS
-os_stmts = OpinionSpaceStatement.objects.filter(opinion_space = first_os)
+os_stmts = OpinionSpaceStatement.objects.filter(opinion_space = first_os).order_by('id')
 
 # Get the discussion statement for the first OS
 disc_stmt = first_os.discussion_statements.filter(is_current = True)[0]
 
 
-# Read from csvfile, hardcoded for now to read from my local directory. This file will be changed when shit gets done.
-with open('../../../../../L1Embedding/statements_5711_processed.csv', 'rb') as csvfile:
+# Read from csvfile, hardcoded for now to read from my local directory. This filepath will be changed when shit gets done.
+with open('state_dept.csv', 'rb') as csvfile: #../../../../../L1Embedding/
     reader = csv.reader(csvfile)
+    i = 1
+    stmt = list(os_stmts[:1])[0]
     for row in reader:
-
         user = User.objects.create_user('user_%d' % i, 'user_%d@gmail.com' % i, 'test')
         user.save()
-        rating = UserRating(user = user,
-                            opinion_space = first_os,
-                            opinion_space_statement = stmt,
-                            rating = row,
-                            is_current = True)
-        rating.save()
 
-        print row
+        #for stmt in os_stmts:
+        if i > 1: # skip first row because it's just labels
+            for j in range(0,len(row)):
+                if j >= 6 and j <= 10:
+                    number = row[j]
+                    rating = UserRating(user = user,
+                                        opinion_space = first_os,
+                                        opinion_space_statement = stmt,
+                                        rating = float(number),
+                                        is_current = True)
+                    rating.save()
+            print number
 
-'''
-# Create random users
-for i in range(0, 30):
-    print "Creating user %s/30..." % (i + 1)
-    
-    user = User.objects.create_user('user_%d' % i, 'user_%d@gmail.com' % i, 'test')
-    user.save()
-    
-    # Create random ratings
-    for stmt in os_stmts:
-        rating = UserRating(user = user,
-                            opinion_space = first_os,
-                            opinion_space_statement = stmt,
-                            rating = random(),
-                            is_current = True)
-        rating.save()
+        i += 1
 
-    # Create random comments
-    comment = DiscussionComment(user = user,
-                                opinion_space = first_os,
-                                discussion_statement = disc_stmt,
-                                comment = 'This is user %s\'s comment.' % user,
-                                                                query_weight = 1,
-                                is_current = True)
-    comment.save()
-    
-print 'Database populated with random users and ratings.'
+        #print row
 
-# Create random ratings
-for user in User.objects.all():
-        
-        # rate all comments randomly
-        i = 1
-        for comment in DiscussionComment.objects.order_by('?')[:20]:
-                print "User: " + str(user.id) + " rating for comment " + str(i)
-                
-                rating = random()
-                score = calculate_reputation_score(1, user, comment.user, rating)
-                cr = CommentRating(comment = comment, rater = user, rating = rating, score = score, reviewer_score = 1, is_current = True, early_bird = 1)
-                cr.save()
-                
-                agreement = random()
-                ca = CommentAgreement(comment = comment, rater = user, agreement = agreement, is_current = True)
-                ca.save()
-                
-                i+=1
-'''
 print "ratings created"
