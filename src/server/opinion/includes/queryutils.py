@@ -1518,7 +1518,7 @@ def get_user_recent_ratings_from_all_revisions(user,os,disc_stmt,type='insight',
 def ratings_2_vector(user):
     result_vector = {}
     for u in UserRating.objects.filter(user = user, is_current=True):
-        result_vector[u.id] = u.rating
+        result_vector[u.opinion_space_statement.id] = u.rating
     return result_vector
 
 def user_2_user_dist(vector1,vector2):
@@ -1560,18 +1560,10 @@ def get_never_seen_comments(user,os,disc_stmt,max_num=None,efficient_count=False
 		
         current_comments = DiscussionComment.objects.filter(is_current = True, blacklisted = False, opinion_space = os, discussion_statement = disc_stmt).exclude(user__in = list(rated_users)).exclude(user__in = users_with_no_ratings)
 		
-		#if DATABASE_ENGINE == 'sqlite3':
-		#	current_comments =  current_comments.extra(select={'rand_weight': "query_weight * random()"}).extra(order_by=['-rand_weight'])
-		#else:
-		#	current_comments =  current_comments.extra(select={'rand_weight': "query_weight * rand()"}).extra(where=["LENGTH(comment) - LENGTH(REPLACE(comment, ' ', '')) >= %s"], params=[str(2)]).extra(order_by=['-rand_weight'])
-
-        ordered_comments = []
-        for c in current_comments:
-            ordered_comments.append((user_2_user_dist(my_ratings,ratings_2_vector(c.user)),c))
-
-        ordered_comments.sort()
-        current_comments = [c[1] for c in ordered_comments]
-
+	if DATABASE_ENGINE == 'sqlite3':
+		current_comments =  current_comments.extra(select={'rand_weight': "query_weight * random()"}).extra(order_by=['-rand_weight'])
+	else:
+		current_comments =  current_comments.extra(select={'rand_weight': "query_weight * rand()"}).extra(where=["LENGTH(comment) - LENGTH(REPLACE(comment, ' ', '')) >= %s"], params=[str(2)]).extra(order_by=['-rand_weight'])
     else:
 		current_comments = DiscussionComment.objects.filter(is_current = True, blacklisted = False, opinion_space = os, discussion_statement = disc_stmt).order_by('-query_weight')
 		

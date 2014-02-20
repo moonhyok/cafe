@@ -35,4 +35,4 @@ for s in OpinionSpaceStatement.objects.all():
     else:
 	cache.update(rating = value)
 
-    print s.id, value
+    print s.id, value, len(s_rating_list)
