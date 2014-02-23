@@ -96,8 +96,8 @@ for u in users:
 			  tag.tag if tag else "",
 			  #str(score),
 			  #str(ascore)
-                          get_author_score(u),
-                          get_participation_score(u),
+                          get_author_score(u) if c else 0,
+                          get_participation_score(u) if c else 0,
                   ] + list(map(str, statements)) + 			  
 			  [str(num_agreement),
 			  str(num_insight),
