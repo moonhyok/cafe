@@ -6,6 +6,7 @@ import csv
 import settings
 import sys
 from django.utils.dateformat import DateFormat
+from opinion.includes.crc_scores import *
 
 # If a file name is given as CL arg, then used.
 file_name = None
@@ -26,11 +27,13 @@ outfile.writerow(['User ID',
 		  'City, State',
 		  'Comment',
 		  'Comment Tag',
-		  'Rating2','Rating1'] 
+                  'Author_Score',
+                  'Participation_Score'
+          ] 
 		 + statements_headings_vector +
 		  ['Rating2 Received','Rating1 Received',
 		  'Rating2 Given','Rating1 Given',
-		  'Leaderboard Score'])
+		  ])
 
 users = User.objects.filter(is_active=True)
 
@@ -91,11 +94,15 @@ for u in users:
 			  (z.city + ", " + z.state) if z else "",
 			  c,
 			  tag.tag if tag else "",
-			  str(score),
-			  str(ascore)] + list(map(str, statements)) + 			  
+			  #str(score),
+			  #str(ascore)
+                          get_author_score(u),
+                          get_participation_score(u),
+                  ] + list(map(str, statements)) + 			  
 			  [str(num_agreement),
 			  str(num_insight),
 			  CommentAgreement.objects.filter(is_current=True,rater = u ).count(),
 			  CommentRating.objects.filter(is_current=True,rater = u).count(),
-			  lscore])
+                           #lscore
+                   ])
 
