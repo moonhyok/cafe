@@ -8,13 +8,13 @@ jspath= settings.MEDIA_ROOT + "/mobile/js/"
 import datetime
 import csv
 from opinion.includes.queryutils import *
-
+import numpy as np
 '''get user.id, grades for each issue, including NA, Zipcode, City,County, State,Join time, comment'''
 
 ofile  = open('cafe-data.csv', "wb")
 writer=csv.writer(ofile,delimiter=',')
 users=User.objects.filter(is_active=True)
-title=["UserId","Grade1","Grade2","Grade3","Grade4","Grade5","Grade6","Zipcode","City","County","State","Created","Comment"]
+title=["UserId","Grade1","Grade2","Grade3","Grade4","Grade5","Grade6","Zipcode","City","County","State","Created","Comment","Tag","Importance","Rating"]
 writer.writerow(title)
 statements = OpinionSpaceStatement.objects.all().order_by('id')
 skip_begin_date=datetime.datetime(2014,1,9,0,0,0,0)
@@ -73,5 +73,18 @@ for user in users:
 	else:
 		row.append("NA")
 		row.append("NA")
-	
+	if len(cur_user_comment)>0:
+		if CommentAgreement.objects.filter(is_current=True,comment=cur_user_comment[0]).count() > 0:
+			row.append(1-np.median(CommentAgreement.objects.filter(comment=cur_user_comment[0],is_current=True).values_list('agreement')))
+		else:
+			row.append("NA")
+		if CommentRating.objects.filter(comment=cur_user_comment[0],is_current=True).count()>0:
+			row.append(1-np.median(CommentRating.objects.filter(comment=cur_user_comment[0],is_current=True).values_list('rating')))
+		else:
+			row.append("NA")
+	else:
+		row.append("NA")
+		row.append("NA")
+		
+              
 	writer.writerow(row)
