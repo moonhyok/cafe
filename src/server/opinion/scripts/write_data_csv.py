@@ -14,7 +14,7 @@ import numpy as np
 ofile  = open('cafe-data.csv', "wb")
 writer=csv.writer(ofile,delimiter=',')
 users=User.objects.filter(is_active=True)
-title=["UserId","Grade1","Grade2","Grade3","Grade4","Grade5","Grade6","Zipcode","City","County","State","Created","Comment","Tag","Importance","Rating"]
+title=["UserId","Grade1","Grade2","Grade3","Grade4","Grade5","Grade6","Zipcode","City","County","State","Created","Comment","Tag","Importance","Rating","Raters"]
 writer.writerow(title)
 statements = OpinionSpaceStatement.objects.all().order_by('id')
 skip_begin_date=datetime.datetime(2014,1,9,0,0,0,0)
@@ -85,6 +85,12 @@ for user in users:
 	else:
 		row.append("NA")
 		row.append("NA")
-		
+	if len(cur_user_comment)>0:	
+		if CommentAgreement.objects.filter(is_current=True,comment=cur_user_comment[0]).count() > 0:
+			row.append(CommentAgreement.objects.filter(is_current=True,comment=cur_user_comment[0]).count())
+		else:
+			row.append("NA")
+	else:
+		row.append("NA")
               
 	writer.writerow(row)
