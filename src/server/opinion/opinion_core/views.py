@@ -208,7 +208,8 @@ def crcstats(request,entry_code=None):
     uid = -1
     show_hist1=False
     show_hist2=False
-
+    lastVisit=''
+    newUser=0
     if level8:
         score = CommentAgreement.objects.filter(rater = user,is_current=True).count()*100 + user_author_score(user)
         given = 2*CommentAgreement.objects.filter(rater = user,is_current=True).count()
@@ -225,6 +226,8 @@ def crcstats(request,entry_code=None):
 
         ordinal = number_to_ordinal(user.id)
         uid = user.id
+        lastVisit=user.last_login.date
+        newUser=User.objects.filter(date_joined__gte=lastVisit).count()
 
     active_users = list(User.objects.filter(is_active = True))
 
@@ -247,11 +250,12 @@ def crcstats(request,entry_code=None):
                                                                                             'given': given,
                                                                                             'received': received,
                                                                                             'score': min(score,30000),
+                                                                                            'LastVisit': lastVisit,
+                                                                                            'newUser':newUser,
                                                                                             'num_ratings': CommentAgreement.objects.filter(rater__in = active_users, is_current=True).count()*2,
                                                                                             'url_root' : settings.URL_ROOT,
                                                                                             'medians': medians,
                                                                                             }))
-
 
 def crc_generic_stats(request):
 
