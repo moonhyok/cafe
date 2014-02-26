@@ -177,11 +177,13 @@ def crcstats(request,entry_code=None):
 
     os = get_os(1)
     disc_stmt = get_disc_stmt(os, 1)
-
+    
     user = None
+    lastVisit=''
     #Case 1: User is logged in
     if request.user.is_authenticated():
         user = request.user
+        lastVisit=user.last_login.date
     #Case 2: Entry using a code
     elif entry_code!=None:
         user = authenticate(entrycode=entry_code)
@@ -189,6 +191,7 @@ def crcstats(request,entry_code=None):
            ec = list(EntryCode.objects.filter(code=entry_code))[-1]
            ec.first_login = True
            ec.save()
+           lastVisit=user.last_login.date
            login(request,user)
     #Case 3: Testing argument based user id
     else:
@@ -196,6 +199,7 @@ def crcstats(request,entry_code=None):
         user_list = User.objects.filter(id = uid)
         if len(user_list) > 0:
             user = user_list[0]
+            lastVisit=user.last_login.date
 
     level8 = (user != None) # Do we have a valid user?
 
@@ -208,7 +212,7 @@ def crcstats(request,entry_code=None):
     uid = -1
     show_hist1=False
     show_hist2=False
-    lastVisit=''
+    
     newUser=0
     if level8:
         score = CommentAgreement.objects.filter(rater = user,is_current=True).count()*100 + user_author_score(user)
@@ -226,7 +230,7 @@ def crcstats(request,entry_code=None):
 
         ordinal = number_to_ordinal(user.id)
         uid = user.id
-        lastVisit=user.last_login.date
+        
         newUser=User.objects.filter(date_joined__gte=lastVisit).count()
 
     active_users = list(User.objects.filter(is_active = True))
