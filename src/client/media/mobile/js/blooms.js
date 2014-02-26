@@ -421,7 +421,16 @@ var _blooms = blooms = (function($, d3, console) {
                     {
                          try{
                              blooms.addYourMug();
-                             window.your_mug.transition().duration(100).style("opacity", "1");
+
+                             if(window.refer == "")
+                                {
+                                    window.your_mug.transition().duration(100).style("opacity", "1");
+                                }
+                             else
+                                {
+                                    window.your_mug.transition().duration(100).style("opacity", ".3");
+                                }
+
                             }catch(err){
                               console.log(err);
                            }
@@ -472,11 +481,13 @@ var _blooms = blooms = (function($, d3, console) {
             return 0;
         })
         .on('click', function(d) {
-            $('.comment-input').slideDown();
-            $('.scorebox').hide();
-            $('.menubar').hide();
-            $('.instructions3').hide();
-            window.cur_state = 'comment';
+            if(window.refer == ""){
+                $('.comment-input').slideDown();
+                $('.scorebox').hide();
+                $('.menubar').hide();
+                $('.instructions3').hide();
+                window.cur_state = 'comment';
+            }
         })
 
     }

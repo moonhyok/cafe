@@ -1564,8 +1564,6 @@ def get_never_seen_comments(user,os,disc_stmt,max_num=None,efficient_count=False
 		current_comments =  current_comments.extra(select={'rand_weight': "query_weight * random()"}).extra(order_by=['-rand_weight'])
 	else:
 		current_comments =  current_comments.extra(select={'rand_weight': "query_weight * rand()"}).extra(where=["LENGTH(comment) - LENGTH(REPLACE(comment, ' ', '')) >= %s"], params=[str(2)]).extra(order_by=['-rand_weight'])
-    else:
-		current_comments = DiscussionComment.objects.filter(is_current = True, blacklisted = False, opinion_space = os, discussion_statement = disc_stmt).order_by('-query_weight')
 		
 	#print users_with_no_ratings
     if max_num != None:
