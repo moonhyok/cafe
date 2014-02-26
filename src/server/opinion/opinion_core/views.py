@@ -293,7 +293,7 @@ def app(request, username=None):
 # 				username = NULL_USER_INDICATOR
 # 		return render_to_response('app.html', context_instance = RequestContext(request, {'username': username, 'client_settings':get_client_settings()}))
 	else:
-		return render_to_response('app.html', context_instance = RequestContext(request, {'client_settings':get_client_settings()}))
+		return render_to_response('app.html', context_instance = RequestContext(request, {'client_settings':get_client_settings(),'refer': request.GET.get('refer','')}))
 
 def get_client_settings(dic=False):
 	client_settings = {}
