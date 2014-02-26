@@ -31,22 +31,24 @@
 </div>
 <br>
 <center>
+{%if level8%}
 <div class="stats-section">
 Thank you for suggesting an issue for the next California Report Card!
 <br><br>
-{{received}} Californian's have graded your suggestion so far and your grades are plotted below.<br><br>
+<span style="font-size:14px; font-weight:bold;">{{received}} Californians have graded your suggestion so far and your grades are plotted below.<br><br></span>
 
-Your participant score is {{score}}. You can increase your score anytime by
-returning to grade more suggestions by other participants: <a href="{{url_root}}/?refer={{entrycode}}">California Report Card</a>.<br><br>
+<span style="font-size:14px; font-weight:bold;">Your participant score is {{score}}.</span><br>
+You can increase your score anytime by returning to grade more suggestions by other participants: <a href="{{url_root}}/?refer={{entrycode}}" target="_blank">California Report Card</a>.<br><br>
 
-Since you last visited on {{LastVisit}}, {{newUser}} new participants have entered grades.<br><br>
+<span style="font-weight:bold">Since you joined on {{LastVisit}}, {{newUser}} new participants have entered grades.</span><br><br>
 
 Your participation score grows as you grade the issues others have suggested (100 points for each up to 10,000 points), and based on how others grade the issue you suggested (up to 30,000 points).<br><br>
 
-See bottom of this page for more info on the Participation Score and to register for the Public Forum on 20 March <a href="http://bit.ly/1ii67bm">http://bit.ly/1ii67bm</a><br><br>
+See bottom of this page for more info on the Participation Score and to register for the Public Forum on 20 March <a href="http://bit.ly/1ii67bm" target="_blank">http://bit.ly/1ii67bm</a><br><br>
 
 Participants with the highest scores will be eligible to be invited to meet with Lt. Gov. Gavin Newsom, Professor Ken Goldberg, and the CRC team at UC Berkeley on 20 March 2014 to discuss the data and lessons learned from version 1.0 and the most important issues for version 2.0.
 </div>
+{%endif%}
 
 <br>
 <hr>
@@ -61,7 +63,7 @@ Participants with the highest scores will be eligible to be invited to meet with
 {% if left_comment %}
 <div class="stats-section-title">
     <div class="issue-text">
-        <span style="font-size:16px; font-weight:bold;"><b>{{comment}}</b></span>
+        <span style="font-size:14px; font-weight:bold; font-style:italic"><b>{{comment}}</b></span>
     </div>
 </div>
 {% else %}
@@ -190,13 +192,13 @@ Data as of <strong>{{date}}</strong><br>
 <hr>
 <div class="stats-section">
 <strong>Thanks for participating!</strong> <br><br>
-Please register for the Public Forum on 20 March <a href="http://bit.ly/1ii67bm">http://bit.ly/1ii67bm</a><br><br>
+Please register for the Public Forum on 20 March <a href="http://bit.ly/1ii67bm" target="_blank">http://bit.ly/1ii67bm</a><br><br>
 
 Participants with the highest scores will be eligible to be invited to meet with Lt. Gov. Gavin Newsom, Professor Ken Goldberg, and the CRC team at UC Berkeley on 20 March 2014 to discuss the data and lessons learned from version 1.0 and the most important issues for version 2.0.
 </div>
 <br>
 <span style="font-style:Italic;">For more information:</span>
-<a href="http://californiareportcard.org/">californiareportcard.org/</a>
+<a href="http://californiareportcard.org/" target="_blank">californiareportcard.org/</a>
 
 	</center>
 <script type='text/javascript' src='{{url_root}}/media/mobile/js/geostat.js'></script>  
