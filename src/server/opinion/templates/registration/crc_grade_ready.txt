@@ -8,7 +8,9 @@ http://californiareportcard.org/mobile/crcstats/{{entrycode}}
 
 The issue you suggested was 
 
+{% autoescape off %}
 {{comment}}
+{% endautoescape %}
 
 In the past month over 1400 Californians have entered grades.
 
