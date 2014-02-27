@@ -113,6 +113,11 @@ def mobile(request,entry_code=None):
 	
     random_username = 'user'+ ''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(10))+'@example.com';
     random_password = ''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(10));
+    num_users = len(active_users)
+    su = User.objects.get(id=1)
+    external_count = User.objects.filter(user = su, key='total_count')
+    if external_count.count() > 0:
+       num_users = external_count[0].value
 
     return render_to_response('mobile.html', context_instance = RequestContext(request, {'url_root' : settings.URL_ROOT,
                                                                                          'return_user_first_time':str(return_user_first_time(request,entry_code)).lower(),
@@ -129,7 +134,7 @@ def mobile(request,entry_code=None):
 											 'init_score': len(get_fully_rated_responses(request, disc_stmt)),
 											 'random_username': random_username,
 											 'random_password': random_password,
-											 'num_users': len(active_users),
+											 'num_users': num_users,
                                              'statement_labels': json.dumps(statement_labels),
 											 'medians': json.dumps(medians)}))
 
