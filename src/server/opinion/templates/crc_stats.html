@@ -35,10 +35,10 @@
 <div class="stats-section">
 Thank you for suggesting an issue for the next California Report Card!
 <br><br>
-<span style="font-size:14px; font-weight:bold;">{{received}} Californians have graded your suggestion so far and your grades are plotted below.<br><br></span>
+<span style="font-weight:bold;">{{received}} Californians have graded your suggestion so far and your grades are plotted below.<br><br></span>
 
-<span style="font-size:14px; font-weight:bold;">Your participant score is {{score}}.</span><br>
-You can increase your score anytime by returning to grade more suggestions by other participants: <a href="{{url_root}}/?refer={{entrycode}}" target="_blank">California Report Card</a>.<br><br>
+<span style="font-weight:bold;">Your participant score is {{score}}.</span><br>
+You can increase your score anytime by returning to grade more suggestions by other participants: <a href="{{url_root}}/?refer={{entrycode}}" target="_blank">My California Report Card Cafe</a>.<br><br>
 
 <span style="font-weight:bold">Since you joined on {{LastVisit}}, {{newUser}} new participants have entered grades.</span><br><br>
 
@@ -56,7 +56,7 @@ Participants with the highest scores will be eligible to be invited to meet with
 
 <div class="stats-section-title">
     <div class="stats-label-big">
-        YOUR SUGGESTION<br/> FOR VERSION 2.0 OF THE CRC:
+        YOUR SUGGESTION FOR VERSION 2.0 OF THE CRC:
     </div>
 </div>
 <br>
@@ -69,21 +69,22 @@ Participants with the highest scores will be eligible to be invited to meet with
 {% else %}
   
   <div class="stats-section-title">
-	   <span class="fine-print">You haven't suggested an issue. <br>Please visit the report card and <br>suggest an issue</span>
+	   <span class="fine-print">You haven't suggested an issue. Please visit the report card and suggest an issue</span>
   </div>
 
 {% endif %}
 
-
 <br>
 <hr>
-<div class="stats-section">
-Data as of <strong>{{date}}</strong><br>
-</div>
+
+    <!--<div class="stats-section">
+    Data as of <strong>{{date}}</strong><br>
+</div> -->
+
 <br>
 <div class="stats-section-title">
     <div class="stats-label-big">
-        GRADES ASSIGNED TO <br/>YOUR SUGGESTION
+        GRADES ASSIGNED TO YOUR SUGGESTION
     </div>
 </div>
 
@@ -91,25 +92,31 @@ Data as of <strong>{{date}}</strong><br>
    {% if left_comment %}
      <br>
      <div class="stats-section-title" id="userhist">
-     "How important is this issue for the <br/> next Report Card?"<br><br>
-     
-     <div class="stat-img" id="userhist1"></div>     <br><br>
 
-     "How would you grade California on <br/>this issue?"<br><br>
-    
-     <div class="stat-img" id="userhist2"></div><br>
+         <center>
+         <div class="responsive-div-1">
+             "How important is this issue for the next Report Card?"
+             <div class="stat-img" id="userhist1"></div><br>
+         </div>
+
+         <div class="responsive-div-2">
+            "How would you grade California on this issue?"
+             <div class="stat-img" id="userhist2"></div><br>
+         </div>
+         </center>
      
      </div>
+
    {% else %}
       <br>
       <div class="stats-section-title">
-	  <span class="fine-print">You haven't suggested an issue.<br> Please visit the report card and <br>suggest an issue</span>
+	  <span class="fine-print">You haven't suggested an issue. Please visit the report card and suggest an issue</span>
       </div>
    {% endif %}
 
 {% else %}
   <div class="stats-section-title">
-	   <span class="fine-print">Please visit the report card, <br>suggest an issue, and leave <br>your email to see how others <br>grade your idea</span>
+	   <span class="fine-print">Please visit the report card, suggest an issue, and leave your email to see how others grade your idea</span>
   </div>
 {% endif %}
 
@@ -118,33 +125,36 @@ Data as of <strong>{{date}}</strong><br>
 
 <div class="stats-section-title">
     <div class="stats-label-big">
-        GRADES ASSIGNED TO THE <br/>STATE OF CALIFORNIA
+        GRADES ASSIGNED TO THE STATE OF CALIFORNIA
     </div>
 
-    <span style="font-size:14px; font-style:Italic;">The median grade is marked in brown</span><br><br>
+    <span style="font-size:12px;">The median grade is marked in brown</span><br><br>
 
     {% for median in medians %}
-    <strong>Issue {{median.id}}:</strong><br>
-        <div class="issue-text"><b>{{median.statement}}</b></div>
 
-    <div class="stat-img" id="{{median.id}}">
-        
-        
-    </div>
+    <div class="responsive-img-box-{{median.id}}">
+        <strong>Issue {{median.id}}: {{median.statement}}</strong>
+
+        <div class="stat-img" id="{{median.id}}">
+
+
+        </div>
         {% autoescape off %}
         <script>
 			$.get('{{url_root}}/media/mobile/img/dailyupdate/{{median.statement}}.png')
-			.done(function() { 
+			.done(function() {
             var img = $('<img/>');
             img.attr('src', '{{url_root}}/media/mobile/img/dailyupdate/{{median.statement}}.png');
             img.appendTo('#{{median.id}}');
             })
-            .fail(function() { 
+            .fail(function() {
             $( "#{{median.id}}" ).html( "<br><span style=' font-size:14px;color: #f5ebde;'>We will present histograms soon</span><br/><br>" );
             document.getElementById( "#{{median.id}}" ).style.height="20px";
             })
         </script>
         {% endautoescape %}
+
+    </div>
     {% endfor %}
 </div>
 <br>
@@ -153,7 +163,7 @@ Data as of <strong>{{date}}</strong><br>
 
 <div class="stats-section-title" id="geodistribution">
     <div class="stats-label-big">
-        GEOGRAPHIC DISTRIBUTION <br/> OF MEDIAN GRADES ASSIGNED
+        GEOGRAPHIC DISTRIBUTION OF MEDIAN GRADES ASSIGNED
     </div><br>
     <span style="font-size:16px; font-weight:bold">Select an issue:</span> <br>
     <select id="CA_selector" onchange="changeData(this)" >
@@ -176,7 +186,7 @@ Data as of <strong>{{date}}</strong><br>
 <hr>
 <div class="stat-section-title" id="geopercapita">
      <div class="stats-label-big">
-        PARTICIPANTS PER  <br/> 10000 POPULATION BY COUNTY
+        PARTICIPANTS PER 10000 POPULATION BY COUNTY
     </div><br>
     <script>
         $.get("{{url_root}}/media/mobile/js/geostat_population.js")

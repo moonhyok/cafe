@@ -33,52 +33,92 @@ font-weight:bold;
 }
 
 hr{
-
-max-width:320px;
+width: 80%;
+max-width:800px;
 }
+
 .stats-section{
-   
-   margin-top: 4px;
-   font-size:14px;
-   
-max-width:320px;
+   font-size:16px;
+   width: 95%;
+
+max-width:800px;
    text-align:left;
 }
 
 .stats-section-title{
- overflow: auto;
-   margin-top: 0px;
+  width: 95%;
+  max-width:800px;
+  text-align:center;
+  }
 
-max-width:320px;
-   text-align:left;
+    .responsive-div-1{
+    }
 
+     .responsive-img-box-1
+      {
+      }
+
+@media screen and (min-width: 700px) {
+  .responsive-div-1{
+    float: left;
+    width: 50%;
+  }
+
+  .responsive-img-box-1
+  {
+      float: left;
+      width: 50%;
+  }
+
+  .responsive-img-box-2
+    {
+        width: 50%;
+        float: right;
+    }
+
+  .responsive-img-box-3
+    {
+        clear: both;
+        float: left;
+        width: 50%;
+    }
+
+      .responsive-img-box-4
+        {
+            width: 50%;
+            float: right;
+        }
+
+
+    .responsive-img-box-5
+        {
+            clear: both;
+            float: left;
+            width: 50%;
+        }
+
+      .responsive-img-box-6
+         {
+             width: 50%;
+             float: right;
+         }
 }
 
 .stats-label-big{
-                   font-size: 16px;
-                   line-height: 20px;
+                   font-size: 20px;
                    font-family: verdana, sans-serif;
                    color: #4f300b;
                    font-weight: bold;
-                   margin-bottom:0px;
-   text-align:left;
-
-max-width:320px;
+                   text-align:center;
                }
 
 .stat-img{
-float:left;
-overflow:hidden; /* this is important */
-max-width:320px;
 text-align:left;
+}
 
-}
-.stat-img img{
-margin-top:-25px;
-}
 .issue-text{
 
-max-width:320px;
+width: 100%;
   text-align:left;
 
 }
