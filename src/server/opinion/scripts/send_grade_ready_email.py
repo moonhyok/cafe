@@ -34,6 +34,7 @@ for user in user_email:
                                    'comment': comment[0].comment,
                                    'newParticipant': User.objects.filter(date_joined__gte=launch_day).count()
                                     })
+        print message
         try:
            #send_mail(subject, message, Settings.objects.string('DEFAULT_FROM_EMAIL'), email_list)
            time.sleep(0.3)
