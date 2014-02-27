@@ -17,6 +17,8 @@ for user in user_active:
        comment=DiscussionComment.objects.filter(user = user,is_current=True)
        if len(comment)>0:
           user_email.append(user)
+          
+print len(user_email)
 
 for user in user_email:
     entrycode=EntryCode.objects.filter(username=user.username,first_login=False)
@@ -34,7 +36,7 @@ for user in user_email:
                                     })
         try:
            #send_mail(subject, message, Settings.objects.string('DEFAULT_FROM_EMAIL'), email_list)
-           print user.email
+           
            time.sleep(0.3)
         except:
            pass
