@@ -95,12 +95,12 @@ Participants with the highest scores will be eligible to be invited to meet with
 
          <center>
          <div class="responsive-div-1">
-             "How important is this issue for the next Report Card?"
+             <div style="text-align:left;font-weight:bold;min-height:30px;">"How important is this issue for the next Report Card?"</div>
              <div class="stat-img" id="userhist1"></div><br>
          </div>
 
          <div class="responsive-div-2">
-            "How would you grade California on this issue?"
+            <div style="text-align:left;font-weight:bold;min-height:30px;">"How would you grade California on this issue?"</div>
              <div class="stat-img" id="userhist2"></div><br>
          </div>
          </center>
@@ -133,7 +133,7 @@ Participants with the highest scores will be eligible to be invited to meet with
     {% for median in medians %}
 
     <div class="responsive-img-box-{{median.id}}">
-        <strong>Issue {{median.id}}: {{median.statement}}</strong>
+        <div style="text-align:left;font-weight:bold;min-height:30px;">Issue {{median.id}}: {{median.statement}}</div>
 
         <div class="stat-img" id="{{median.id}}">
 
@@ -179,7 +179,7 @@ Participants with the highest scores will be eligible to be invited to meet with
             document.getElementById( "#geodistribution" ).style.height="40px";
             })
     </script>
-<div id="map"></div>
+<center><div id="map"></div></center>
 
 </div>
 <br>
