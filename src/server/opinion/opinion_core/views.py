@@ -255,7 +255,7 @@ def crcstats(request,entry_code=None):
                                                                                             'score': min(score,30000),
                                                                                             'LastVisit': lastVisit,
                                                                                             'newUser':newUser,
-                                                                                            'numberRater' received/2;
+                                                                                            'numberRater':received/2,
                                                                                             'num_ratings': CommentAgreement.objects.filter(rater__in = active_users, is_current=True).count()*2,
                                                                                             'url_root' : settings.URL_ROOT,
                                                                                             'medians': medians,
