@@ -1,0 +1,41 @@
+Thank you for suggesting an issue for the next California Report Card!
+
+{{received}} Californian's have graded your suggestion so far!
+
+View your grades and participation score.
+
+http://californiareportcard.org/mobile/crcstats/{{entrycode}}
+
+The Issue you suggested was 
+{{comment}}
+
+In the past month {{newParticipant}} Californian's have entered grades and suggested
+timely issues.
+
+  "The California Report Card is a new way for me to keep an ear to the
+  ground. I'm working with Ken Goldberg and his research team at UC
+  Berkeley to develop a platform that lets Californians use their cell
+  phones to advise me on state priorities.  This new app/website makes it
+  easy to assign grades to timely issues and suggest new ones that merit
+  further attention.  In the first few weeks, participants are conveying
+  that they approve of our rollout of Obamacare but are very concerned
+  about the future of California schools and universities. I'm also
+  hearing insights from Californians on issues ranging from fracking to
+  pension reform.  On Mar 20, 3-5pm, I'll be at UC Berkeley for an open
+  forum to discuss what we're learning and what we can do next."
+   - Lt. Governor Gavin Newsom
+
+Thanks again for participating!
+
+- The California Report Card Team
+
+Information about the project, history, team, contact, and more:
+http://californiareportcard.org/
+
+The California Report Card developed by the CITRIS Data and Democracy Initiative
+at UC Berkeley and the Office of Lt. Governor Gavin Newsom explores how 
+smartphones and networks can enhance communication between the public 
+and government leaders.
+
+To decline (infrequent!) emails from us, just send an email request to: 
+Brandie Martin Nonnecke <nonnecke@citris-uc.org>

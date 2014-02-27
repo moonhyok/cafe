@@ -1,7 +1,7 @@
 function map_capita(){	
 
 		var map = L.map('map_capita').setView([37.9, -117.8], 5);
-        
+                map.scrollWheelZoom.disable();
 
 
 		// control that shows state info on hover
