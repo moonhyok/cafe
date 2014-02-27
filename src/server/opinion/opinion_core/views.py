@@ -115,7 +115,7 @@ def mobile(request,entry_code=None):
     random_password = ''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(10));
     num_users = len(active_users)
     su = User.objects.get(id=1)
-    external_count = User.objects.filter(user = su, key='total_count')
+    external_count = UserData.objects.filter(user = su, key='total_count')
     if external_count.count() > 0:
        num_users = external_count[0].value
 
