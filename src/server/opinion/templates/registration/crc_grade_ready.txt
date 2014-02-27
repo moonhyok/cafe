@@ -1,12 +1,12 @@
 Thank you for suggesting an issue for the next California Report Card!
 
-{{received}} Californian's have graded your suggestion so far!
+{{received}} Californians have graded your suggestion so far!
 
 View your grades and participation score.
 
 http://californiareportcard.org/mobile/crcstats/{{entrycode}}
 
-The Issue you suggested was 
+The issue you suggested was 
 {{comment}}
 
 In the past month {{newParticipant}} Californian's have entered grades and suggested
