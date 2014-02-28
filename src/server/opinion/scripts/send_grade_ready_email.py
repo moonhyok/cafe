@@ -27,16 +27,16 @@ for user in user_email:
         received = 2*CommentAgreement.objects.filter(comment__in = DiscussionComment.objects.filter(user = user),is_current=True).count()
         email_list = [user.email]
         comment=DiscussionComment.objects.filter(user = user,is_current=True)
-        print User.objects.filter(date_joined__gte=launch_day).count()
+        
         message = render_to_string('registration/crc_grade_ready.txt',
                                   {'entrycode': entrycode[0].code,
                                    'received': received/2,
                                    'comment': comment[0].comment,
                                    'newParticipant': User.objects.filter(date_joined__gte=launch_day).count()
                                     })
-        print message
+        
         try:
-           #send_mail(subject, message, Settings.objects.string('DEFAULT_FROM_EMAIL'), email_list)
+           send_mail(subject, message, Settings.objects.string('DEFAULT_FROM_EMAIL'), email_list)
            time.sleep(0.3)
         except:
            pass
