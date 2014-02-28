@@ -36,7 +36,7 @@
 <hr>
 <div class="stats-section-title" id="geodistribution">
     <div class="stats-label-big">
-        GEOGRAPHIC DISTRIBUTION <br/> OF MEDIAN GRADES ASSIGNED
+        GEOGRAPHIC DISTRIBUTION OF MEDIAN GRADES ASSIGNED
     </div><br>
     <span style="font-size:16px; font-weight:bold">Select an issue:</span> <br>
     <select id="CA_selector" onchange="changeData(this)" >
@@ -52,14 +52,15 @@
             document.getElementById( "#geodistribution" ).style.height="40px";
             })
     </script>
+    <center>
 <div id="map"></div>
-
+</center>
 </div>
 <br>
 <hr>
 <div class="stat-section-title" id="geopercapita">
      <div class="stats-label-big">
-        PARTICIPANTS PER  <br/> 10000 POPULATION BY COUNTY
+        PARTICIPANTS PER 10000 POPULATION BY COUNTY
     </div><br>
     <script>
         $.get("{{url_root}}/media/mobile/js/geostat_population.js")
@@ -76,19 +77,19 @@
 
 <div class="stats-section-title">
     <div class="stats-label-big">
-        GRADES ASSIGNED TO THE <br/>STATE OF CALIFORNIA
+        GRADES ASSIGNED TO THE STATE OF CALIFORNIA
     </div>
 
-    <span style="font-size:14px; font-style:Italic;">The median grade is marked in brown</span><br><br>
+    <span style="font-size:12px;">The median grade is marked in brown</span><br><br>
 
     {% for median in medians %}
-    <strong>Issue {{median.id}}:</strong><br>
-        <div class="issue-text"><b>{{median.statement}}</b></div>
-
-    <div class="stat-img" id="{{median.id}}">
-        
-    
-    </div>
+     <div class="responsive-img-box-{{median.id}}">
+       <strong>Issue {{median.id}}: {{median.statement}}</strong>
+ 
+         <div class="stat-img" id="{{median.id}}">
+ 
+ 
+         </div>
     {% autoescape off %}
         <script>
 			$.get('{{url_root}}/media/mobile/img/dailyupdate/{{median.statement}}.png')
@@ -103,8 +104,9 @@
             })
         </script>
     {% endautoescape %}
+    </div>
     {% endfor %}
-
+</div>
 <br>
 <hr>
 <br>
