@@ -193,7 +193,6 @@ def crcstats(request,entry_code=None):
     elif entry_code!=None:
         user = authenticate(entrycode=entry_code)
         if user!=None:
-           print user.id
            ec = list(EntryCode.objects.filter(code=entry_code))[-1]
            ec.first_login = True
            ec.save()
