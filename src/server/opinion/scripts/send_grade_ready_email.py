@@ -10,24 +10,26 @@ import time
 
 user_active=User.objects.filter(is_active=True)
 launch_day=datetime.datetime(2014,01,28,0,0,0,0)
-
+f=open('send_grade_email_test.txt','w')
 user_email=[]
 for user in user_active:
     if len(user.email)>0:
        comment=DiscussionComment.objects.filter(user = user,is_current=True)
        if len(comment)>0:
           user_email.append(user)
-
-print len(user_email)
+          
 
 for user in user_email:
-    entrycode=EntryCode.objects.filter(username=user.username,first_login=False)
+    entrycode=EntryCode.objects.filter(username=user.username)
+    f.write(str(user.email)+'\n')
     if len(entrycode)>0:
         subject = "Your grades are ready to view at the California Report Card!"
         received = 2*CommentAgreement.objects.filter(comment__in = DiscussionComment.objects.filter(user = user),is_current=True).count()
         email_list = [user.email]
         comment=DiscussionComment.objects.filter(user = user,is_current=True)
-        
+        f.write(str(entrycode[0].code)+'\n')
+        f.write(str(comment[0].comment)+'\n')
+        f.write(str(received/2)+'\n')
         message = render_to_string('registration/crc_grade_ready.txt',
                                   {'entrycode': entrycode[0].code,
                                    'received': received/2,
@@ -36,7 +38,7 @@ for user in user_email:
                                     })
         
         try:
-           send_mail(subject, message, Settings.objects.string('DEFAULT_FROM_EMAIL'), email_list)
+           #send_mail(subject, message, Settings.objects.string('DEFAULT_FROM_EMAIL'), email_list)
            time.sleep(0.3)
         except:
            pass
