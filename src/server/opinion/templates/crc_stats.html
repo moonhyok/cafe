@@ -6,6 +6,7 @@
 		window.userhist2_url="{{url_root}}/media/mobile/img/dailyupdate/{{uid}}_2.png"
 		window.show_hist1={{show_hist1}}
 		window.show_hist2={{show_hist2}}	
+		window.id={{uid}}
     </script>
 </head>
 <style>
@@ -17,7 +18,7 @@
 <link rel="stylesheet" href="{{url_root}}/media/mobile/css/stats.css" />
 <script src="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.js?2"></script>
 <script type='text/javascript' src='{{url_root}}/media/mobile/jquery-mobile/jquery-1.10.2.min.js'></script>
-
+<script>console.log(window.id);</script>
 
 <div class="home-btn-dialog-box">
     <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
