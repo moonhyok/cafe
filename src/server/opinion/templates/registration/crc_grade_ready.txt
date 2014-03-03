@@ -1,16 +1,16 @@
 Thank you for suggesting an issue for the next California Report Card!
 
-{{received}} Californian's have graded your suggestion so far!
+{{received}} Californians have graded your suggestion so far!
 
 View your grades and participation score.
 
 http://californiareportcard.org/mobile/crcstats/{{entrycode}}
 
-The Issue you suggested was 
+The issue you suggested was 
+{% autoescape off %}
 {{comment}}
-
-In the past month {{newParticipant}} Californian's have entered grades and suggested
-timely issues.
+{% endautoescape %}
+In the past month over 1400 Californians have entered grades.
 
   "The California Report Card is a new way for me to keep an ear to the
   ground. I'm working with Ken Goldberg and his research team at UC
@@ -24,6 +24,9 @@ timely issues.
   pension reform.  On Mar 20, 3-5pm, I'll be at UC Berkeley for an open
   forum to discuss what we're learning and what we can do next."
    - Lt. Governor Gavin Newsom
+
+Please consider joining us for the Public Forum on 20 March
+http://bit.ly/1ii67bm
 
 Thanks again for participating!
 

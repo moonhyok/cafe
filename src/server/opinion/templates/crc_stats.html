@@ -6,6 +6,7 @@
 		window.userhist2_url="{{url_root}}/media/mobile/img/dailyupdate/{{uid}}_2.png"
 		window.show_hist1={{show_hist1}}
 		window.show_hist2={{show_hist2}}	
+		window.id={{uid}}
     </script>
 </head>
 <style>
@@ -17,7 +18,7 @@
 <link rel="stylesheet" href="{{url_root}}/media/mobile/css/stats.css" />
 <script src="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.js?2"></script>
 <script type='text/javascript' src='{{url_root}}/media/mobile/jquery-mobile/jquery-1.10.2.min.js'></script>
-
+<script>console.log(window.id);</script>
 
 <div class="home-btn-dialog-box">
     <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
@@ -95,12 +96,12 @@ Participants with the highest scores will be eligible to be invited to meet with
 
          <center>
          <div class="responsive-div-1">
-             "How important is this issue for the next Report Card?"
+             <div style="text-align:left;font-weight:bold;min-height:30px;">"How important is this issue for the next Report Card?"</div>
              <div class="stat-img" id="userhist1"></div><br>
          </div>
 
          <div class="responsive-div-2">
-            "How would you grade California on this issue?"
+            <div style="text-align:left;font-weight:bold;min-height:30px;">"How would you grade California on this issue?"</div>
              <div class="stat-img" id="userhist2"></div><br>
          </div>
          </center>
@@ -133,7 +134,7 @@ Participants with the highest scores will be eligible to be invited to meet with
     {% for median in medians %}
 
     <div class="responsive-img-box-{{median.id}}">
-        <strong>Issue {{median.id}}: {{median.statement}}</strong>
+        <div style="text-align:left;font-weight:bold;min-height:30px;">Issue {{median.id}}: {{median.statement}}</div>
 
         <div class="stat-img" id="{{median.id}}">
 
@@ -179,7 +180,7 @@ Participants with the highest scores will be eligible to be invited to meet with
             document.getElementById( "#geodistribution" ).style.height="40px";
             })
     </script>
-<div id="map"></div>
+<center><div id="map"></div></center>
 
 </div>
 <br>
@@ -202,7 +203,7 @@ Participants with the highest scores will be eligible to be invited to meet with
 <hr>
 <div class="stats-section">
 <strong>Thanks for participating!</strong> <br><br>
-Please register for the Public Forum on 20 March <a href="http://bit.ly/1ii67bm" target="_blank">http://bit.ly/1ii67bm</a><br><br>
+Please consider joining us for the Public Forum on 20 March <a href="http://bit.ly/1ii67bm" target="_blank">http://bit.ly/1ii67bm</a><br><br>
 
 Participants with the highest scores will be eligible to be invited to meet with Lt. Gov. Gavin Newsom, Professor Ken Goldberg, and the CRC team at UC Berkeley on 20 March 2014 to discuss the data and lessons learned from version 1.0 and the most important issues for version 2.0.
 </div>
