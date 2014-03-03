@@ -2,11 +2,11 @@
 import environ
 from opinion.opinion_core.models import *
 import numpy as np
+from opinion.includes.queryutils import *
 
-for u in User.objects.filter(id__lte = 361):
-	comment = DiscussionComment.objects.filter(is_current =True, user = u)
-	if len(comment) > 0:
-		comment[0].blacklisted = True
-		comment[0].save()
-		print "Pruned negative comment"
+uids =[785, 488, 769, 764, 779, 1335, 1561, 1245]
+for u in User.objects.filter(id__in = uids):
+    ratings = CommentAgreement.objects.filter(rater = u).count()
+    print ratings*100
+
 
