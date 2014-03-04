@@ -1534,12 +1534,12 @@ def user_2_user_dist(vector1,vector2):
     return dist
 	
 def get_never_seen_comments(user,os,disc_stmt,max_num=None,efficient_count=False, no_statements=False):
-    users_with_ratings = UserData.objects.filter(key = 'first_rating').values_list('user')
-    users_with_no_ratings = User.objects.all().exclude(id__in = users_with_ratings)
+  users_with_ratings = UserData.objects.filter(key = 'first_rating').values_list('user')
+  users_with_no_ratings = User.objects.all().exclude(id__in = users_with_ratings)
 
-    rated_users = set()
+  rated_users = set()
 	
-    if user.is_authenticated():
+  if user.is_authenticated():
         insight_rated_comments = CommentRating.objects.filter(rater = user, is_current=True)
         agreement_rated_comments = CommentAgreement.objects.filter(rater = user, is_current=True)
         my_ratings = ratings_2_vector(user)
@@ -1558,21 +1558,21 @@ def get_never_seen_comments(user,os,disc_stmt,max_num=None,efficient_count=False
 
         rated_users.add(user) #exlude self too
 		
-        current_comments = DiscussionComment.objects.filter(is_current = True, blacklisted = False, opinion_space = os, discussion_statement = disc_stmt).exclude(user__in = list(rated_users)).exclude(user__in = users_with_no_ratings)
+  current_comments = DiscussionComment.objects.filter(is_current = True, blacklisted = False, opinion_space = os, discussion_statement = disc_stmt).exclude(user__in = list(rated_users)).exclude(user__in = users_with_no_ratings)
 		
-	if DATABASE_ENGINE == 'sqlite3':
-		current_comments =  current_comments.extra(select={'rand_weight': "query_weight * random()"}).extra(order_by=['-rand_weight'])
-	else:
-		current_comments =  current_comments.extra(select={'rand_weight': "query_weight * rand()"}).extra(where=["LENGTH(comment) - LENGTH(REPLACE(comment, ' ', '')) >= %s"], params=[str(2)]).extra(order_by=['-rand_weight'])
+  if DATABASE_ENGINE == 'sqlite3':
+     current_comments =  current_comments.extra(select={'rand_weight': "query_weight * random()"}).extra(order_by=['-rand_weight'])
+  else:
+     current_comments =  current_comments.extra(select={'rand_weight': "query_weight * rand()"}).extra(where=["LENGTH(comment) - LENGTH(REPLACE(comment, ' ', '')) >= %s"], params=[str(2)]).extra(order_by=['-rand_weight'])
 		
 	#print users_with_no_ratings
-    if max_num != None:
-        current_comments = current_comments[:max_num]
+  if max_num != None:
+    current_comments = current_comments[:max_num]
 	
-    if efficient_count:
-        return current_comments.count()
-    else:
-        return [format_discussion_comment(user, current_comment) for current_comment in current_comments]
+  if efficient_count:
+    return current_comments.count()
+  else:
+    return [format_discussion_comment(user, current_comment) for current_comment in current_comments]
 
 def get_rated_updated_comments(user,os,disc_stmt,max_num=None):
 	agreement_ratings = get_user_recent_ratings_from_all_revisions(user,os,disc_stmt,'agreement') #get most recent agreement ratings
