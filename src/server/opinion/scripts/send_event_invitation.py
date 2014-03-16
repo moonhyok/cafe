@@ -47,6 +47,8 @@ if len(candidate)>0:
                                    'received': received,
                                    'comment': comment[0].comment,
                                     })
+      print subject
+      print message
       try:
          #send_mail(subject, message, Settings.objects.string('DEFAULT_FROM_EMAIL'), email_list)
          time.sleep(0.3)
