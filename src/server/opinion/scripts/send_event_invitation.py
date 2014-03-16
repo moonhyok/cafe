@@ -38,7 +38,6 @@ if len(candidate)>0:
    user = User.objects.filter(username__exact=candidate[len(candidate)-2].username).order_by('id')
    if len(user)>0:
       user= user[len(user)-1]
-      user_email.append(user)
       received = CommentAgreement.objects.filter(comment__in = DiscussionComment.objects.filter(user = user),is_current=True).count()
       subject = str(received)+" people have graded your suggestion: Updates on the California Report Card"
       email_list = [user.email]
@@ -54,7 +53,7 @@ if len(candidate)>0:
       except:
          pass
 
-
+'''
 for user in user_email:
     entrycode=EntryCode.objects.filter(username=user.username)
     if len(entrycode)>0:
@@ -73,6 +72,6 @@ for user in user_email:
            #send_mail(subject, message, Settings.objects.string('DEFAULT_FROM_EMAIL'), email_list)
            time.sleep(0.3)
         except:
-           pass
+           pass'''
 
 
