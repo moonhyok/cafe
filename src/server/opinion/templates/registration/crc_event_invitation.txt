@@ -1,0 +1,49 @@
+Thank you for participating in the California Report Card Project!
+
+Since the "California Report Card" launched in early February, over
+6000 people from almost every county have assigned over 20,000 grades
+to the State of California and suggested issues for the next report
+card.  This feedback is being closely watched by Lt. Governor Gavin Newsom.
+
+Two updates:
+
+1)  This Thursday, 20 March, we will host a public forum on the California 
+Report Card: Learning from a New Platform for Civic Engagement, 3-5pm, at 
+UC Berkeley. Lt. Governor Gavin Newsom and Prof. Ken Goldberg will be 
+joined by Dr. Marina Gorbis, Director of the Institute of the Future Director,
+and Prof. Henry Brady, Dean of the Goldman School of Public Policy to host
+a public forum at UC Berkeley on 20 March 2014 to review the data and 
+lessons learned. It's Free and Open to the Public.  
+Please register at: http://j.mp/CRC-20-March-Event
+
+2) To help others grade the issues suggested by participants,
+we made a light edit to the wording of suggestions.  
+The issue that you suggested for the next Report Card now reads as follows:
+
+{% autoescape off %}
+{{comment}}
+{% endautoescape %}
+
+If you would like a change in this wording, please contact Project Manager
+Dr. Brandie Martin Nonnecke <nonnecke@citris-uc.org>.
+
+{{received}} Californians have graded your suggestion so far!
+
+View your grades and participation score, and increase your score by 
+grading more suggestions from others, please visit:
+
+http://californiareportcard.org/mobile/crcstats/{{entrycode}}/
+
+Thanks again for participating!
+
+- The California Report Card Team
+Information about the project, history, team, contact, and more:
+
+http://californiareportcard.org/
+
+The California Report Card developed by the CITRIS Data and Democracy Initiative
+at UC Berkeley and the Office of Lt. Governor Gavin Newsom explores how
+smartphones and networks can enhance communication between the public and government leaders.
+
+To decline (infrequent!) emails from us, just send an email request to: 
+Brandie Martin Nonnecke <nonnecke@citris-uc.org>
