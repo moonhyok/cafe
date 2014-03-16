@@ -44,7 +44,7 @@ if len(candidate)>0:
       email_list = [user.email]
       comment=DiscussionComment.objects.filter(user = user,is_current=True)
       message = render_to_string('registration/crc_event_invitation.txt',
-                                  {'entrycode': entrycode[0].code,
+                                  {'entrycode': entrycode,
                                    'received': received,
                                    'comment': comment[0].comment,
                                     })
