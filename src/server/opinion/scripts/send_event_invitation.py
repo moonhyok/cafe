@@ -19,13 +19,15 @@ user_active=User.objects.filter(is_active=True)
 duplicated_email=['hunallen@gmail.com','patel.jay@berkeley.edu','ccrittenden@berkeley.edu','nonnecke@citris-uc.org','nonnecke@berkeley.edu','tanja.aitamurto@gmail.com','sanjaykrishn@gmail.com','goldberg@berkeley.edu']
 user_email=[]
 for email in duplicated_email:
-    entrycode=hashlib.sha224(email).hexdigest()[0:7]
+    entrycode=hashlib.sha224(email).hexdigest()[0:7]   
     candidate=EntryCode.objects.filter(code__exact=entrycode).order_by('id')
-    user = User.objects.filter(username__exact=candidate[len(candidate)-1].username).order_by('id')
-    user= user[len(user)-1]
-    comment=DiscussionComment.objects.filter(user = user,is_current=True)
-    if len(comment)>0:
-       user_email.append(user)
+    if len(candidate)>0:
+       user = User.objects.filter(username__exact=candidate[len(candidate)-1].username).order_by('id')
+       if len(user)>0:
+          user= user[len(user)-1]
+          comment=DiscussionComment.objects.filter(user = user,is_current=True)
+          if len(comment)>0:
+             user_email.append(user)
 
 
 for user in user_active:
