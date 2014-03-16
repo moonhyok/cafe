@@ -18,7 +18,7 @@ writer.writerow(title)
 user_active=User.objects.filter(is_active=True)
 duplicated_email=['hunallen@gmail.com','patel.jay@berkeley.edu','ccrittenden@berkeley.edu','nonnecke@citris-uc.org','nonnecke@berkeley.edu','tanja.aitamurto@gmail.com','sanjaykrishn@gmail.com','goldberg@berkeley.edu']
 user_email=[]
-for email in duplicated_email
+for email in duplicated_email:
     entrycode=hashlib.sha224(email).hexdigest()[0:7]
     candidate=EntryCode.objects.filter(code__exact=entrycode).order_by('id')
     user = User.objects.filter(username__exact=candidate[len(candidate)-1].username).order_by('id')
