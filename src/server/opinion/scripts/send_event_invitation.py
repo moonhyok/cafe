@@ -50,10 +50,11 @@ if len(candidate)>0:
                                     })
       try:
          #send_mail(subject, message, Settings.objects.string('DEFAULT_FROM_EMAIL'), email_list)
+         time.sleep(0.3)
       except:
          pass
 
-'''
+
 for user in user_email:
     entrycode=EntryCode.objects.filter(username=user.username)
     if len(entrycode)>0:
@@ -73,5 +74,5 @@ for user in user_email:
            time.sleep(0.3)
         except:
            pass
-'''
+
 
