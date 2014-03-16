@@ -39,8 +39,23 @@ if len(candidate)>0:
    if len(user)>0:
       user= user[len(user)-1]
       user_email.append(user)
+      received = CommentAgreement.objects.filter(comment__in = DiscussionComment.objects.filter(user = user),is_current=True).count()
+      subject = str(received)+" people have graded your suggestion: Updates on the California Report Card"
+      email_list = [user.email]
+      comment=DiscussionComment.objects.filter(user = user,is_current=True)
+      message = render_to_string('registration/crc_event_invitation.txt',
+                                  {'entrycode': entrycode[0].code,
+                                   'received': received,
+                                   'comment': comment[0].comment,
+                                    })
+      print subject
+      print message
+      try:
+         #send_mail(subject, message, Settings.objects.string('DEFAULT_FROM_EMAIL'), email_list)
+      except:
+         pass
 
-
+'''
 for user in user_email:
     entrycode=EntryCode.objects.filter(username=user.username)
     if len(entrycode)>0:
@@ -60,5 +75,5 @@ for user in user_email:
            time.sleep(0.3)
         except:
            pass
-
+'''
 
