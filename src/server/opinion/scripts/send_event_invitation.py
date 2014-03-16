@@ -24,7 +24,7 @@ for email in duplicated_email:
     user = User.objects.filter(username__exact=candidate[len(candidate)-1].username).order_by('id')
     user= user[len(user)-1]
     comment=DiscussionComment.objects.filter(user = user,is_current=True)
-    if len(comment)>0
+    if len(comment)>0:
        user_email.append(user)
 
 
