@@ -10,7 +10,7 @@ import time
 import csv
 import hashlib
 
-ofile  = open('send_mail_grade_test.csv', "wb")
+ofile  = open('send_event_invitation.csv', "wb")
 writer=csv.writer(ofile,delimiter=',')
 title=["UserId","username","email","comment","received","entrycode"]
 writer.writerow(title)
