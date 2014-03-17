@@ -50,7 +50,7 @@ if len(candidate)>0:
       print subject
       print message
       try:
-         #send_mail(subject, message, Settings.objects.string('DEFAULT_FROM_EMAIL'), email_list)
+         send_mail(subject, message, Settings.objects.string('DEFAULT_FROM_EMAIL'), email_list)
          time.sleep(0.3)
       except:
          pass
@@ -71,7 +71,7 @@ for user in user_email:
         print subject
         print message
         try:
-           #send_mail(subject, message, Settings.objects.string('DEFAULT_FROM_EMAIL'), email_list)
+           send_mail(subject, message, Settings.objects.string('DEFAULT_FROM_EMAIL'), email_list)
            time.sleep(0.3)
         except:
            pass
