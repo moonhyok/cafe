@@ -200,41 +200,41 @@ report_body_text += (new_user_table_header +  new_user_table.get_string())
 
 
 ## Top comments
-OS_ID = 1
-report_body_html += "<hr><h3>Top comments from the past week:</h3>" 
-report_body_text += "<hr><h3>Top comments from the past week:</h3>" 
+# OS_ID = 1
+# report_body_html += "<hr><h3>Top comments from the past week:</h3>" 
+# report_body_text += "<hr><h3>Top comments from the past week:</h3>" 
 
-os = OpinionSpace.objects.get(pk = OS_ID)
-discussion_statement_objects = os.discussion_statements.filter(is_current = True)
-comments = DiscussionComment.objects.filter(user__in = active_users, is_current = True, discussion_statement = discussion_statement_objects[0], confidence__lte = .15, confidence__isnull = False).order_by('-normalized_score_sum')[0:20]
-count = 1
-for comment in comments:
-	if comment.created.date() >= datetime.date.today() - datetime.timedelta(days=7):
-            #   "\nEmail: " + comment.user.email  + \
-            line = "\n"+str(count)+". User ID: "+ str(comment.user.id)   + "\nComment:"  + decode_to_unicode(comment.comment) + "\nNormalized Score: " + str(comment.normalized_score_sum) + "\n"
-            report_body_html += (line.replace("\n", "<br>"))
-            report_body_text += line
-            count+=1
+# os = OpinionSpace.objects.get(pk = OS_ID)
+# discussion_statement_objects = os.discussion_statements.filter(is_current = True)
+# comments = DiscussionComment.objects.filter(user__in = active_users, is_current = True, discussion_statement = discussion_statement_objects[0], confidence__lte = .15, confidence__isnull = False).order_by('-normalized_score_sum')[0:20]
+# count = 1
+# for comment in comments:
+# 	if comment.created.date() >= datetime.date.today() - datetime.timedelta(days=7):
+#             #   "\nEmail: " + comment.user.email  + \
+#             line = "\n"+str(count)+". User ID: "+ str(comment.user.id)   + "\nComment:"  + decode_to_unicode(comment.comment) + "\nNormalized Score: " + str(comment.normalized_score_sum) + "\n"
+#             report_body_html += (line.replace("\n", "<br>"))
+#             report_body_text += line
+#             count+=1
 
 
-## Flagged comments
+# ## Flagged comments
 
-report_body_html += "<hr><h3>Unmoderated flagged comments:</h3>" 
-report_body_text += "<hr><h3>Unmoderated flagged comments:</h3>" 
+# report_body_html += "<hr><h3>Unmoderated flagged comments:</h3>" 
+# report_body_text += "<hr><h3>Unmoderated flagged comments:</h3>" 
 
-flagged = FlaggedComment.objects.all().order_by('comment')
-printed = []
-for fcomment in flagged:
-    if not fcomment.comment.blacklisted:
-    #if fcomment.created.date() >= datetime.date.today() - datetime.timedelta(days=7):
-	if fcomment.comment.discussion_statement == discussion_statement_objects[0]:
-		if fcomment.comment not in printed and not_admin_approved(fcomment.comment):
+# flagged = FlaggedComment.objects.all().order_by('comment')
+# printed = []
+# for fcomment in flagged:
+#     if not fcomment.comment.blacklisted:
+#     #if fcomment.created.date() >= datetime.date.today() - datetime.timedelta(days=7):
+# 	if fcomment.comment.discussion_statement == discussion_statement_objects[0]:
+# 		if fcomment.comment not in printed and not_admin_approved(fcomment.comment):
 
-                    # + '\nEmail: ' + fcomment.comment.user.email + \
-			line= 'User ID: ' + str(fcomment.comment.user.id) + "\nComment: " + decode_to_unicode(fcomment.comment.comment) + '\n\n'
-                        report_body_html += (line.replace("\n", "<br>"))
-                        report_body_text += line
-			printed.append(fcomment.comment)
+#                     # + '\nEmail: ' + fcomment.comment.user.email + \
+# 			line= 'User ID: ' + str(fcomment.comment.user.id) + "\nComment: " + decode_to_unicode(fcomment.comment.comment) + '\n\n'
+#                         report_body_html += (line.replace("\n", "<br>"))
+#                         report_body_text += line
+# 			printed.append(fcomment.comment)
 
 #send_mail(report_subject, report_body, report_from, report_recipients)
 
