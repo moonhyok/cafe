@@ -35,9 +35,11 @@ def main():
 	max_weight = 0
 	comment_id_to_num_ratings_map = {}
 	for comment in comments:
-		agreement = [r[1] for r in get_recent_ratings_from_all_revisions(comment,'agreement',-1)]
+		agreement = [r[1].agreement for r in get_recent_ratings_from_all_revisions(comment,'agreement',-1)]
+		num_ratings = numpy.std(agreement)/numpy.sqrt(len(agreement))
 		insight = [r[1] for r in get_recent_ratings_from_all_revisions(comment,'insight', -1)]
-		num_ratings = len(union_sort_agreement_and_insight(agreement, insight))
+		#num_ratings = len(union_sort_agreement_and_insight(agreement, insight))
+
 		comment_id_to_num_ratings_map[comment.id] = num_ratings
 		if num_ratings > max_weight:
 			max_weight = num_ratings
