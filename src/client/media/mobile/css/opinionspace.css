@@ -653,7 +653,9 @@ table.pretty caption {
 	.manual-slide{
 		line-height: 55px;
 		font-size: 20px;
-		width: 30px;
+		width: 20px;
+		margin-right: 5px;
+		margin-left: 5px;
 		border:1px solid #FFFFFF;
 		padding-top:5px;
 		border-radius:10px;

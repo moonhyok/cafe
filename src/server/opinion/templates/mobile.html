@@ -86,7 +86,7 @@
 
 
  jQuery(document).ready(function(){
-   for (var i = 0; i <= window.num_sliders; i++) {
+   for (var i = 0; i < window.num_sliders; i++) {
      window.sliders[i] = 42;
      window.skipped[i] = false;
      $(".endslider-slider"+(i+1)).noUiSlider({
@@ -108,16 +108,18 @@
 
   var sliderId = i + 1;
   document.getElementById('inner-div-'+sliderId).style.right = (window.sliders[sliderId-1])*window.slider_shift + 'px';
+  console.log(sliderId);
   document.getElementById('grade-'+window.sliders[sliderId-1]+'-'+sliderId).style.border = '2px solid #3f8b44';
+  document.getElementById('grade-'+window.sliders[sliderId-1]+'-'+sliderId).style.opacity = '1';
   document.getElementById('grade-'+window.sliders[sliderId-1]+'-'+sliderId).style.backgroundColor = "rgba(255, 255, 255, 0.3)";
   document.getElementById('grade-'+(window.sliders[sliderId-1]+8)+'-'+sliderId).style.border = '1px solid #FFFFFF';
   document.getElementById('grade-'+(window.sliders[sliderId-1]+8)+'-'+sliderId).style.backgroundColor = "rgba(255, 255, 255, 0.0)";
 
-  document.getElementById('grade-'+(window.sliders[sliderId-1]+8)+'-'+sliderId).style.opacity = '1.0';
-  document.getElementById('grade-'+(window.sliders[sliderId-1]+16)+'-'+sliderId).style.opacity = '0.25';
+  document.getElementById('grade-'+(window.sliders[sliderId-1]+8)+'-'+sliderId).style.opacity = '.75';
+  document.getElementById('grade-'+(window.sliders[sliderId-1]+16)+'-'+sliderId).style.opacity = '0.2';
 
-  document.getElementById('grade-'+(window.sliders[sliderId-1]-8)+'-'+sliderId).style.opacity = '1.0';
-  document.getElementById('grade-'+(window.sliders[sliderId-1]-16)+'-'+sliderId).style.opacity = '0.25';
+  document.getElementById('grade-'+(window.sliders[sliderId-1]-8)+'-'+sliderId).style.opacity = '.75';
+  document.getElementById('grade-'+(window.sliders[sliderId-1]-16)+'-'+sliderId).style.opacity = '0.2';
 
    }
 
@@ -207,20 +209,21 @@
   var offset =  window.sliders[sliderId-1];
   document.getElementById('inner-div-'+sliderId).style.right = (offset - 8)*window.slider_shift + 'px';
   window.sliders[sliderId-1] = window.sliders[sliderId-1] - 8;
+  document.getElementById('grade-'+window.sliders[sliderId-1]+'-'+sliderId).style.opacity = '1';
   document.getElementById('grade-'+window.sliders[sliderId-1]+'-'+sliderId).style.border = '2px solid #3f8b44';
   document.getElementById('grade-'+window.sliders[sliderId-1]+'-'+sliderId).style.backgroundColor = "rgba(255, 255, 255, 0.3)";
   document.getElementById('grade-'+(window.sliders[sliderId-1]+8)+'-'+sliderId).style.border = '1px solid #FFFFFF';
   document.getElementById('grade-'+(window.sliders[sliderId-1]+8)+'-'+sliderId).style.backgroundColor = "rgba(255, 255, 255, 0.0)";
-  document.getElementById('grade-'+(window.sliders[sliderId-1]+8)+'-'+sliderId).style.opacity = '1.0';
+  document.getElementById('grade-'+(window.sliders[sliderId-1]+8)+'-'+sliderId).style.opacity = '0.75';
 
   if (window.sliders[sliderId-1]+16 <= 82)
-    document.getElementById('grade-'+(window.sliders[sliderId-1]+16)+'-'+sliderId).style.opacity = '0.25';
+    document.getElementById('grade-'+(window.sliders[sliderId-1]+16)+'-'+sliderId).style.opacity = '0.2';
 
   if (window.sliders[sliderId-1]-8 >= -14)
-    document.getElementById('grade-'+(window.sliders[sliderId-1]-8)+'-'+sliderId).style.opacity = '1.0';
+    document.getElementById('grade-'+(window.sliders[sliderId-1]-8)+'-'+sliderId).style.opacity = '0.75';
 
   if (window.sliders[sliderId-1]-16 >= -14)
-    document.getElementById('grade-'+(window.sliders[sliderId-1]-16)+'-'+sliderId).style.opacity = '0.25';
+    document.getElementById('grade-'+(window.sliders[sliderId-1]-16)+'-'+sliderId).style.opacity = '0.2';
 
  }
 
@@ -232,6 +235,7 @@
   var offset =  window.sliders[sliderId-1];
   document.getElementById('inner-div-'+sliderId).style.right = (offset + 8)*window.slider_shift + 'px';
   window.sliders[sliderId-1] = window.sliders[sliderId-1] + 8;
+  document.getElementById('grade-'+window.sliders[sliderId-1]+'-'+sliderId).style.opacity = '1';
   document.getElementById('grade-'+window.sliders[sliderId-1]+'-'+sliderId).style.border = '2px solid #3f8b44';
   document.getElementById('grade-'+window.sliders[sliderId-1]+'-'+sliderId).style.backgroundColor = "rgba(255, 255, 255, 0.3)";
 
@@ -239,15 +243,15 @@
   document.getElementById('grade-'+(window.sliders[sliderId-1]-8)+'-'+sliderId).style.backgroundColor = "rgba(255, 255, 255, 0.0)";
  
   if (window.sliders[sliderId-1]+8 <= 82)
-    document.getElementById('grade-'+(window.sliders[sliderId-1]+8)+'-'+sliderId).style.opacity = '1.0';
+    document.getElementById('grade-'+(window.sliders[sliderId-1]+8)+'-'+sliderId).style.opacity = '0.75';
   
   if (window.sliders[sliderId-1]+16 <= 82)
-    document.getElementById('grade-'+(window.sliders[sliderId-1]+16)+'-'+sliderId).style.opacity = '0.25';
+    document.getElementById('grade-'+(window.sliders[sliderId-1]+16)+'-'+sliderId).style.opacity = '0.2';
 
-  document.getElementById('grade-'+(window.sliders[sliderId-1]-8)+'-'+sliderId).style.opacity = '1.0';
+  document.getElementById('grade-'+(window.sliders[sliderId-1]-8)+'-'+sliderId).style.opacity = '0.75';
   
   if (window.sliders[sliderId-1]-16 >= -14)
-    document.getElementById('grade-'+(window.sliders[sliderId-1]-16)+'-'+sliderId).style.opacity = '0.25';
+    document.getElementById('grade-'+(window.sliders[sliderId-1]-16)+'-'+sliderId).style.opacity = '0.2';
 
  }
 
@@ -292,14 +296,14 @@
         <img src="{{url_root}}/media/mobile/img/cafe/california_map.png" style="width: 120px;">
       </div>
       
-      <div class="landing-img-title" style="position: relative; top: -150px;">
+      <div class="landing-img-title" style="position: relative; top: -120px;">
       
       California<br/>Report Card
       </div>
 
 <center> 
 
-<div style="max-width: 280px; padding-top: 30px; padding-bottom: 30px;">
+<div style="max-width: 280px; padding-top: 10px; padding-bottom: 30px;">
    
     <div class="landing-img-txt">   
         Take a moment to join <strong>{{num_users}}</strong> others who have graded the State of California on six timely issues.<br/>
@@ -373,7 +377,7 @@
                     {{ statement.statement }}
                     <center>
                     <div class="manual-slide" onclick="incrementSlider({{ statement.id}});" style="float: left;margin-top: 5px;"><</div>
-                    <div style="max-height: 60px; overflow:hidden; max-width: 240px;float: left;margin-top: 5px;">
+                    <div id="outer-div-{{statement.id}}" style="max-height: 60px; overflow:hidden; max-width: 240px;float: left;margin-top: 5px;">
                       <div id="inner-div-{{statement.id}}" style="position: relative; width: 800px;">
                         <div class="slider-grade-val" id="grade--14-{{ statement.id}}">A+</div>
                         <div class="slider-grade-val" id="grade--6-{{ statement.id}}">A</div>
@@ -393,7 +397,7 @@
                     <div class="manual-slide" onclick="decrementSlider({{ statement.id}});" style="float: left;">></div>
 
                 <div style="clear: both;"></div>
-                 <div class="skip-img-btn button-skip" id="skip-img{{statement.id}}" style="margin-top:5px;position: relative; left: 5px;">Skip</div>
+                 <div class="skip-img{{statement.id}} button-skip" id="skip-img{{statement.id}}" style="margin-top:5px;position: relative; left: 5px;" onclick="accounts.skipStatement({{statement.id}})">Skip</div>
                </center>
 
               </div>
