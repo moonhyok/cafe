@@ -24,6 +24,7 @@
  <link rel='stylesheet' type='text/css' href='{{url_root}}/media/mobile/css/themes/cafe-jquery-new-v2.min.css'/> 
 <link href="{{url_root}}/media/mobile/css/jquery.nouislider.min.css" rel="stylesheet">
 <link rel='stylesheet' type='text/css' href='{{url_root}}/media/mobile/css/opinionspace.css?nonce={{random_password}}' />
+<link rel='stylesheet' type='text/css' href='{{url_root}}/media/mobile/css/crc-transparent-slider.css?nonce={{random_password}}' />
 
 <!-- JavaScript -->
 <script type='text/javascript' src='{{url_root}}/media/mobile/jquery-mobile/jquery-1.10.2.min.js'></script>
@@ -34,6 +35,7 @@
 <script type='text/javascript' src='{{url_root}}/media/mobile/js/blooms.js?nonce={{random_password}}'></script>
 <script type='text/javascript' src='{{url_root}}/media/mobile/js/rate.js?nonce={{random_password}}'></script>
 <script type='text/javascript' src='{{url_root}}/media/mobile/js/accounts.js?nonce={{random_password}}'></script>
+<script type='text/javascript' src='{{url_root}}/media/mobile/js/crc-transparent-slider.js?nonce={{random_password}}'></script>
 <script type='text/javascript' src='{{url_root}}/media/mobile/js/utils.js'></script>
 
 <script type='text/javascript' src='{{url_root}}/media/mobile/jquery-mobile/jquery.mobile-1.3.2.min.js'></script>
@@ -53,6 +55,8 @@
   window.email_saved = false;
 
   window.prev_state = 'home';
+
+  window.mousedown = 0;
 
   window.cur_state = 'home';
 
@@ -105,21 +109,6 @@
       id = parseInt(id.substring(1, id.length)); // strips the leading 's'
       update_score(id);
      });
-
-  var sliderId = i + 1;
-  document.getElementById('inner-div-'+sliderId).style.right = (window.sliders[sliderId-1])*window.slider_shift + 'px';
-  console.log(sliderId);
-  document.getElementById('grade-'+window.sliders[sliderId-1]+'-'+sliderId).style.border = '2px solid #3f8b44';
-  document.getElementById('grade-'+window.sliders[sliderId-1]+'-'+sliderId).style.opacity = '1';
-  document.getElementById('grade-'+window.sliders[sliderId-1]+'-'+sliderId).style.backgroundColor = "rgba(255, 255, 255, 0.3)";
-  document.getElementById('grade-'+(window.sliders[sliderId-1]+8)+'-'+sliderId).style.border = '1px solid #FFFFFF';
-  document.getElementById('grade-'+(window.sliders[sliderId-1]+8)+'-'+sliderId).style.backgroundColor = "rgba(255, 255, 255, 0.0)";
-
-  document.getElementById('grade-'+(window.sliders[sliderId-1]+8)+'-'+sliderId).style.opacity = '.75';
-  document.getElementById('grade-'+(window.sliders[sliderId-1]+16)+'-'+sliderId).style.opacity = '0.2';
-
-  document.getElementById('grade-'+(window.sliders[sliderId-1]-8)+'-'+sliderId).style.opacity = '.75';
-  document.getElementById('grade-'+(window.sliders[sliderId-1]-16)+'-'+sliderId).style.opacity = '0.2';
 
    }
 
@@ -199,60 +188,6 @@
         return 'F';
     else
         return 'D-';
- }
-
- function incrementSlider(sliderId){
-
-  if (window.sliders[sliderId-1] <= -14)
-    return;
-
-  var offset =  window.sliders[sliderId-1];
-  document.getElementById('inner-div-'+sliderId).style.right = (offset - 8)*window.slider_shift + 'px';
-  window.sliders[sliderId-1] = window.sliders[sliderId-1] - 8;
-  document.getElementById('grade-'+window.sliders[sliderId-1]+'-'+sliderId).style.opacity = '1';
-  document.getElementById('grade-'+window.sliders[sliderId-1]+'-'+sliderId).style.border = '2px solid #3f8b44';
-  document.getElementById('grade-'+window.sliders[sliderId-1]+'-'+sliderId).style.backgroundColor = "rgba(255, 255, 255, 0.3)";
-  document.getElementById('grade-'+(window.sliders[sliderId-1]+8)+'-'+sliderId).style.border = '1px solid #FFFFFF';
-  document.getElementById('grade-'+(window.sliders[sliderId-1]+8)+'-'+sliderId).style.backgroundColor = "rgba(255, 255, 255, 0.0)";
-  document.getElementById('grade-'+(window.sliders[sliderId-1]+8)+'-'+sliderId).style.opacity = '0.75';
-
-  if (window.sliders[sliderId-1]+16 <= 82)
-    document.getElementById('grade-'+(window.sliders[sliderId-1]+16)+'-'+sliderId).style.opacity = '0.2';
-
-  if (window.sliders[sliderId-1]-8 >= -14)
-    document.getElementById('grade-'+(window.sliders[sliderId-1]-8)+'-'+sliderId).style.opacity = '0.75';
-
-  if (window.sliders[sliderId-1]-16 >= -14)
-    document.getElementById('grade-'+(window.sliders[sliderId-1]-16)+'-'+sliderId).style.opacity = '0.2';
-
- }
-
-  function decrementSlider(sliderId){
-
-   if (window.sliders[sliderId-1] >= 82)
-    return;
-
-  var offset =  window.sliders[sliderId-1];
-  document.getElementById('inner-div-'+sliderId).style.right = (offset + 8)*window.slider_shift + 'px';
-  window.sliders[sliderId-1] = window.sliders[sliderId-1] + 8;
-  document.getElementById('grade-'+window.sliders[sliderId-1]+'-'+sliderId).style.opacity = '1';
-  document.getElementById('grade-'+window.sliders[sliderId-1]+'-'+sliderId).style.border = '2px solid #3f8b44';
-  document.getElementById('grade-'+window.sliders[sliderId-1]+'-'+sliderId).style.backgroundColor = "rgba(255, 255, 255, 0.3)";
-
-  document.getElementById('grade-'+(window.sliders[sliderId-1]-8)+'-'+sliderId).style.border = '1px solid #FFFFFF';
-  document.getElementById('grade-'+(window.sliders[sliderId-1]-8)+'-'+sliderId).style.backgroundColor = "rgba(255, 255, 255, 0.0)";
- 
-  if (window.sliders[sliderId-1]+8 <= 82)
-    document.getElementById('grade-'+(window.sliders[sliderId-1]+8)+'-'+sliderId).style.opacity = '0.75';
-  
-  if (window.sliders[sliderId-1]+16 <= 82)
-    document.getElementById('grade-'+(window.sliders[sliderId-1]+16)+'-'+sliderId).style.opacity = '0.2';
-
-  document.getElementById('grade-'+(window.sliders[sliderId-1]-8)+'-'+sliderId).style.opacity = '0.75';
-  
-  if (window.sliders[sliderId-1]-16 >= -14)
-    document.getElementById('grade-'+(window.sliders[sliderId-1]-16)+'-'+sliderId).style.opacity = '0.2';
-
  }
 
  function statementsComplete() {
@@ -375,27 +310,11 @@
               {% for statement in statements %}
               <div style="background-color: rgba(0,0,0,0); text-align: left; color: #FFFFFF; padding-left: 10px; font-size: 16px; padding-bottom: 50px;">
                     {{ statement.statement }}
-                    <center>
-                    <div class="manual-slide" onclick="incrementSlider({{ statement.id}});" style="float: left;margin-top: 5px;"><</div>
-                    <div id="outer-div-{{statement.id}}" style="max-height: 60px; overflow:hidden; max-width: 240px;float: left;margin-top: 5px;">
-                      <div id="inner-div-{{statement.id}}" style="position: relative; width: 800px;">
-                        <div class="slider-grade-val" id="grade--14-{{ statement.id}}">A+</div>
-                        <div class="slider-grade-val" id="grade--6-{{ statement.id}}">A</div>
-                        <div class="slider-grade-val" id="grade-2-{{ statement.id}}">A-</div>
-                        <div class="slider-grade-val" id="grade-10-{{ statement.id}}">B+</div>
-                        <div class="slider-grade-val" id="grade-18-{{ statement.id}}">B</div>
-                        <div class="slider-grade-val" id="grade-26-{{ statement.id}}">B-</div>
-                        <div class="slider-grade-val" id="grade-34-{{ statement.id}}">C+</div>
-                        <div class="slider-grade-val" id="grade-42-{{ statement.id}}">C</div>
-                        <div class="slider-grade-val" id="grade-50-{{ statement.id}}">C-</div>
-                        <div class="slider-grade-val" id="grade-58-{{ statement.id}}" >D+</div>
-                        <div class="slider-grade-val" id="grade-66-{{ statement.id}}" >D</div>
-                        <div class="slider-grade-val" id="grade-74-{{ statement.id}}" >D-</div>
-                        <div class="slider-grade-val" id="grade-82-{{ statement.id}}">F</div>
-                      </div>
-                    </div>
-                    <div class="manual-slide" onclick="decrementSlider({{ statement.id}});" style="float: left;">></div>
+                    
+                      
+                      <div class="slider" id="slider-{{statement.id}}"></div>
 
+                <center>    
                 <div style="clear: both;"></div>
                  <div class="skip-img{{statement.id}} button-skip" id="skip-img{{statement.id}}" style="margin-top:5px;position: relative; left: 5px;" onclick="accounts.skipStatement({{statement.id}})">Skip</div>
                </center>
@@ -611,31 +530,7 @@
 
      <div class='sliders'>
          How important is this issue for the next Report Card?<br/>
-
-        <div style="background-color: rgba(0,0,0,0); text-align: left; color: #FFFFFF; padding-left: 10px; font-size: 16px;">
-                    <center>
-                    <div class="manual-slide" onclick="" style="float: left;margin-top: 5px;"><</div>
-                    <div style="max-height: 60px; overflow:hidden; max-width: 230px;float: left;margin-top: 5px;">
-                      <div id="inner-div-importance" style="position: relative; width: 800px;">
-                        <div class="slider-grade-val" id="grade--14-importance">A+</div>
-                        <div class="slider-grade-val" id="grade--6-importance">A</div>
-                        <div class="slider-grade-val" id="grade-2-importance">A-</div>
-                        <div class="slider-grade-val" id="grade-10-importance">B+</div>
-                        <div class="slider-grade-val" id="grade-18-importance">B</div>
-                        <div class="slider-grade-val" id="grade-26-importance">B-</div>
-                        <div class="slider-grade-val" id="grade-34-importance">C+</div>
-                        <div class="slider-grade-val" id="grade-42-importance">C</div>
-                        <div class="slider-grade-val" id="grade-50-importance">C-</div>
-                        <div class="slider-grade-val" id="grade-58-importance" >D+</div>
-                        <div class="slider-grade-val" id="grade-66-importance" >D</div>
-                        <div class="slider-grade-val" id="grade-74-importance" >D-</div>
-                        <div class="slider-grade-val" id="grade-82-importance">F</div>
-                      </div>
-                    </div>
-                    <div class="manual-slide" onclick="" style="float: left;">></div>
-               </center>
-       </div>
-
+                   <div class="slider" id="slider-importance"></div>
        <div class="slider-padding"></div>
 
        <div style="clear: both;"></div>
@@ -643,28 +538,7 @@
         <!--<div id="slider1" class="rating-slider rating-slider1"></div><br/>-->
 
          How would you rate the State of California on this issue today?<br/>
-          <div style="background-color: rgba(0,0,0,0); text-align: left; color: #FFFFFF; padding-left: 10px; font-size: 16px;">
-                    <center>
-                    <div class="manual-slide" onclick="" style="float: left;margin-top: 5px;"><</div>
-                    <div style="max-height: 60px; overflow:hidden; max-width: 230px;float: left;margin-top: 5px;">
-                      <div id="inner-div-grade" style="position: relative; width: 800px;">
-                        <div class="slider-grade-val" id="grade--14-grade">A+</div>
-                        <div class="slider-grade-val" id="grade--6-grade">A</div>
-                        <div class="slider-grade-val" id="grade-2-grade">A-</div>
-                        <div class="slider-grade-val" id="grade-10-grade">B+</div>
-                        <div class="slider-grade-val" id="grade-18-grade">B</div>
-                        <div class="slider-grade-val" id="grade-26-grade">B-</div>
-                        <div class="slider-grade-val" id="grade-34-grade">C+</div>
-                        <div class="slider-grade-val" id="grade-42-grade">C</div>
-                        <div class="slider-grade-val" id="grade-50-grade">C-</div>
-                        <div class="slider-grade-val" id="grade-58-grade" >D+</div>
-                        <div class="slider-grade-val" id="grade-66-grade" >D</div>
-                        <div class="slider-grade-val" id="grade-74-grade" >D-</div>
-                        <div class="slider-grade-val" id="grade-82-grade">F</div>
-                      </div>
-                    </div>
-                    <div class="manual-slide" onclick="" style="float: left;">></div>
-           </div>
+         <div class="slider" id="slider-grade"></div>
            <div style="clear: both;"></div>
                
         <!--<div id="slider2" class="rating-slider rating-slider2"></div><br/>-->
