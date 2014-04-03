@@ -89,13 +89,13 @@ $(".crc-div-wrapper").on("swiperight",function(){
 		$(this).parent().children(".crc-div-wrapper").children(".grade-container").css("right",current_pos+"px");
         });*/
 
-$(".crc-div-wrapper").on("mousedown",function(e){
+$(".crc-div-wrapper").on("vmousedown",function(e){
         x=e.pageX;
         y=e.pageY;
         window.mousedown  =x;
         });
 
-$(".crc-div-wrapper").mousemove(function(e){
+$(".crc-div-wrapper").on('vmousemove',function(e){
   
   if(window.mousedown != 0)
   {x=e.pageX;
@@ -111,7 +111,8 @@ $(".crc-div-wrapper").mousemove(function(e){
 
 });
 
-$(".crc-div-wrapper").on("mouseup",function(e){
+
+$(".crc-div-wrapper").on("vmouseup",function(e){
         x=e.pageX;
         y=e.pageY;
         var current_pos = $(this).children(".grade-container").css("right");
@@ -124,7 +125,43 @@ $(".crc-div-wrapper").on("mouseup",function(e){
         					slider_utils.focusSlider($(this));
         					slider_utils.setOpacity($(this));
         });
-        
+
+$(".crc-div-wrapper").on("touchstart",function(e){
+        x=e.pageX;
+        y=e.pageY;
+        window.mousedown  =x;
+        });
+
+$(".crc-div-wrapper").on('touchmove',function(e){
+  
+  if(window.mousedown != 0)
+  {x=e.pageX;
+  y=e.pageY;
+  var current_pos = $(this).children(".grade-container").css("right");
+  current_pos = current_pos.substring(0,current_pos.length - 2);
+  current_pos = parseInt(current_pos,10) - (x - window.mousedown)/20;
+
+  current_pos = Math.min(Math.max(current_pos,-100),512);
+  slider_utils.setOpacity($(this));
+  $(this).parent().children(".crc-div-wrapper").children(".grade-container").css("right",current_pos+"px");
+	}
+
+});
+
+
+$(".crc-div-wrapper").on("touchend",function(e){
+        x=e.pageX;
+        y=e.pageY;
+        var current_pos = $(this).children(".grade-container").css("right");
+									current_pos = current_pos.substring(0,current_pos.length - 2);
+									current_pos = parseInt(current_pos,10) - 257;
+									current_pos = Math.round(current_pos/51.0)*51.0 + 257;
+									current_pos = Math.min(Math.max(current_pos,-100),512);
+									$(this).parent().children(".crc-div-wrapper").children(".grade-container").css("right",current_pos+"px");
+        					window.mousedown  =0;
+        					slider_utils.focusSlider($(this));
+        					slider_utils.setOpacity($(this));
+        });
 
 
 });
