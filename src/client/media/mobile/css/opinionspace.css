@@ -501,6 +501,7 @@ table.pretty caption {
 		/*background-color: #FAEBCD;*/
 		/*background: #76b9b6;*/
 		background-image:url('../img/cafe/golden_gate_bridge_foggy.jpg');
+		background-size: 100% auto;
 		z-index: 999;
 		overflow-y: auto;
 		overflow-x: hidden;
@@ -520,6 +521,7 @@ table.pretty caption {
     		color: white;
     		/*background-color: #FAEBCD;*/
     		background-image:url('../img/cafe/golden_gate_bridge_foggy.jpg');
+    		background-size: 100% auto;
     		z-index: 997;
     		overflow-y: auto;
     		overflow-x: hidden;
@@ -716,6 +718,7 @@ table.pretty caption {
 		width: 100%;
 		height: 100%;
 		background-image:url('../img/cafe/golden_gate_bridge_foggy.jpg');
+		background-size: 100% auto;
 		overflow: auto;
 		z-index: 999;
 	}
@@ -728,6 +731,7 @@ table.pretty caption {
 		width: 100%;
 		height: 100%;
 		background-image:url('../img/cafe/golden_gate_bridge_foggy.jpg');
+		background-size: 100% auto;
 		/*background-image:url('../img/cafe/cafe_bg.jpg');*/
 		/*background-color: #FAEBCD;*/
 		/*background: #76b9b6; Old browsers */
@@ -1011,6 +1015,7 @@ padding-right: 7px;
 
 .dialog-style{
 	background-image:url('../img/cafe/golden_gate_bridge_foggy.jpg');
+	background-size: 100% auto;
 	width: 100%;
 	position: absolute;
 	top:0;
