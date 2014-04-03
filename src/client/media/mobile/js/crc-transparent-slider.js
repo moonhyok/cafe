@@ -130,6 +130,9 @@ $(".crc-div-wrapper").on("touchstart",function(e){
         x=e.pageX;
         y=e.pageY;
         window.mousedown  =x;
+          if( navigator.userAgent.match(/Android/i) ) {
+    		e.preventDefault();
+  			}
         });
 
 $(".crc-div-wrapper").on('touchmove',function(e){
