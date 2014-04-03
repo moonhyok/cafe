@@ -132,8 +132,8 @@ $(".crc-div-wrapper").on("touchstart",function(e){
         window.mousedown  =x;
           if( navigator.userAgent.match(/Android/i) ) {
     		e.preventDefault();
-  			}
-        });
+  			}}
+        ,false);
 
 $(".crc-div-wrapper").on('touchmove',function(e){
   
