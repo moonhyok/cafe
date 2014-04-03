@@ -129,11 +129,7 @@ $(".crc-div-wrapper").on("vmouseup",function(e){
 $(".crc-div-wrapper").on("touchstart",function(e){
         x=e.pageX;
         y=e.pageY;
-        window.mousedown  =x;
-          if( navigator.userAgent.match(/Android/i) ) {
-    		e.preventDefault();
-  			}}
-        ,false);
+        window.mousedown  =x;});
 
 $(".crc-div-wrapper").on('touchmove',function(e){
   
