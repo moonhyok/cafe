@@ -1,0 +1,42 @@
+	.manual-slide{
+		line-height: 55px;
+		font-size: 20px;
+		width: 20px;
+		margin-right: 5px;
+		margin-left: 5px;
+		border:1px solid #FFFFFF;
+		padding-top:0px;
+		text-align: center;
+		border-radius:10px;
+		background-color: rgba(200,200,200,.5);
+		float: left;margin-top: 5px;
+	}
+
+	.crc-div-wrapper{
+	max-height: 60px; 
+	overflow:hidden; 
+	max-width: 240px;
+	float: left;
+	margin-top: 5px;
+	}
+
+	.grade-container{
+
+		position: relative; 
+		width: 800px;
+		right: 257px;
+	}
+
+		.slider-grade-bubble{
+		border:1px solid #FFFFFF;
+		border-radius:22px;
+		line-height: 45px;
+		font-size: 20px;
+		text-align: center;
+		width: 45px;
+		float:left;
+		margin-right: 2px;
+		margin-left: 2px;
+		margin-bottom: 5px;
+		margin-top: 5px;
+	}
