@@ -37,16 +37,16 @@ function map_capita(){
         function getColor(d) {
 			
 			
-		return	   d > 3 ? "#bc3160" :
-		           d > 2   ? "#e05e75" :
-		           d > 1   ? "#ff8ba1" :
-		           d > 0.5   ? "#fbbd88" :
-		           d > 0.2   ? "#fef391" :
- 			       d > 0.1   ? "#c1e9a3" :
-			       d > 0.05   ? "#61b392" :
-			       d > 0.02   ? "#5890a8" :
-			       d > 0      ? "#8c75a9" :
-			                    "#7d625f" ;
+		return	   d > 3 ? "#7f2704" :
+		           d > 2   ? "#a63603" :
+		           d > 1   ? "#d94801" :
+		           d > 0.5   ? "#f16913" :
+		           d > 0.2   ? "#fd8d3c" :
+ 			       d > 0.1   ? "#fdae6b" :
+			       d > 0.05   ? "#fdd0a2" :
+			       d > 0.02   ? "#fee6ce" :
+			       d > 0      ? "#fff5eb" :
+			                    "#3d3333" ;
 		}
 
 		function style(feature) {
