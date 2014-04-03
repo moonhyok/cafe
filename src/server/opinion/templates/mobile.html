@@ -308,18 +308,17 @@
               <div style="height: 7px;"></div>
 
               {% for statement in statements %}
-              <div style="background-color: rgba(0,0,0,0); text-align: left; color: #FFFFFF; padding-left: 10px; font-size: 16px; padding-bottom: 50px;">
+              <center>
+              <div style="background-color: rgba(0,0,0,0); text-align: left;color: #FFFFFF; padding-left: 10px; font-size: 16px; padding-bottom: 50px;">
                     {{ statement.statement }}
                     
-                <center>   
-                      <div class="slider" id="slider-{{statement.id}}"></div>
+                <div class="slider" id="slider-{{statement.id}}"></div>
 
                   
                 <div style="clear: both;"></div>
-                 <div class="skip-img{{statement.id}} button-skip" id="skip-img{{statement.id}}" style="margin-top:5px;position: relative; left: 5px;" onclick="accounts.skipStatement({{statement.id}})">Skip</div>
-               </center>
-
+                 <div class="skip-img{{statement.id}} button-skip" id="skip-img{{statement.id}}" style="margin-top:5px;position: relative; left: 120px;" onclick="accounts.skipStatement({{statement.id}})">Skip</div>
               </div>
+            </center>
 
               <!--<table class='cardtable grade-table'>
                   <tr id="tr{{statement.id}}">
