@@ -26,7 +26,7 @@ def geostats():
     """produce geojson file for leaflet"""
     f=open(imagepath+'participant_county.txt','w')
     f.write("all log zip "+str(len(ZipCodeLog.objects.all()))+'\n')
-    geo_json=open('geo-ca.json')
+    geo_json=open('/var/www/latest-version/src/server/opinion/geo-ca.json')
     geo_data=json.load(geo_json)
     skip_begin_date=datetime.datetime(2014,1,9,0,0,0,0)
     statements = OpinionSpaceStatement.objects.all().order_by('id')
