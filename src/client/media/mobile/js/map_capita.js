@@ -1,6 +1,6 @@
 function map_capita(){	
 
-		var map = L.map('map_capita').setView([37.9, -117.8], 5);
+		var map = L.map('map_capita').setView([37.9, -118.8], 5.5);
                 map.scrollWheelZoom.disable();
 
 
@@ -46,7 +46,7 @@ function map_capita(){
 			       d > 0.05   ? "#fdd0a2" :
 			       d > 0.02   ? "#fee6ce" :
 			       d > 0      ? "#fff5eb" :
-			                    "#3d3333" ;
+			                    "#dddddd" ;
 		}
 
 		function style(feature) {
