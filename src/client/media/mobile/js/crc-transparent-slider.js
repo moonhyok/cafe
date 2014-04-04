@@ -138,7 +138,7 @@ $(".crc-div-wrapper").on('touchmove',function(e){
   y=e.pageY;
   var current_pos = $(this).children(".grade-container").css("right");
   current_pos = current_pos.substring(0,current_pos.length - 2);
-  current_pos = parseInt(current_pos,10) - (x - window.mousedown)/20;
+  current_pos = parseInt(current_pos,10) - (x - window.mousedown)/1.0;
 
   current_pos = Math.min(Math.max(current_pos,-100),512);
   slider_utils.setOpacity($(this));
