@@ -50,6 +50,16 @@
 		opacity: 0.25;
 	}
 
+	.slider-progress-dot{
+		border:1px solid #000000;
+		border-radius:7px;
+		height: 7px;
+		width: 7px;
+		background: #000000;
+		display:inline-block;
+		margin-right: 7px;
+	}
+
 	.slider{
 		max-width: 200px;
 	}

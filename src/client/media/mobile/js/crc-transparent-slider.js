@@ -7,6 +7,11 @@ var slider_utils = (function($, d3, console) {
 
 jQuery(document).ready(function(){
 
+for (var i=1;i<=window.num_sliders;i++)
+{
+	$(".slider-progress").append("<div class=\"slider-progress-dot slider-progress-dot-"+i+"\"></div>")
+}
+
 //$( ".slider" ).append( "<span class=\"manual-slide manual-slide-left\"><</span>" );
 $( ".slider" ).append( "<div class=\"crc-div-wrapper\"><div class=\"grade-container\"></div></div>" );
 
@@ -21,12 +26,15 @@ grades.forEach(function(grade) {
 });
 $(".slider-grade-bubble").on("click",function(e){ 
 	$(this).parent().children(".slider-grade-bubble").css("opacity","0.25"); 
+	$(this).parent().children(".slider-grade-bubble").css("border","2px solid #FFFFFF");
+
 	$(this).css("opacity","1.0"); 
-	median = score_to_grade(100*medians[parseInt($(this).parent().parent().parent().attr("id").substring(7))]);
+	$(this).css("border","3px solid #00FFFF");
+	//median = score_to_grade(100*medians[parseInt($(this).parent().parent().parent().attr("id").substring(7))]);
 	
-	$(this).parent().children(".bubble-"+median.replace("+","p")).css("opacity","1.0");
-	$(this).parent().children(".bubble-"+median.replace("+","p")).css("border","1px solid #00FFFF");
-	$(this).parent().children(".bubble-"+median.replace("+","p")).append("<div style=\"font-size: 10px;\">Median</font>")
+	//$(this).parent().children(".bubble-"+median.replace("+","p")).css("opacity","1.0");
+	//$(this).parent().children(".bubble-"+median.replace("+","p")).css("border","1px solid #000000");
+	//$(this).parent().children(".bubble-"+median.replace("+","p")).innerHTML = "<div style=\"font-size: 10px;\">Median</font>";
 });
 //$(".slider-grade-bubble").on("mouseover",function(e){ $(this).css("opacity","0.5"); });
 

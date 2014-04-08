@@ -420,8 +420,11 @@ var rate = (function($, d3, console) {
 $(document).ready(function() {
     $('.score-label').text(utils.toTitleCase(window.conf['YOUR_SCORE_LANGUAGE']).trim().replace(':', '') + ' is ');
 
-    $('.done-endsliders-btn').click(function() {
-        window.prev_state = 'grade';
+    $('.endsliders-next-btn').click(function(event){ 
+        
+        if(parseInt(event.target.id.substring(5),10)+1 > window.num_sliders)
+        {
+            window.prev_state = 'grade';
         window.cur_state = 'register';
         rate.logUserEvent(5,'sliders finished');
         rate.storeSliders(window.num_sliders);
@@ -430,23 +433,20 @@ $(document).ready(function() {
                 rate.sendSlider(window.sliders[i], i);
             }
 
-            /*if(!window.no_menubar)
-            {
-                $('.menubar').show();
-                $('.scorebox').show();
-            }*/
-
         }
-    });
-
-    $('.endsliders-next-btn').click(function(event){ 
-        $("#slide-"+event.target.id.substring(5)).hide();
-        $("#slide-"+(parseInt(event.target.id.substring(5),10)+1)).show();
+        }
+        else
+            {
+                $("#slide-"+event.target.id.substring(5)).hide();
+                $("#slide-"+(parseInt(event.target.id.substring(5),10)+1)).show();
+                $(".slider-progress-dot-"+(parseInt(event.target.id.substring(5),10)+1)).css("background","#FFFFFF");
+            }
     });
 
     $('.endsliders-back-btn').click(function(event){ 
         $("#slide-"+event.target.id.substring(5)).hide();
         $("#slide-"+(parseInt(event.target.id.substring(5),10)-1)).show();
+        $(".slider-progress-dot-"+(parseInt(event.target.id.substring(5),10))).css("background","#000000");
     });
 
     $('.comment-submit-btn').click(function() {

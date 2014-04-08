@@ -352,6 +352,7 @@ table.pretty caption {
 		color: #4e300f;
 		text-shadow: none;
 		height: 100%;
+		width: 100%;
 		
 
 	}
@@ -547,14 +548,14 @@ table.pretty caption {
 
 	.landing-img-title{
 	color: #FFFFFF;
-	font-size: 40px;
+	font-size: 44px;
 	text-shadow: none;
 	font-weight: bold;
 	}
 
 	.landing-img-txt{
 	color: #FFFFFF;
-	font-size: 16px;
+	font-size: 18px;
 	text-shadow: none;
 	text-align: left;
 	}
@@ -655,10 +656,9 @@ table.pretty caption {
 	}
 
 	.sliders, .reg-sliders{
-		text-align: left;
 		text-shadow: none;
 		width: 95%;
-		font-size: 16px;
+		font-size: 18px;
 		line-height: 17px;
 		
 		padding-bottom: 3px;
@@ -1244,11 +1244,12 @@ padding-right: 7px;
 	background-color: rgba(0,0,0,0); 
 	text-align: left;
 	color: #FFFFFF; 
-	font-size: 20px; 
+	font-size: 18px; 
 	padding-left: 10px; 
-	padding-top: 5px; p
-	padding-bottom: 50px;
+	padding-top: 0px;
+	line-height: 18px;
 	display: none;
+	width: 95%;
 }
 /*.loading {
 	display: block;
