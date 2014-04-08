@@ -576,16 +576,18 @@ table.pretty caption {
 	}
 
 		.button-skip {
-		background-color: rgba(255, 255, 255,0.15);
 		border:1px solid #FFFFFF;
-		border-radius:16px;
-		width: 70px;
-		font-weight: normal;
-		font-size: 12px;
-		line-height: 14px;
+		background-color: rgba(100, 100, 100,0.25);
+		border-radius:24px;
+		line-height: 50px;
+		font-size: 20px;
 		text-align: center;
-		color: #FFFFFF;
-		text-shadow: none;
+		width: 55px;
+		opacity: 0.5;
+		margin-right: 2px;
+		margin-left: 2px;
+		margin-bottom: 2px;
+		margin-top: 2px;
 		/*position: absolute;
 		bottom: 20px;*/
 	}
@@ -1235,6 +1237,18 @@ padding-right: 7px;
 
 .responsive-max-width{
         max-width: 500px;
+}
+
+.endsliders-slide
+{
+	background-color: rgba(0,0,0,0); 
+	text-align: left;
+	color: #FFFFFF; 
+	font-size: 20px; 
+	padding-left: 10px; 
+	padding-top: 5px; p
+	padding-bottom: 50px;
+	display: none;
 }
 /*.loading {
 	display: block;

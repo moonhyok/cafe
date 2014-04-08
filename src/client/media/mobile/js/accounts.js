@@ -167,6 +167,8 @@ var accounts = (function($, d3, console) {
         //document.getElementById('skip-img'+id).innerHTML = "grade";
         //document.getElementById('skip-img'+id).style.width = '50px';
         window.skipped[id-1] = true;
+        $("#skip-img"+id).css("opacity","1.0");
+        //$("#slider-"+id).css("background-color","rgba(200,200,200,0.3)");
         document.getElementById('skip-img'+id).innerHTML = "Grade";
         rate.logUserEvent(11,'slider_set ' + id + ' ' + 'Grade');
     }
@@ -858,38 +860,6 @@ $(document).ready(function() {
            }
         window.no_menubar = false;
 	});
-
-        $("#outer-div-"+1).on("swipeleft",function(){
-        decrementSlider(1);
-        });
-        $("#outer-div-"+1).on("swiperight",function(){
-        incrementSlider(1);
-        });
-        $("#outer-div-"+2).on("swipeleft",function(){
-        decrementSlider(2);
-        });
-        $("#outer-div-"+2).on("swiperight",function(){
-        incrementSlider(2);
-        });
-        $("#outer-div-"+3).on("swipeleft",function(){
-        decrementSlider(3);
-        });
-        $("#outer-div-"+3).on("swiperight",function(){
-        incrementSlider(3);
-        });
-        $("#outer-div-"+4).on("swipeleft",function(){
-        decrementSlider(4);
-        });
-        $("#outer-div-"+5).on("swiperight",function(){
-        incrementSlider(5);
-        });
-        $("#outer-div-"+6).on("swipeleft",function(){
-        decrementSlider(6);
-        });
-        $("#outer-div-"+6).on("swiperight",function(){
-        incrementSlider(6);
-        });
-
 
     window.onpopstate = function(event) {
         backButtonHandler();

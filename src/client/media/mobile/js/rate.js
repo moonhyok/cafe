@@ -439,6 +439,16 @@ $(document).ready(function() {
         }
     });
 
+    $('.endsliders-next-btn').click(function(event){ 
+        $("#slide-"+event.target.id.substring(5)).hide();
+        $("#slide-"+(parseInt(event.target.id.substring(5),10)+1)).show();
+    });
+
+    $('.endsliders-back-btn').click(function(event){ 
+        $("#slide-"+event.target.id.substring(5)).hide();
+        $("#slide-"+(parseInt(event.target.id.substring(5),10)-1)).show();
+    });
+
     $('.comment-submit-btn').click(function() {
         window.comment = $('#entered-comment').val();
         $('.comment-input').hide();

@@ -271,10 +271,7 @@
           &nbsp;
           &nbsp;
           <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
-      </div>
-
-                <div class="basic-header">{{client_settings.REPORT_CARD_HEADER}}</div>
-
+      </div>       
       <!--<center>
         <div class="rc-sub-header">
             {{client_settings.REPORT_CARD_INST}}
@@ -283,6 +280,18 @@
       </center>-->
 
       <div class='reportcard responsive-max-width'>
+
+        <div class="endsliders-slide" id="slide-0" style="display: initial;">
+          <!--<div class="basic-header">{{client_settings.REPORT_CARD_HEADER}}</div>-->
+          Assign grades by pressing the bubbles. The bubble will light up when your grade is recorded.<br/><br/>
+
+          Example:
+          <center>
+            <img src="{{url_root}}/media/mobile/img/cafe/grading-instructions.png" width="200px" style="border: 1px solid white;margin-top: 5px;"/>
+        
+          <div class='endsliders-next-btn button-div' id="next-0">{{client_settings.REPORT_CARD_NEXT_BUTTON}}</div><br/>
+          </center>
+        </div>
 
 
           <center>
@@ -305,18 +314,19 @@
                   </tr>
               </table> -->
 
-              <div style="height: 7px;"></div>
-
               {% for statement in statements %}
               <center>
-              <div style="background-color: rgba(0,0,0,0); text-align: left;color: #FFFFFF; padding-left: 10px; font-size: 16px; padding-bottom: 50px;">
-                    {{ statement.statement }}
-                    
+              <div class="endsliders-slide" id="slide-{{statement.id}}">
+                <center>    
+                  {{ statement.statement }}
                 <div class="slider" id="slider-{{statement.id}}"></div>
 
                   
-                <div style="clear: both;"></div>
-                 <div class="skip-img{{statement.id}} button-skip" id="skip-img{{statement.id}}" style="margin-top:5px;position: relative; left: 120px;" onclick="accounts.skipStatement({{statement.id}})">Skip</div>
+                <div style="clear: both;padding-bottom: 5px;"></div>
+                <div class='endsliders-back-btn button-div' id="back-{{statement.id}}">Back</div>
+                <div class='endsliders-next-btn button-div' id="next-{{statement.id}}">{{client_settings.REPORT_CARD_NEXT_BUTTON}}</div><br/>
+              </center>
+
               </div>
             </center>
 
@@ -358,8 +368,6 @@
               <img class="skip-img-btn" id="skip-img{{statement.id}}" src="{{url_root}}/media/mobile/img/cafe/skip.png" style="position:relative;top: -12px;width: 50px;left: 4px;" onclick="accounts.skipStatement({{statement.id}});"> <br/><br/>-->
 
               {% endfor %}
-                  <div class='done-endsliders-btn button-div' >{{client_settings.REPORT_CARD_NEXT_BUTTON}}</div><br/>
-
           </center>
       </div>
   </div>
