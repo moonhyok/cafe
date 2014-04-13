@@ -18,8 +18,10 @@ $( ".slider" ).append( "<div class=\"crc-div-wrapper\"><div class=\"grade-contai
 grades = ['A+','A','A-','B+','B','B-','C+','C','C-','D+','D','D-','F']
 grades.forEach(function(grade) { 
 
-	if(grade.indexOf('+') >= 0 || grade.indexOf('-') >= 0 )
+	if(grade.indexOf('+') >= 0)
 		$(".grade-container").append("<div class=\"slider-grade-bubble slider-grade-p bubble-" +grade.replace("+","p")+"\">"+grade+"</div>");
+	else if (grade.indexOf('-') >= 0 ) 
+		$(".grade-container").append("<div class=\"slider-grade-bubble slider-grade-m bubble-" +grade+"\">"+grade+"</div>");
 	else	
 		$(".grade-container").append("<div class=\"slider-grade-bubble slider-grade-main bubble-" +grade.replace("+","p")+"\">"+grade+"</div>");
 
