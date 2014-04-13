@@ -1,0 +1,131 @@
+	.manual-slide{
+		line-height: 55px;
+		font-size: 20px;
+		width: 20px;
+		margin-right: 5px;
+		margin-left: 5px;
+		border:1px solid #FFFFFF;
+		padding-top:0px;
+		text-align: center;
+		border-radius:10px;
+		background-color: rgba(200,200,200,.5);
+		float: left;margin-top: 5px;
+	}
+
+	.crc-div-wrapper{
+	max-width: 300px;
+	margin-top: 5px;
+	}
+
+	.grade-container{
+		width: 100%; 
+	}
+		.slider-grade-main{
+		border:2px solid #FFFFFF;
+		border-radius:20px;
+		line-height: 40px;
+		font-size: 22px;
+		text-align: center;
+		width: 44px;
+		display:inline-block;
+		margin-right: 3px;
+		margin-left: 3px;
+		margin-bottom: 3px;
+		margin-top: 3px;
+		opacity: 0.35;
+	}
+
+		.slider-grade-p{
+		border:2px solid #FFFFFF;
+		border-radius:20px;
+		line-height: 40px;
+		font-size: 22px;
+		text-align: center;
+		width: 44px;
+		display:inline-block;
+		margin-right: 3px;
+		margin-left: 3px;
+		margin-bottom: 3px;
+		margin-top: 3px;
+		opacity: 0.35;
+	}
+
+			.slider-grade-m{
+		border:2px solid #FFFFFF;
+		border-radius:20px;
+		line-height: 40px;
+		font-size: 22px;
+		text-align: center;
+		width: 44px;
+		display:inline-block;
+		margin-right: 3px;
+		margin-left: 3px;
+		margin-bottom: 3px;
+		margin-top: 3px;
+		opacity: 0.35;
+	}
+
+	.slider-progress-dot{
+		border:2px solid #000000;
+		border-radius:7px;
+		height: 7px;
+		width: 7px;
+		background: #000000;
+		display:inline-block;
+		margin-right: 7px;
+	}
+
+	.slider{
+		max-width: 300px;
+	}
+	
+
+	.bubble-Ap{
+		background-color: rgba(0,250,0,1.0) !important;
+	}
+
+	.bubble-A{
+		background-color: rgba(20,230,0,1.0) !important;
+	}
+
+	.bubble-A-{
+		background-color: rgba(40,210,0,1.0) !important;
+	}
+
+	.bubble-Bp{
+		background-color: rgba(60,190,0,1.0) !important;
+	}
+
+	.bubble-B{
+		background-color: rgba(80,170,0,1.0) !important;
+	}
+
+	.bubble-B-{
+		background-color: rgba(100,150,0,1.0) !important;
+	}
+
+	.bubble-Cp{
+		background-color: rgba(120,130,0,1.0) !important;
+	}
+
+	.bubble-C{
+		background-color: rgba(200,200,0,1.0) !important;
+	}
+
+	.bubble-C-{
+		background-color: rgba(160,90,0,1.0) !important;
+	}
+
+	.bubble-Dp{
+		background-color: rgba(180,70,0,1.0) !important;
+	}
+
+	.bubble-D{
+		background-color: rgba(200,50,0,1.0) !important;
+	}
+	.bubble-D-{
+		background-color: rgba(220,30,0,1.0) !important;
+	}
+	.bubble-F{
+		background-color: rgba(250,0,0,1.0) !important;
+	}
