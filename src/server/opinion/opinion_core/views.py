@@ -128,6 +128,7 @@ def mobile(request,entry_code=None):
 											 'entry_code': str(entry_code!=None).lower(),
 											 'refer': referrallink,
 											 'client_settings': get_client_settings(True),
+                                             'horizontal_slide': settings.HORIZONTAL_SLIDE,
 											 'topic': DiscussionStatement.objects.filter(is_current=True)[0].statement,
 											 'short_topic': DiscussionStatement.objects.filter(is_current=True)[0].short_version,
 											 'statements': statements,

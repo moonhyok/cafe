@@ -24,7 +24,13 @@
  <link rel='stylesheet' type='text/css' href='{{url_root}}/media/mobile/css/themes/cafe-jquery-new-v2.min.css'/> 
 <link href="{{url_root}}/media/mobile/css/jquery.nouislider.min.css" rel="stylesheet">
 <link rel='stylesheet' type='text/css' href='{{url_root}}/media/mobile/css/opinionspace.css?nonce={{random_password}}' />
+
+{% if horizontal_slide %}
+<link rel='stylesheet' type='text/css' href='{{url_root}}/media/mobile/css/crc-transparent-slider-horizontal.css?nonce={{random_password}}' />
+{% else %}
 <link rel='stylesheet' type='text/css' href='{{url_root}}/media/mobile/css/crc-transparent-slider.css?nonce={{random_password}}' />
+{% endif %}
+
 
 <!-- JavaScript -->
 <script type='text/javascript' src='{{url_root}}/media/mobile/jquery-mobile/jquery-1.10.2.min.js'></script>
@@ -35,7 +41,13 @@
 <script type='text/javascript' src='{{url_root}}/media/mobile/js/blooms.js?nonce={{random_password}}'></script>
 <script type='text/javascript' src='{{url_root}}/media/mobile/js/rate.js?nonce={{random_password}}'></script>
 <script type='text/javascript' src='{{url_root}}/media/mobile/js/accounts.js?nonce={{random_password}}'></script>
+
+{% if horizontal_slide %}
+<script type='text/javascript' src='{{url_root}}/media/mobile/js/crc-transparent-slider-horizontal.js?nonce={{random_password}}'></script>
+{% else %}
 <script type='text/javascript' src='{{url_root}}/media/mobile/js/crc-transparent-slider.js?nonce={{random_password}}'></script>
+{% endif %}
+
 <script type='text/javascript' src='{{url_root}}/media/mobile/js/utils.js'></script>
 
 <script type='text/javascript' src='{{url_root}}/media/mobile/jquery-mobile/jquery.mobile-1.3.2.min.js'></script>
@@ -67,8 +79,6 @@
   window.entry_code = {{ entry_code }} ;
 
   window.registration_in_progress = false;
-
-  window.slider_style = "vertical";
 
   window.landing = true;
 
