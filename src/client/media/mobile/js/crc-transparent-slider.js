@@ -25,7 +25,7 @@ grades.forEach(function(grade) {
 
 });
 $(".slider-grade-bubble").on("click",function(e){ 
-	$(this).parent().children(".slider-grade-bubble").css("opacity","0.25"); 
+	$(this).parent().children(".slider-grade-bubble").css("opacity","0.35"); 
 	$(this).parent().children(".slider-grade-bubble").css("border","2px solid #FFFFFF");
 
 	$(this).css("opacity","1.0"); 

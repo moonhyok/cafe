@@ -115,6 +115,12 @@
   $(".rating-slider").noUiSlider({
     range: [0, 100], start: 50, step: 5, handles: 1,connect: false, behaviour: "none"
   });
+
+  $("#slide-1").css("display","initial");
+  $("#slide-1").css("position","relative");
+  $("#slide-1").css("top","-17px");
+  $("#back-1").hide();
+  $(".slider-progress-dot-"+1).css("background","#FFFFFF");
   
   /*var html_label ="<div class='slider-range-labels'><div class='alignleft'>{{client_settings.SLIDER1_LEFT}}</div><div class='alignright'>{{client_settings.SLIDER1_RIGHT}}</div></div>";
   $('.rating-slider1 > .noUi-base').append( html_label );
@@ -281,8 +287,7 @@
 
       <div class='reportcard'>
 
-        <div class="endsliders-slide" id="slide-0" style="display: initial;">
-          <!--<div class="basic-header">{{client_settings.REPORT_CARD_HEADER}}</div>-->
+        <!--<div class="endsliders-slide" id="slide-0" style="display: initial;">
          <div style="width: 95%;padding-left: 10px;">
           Assign grades by pressing the bubbles. The bubble will light up when your grade is submitted. If you are unsure of how to grade, you can skip the issue by pressing "Next".<br/><br/>
         </div>
@@ -293,7 +298,7 @@
         
           <div class='endsliders-next-btn button-div' id="next-0">Start Grading</div><br/>
           </center>
-        </div>
+        </div>-->
 
               <!--<table class='cardtable title-table'>
                   <tr>
@@ -312,18 +317,21 @@
 
                   </tr>
               </table> -->
-
               {% for statement in statements %}
               <center>
               <div class="endsliders-slide" id="slide-{{statement.id}}">
                 <center>  
                 <div class="slider-progress"></div>  
+                Assign a grade to California on the following issue:<br/><br/>
                 <div style="width: 95%; text-align: center;">{{ statement.statement }}</div>
                 <div class="slider" id="slider-{{statement.id}}"></div>
 
                   
                 <div style="clear: both;padding-bottom: 5px;"></div>
+
+
                 <div class='endsliders-back-btn button-div' id="back-{{statement.id}}">Back</div>
+                
                 <div class='endsliders-next-btn button-div' id="next-{{statement.id}}">{{client_settings.REPORT_CARD_NEXT_BUTTON}}</div><br/>
               </center>
 

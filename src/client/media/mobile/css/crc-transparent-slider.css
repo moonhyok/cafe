@@ -32,7 +32,7 @@
 		margin-left: 2px;
 		margin-bottom: 2px;
 		margin-top: 2px;
-		opacity: 0.25;
+		opacity: 0.35;
 	}
 
 		.slider-grade-p{
@@ -47,11 +47,11 @@
 		margin-left: 5px;
 		margin-bottom: 5px;
 		margin-top: 5px;
-		opacity: 0.25;
+		opacity: 0.35;
 	}
 
 	.slider-progress-dot{
-		border:1px solid #000000;
+		border:2px solid #000000;
 		border-radius:7px;
 		height: 7px;
 		width: 7px;
