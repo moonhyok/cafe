@@ -38,6 +38,19 @@ $(".slider-grade-bubble").on("click",function(e){
 	//$(this).parent().children(".bubble-"+median.replace("+","p")).css("border","1px solid #000000");
 	//$(this).parent().children(".bubble-"+median.replace("+","p")).innerHTML = "<div style=\"font-size: 10px;\">Median</font>";
 });
+
+$(".slider-grade-bubble").on("touchstart",function(e){ 
+	$(this).parent().children(".slider-grade-bubble").css("opacity","0.35"); 
+	$(this).parent().children(".slider-grade-bubble").css("border","2px solid #FFFFFF");
+
+	$(this).css("opacity","1.0"); 
+	$(this).css("border","3px solid #00FFFF");
+	//median = score_to_grade(100*medians[parseInt($(this).parent().parent().parent().attr("id").substring(7))]);
+	
+	//$(this).parent().children(".bubble-"+median.replace("+","p")).css("opacity","1.0");
+	//$(this).parent().children(".bubble-"+median.replace("+","p")).css("border","1px solid #000000");
+	//$(this).parent().children(".bubble-"+median.replace("+","p")).innerHTML = "<div style=\"font-size: 10px;\">Median</font>";
+});
 //$(".slider-grade-bubble").on("mouseover",function(e){ $(this).css("opacity","0.5"); });
 
 
