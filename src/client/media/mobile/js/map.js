@@ -42,20 +42,20 @@
 		function getColor(d) {
 			score=100 - d*100;
 			
-		return	   score > 99.9 ? "#bc3160" :
-		           score > 92   ? "#e05e75" :
-		           score > 86   ? "#ff8ba1" :
-		           score > 81   ? "#fbbd88" :
-		           score > 69   ? "#fef391" :
- 			       score > 63   ? "#c1e9a3" :
-			       score > 56   ? "#61b392" :
-			       score > 44   ? "#5890a8" :
-			       score > 38   ? "#5e7dbc" :
-			       score > 32   ? "#59569e" :
-			       score > 19   ? "#8c75a9" :
-			       score > 1    ? "#c3c3c3" :
-			       score >-1    ? "#7d625f" :
-			                      "#3d3333";
+		return	   score > 99.9 ? "#fff7ec" :
+		           score > 92   ? "#fee8c8" :
+		           score > 86   ? "#fdd49e" :
+		           score > 81   ? "#fdbb84" :
+		           score > 69   ? "#FDA766" :
+ 			       score > 63   ? "#fc8d59" :
+			       score > 56   ? "#ef6548" :
+			       score > 44   ? "#EF5430" :
+			       score > 38   ? "#d7301f" :
+			       score > 32   ? "#b30000" :
+			       score > 19   ? "#7f0000" :
+			       score > 1    ? "#590000" :
+			       score >-1    ? "#390000" :
+			                      "#dddddd";
 		}
 		function style(feature) {
 			return {
