@@ -446,7 +446,7 @@ $(document).ready(function() {
     $('.endsliders-back-btn').click(function(event){ 
         $("#slide-"+event.target.id.substring(5)).hide();
         $("#slide-"+(parseInt(event.target.id.substring(5),10)-1)).show();
-        $(".slider-progress-dot-"+(parseInt(event.target.id.substring(5),10))).css("background","#000000");
+        $(".slider-progress-dot-"+(parseInt(event.target.id.substring(5),10))).css("background","#00CCFF");
     });
 
     $('.comment-submit-btn').click(function() {
@@ -475,6 +475,22 @@ $(document).ready(function() {
           window.prev_state = 'comment';
           window.cur_state = 'continue';
         //$('.scorebox').show();
+    });
+
+    $('.button-div').on("touchstart",function(e){  
+    $(this).css("border","2px solid #FFFF99");
+    });
+
+    $('.button-div').on("touchend",function(e){  
+    $(this).css("border","1px solid #FFFFFF");
+    });
+
+    $('.button-div').on("mousedown",function(e){  
+    $(this).css("border","2px solid #FFFF99");
+    });
+
+    $('.button-div').on("mouseup",function(e){  
+    $(this).css("border","1px solid #FFFFFF");
     });
 
 
