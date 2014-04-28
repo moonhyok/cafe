@@ -27,11 +27,13 @@ grades.forEach(function(grade) {
 
 });
 $(".slider-grade-bubble").on("click",function(e){ 
-	$(this).parent().children(".slider-grade-bubble").css("opacity","0.45"); 
+	$(this).parent().children(".slider-grade-bubble").css("opacity","1.0"); 
 	$(this).parent().children(".slider-grade-bubble").css("border","2px solid #FFFFFF");
+	$(this).parent().children(".slider-grade-bubble").css("color","#FFFFFF");
 
 	$(this).css("opacity","1.0"); 
-	$(this).css("border","3px solid #00FFFF");
+	$(this).css("border","4px solid #00CCFF");
+	$(this).css("color","#FFFFFF");
 	//median = score_to_grade(100*medians[parseInt($(this).parent().parent().parent().attr("id").substring(7))]);
 	
 	//$(this).parent().children(".bubble-"+median.replace("+","p")).css("opacity","1.0");
@@ -42,9 +44,11 @@ $(".slider-grade-bubble").on("click",function(e){
 $(".slider-grade-bubble").on("touchstart",function(e){ 
 	$(this).parent().children(".slider-grade-bubble").css("opacity","0.45"); 
 	$(this).parent().children(".slider-grade-bubble").css("border","2px solid #FFFFFF");
+	$(this).parent().children(".slider-grade-bubble").css("color","#FFFFFF");
 
 	$(this).css("opacity","1.0"); 
-	$(this).css("border","3px solid #00FFFF");
+	$(this).css("border","4px solid #00CCFF");
+	$(this).css("color","#FFFFFF");
 	//median = score_to_grade(100*medians[parseInt($(this).parent().parent().parent().attr("id").substring(7))]);
 	
 	//$(this).parent().children(".bubble-"+median.replace("+","p")).css("opacity","1.0");

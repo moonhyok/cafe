@@ -422,6 +422,9 @@ $(document).ready(function() {
 
     $('.endsliders-next-btn').click(function(event){ 
         
+        $('.first-dialog-nav').hide();
+        $('.slider-nav-box').show();
+
         if(parseInt(event.target.id.substring(5),10)+1 > window.num_sliders)
         {
             window.prev_state = 'grade';
@@ -447,6 +450,12 @@ $(document).ready(function() {
         $("#slide-"+event.target.id.substring(5)).hide();
         $("#slide-"+(parseInt(event.target.id.substring(5),10)-1)).show();
         $(".slider-progress-dot-"+(parseInt(event.target.id.substring(5),10))).css("background","#00CCFF");
+
+        if(parseInt(event.target.id.substring(5),10) == 2)
+        {
+            $('.first-dialog-nav').show();
+            $('.slider-nav-box').hide();
+        }
     });
 
     $('.comment-submit-btn').click(function() {

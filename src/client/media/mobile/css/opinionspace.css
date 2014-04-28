@@ -536,6 +536,13 @@ table.pretty caption {
 	    padding-bottom: 40px;
 	}
 
+	.endsliders-next-btn{
+
+		width: 100px !important;
+		display: inline-block;
+		margin-left: 10px;
+	}
+
 
 	.landing-img-div{
 	text-align: right;
@@ -817,10 +824,9 @@ table.pretty caption {
 .basic-header {
 	font-family: verdana, sans-serif;
 	text-shadow: none;
-	text-align: left !important;
+	text-align: center !important;
 	color: #FFFFFF;
 	font-size: 28px;
-	padding-left: 10px;
 	line-height: 32px;
 }
 
@@ -1083,8 +1089,9 @@ padding-right: 7px;
 	position: relative;
     vertical-align: middle;
     font-family: verdana, sans-serif;
-	color: #4e300f;
-	background: #76b9b6;
+	color: #FFFFFF;
+	background-image:url('../img/cafe/capitol_clean.jpg');
+	background-size: cover;
 	text-decoration: none;
 	text-shadow: none;
 	font-size: 15px;
@@ -1277,10 +1284,9 @@ padding-right: 7px;
 	text-align: left;
 	color: #FFFFFF; 
 	font-size: 18px; 
-	padding-left: 10px; 
 	line-height: 18px;
 	display: none;
-	width: 95%;
+	width: 100%;
 }
 /*.loading {
 	display: block;

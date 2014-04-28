@@ -277,27 +277,24 @@
 
   </div>
 
-  <div id='rating' class='endsliders'>
-
-      <div class="home-btn-dialog-box">
-          <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
-          &nbsp;
-          &nbsp;
-          &nbsp;
-          <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
-          &nbsp;
-          &nbsp;
-          &nbsp;
-          <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
-      </div>       
+  <div id='rating' class='endsliders'>    
+  <div class="home-btn-dialog-box first-dialog-nav" style="margin-bottom: 20px;">
+                      <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+                      &nbsp;
+                      &nbsp;
+                      &nbsp;
+                      <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+                      &nbsp;
+                      &nbsp;
+                      &nbsp;
+                    <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+                    </div>  
       <!--<center>
         <div class="rc-sub-header">
             {{client_settings.REPORT_CARD_INST}}
         </div>
 
       </center>-->
-
-      <div class='reportcard'>
 
         <!--<div class="endsliders-slide" id="slide-0" style="display: initial;">
          <div style="width: 95%;padding-left: 10px;">
@@ -331,21 +328,37 @@
               </table> -->
               {% for statement in statements %}
               <center>
+              
               <div class="endsliders-slide" id="slide-{{statement.id}}">
+                      <div class="home-btn-dialog-box slider-nav-box" style="display: none;">
+                      <img width="30px;" class='endsliders-back-btn' id="back-{{statement.id}}" src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+                      &nbsp;
+                      &nbsp;
+                      &nbsp;
+                      <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+                      &nbsp;
+                      &nbsp;
+                      &nbsp;
+                    <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+                    </div>  
+
                 <center>  
                 <div class="slider-progress"></div>  
-                Assign a grade to California on the following issue:<br/><br/>
-                <div style="width: 95%; text-align: center;">{{ statement.statement }}</div>
-                <div class='endsliders-next-btn button-div-small' id="skip-{{statement.id}}">Skip</div><br/>
+                <div style="width: 95%; text-align: center;">{{ statement.statement }}</div><br/>
+                <!--<div class='endsliders-next-btn button-div-small' id="skip-{{statement.id}}">Skip</div><br/>-->
                 <div class="slider" id="slider-{{statement.id}}"></div>
 
                   
                 <div style="clear: both;padding-bottom: 5px;"></div>
 
+                <center>
+                <div style="text-align: center; width:  100%;">
+                  <div class='endsliders-next-btn button-div' id="next-{{statement.id}}">Skip</div>
+                  <div class='endsliders-next-btn button-div' id="next-{{statement.id}}">{{client_settings.REPORT_CARD_NEXT_BUTTON}}</div>
+                </div>
+                </center>
+                <div style="clear: both;"></div>
 
-                <div class='endsliders-back-btn button-div' id="back-{{statement.id}}">Back</div>
-                
-                <div class='endsliders-next-btn button-div' id="next-{{statement.id}}">{{client_settings.REPORT_CARD_NEXT_BUTTON}}</div><br/>
               </center>
 
               </div>
@@ -389,7 +402,6 @@
               <img class="skip-img-btn" id="skip-img{{statement.id}}" src="{{url_root}}/media/mobile/img/cafe/skip.png" style="position:relative;top: -12px;width: 50px;left: 4px;" onclick="accounts.skipStatement({{statement.id}});"> <br/><br/>-->
 
               {% endfor %}
-      </div>
   </div>
 
   <div class = 'register' id='register'>
