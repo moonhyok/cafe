@@ -22,11 +22,11 @@
 	}
 		.slider-grade-main{
 		border:2px solid #FFFFFF;
-		border-radius:27px;
-		line-height: 55px;
+		border-radius:25px;
+		line-height: 50px;
 		font-size: 22px;
 		text-align: center;
-		width: 55px;
+		width: 50px;
 		display:inline-block;
 		margin-right: 2px;
 		margin-left: 2px;
@@ -37,11 +37,11 @@
 
 		.slider-grade-p{
 		border:2px solid #FFFFFF;
-		border-radius:22px;
-		line-height: 45px;
+		border-radius:20px;
+		line-height: 40px;
 		font-size: 22px;
 		text-align: center;
-		width: 45px;
+		width: 40px;
 		display:inline-block;
 		margin-right: 5px;
 		margin-left: 5px;
@@ -54,11 +54,11 @@
 
 			.slider-grade-m{
 		border:2px solid #FFFFFF;
-		border-radius:22px;
-		line-height: 45px;
+		border-radius:20px;
+		line-height: 40px;
 		font-size: 22px;
 		text-align: center;
-		width: 45px;
+		width: 40px;
 		display:inline-block;
 		margin-right: 5px;
 		margin-left: 5px;
