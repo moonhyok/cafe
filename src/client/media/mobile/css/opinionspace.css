@@ -223,7 +223,7 @@ table.pretty caption {
 		left:0px;
         position: fixed;
         z-index: 999;
-        background-color: #3f8b44;
+        background-color: #000000;
 	}
 
 	.ui-slider-input {
@@ -977,7 +977,7 @@ padding-right: 7px;
     padding-bottom: 0px;
     letter-spacing: 2px;
     text-align: center;
-    background-color: #3f8b44;
+    background-color: #000000;
 }
 
 .home-btn-dialog-box .ui-btn-inner{
