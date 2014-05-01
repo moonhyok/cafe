@@ -441,7 +441,7 @@ $(document).ready(function() {
         else
             {
                 $("#slide-"+event.target.id.substring(5)).hide();
-                $("#slide-"+(parseInt(event.target.id.substring(5),10)+1)).show("slide", { direction: "right" }, 300);
+                $("#slide-"+(parseInt(event.target.id.substring(5),10)+1)).show("slide", { direction: "right" }, 500);
                 $(".slider-progress-dot-"+(parseInt(event.target.id.substring(5),10)+1)).css("background","#FFFFFF");
 
             }
@@ -449,7 +449,7 @@ $(document).ready(function() {
 
     $('.endsliders-back-btn').click(function(event){ 
         $("#slide-"+event.target.id.substring(5)).hide();
-        $("#slide-"+(parseInt(event.target.id.substring(5),10)-1)).show("slide", { direction: "left" }, 300);
+        $("#slide-"+(parseInt(event.target.id.substring(5),10)-1)).show("slide", { direction: "left" }, 500);
         $(".slider-progress-dot-"+(parseInt(event.target.id.substring(5),10))).css("background","#00CCFF");
 
         if(parseInt(event.target.id.substring(5),10) == 2)
