@@ -42,7 +42,7 @@ $(".slider-grade-bubble").on("click",function(e){
 });
 
 $(".slider-grade-bubble").on("touchstart",function(e){ 
-	$(this).parent().children(".slider-grade-bubble").css("opacity","0.45"); 
+	$(this).parent().children(".slider-grade-bubble").css("opacity","1.0"); 
 	$(this).parent().children(".slider-grade-bubble").css("border","2px solid #FFFFFF");
 	$(this).parent().children(".slider-grade-bubble").css("color","#FFFFFF");
 
