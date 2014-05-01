@@ -1287,6 +1287,7 @@ padding-right: 7px;
 	line-height: 18px;
 	display: none;
 	width: 100%;
+	-webkit-transform: translateZ(0);
 }
 /*.loading {
 	display: block;
