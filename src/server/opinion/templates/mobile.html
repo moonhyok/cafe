@@ -344,20 +344,13 @@
 
                 <center>  
                 <div class="slider-progress"></div>  
-                <div style="width: 95%; text-align: center;">{{ statement.statement }}</div>
+                <div style="width: 100%; text-align: center; padding-bottom: 30px;">{{ statement.statement }}</div>
                 <!--<div class='endsliders-next-btn button-div-small' id="skip-{{statement.id}}">Skip</div><br/>-->
-                <div class="slider" id="slider-{{statement.id}}"></div>
-
+                <img class='endsliders-next-btn' style="width: 50px !important; float: left;" id="next-{{statement.id}}" src="{{url_root}}/media/mobile/img/cafe/Skip_V1.png">
+                <div class="slider" style="float: left;" id="slider-{{statement.id}}"></div>
+               <img class='endsliders-next-btn' style="width: 50px !important; float: left; position: relative; left: -10px;" id="next-{{statement.id}}" src="{{url_root}}/media/mobile/img/cafe/Next_V1.png">
                   
                 <div style="clear: both;padding-bottom: 5px;"></div>
-
-                <center>
-                <div style="text-align: center; width:  100%;">
-                  <div class='endsliders-next-btn button-div' id="next-{{statement.id}}">Skip</div>
-                  <div class='endsliders-next-btn button-div' id="next-{{statement.id}}">{{client_settings.REPORT_CARD_NEXT_BUTTON}}</div>
-                </div>
-                </center>
-                <div style="clear: both;"></div>
 
               </center>
 
