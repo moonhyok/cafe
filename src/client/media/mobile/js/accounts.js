@@ -577,7 +577,7 @@ $(document).ready(function() {
                 else if (window.prev_state.indexOf('help') != -1)
                 {
                     $('.dialog-help-alt').show();
-                    window.prev_state = window.prev_state.substring(4);
+                    window.prev_state = 'home';
                 }
                 else if (window.prev_state == 'stats')
                 {
