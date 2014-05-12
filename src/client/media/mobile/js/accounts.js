@@ -324,7 +324,7 @@ var accounts = (function($, d3, console) {
 })($, d3, console);
 
 $(document).ready(function() {
-    $('#reg_form').submit(function(e) {
+    $('#registerb').click(function(e) {
         $('#register').find('.ui-btn-active').removeClass('ui-btn-active ui-focus');
         e.preventDefault();
         e.stopPropagation();
