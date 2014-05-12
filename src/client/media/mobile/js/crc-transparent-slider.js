@@ -34,7 +34,10 @@ $(".slider-grade-bubble").on("click",function(e){
 	$(this).css("opacity","1.0"); 
 	$(this).css("border","4px solid #00CCFF");
 	$(this).css("color","#FFFFFF");
-	//median = score_to_grade(100*medians[parseInt($(this).parent().parent().parent().attr("id").substring(7))]);
+	statement_id = parseInt($(this).parent().parent().parent().attr("id").substring(7));
+	median = score_to_grade(100*medians[statement_id]);
+	//alert(median);
+	$(".median-grade-"+statement_id).html("Median Grade: " + median);
 	
 	//$(this).parent().children(".bubble-"+median.replace("+","p")).css("opacity","1.0");
 	//$(this).parent().children(".bubble-"+median.replace("+","p")).css("border","1px solid #000000");
