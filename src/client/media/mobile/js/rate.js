@@ -447,7 +447,41 @@ $(document).ready(function() {
             }
     });
 
+    $('.skip-btn').click(function(event){ 
+        
+        $('.first-dialog-nav').hide();
+        $('.slider-nav-box').show();
+
+        if(parseInt(event.target.id.substring(5),10)+1 > window.num_sliders)
+        {
+            window.prev_state = 'grade';
+        window.cur_state = 'register';
+        rate.logUserEvent(5,'sliders finished');
+        rate.storeSliders(window.num_sliders);
+        if (window.authenticated) {
+            for (var i = 1; i <= window.num_sliders; i++) {
+                rate.sendSlider(window.sliders[i], i);
+            }
+
+        }
+        }
+        else
+            {
+                $("#slide-"+event.target.id.substring(5)).hide();
+                $("#slide-"+(parseInt(event.target.id.substring(5),10)+1)).show("slide", { direction: "right" }, 500);
+                $(".slider-progress-dot-"+(parseInt(event.target.id.substring(5),10)+1)).css("background","#FFFFFF");
+
+            }
+    });
+
+
     $('.endsliders-back-btn').click(function(event){ 
+        
+        if(parseInt(event.target.id.substring(5),10) == 1)
+        {
+            return;
+        }
+
         $("#slide-"+event.target.id.substring(5)).hide();
         $("#slide-"+(parseInt(event.target.id.substring(5),10)-1)).show("slide", { direction: "left" }, 500);
         $(".slider-progress-dot-"+(parseInt(event.target.id.substring(5),10))).css("background","#00CCFF");
@@ -457,6 +491,7 @@ $(document).ready(function() {
             $('.first-dialog-nav').show();
             $('.slider-nav-box').hide();
         }
+
     });
 
     $('.comment-submit-btn').click(function() {
