@@ -209,6 +209,35 @@
         return 'D-';
  }
 
+  function grade_to_score(grade) {
+    if (grade == 'A+')
+        return 100;
+    else if (grade == 'A')
+        return 92;
+    else if (grade == 'A-')
+        return 86;
+    else if (grade == 'B+')
+        return 81;
+    else if (grade == 'B' )
+        return 69;
+    else if (grade == 'B-')
+        return 62;
+    else if (grade == 'C+')
+        return 56;
+    else if (grade == 'C')
+        return 44;
+    else if (grade == 'C-')
+        return 38;
+    else if (grade == 'D+')
+        return 32;
+    else if (grade == 'D')
+        return 19;
+    else if (grade == 'D-')
+        return 10;
+    else
+        return 0;
+ }
+
  function statementsComplete() {
   for(var i = 0; i < window.num_sliders; i++) {
     if (finishedStatements[i]==0) {
@@ -220,13 +249,13 @@
 
     /** Updates statement number STATEMENT (which is of type number). */
  function update_score(statement) {
-   $('#g' + statement).css('opacity', 1);
+  /* $('#g' + statement).css('opacity', 1);
    console.log(medians[statement]);
    $('#o' + statement).html(score_to_grade(medians[statement]*100))
    window.sliders[statement] = $('#s' + statement).val();
    document.getElementById('tr'+statement).style.backgroundColor = "rgba(255, 255, 0, 0.8)";
    finishedStatements[statement-1]= 1;
-   rate.logUserEvent(11,'slider_set ' + statement + ' ' + window.sliders[statement]/100);
+   rate.logUserEvent(11,'slider_set ' + statement + ' ' + window.sliders[statement]/100);*/
 }
 
 </script>
@@ -418,10 +447,10 @@
       <div class= 'registerpanel responsive-max-width' style="max-width: 90%;padding-left: 10px;">
           <div class="basic-header2" style="width: 100%">{{client_settings.ZIP_CODE_INSTRUCTIONS}}: </div>
 
-          <form id='reg_form' class='form-horizontal' method='post' action='{{ url_root }}/accountsjson/register/'>
+          <form id='reg_form' class='form-horizontal'>
               <center>
               <div data-role="fieldcontain">
-                  <input type ='tel' id='regzip' name='regzip' class='regforminput' value="" placeholder="Zip Code" onblur="$('#reg_form').submit();">
+                  <input type ='tel' id='regzip' name='regzip' class='regforminput' value="" placeholder="Zip Code">
                   <div class='alert-error' id='zipcode-error' style='display:none;'></div>
               </div>
 
@@ -434,18 +463,19 @@
                   <input type="hidden" id='regusername' name='regusername' class='regforminput' value='{{ random_username }}' placeholder="Email" data-theme='b'/>
                   <div class='alert-error' id='username-error' style='display:none;'></div>
               </div>
+
               <div data-role="fieldcontain" style='display:none;'>
                   <label for="regpassword1" class='regforminput' style="display: none;">Password:</label>
                   <input type ='hidden' id='regpassword1' name='regpassword1' class='regforminput' value='{{ random_password }}' placeholder="Password">
                   <div class='alert-error' id='password-error'></div>
               </div>
-
-
-                  <div class="standard-btn-div" onclick="document.getElementById('registerb').focus();">
-                      <div class="button-div" id="registerb">{{client_settings.ZIP_CODE_BUTTON}}</div>
-                  </div>
+                  <!--<div class="standard-btn-div" onclick="document.getElementById('registerb').focus();">
+                      
+                  </div>-->
               </center>
           </form>
+
+           <div class="button-div registerb" id="registerb">{{client_settings.ZIP_CODE_BUTTON}}</div>
       </div>
   </div>
 

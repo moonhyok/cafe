@@ -9,7 +9,7 @@ var accounts = (function($, d3, console) {
 
     function showRegister() {
         $('.register').show();
-        $('#finishRegistration').click(function() {});
+        //$('#finishRegistration').click(function() {});
     }
 
     function showCommentInput() {
@@ -86,8 +86,8 @@ var accounts = (function($, d3, console) {
                     window.authenticated = true;
                     //rate.sendComment(window.comment);
                     rate.logUserEvent(0,'login');
-                    for (var i = 1; i <= window.num_sliders; i++) {
-                        rate.sendSlider(window.sliders[i], i);
+                    for (var i = 0; i < window.num_sliders; i++) {
+                        rate.sendSlider(window.sliders[i], i+1);
                         //blooms will be populated at the end of this! see callback
                         //there are two calls!!
                     }
@@ -198,19 +198,15 @@ var accounts = (function($, d3, console) {
         $('#regzip').prop('disabled', true);
         //utils.ajaxTempOff(function() {
 
-            //seems slow TODO
-            //stats.showGraphs(justRegistered);
-
-
         $.ajax({
             async:false,
             type: "GET",
             dataType: 'json',
             url: window.url_root + '/os/show/1/',
             success: function(data) {
-                $('.score-value').text("" + ~~(data['cur_user_rater_score'] * window.conf.SCORE_SCALE_FACTOR));
+                //$('.score-value').text("" + ~~(data['cur_user_rater_score'] * window.conf.SCORE_SCALE_FACTOR));
                 window.user_score = data['cur_user_rater_score'];
-                $('.username').text(' ' + data['cur_username']);
+                //$('.username').text(' ' + data['cur_username']);
                 if (window.user_score == 0) {
                             accounts.hideAll();
                             $('.dialog').show();
@@ -325,9 +321,9 @@ var accounts = (function($, d3, console) {
 
 $(document).ready(function() {
     $('#registerb').click(function(e) {
-        $('#register').find('.ui-btn-active').removeClass('ui-btn-active ui-focus');
-        e.preventDefault();
-        e.stopPropagation();
+        //$('#register').find('.ui-btn-active').removeClass('ui-btn-active ui-focus');
+        //e.preventDefault();
+        //e.stopPropagation();
 
         if(window.authenticated)
         {
@@ -389,9 +385,10 @@ $(document).ready(function() {
                     if (data.hasOwnProperty('success')) {
                         accounts.setAuthenticated();
                         utils.showLoading("Loading", function() {
+                            
                             accounts.loginAfterRegister(loginData);
                             blooms.populateBlooms();
-                            $('.register').hide();
+                            //$('.register').hide();
                             $("#regzip").attr("disabled", true);
                             utils.hideLoading();
                             window.conf.ZIPCODE=registrationData.zipcode;
@@ -407,6 +404,9 @@ $(document).ready(function() {
                                 });
                             }, 500);*/
                         });
+                        
+         
+
                         //accounts.setAuthenticated();
                     } else {
                         accounts.showRegister();
