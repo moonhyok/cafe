@@ -129,10 +129,6 @@
     range: [0, 100], start: 50, step: 5, handles: 1,connect: false, behaviour: "none"
   });
 
-  $("#slide-1").css("display","initial");
-  $("#slide-1").css("position","relative");
-  $("#slide-1").css("top","-17px");
-  $("#back-1").hide();
   $(".slider-progress-dot-"+1).css("background","#FFFFFF");
   
   /*var html_label ="<div class='slider-range-labels'><div class='alignleft'>{{client_settings.SLIDER1_LEFT}}</div><div class='alignright'>{{client_settings.SLIDER1_RIGHT}}</div></div>";
@@ -267,182 +263,110 @@
 <body>
 
   <div class='landing'>
-
       <div class="home-btn-dialog-box landing-navigation" style="display: none;">
           <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+      </div>      
+
+      <div class="landing-img-title">
+      <center>California<br/>Report Card</center>
       </div>
 
-      <!--<center>
-          <img src="{{url_root}}/media/mobile/img/cafe/cafe-title-cropped.png" style="padding-top: 5px;border: none;width: 250px;" />
-      </center>-->
-      <div style="padding-top: 50px;">
-        <img src="{{url_root}}/media/mobile/img/cafe/california_map.png" style="width: 120px;">
-      </div>
-      
-      <div class="landing-img-title" style="position: relative; top: -120px;">
-      
-      California<br/>Report Card
-      </div>
+      <div class="capitol-bg">
+        <center><div class='button-div-red first-time-btn' style="position: relative; top: 170px;">Begin</div></center>
+       </div>
 
-<center> 
 
-<div style="max-width: 280px; padding-top: 10px; padding-bottom: 30px;">
-   
-    <div class="landing-img-txt">   
-        Take a moment to join <strong>{{num_users}}</strong> others who have graded the State of California on six timely issues.<br/>
-    </div>
-
-</div>
-
-    <div class='first-time-btn button-div-red'>Begin</div> 
-
-</center>
-
-      <!--<center>
-      <div class="landing-disclaimer">
-          {{client_settings.WELCOME_PAGE_TEXT2}}.<br/>
-          Developed by the CITRIS Data & Democracy Initiative and the Office of the Lt. Gov of California.<br>
-      </div>
-      </center>-->
+       <div class="landing-img-txt">   
+           Take a moment to join <strong>{{num_users}}</strong> others who have graded the State of California on six timely issues.<br/>
+       </div>
 
   </div>
 
-  <div id='rating' class='endsliders'>    
-  <div class="home-btn-dialog-box first-dialog-nav" style="margin-bottom: 20px;">
-                      <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
-                      &nbsp;
-                      &nbsp;
-                      &nbsp;
-                      <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
-                      &nbsp;
-                      &nbsp;
-                      &nbsp;
-                    <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
-                    </div>  
-      <!--<center>
-        <div class="rc-sub-header">
-            {{client_settings.REPORT_CARD_INST}}
-        </div>
 
-      </center>-->
 
-        <!--<div class="endsliders-slide" id="slide-0" style="display: initial;">
-         <div style="width: 95%;padding-left: 10px;">
-          Assign grades by pressing the bubbles. The bubble will light up when your grade is submitted. If you are unsure of how to grade, you can skip the issue by pressing "Next".<br/><br/>
-        </div>
+  <div style="clear: both;"></div>
 
-          Example:
-          <center>
-            <img src="{{url_root}}/media/mobile/img/cafe/grading-instructions.png" width="200px" style="border: 1px solid white;margin-top: 5px;margin-bottom: 10px;"/>
-        
-          <div class='endsliders-next-btn button-div' id="next-0">Start Grading</div><br/>
-          </center>
-        </div>-->
 
-              <!--<table class='cardtable title-table'>
-                  <tr>
 
-                      <td class="title-table-label1">
-                          Subject
-                      </td>
 
-                      <td class="title-table-label2">
-                          My<br/>Grade
-                      </td>
+  <div id='rating' class='endsliders'>        
 
-                      <td class="title-table-label2">
-                          <a href="#" onclick="$('.endsliders').hide();$('.dialog-avggrade').show();window.prev_state='grade';window.cur_state='median';" style="color: #f5ebdf !important;">Median Grade</a>
-                      </td>
+      {% for statement in statements %}              
+        <div class="endsliders-slide" id="slide-{{statement.id}}">
 
-                  </tr>
-              </table> -->
-              {% for statement in statements %}
-              <center>
-              
-              <div class="endsliders-slide" id="slide-{{statement.id}}">
-                      <div class="home-btn-dialog-box slider-nav-box" style="display: none;">
-                      <img width="30px;" class='endsliders-back-btn' id="back-{{statement.id}}" src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
-                      &nbsp;
-                      &nbsp;
-                      &nbsp;
-                      <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
-                      &nbsp;
-                      &nbsp;
-                      &nbsp;
-                    <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
-                    </div>  
+         <div class="home-btn-dialog-box first-dialog-nav">
+            <div class="home-btn-title">
+                Vote
+            </div>
+            
+            <div class="home-btn-wrapper" style="width:45%;display:inline-block; text-align: right;">
+                <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png"> &nbsp;
+                
+                <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png"> &nbsp;
+                
+                <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+            </div>
 
-                <center>  
-                <div class="slider-progress"></div>  
-                <div style="width: 100%; text-align: center; padding-bottom: 15px;">{{ statement.statement }}</div>
-                <!--<div class='endsliders-next-btn button-div-small' id="skip-{{statement.id}}">Skip</div><br/>-->
-                <div style="position:relative; left: 15px; width: 100%;">
-                <img class='endsliders-back-btn' style="width: 50px !important; display: inline-block;position: relative;top: -35px;" id="back-{{statement.id}}" src="{{url_root}}/media/mobile/img/cafe/Skip_V1.png">
-                <div class="slider" style="display: inline-block;" id="slider-{{statement.id}}"></div>
-               <img class='endsliders-next-btn' style="width: 50px !important; display: inline-block; position: relative; left: -15px;top: -35px;" id="next-{{statement.id}}" src="{{url_root}}/media/mobile/img/cafe/Next_V1.png">
-                </div>
-                  
-                <div style="clear: both;padding-bottom: 10px;"></div>
-                <div class="median-grade-{{statement.id}}" style="font-size: 26px;display: none;"></div>
-                <div class="button-div skip-button-{{statement.id}} skip-btn" id="next-{{statement.id}}" style="background-color: #adafb2;color: #000000;width: 150px;">SKIP</div>
+         </div> 
 
-              </center>
+          <div class="home-btn-dialog-box slider-nav-box" style="display: none;">
+            
+            <div class="home-btn-title" style="position:relative;left: 20px;">
+              Vote
+            </div>
+           
+            <img width="30px;" class='endsliders-back-btn' id="back-{{statement.id}}" src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png"> &nbsp;
+               
+            <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png"> &nbsp;
+                
+            <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+          
+          </div>  
+
+          <center> 
+              <br/>   
+              <div style="width: 90%; text-align: center; padding-bottom: 15px;">{{ statement.statement }}</div>
+
+              <div style="width: 100%;">
+                <img class='endsliders-back-btn' style="width: 30px !important; display: inline-block; position: relative; top: -100px;" id="back-{{statement.id}}" src="{{url_root}}/media/mobile/img/cafe/Skip_V1.png">
+
+                <div class="slider" style="display: inline-block;margin-left: 15px;margin-right: 5px;" id="slider-{{statement.id}}"></div>
+
+                <img class='endsliders-next-btn' style="width: 30px !important; display: inline-block; position: relative; top: -100px;" id="next-{{statement.id}}" src="{{url_root}}/media/mobile/img/cafe/Next_V1.png">
 
               </div>
-            </center>
+                  
+              <div style="clear: both;"></div>
 
-              <!--<table class='cardtable grade-table'>
-                  <tr id="tr{{statement.id}}">
-                      <td style="height: 60px;background-color:#f5ebdf;" id="tr-label{{statement.id}}">
-                          {% ifnotequal statement.statement '' %}
-                          <div class='slider-question'>
-                              {{statement.id}}. {{ statement.statement }}
-                          </div>
-                          {% else %}
-                          {% endifnotequal %}
-                      </td>
+              <div class="median-grade-{{statement.id}}" style="font-size: 18px;display: none;"></div><br/>
 
-                      <td class="title-table-label2" style="background-color:#f5ebdf;" id="tr-1grade{{statement.id}}">
-                          <div id='g{{statement.id}}' class="grade"></div>
-                      </td>
+              <div class="skip-button-{{statement.id}} skip-btn" id="next-{{statement.id}}">Skip</div>
 
-                      <td class="title-table-label2" style="background-color:#f5ebdf;" id="tr-2grade{{statement.id}}">
-                          <div id='o{{statement.id}}' class="grade2"></div>
-                      </td>
+              <div class="slider-progress"></div>
 
-                  </tr>
+          </center>
 
-                  <tr id="tr-slider{{statement.id}}">
-                      <td colspan="3" class="slider-row" style="border: none;">
-                          {% ifnotequal statement.statement '' %}
-                          <div id="s{{statement.id}}" data-statement="{{statement.id}}" class="endslider-slider{{statement.id}} statement-slider" style=""></div>
-                          {% else %}
-                          <div style='display:none;'>
-                              <br><div id="s{{statement.id}}" data-statement="{{statement.id}}"  class="endslider-slider"></div>
-                          </div>
-                          {% endifnotequal %}
-                      </td>
-                  </tr>
-              </table>-->
+      </div>
+  
+  {% endfor %}
 
-              <!--<img src="{{url_root}}/media/mobile/img/cafe/skip_line.png" style="padding-top: 17px;"/><br/>
-              <img class="skip-img-btn" id="skip-img{{statement.id}}" src="{{url_root}}/media/mobile/img/cafe/skip.png" style="position:relative;top: -12px;width: 50px;left: 4px;" onclick="accounts.skipStatement({{statement.id}});"> <br/><br/>-->
-
-              {% endfor %}
   </div>
 
   <div class = 'register' id='register'>
       <div class="home-btn-dialog-box">
-          <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
-          &nbsp;
-          &nbsp;
-          &nbsp;
-          <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
-          &nbsp;
-          &nbsp;
-          &nbsp;
-          <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
-      </div>
+            <div class="home-btn-title">
+                Register
+            </div>
+            
+            <div class="home-btn-wrapper" style="width:45%;display:inline-block; text-align: right;">
+                <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png"> &nbsp;
+                
+                <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png"> &nbsp;
+                
+                <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+            </div>
+
+         </div> 
 
       <div class= 'registerpanel responsive-max-width' style="max-width: 90%;padding-left: 10px;">
           <div class="basic-header2" style="width: 100%">{{client_settings.ZIP_CODE_INSTRUCTIONS}}: </div>
@@ -481,53 +405,56 @@
 
   <div class='dialog dialog-style'>
       <div class="home-btn-dialog-box">
-          <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
-          &nbsp;
-          &nbsp;
-          &nbsp;
-          <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
-          &nbsp;
-          &nbsp;
-          &nbsp;
-          <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
-      </div>
-      <!--<img class="header-img-topic center" src="{{ url_root }}/media/mobile/img/cafe/CRC_join.png"/>-->
-      <div class="basic-header">
-        Discuss
-      </div>
+            <div class="home-btn-title">
+                Discuss
+            </div>
+            
+            <div class="home-btn-wrapper" style="width:45%;display:inline-block; text-align: right;">
+                <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png"> &nbsp;
+                
+                <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png"> &nbsp;
+                
+                <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+            </div>
 
+         </div> 
+      <!--<img class="header-img-topic center" src="{{ url_root }}/media/mobile/img/cafe/CRC_join.png"/>-->
       <div class='dialog-text1 dialog-text-style default-left-padding' style="padding-top: 10px;">
           {{ client_settings.DISCUSSION_DIALOG_TEXT1 }}
-          <center>
-              <div class="standard-btn-div" style="padding-top:10px;">
+      </div><br/>
+       <center>
+              <div class="discuss-btn-div">
                   <div class='dialog-ready button-div'> Enter </button>
                   <!--<button type='submit' data-theme='b' class='dialog-next'  onclick="$('.dialog-text1').hide();$('.dialog-text2').show();"><font style="font-size: 16px;">Next</font></button>-->
               </div>
-          </center>
-      </div>
+      </center>
   </div>
 
   <div class='comment-input'>
-      <div class="home-btn-dialog-box">
-          <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
-          &nbsp;
-          &nbsp;
-          <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
-          &nbsp;
-          &nbsp;
-          <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
-          &nbsp;
-          &nbsp;
-          <img width="30px;" class='logout-btn' src="{{url_root}}/media/mobile/img/cafe/CRC_logout_bttn.png">
-      </div>
+       <div class="home-btn-dialog-box">
+            <div class="home-btn-title" style="width:40%;">
+                Your Turn
+            </div>
+            
+            <div class="home-btn-wrapper" style="width:55%;display:inline-block; text-align: right;">
+                <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png"> &nbsp;
+                
+                <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png"> &nbsp;
+                
+                <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+                &nbsp;
+                <img width="30px;" class='logout-btn' src="{{url_root}}/media/mobile/img/cafe/CRC_logout_bttn.png">
+            </div>
+
+         </div> 
 
       <center>
           <div class='comment-panel'>
               <div class="basic-sub-sub-header" style="text-align:left;">{{topic}}<br/></div>
               <textarea name='answer' id='entered-comment'></textarea>
-              <div class="standard-btn-div">
-                  <div class='comment-submit-btn button-div'>Post</div>
-                  <div class='comment-cancel-btn button-div'>Later</div>
+              <div class="standard-btn-div" style="width: 100%;">
+                  <div class='comment-submit-btn button-div' style="width: 100px; display: inline-block;">Post</div>
+                  <div class='comment-cancel-btn button-div' style="background-color: #4d4d4d;display: inline-block; ">Save as Draft</div>
               </div>
           </div>
       </center>
@@ -573,12 +500,19 @@
   <div class='rate'>
 
       <div class="home-btn-dialog-box">
-          <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
-          &nbsp;
-          <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
-          &nbsp;
-          <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
-      </div>
+            <div class="home-btn-title">
+                Discuss
+            </div>
+            
+            <div class="home-btn-wrapper" style="width:45%;display:inline-block; text-align: right;">
+                <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png"> &nbsp;
+                
+                <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png"> &nbsp;
+                
+                <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+            </div>
+
+         </div>
 
     <center>
        <textarea id='commentInput' class='answer' readonly="true"></textarea>
@@ -589,12 +523,6 @@
     <div id="flag" class="flag-style"></div>
 
     <div class="answerwrapper">
-
-        <div class="comment-admin-text">
-            <a href="#" class="comment-admin-text-a" onclick="rate.doneRatingNoSave();">Skip</a>&nbsp;&nbsp;
-            <a href="#" class="comment-admin-text-a" id="flag1">Inappropriate</a>
-        </div>
-
     <center>
      <div class='sliders'>
          How important is this issue for the next Report Card?<br/>
@@ -603,27 +531,14 @@
 
        <div style="clear: both;"></div>
 
-        <!--<div id="slider1" class="rating-slider rating-slider1"></div><br/>-->
-
          How would you rate the State of California on this issue today?<br/>
          <div class="slider" id="slider-grade"></div>
            <div style="clear: both;"></div>
-               
-        <!--<div id="slider2" class="rating-slider rating-slider2"></div><br/>-->
+          
 
         <center>
             <div class="button-div" id='go-back'>Next</div>
         </center>
-
-        <!--begin gtranslate-->
-        <!--
-        <div id="google_translate_element"></div>
-        <script type="text/javascript">
-        function googleTranslateElementInit() {
-        new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, multilanguagePage: true, gaTrack: true, gaId: 'UA-34341740-14'}, 'google_translate_element');
-        }
-        </script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>-->
-        <!--end gtranslate-->
 
       </div>
     </center>
@@ -651,7 +566,7 @@
 
             <center><img style="max-width: 220px;" src="{{url_root}}/media/mobile/img/cafe/cafe_teaser.png"></center>
         </div>
-    </div>
+ </div>
 
   <div class='welcome-back'>
      <div class='landing-intro default-left-padding'>
@@ -718,24 +633,31 @@
   </div>
 
   <div class='dialog-continue dialog-style'>
-      <div class="home-btn-dialog-box">
-          <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
-          &nbsp;
-          <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
-          &nbsp;
-          <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
-          <span class="logout-wrapper">&nbsp;<img width="30px;" class='logout-btn' src="{{url_root}}/media/mobile/img/cafe/CRC_logout_bttn.png"></span>
-      </div>
+       <div class="home-btn-dialog-box">
+            <div class="home-btn-title" style="width:40%;">
+                Thanks!
+            </div>
+            
+            <div class="home-btn-wrapper" style="width:55%;display:inline-block; text-align: right;">
+                <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png"> &nbsp;
+                
+                <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png"> &nbsp;
+                
+                <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+                &nbsp;
+                <img width="30px;" class='logout-btn' src="{{url_root}}/media/mobile/img/cafe/CRC_logout_bttn.png">
+            </div>
+
+         </div> 
 
     <div class='dialog-text-style default-left-padding'>
-        <div class="basic-header" style="width:100%;">{{client_settings.RESPONSE_SAVED_HEADER}}</div>
-        
         <!--<div class='dialog-text-style default-left-padding'>
         {{client_settings.EMAIL_ASK_TEXT}}
       </div>-->
 
         <input type="email" id='regemail' name='regemail' class='regforminput' style="font-size: 15px; background-color: #FFFFFF;color: #000000;" placeholder="Email" data-theme='b'></input>
         <div class="comment-admin-text-b">Your email address will not be displayed and we promise not to share your email address with any third parties.</div>
+        <br/>
         <center>
             <div class="standard-btn-div">
                 <div class='button-div dialog-continue-ready'>Enter</div>
@@ -747,26 +669,29 @@
   </div>
 
  <div class='dialog-email dialog-style'>
-     <div class="home-btn-dialog-box">
-         <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
-         &nbsp;
-         <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
-         &nbsp;
-         <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
-         &nbsp;
-         <img width="30px;" class='logout-btn' src="{{url_root}}/media/mobile/img/cafe/CRC_logout_bttn.png">
-     </div>
+       <div class="home-btn-dialog-box">
+            <div class="home-btn-title" style="width:40%;">
+                Thanks!
+            </div>
+            
+            <div class="home-btn-wrapper" style="width:55%;display:inline-block; text-align: right;">
+                <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png"> &nbsp;
+                
+                <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png"> &nbsp;
+                
+                <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+                &nbsp;
+                <img width="30px;" class='logout-btn' src="{{url_root}}/media/mobile/img/cafe/CRC_logout_bttn.png">
+            </div>
 
-     <div class='landing-img-txt default-left-padding' style="width: 95%;font-size: 20px;line-height: 23px;padding-top: 10px;">
-         Thank you!  Logout now or grade more mugs.
-         <div class="standard-btn-div" style="max-width: 250px !important;">
-             <button type='submit' data-theme='b' class='dialog-email-ready' ><font style="font-size: 16px;">Continue Grading</font></button>
+         </div> 
+
+         <div class='dialog-text-style default-left-padding'>
+            Thank you!  Logout now or grade more mugs.
+            <div class="standard-btn-div" style="max-width: 250px !important;">
+              <div class='button-div dialog-email-ready' >Continue Grading</div>
+            </div>
          </div>
-         Please tell your friends and colleagues:<br/>
-         <a href="http://californiareportcard.org" target="_blank" style="color: #4e300f;">http://californiareportcard.org</a><br/><br/>
-         Twitter: <a href="http://twitter.com/home?status=How%20do%20you%20grade%20California?%20%20Try%20@CAReportCard%20developed%20by%20@Cal%20@GavinNewsom%20%26%20@Ken_Goldberg%20%20http://californiareportcard.org/mobile%20%23CA%20%23Gov" target="_blank" style="color: #4e300f;">@CAReportCard</a><br/>
-         Facebook: <a href="http://on.fb.me/1jF60JL" target="_blank" style="color: #4e300f;">CAReportCard</a><br/><br/>
-     </div>
   </div>
 
   <div class='dialog-avggrade dialog-style'>
@@ -816,7 +741,7 @@
       </div>
   </div>
 
-  <div class='dialog-help-grade dialog-style' style="z-index:999">
+  <div class='dialog-help-grade dialog-style' style="z-index:999;">
       <div class="home-btn-dialog-box">
           <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
           &nbsp;

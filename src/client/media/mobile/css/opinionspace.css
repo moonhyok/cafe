@@ -80,12 +80,13 @@ html {
 
 #entered-comment{
 	display:inline;
-	color: #FFFFFF;
-	background-color: rgba(0, 0, 0,0.3);
+	color: #000000;
+	background-color: #ffffff;
 	text-shadow: none;
 	width: 100% !important;
 	height: 200px !important;
 	font-size: 16px;
+	border-radius: 0px;
 	font-family: verdana, sans-serif;
 }
 
@@ -223,7 +224,7 @@ table.pretty caption {
 		left:0px;
         position: fixed;
         z-index: 999;
-        background-color: #000000;
+        background-color: #808080;
 	}
 
 	.ui-slider-input {
@@ -259,7 +260,6 @@ table.pretty caption {
 
 	strong {
 		font-weight: bolder;
-		color: #FFFFCC;
 	}
 	strong.go-back {
 		color: #54D6F6;
@@ -371,10 +371,8 @@ table.pretty caption {
 		/*background: url('../img/cafe/cafe_notebook.png') repeat-y;*/
 		color: #f5ebdf;
 		text-shadow: none;
-		width: 95%;
+		width: 100%;
 		height: 100%;
-		padding-top: 10px;
-		padding-right: 10px;
 	}
 	
 	.cardtable{
@@ -499,9 +497,9 @@ table.pretty caption {
 		right: 0;
 		width: 100%;
 		height: 100%;
-		/*background-color: #FAEBCD;*/
+		background-color: #666666;
 		/*background: #76b9b6;*/
-		background-image:url('../img/cafe/capitol_clean.jpg');
+		/*background-image:url('../img/cafe/capitol_clean.jpg');*/
 		z-index: 999;
 		overflow-y: auto;
 		overflow-x: hidden;
@@ -520,9 +518,9 @@ table.pretty caption {
     		width: 100%;
     		height: 100%;
     		color: white;
-    		/*background-color: #FAEBCD;*/
-    		background-image:url('../img/cafe/capitol_clean.jpg');
-    		z-index: 997;
+    		background-color: #666666;
+    		/*background-image:url('../img/cafe/capitol_clean.jpg');*/
+    		z-index: 999;
     		overflow-y: auto;
     		overflow-x: hidden;
     		text-align: center;
@@ -555,30 +553,63 @@ table.pretty caption {
 
 	.landing-img-title{
 	color: #FFFFFF;
+	background-color: #4d87c6;
 	font-size: 44px;
 	text-shadow: none;
-	font-weight: bold;
+	line-height: 44px;
+	max-width: 500px;
+	padding-top: 10px;
+	letter-spacing: 1px;
 	}
 
 	.landing-img-txt{
-	color: #FFFFFF;
+	color: #121212;
+	background-color: #f5f5f5;
 	font-size: 18px;
 	text-shadow: none;
 	text-align: left;
+	max-width: 470px;
+	padding: 15px;
+	height: 100px;
+	line-height: 26px;
+	position: absolute;
+	bottom: 0px;
+	letter-spacing: 1px;
+
 	}
 
 	.button-div {
-		background-color: #00CCFF;
-		border:1px solid #FFFFFF;
-		border-radius:15px;
+		background-color: #6598f5;
+		border:0px solid #FFFFFF;
+		border-radius:5px;
 		width: 170px;
 		font-weight: normal;
 		font-size: 18px;
-		line-height: 36px;
+		line-height: 44px;
 		text-align: center;
 		color: #FFFFFF;
 		margin-bottom: 5px;
 		text-shadow: none;
+		/*position: absolute;
+		bottom: 20px;*/
+	}
+
+		.skip-btn {
+		background-color: #4d4d4d;
+		color: #ffffff;
+		width: 70px;
+		border-radius:5px;
+		font-weight: normal;
+		font-size: 16px;
+		line-height: 24px;
+		text-align: center;
+		color: #FFFFFF;
+		margin-bottom: 5px;
+		text-shadow: none;
+		z-index: 999;
+		position: absolute;
+		bottom: 10px;
+		right: 15px;
 		/*position: absolute;
 		bottom: 20px;*/
 	}
@@ -599,17 +630,25 @@ table.pretty caption {
 		bottom: 20px;*/
 	}
 
+	.capitol-bg{
+		background-image:url('../img/cafe/capitol-landing.png');
+		background-size: cover;
+		height: 240px;
+		width: 500px;
+		max-width: 100%;
+	}
+
 		.button-div-red {
-		background-color: #FF5050;
-		border:1px solid #FFFFFF;
-		border-radius:15px;
+		background-color: #c23e17;
+		border-radius:5px;
 		width: 170px;
 		font-weight: normal;
-		font-size: 18px;
-		line-height: 36px;
+		font-size: 20px;
+		line-height: 42px;
 		text-align: center;
 		color: #FFFFFF;
 		margin-bottom: 5px;
+		letter-spacing: 1px;
 		text-shadow: none;
 		/*position: absolute;
 		bottom: 20px;*/
@@ -771,10 +810,10 @@ table.pretty caption {
 		right: 0;
 		width: 100%;
 		height: 100%;
-		background-image:url('../img/cafe/capitol_clean.jpg');
-		background-size: cover;
+		/*background-image:url('../img/cafe/capitol_clean.jpg');
+		background-size: cover;*/
 		/*background-image:url('../img/cafe/cafe_bg.jpg');*/
-		/*background-color: #FAEBCD;*/
+		background-color: #f5f5f5;
 		/*background: #76b9b6; Old browsers */
 		overflow: auto;
 		z-index: 999;
@@ -852,12 +891,18 @@ table.pretty caption {
 }
 
 .basic-sub-sub-header{
-font-size: 18px;
+font-size: 16px;
 padding-left: 7px;
 padding-right: 7px;
+padding-top: 10px;
+padding-bottom: 10px;
+position: relative;
+top: -10px;
 font-family: verdana, sans-serif;
 color: #FFFFFF;
-line-height:20px;
+width: 100%;
+background-color: #808080;
+line-height:24px;
 }
 
 .basic-fine-print{
@@ -931,12 +976,16 @@ padding-right: 7px;
 }
 
 .answer {
-	background-color: rgba(0,0,0,.2) !important;
+	background-color: #808080 !important;
 	width: 100% !important;
-	min-height: 150px !important;
+	min-height: 250px !important;
 	font-size: 16px !important;
 	font-family: verdana, sans-serif;
 	color: #ffffff;
+	border: 0px;
+	border-radius: 0px;
+	position:relative;
+	top: -10px;
 	
 	text-shadow: none !important;
 }
@@ -976,8 +1025,20 @@ padding-right: 7px;
     padding-top: 5px;
     padding-bottom: 0px;
     letter-spacing: 2px;
-    text-align: center;
-    background-color: #000000;
+    text-align: right;
+    background-color: #808080;
+}
+
+.home-btn-title{
+
+	width:45%;
+	display:inline-block;
+	text-align: left; 
+	font-size: 24px;
+	color: #ffffff;
+	position:relative;
+	bottom: 5px;
+	left: 5px;
 }
 
 .home-btn-dialog-box .ui-btn-inner{
@@ -1054,15 +1115,26 @@ padding-right: 7px;
 }
 
 .dialog-style{
-	background-image:url('../img/cafe/capitol_clean.jpg');
-	background-size: cover;
-	width: 100%;
-	position: absolute;
+    position: absolute;
 	top:0;
 	left: 0;
+	background-color:#808080;
+	width: 100%;
 	display: none;
 	z-index: 999;
 	min-height: 100%;
+}
+
+.discuss-btn-div{
+
+		background-image:url('../img/cafe/cafe_bg.png');
+	background-size:cover;
+	position: absolute;
+	bottom: 0px;
+	width: 100%;
+	height: 230px;
+	max-height: 60%;
+	padding-top:15px;
 }
 
 .stats-iframe{
@@ -1090,8 +1162,6 @@ padding-right: 7px;
     vertical-align: middle;
     font-family: verdana, sans-serif;
 	color: #FFFFFF;
-	background-image:url('../img/cafe/capitol_clean.jpg');
-	background-size: cover;
 	text-decoration: none;
 	text-shadow: none;
 	font-size: 15px;
@@ -1284,9 +1354,10 @@ padding-right: 7px;
 	text-align: left;
 	color: #FFFFFF; 
 	font-size: 18px; 
-	line-height: 18px;
+	/*line-height: 18px;*/
 	display: none;
 	width: 100%;
+	height: 100%;
 	-webkit-transform: translateZ(0);
 }
 /*.loading {

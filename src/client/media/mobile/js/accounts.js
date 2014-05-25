@@ -494,6 +494,7 @@ $(document).ready(function() {
         window.history.pushState("", "", '#');
         accounts.hideAll();
         $('.endsliders').show();
+        $('#slide-1').show();
         window.cur_state = 'grade';
         rate.logUserEvent(7,'first time');
         //$('.top-bar').show();

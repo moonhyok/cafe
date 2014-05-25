@@ -484,7 +484,7 @@ $(document).ready(function() {
 
         $("#slide-"+event.target.id.substring(5)).hide();
         $("#slide-"+(parseInt(event.target.id.substring(5),10)-1)).show("slide", { direction: "left" }, 500);
-        $(".slider-progress-dot-"+(parseInt(event.target.id.substring(5),10))).css("background","#00CCFF");
+        $(".slider-progress-dot-"+(parseInt(event.target.id.substring(5),10))).css("background","#666666");
 
         if(parseInt(event.target.id.substring(5),10) == 2)
         {
