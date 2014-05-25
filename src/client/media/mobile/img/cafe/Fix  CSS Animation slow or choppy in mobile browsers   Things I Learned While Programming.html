@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<!--[if IE 7]>
+<html class="ie ie7" lang="en-US">
+<![endif]-->
+<!--[if IE 8]>
+<html class="ie ie8" lang="en-US">
+<![endif]-->
+<!--[if !(IE 7) | !(IE 8) ]><!-->
+<html lang="en-US">
+<!--<![endif]-->
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Fix: CSS Animation slow or choppy in mobile browsers | Things I Learned While Programming</title>
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+	<link rel="pingback" href="http://chrissilich.com/blog/xmlrpc.php">
+	<!--[if lt IE 9]>
+	<script src="http://chrissilich.com/blog/wp-content/themes/twentyfourteen/js/html5.js"></script>
+
+	<![endif]-->
+	<link rel="alternate" type="application/rss+xml" title="Things I Learned While Programming &raquo; Feed" href="http://chrissilich.com/blog/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Things I Learned While Programming &raquo; Comments Feed" href="http://chrissilich.com/blog/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Things I Learned While Programming &raquo; Fix: CSS Animation slow or choppy in mobile browsers Comments Feed" href="http://chrissilich.com/blog/fix-css-animation-slow-or-choppy-in-mobile-browsers/feed/" />
+<link rel='stylesheet' id='twentyfourteen-lato-css'  href='//fonts.googleapis.com/css?family=Lato%3A300%2C400%2C700%2C900%2C300italic%2C400italic%2C700italic' type='text/css' media='all' />
+<link rel='stylesheet' id='genericons-css'  href='http://chrissilich.com/blog/wp-content/themes/twentyfourteen/genericons/genericons.css?ver=3.0.2' type='text/css' media='all' />
+<link rel='stylesheet' id='twentyfourteen-style-css'  href='http://chrissilich.com/blog/wp-content/themes/twentyfourteen/style.css?ver=3.8' type='text/css' media='all' />
+<!--[if lt IE 9]>
+<link rel='stylesheet' id='twentyfourteen-ie-css'  href='http://chrissilich.com/blog/wp-content/themes/twentyfourteen/css/ie.css?ver=20131205' type='text/css' media='all' />
+<![endif]-->
+<script type='text/javascript' src='http://chrissilich.com/blog/wp-includes/js/comment-reply.min.js?ver=3.8'></script>
+<script type='text/javascript' src='http://chrissilich.com/blog/wp-includes/js/jquery/jquery.js?ver=1.10.2'></script>
+<script type='text/javascript' src='http://chrissilich.com/blog/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.2.1'></script>
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://chrissilich.com/blog/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://chrissilich.com/blog/wp-includes/wlwmanifest.xml" /> 
+<link rel='prev' title='Socket.io 0.7 &#8211; Sending messages to individual clients' href='http://chrissilich.com/blog/socket-io-0-7-sending-messages-to-individual-clients/' />
+<link rel='next' title='Primal Screen website launch' href='http://chrissilich.com/blog/primal-screen-website-launch/' />
+<meta name="generator" content="WordPress 3.8" />
+<link rel='canonical' href='http://chrissilich.com/blog/fix-css-animation-slow-or-choppy-in-mobile-browsers/' />
+<link rel='shortlink' href='http://chrissilich.com/blog/?p=304' />
+<style type="text/css" id="custom-background-css">
+body.custom-background { background-color: #f5f5f5; }
+</style>
+</head>
+
+<body class="single single-post postid-304 single-format-standard custom-background masthead-fixed full-width singular">
+<div id="page" class="hfeed site">
+	
+	<header id="masthead" class="site-header" role="banner">
+		<div class="header-main">
+			<h1 class="site-title">
+				<a href="http://chrissilich.com/blog/" rel="home">
+					Things I Learned While Programming				</a>
+			</h1>
+
+							<h2 class="site-description">/* that might come in handy later */</h2>
+			
+
+			<div class="search-toggle">
+				<a href="#search-container" class="screen-reader-text">Search</a>
+			</div>
+
+			<nav id="primary-navigation" class="site-navigation primary-navigation" role="navigation">
+				<h1 class="menu-toggle">Primary Menu</h1>
+				<a class="screen-reader-text skip-link" href="#content">Skip to content</a>
+				<div class="nav-menu"></div>
+			</nav>
+		</div>
+
+		<div id="search-container" class="search-box-wrapper hide">
+			<div class="search-box">
+				<form role="search" method="get" class="search-form" action="http://chrissilich.com/blog/">
+				<label>
+					<span class="screen-reader-text">Search for:</span>
+					<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s" title="Search for:" />
+				</label>
+				<input type="submit" class="search-submit" value="Search" />
+			</form>			</div>
+		</div>
+	</header><!-- #masthead -->
+
+	<div id="main" class="site-main">
+	<div id="primary" class="content-area">
+		<div id="content" class="site-content" role="main">
+			
+<article id="post-304" class="post-304 post type-post status-publish format-standard hentry category-html category-html5 category-ios category-javascript category-jquery category-phonegap tag-animation tag-choppy tag-css tag-iphone tag-jquery-2 tag-jumpy tag-mobile tag-slow tag-transition tag-webkit">
+	
+	<header class="entry-header">
+				<div class="entry-meta">
+			<span class="cat-links"><a href="http://chrissilich.com/blog/category/html/" title="View all posts in HTML/CSS" rel="category tag">HTML/CSS</a>, <a href="http://chrissilich.com/blog/category/html/html5/" title="View all posts in HTML5" rel="category tag">HTML5</a>, <a href="http://chrissilich.com/blog/category/ios/" title="View all posts in iOS" rel="category tag">iOS</a>, <a href="http://chrissilich.com/blog/category/javascript/" title="View all posts in Javascript" rel="category tag">Javascript</a>, <a href="http://chrissilich.com/blog/category/javascript/jquery/" title="View all posts in jQuery" rel="category tag">jQuery</a>, <a href="http://chrissilich.com/blog/category/ios/phonegap/" title="View all posts in PhoneGap" rel="category tag">PhoneGap</a></span>
+		</div>
+		<h1 class="entry-title">Fix: CSS Animation slow or choppy in mobile browsers</h1>
+		<div class="entry-meta">
+			<span class="entry-date"><a href="http://chrissilich.com/blog/fix-css-animation-slow-or-choppy-in-mobile-browsers/" rel="bookmark"><time class="entry-date" datetime="2011-08-25T20:45:41+00:00">August 25, 2011</time></a></span> <span class="byline"><span class="author vcard"><a class="url fn n" href="http://chrissilich.com/blog/author/chrissilich/" rel="author">chrissilich</a></span></span>			<span class="comments-link"><a href="http://chrissilich.com/blog/fix-css-animation-slow-or-choppy-in-mobile-browsers/#comments" title="Comment on Fix: CSS Animation slow or choppy in mobile browsers">24 Comments</a></span>
+					</div><!-- .entry-meta -->
+	</header><!-- .entry-header -->
+
+		<div class="entry-content">
+		<p>I&#8217;m developing an iPhone app using the PhoneGap library, which lets you write your app as if it were a website. That means any UI transitions or animations have to be written the way you would for any modern website targeting Webkit: CSS3 transitions (mobile javascript is too slow for frame by frame calculations).</p>
+<p>Unfortunately, CSS transitions can be a little slow, a little choppy, even on iPhone 4 and the faster Android based phones. The problem is that, by default, webkit doesn&#8217;t involve the GPU unless you&#8217;re doing 3D transforms. With desktop horsepower, thats fine. On a mobile device, that GPU could really help.</p>
+<p>So how do you force webkit to share the processing load with the GPU?</p>
+<p>Apply this style to the element you&#8217;re animating:</p>
+<pre class="brush:css">
+-webkit-transform: translateZ(0);
+</pre>
+<p>Simple, but effective.</p>
+	</div><!-- .entry-content -->
+	
+	<footer class="entry-meta"><span class="tag-links"><a href="http://chrissilich.com/blog/tag/animation/" rel="tag">animation</a><a href="http://chrissilich.com/blog/tag/choppy/" rel="tag">choppy</a><a href="http://chrissilich.com/blog/tag/css/" rel="tag">CSS</a><a href="http://chrissilich.com/blog/tag/iphone/" rel="tag">iphone</a><a href="http://chrissilich.com/blog/tag/jquery-2/" rel="tag">jquery</a><a href="http://chrissilich.com/blog/tag/jumpy/" rel="tag">jumpy</a><a href="http://chrissilich.com/blog/tag/mobile/" rel="tag">mobile</a><a href="http://chrissilich.com/blog/tag/slow/" rel="tag">slow</a><a href="http://chrissilich.com/blog/tag/transition/" rel="tag">transition</a><a href="http://chrissilich.com/blog/tag/webkit/" rel="tag">webkit</a></span></footer></article><!-- #post-## -->
+	<nav class="navigation post-navigation" role="navigation">
+		<h1 class="screen-reader-text">Post navigation</h1>
+		<div class="nav-links">
+			<a href="http://chrissilich.com/blog/socket-io-0-7-sending-messages-to-individual-clients/" rel="prev"><span class="meta-nav">Previous Post</span>Socket.io 0.7 &#8211; Sending messages to individual clients</a><a href="http://chrissilich.com/blog/primal-screen-website-launch/" rel="next"><span class="meta-nav">Next Post</span>Primal Screen website launch</a>		</div><!-- .nav-links -->
+	</nav><!-- .navigation -->
+	
+<div id="comments" class="comments-area">
+
+	
+	<h2 class="comments-title">
+		24 thoughts on &ldquo;Fix: CSS Animation slow or choppy in mobile browsers&rdquo;	</h2>
+
+	
+	<ol class="comment-list">
+				<li id="comment-135" class="comment even thread-even depth-1">
+			<article id="div-comment-135" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://1.gravatar.com/avatar/de7db670c7919a7b8fd92a9c388ea6b8?s=34&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D34&amp;r=G' class='avatar avatar-34 photo' height='34' width='34' />						<b class="fn"><a href='http://www.sachermesfr.com' rel='external nofollow' class='url'>Sac Hermes</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="http://chrissilich.com/blog/fix-css-animation-slow-or-choppy-in-mobile-browsers/#comment-135">
+							<time datetime="2011-09-19T16:50:55+00:00">
+								September 19, 2011 at 4:50 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>whoah that blog site will be superb i love looking at you. Maintain the excellent artwork! You feel, lots of people are searching for this info, you can help him or her enormously.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply">
+					<a class='comment-reply-link' href='/blog/fix-css-animation-slow-or-choppy-in-mobile-browsers/?replytocom=135#respond' onclick='return addComment.moveForm("div-comment-135", "135", "respond", "304")'>Reply</a>				</div><!-- .reply -->
+			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+		<li id="comment-136" class="pingback odd alt thread-odd thread-alt depth-1">
+			<div class="comment-body">
+				Pingback: <a href='http://chrissilich.com/blog/update-fix-css-animation-slow-or-choppy-in-mobile-browsers/' rel='external nofollow' class='url'>UPDATE: Fix: CSS Animation slow or choppy in mobile browsers | Things I Learned While Programming</a> 			</div>
+</li><!-- #comment-## -->
+		<li id="comment-137" class="comment even thread-even depth-1 parent">
+			<article id="div-comment-137" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://1.gravatar.com/avatar/9f778af76ec489bb724afe9eae929c8d?s=34&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D34&amp;r=G' class='avatar avatar-34 photo' height='34' width='34' />						<b class="fn">Prakash</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="http://chrissilich.com/blog/fix-css-animation-slow-or-choppy-in-mobile-browsers/#comment-137">
+							<time datetime="2012-01-09T03:26:47+00:00">
+								January 9, 2012 at 3:26 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Hi, I am using 2D transforms. The webkit animation is slow in android when compare to ipad/iphone. Is it helpful to mention this fix to solve my issue?</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply">
+					<a class='comment-reply-link' href='/blog/fix-css-animation-slow-or-choppy-in-mobile-browsers/?replytocom=137#respond' onclick='return addComment.moveForm("div-comment-137", "137", "respond", "304")'>Reply</a>				</div><!-- .reply -->
+			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-138" class="comment byuser comment-author-chrissilich bypostauthor odd alt depth-2 parent">
+			<article id="div-comment-138" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/6e1f3fe92f48819badc48105d58d203f?s=34&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D34&amp;r=G' class='avatar avatar-34 photo' height='34' width='34' />						<b class="fn">Chris Silich</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="http://chrissilich.com/blog/fix-css-animation-slow-or-choppy-in-mobile-browsers/#comment-138">
+							<time datetime="2012-01-09T07:41:28+00:00">
+								January 9, 2012 at 7:41 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>I never tested it on android, but since they&#8217;re using the same rendering engine, I assume the same fix would work. Only one way to find out&#8230;</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply">
+					<a class='comment-reply-link' href='/blog/fix-css-animation-slow-or-choppy-in-mobile-browsers/?replytocom=138#respond' onclick='return addComment.moveForm("div-comment-138", "138", "respond", "304")'>Reply</a>				</div><!-- .reply -->
+			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-142" class="comment even depth-3">
+			<article id="div-comment-142" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://1.gravatar.com/avatar/fd86178e97d3b6405df94586c672177f?s=34&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D34&amp;r=G' class='avatar avatar-34 photo' height='34' width='34' />						<b class="fn"><a href='http://www.andythedesigner.com' rel='external nofollow' class='url'>andy</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="http://chrissilich.com/blog/fix-css-animation-slow-or-choppy-in-mobile-browsers/#comment-142">
+							<time datetime="2012-05-22T14:57:00+00:00">
+								May 22, 2012 at 2:57 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>This only helps in browsers that support hardware rendering. There&#8217;s only a handfull of Android phones that support hardware rendering right now &#8211; so unfortunately there is a small chance this would help with animation on android. </p>
+<p>The general idea is that when you&#8217;re updating css transformations on objects you use translate3d instead of translate; as in translate3d(10px,10px,0);</p>
+<p>The big problem with this is older android os&#8217;s don&#8217;t support the translate3d transform&#8230;</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply">
+					<a class='comment-reply-link' href='/blog/fix-css-animation-slow-or-choppy-in-mobile-browsers/?replytocom=142#respond' onclick='return addComment.moveForm("div-comment-142", "142", "respond", "304")'>Reply</a>				</div><!-- .reply -->
+			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-139" class="comment odd alt thread-odd thread-alt depth-1 parent">
+			<article id="div-comment-139" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://1.gravatar.com/avatar/ba4b9c06850e8a648056b98248438801?s=34&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D34&amp;r=G' class='avatar avatar-34 photo' height='34' width='34' />						<b class="fn">Aaron</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="http://chrissilich.com/blog/fix-css-animation-slow-or-choppy-in-mobile-browsers/#comment-139">
+							<time datetime="2012-02-02T20:14:05+00:00">
+								February 2, 2012 at 8:14 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>I&#8217;ve been working on a mobile webapp with some drag/slide animation features, and have changed many of my translateX transform animations to translate3d(#,0,0), as touch responsiveness under the former was choppy at best, and practically absent at worst. I can confirm that this fix works for Webkit-based browsers on iOS and Android (I&#8217;m testing on a Samsung Galaxy Nexus as well as several generation&#8217;s of the iPhone), but would advise that developers use it sparingly, as an abundance of hardware-accelerated effects on the page can really eat through a viewer&#8217;s battery, and hardware accelerated elements seem to render more slowly when the part of the page containing them is loaded/reloaded. Also, apparently the opacity property also triggers hardware rendering in many cases, so if you&#8217;re frequently manipulating the transform property via JavaScript, defining an opacity value of 1 may serve as a welcome alternative to a superfluous translate3d property included only to trigger the hardware rendering.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply">
+					<a class='comment-reply-link' href='/blog/fix-css-animation-slow-or-choppy-in-mobile-browsers/?replytocom=139#respond' onclick='return addComment.moveForm("div-comment-139", "139", "respond", "304")'>Reply</a>				</div><!-- .reply -->
+			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-143" class="comment even depth-2">
+			<article id="div-comment-143" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://1.gravatar.com/avatar/fd86178e97d3b6405df94586c672177f?s=34&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D34&amp;r=G' class='avatar avatar-34 photo' height='34' width='34' />						<b class="fn"><a href='http://www.andythedesigner.com' rel='external nofollow' class='url'>andy</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="http://chrissilich.com/blog/fix-css-animation-slow-or-choppy-in-mobile-browsers/#comment-143">
+							<time datetime="2012-05-22T14:58:09+00:00">
+								May 22, 2012 at 2:58 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>An abundance of animations would not affect the users battery. You&#8217;re either using the gpu or you&#8217;re not. If you have one dom element with z-rendering enabled, then you&#8217;re using the users battery.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply">
+					<a class='comment-reply-link' href='/blog/fix-css-animation-slow-or-choppy-in-mobile-browsers/?replytocom=143#respond' onclick='return addComment.moveForm("div-comment-143", "143", "respond", "304")'>Reply</a>				</div><!-- .reply -->
+			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-140" class="comment odd alt thread-even depth-1">
+			<article id="div-comment-140" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/e03dbcadce07c5e2b7fd722a25fdbbcf?s=34&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D34&amp;r=G' class='avatar avatar-34 photo' height='34' width='34' />						<b class="fn">Lee Bartelme</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="http://chrissilich.com/blog/fix-css-animation-slow-or-choppy-in-mobile-browsers/#comment-140">
+							<time datetime="2012-02-21T18:12:19+00:00">
+								February 21, 2012 at 6:12 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>This is probably one of the simplest and groundbreaking things I have seen in a while. jQuery animations also have the ability to SUCK on the mobile platforms, but this little trick works wonders. With my small app I appled this to the body of the page and all elements that are animated now run smooth.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply">
+					<a class='comment-reply-link' href='/blog/fix-css-animation-slow-or-choppy-in-mobile-browsers/?replytocom=140#respond' onclick='return addComment.moveForm("div-comment-140", "140", "respond", "304")'>Reply</a>				</div><!-- .reply -->
+			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+		<li id="comment-141" class="comment even thread-odd thread-alt depth-1">
+			<article id="div-comment-141" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://1.gravatar.com/avatar/578fc437377754aa72d7ce3dfcbd82b4?s=34&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D34&amp;r=G' class='avatar avatar-34 photo' height='34' width='34' />						<b class="fn"><a href='http://miamifishing.com' rel='external nofollow' class='url'>sergio</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="http://chrissilich.com/blog/fix-css-animation-slow-or-choppy-in-mobile-browsers/#comment-141">
+							<time datetime="2012-05-04T19:04:02+00:00">
+								May 4, 2012 at 7:04 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>You are a genius.<br />
+This solves 50% of my problem and 0% was answered in Apple forums (the regular one. It seems I have to be a paid user, not just &#8220;registered&#8221; in order to browse the dev forums)</p>
+<p>If you find the solution to the other 50% of the reasons why websites become really irresponsive I look forward for a new post! That is, the elements being transformed require the whole page outer bounds to be re-calculated to FIT the damn viewport with every frame/change.</p>
+<p>I tried every combination of the viewport tag attributes, no success. It only sets the initial view, and the page still gets re-drawn with every frame.<br />
+I tried using widths for everything, and images, no success.<br />
+Getting rid of shadows helped a little the speed, but didn&#8217;t stop the resizing.</p>
+<p>So the website is un-browse-able.</p>
+<p>Hope you find a solution</p>
+<p>Thanks.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply">
+					<a class='comment-reply-link' href='/blog/fix-css-animation-slow-or-choppy-in-mobile-browsers/?replytocom=141#respond' onclick='return addComment.moveForm("div-comment-141", "141", "respond", "304")'>Reply</a>				</div><!-- .reply -->
+			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+		<li id="comment-144" class="comment odd alt thread-even depth-1 parent">
+			<article id="div-comment-144" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/e121b2fefa615e838586a3fecbb8b72a?s=34&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D34&amp;r=G' class='avatar avatar-34 photo' height='34' width='34' />						<b class="fn">Rev</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="http://chrissilich.com/blog/fix-css-animation-slow-or-choppy-in-mobile-browsers/#comment-144">
+							<time datetime="2012-06-20T20:07:28+00:00">
+								June 20, 2012 at 8:07 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>So i can use that fix and continue to use any js library like jquery, zepto, jqtouch etc.,? Or should i use plain css for page transforms and other animations?</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply">
+					<a class='comment-reply-link' href='/blog/fix-css-animation-slow-or-choppy-in-mobile-browsers/?replytocom=144#respond' onclick='return addComment.moveForm("div-comment-144", "144", "respond", "304")'>Reply</a>				</div><!-- .reply -->
+			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-145" class="comment byuser comment-author-chrissilich bypostauthor even depth-2">
+			<article id="div-comment-145" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/6e1f3fe92f48819badc48105d58d203f?s=34&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D34&amp;r=G' class='avatar avatar-34 photo' height='34' width='34' />						<b class="fn">Chris Silich</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="http://chrissilich.com/blog/fix-css-animation-slow-or-choppy-in-mobile-browsers/#comment-145">
+							<time datetime="2012-06-21T07:21:38+00:00">
+								June 21, 2012 at 7:21 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>You can use any javascript library you want, but the animations themselves must be written in CSS, not javascript. It is absolutely vital for mobile developers to learn CSS animation instead of javascript. </p>
+<p>The reason is that Javascript is actually very inefficient for animation, and it&#8217;s only recently, with the proliferation of mobile browsers, that we are starting to notice this. </p>
+<p>You see, with a JS animation (e.g. created using jQuery&#8217;s animate function), the javascript library sets an interval timer (lets say, 33ms, which is about 30 frames per second), and on that interval, it figures out where the animated element should be, using complex math calculated by the CPU, and then puts it there. Unfortunately, if the CPU is too slow to do that calculation every interval, it gets backed up and the animation stutters. jQuery and other JS animation tools do some work to combat this, sensing a drop in frame rate and trying to make the interval wider, to give it more time to complete the calculations, but it&#8217;s often too-little-too-late.</p>
+<p>On the other hand, when you do a CSS animation (e.g. using the transform or webkit-transform css properties), you leave it to the GPU to simply calculate where the element should be <i>as often as it can</i>. As soon as it calculates the element&#8217;s new position and places it there, the GPU starts the calculation again. This means the animation is always as smooth as the GPU can possibly make it, no matter what. If you animate too many elements for the GPU to handle it may still have trouble, but instead of ugly stuttering, it will be a more graceful drop in framerate.</p>
+<p>Hope that helps.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply">
+					<a class='comment-reply-link' href='/blog/fix-css-animation-slow-or-choppy-in-mobile-browsers/?replytocom=145#respond' onclick='return addComment.moveForm("div-comment-145", "145", "respond", "304")'>Reply</a>				</div><!-- .reply -->
+			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-146" class="comment odd alt thread-odd thread-alt depth-1">
+			<article id="div-comment-146" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/8f8ff21a67437febebc70afd19364e95?s=34&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D34&amp;r=G' class='avatar avatar-34 photo' height='34' width='34' />						<b class="fn">Alon</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="http://chrissilich.com/blog/fix-css-animation-slow-or-choppy-in-mobile-browsers/#comment-146">
+							<time datetime="2012-06-26T03:25:36+00:00">
+								June 26, 2012 at 3:25 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Thanks you so much !!<br />
+It works perfectly !!! i was really upset when i saw the lame animation in iphone/android.<br />
+Now it works perfect :)</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply">
+					<a class='comment-reply-link' href='/blog/fix-css-animation-slow-or-choppy-in-mobile-browsers/?replytocom=146#respond' onclick='return addComment.moveForm("div-comment-146", "146", "respond", "304")'>Reply</a>				</div><!-- .reply -->
+			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+		<li id="comment-147" class="comment even thread-even depth-1">
+			<article id="div-comment-147" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://1.gravatar.com/avatar/dd667a128e5ef4d3c67e31c424e99be0?s=34&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D34&amp;r=G' class='avatar avatar-34 photo' height='34' width='34' />						<b class="fn">Joe</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="http://chrissilich.com/blog/fix-css-animation-slow-or-choppy-in-mobile-browsers/#comment-147">
+							<time datetime="2012-07-06T10:44:43+00:00">
+								July 6, 2012 at 10:44 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Thanks for this post, it was an APP SAVER!</p>
+<p>ADDITIONAL TIP: If you are animating an element with NESTED elements that are significantly styled, try adding &#8220;-webkit-transform: translateZ(0);&#8221; to the child element style definition(s) as well. Made a huge difference for me.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply">
+					<a class='comment-reply-link' href='/blog/fix-css-animation-slow-or-choppy-in-mobile-browsers/?replytocom=147#respond' onclick='return addComment.moveForm("div-comment-147", "147", "respond", "304")'>Reply</a>				</div><!-- .reply -->
+			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+		<li id="comment-148" class="comment odd alt thread-odd thread-alt depth-1">
+			<article id="div-comment-148" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/e6c13703ad87d9f11f25a5177f6a4087?s=34&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D34&amp;r=G' class='avatar avatar-34 photo' height='34' width='34' />						<b class="fn">Al</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="http://chrissilich.com/blog/fix-css-animation-slow-or-choppy-in-mobile-browsers/#comment-148">
+							<time datetime="2012-07-29T15:46:46+00:00">
+								July 29, 2012 at 3:46 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Nice tip &#8211; completely fixed the jagged edges I was seeing when resizing an image with easing &#8211; thanks!</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply">
+					<a class='comment-reply-link' href='/blog/fix-css-animation-slow-or-choppy-in-mobile-browsers/?replytocom=148#respond' onclick='return addComment.moveForm("div-comment-148", "148", "respond", "304")'>Reply</a>				</div><!-- .reply -->
+			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+		<li id="comment-149" class="comment even thread-even depth-1">
+			<article id="div-comment-149" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/4a01aa49378764956a55c2a17ecdcdb1?s=34&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D34&amp;r=G' class='avatar avatar-34 photo' height='34' width='34' />						<b class="fn">Glenn</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="http://chrissilich.com/blog/fix-css-animation-slow-or-choppy-in-mobile-browsers/#comment-149">
+							<time datetime="2012-08-06T16:30:48+00:00">
+								August 6, 2012 at 4:30 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Unfortunately, this makes transitions noticably choppier for my page (on an iPad 3), not smoother.</p>
+<p>&gt; An abundance of animations would not affect the users battery. You’re either using the gpu or you’re not. If you have one dom element with z-rendering enabled, then you’re using the users battery.</p>
+<p>This is wrong.  For one thing, the GPU is *always* being used by iOS, since it&#8217;s used for compositing.  For another, of course you&#8217;re using more battery with lots of transitions, as you&#8217;re causing far more composition operations to occur.  You&#8217;re using battery any time something is changing.  There are more distinct visible frames, each of which has to be rendered (whether it happens on the CPU or GPU&#8211;in reality it&#8217;s both).  It&#8217;s not like the GPU is something that gets turned on and left on while you&#8217;re using it (like the gyroscope or wifi); it wakes up for the work it needs to do and then idles again.</p>
+<p>However, the difference is probably not significant and certainly not worth worrying about.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply">
+					<a class='comment-reply-link' href='/blog/fix-css-animation-slow-or-choppy-in-mobile-browsers/?replytocom=149#respond' onclick='return addComment.moveForm("div-comment-149", "149", "respond", "304")'>Reply</a>				</div><!-- .reply -->
+			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+		<li id="comment-150" class="comment odd alt thread-odd thread-alt depth-1">
+			<article id="div-comment-150" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://1.gravatar.com/avatar/935714a045a23a786f8f0750f2a44565?s=34&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D34&amp;r=G' class='avatar avatar-34 photo' height='34' width='34' />						<b class="fn">Shai Mishali</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="http://chrissilich.com/blog/fix-css-animation-slow-or-choppy-in-mobile-browsers/#comment-150">
+							<time datetime="2012-08-13T13:21:26+00:00">
+								August 13, 2012 at 1:21 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Chris, To say your little one-liner was a lifesaver would be a complete understatement. You literally saved me hours of optimisation. Thank you for this trick!</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply">
+					<a class='comment-reply-link' href='/blog/fix-css-animation-slow-or-choppy-in-mobile-browsers/?replytocom=150#respond' onclick='return addComment.moveForm("div-comment-150", "150", "respond", "304")'>Reply</a>				</div><!-- .reply -->
+			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+		<li id="comment-151" class="pingback even thread-even depth-1">
+			<div class="comment-body">
+				Pingback: <a href='http://www.position-absolute.com/articles/trends/the-road-to-mobile-web-application-development/' rel='external nofollow' class='url'>The road to mobile web application development &laquo; Position Absolute</a> 			</div>
+</li><!-- #comment-## -->
+		<li id="comment-152" class="comment odd alt thread-odd thread-alt depth-1">
+			<article id="div-comment-152" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/2deebc4d83a5e28e9cecf15cc0adfe00?s=34&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D34&amp;r=G' class='avatar avatar-34 photo' height='34' width='34' />						<b class="fn"><a href='http://www.cooshtee.com' rel='external nofollow' class='url'>Chris Howard</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="http://chrissilich.com/blog/fix-css-animation-slow-or-choppy-in-mobile-browsers/#comment-152">
+							<time datetime="2012-11-12T13:38:35+00:00">
+								November 12, 2012 at 1:38 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>You legend!<br />
+Had a great, reposnsive way of navigating content using the jQuery scrollable plugin, but the animation was awful on ipad and iphone&#8230; until this.<br />
+Brilliant</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply">
+					<a class='comment-reply-link' href='/blog/fix-css-animation-slow-or-choppy-in-mobile-browsers/?replytocom=152#respond' onclick='return addComment.moveForm("div-comment-152", "152", "respond", "304")'>Reply</a>				</div><!-- .reply -->
+			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+		<li id="comment-153" class="comment even thread-even depth-1">
+			<article id="div-comment-153" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://1.gravatar.com/avatar/34b7df418e2735f415c9fa20168371ea?s=34&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D34&amp;r=G' class='avatar avatar-34 photo' height='34' width='34' />						<b class="fn"><a href='http://octoberfly.blogspot.com' rel='external nofollow' class='url'>Octoberfly</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="http://chrissilich.com/blog/fix-css-animation-slow-or-choppy-in-mobile-browsers/#comment-153">
+							<time datetime="2012-12-24T00:32:44+00:00">
+								December 24, 2012 at 12:32 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Omg this helped so much. Such a simple trick but huge effect. Thanks!</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply">
+					<a class='comment-reply-link' href='/blog/fix-css-animation-slow-or-choppy-in-mobile-browsers/?replytocom=153#respond' onclick='return addComment.moveForm("div-comment-153", "153", "respond", "304")'>Reply</a>				</div><!-- .reply -->
+			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+		<li id="comment-154" class="comment odd alt thread-odd thread-alt depth-1">
+			<article id="div-comment-154" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://1.gravatar.com/avatar/3e3a3d79fbe1340cf68957baf4c3b105?s=34&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D34&amp;r=G' class='avatar avatar-34 photo' height='34' width='34' />						<b class="fn"><a href='http://aretha.com.br' rel='external nofollow' class='url'>josie</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="http://chrissilich.com/blog/fix-css-animation-slow-or-choppy-in-mobile-browsers/#comment-154">
+							<time datetime="2013-02-08T14:38:30+00:00">
+								February 8, 2013 at 2:38 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>well done trick.<br />
+cheers</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply">
+					<a class='comment-reply-link' href='/blog/fix-css-animation-slow-or-choppy-in-mobile-browsers/?replytocom=154#respond' onclick='return addComment.moveForm("div-comment-154", "154", "respond", "304")'>Reply</a>				</div><!-- .reply -->
+			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+		<li id="comment-155" class="comment even thread-even depth-1">
+			<article id="div-comment-155" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://1.gravatar.com/avatar/37fde481fd2fdd3099e70edea8d321d9?s=34&amp;d=http%3A%2F%2F1.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D34&amp;r=G' class='avatar avatar-34 photo' height='34' width='34' />						<b class="fn">johan</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="http://chrissilich.com/blog/fix-css-animation-slow-or-choppy-in-mobile-browsers/#comment-155">
+							<time datetime="2013-03-25T04:57:26+00:00">
+								March 25, 2013 at 4:57 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Wow, my images rotates like a charm&#8230;.. It did in firefox and chrome on android, but not in the normal android browser.</p>
+<p>Now it does!!!!</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply">
+					<a class='comment-reply-link' href='/blog/fix-css-animation-slow-or-choppy-in-mobile-browsers/?replytocom=155#respond' onclick='return addComment.moveForm("div-comment-155", "155", "respond", "304")'>Reply</a>				</div><!-- .reply -->
+			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+		<li id="comment-156" class="comment odd alt thread-odd thread-alt depth-1 parent">
+			<article id="div-comment-156" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/63548efceaa5bf308a0647c876ff13d2?s=34&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D34&amp;r=G' class='avatar avatar-34 photo' height='34' width='34' />						<b class="fn">Anderson</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="http://chrissilich.com/blog/fix-css-animation-slow-or-choppy-in-mobile-browsers/#comment-156">
+							<time datetime="2013-09-19T00:01:25+00:00">
+								September 19, 2013 at 12:01 am							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>Great tip! but I still have a question, as some said above, use Css transform accelarate the animations, but trying something like change margin and padding values, still sucks on my android.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply">
+					<a class='comment-reply-link' href='/blog/fix-css-animation-slow-or-choppy-in-mobile-browsers/?replytocom=156#respond' onclick='return addComment.moveForm("div-comment-156", "156", "respond", "304")'>Reply</a>				</div><!-- .reply -->
+			</article><!-- .comment-body -->
+<ol class="children">
+		<li id="comment-187" class="comment byuser comment-author-chrissilich bypostauthor even depth-2">
+			<article id="div-comment-187" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/6e1f3fe92f48819badc48105d58d203f?s=34&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D34&amp;r=G' class='avatar avatar-34 photo' height='34' width='34' />						<b class="fn">chrissilich</b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="http://chrissilich.com/blog/fix-css-animation-slow-or-choppy-in-mobile-browsers/#comment-187">
+							<time datetime="2014-01-23T18:26:48+00:00">
+								January 23, 2014 at 6:26 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>I think it&#8217;s probably because margin and padding make the browser re-float everything else on the page. If you can avoid animating those values, do it.</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply">
+					<a class='comment-reply-link' href='/blog/fix-css-animation-slow-or-choppy-in-mobile-browsers/?replytocom=187#respond' onclick='return addComment.moveForm("div-comment-187", "187", "respond", "304")'>Reply</a>				</div><!-- .reply -->
+			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+</ol><!-- .children -->
+</li><!-- #comment-## -->
+		<li id="comment-157" class="comment odd alt thread-even depth-1">
+			<article id="div-comment-157" class="comment-body">
+				<footer class="comment-meta">
+					<div class="comment-author vcard">
+						<img alt='' src='http://0.gravatar.com/avatar/c14c71d9f18dd96c87a12b60b87621e4?s=34&amp;d=http%3A%2F%2F0.gravatar.com%2Favatar%2Fad516503a11cd5ca435acc9bb6523536%3Fs%3D34&amp;r=G' class='avatar avatar-34 photo' height='34' width='34' />						<b class="fn"><a href='http://www.germanunique.com' rel='external nofollow' class='url'>Holger Tepper</a></b> <span class="says">says:</span>					</div><!-- .comment-author -->
+
+					<div class="comment-metadata">
+						<a href="http://chrissilich.com/blog/fix-css-animation-slow-or-choppy-in-mobile-browsers/#comment-157">
+							<time datetime="2013-10-28T15:38:51+00:00">
+								October 28, 2013 at 3:38 pm							</time>
+						</a>
+											</div><!-- .comment-metadata -->
+
+									</footer><!-- .comment-meta -->
+
+				<div class="comment-content">
+					<p>I agree:<br />
+THIS IS DEFINITELY ONE OF THE MOST <strong>AMAZING</strong> TIPS I&#8217;VE READ IN &#8230; 2 YEARS MAYBE !<br />
+AWESOME, THANKS !!!<br />
+APPLYING THIS TO MY APP SCROLLS AND PERFORMS LIKE A CHARM !!!!!</p>
+				</div><!-- .comment-content -->
+
+				<div class="reply">
+					<a class='comment-reply-link' href='/blog/fix-css-animation-slow-or-choppy-in-mobile-browsers/?replytocom=157#respond' onclick='return addComment.moveForm("div-comment-157", "157", "respond", "304")'>Reply</a>				</div><!-- .reply -->
+			</article><!-- .comment-body -->
+</li><!-- #comment-## -->
+	</ol><!-- .comment-list -->
+
+	
+	
+	
+									<div id="respond" class="comment-respond">
+				<h3 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="/blog/fix-css-animation-slow-or-choppy-in-mobile-browsers/#respond" style="display:none;">Cancel reply</a></small></h3>
+									<form action="http://chrissilich.com/blog/wp-comments-post.php" method="post" id="commentform" class="comment-form" novalidate>
+																			<p class="comment-notes">Your email address will not be published. Required fields are marked <span class="required">*</span></p>							<p class="comment-form-author"><label for="author">Name <span class="required">*</span></label> <input id="author" name="author" type="text" value="" size="30" aria-required='true' /></p>
+<p class="comment-form-email"><label for="email">Email <span class="required">*</span></label> <input id="email" name="email" type="email" value="" size="30" aria-required='true' /></p>
+<p class="comment-form-url"><label for="url">Website</label> <input id="url" name="url" type="url" value="" size="30" /></p>
+												<p class="comment-form-comment"><label for="comment">Comment</label> <textarea id="comment" name="comment" cols="45" rows="8" aria-required="true"></textarea></p>						<p class="form-allowed-tags">You may use these <abbr title="HyperText Markup Language">HTML</abbr> tags and attributes:  <code>&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;cite&gt; &lt;code&gt; &lt;del datetime=&quot;&quot;&gt; &lt;em&gt; &lt;i&gt; &lt;q cite=&quot;&quot;&gt; &lt;strike&gt; &lt;strong&gt; </code></p>						<p class="form-submit">
+							<input name="submit" type="submit" id="submit" value="Post Comment" />
+							<input type='hidden' name='comment_post_ID' value='304' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+						</p>
+						<p style="display: none;"><input type="hidden" id="akismet_comment_nonce" name="akismet_comment_nonce" value="fe245b3c94" /></p>					</form>
+							</div><!-- #respond -->
+			
+</div><!-- #comments -->
+		</div><!-- #content -->
+	</div><!-- #primary -->
+
+<div id="secondary">
+	
+	
+		<div id="primary-sidebar" class="primary-sidebar widget-area" role="complementary">
+				<aside id="recent-posts-2" class="widget widget_recent_entries">		<h1 class="widget-title">Recent Posts</h1>		<ul>
+					<li>
+				<a href="http://chrissilich.com/blog/javascript-singleton-pattern/">Javascript Singleton Pattern</a>
+						</li>
+					<li>
+				<a href="http://chrissilich.com/blog/rolling-my-own-very-simple-mvc-patterned-javascript-canvas-game-without-an-mvc-framework/">Rolling my own very simple, MVC patterned Javascript Canvas game without an MVC framework</a>
+						</li>
+					<li>
+				<a href="http://chrissilich.com/blog/dos-and-donts-of-animating-for-ipad-1/">Dos and Don&#8217;ts of Animating for iPad 1 using CSS or JS/TweenMax</a>
+						</li>
+					<li>
+				<a href="http://chrissilich.com/blog/sublime-text-font-smoothing-anti-aliasing-issues-in-mountain-lion/">Sublime Text Font Smoothing (anti-aliasing) issues in Mountain Lion</a>
+						</li>
+					<li>
+				<a href="http://chrissilich.com/blog/itunes-playlists-out-of-order-when-synced-to-iphoneipodipad/">iTunes playlists out of order when synced to iPhone/iPod/iPad</a>
+						</li>
+				</ul>
+		</aside><aside id="categories-2" class="widget widget_categories"><h1 class="widget-title">Categories</h1>		<ul>
+	<li class="cat-item cat-item-2"><a href="http://chrissilich.com/blog/category/actionscript/" title="View all posts filed under Actionscript/Flash">Actionscript/Flash</a>
+</li>
+	<li class="cat-item cat-item-3"><a href="http://chrissilich.com/blog/category/aftereffects/" title="View all posts filed under AfterEffects">AfterEffects</a>
+</li>
+	<li class="cat-item cat-item-17"><a href="http://chrissilich.com/blog/category/php/codeigniter/" title="View all posts filed under CodeIgniter">CodeIgniter</a>
+</li>
+	<li class="cat-item cat-item-18"><a href="http://chrissilich.com/blog/category/html/css/" title="View all posts filed under CSS">CSS</a>
+</li>
+	<li class="cat-item cat-item-19"><a href="http://chrissilich.com/blog/category/ios/general/" title="View all posts filed under General">General</a>
+</li>
+	<li class="cat-item cat-item-4"><a href="http://chrissilich.com/blog/category/hackintosh/" title="View all posts filed under Hackintosh">Hackintosh</a>
+</li>
+	<li class="cat-item cat-item-5"><a href="http://chrissilich.com/blog/category/html/" title="View all posts filed under HTML/CSS">HTML/CSS</a>
+</li>
+	<li class="cat-item cat-item-6"><a href="http://chrissilich.com/blog/category/html/html5/" title="View all posts filed under HTML5">HTML5</a>
+</li>
+	<li class="cat-item cat-item-7"><a href="http://chrissilich.com/blog/category/ios/" title="View all posts filed under iOS">iOS</a>
+</li>
+	<li class="cat-item cat-item-8"><a href="http://chrissilich.com/blog/category/javascript/" title="View all posts filed under Javascript">Javascript</a>
+</li>
+	<li class="cat-item cat-item-9"><a href="http://chrissilich.com/blog/category/javascript/jquery/" title="View all posts filed under jQuery">jQuery</a>
+</li>
+	<li class="cat-item cat-item-10"><a href="http://chrissilich.com/blog/category/javascript/node/" title="View all posts filed under Node">Node</a>
+</li>
+	<li class="cat-item cat-item-11"><a href="http://chrissilich.com/blog/category/osx/" title="View all posts filed under OS X">OS X</a>
+</li>
+	<li class="cat-item cat-item-12"><a href="http://chrissilich.com/blog/category/ios/phonegap/" title="View all posts filed under PhoneGap">PhoneGap</a>
+</li>
+	<li class="cat-item cat-item-13"><a href="http://chrissilich.com/blog/category/php/" title="View all posts filed under PHP">PHP</a>
+</li>
+	<li class="cat-item cat-item-14"><a href="http://chrissilich.com/blog/category/javascript/socket-io/" title="View all posts filed under socket.io">socket.io</a>
+</li>
+	<li class="cat-item cat-item-15"><a href="http://chrissilich.com/blog/category/javascript/tweenmax/" title="View all posts filed under TweenMax">TweenMax</a>
+</li>
+	<li class="cat-item cat-item-1"><a href="http://chrissilich.com/blog/category/uncategorized/" title="View all posts filed under Uncategorized">Uncategorized</a>
+</li>
+	<li class="cat-item cat-item-16"><a href="http://chrissilich.com/blog/category/php/zend/" title="View all posts filed under Zend">Zend</a>
+</li>
+		</ul>
+</aside><aside id="archives-2" class="widget widget_archive"><h1 class="widget-title">Archives</h1>		<ul>
+			<li><a href='http://chrissilich.com/blog/2013/09/'>September 2013</a></li>
+	<li><a href='http://chrissilich.com/blog/2013/01/'>January 2013</a></li>
+	<li><a href='http://chrissilich.com/blog/2012/09/'>September 2012</a></li>
+	<li><a href='http://chrissilich.com/blog/2012/07/'>July 2012</a></li>
+	<li><a href='http://chrissilich.com/blog/2012/06/'>June 2012</a></li>
+	<li><a href='http://chrissilich.com/blog/2012/02/'>February 2012</a></li>
+	<li><a href='http://chrissilich.com/blog/2011/11/'>November 2011</a></li>
+	<li><a href='http://chrissilich.com/blog/2011/09/'>September 2011</a></li>
+	<li><a href='http://chrissilich.com/blog/2011/08/'>August 2011</a></li>
+	<li><a href='http://chrissilich.com/blog/2011/07/'>July 2011</a></li>
+	<li><a href='http://chrissilich.com/blog/2011/06/'>June 2011</a></li>
+	<li><a href='http://chrissilich.com/blog/2011/05/'>May 2011</a></li>
+	<li><a href='http://chrissilich.com/blog/2011/04/'>April 2011</a></li>
+	<li><a href='http://chrissilich.com/blog/2011/03/'>March 2011</a></li>
+	<li><a href='http://chrissilich.com/blog/2011/02/'>February 2011</a></li>
+	<li><a href='http://chrissilich.com/blog/2011/01/'>January 2011</a></li>
+	<li><a href='http://chrissilich.com/blog/2010/12/'>December 2010</a></li>
+	<li><a href='http://chrissilich.com/blog/2010/11/'>November 2010</a></li>
+	<li><a href='http://chrissilich.com/blog/2010/10/'>October 2010</a></li>
+		</ul>
+</aside><aside id="search-3" class="widget widget_search"><h1 class="widget-title">Search Blog</h1><form role="search" method="get" class="search-form" action="http://chrissilich.com/blog/">
+				<label>
+					<span class="screen-reader-text">Search for:</span>
+					<input type="search" class="search-field" placeholder="Search &hellip;" value="" name="s" title="Search for:" />
+				</label>
+				<input type="submit" class="search-submit" value="Search" />
+			</form></aside><aside id="meta-2" class="widget widget_meta"><h1 class="widget-title">Meta</h1>			<ul>
+						<li><a href="http://chrissilich.com/blog/wp-login.php">Log in</a></li>
+			<li><a href="http://chrissilich.com/blog/feed/" title="Syndicate this site using RSS 2.0">Entries <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+			<li><a href="http://chrissilich.com/blog/comments/feed/" title="The latest comments to all posts in RSS">Comments <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+			<li><a href="http://wordpress.org/" title="Powered by WordPress, state-of-the-art semantic personal publishing platform.">WordPress.org</a></li>						</ul>
+</aside>	</div><!-- #primary-sidebar -->
+	</div><!-- #secondary -->
+		</div><!-- #main -->
+
+		<footer id="colophon" class="site-footer" role="contentinfo">
+
+			
+			<div class="site-info">
+								<a href="http://wordpress.org/">Proudly powered by WordPress</a>
+			</div><!-- .site-info -->
+		</footer><!-- #colophon -->
+	</div><!-- #page -->
+
+	<!-- Auto SyntaxHighlighter -->
+<script type='text/javascript' src='http://chrissilich.com/blog/wp-content/plugins/auto-syntaxhighlighter/SyntaxHighlighter/build/scripts/core-min.js?ver=3.0.83'></script>
+<link rel='stylesheet' id='ash_core-css'  href='http://chrissilich.com/blog/wp-content/plugins/auto-syntaxhighlighter/SyntaxHighlighter/build/styles/shCore-min.css?ver=3.0.83' type='text/css' media='all' />
+<link rel='stylesheet' id='ash_theme_default-css'  href='http://chrissilich.com/blog/wp-content/plugins/auto-syntaxhighlighter/SyntaxHighlighter/build/styles/shThemeDefault-min.css?ver=3.0.83' type='text/css' media='all' />
+<script type='text/javascript'>
+SyntaxHighlighter.autoloader(
+	'applescript	http://chrissilich.com/blog/wp-content/plugins/auto-syntaxhighlighter/SyntaxHighlighter/build/scripts/shBrushAppleScript-min.js',
+	'actionscript3 as3	http://chrissilich.com/blog/wp-content/plugins/auto-syntaxhighlighter/SyntaxHighlighter/build/scripts/shBrushAS3-min.js',
+	'bash shell	http://chrissilich.com/blog/wp-content/plugins/auto-syntaxhighlighter/SyntaxHighlighter/build/scripts/shBrushBash-min.js',
+	'coldfusion cf	http://chrissilich.com/blog/wp-content/plugins/auto-syntaxhighlighter/SyntaxHighlighter/build/scripts/shBrushColdFusion-min.js',
+	'c# c-sharp csharp	http://chrissilich.com/blog/wp-content/plugins/auto-syntaxhighlighter/SyntaxHighlighter/build/scripts/shBrushCSharp-min.js',
+	'cpp c	http://chrissilich.com/blog/wp-content/plugins/auto-syntaxhighlighter/SyntaxHighlighter/build/scripts/shBrushCpp-min.js',
+	'css	http://chrissilich.com/blog/wp-content/plugins/auto-syntaxhighlighter/SyntaxHighlighter/build/scripts/shBrushCss-min.js',
+	'delphi pas pascal	http://chrissilich.com/blog/wp-content/plugins/auto-syntaxhighlighter/SyntaxHighlighter/build/scripts/shBrushDelphi-min.js',
+	'diff patch	http://chrissilich.com/blog/wp-content/plugins/auto-syntaxhighlighter/SyntaxHighlighter/build/scripts/shBrushDiff-min.js',
+	'erl erlang	http://chrissilich.com/blog/wp-content/plugins/auto-syntaxhighlighter/SyntaxHighlighter/build/scripts/shBrushErlang-min.js',
+	'groovy	http://chrissilich.com/blog/wp-content/plugins/auto-syntaxhighlighter/SyntaxHighlighter/build/scripts/shBrushGroovy-min.js',
+	'js jscript javascript	http://chrissilich.com/blog/wp-content/plugins/auto-syntaxhighlighter/SyntaxHighlighter/build/scripts/shBrushJScript-min.js',
+	'java	http://chrissilich.com/blog/wp-content/plugins/auto-syntaxhighlighter/SyntaxHighlighter/build/scripts/shBrushJava-min.js',
+	'jfx javafx	http://chrissilich.com/blog/wp-content/plugins/auto-syntaxhighlighter/SyntaxHighlighter/build/scripts/shBrushJavaFX-min.js',
+	'objective-c objc cocoa	http://chrissilich.com/blog/wp-content/plugins/auto-syntaxhighlighter/SyntaxHighlighter/build/scripts/shBrushObjC-min.js',
+	'perl pl	http://chrissilich.com/blog/wp-content/plugins/auto-syntaxhighlighter/SyntaxHighlighter/build/scripts/shBrushPerl-min.js',
+	'php	http://chrissilich.com/blog/wp-content/plugins/auto-syntaxhighlighter/SyntaxHighlighter/build/scripts/shBrushPhp-min.js',
+	'text plain	http://chrissilich.com/blog/wp-content/plugins/auto-syntaxhighlighter/SyntaxHighlighter/build/scripts/shBrushPlain-min.js',
+	'ps powershell	http://chrissilich.com/blog/wp-content/plugins/auto-syntaxhighlighter/SyntaxHighlighter/build/scripts/shBrushPowerShell-min.js',
+	'py python	http://chrissilich.com/blog/wp-content/plugins/auto-syntaxhighlighter/SyntaxHighlighter/build/scripts/shBrushPython-min.js',
+	'rails ror ruby	http://chrissilich.com/blog/wp-content/plugins/auto-syntaxhighlighter/SyntaxHighlighter/build/scripts/shBrushRuby-min.js',
+	'scala	http://chrissilich.com/blog/wp-content/plugins/auto-syntaxhighlighter/SyntaxHighlighter/build/scripts/shBrushScala-min.js',
+	'sql	http://chrissilich.com/blog/wp-content/plugins/auto-syntaxhighlighter/SyntaxHighlighter/build/scripts/shBrushSql-min.js',
+	'vb vbnet	http://chrissilich.com/blog/wp-content/plugins/auto-syntaxhighlighter/SyntaxHighlighter/build/scripts/shBrushVb-min.js',
+	'xml xhtml xslt html	http://chrissilich.com/blog/wp-content/plugins/auto-syntaxhighlighter/SyntaxHighlighter/build/scripts/shBrushXml-min.js'
+);
+SyntaxHighlighter.defaults['auto-links'] = false;
+SyntaxHighlighter.defaults['toolbar'] = false;
+SyntaxHighlighter.all();
+</script>
+<!-- /Auto SyntaxHighlighter -->
+<script type='text/javascript' src='http://chrissilich.com/blog/wp-content/themes/twentyfourteen/js/functions.js?ver=20131209'></script>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-12796799-5', 'chrissilich.com');
+  ga('send', 'pageview');
+
+</script>
+</body>
+</html>

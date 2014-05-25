@@ -1,0 +1,1631 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>spacing - How can I decrease spaces between equations? - TeX - LaTeX Stack Exchange</title>
+    <link rel="shortcut icon" href="//cdn.sstatic.net/tex/img/favicon.ico?v=8bd9630dcd9e">
+    <link rel="apple-touch-icon image_src" href="//cdn.sstatic.net/tex/img/apple-touch-icon.png?v=0a90e8f91d4c">
+    <link rel="search" type="application/opensearchdescription+xml" title="TeX - LaTeX Stack Exchange" href="/opensearch.xml">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@StackTeX" />
+    <meta name="twitter:domain" content="tex.stackexchange.com"/>
+    <meta name="og:type" content="website" />
+    <meta name="og:image" content="http://cdn.sstatic.net/tex/img/apple-touch-icon@2.png?v=eaf26b461720"/>
+    <meta name="og:title" content="How can I decrease spaces between equations?" />
+    <meta name="og:description" content="\documentclass[12pt,a4paper]{mwrep}    
+\renewcommand\baselinestretch{1.5}
+\begin{document}
+\chapter{Test}
+Text text text text text text text text text text      
+\begin{equation}
+1 + 2 + 3 = 6
+" />
+    <meta name="og:url" content="http://tex.stackexchange.com/questions/32918/how-can-i-decrease-spaces-between-equations"/>
+    <link rel="canonical" href="http://tex.stackexchange.com/questions/32918/how-can-i-decrease-spaces-between-equations" />
+
+    
+    
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="//cdn.sstatic.net/Js/stub.en.js?v=a085b0b86607"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.sstatic.net/tex/all.css?v=00f9bd069367">
+    
+    <link rel="alternate" type="application/atom+xml" title="Feed for question &#39;How can I decrease spaces between equations?&#39;" href="/feeds/question/32918">
+    <script>
+        
+        StackExchange.ready(function () {
+            StackExchange.using("postValidation", function () {
+                StackExchange.postValidation.initOnBlurAndSubmit($('#post-form'), 2, 'answer');
+            });
+
+            
+            StackExchange.question.init({showAnswerHelp:true,totalCommentCount:0,shownCommentCount:0,highlightColor:'#F4A83D',backgroundColor:'#FFF',questionId:32918});
+
+            styleCode();
+
+                StackExchange.realtime.subscribeToQuestion('85', '32918');
+            
+                    });
+    </script>
+
+
+    <script>
+        StackExchange.ready(function () {
+            StackExchange.realtime.init('wss://qa.sockets.stackexchange.com,ws://qa.sockets.stackexchange.com');
+            StackExchange.realtime.subscribeToInboxNotifications();
+                    StackExchange.realtime.subscribeToReputationNotifications('85');
+                StackExchange.realtime.subscribeToTopBarNotifications('85');
+        });
+    </script>
+    <script>
+        StackExchange.init({"locale":"en","stackAuthUrl":"https://stackauth.com","serverTime":1399111088,"networkMetaHostname":"meta.stackexchange.com","styleCode":true,"enableUserHovercards":true,"site":{"name":"TeX - LaTeX Stack Exchange","description":"Q&A for users of TeX, LaTeX, ConTeXt, and related typesetting systems","isNoticesTabEnabled":true,"recaptchaPublicKey":"6LdsB7sSAAAAAAzjgEF_Hd8vXv-C42sa_KyofaGR","recaptchaAudioLang":"en","enableSocialMediaInSharePopup":true},"user":{"fkey":"eca6c4cd45e7d4a8a910de8541503c8e","isAnonymous":true,"ab":{"welcome_email":{"v":"3","g":2}}}});
+        StackExchange.using.setCacheBreakers({"js/prettify-full.en.js":"d987e8ba02e8","js/moderator.en.js":"852a9590ae2d","js/full-anon.en.js":"e0135be99202","js/full.en.js":"252aef4827ba","js/wmd.en.js":"d9dc7a9550f9","js/third-party/jquery.autocomplete.min.js":"e5f01e97f7c3","js/third-party/jquery.autocomplete.min.en.js":"","js/mobile.en.js":"dcf6dd539af8","js/help.en.js":"ceae85b045a1","js/tageditor.en.js":"7f54d0efc81e","js/tageditornew.en.js":"0bf79a6484e0","js/inline-tag-editing.en.js":"d00846e90065","js/revisions.en.js":"9a2b9be85a69","js/review.en.js":"063e88635927","js/tagsuggestions.en.js":"bb4721d888d2","js/post-validation.en.js":"0e52d1a0290c","js/explore-qlist.en.js":"24424eb238e8","js/events.en.js":"203491ffdbd7"});
+        StackExchange.using("gps", function() {
+             StackExchange.gps.init(true);
+        });
+        
+    </script>
+    
+        <script>
+            StackExchange.ready(function () {
+                $('#nav-tour').click(function () {
+                    StackExchange.using("gps", function() {
+                        StackExchange.gps.track("aboutpage.click", { aboutclick_location: "headermain" }, true);
+                    });
+                });
+            });
+        </script>
+</head>
+<body class="question-page new-topbar">
+    <noscript><div id="noscript-padding"></div></noscript>
+    <div id="notify-container"></div>
+    <div id="overlay-header"></div>
+    <div id="custom-header"></div>
+<div class="topbar">
+    <div class="topbar-wrapper">
+        
+        <div class="js-topbar-dialog-corral">
+
+<div class="topbar-dialog siteSwitcher-dialog dno">
+    <div class="header">
+        <h3><a href="//tex.stackexchange.com">current community</a></h3>
+    </div>
+    <div class="modal-content current-site-container">
+        <ul class="current-site">
+                <li>
+                        <div class="related-links">
+            <a href="http://chat.stackexchange.com"     data-gps-track="site_switcher.click({ item_type:6 })"
+>chat</a>
+                    <a href="http://tex.blogoverflow.com/"     data-gps-track="site_switcher.click({ item_type:7 })"
+>blog</a>
+            </div>
+
+
+
+
+    <a href="//tex.stackexchange.com"
+       class="current-site-link site-link js-gps-track"
+       data-id="85"
+       data-gps-track="
+        site_switcher.click({ item_type:3 })">
+        <div class="site-icon favicon favicon-tex" title="TeX - LaTeX"></div>
+        TeX - LaTeX
+    </a>
+
+                </li>
+                <li class="related-site">
+                        <div class="L-shaped-icon-container">
+        <span class="L-shaped-icon"></span>
+    </div>
+
+                    
+
+
+
+    <a href="http://meta.tex.stackexchange.com"
+       class="site-link js-gps-track"
+       data-id="87"
+       data-gps-track="
+            site.switch({ target_site:87, item_type:3 }),
+        site_switcher.click({ item_type:4 })">
+        <div class="site-icon favicon favicon-texmeta" title="TeX - LaTeX Meta"></div>
+        TeX - LaTeX Meta
+    </a>
+
+                </li>
+                    </ul>
+    </div>
+    
+    <div class="header" id="your-communities-header">
+        <h3>
+your communities        </h3>
+            
+    </div>
+    <div class="modal-content" id="your-communities-section">
+            
+            <div class="call-to-login">
+                        <a href="https://tex.stackexchange.com/users/signup?returnurl=http%3a%2f%2ftex.stackexchange.com%2fquestions%2f32918%2fhow-can-i-decrease-spaces-between-equations" class="js-gps-track"     data-gps-track="site_switcher.click({ item_type:10 })"
+>Sign up</a>
+                    or
+                    <a href="https://tex.stackexchange.com/users/login?returnurl=http%3a%2f%2ftex.stackexchange.com%2fquestions%2f32918%2fhow-can-i-decrease-spaces-between-equations" class="js-gps-track"     data-gps-track="site_switcher.click({ item_type:11 })"
+>log in</a>
+
+                    to customize your list.
+            </div>
+    </div>
+    
+    <div class="header">
+        <h3><a href="//stackexchange.com/sites">more stack exchange communities</a></h3>
+    </div>
+    <div class="modal-content">
+            <div class="child-content"></div>
+    </div>
+</div>
+        </div>
+
+        <div class="network-items">
+            
+            <a href="//stackexchange.com" 
+               class="topbar-icon icon-site-switcher yes-hover js-site-switcher-button js-gps-track"
+               data-gps-track="site_switcher.show"
+               title="A list of all 123 Stack Exchange sites">
+                <span class="hidden-text">Stack Exchange</span>
+            </a>
+            
+        </div>
+
+        <div class="topbar-links">
+            
+                <div class="links-container">
+                    <span class="topbar-menu-links">
+                            <a href="https://tex.stackexchange.com/users/signup?returnurl=http%3a%2f%2ftex.stackexchange.com%2fquestions%2f32918%2fhow-can-i-decrease-spaces-between-equations" class="login-link">sign up</a>
+                            <a href="https://tex.stackexchange.com/users/login?returnurl=http%3a%2f%2ftex.stackexchange.com%2fquestions%2f32918%2fhow-can-i-decrease-spaces-between-equations" class="login-link">log in</a>
+                            <a href="/tour">tour</a>
+
+                            <a href="#" class="icon-help js-help-button" title="Help Center and other resources">
+        help
+        <span class="triangle"></span>
+    </a>
+    <div class="topbar-dialog help-dialog js-help-dialog dno">
+        <div class="modal-content">
+            <ul>
+                <li>
+                    <a href="/tour"     class="js-gps-track" data-gps-track="help_popup.click({ item_type:1 })"
+>
+                        Tour
+                        <span class="item-summary">
+                            Start here for a quick overview of the site
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/help"     class="js-gps-track" data-gps-track="help_popup.click({ item_type:4 })"
+>
+                        Help Center
+                        <span class="item-summary">
+                            Detailed answers to any questions you might have
+                        </span>
+                    </a>
+                </li>
+                    <li>
+                        <a href="//meta.tex.stackexchange.com"     class="js-gps-track" data-gps-track="help_popup.click({ item_type:2 })"
+>
+                            Meta
+                            <span class="item-summary">
+                                Discuss the workings and policies of this site
+                            </span>
+                        </a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+
+                    </span>
+                </div>
+
+			<div class="search-container">
+                <form id="search" action="/search" method="get" autocomplete="off">
+                    <input name="q" type="text" placeholder="search" value="" tabindex="1" autocomplete="off" maxlength="240" />
+                </form>
+			</div>
+            	
+        </div>      
+    </div> 
+</div>
+<script>
+    StackExchange.ready(function () {
+        //topbar.init();
+        StackExchange.topbar.init();
+    });
+</script>
+    <div class="container">
+        <div id="header" class=headeranon>
+            <br class="cbt">
+            <div id="hlogo">
+                <a href="/">
+                    TeX - LaTeX
+                </a>
+            </div>
+            <div id="hmenus">
+                <div class="nav mainnavs mainnavsanon">
+                    <ul>
+                            <li class="youarehere"><a id="nav-questions" href="/questions">Questions</a></li>
+                            <li><a id="nav-tags" href="/tags">Tags</a></li>
+                            <li><a id="nav-tour" href="/about">Tour</a></li>
+                            <li><a id="nav-users" href="/users">Users</a></li>
+                    </ul>
+                </div>
+                <div class="nav askquestion">
+                    <ul>
+                        <li>
+                            <a id="nav-askquestion"  href="/questions/ask">Ask Question</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+
+
+
+        <div id="content">
+            
+
+<div itemscope itemtype="http://schema.org/Article">
+	<link itemprop="image" href="//cdn.sstatic.net/tex/img/apple-touch-icon.png">
+			<!--googleoff: all-->
+
+<div id="herobox-mini">
+    <div id="hero-content">
+        <span id="controls">
+            <a href="/about" id="tell-me-more" class="button">Take the 2-minute tour</a>
+            <span id="close"><a title="click to dismiss">&times;</a></span>
+        </span>
+        <div id="blurb">
+            TeX - LaTeX Stack Exchange is a question and answer site for users of TeX, LaTeX, ConTeXt, and related typesetting systems. It&#39;s 100% free, no registration required.
+        </div>        
+    </div>
+    <script>
+        $('#tell-me-more').click(function () {
+            var clickSource = $("body").attr("class") + '-mini';
+            if ($("body").hasClass("questions-page")) {
+                clickSource = 'questionpagemini';
+            } else if ($("body").hasClass("question-page")) {
+                clickSource = 'questionpagemini';
+            } else if ($("body").hasClass("home-page")) {
+                clickSource = 'homepagemini';
+            }
+
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("aboutpage.click", { aboutclick_location: clickSource } , true);
+            });
+        });
+        $('#herobox-mini #close').click(function () {
+            StackExchange.using("gps", function () {
+                StackExchange.gps.track("hero.action", { hero_action_type: "close" }, true);
+            });
+            $.cookie("hero", "none", { path: "/" });
+            var $hero = $("#herobox-mini");
+            $hero.slideUp('fast', function () { $hero.remove(); });
+            return false;
+        });
+    </script>
+</div>
+			<!--googleon: all-->
+			<div id="question-header">
+			<h1 itemprop="name"><a href="/questions/32918/how-can-i-decrease-spaces-between-equations" class="question-hyperlink">How can I decrease spaces between equations?</a></h1>
+		</div>
+			<div id="mainbar">
+
+			
+
+<div class="question" data-questionid="32918"  id="question">
+    
+        <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="32918">
+    <a class="vote-up-off" title="This question shows research effort; it is useful and clear">up vote</a>
+    <span class="vote-count-post ">8</span>
+    <a class="vote-down-off" title="This question does not show any research effort; it is unclear or not useful">down vote</a>
+    
+    <a class="star-off" href="#" title="This is a favorite question (click again to undo)">favorite</a>
+    <div class="favoritecount"><b>5</b></div>   
+
+</div>
+
+            </td>
+            
+<td class="postcell">
+<div>
+    <div class="post-text" itemprop="description">
+
+        <pre><code>\documentclass[12pt,a4paper]{mwrep}    
+\renewcommand\baselinestretch{1.5}
+\begin{document}
+\chapter{Test}
+Text text text text text text text text text text      
+\begin{equation}
+1 + 2 + 3 = 6
+\end{equation}  
+Text text text text text text text text text text  
+\begin{equation}
+1 + 2 + 3 = 6
+\end{equation}
+\begin{equation}
+1 + 2 + 3 = 6
+\end{equation}
+\end{document}
+</code></pre>
+
+<p>Spaces between two equations and between equations and text are too big. How can I lower them? I know that using <code>\renewcommand\baselinestretch{1.5}</code> is responsible for that but I need this command.</p>
+
+    </div>
+    <div class="post-taglist">
+        <a href="/questions/tagged/spacing" class="post-tag" title="show questions tagged &#39;spacing&#39;" rel="tag">spacing</a> <a href="/questions/tagged/equations" class="post-tag" title="show questions tagged &#39;equations&#39;" rel="tag">equations</a> 
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+<div class="post-menu"><a href="/q/32918" title="short permalink to this question" class="short-link" id="link-post-32918">share</a><span class="lsep">|</span><a href="/posts/32918/edit" class="suggest-edit-post" title="">improve this question</a></div>        
+    </td>
+    <td align="right" class="post-signature">
+<div class="user-info ">
+    <div class="user-action-time">
+        <a href="/posts/32918/revisions" title="show all edits to this post">edited <span title="2011-10-27 19:33:57Z" class="relativetime">Oct 27 '11 at 19:33</span></a>
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+    <td class="post-signature owner">
+        <div class="user-info ">
+    <div class="user-action-time">
+        asked <span title="2011-10-27 19:30:06Z" class="relativetime">Oct 27 '11 at 19:30</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/1997/ichibann"><div><img src="https://www.gravatar.com/avatar/54bdd408187763ee87b6f508e6056dcc?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/1997/ichibann">Ichibann</a><br>
+        <span class="reputation-score" title="reputation score " dir="ltr">1,495</span><span title="5 gold badges"><span class="badge1"></span><span class="badgecount">5</span></span><span title="13 silver badges"><span class="badge2"></span><span class="badgecount">13</span></span><span title="39 bronze badges"><span class="badge3"></span><span class="badgecount">39</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</div>
+</td>
+        </tr>
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-32918" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-32918" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid answering questions in comments." 
+				>add comment</a>
+    </td>
+</tr>            </table>    
+</div>
+
+
+			<div id="answers">
+
+				<a name="tab-top"></a>
+				<div id="answers-header">
+					<div class="subheader answers-subheader">
+						<h2>
+								3 Answers
+						</h2>
+						<div>
+							<div id="tabs">
+        <a href="/questions/32918/how-can-i-decrease-spaces-between-equations?answertab=active#tab-top" title="Answers with the latest activity first">active</a>
+        <a href="/questions/32918/how-can-i-decrease-spaces-between-equations?answertab=oldest#tab-top" title="Answers in the order they were provided">oldest</a>
+        <a class="youarehere" href="/questions/32918/how-can-i-decrease-spaces-between-equations?answertab=votes#tab-top" title="Answers with the highest score first">votes</a>
+</div>
+						</div>
+					</div>    
+				</div>    
+
+
+
+
+  
+<a name="32922"></a>
+<div id="answer-32922" class="answer accepted-answer" data-answerid="32922" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="32922">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">13</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+        <span class="vote-accepted-on load-accepted-answer-date" title="loading when this answer was accepted...">accepted</span>
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text">
+            <p>I would recommend the following measures:</p>
+
+<p>(1) Instead of <code>\renewcommand\baselinestretch{1.5}</code>, load the <code>setspace</code> package with the <code>nodisplayskipstretch</code> option, and then execute the command <code>setstretch{1.5}</code> in your document's preamble:</p>
+
+<pre><code>...
+\usepackage[nodisplayskipstretch]{setspace}
+\setstretch{1.5}
+</code></pre>
+
+<p>This way, you won't experience the excessive spacing between lines of text and floating objects. Also, material in footnotes will remain single-spaced. </p>
+
+<p>(2) When you have consecutive equations, don't use separate <code>equation</code> environments but instead use the <code>gather</code> environment provided by the <code>amsmath</code> package. (If the equations should be aligned along, say, their equal signs, use the <code>align</code> environment instead of the <code>gather</code> environment, using the ampersand, <code>&amp;</code>, character as the alignment point.) Two consecutive equations would then be entered as</p>
+
+<pre><code>\begin{gather}
+1 + 2 + 3 = 6 \\
+2 + 4 + 6 = 12
+\end{gather}  
+</code></pre>
+
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+<div class="post-menu"><a href="/a/32922" title="short permalink to this answer" class="short-link" id="link-post-32922">share</a><span class="lsep">|</span><a href="/posts/32922/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+<div class="user-info ">
+    <div class="user-action-time">
+        <a href="/posts/32922/revisions" title="show all edits to this post">edited <span title="2011-10-28 21:08:48Z" class="relativetime">Oct 28 '11 at 21:08</span></a>
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info user-hover">
+    <div class="user-action-time">
+        answered <span title="2011-10-27 19:47:59Z" class="relativetime">Oct 27 '11 at 19:47</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/5001/mico"><div class="gravatar-wrapper-32"><img src="http://i.stack.imgur.com/c7PDj.jpg?s=32&g=1" alt=""></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/5001/mico">Mico</a><br>
+        <span class="reputation-score" title="reputation score 71587" dir="ltr">71.6k</span><span title="4 gold badges"><span class="badge1"></span><span class="badgecount">4</span></span><span title="102 silver badges"><span class="badge2"></span><span class="badgecount">102</span></span><span title="238 bronze badges"><span class="badge3"></span><span class="badgecount">238</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>
+        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-32922" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="2" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-64973" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy"><code>\begin{gather} 1 + 2 + 3 = 6 \ 2 + 4 + 6 = 12 \end{gather}</code> shows two equations in one line.</span>
+                &ndash;&nbsp;
+                    <a href="/users/1997/ichibann"
+                       title="1495 reputation"
+                       class="comment-user owner">Ichibann</a>
+                <span class="comment-date" dir="ltr"><span title="2011-10-27 19:52:02Z" class="relativetime-clean">Oct 27 '11 at 19:52</span></span>
+                                                                            </div>
+        </td>
+    </tr>
+    <tr id="comment-64974" class="comment">
+        <td>
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                &nbsp;&nbsp;
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">Ok, I figured on my own that I need to put ` \\ ` instead of ` \ `</span>
+                &ndash;&nbsp;
+                    <a href="/users/1997/ichibann"
+                       title="1495 reputation"
+                       class="comment-user owner">Ichibann</a>
+                <span class="comment-date" dir="ltr"><span title="2011-10-27 19:56:09Z" class="relativetime-clean">Oct 27 '11 at 19:56</span></span>
+                    <span class="edited-yes" title="this comment was edited 2 times"></span>
+                                                                            </div>
+        </td>
+    </tr>
+    <tr id="comment-64976" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of &#39;useful comment&#39; votes received"
+                                      class="cool">1</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">You need an &amp; character on each line for an alignment tab.  You can put it anywhere, but I ususally put it in front of the =.</span>
+                &ndash;&nbsp;
+                    <a href="/users/987/brandon-kuczenski"
+                       title="755 reputation"
+                       class="comment-user">Brandon Kuczenski</a>
+                <span class="comment-date" dir="ltr"><span title="2011-10-27 20:03:09Z" class="relativetime-clean">Oct 27 '11 at 20:03</span></span>
+                    <span class="edited-yes" title="this comment was edited 1 time"></span>
+                                                                            </div>
+        </td>
+    </tr>
+    <tr id="comment-64984" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of &#39;useful comment&#39; votes received"
+                                      class="cool">2</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">It&#39;s not <i>wrong</i> to have two consecutive <code>equation</code> environments. However, doing so will in general use more space than if you use an environment that &quot;knows&quot; that successive lines are equations rather than switches between text and equations. Moreover, if you use consecutive <code>equation</code> environments, you can&#39;t align them on, say, the equal sign -- something you could do if you&#39;d use the <code>align</code> environment, say.</span>
+                &ndash;&nbsp;
+                    <a href="/users/5001/mico"
+                       title="71587 reputation"
+                       class="comment-user">Mico</a>
+                <span class="comment-date" dir="ltr"><span title="2011-10-27 21:04:31Z" class="relativetime-clean">Oct 27 '11 at 21:04</span></span>
+                                                                            </div>
+        </td>
+    </tr>
+    <tr id="comment-101401" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of &#39;useful comment&#39; votes received"
+                                      class="cool">1</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">+1 for the <code>gather</code> environment. I didn&#39;t want to mess around with document-wide spacing parameters just because LaTeX didn&#39;t &quot;know&quot; I was providing a series of equations.</span>
+                &ndash;&nbsp;
+                    <a href="/users/7016/warrick"
+                       title="327 reputation"
+                       class="comment-user">Warrick</a>
+                <span class="comment-date" dir="ltr"><span title="2012-03-23 09:42:12Z" class="relativetime-clean">Mar 23 '12 at 9:42</span></span>
+                                                                            </div>
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-32922" data-rep=50 data-anon=true
+			   class="comments-link " 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>show <b>2</b> more comments</a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="32919"></a>
+<div id="answer-32919" class="answer" data-answerid="32919" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="32919">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">8</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text">
+            <p>LaTeX uses <code>\abovedisplayskip</code> and <code>\belowdisplayskip</code> for the spacing above/below equations. There's also a short version of the former two commands for paragraphs ending/beginning with shorter lines. Here's an example showing the difference:</p>
+
+<p><img src="http://i.stack.imgur.com/mu0aH.png" alt="enter image description here"></p>
+
+<pre><code>\documentclass{article}
+\usepackage{amsmath}% http://ctan.org/pkg/amsmath
+\begin{document}
+Text text text text text text text text text text
+\begin{equation}
+1 + 2 + 3 = 6
+\end{equation}  
+Text text text text text text text text text text
+\begin{align}
+1 + 2 + 3 &amp;= 6 \\
+1 + 2 + 3 &amp;= 6
+\end{align}
+
+\setlength{\belowdisplayskip}{0pt} \setlength{\belowdisplayshortskip}{0pt}
+\setlength{\abovedisplayskip}{0pt} \setlength{\abovedisplayshortskip}{0pt}
+
+Text text text text text text text text text text
+\begin{equation}
+1 + 2 + 3 = 6
+\end{equation}  
+Text text text text text text text text text text
+\begin{align}
+1 + 2 + 3 &amp;= 6 \\
+1 + 2 + 3 &amp;= 6
+\end{align}
+\end{document}​
+</code></pre>
+
+<p>The same effect is obtained with/without a modified <code>\baselinestretch</code> - it is just clearer when viewed without that set. Of course, you can modify these lengths as needed.</p>
+
+<p><strong>Edit</strong>: Heed @egreg's suggestion and/or @Mico's answer regarding two equations</p>
+
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+<div class="post-menu"><a href="/a/32919" title="short permalink to this answer" class="short-link" id="link-post-32919">share</a><span class="lsep">|</span><a href="/posts/32919/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+    <td align="right" class="post-signature">
+<div class="user-info ">
+    <div class="user-action-time">
+        <a href="/posts/32919/revisions" title="show all edits to this post">edited <span title="2011-10-27 20:35:27Z" class="relativetime">Oct 27 '11 at 20:35</span></a>
+    </div>
+    <div class="user-gravatar32">
+        
+    </div>
+    <div class="user-details">
+        <br>
+        
+    </div>
+</div>    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info user-hover">
+    <div class="user-action-time">
+        answered <span title="2011-10-27 19:38:56Z" class="relativetime">Oct 27 '11 at 19:38</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/5764/werner"><div><img src="https://www.gravatar.com/avatar/2755fad858b65fead337857525eab28e?s=32&d=identicon&r=PG" alt="" width="32" height="32"></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/5764/werner">Werner</a><br>
+        <span class="reputation-score" title="reputation score 185872" dir="ltr">186k</span><span title="14 gold badges"><span class="badge1"></span><span class="badgecount">14</span></span><span title="367 silver badges"><span class="badge2"></span><span class="badgecount">367</span></span><span title="649 bronze badges"><span class="badge3"></span><span class="badgecount">649</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>
+        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-32919" class="comments" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+
+    <tr id="comment-64972" class="comment">
+        <td class="comment-actions">
+            <table>
+                <tbody>
+                    <tr>
+                        <td class=" comment-score">
+                                <span title="number of &#39;useful comment&#39; votes received"
+                                      class="warm">5</span>
+                        </td>
+                        <td>
+                                &nbsp;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>   
+        </td>
+        <td class="comment-text">
+            <div style="display: block;" class="comment-body">
+                <span class="comment-copy">One should never use two consecutive <code>equation</code> environment, but rather the <code>gather</code> environment provided by <b>amsmath</b></span>
+                &ndash;&nbsp;
+                    <a href="/users/4427/egreg"
+                       title="278107 reputation"
+                       class="comment-user">egreg</a>
+                <span class="comment-date" dir="ltr"><span title="2011-10-27 19:47:47Z" class="relativetime-clean">Oct 27 '11 at 19:47</span></span>
+                                                                            </div>
+        </td>
+    </tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-32919" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+
+  
+<a name="32921"></a>
+<div id="answer-32921" class="answer" data-answerid="32921" >
+    <table>
+        <tr>
+            <td class="votecell">
+                
+
+<div class="vote">
+    <input type="hidden" name="_id_" value="32921">
+    <a class="vote-up-off" title="This answer is useful">up vote</a>
+    <span class="vote-count-post ">4</span>
+    <a class="vote-down-off" title="This answer is not useful">down vote</a>
+    
+
+
+</div>
+
+            </td>
+            
+
+
+<td class="answercell">
+    <div class="post-text">
+            <p>you should use package <code>setspace</code> for the vertical spacing. The distance between two equations is set by the short skips!</p>
+
+<pre><code>\documentclass[12pt,a4paper]{mwrep}    
+\usepackage{setspace}\onehalfspacing
+\AtBeginDocument{%
+  \addtolength\abovedisplayskip{-0.5\baselineskip}%
+  \addtolength\belowdisplayskip{-0.5\baselineskip}%
+%  \addtolength\abovedisplayshortskip{-0.5\baselineskip}%
+%  \addtolength\belowdisplayshortskip{-0.5\baselineskip}%
+}
+
+\begin{document}
+\chapter{Test}
+Text text text text text text text text text text      
+\begin{equation}
+1 + 2 + 3 = 6
+\end{equation}  
+Text text text text text text text text text text  
+\begin{equation}
+1 + 2 + 3 = 6
+\end{equation}
+\begin{equation}
+1 + 2 + 3 = 6
+\end{equation}
+some nmore text\par
+some more text
+
+\end{document}
+</code></pre>
+
+<p><img src="http://i.stack.imgur.com/KOSFZ.png" alt="enter image description here"></p>
+
+    </div>
+    <table class="fw">
+    <tr>
+    <td class="vt">
+<div class="post-menu"><a href="/a/32921" title="short permalink to this answer" class="short-link" id="link-post-32921">share</a><span class="lsep">|</span><a href="/posts/32921/edit" class="suggest-edit-post" title="">improve this answer</a></div>                    </td>
+            
+
+
+    <td align="right" class="post-signature">   
+       
+
+    <div class="user-info ">
+    <div class="user-action-time">
+        answered <span title="2011-10-27 19:47:42Z" class="relativetime">Oct 27 '11 at 19:47</span>
+    </div>
+    <div class="user-gravatar32">
+        <a href="/users/2478/herbert"><div class="gravatar-wrapper-32"><img src="http://i.stack.imgur.com/qywAp.png?s=32&g=1" alt=""></div></a>
+    </div>
+    <div class="user-details">
+        <a href="/users/2478/herbert">Herbert</a><br>
+        <span class="reputation-score" title="reputation score 153707" dir="ltr">154k</span><span title="8 gold badges"><span class="badge1"></span><span class="badgecount">8</span></span><span title="193 silver badges"><span class="badge2"></span><span class="badgecount">193</span></span><span title="437 bronze badges"><span class="badge3"></span><span class="badgecount">437</span></span>
+    </div>
+</div>
+    </td>
+    </tr>
+    </table>
+</td>
+        </tr>
+
+<tr>
+    <td class="votecell"></td>
+    <td>
+	    <div id="comments-32921" class="comments dno" data-localized="true">
+		    <table>
+			    <tbody data-remaining-comments-count="0" 
+			           data-addlink-html="add comment" 
+			           data-addlink-disabled="true">
+					    <tr><td></td><td></td></tr>
+			    </tbody>
+		    </table>
+	    </div>
+			<a id="comments-link-32921" data-rep=50 data-anon=true
+			   class="comments-link disabled-link" 
+			   title="Use comments to ask for more information or suggest improvements. Avoid comments like “+1” or “thanks”." 
+				>add comment</a>
+    </td>
+</tr>
+    </table>
+</div>
+									<a name='new-answer'></a>
+						<form id="post-form" action="/questions/32918/answer/submit" method="post"  class="post-form">
+							<input type="hidden" id="post-id" value="32918" />
+							<h2 class="space">Your Answer</h2>
+
+
+
+    
+
+<script>
+    StackExchange.ready(function() {
+        initTagRenderer("".split(" "), "".split(" "));
+         
+        prepareEditor({
+            heartbeatType: 'answer',
+            bindNavPrevention: true,
+            postfix: "",
+            onDemand: true,
+            discardSelector: ".discard-answer"
+            ,immediatelyShowMarkdownHelp:true
+        });
+        
+
+    });  
+</script>
+
+
+<div id="post-editor" class="post-editor">
+
+    <div style="position: relative;">     
+        <div class="wmd-container">
+            <div id="wmd-button-bar" class="wmd-button-bar"></div>
+            <textarea id="wmd-input" class="wmd-input" name="post-text" cols="92" rows="15" tabindex="101" data-min-length=""></textarea>
+        </div>
+    </div>
+
+    <div class="fl" style="margin-top: 8px; height:24px;">&nbsp;</div>
+    <div id="draft-saved" class="draft-saved community-option fl" style="margin-top: 8px; height:24px; display:none;">draft saved</div>
+
+    <div id="draft-discarded" class="draft-discarded community-option fl" style="margin-top: 8px; height:24px; display:none;">draft discarded</div>
+
+
+
+    <div id="wmd-preview" class="wmd-preview"></div>
+    <div></div>
+    <div class="edit-block">
+        <input id="fkey" name="fkey" type="hidden" value="eca6c4cd45e7d4a8a910de8541503c8e">
+        <input id="author" name="author" type="text">
+    </div>
+</div>
+							<div style="position: relative;">
+								
+            <div class="form-item dno new-post-login">
+        
+                <div class="new-login-form">
+                    <div class="new-login-left">
+                        <h3>Sign up or <a id="login-link" href="/users/login?returnurl=%2fquestions%2f32918%2fhow-can-i-decrease-spaces-between-equations%23new-answer">log in</a></h3>
+                        <script>
+                            StackExchange.ready(function () {
+                                StackExchange.helpers.onClickDraftSave('#login-link');
+                            });
+                        </script>
+                        <div class="preferred-login google-login">
+                            <p><span class="icon"></span><span>Sign up using Google</span></p>
+                        </div>
+                        <div class="preferred-login facebook-login">
+                            <p><span class="icon"></span><span>Sign up using Facebook</span></p>
+                        </div>
+                        <div class="preferred-login stackexchange-login">
+                            <p><span class="icon"></span><span>Sign up using Stack Exchange</span></p>
+                        </div>
+                    </div>
+                    <input type="hidden" name="manual-openid" class="manual-openid" />
+                    <input type="hidden" name="use-facebook" class="use-facebook" value="false" />
+                    <input type="button" class="submit-openid" value="Submit" style="display:none" />
+                    <div class="new-login-right">
+                                <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script>
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+                    </div>
+                </div>
+            </div>
+            <script>
+                StackExchange.ready(
+                    function () {
+                        StackExchange.openid.initPostLogin('.new-post-login', '%2fquestions%2f32918%2fhow-can-i-decrease-spaces-between-equations%23new-answer');
+                    }
+                );
+            </script>
+            <noscript>
+                        <h3>Post as a guest</h3>
+    <div class="form-item">
+        <table>
+        <tr>
+                    <script>
+                StackExchange.ready(function () {
+                    StackExchange.helpers.bindHelpOverlayEvents($('.vm input'));
+                });
+            </script>
+            <td class="vm">
+                <div>
+                    <label for="display-name">Name</label>
+                    <input id="display-name" name="display-name" type="text" size="30" maxlength="30" value="" tabindex="105">
+                </div>
+                <div>
+                    <label for="m-address">Email</label>
+                    <input id="m-address" name="m-address" type="text" size="30" maxlength="100" value="" tabindex="106">
+                    <span class="edit-field-overlay">required, but not shown</span>
+                </div>
+            </td>
+        </tr>
+        </table>
+    </div>
+
+            </noscript>
+							</div>
+           
+															<div class="form-submit cbt">
+									<input id="submit-button" type="submit" value="Post Your Answer" tabindex="110">
+									<a href="#" class="discard-answer dno">discard</a>
+
+<p class="privacy-policy-agreement">
+By posting your answer, you agree to the <a href='http://stackexchange.com/legal/privacy-policy' target='_blank'>privacy policy</a> and <a href='http://stackexchange.com/legal/terms-of-service' target='_blank'>terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1" />								</div>
+						</form>
+
+
+
+						<h2 class="bottom-notice">
+Not the answer you&#39;re looking for?							Browse other questions tagged <a href="/questions/tagged/spacing" class="post-tag" title="show questions tagged &#39;spacing&#39;" rel="tag">spacing</a> <a href="/questions/tagged/equations" class="post-tag" title="show questions tagged &#39;equations&#39;" rel="tag">equations</a>  or <a href="/questions/ask">ask your own question</a>.						</h2>
+			</div>
+		</div>
+				<div id="sidebar" class="show-votes">
+						    <div class="module question-stats">
+			        <table id="qinfo">
+			            <tr>
+			                <td>
+			                    <p class="label-key">asked</p>
+			                </td>
+			                <td style="padding-left: 10px">
+			                    <p class="label-key" title="2011-10-27 19:30:06Z"><b>2 years ago</b></p>
+			                </td>
+			            </tr>
+			            <tr>
+			                <td>
+			                    <p class="label-key">viewed</p>
+			                </td>
+
+			                <td style="padding-left: 10px">
+			                    <p class="label-key">
+			                        <b>17239 times</b>
+			                    </p>
+			                </td>
+			            </tr>
+			                <tr>
+			                    <td>
+			                        <p class="label-key">active</p>
+			                    </td>
+			                    <td style="padding-left: 10px">
+			                        <p class="label-key"><b><a href="?lastactivity" class="lastactivity-link" title="2011-10-28 21:08:48Z">2 years ago</a></b></p>
+			                    </td>
+			                </tr>
+			        </table>
+			    </div>
+			<div class="module community-bulletin" data-tracker="cb=1">
+    <h4>Community Bulletin</h4>
+    <div class="related">
+            <div class="spacer"> 
+                <div class="bulletin-item-type event-date">event</div>
+                <div class="bulletin-item-content">
+                    <a href="http://chat.stackexchange.com/rooms/41/tex-latex-and-friends" class="question-hyperlink" target="_blank">Answer the Unanswered</a>
+                        <span class="event-date" style="white-space: nowrap;">&ndash; <span title="2014-05-03 21:00:00Z" class="relativetime">in 11 hours</span></span>
+                </div>
+                <br class="cbt" />
+            </div>
+
+    </div>
+</div>			
+			<div style="margin-bottom: 10px;">
+        
+
+<style type="text/css">
+#newsletter-ad {
+    width: 190px;
+    height: 250px;
+    overflow: hidden;
+    background: url('//cdn.sstatic.net/tex/img/newsletter-ad.png');
+    padding: 0 15px 0 15px;
+}
+#newsletter-ad-header {
+    margin-top: 60px;
+}
+#newsletter-ad ul {
+    margin: 1em 0 1em 1.5em;
+}
+#newsletter-ad ul li {
+    margin-bottom: 5px;
+}
+#newsletter-signup-container {
+    text-align: center;
+}
+#newsletter-preview-container {
+    margin-top: 10px;
+    text-align: center;
+}
+#newsletter-email-input {
+    width: 200px;
+}
+</style>
+
+<script>
+    StackExchange.ready(function () {
+        StackExchange.newsletterAd.init();
+    });
+</script>
+
+<div id="newsletter-ad">
+    <p id="newsletter-ad-header">Get the <b>weekly newsletter!</b></p>
+    <ul>
+        <li>Top questions and answers</li>
+        <li>Important announcements</li>
+        <li>Unanswered questions</li>
+    </ul>
+    <div id="newsletter-signup-container"><input id="newsletter-signup" type="button" value="Sign up for the newsletter" /></div>
+    <p id="newsletter-preview-container">see an <a href="http://stackexchange.com/newsletters/newsletter?site=tex.stackexchange.com" id="newsletter-preview">example newsletter</a></p>
+    <div class="dno">
+        
+<p class="privacy-policy-agreement">
+By subscribing, you agree to the <a href='http://stackexchange.com/legal/privacy-policy' target='_blank'>privacy policy</a> and <a href='http://stackexchange.com/legal/terms-of-service' target='_blank'>terms of service</a>.</p>
+<input type="hidden" name="legalLinksShown" value="1" />
+    </div>
+</div>
+
+    </div>
+			  
+    
+            
+
+				<div class="module sidebar-related">
+					<h4 id="h-related">Related</h4>
+                    <div class="related js-gps-related-questions" data-tracker="rq=1">
+                        <div class="spacer">
+<a href="/q/23646" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">1
+    </div>
+</a><a href="/questions/23646/increasing-spacing-between-the-rows-of-a-table-containing-both-equations-and-wor" class="question-hyperlink">Increasing spacing between the rows of a table containing both equations and words</a>
+</div>
+<div class="spacer">
+<a href="/q/58686" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">6
+    </div>
+</a><a href="/questions/58686/vertical-spacing-between-equations-and-text" class="question-hyperlink">Vertical spacing between equations and text</a>
+</div>
+<div class="spacer">
+<a href="/q/100008" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">4
+    </div>
+</a><a href="/questions/100008/how-can-i-move-an-equation-without-affecting-the-label" class="question-hyperlink">How can I move an equation without affecting the label?</a>
+</div>
+<div class="spacer">
+<a href="/q/102051" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">2
+    </div>
+</a><a href="/questions/102051/equal-spacing-between-equations-on-a-page" class="question-hyperlink">Equal spacing between equations on a page</a>
+</div>
+<div class="spacer">
+<a href="/q/102086" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">1
+    </div>
+</a><a href="/questions/102086/latex-equal-spacing-between-equations-on-a-page" class="question-hyperlink">Latex: Equal spacing between equations on a page</a>
+</div>
+<div class="spacer">
+<a href="/q/132965" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">7
+    </div>
+</a><a href="/questions/132965/different-space-between-align-and-equation" class="question-hyperlink">Different space between \align and \equation</a>
+</div>
+<div class="spacer">
+<a href="/q/136918" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">2
+    </div>
+</a><a href="/questions/136918/how-to-modify-horizontal-spacing-between-equation-elements-globally-or-for-a-si" class="question-hyperlink">How to modify horizontal spacing between equation elements globally, or for a single equation?</a>
+</div>
+<div class="spacer">
+<a href="/q/145724" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">0
+    </div>
+</a><a href="/questions/145724/decrease-the-space-between-formula-and-text-and-the-formula-position-of-align-e" class="question-hyperlink">Decrease the space between formula and text, and the formula position of align environment</a>
+</div>
+<div class="spacer">
+<a href="/q/157395" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes answered-accepted default">0
+    </div>
+</a><a href="/questions/157395/changing-vertical-spacing-between-equations" class="question-hyperlink">Changing vertical spacing between equations</a>
+</div>
+<div class="spacer">
+<a href="/q/166495" title="Vote score (upvotes - downvotes)">
+    <div class="answer-votes default">0
+    </div>
+</a><a href="/questions/166495/irrelevant-spacing-for-equations" class="question-hyperlink">Irrelevant spacing for equations</a>
+</div>
+
+                    </div>
+				</div>
+            
+<div id="hot-network-questions" class="module">
+    <h4>
+        <a href="//stackexchange.com/questions?tab=hot" 
+           class="js-gps-track" 
+           data-gps-track="posts_hot_network.click({ item_type:1, location:11 })">
+            Hot Network Questions
+        </a>
+    </h4>
+    <ul>
+            <li >
+                <div class="favicon favicon-security" title="Information Security Stack Exchange"></div><a href="http://security.stackexchange.com/questions/57143/can-someone-explain-the-covert-redirect-vulnerability-in-oauth-and-openid" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:162 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Can someone explain the &quot;Covert Redirect&quot; vulnerability in OAuth and OpenID?
+                </a>
+
+            </li>
+            <li >
+                <div class="favicon favicon-physics" title="Physics Stack Exchange"></div><a href="http://physics.stackexchange.com/questions/110960/how-does-wind-speed-affect-the-velocity-of-light" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:151 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How does wind speed affect the velocity of light?
+                </a>
+
+            </li>
+            <li >
+                <div class="favicon favicon-academia" title="Academia Stack Exchange"></div><a href="http://academia.stackexchange.com/questions/20084/is-using-the-phrase-is-left-as-an-exercise-for-the-reader-considered-good" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:415 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Is using the phrase &quot;... is left as an exercise for the reader&quot; considered good style in academic papers/theses?
+                </a>
+
+            </li>
+            <li >
+                <div class="favicon favicon-programmers" title="Programmers Stack Exchange"></div><a href="http://programmers.stackexchange.com/questions/237738/should-failing-unit-tests-that-were-not-going-to-fix-be-removed" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:131 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Should failing unit tests that we&#39;re not going to fix be removed?
+                </a>
+
+            </li>
+            <li >
+                <div class="favicon favicon-academia" title="Academia Stack Exchange"></div><a href="http://academia.stackexchange.com/questions/20139/what-can-i-do-if-my-supervisor-does-not-publish-my-research-results" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:415 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    What can I do if my supervisor does not publish my research results?
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-codereview" title="Code Review Stack Exchange"></div><a href="http://codereview.stackexchange.com/questions/48790/can-i-simplify-this-recursive-grid-search" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:196 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Can I simplify this recursive grid search?
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-music" title="Musical Practice &amp; Performance Stack Exchange"></div><a href="http://music.stackexchange.com/questions/17180/how-to-identify-key-changes" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:240 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How to identify key changes?
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-aviation" title="Aviation Stack Exchange"></div><a href="http://aviation.stackexchange.com/questions/3694/why-do-slats-deploy-first" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:528 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Why do slats deploy first?
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-codegolf" title="Programming Puzzles &amp; Code Golf Stack Exchange"></div><a href="http://codegolf.stackexchange.com/questions/26323/how-slow-is-python-really-or-how-fast-is-your-language" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:200 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How slow is python really? (Or how fast is your language?)
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-blender" title="Blender Stack Exchange"></div><a href="http://blender.stackexchange.com/questions/9092/material-not-displaying-on-array-objects" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:502 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Material not displaying on array objects
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-security" title="Information Security Stack Exchange"></div><a href="http://security.stackexchange.com/questions/57156/bad-things-about-no-ssl-encryption" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:162 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Bad things about no SSL encryption?
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-math" title="Mathematics Stack Exchange"></div><a href="http://math.stackexchange.com/questions/772810/mathematicians-ahead-of-their-time" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:69 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Mathematicians ahead of their time?
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-superuser" title="Super User"></div><a href="http://superuser.com/questions/749045/should-i-install-internet-explorer-updates-although-i-disabled-it" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:3 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Should I install Internet Explorer updates although I disabled it?
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-ell" title="English Language Learners Stack Exchange"></div><a href="http://ell.stackexchange.com/questions/22601/can-me-be-a-subject" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:481 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Can &quot;me&quot; be a subject?
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-codegolf" title="Programming Puzzles &amp; Code Golf Stack Exchange"></div><a href="http://codegolf.stackexchange.com/questions/26388/avoid-the-evil-integers" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:200 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Avoid the evil integers!
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-programmers" title="Programmers Stack Exchange"></div><a href="http://programmers.stackexchange.com/questions/237697/if-null-is-evil-and-it-is-why-do-modern-languages-implement-it" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:131 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    If null is evil (and it is) why do modern languages implement it?
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-anime" title="Anime &amp; Manga Stack Exchange"></div><a href="http://anime.stackexchange.com/questions/9486/what-does-the-symbol-on-edwards-coat-mean" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:477 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    What does the symbol on Edward&#39;s coat mean?
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-unix" title="Unix &amp; Linux Stack Exchange"></div><a href="http://unix.stackexchange.com/questions/127610/how-to-make-traceroute-trace-beyond-30-hops" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:106 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How to make traceroute trace beyond 30 hops?
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-physics" title="Physics Stack Exchange"></div><a href="http://physics.stackexchange.com/questions/110645/why-does-ice-melting-not-change-the-water-level-in-a-container" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:151 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Why does ice melting not change the water level in a container?
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-math" title="Mathematics Stack Exchange"></div><a href="http://math.stackexchange.com/questions/778068/lnx-vs-lnx-when-is-the-ln-antiderivative-marked-as-an-absolute-value" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:69 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    ln|x| vs. ln(x)? When is the ln antiderivative marked as an absolute value?
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-english" title="English Language &amp; Usage Stack Exchange"></div><a href="http://english.stackexchange.com/questions/167630/why-is-an-actor-sometimes-called-ham" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:97 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Why is an actor sometimes called &#39;ham&#39;?
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-mathoverflow" title="MathOverflow"></div><a href="http://mathoverflow.net/questions/164959/how-do-i-verify-the-coq-proof-of-feit-thompson" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:504 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    How do I verify the Coq proof of Feit-Thompson?
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-codereview" title="Code Review Stack Exchange"></div><a href="http://codereview.stackexchange.com/questions/48728/pacman-game-implementation-in-java" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:196 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    Pacman game implementation in Java
+                </a>
+
+            </li>
+            <li class="dno js-hidden">
+                <div class="favicon favicon-stackoverflow" title="Stack Overflow"></div><a href="http://stackoverflow.com/questions/23430994/if-fall-through" class="js-gps-track" data-gps-track="site.switch({ item_type:11, target_site:1 }); posts_hot_network.click({ item_type:2, location:11 })">
+                    if fall through
+                </a>
+
+            </li>
+    </ul>
+
+        <a href="#" 
+           class="show-more js-show-more js-gps-track" 
+           data-gps-track="posts_hot_network.click({ item_type:3, location:11 })">
+            more hot questions
+        </a>
+</div>
+		</div>
+	
+<div id="feed-link">
+    <div id="feed-link-text">
+        <a href="/feeds/question/32918" title="feed of this question and its answers">
+            <span class="feed-icon"></span>question feed
+        </a>
+    </div>
+</div>	<script>
+StackExchange.ready(function(){$.get('/posts/32918/ivc/bd22');});
+</script>
+<noscript>
+    <div><img src="/posts/32918/ivc/bd22" class="dno" alt="" width="0" height="0"></div>
+</noscript><div style="display:none" id="prettify-lang">lang-tex</div></div>
+
+
+
+        </div>
+    </div>
+    <div id="footer" class="categories">
+        <div class="footerwrap">
+            <div id="footer-menu">
+                <div class="top-footer-links">
+                        <a href="/about">about</a>
+                    <a href="/help">help</a>
+                        <a href="/help/badges">badges</a>
+                    <a href="http://tex.blogoverflow.com/?blb=1">blog</a>
+                        <a href="http://chat.stackexchange.com">chat</a>
+                    <a href="http://data.stackexchange.com">data</a>
+                    <a href="http://stackexchange.com/legal">legal</a>
+                    <a href="http://stackexchange.com/legal/privacy-policy">privacy policy</a>
+                    <a href="http://stackexchange.com/about/hiring">jobs</a>
+                    <a href="http://stackexchange.com/about/contact">advertising info</a>
+
+                    <a onclick='StackExchange.switchMobile("on")'>mobile</a>
+                    <b><a href="/contact">contact us</a></b>
+                        <b><a href="http://meta.tex.stackexchange.com">feedback</a></b>
+                    
+                </div>
+                <div id="footer-sites">
+                    <table>
+    <tr>
+            <th colspan=3>
+                Technology
+            </th>
+            <th >
+                Life / Arts
+            </th>
+            <th >
+                Culture / Recreation
+            </th>
+            <th >
+                Science
+            </th>
+            <th >
+                Other
+            </th>
+    </tr>
+    <tr>
+            <td>
+                <ol>
+                        <li><a href="http://stackoverflow.com" title="professional and enthusiast programmers">Stack Overflow</a></li>
+                        <li><a href="http://serverfault.com" title="professional system and network administrators">Server Fault</a></li>
+                        <li><a href="http://superuser.com" title="computer enthusiasts and power users">Super User</a></li>
+                        <li><a href="http://webapps.stackexchange.com" title="power users of web applications">Web Applications</a></li>
+                        <li><a href="http://askubuntu.com" title="Ubuntu users and developers">Ask Ubuntu</a></li>
+                        <li><a href="http://webmasters.stackexchange.com" title="pro webmasters">Webmasters</a></li>
+                        <li><a href="http://gamedev.stackexchange.com" title="professional and independent game developers">Game Development</a></li>
+                        <li><a href="http://tex.stackexchange.com" title="users of TeX, LaTeX, ConTeXt, and related typesetting systems">TeX - LaTeX</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://programmers.stackexchange.com" title="professional programmers interested in conceptual questions about software development">Programmers</a></li>
+                        <li><a href="http://unix.stackexchange.com" title="users of Linux, FreeBSD and other Un*x-like operating systems.">Unix &amp; Linux</a></li>
+                        <li><a href="http://apple.stackexchange.com" title="power users of Apple hardware and software">Ask Different (Apple)</a></li>
+                        <li><a href="http://wordpress.stackexchange.com" title="WordPress developers and administrators">WordPress Development</a></li>
+                        <li><a href="http://gis.stackexchange.com" title="cartographers, geographers and GIS professionals">Geographic Information Systems</a></li>
+                        <li><a href="http://electronics.stackexchange.com" title="electronics and electrical engineering professionals, students, and enthusiasts">Electrical Engineering</a></li>
+                        <li><a href="http://android.stackexchange.com" title="enthusiasts and power users of the Android operating system">Android Enthusiasts</a></li>
+                        <li><a href="http://security.stackexchange.com" title="Information security professionals">Information Security</a></li>
+                            </ol></td><td><ol>
+                        <li><a href="http://dba.stackexchange.com" title="database professionals who wish to improve their database skills and learn from others in the community">Database Administrators</a></li>
+                        <li><a href="http://drupal.stackexchange.com" title="Drupal developers and administrators">Drupal Answers</a></li>
+                        <li><a href="http://sharepoint.stackexchange.com" title="SharePoint enthusiasts">SharePoint</a></li>
+                        <li><a href="http://ux.stackexchange.com" title="user experience researchers and experts">User Experience</a></li>
+                        <li><a href="http://mathematica.stackexchange.com" title="users of Mathematica">Mathematica</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#technology" class="more">
+                                more (14)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://photo.stackexchange.com" title="professional, enthusiast and amateur photographers">Photography</a></li>
+                        <li><a href="http://scifi.stackexchange.com" title="science fiction and fantasy enthusiasts">Science Fiction &amp; Fantasy</a></li>
+                        <li><a href="http://graphicdesign.stackexchange.com" title="professional graphic designers and non-designers trying to do their own graphic design">Graphic Design</a></li>
+                        <li><a href="http://cooking.stackexchange.com" title="professional and amateur chefs">Seasoned Advice (cooking)</a></li>
+                        <li><a href="http://diy.stackexchange.com" title="contractors and serious DIYers">Home Improvement</a></li>
+                        <li><a href="http://money.stackexchange.com" title="people who want to be financially literate">Personal Finance &amp; Money</a></li>
+                        <li><a href="http://academia.stackexchange.com" title="academics and those enrolled in higher education">Academia</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#lifearts" class="more">
+                                more (10)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://english.stackexchange.com" title="linguists, etymologists, and serious English language enthusiasts">English Language &amp; Usage</a></li>
+                        <li><a href="http://skeptics.stackexchange.com" title="scientific skepticism">Skeptics</a></li>
+                        <li><a href="http://judaism.stackexchange.com" title="those who base their lives on Jewish law and tradition and anyone interested in learning more">Mi Yodeya (Judaism)</a></li>
+                        <li><a href="http://travel.stackexchange.com" title="road warriors and seasoned travelers">Travel</a></li>
+                        <li><a href="http://christianity.stackexchange.com" title="committed Christians, experts in Christianity and those interested in learning more">Christianity</a></li>
+                        <li><a href="http://gaming.stackexchange.com" title="passionate videogamers on all platforms">Arqade (gaming)</a></li>
+                        <li><a href="http://bicycles.stackexchange.com" title="people who build and repair bicycles, people who train cycling, or commute on bicycles">Bicycles</a></li>
+                        <li><a href="http://rpg.stackexchange.com" title="gamemasters and players of tabletop, paper-and-pencil role-playing games">Role-playing Games</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#culturerecreation" class="more">
+                                more (21)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://math.stackexchange.com" title="people studying math at any level and professionals in related fields">Mathematics</a></li>
+                        <li><a href="http://stats.stackexchange.com" title="people interested in statistics, machine learning, data analysis, data mining, and data visualization">Cross Validated (stats)</a></li>
+                        <li><a href="http://cstheory.stackexchange.com" title="theoretical computer scientists and researchers in related fields">Theoretical Computer Science</a></li>
+                        <li><a href="http://physics.stackexchange.com" title="active researchers, academics and students of physics">Physics</a></li>
+                        <li><a href="http://mathoverflow.net" title="professional mathematicians">MathOverflow</a></li>
+                    
+                        <li>
+                            <a href="http://stackexchange.com/sites#science" class="more">
+                                more (7)
+                            </a>
+                        </li>
+                </ol>
+            </td>
+            <td>
+                <ol>
+                        <li><a href="http://stackapps.com" title="apps, scripts, and development with the Stack Exchange API">Stack Apps</a></li>
+                        <li><a href="http://meta.stackexchange.com" title="meta-discussion of the Stack Exchange family of Q&amp;A websites">Meta Stack Exchange</a></li>
+                        <li><a href="http://area51.stackexchange.com" title="proposing new sites in the Stack Exchange network">Area 51</a></li>
+                        <li><a href="http://careers.stackoverflow.com">Stack Overflow Careers</a></li>
+                    
+                </ol>
+            </td>
+    </tr>
+</table>
+                </div>
+            </div>
+
+            <div id="copyright">
+                site design / logo &#169; 2014 stack exchange inc; user contributions licensed under <a href="http://creativecommons.org/licenses/by-sa/3.0/" rel="license">cc by-sa 3.0</a> 
+                with <a href="http://blog.stackoverflow.com/2009/06/attribution-required/" rel="license">attribution required</a>
+            </div>
+            <div id="svnrev">
+                rev 2014.4.30.1585
+            </div>
+            
+        </div>
+    </div>
+    <noscript>
+        <div id="noscript-warning">TeX - LaTeX Stack Exchange works best with JavaScript enabled<img src="http://pixel.quantserve.com/pixel/p-c1rF4kxgLUzNc.gif" alt="" class="dno"></div>
+    </noscript>
+
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () { (i[r].q = i[r].q || []).push(arguments) }, i[r].l = 1 * new Date(); a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m);
+        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+        ga('create', 'UA-5620270-24', '.stackexchange.com');
+        
+        
+        ga('set', 'dimension2', '|spacing|equations|');         
+        ga('send', 'pageview');
+        var _qevents = _qevents || [],
+            _comscore = _comscore || [];
+        (function () {
+            var ssl='https:'==document.location.protocol,
+                s=document.getElementsByTagName('script')[0],
+                qc=document.createElement('script');
+            qc.async=true;
+            qc.src=(ssl?'https://secure':'http://edge')+'.quantserve.com/quant.js';
+            s.parentNode.insertBefore(qc, s);
+            var sc=document.createElement('script');
+            sc.async=true;
+            sc.src=(ssl?'https://sb':'http://b') + '.scorecardresearch.com/beacon.js';
+            s.parentNode.insertBefore(sc, s);
+        })();
+        _comscore.push({ c1: "2", c2: "17440561" });
+        _qevents.push({ qacct: "p-c1rF4kxgLUzNc" });
+    </script>        
+    
+    </body>
+</html>
