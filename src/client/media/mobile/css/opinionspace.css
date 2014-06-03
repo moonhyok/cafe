@@ -9,6 +9,33 @@ html {
   overflow-x: hidden;
 }
 
+@font-face {
+	font-family: 'novecento-medium'; 
+	src: url('title-fonts/novecento_medium.otf'),
+		 url('title-fonts/novecento_medium.woff'),
+		 url('title-fonts/novecento_medium.svg'),
+		 url('title-fonts/novecento_medium.ttf'),
+		 url('title-fonts/novecento_medium.eot');
+}
+
+@font-face {
+	font-family: 'novecento-light'; 
+	src: url('title-fonts/novecento_light.otf'),
+		 url('title-fonts/novecento_light.woff'),
+		 url('title-fonts/novecento_light.svg'),
+		 url('title-fonts/novecento_light.ttf'),
+		 url('title-fonts/novecento_light.eot');
+}
+
+@font-face {
+	font-family: 'novecento-normal'; 
+	src: url('title-fonts/novecento_normal.otf'),
+		 url('title-fonts/novecento_normal.woff'),
+		 url('title-fonts/novecento_normal.svg'),
+		 url('title-fonts/novecento_normal.ttf'),
+		 url('title-fonts/novecento_normal.eot');
+}
+
 .margin{
 	background-color: #DDDDDD
 	position: absolute;
@@ -81,13 +108,13 @@ html {
 #entered-comment{
 	display:inline;
 	color: #000000;
-	background-color: #ffffff;
+	background-color: #50535a;
 	text-shadow: none;
 	width: 100% !important;
 	height: 200px !important;
 	font-size: 16px;
 	border-radius: 0px;
-	font-family: verdana, sans-serif;
+	font-family: novecento-normal, sans-serif;
 }
 
 /* This prevents the jQuery navbar buttons from staying pressed */
@@ -224,7 +251,7 @@ table.pretty caption {
 		left:0px;
         position: fixed;
         z-index: 999;
-        background-color: #808080;
+        background-color: #212121;
 	}
 
 	.ui-slider-input {
@@ -250,7 +277,7 @@ table.pretty caption {
 	}
 
 	body {
-		/*font-family: "Helvetica Neue", verdana, sans-serif;*/
+		/*font-family: "Helvetica Neue", novecento-normal, sans-serif;*/
 		background: #76b9b6;
 		height: 100%;
 		padding: 0 !important;
@@ -295,14 +322,14 @@ table.pretty caption {
 		padding-left: 6px;
 		padding-bottom: 5px;
 		padding-top: 5px;
-		font-family: verdana, sans-serif;
+		font-family: novecento-normal, sans-serif;
 		/*margin-bottom: 20px; */
 	}
 
 	.instructions{
 		/*position: absolute;*/
 		color: #FFFFFF;
-		font-family: verdana, sans-serif;
+		font-family: novecento-normal, sans-serif;
 		z-index: 999;
 		text-shadow: none;
 		font-size: 17px !important;
@@ -317,7 +344,7 @@ table.pretty caption {
 	.instructions2{
     		/*position: absolute;*/
     		color: #FFFFFF;
-    		font-family: verdana, sans-serif;
+    		font-family: novecento-normal, sans-serif;
     		left: 0px;
     		z-index: 999;
     		text-shadow: none;
@@ -333,7 +360,7 @@ table.pretty caption {
     .instructions3{
         		/*position: absolute;*/
         		color: #FFFFFF;
-        		font-family: verdana, sans-serif;
+        		font-family: novecento-normal, sans-serif;
         		left: 0px;
         		z-index: 999;
         		text-shadow: none;
@@ -444,7 +471,7 @@ table.pretty caption {
     }
 	
 	.grade{
-		font-family: verdana, sans-serif;
+		font-family: novecento-normal, sans-serif;
 		color: #4e300f;
 		text-shadow: none;
 		font-size: 28px;
@@ -453,7 +480,7 @@ table.pretty caption {
 	}
 	
 	.grade2{
-		font-family: verdana, sans-serif;
+		font-family: novecento-normal, sans-serif;
 		color: #4e300f;
 		text-shadow: none;
 		font-size: 28px;
@@ -493,11 +520,12 @@ table.pretty caption {
 	 /* piggy backing the the new divs here for now,  .stats, .help*/
 		display: none;
 		position: fixed;
+		font-family: novecento-normal, sans-serif;
 		top: 0;
 		right: 0;
 		width: 100%;
 		height: 100%;
-		background-color: #666666;
+		background-color: #50535a;
 		/*background: #76b9b6;*/
 		/*background-image:url('../img/cafe/capitol_clean.jpg');*/
 		z-index: 999;
@@ -553,13 +581,15 @@ table.pretty caption {
 
 	.landing-img-title{
 	color: #FFFFFF;
-	background-color: #4d87c6;
-	font-size: 44px;
+	background-color: #75aef1;
+	font-size: 42px;
 	text-shadow: none;
-	line-height: 44px;
+	line-height: 42px;
 	max-width: 500px;
 	padding-top: 10px;
+	padding-bottom: 10px;
 	letter-spacing: 1px;
+	font-family: novecento-normal, sans-serif;
 	}
 
 	.landing-img-txt{
@@ -595,8 +625,8 @@ table.pretty caption {
 	}
 
 		.skip-btn {
-		background-color: #4d4d4d;
-		color: #ffffff;
+		background-color: #cccccc;
+		color: #000000 !important;
 		width: 70px;
 		border-radius:5px;
 		font-weight: normal;
@@ -631,25 +661,23 @@ table.pretty caption {
 	}
 
 	.capitol-bg{
-		background-image:url('../img/cafe/capitol-landing.png');
-		background-size: cover;
-		height: 240px;
-		width: 500px;
-		max-width: 100%;
+		width: 100%;
+		max-width: 350px;
 	}
 
 		.button-div-red {
-		background-color: #c23e17;
+		background-color: #a13716;
 		border-radius:5px;
-		width: 170px;
+		width: 220px;
 		font-weight: normal;
-		font-size: 20px;
-		line-height: 42px;
+		font-size: 34px;
+		line-height: 50px;
 		text-align: center;
 		color: #FFFFFF;
 		margin-bottom: 5px;
 		letter-spacing: 1px;
 		text-shadow: none;
+		font-family: novecento-normal, sans-serif;
 		/*position: absolute;
 		bottom: 20px;*/
 	}
@@ -813,7 +841,7 @@ table.pretty caption {
 		/*background-image:url('../img/cafe/capitol_clean.jpg');
 		background-size: cover;*/
 		/*background-image:url('../img/cafe/cafe_bg.jpg');*/
-		background-color: #f5f5f5;
+		background-color: #ffffff;
 		/*background: #76b9b6; Old browsers */
 		overflow: auto;
 		z-index: 999;
@@ -839,7 +867,7 @@ table.pretty caption {
 	}
 
 .landing-header {
-	font-family: verdana, sans-serif;
+	font-family: novecento-normal, sans-serif;
 	text-shadow: none;
 	color: #f5ebdf;
 	font-size: 42px;
@@ -851,7 +879,7 @@ table.pretty caption {
 .rc-sub-header {
     text-align: center;
     padding-bottom: 10px;
-    font-family: verdana, sans-serif;
+    font-family: novecento-normal, sans-serif;
     font-size: 16px;
     line-height: 20px;
     width: 95%;
@@ -861,7 +889,7 @@ table.pretty caption {
 }
 
 .basic-header {
-	font-family: verdana, sans-serif;
+	font-family: novecento-normal, sans-serif;
 	text-shadow: none;
 	text-align: center !important;
 	color: #FFFFFF;
@@ -870,7 +898,7 @@ table.pretty caption {
 }
 
 .basic-header2 {
-	font-family: verdana, sans-serif;
+	font-family: novecento-normal, sans-serif;
     	text-shadow: none;
     	text-align: left !important;
     	color: #FFFFFF;
@@ -881,7 +909,7 @@ table.pretty caption {
 }
 
 .basic-sub-header {
-	font-family: verdana, sans-serif;
+	font-family: novecento-normal, sans-serif;
 	text-shadow: none;
 	color: #f5ebdf;
 	font-size: 18px;
@@ -898,7 +926,7 @@ padding-top: 10px;
 padding-bottom: 10px;
 position: relative;
 top: -10px;
-font-family: verdana, sans-serif;
+font-family: novecento-normal, sans-serif;
 color: #FFFFFF;
 width: 100%;
 background-color: #808080;
@@ -912,7 +940,7 @@ color: #f5ebdf;
 line-height:16px;
 text-align:right;
 padding-right: 5px;
-font-family: verdana, sans-serif;
+font-family: novecento-normal, sans-serif;
 padding-left: 5px;
 }
 
@@ -925,7 +953,7 @@ padding-right: 7px;
 .landing-desc {
 	padding-top: 5px;
 	line-height: 27px;
-	font-family: verdana, sans-serif;
+	font-family: novecento-normal, sans-serif;
 	text-shadow: none;
 	color: #f5ebdf;
 	font-size: 28px;
@@ -965,14 +993,14 @@ padding-right: 7px;
     font-size: 13px !important;
     line-height: 11px;
     color: #ffffff !important;
-    font-family: verdana, sans-serif;
+    font-family: novecento-normal, sans-serif;
 }
 
 .comment-admin-text-b{
     font-size: 14px !important;
     line-height: 14px;
     color: #ffffff !important;
-    font-family: verdana, sans-serif;
+    font-family: novecento-normal, sans-serif;
 }
 
 .answer {
@@ -980,7 +1008,7 @@ padding-right: 7px;
 	width: 100% !important;
 	min-height: 250px !important;
 	font-size: 16px !important;
-	font-family: verdana, sans-serif;
+	font-family: novecento-normal, sans-serif;
 	color: #ffffff;
 	border: 0px;
 	border-radius: 0px;
@@ -998,19 +1026,19 @@ padding-right: 7px;
 }
 
 .standard-btn-div .ui-btn-inner{
-    font-family: verdana, sans-serif;
+    font-family: novecento-normal, sans-serif;
     text-transform:uppercase;
     line-height: 26px;
 }
 
 .standard-btn-div .ui-btn{
-    font-family: verdana, sans-serif;
+    font-family: novecento-normal, sans-serif;
     text-transform:uppercase;
     line-height: 25px;
 }
 
 .first-time-btn .ui-btn-inner{
-    font-family: verdana, sans-serif;
+    font-family: novecento-normal, sans-serif;
     line-height: 30px !important;
     padding: 10px !important;
 }
@@ -1026,7 +1054,7 @@ padding-right: 7px;
     padding-bottom: 0px;
     letter-spacing: 2px;
     text-align: right;
-    background-color: #808080;
+    background-color: #212121;
 }
 
 .home-btn-title{
@@ -1042,13 +1070,13 @@ padding-right: 7px;
 }
 
 .home-btn-dialog-box .ui-btn-inner{
-    font-family: verdana, sans-serif;
+    font-family: novecento-normal, sans-serif;
     line-height: 15px;
     padding: 0px;
 }
 
 .home-btn-dialog-box .ui-btn{
-    font-family: verdana, sans-serif;
+    font-family: novecento-normal, sans-serif;
     line-height: 20px;
     /*border-radius: 0px !important;*/
 }
@@ -1146,7 +1174,7 @@ padding-right: 7px;
 .dialog-text-style {
 	position: relative;
         vertical-align: middle;
-        font-family: verdana, sans-serif;
+        font-family: novecento-normal, sans-serif;
 	color: #FFFFFF;
 	height: 100%;
 	text-decoration: none;
@@ -1160,7 +1188,7 @@ padding-right: 7px;
 .dialog-text-style-noflow {
 	position: relative;
     vertical-align: middle;
-    font-family: verdana, sans-serif;
+    font-family: novecento-normal, sans-serif;
 	color: #FFFFFF;
 	text-decoration: none;
 	text-shadow: none;
@@ -1213,7 +1241,7 @@ padding-right: 7px;
 .dialog-text-notitle {
 	position: relative;
         vertical-align: middle;
-        font-family: verdana, sans-serif;
+        font-family: novecento-normal, sans-serif;
 	color: #4e300f;
 	background: #76b9b6;
 	width: 100%;
@@ -1235,12 +1263,12 @@ padding-right: 7px;
     }
 
     .axis text {
-      font-family: verdana, sans-serif;
+      font-family: novecento-normal, sans-serif;
       font-size: 10px;
     }
 
     .timeline-label {
-      font-family: verdana, sans-serif;
+      font-family: novecento-normal, sans-serif;
       font-size: 12px;
     }
     
@@ -1258,7 +1286,7 @@ padding-right: 7px;
    
    .rate-username{
 	 font-size: 13px;
-	 font-family: verdana, sans-serif;
+	 font-family: novecento-normal, sans-serif;
 	 color: #ffffff;
 	 text-align: center !important;
 	 position: relative;

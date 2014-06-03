@@ -16,7 +16,6 @@ from opinion.includes.profanityutils import *
 from opinion.includes.queryutils import *
 from opinion.includes.smsutils import *
 from opinion.includes.accountutils import *
-from opinion.includes.socialutils import manual_login
 from opinion.settings import *
 from opinion.settings_local import DATABASE_ENGINE
 from opinion.settings_local import ASSETS_LOCAL
@@ -720,6 +719,12 @@ def proof_read_comments(request):
 		data.append({'type': cid,'text':query[0].comment})
 		form = ProofreadForm().create_form(data)	
 		return render_to_response('proofread.html', context_instance = RequestContext(request, {'form':form, 'saved':updated}))
+        
+def manual_login(request, user):
+    connect_visitor_to_user(request, user.id)
+    request.session['user_id'] = user.id
+    request.session['_auth_user_id'] = user.id
+    request.session['_auth_user_backend'] = 'opinion.email-auth.EmailOrUsernameModelBackend'
 
 def admin_panel_login(request):
 	if request.user.is_authenticated():

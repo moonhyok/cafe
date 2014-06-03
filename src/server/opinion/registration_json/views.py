@@ -28,7 +28,6 @@ from opinion.includes.accountutils import *
 from opinion.opinion_core.forms import UserDemographicsForm
 from opinion.opinion_core.models import *
 from opinion.includes.logutils import *
-from opinion.includes.socialutils import *
 
 from registration.forms import RegistrationFormUniqueEmail
 from registration.models import RegistrationProfile
@@ -43,27 +42,6 @@ import opinion.settings
 import md5
 #import hashlib
 
-def handle_facebook_register_or_login(request):
-	return HttpResponse(facebook_register(request, True))
-
-def handle_facebook_register(request):
-	return HttpResponse(facebook_register(request))
-	
-def handle_facebook_login(request):
-	return HttpResponse(facebook_login(request))
-
-def get_twitter_url(request):
-	return HttpResponse(generate_twitter_url(request))
-
-def handle_twitter_register_or_login(request):
-	return HttpResponse(twitter_register(request, True))
-
-def handle_twitter_register(request):
-	return HttpResponse(twitter_register(request))
-	
-def handle_twitter_login(request):
-	return HttpResponse(twitter_login(request))
-	
 def connect_visitor_to_user(request, user_id):
 	visitor_id = request.session.get('visitor_id', False)
 	if visitor_id:
@@ -206,6 +184,10 @@ def register(request, success_url=None,
 		demog = UserDemographicsForm(data=request_post_copy)
 		if form.is_valid() and demog.is_valid():
 			new_user = form.save(profile_callback=profile_callback)
+
+			ud = UserData(user = new_user, key='demographics',value=request_post_copy.urlencode())
+			ud.save()
+			print request_post_copy.urlencode()
 			
 			# Save the original formatting of the username
 			username_setting = UserSettings(user = new_user, key = 'username_format', value = formatted_username)

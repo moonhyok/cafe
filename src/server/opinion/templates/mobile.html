@@ -265,20 +265,18 @@
   <div class='landing'>
       <div class="home-btn-dialog-box landing-navigation" style="display: none;">
           <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
-      </div>      
-
+      </div>   
       <div class="landing-img-title">
       <center>California<br/>Report Card</center>
-      </div>
-
-      <div class="capitol-bg">
-        <center><div class='button-div-red first-time-btn' style="position: relative; top: 170px;">Begin</div></center>
-       </div>
+      </div>  
 
 
-       <div class="landing-img-txt">   
+      <img class="capitol-bg" src="{{url_root}}/media/mobile/img/cafe/capitol-landing1.png">
+      <center><div class='button-div-red first-time-btn' style="position: relative; top: -80px;">Begin</div></center>
+      
+       <!--<div class="landing-img-txt">   
            Take a moment to join <strong>{{num_users}}</strong> others who have graded the State of California on six timely issues.<br/>
-       </div>
+       </div>-->
 
   </div>
 
@@ -296,7 +294,7 @@
 
          <div class="home-btn-dialog-box first-dialog-nav">
             <div class="home-btn-title">
-                Vote
+                Grade
             </div>
             
             <div class="home-btn-wrapper" style="width:45%;display:inline-block; text-align: right;">
@@ -312,7 +310,7 @@
           <div class="home-btn-dialog-box slider-nav-box" style="display: none;">
             
             <div class="home-btn-title" style="position:relative;left: 20px;">
-              Vote
+              Grade
             </div>
            
             <img width="30px;" class='endsliders-back-btn' id="back-{{statement.id}}" src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png"> &nbsp;
@@ -323,16 +321,15 @@
           
           </div>  
 
-          <center> 
-              <br/>   
+          <center>   
               <div style="width: 90%; text-align: center; padding-bottom: 15px;">{{ statement.statement }}</div>
 
               <div style="width: 100%;">
-                <img class='endsliders-back-btn' style="width: 30px !important; display: inline-block; position: relative; top: -100px;" id="back-{{statement.id}}" src="{{url_root}}/media/mobile/img/cafe/Skip_V1.png">
+                <img class='endsliders-back-btn' style="width: 30px !important; display: inline-block; position: relative; top: -120px;" id="back-{{statement.id}}" src="{{url_root}}/media/mobile/img/cafe/Skip_V1.png">
 
                 <div class="slider" style="display: inline-block;margin-left: 15px;margin-right: 5px;" id="slider-{{statement.id}}"></div>
 
-                <img class='endsliders-next-btn' style="width: 30px !important; display: inline-block; position: relative; top: -100px;" id="next-{{statement.id}}" src="{{url_root}}/media/mobile/img/cafe/Next_V1.png">
+                <img class='endsliders-next-btn' style="width: 30px !important; display: inline-block; position: relative; top: -120px;" id="next-{{statement.id}}" src="{{url_root}}/media/mobile/img/cafe/Next_V1.png">
 
               </div>
                   
@@ -398,8 +395,9 @@
                   </div>-->
               </center>
           </form>
+          <br/>
 
-           <div class="button-div registerb" id="registerb">{{client_settings.ZIP_CODE_BUTTON}}</div>
+           <center> <div class="button-div-red registerb" id="registerb">{{client_settings.ZIP_CODE_BUTTON}}</div></center>
       </div>
   </div>
 
@@ -424,7 +422,7 @@
       </div><br/>
        <center>
               <div class="discuss-btn-div">
-                  <div class='dialog-ready button-div'> Enter </button>
+                  <div class='dialog-ready button-div-red'> Enter </button>
                   <!--<button type='submit' data-theme='b' class='dialog-next'  onclick="$('.dialog-text1').hide();$('.dialog-text2').show();"><font style="font-size: 16px;">Next</font></button>-->
               </div>
       </center>
@@ -531,9 +529,9 @@
 
        <div style="clear: both;"></div>
 
-         How would you rate the State of California on this issue today?<br/>
+       <!--  How would you rate the State of California on this issue today?<br/>
          <div class="slider" id="slider-grade"></div>
-           <div style="clear: both;"></div>
+           <div style="clear: both;"></div>-->
           
 
         <center>
