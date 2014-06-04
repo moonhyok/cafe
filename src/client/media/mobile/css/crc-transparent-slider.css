@@ -20,7 +20,7 @@
 		width: 100%; 
 	}
 		.slider-grade-main{
-		border-radius:8px;
+		border-radius:22px;
 		line-height: 45px;
 		font-size: 22px;
 		text-align: center;
@@ -34,7 +34,7 @@
 	}
 
 		.slider-grade-p{
-		border-radius:8px;
+		border-radius:22px;
 		line-height: 45px;
 		font-size: 22px;
 		text-align: center;
@@ -48,7 +48,7 @@
 	}
 
 			.slider-grade-m{
-		border-radius:8px;
+		border-radius:22px;
 		line-height: 45px;
 		font-size: 22px;
 		text-align: center;
@@ -75,10 +75,10 @@
 		max-width: 200px;
 	}
 
-		.slider-progress{
-					position:absolute;
+	.slider-progress{
+		position:absolute;
 		bottom: 0px;
-		background-color: #212121;
+		background-color: rgba(0,0,0,1);
 		width: 100%;
 		text-align: center;
 		padding-top: 15px;
@@ -87,51 +87,64 @@
 	
 
 	.bubble-Ap{
-		background-color: #003300 !important;
+		border: 2px solid #003300 !important;
+		color: #003300;
 	}
 
 	.bubble-A{
-		background-color: #003300 !important;
+		border: 2px solid #003300 !important;
+		color: #003300;
 	}
 
 	.bubble-A-{
-		background-color: #003300 !important;
+		border: 2px solid #003300 !important;
+		color: #003300;
 	}
 
 	.bubble-Bp{
-		background-color: #99CC00 !important;
+		border: 2px solid #99CC00 !important;
+		color: #99CC00;
 	}
 
 	.bubble-B{
-		background-color: #99CC00 !important;
+		border: 2px solid #99CC00 !important;
+		color: #99CC00;
 	}
 
 	.bubble-B-{
-		background-color: #99CC00 !important;
+		border: 2px solid #99CC00 !important;
+		color: #99CC00;
 	}
 
 	.bubble-Cp{
-		background-color: #FFCC00 !important;
+		border: 2px solid #ab9030 !important;
+		color: #ab9030;
 	}
 
 	.bubble-C{
-		background-color: #FFCC00 !important;
+		border: 2px solid #ab9030 !important;
+		color: #ab9030;
 	}
 
 	.bubble-C-{
-		background-color: #FFCC00 !important;
+		border: 2px solid #ab9030 !important;
+		color: #ab9030;
 	}
 
 	.bubble-Dp{
-		background-color: #FF6600 !important;
+		border: 2px solid #FF6600 !important;
+		color: #FF6600;
 	}
 
 	.bubble-D{
-		background-color: #FF6600 !important;
+		border: 2px solid #FF6600 !important;
+		color: #FF6600;
 	}
 	.bubble-D-{
-		background-color: #FF6600 !important;
+		border: 2px solid #FF6600 !important;
+		color: #FF6600;
 	}
 	.bubble-F{
-		background-color: #990000 !important;
+		border: 2px solid #990000 !important;
+		color: #990000;
 	}

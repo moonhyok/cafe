@@ -265,14 +265,22 @@
   <div class='landing'>
       <div class="home-btn-dialog-box landing-navigation" style="display: none;">
           <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
-      </div>   
-      <div class="landing-img-title">
-      <center>California<br/>Report Card</center>
-      </div>  
+      </div>
+
+      <br/>
+      <br/>
+      <br/>
+
+      <center>
+        <div class="landing-img-title">
+          <center>California<br/>Report Card</center>
+        </div>  
+      </center>
 
 
-      <img class="capitol-bg" src="{{url_root}}/media/mobile/img/cafe/capitol-landing1.png">
-      <center><div class='button-div-red first-time-btn' style="position: relative; top: -80px;">Begin</div></center>
+      <!--<img class="capitol-bg" src="{{url_root}}/media/mobile/img/cafe/capitol-landing1.png">-->
+
+      <center><div class='button-div-red first-time-btn' style="position: relative; top: 200px;">begin</div></center>
       
        <!--<div class="landing-img-txt">   
            Take a moment to join <strong>{{num_users}}</strong> others who have graded the State of California on six timely issues.<br/>
@@ -309,20 +317,22 @@
 
           <div class="home-btn-dialog-box slider-nav-box" style="display: none;">
             
-            <div class="home-btn-title" style="position:relative;left: 20px;">
+            <div class="home-btn-title" style="position:relative;">
               Grade
             </div>
            
+           <div class="home-btn-wrapper" style="width:45%;display:inline-block; text-align: right;">
             <img width="30px;" class='endsliders-back-btn' id="back-{{statement.id}}" src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png"> &nbsp;
                
             <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png"> &nbsp;
                 
             <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+            </div>
           
           </div>  
 
           <center>   
-              <div style="width: 90%; text-align: center; padding-bottom: 15px;">{{ statement.statement }}</div>
+              <div style="padding: 15px; text-align: center; letter-spacing: 2px;font-size: 18px;line-height: 26px;">{{ statement.statement }}</div>
 
               <div style="width: 100%;">
                 <img class='endsliders-back-btn' style="width: 30px !important; display: inline-block; position: relative; top: -120px;" id="back-{{statement.id}}" src="{{url_root}}/media/mobile/img/cafe/Skip_V1.png">
@@ -335,7 +345,7 @@
                   
               <div style="clear: both;"></div>
 
-              <div class="median-grade-{{statement.id}}" style="font-size: 18px;display: none;"></div><br/>
+              <div class="median-grade-{{statement.id}}" style="font-size: 18px;display: none;letter-spacing: 2px;"></div><br/>
 
               <div class="skip-button-{{statement.id}} skip-btn" id="next-{{statement.id}}">Skip</div>
 
@@ -365,10 +375,10 @@
 
          </div> 
 
-      <div class= 'registerpanel responsive-max-width' style="max-width: 90%;padding-left: 10px;">
-          <div class="basic-header2" style="width: 100%">{{client_settings.ZIP_CODE_INSTRUCTIONS}}: </div>
+      <div class= 'registerpanel'>
+          <div class="basic-header2">{{client_settings.ZIP_CODE_INSTRUCTIONS}}: </div>
 
-          <form id='reg_form' class='form-horizontal'>
+          <form id='reg_form' class='form-horizontal reg_form'>
               <center>
               <div data-role="fieldcontain">
                   <input type ='tel' id='regzip' name='regzip' class='regforminput' value="" placeholder="Zip Code">
@@ -397,13 +407,13 @@
           </form>
           <br/>
 
-           <center> <div class="button-div-red registerb" id="registerb">{{client_settings.ZIP_CODE_BUTTON}}</div></center>
+           <center> <div class="button-div registerb" id="registerb">{{client_settings.ZIP_CODE_BUTTON}}</div></center>
       </div>
   </div>
 
   <div class='dialog dialog-style'>
       <div class="home-btn-dialog-box">
-            <div class="home-btn-title">
+            <div class="home-btn-title" style="text-shadow: none;">
                 Discuss
             </div>
             
@@ -417,7 +427,7 @@
 
          </div> 
       <!--<img class="header-img-topic center" src="{{ url_root }}/media/mobile/img/cafe/CRC_join.png"/>-->
-      <div class='dialog-text1 dialog-text-style default-left-padding' style="padding-top: 10px;">
+      <div class='dialog-text1 dialog-text-style'>
           {{ client_settings.DISCUSSION_DIALOG_TEXT1 }}
       </div><br/>
        <center>
@@ -431,7 +441,7 @@
   <div class='comment-input'>
        <div class="home-btn-dialog-box">
             <div class="home-btn-title" style="width:40%;">
-                Your Turn
+                Discuss
             </div>
             
             <div class="home-btn-wrapper" style="width:55%;display:inline-block; text-align: right;">
@@ -448,11 +458,11 @@
 
       <center>
           <div class='comment-panel'>
-              <div class="basic-sub-sub-header" style="text-align:left;">{{topic}}<br/></div>
+              <div class="basic-header2" style="text-align:left;">{{topic}}<br/></div>
               <textarea name='answer' id='entered-comment'></textarea>
               <div class="standard-btn-div" style="width: 100%;">
-                  <div class='comment-submit-btn button-div' style="width: 100px; display: inline-block;">Post</div>
-                  <div class='comment-cancel-btn button-div' style="background-color: #4d4d4d;display: inline-block; ">Save as Draft</div>
+                  <div class='comment-submit-btn button-div' style="display: inline-block;">Post</div>
+                  <div class='comment-cancel-btn button-div' style="display: inline-block; ">Later</div>
               </div>
           </div>
       </center>
@@ -495,7 +505,7 @@
 
   <div class="margin"></div>
 
-  <div class='rate'>
+  <div class='rate' id="rate">
 
       <div class="home-btn-dialog-box">
             <div class="home-btn-title">
@@ -556,13 +566,11 @@
           &nbsp;
           <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
       </div>
-        <div class='landing-img-txt default-left-padding' style="width: 95%;font-size: 20px;line-height: 23px;padding-top: 10px;">
+        <div style="padding: 20px;">
             {{client_settings.LOGOUT_DIALOG_TEXT}}<br/><br/>
-            <a href="http://californiareportcard.org" target="_blank" style="color: #FFFFCC;">http://californiareportcard.org</a><br/><br/>
-	    Twitter: <a href="http://twitter.com/home?status=How%20do%20you%20grade%20California?%20%20Try%20@CAReportCard%20developed%20by%20@Cal%20@GavinNewsom%20%26%20@Ken_Goldberg%20%20http://californiareportcard.org/mobile%20%23CA%20%23Gov" target="_blank" style="color: #FFFFCC;">@CAReportCard</a><br/>
-	    Facebook: <a href="http://on.fb.me/1jF60JL" target="_blank" style="color: #FFFFCC;">CAReportCard</a><br/><br/>
-
-            <center><img style="max-width: 220px;" src="{{url_root}}/media/mobile/img/cafe/cafe_teaser.png"></center>
+            <a href="http://californiareportcard.org" target="_blank" style="color: #555555;">http://californiareportcard.org</a><br/><br/>
+	    Twitter: <a href="http://twitter.com/home?status=How%20do%20you%20grade%20California?%20%20Try%20@CAReportCard%20developed%20by%20@Cal%20@GavinNewsom%20%26%20@Ken_Goldberg%20%20http://californiareportcard.org/mobile%20%23CA%20%23Gov" target="_blank" style="color: #555555;">@CAReportCard</a><br/>
+	    Facebook: <a href="http://on.fb.me/1jF60JL" target="_blank" style="color: #555555;">CAReportCard</a><br/><br/>
         </div>
  </div>
 
@@ -632,7 +640,7 @@
 
   <div class='dialog-continue dialog-style'>
        <div class="home-btn-dialog-box">
-            <div class="home-btn-title" style="width:40%;">
+            <div class="home-btn-title" style="width:40%; text-shadow: none;">
                 Thanks!
             </div>
             
@@ -648,7 +656,7 @@
 
          </div> 
 
-    <div class='dialog-text-style default-left-padding'>
+    <div class='dialog-text-style'>
         <!--<div class='dialog-text-style default-left-padding'>
         {{client_settings.EMAIL_ASK_TEXT}}
       </div>-->

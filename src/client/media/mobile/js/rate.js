@@ -96,6 +96,9 @@ var rate = (function($, d3, console) {
         logScore();
         logUserEvent(4,'rated');
         window.cur_state = 'map';
+        var myDiv = document.getElementById('rate');
+        myDiv.scrollTop = 0;
+        $("#slider-importance").children().children().children(".slider-grade-bubble").css("background-color","transparent"); 
 
             sendAgreementRating({
                 'r1': $("#slider1").val(),

@@ -28,12 +28,10 @@ grades.forEach(function(grade) {
 });
 $(".slider-grade-bubble").on("click",function(e){ 
 	$(this).parent().children(".slider-grade-bubble").css("opacity","1.0"); 
-	$(this).parent().children(".slider-grade-bubble").css("border","0px solid #FFFFFF");
-	$(this).parent().children(".slider-grade-bubble").css("color","#FFFFFF");
+	$(this).parent().children(".slider-grade-bubble").css("background-color","transparent"); 
 
 	$(this).css("opacity","1.0"); 
-	$(this).css("border","4px solid #00CCFF");
-	$(this).css("color","#FFFFFF");
+	$(this).css("background-color","#ffffff");
 	
 	try {
 	statement_id = parseInt($(this).parent().parent().parent().attr("id").substring(7));
@@ -55,12 +53,10 @@ $(".slider-grade-bubble").on("click",function(e){
 
 $(".slider-grade-bubble").on("touchstart",function(e){ 
 	$(this).parent().children(".slider-grade-bubble").css("opacity","1.0"); 
-	$(this).parent().children(".slider-grade-bubble").css("border","0px solid #FFFFFF");
-	$(this).parent().children(".slider-grade-bubble").css("color","#FFFFFF");
-
+	$(this).parent().children(".slider-grade-bubble").css("background-color","transparent"); 
+	
 	$(this).css("opacity","1.0"); 
-	$(this).css("border","4px solid #00CCFF");
-	$(this).css("color","#FFFFFF");
+	$(this).css("background-color","#ffffff");
 	
 	try {
 	statement_id = parseInt($(this).parent().parent().parent().attr("id").substring(7));
