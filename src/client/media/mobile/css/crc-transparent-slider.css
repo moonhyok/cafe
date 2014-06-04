@@ -20,7 +20,7 @@
 		width: 100%; 
 	}
 		.slider-grade-main{
-		border-radius:22px;
+		border-radius:25px;
 		line-height: 45px;
 		font-size: 22px;
 		text-align: center;
@@ -34,7 +34,7 @@
 	}
 
 		.slider-grade-p{
-		border-radius:22px;
+		border-radius:25px;
 		line-height: 45px;
 		font-size: 22px;
 		text-align: center;
@@ -48,7 +48,7 @@
 	}
 
 			.slider-grade-m{
-		border-radius:22px;
+		border-radius:25px;
 		line-height: 45px;
 		font-size: 22px;
 		text-align: center;
@@ -87,18 +87,18 @@
 	
 
 	.bubble-Ap{
-		border: 2px solid #003300 !important;
-		color: #003300;
+		border: 2px solid #00FF00 !important;
+		color: #00FF00;
 	}
 
 	.bubble-A{
-		border: 2px solid #003300 !important;
-		color: #003300;
+		border: 2px solid #00FF00 !important;
+		color: #00FF00;
 	}
 
 	.bubble-A-{
-		border: 2px solid #003300 !important;
-		color: #003300;
+		border: 2px solid #00FF00 !important;
+		color: #00FF00;
 	}
 
 	.bubble-Bp{
