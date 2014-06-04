@@ -31,7 +31,7 @@ $(".slider-grade-bubble").on("click",function(e){
 	$(this).parent().children(".slider-grade-bubble").css("background-color","transparent"); 
 
 	$(this).css("opacity","1.0"); 
-	$(this).css("background-color","#F2F0D1");
+	$(this).css("background-color","rgba(242,240,209,1.0)");
 	
 	try {
 	statement_id = parseInt($(this).parent().parent().parent().attr("id").substring(7));
@@ -56,7 +56,7 @@ $(".slider-grade-bubble").on("touchstart",function(e){
 	$(this).parent().children(".slider-grade-bubble").css("background-color","transparent"); 
 	
 	$(this).css("opacity","1.0"); 
-	$(this).css("background-color","#F2F0D1");
+	$(this).css("background-color","rgba(242,240,209,1.0)");
 	
 	try {
 	statement_id = parseInt($(this).parent().parent().parent().attr("id").substring(7));

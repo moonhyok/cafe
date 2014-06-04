@@ -527,7 +527,7 @@ table.pretty caption {
 		right: 0;
 		width: 100%;
 		height: 100%;
-		background-color: #2B2318;
+			background-color: rgba(28,25,51,1.0);
 		color: #ffffff;
 		/*background: #76b9b6;*/
 		/*background-image:url('../img/cafe/capitol_clean.jpg');*/
@@ -598,7 +598,7 @@ table.pretty caption {
 	left: -9px;
 	}
 
-	.landing-img-title{
+	/*.landing-img-title{
 	color: #FFFFFF;
 	background-color: rgba(0,0,0,.75);
 	padding: 10px;
@@ -609,6 +609,20 @@ table.pretty caption {
 	width: 100%;
 	font-weight: 300;
 	letter-spacing: 3px;
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	}*/
+
+	.landing-img-title{
+	color: #FFFFFF;
+	background-color: rgba(27,46,91,0.85);
+	padding: 10px;
+	font-size: 36px;
+	text-shadow: none;
+	line-height: 46px;
+	text-transform: uppercase;
+	width: 100%;
+	font-weight: 300;
+	letter-spacing: 2px;
 	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 	}
 
@@ -629,7 +643,7 @@ table.pretty caption {
 	}
 
 	.button-div {
-		background-color: #000000;
+		background: #1b2e5b;
 		border:0px solid #FFFFFF;
 		border-radius:7px;
 		width: 170px;
@@ -648,7 +662,8 @@ table.pretty caption {
 	}
 
 		.skip-btn {
-		background-color: rgba(0,0,0,.75);
+		background-color: rgba(255,255,255,0.1);
+		border: 2px solid white;
 		font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 		width: 120px;
 		border-radius:7px;
@@ -670,7 +685,7 @@ table.pretty caption {
 	}
 
 		.button-div-small {
-		background-color: #CCCCDD;
+		background: #1b2e5b;
 		border:1px solid #FFFFFF;
 		border-radius:10px;
 		width: 80px;
@@ -691,8 +706,9 @@ table.pretty caption {
 	}
 
 		.button-div-red {
-		background-color: rgba(0,0,0,0.6);
-		border: 2px solid white;
+
+			background: #1b2e5b; 
+		border: 0px solid black;
 		border-radius:10px;
 		width: 220px;
 		font-weight: normal;
@@ -1065,7 +1081,7 @@ padding-right: 7px;
     letter-spacing: 2px;
     padding-right: 15px;
     text-align: right;
-    background-color: #000000;
+    background-color: #28384F;
 }
 
 .home-btn-title{

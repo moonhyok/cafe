@@ -78,7 +78,7 @@
 	.slider-progress{
 		position:absolute;
 		bottom: 0px;
-		background-color: rgba(0,0,0,1);
+		background-color: #28384F;
 		width: 100%;
 		text-align: center;
 		padding-top: 15px;
@@ -117,18 +117,18 @@
 	}
 
 	.bubble-Cp{
-		border: 2px solid #ab9030 !important;
-		color: #ab9030;
+		border: 2px solid #dabe5b !important;
+		color: #dabe5b;
 	}
 
 	.bubble-C{
-		border: 2px solid #ab9030 !important;
-		color: #ab9030;
+		border: 2px solid #dabe5b !important;
+		color: #dabe5b;
 	}
 
 	.bubble-C-{
-		border: 2px solid #ab9030 !important;
-		color: #ab9030;
+		border: 2px solid #dabe5b !important;
+		color: #dabe5b;
 	}
 
 	.bubble-Dp{
