@@ -602,6 +602,7 @@ table.pretty caption {
 	.landing-img-title{
 	color: #FFFFFF;
 	background-color: #250E00;
+	opacity: 0.9;
 	padding: 10px;
 	font-size: 36px;
 	text-shadow: none;
