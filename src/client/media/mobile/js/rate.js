@@ -101,13 +101,14 @@ var rate = (function($, d3, console) {
         $("#slider-importance").children().children().children(".slider-grade-bubble").css("background-color","transparent"); 
 
             sendAgreementRating({
-                'r1': $("#slider1").val(),
-                'r2': $("#slider2").val(),
+                'r1': window.current_rating,
+                'r2': window.current_rating,
                 'cid': window.current_uid
             });
+            window.current_rating = 0.5;
             sendInsightRating({
-                'r1': $("#slider1").val(),
-                'r2': $("#slider2").val(),
+                'r1': window.current_rating,
+                'r2': window.current_rating,
                 'cid': window.current_uid
             });
             

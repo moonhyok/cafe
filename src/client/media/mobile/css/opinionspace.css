@@ -250,9 +250,10 @@ table.pretty caption {
 		top: 0px;
 		left:0px;
 		padding-top: 7px;
+		padding-bottom: 5px;
         position: fixed;
         z-index: 999;
-        background-color: #000000;
+        background-color: #73251F;
 	}
 
 	.ui-slider-input {
@@ -397,7 +398,7 @@ table.pretty caption {
 	
 	.comment-panel{
 		/*background: url('../img/cafe/cafe_notebook.png') repeat-y;*/
-		background-color: #fcf0de;
+		background-color: #250E00;
 		color: #222222;
 		text-shadow: none;
 		width: 100%;
@@ -527,7 +528,7 @@ table.pretty caption {
 		right: 0;
 		width: 100%;
 		height: 100%;
-			background-color: rgba(28,25,51,1.0);
+			background-color: #250E00;
 		color: #ffffff;
 		/*background: #76b9b6;*/
 		/*background-image:url('../img/cafe/capitol_clean.jpg');*/
@@ -579,7 +580,7 @@ table.pretty caption {
 		right: 0;
 		width: 100%;
 		height: 100%;
-		background-image:url('../img/cafe/capitol-landing7.jpg');
+		background-image:url('../img/cafe/capitol-landing6.jpg');
 		background-size: cover;
 		/*background-image:url('../img/cafe/cafe_bg.jpg');*/
 		background-color: #ffffff;
@@ -598,9 +599,9 @@ table.pretty caption {
 	left: -9px;
 	}
 
-	/*.landing-img-title{
+	.landing-img-title{
 	color: #FFFFFF;
-	background-color: rgba(0,0,0,.75);
+	background-color: #250E00;
 	padding: 10px;
 	font-size: 36px;
 	text-shadow: none;
@@ -610,9 +611,9 @@ table.pretty caption {
 	font-weight: 300;
 	letter-spacing: 3px;
 	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-	}*/
+	}
 
-	.landing-img-title{
+	/*.landing-img-title{
 	color: #FFFFFF;
 	background-color: rgba(27,46,91,0.85);
 	padding: 10px;
@@ -624,7 +625,7 @@ table.pretty caption {
 	font-weight: 300;
 	letter-spacing: 2px;
 	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-	}
+	}*/
 
 	.landing-img-txt{
 	color: #121212;
@@ -643,8 +644,8 @@ table.pretty caption {
 	}
 
 	.button-div {
-		background: #1b2e5b;
-		border:0px solid #FFFFFF;
+		background: #73251F;
+		border: 1px solid #000000;
 		border-radius:7px;
 		width: 170px;
 		font-weight: normal;
@@ -661,9 +662,9 @@ table.pretty caption {
 		bottom: 20px;*/
 	}
 
-		.skip-btn {
-		background-color: rgba(255,255,255,0.1);
-		border: 2px solid white;
+		/*.skip-btn {
+		background-color: #73251F;
+		border: 0px solid #555555;
 		font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 		width: 90px;
 		border-radius:7px;
@@ -680,13 +681,13 @@ table.pretty caption {
 		text-transform: uppercase;
 		bottom: 60px;
 		right: 15px;
-		/*position: absolute;
-		bottom: 20px;*/
-	}
+		position: absolute;
+		bottom: 20px;
+	}*/
 
 		.button-div-small {
-		background: #1b2e5b;
-		border:1px solid #FFFFFF;
+		background: #73251F;
+		border:0px solid #555555;
 		border-radius:10px;
 		width: 80px;
 		font-weight: normal;
@@ -707,8 +708,8 @@ table.pretty caption {
 
 		.button-div-red {
 
-			background: #1b2e5b; 
-		border: 0px solid black;
+			background: #250E00; 
+		border: 1px solid #000000;
 		border-radius:10px;
 		width: 220px;
 		font-weight: normal;
@@ -853,15 +854,17 @@ table.pretty caption {
 		overflow-x: hidden;
 		text-align: left;
 		position: absolute;
+		color: #ffffff;
+		text-shadow: none;
 		top: 0;
 		right: 0;
 		width: 100%;
 		height: 100%;
-		background-color: #fcf0de;
+		background-color: #250E00;
 		font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 		line-height: 26px;
 		letter-spacing: 2px;
-		font-size: 18px;
+		font-size: 16px;
 		overflow: auto;
 		z-index: 999;
 	}
@@ -911,7 +914,7 @@ table.pretty caption {
 	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 	text-shadow: none;
 	text-align: center !important;
-	color: #000000;
+	color: #FFFFFF;
 	font-size: 28px;
 	line-height: 32px;
 }
@@ -920,7 +923,7 @@ table.pretty caption {
 	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
     	text-shadow: none;
     	text-align: left !important;
-    	color: #CCCCCC;
+    	color: #FFFFFF;
     	font-size: 18px;
     	line-height: 26px;
     	letter-spacing: 2px;
@@ -931,7 +934,7 @@ table.pretty caption {
 .basic-sub-header {
 	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 	text-shadow: none;
-	color: #f5ebdf;
+	color: #ffffff;
 	font-size: 18px;
 	line-height: 20px;
 	padding-bottom: 10px;
@@ -1019,16 +1022,16 @@ padding-right: 7px;
 .comment-admin-text-b{
     font-size: 14px !important;
     line-height: 18px;
-    color: #333333 !important;
+    color: #DDDDDD !important;
     letter-spacing: 2px;
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 }
 
 .answer {
-	background-color: #ffe9ca !important;
+	background-color: #c1b39b!important;
 	width: 100% !important;
 	min-height: 250px !important;
-	font-size: 18px !important;
+	font-size: 16px !important;
 	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 	color: #000000;
 	font-weight: normal;
@@ -1076,25 +1079,26 @@ padding-right: 7px;
 }
 
 .home-btn-dialog-box {
-    padding-top: 7px;
-    padding-bottom: 0px;
+    padding-top: 10px;
+    padding-bottom: 5px;
     letter-spacing: 2px;
     padding-right: 15px;
     text-align: right;
-    background-color: #28384F;
+    background-color: #73251F;
 }
 
 .home-btn-title{
 
 	width:45%;
 	display:inline-block;
+	font-weight: bold;
 	text-align: left; 
-	font-size: 22px;
+	font-size: 14px;
 	color: #ffffff;
 	position:relative;
 	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 	bottom: 5px;
-	left: 5px;
+	left: -5px;
 	text-transform: uppercase;
 }
 
@@ -1118,8 +1122,8 @@ padding-right: 7px;
 	padding-left: 20px;
 	padding-right: 20px;
 	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-	font-size: 18px;
-	line-height: 26px;
+	font-size: 16px;
+	line-height: 22px;
 	letter-spacing: 2px;
 }
 
@@ -1180,7 +1184,7 @@ padding-right: 7px;
     position: absolute;
 	top:0;
 	left: 0;
-	background-color:#fcf0de;
+	background-color: #250E00;
 	width: 100%;
 	overflow: none;
 	display: none;
@@ -1196,7 +1200,7 @@ padding-right: 7px;
 	bottom: 0px;
 	width: 100%;
 	height: 230px;
-	max-height: 60%;
+	max-height: 40%;
 	padding-top:15px;
 }
 
@@ -1210,7 +1214,7 @@ padding-right: 7px;
 	position: relative;
     vertical-align: middle;
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-	color: #222222;
+	color: #FFFFFF;
 	height: 100%;
 	text-decoration: none;
 	text-shadow: none;
@@ -1218,7 +1222,7 @@ padding-right: 7px;
 	padding-right: 20px;
 	padding-left: 20px;
 	padding-top: 10px;
-	font-size: 18px;
+	font-size: 16px;
 	line-height: 26px;
 
 }
@@ -1227,7 +1231,7 @@ padding-right: 7px;
 	position: relative;
     vertical-align: middle;
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-	color: #000000;
+	color: #FFFFFF;
 	text-decoration: none;
 	text-shadow: none;
 	font-size: 16px;
@@ -1260,14 +1264,14 @@ padding-right: 7px;
 }
 
 .dialog-text-style-noflow strong {
-    color: #555555;
+    color: #CCCCCC;
     text-decoration: none;
     font-size: 16px;
     font-weight: bold;
 }
 
 .dialog-text-style-noflow em {
-   color: #555555;
+   color: #CCCCCC;
     text-decoration: none;
     font-weight: bold;
     font-size: 16px;

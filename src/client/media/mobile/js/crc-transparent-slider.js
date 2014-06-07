@@ -31,8 +31,15 @@ $(".slider-grade-bubble").on("click",function(e){
 	$(this).parent().children(".slider-grade-bubble").css("background-color","transparent"); 
 
 	$(this).css("opacity","1.0"); 
-	$(this).css("background-color","rgba(242,240,209,1.0)");
+	$(this).css("background-color","rgba(242,240,209,0.5)");
 	
+	if($(this).parent().parent().parent().attr("id").substring(7).indexOf("importance") > -1)
+	{
+		var classList = $(this).attr('class').split(/\s+/);
+		window.current_rating = grade_to_score(classList[2].substring(7).replace("p","+"));
+		return;
+	}
+
 	try {
 	statement_id = parseInt($(this).parent().parent().parent().attr("id").substring(7));
 	var classList =$(this).attr('class').split(/\s+/);
@@ -56,7 +63,7 @@ $(".slider-grade-bubble").on("touchstart",function(e){
 	$(this).parent().children(".slider-grade-bubble").css("background-color","transparent"); 
 	
 	$(this).css("opacity","1.0"); 
-	$(this).css("background-color","rgba(242,240,209,1.0)");
+	$(this).css("background-color","rgba(242,240,209,0.5)");
 	
 	try {
 	statement_id = parseInt($(this).parent().parent().parent().attr("id").substring(7));

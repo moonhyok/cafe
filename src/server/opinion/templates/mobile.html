@@ -71,6 +71,8 @@
 
   window.mousedown = 0;
 
+  window.current_rating = 50;
+
   window.cur_state = 'home';
 
   window.toggle_flag1 = false;
@@ -264,7 +266,7 @@
 
   <div class='landing'>
       <div class="home-btn-dialog-box landing-navigation" style="display: none;">
-          <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+          <img width="25px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
       </div>
 
       <br/>
@@ -303,14 +305,15 @@
          <div class="home-btn-dialog-box first-dialog-nav">
             <div class="home-btn-title">
                 Grade
+                <div class="slider-progress" style="display:inline-block;"></div>
             </div>
-            
+
             <div class="home-btn-wrapper" style="width:45%;display:inline-block; text-align: right;">
-                <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png"> &nbsp;
+                <img width="25px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png"> &nbsp;
                 
-                <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png"> &nbsp;
+                <img width="25px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png"> &nbsp;
                 
-                <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+                <img width="25px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
             </div>
 
          </div> 
@@ -319,20 +322,23 @@
             
             <div class="home-btn-title" style="position:relative;">
               Grade
+              <div class="slider-progress" style="display:inline-block;"></div>
             </div>
+
+            
            
            <div class="home-btn-wrapper" style="width:45%;display:inline-block; text-align: right;">
-            <img width="30px;" class='endsliders-back-btn' id="back-{{statement.id}}" src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png"> &nbsp;
+            <img width="25px;" class='endsliders-back-btn' id="back-{{statement.id}}" src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png"> &nbsp;
                
-            <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png"> &nbsp;
+            <img width="25px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png"> &nbsp;
                 
-            <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+            <img width="25px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
             </div>
           
           </div>  
 
           <center>   
-              <div style="padding: 10px; text-align: center; letter-spacing: 2px;font-size: 18px;line-height: 22px;">{{ statement.statement }}</div>
+              <div style="padding: 20px; text-align: left; letter-spacing: 2px;font-size: 15px;line-height: 18px;">{{ statement.statement }}</div>
 
               <div style="width: 100%;">
                 <img class='endsliders-back-btn' style="width: 45px !important; display: inline-block; position: relative; top: -120px;" id="back-{{statement.id}}" src="{{url_root}}/media/mobile/img/cafe/Skip_V1.png">
@@ -344,12 +350,10 @@
               </div>
                   
               <div style="clear: both;"></div>
+              <a href="#" class="skip-button-{{statement.id}} skip-btn" id="next-{{statement.id}}" style="color: #ffffff;font-size: 16px;">Skip</a>
+              <div class="median-grade-{{statement.id}}" style="font-size: 16px;display: none;letter-spacing: 2px;"></div><br/>
 
-              <div class="median-grade-{{statement.id}}" style="font-size: 18px;display: none;letter-spacing: 2px;"></div><br/>
-
-              <div class="skip-button-{{statement.id}} skip-btn" id="next-{{statement.id}}">Skip</div>
-
-              <div class="slider-progress"></div>
+              
 
           </center>
 
@@ -366,11 +370,11 @@
             </div>
             
             <div class="home-btn-wrapper" style="width:45%;display:inline-block; text-align: right;">
-                <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png"> &nbsp;
+                <img width="25px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png"> &nbsp;
                 
-                <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png"> &nbsp;
+                <img width="25px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png"> &nbsp;
                 
-                <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+                <img width="25px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
             </div>
 
          </div> 
@@ -418,11 +422,11 @@
             </div>
             
             <div class="home-btn-wrapper" style="width:45%;display:inline-block; text-align: right;">
-                <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png"> &nbsp;
+                <img width="25px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png"> &nbsp;
                 
-                <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png"> &nbsp;
+                <img width="25px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png"> &nbsp;
                 
-                <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+                <img width="25px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
             </div>
 
          </div> 
@@ -432,7 +436,7 @@
       </div><br/>
        <center>
               <div class="discuss-btn-div">
-                  <div class='dialog-ready button-div-red'> Enter </button>
+                  <div class='dialog-ready button-div' style="border: 1px solid #000000;"> Enter </button>
                   <!--<button type='submit' data-theme='b' class='dialog-next'  onclick="$('.dialog-text1').hide();$('.dialog-text2').show();"><font style="font-size: 16px;">Next</font></button>-->
               </div>
       </center>
@@ -440,18 +444,18 @@
 
   <div class='comment-input'>
        <div class="home-btn-dialog-box">
-            <div class="home-btn-title" style="width:40%;">
+            <div class="home-btn-title" style="width:40%;position: relative; left: 15px;">
                 Discuss
             </div>
             
             <div class="home-btn-wrapper" style="width:55%;display:inline-block; text-align: right;">
-                <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png"> &nbsp;
+                <img width="25px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png"> &nbsp;
                 
-                <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png"> &nbsp;
+                <img width="25px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png"> &nbsp;
                 
-                <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+                <img width="25px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
                 &nbsp;
-                <img width="30px;" class='logout-btn' src="{{url_root}}/media/mobile/img/cafe/CRC_logout_bttn.png">
+                <img width="25px;" class='logout-btn' src="{{url_root}}/media/mobile/img/cafe/CRC_logout_bttn.png">
             </div>
 
          </div> 
@@ -476,22 +480,22 @@
             </div>
 
             <div style="letter-spacing: 2px;padding-top: 5px;">
-                <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+                <img width="25px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
                 &nbsp;
                 &nbsp;
                 &nbsp;
-                <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+                <img width="25px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
                  &nbsp;
                  &nbsp;
                   &nbsp;
-                 <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+                 <img width="25px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
                 &nbsp;
                 &nbsp;
                 &nbsp;
-                <img width="30px;" class='logout-btn' src="{{url_root}}/media/mobile/img/cafe/CRC_logout_bttn.png">
+                <img width="25px;" class='logout-btn' src="{{url_root}}/media/mobile/img/cafe/CRC_logout_bttn.png">
             </div>
 
-            <span class="stats-wrapper" style="display: none;">&nbsp;<img width="30px;" class='my-comment-btn' src="{{url_root}}/media/mobile/img/cafe/CRC_stats_bttn.png"></span>
+            <span class="stats-wrapper" style="display: none;">&nbsp;<img width="25px;" class='my-comment-btn' src="{{url_root}}/media/mobile/img/cafe/CRC_stats_bttn.png"></span>
         </div>
 
         <div style="display: none;">
@@ -513,11 +517,11 @@
             </div>
             
             <div class="home-btn-wrapper" style="width:45%;display:inline-block; text-align: right;">
-                <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png"> &nbsp;
+                <img width="25px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png"> &nbsp;
                 
-                <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png"> &nbsp;
+                <img width="25px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png"> &nbsp;
                 
-                <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+                <img width="25px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
             </div>
 
          </div>
@@ -531,10 +535,12 @@
     <div id="flag" class="flag-style"></div>
 
     <div class="answerwrapper">
-    <center>
-     <div class='sliders'>
-         How important is this issue for the next Report Card?<br/>
-                   <div class="slider" id="slider-importance"></div>
+     <div class='sliders' style="text-align: left;">
+       How important is this issue for the next Report Card?<br/><br/>
+       <center>
+       <div class="slider" id="slider-importance"></div>
+       </center>
+
        <div class="slider-padding"></div>
 
        <div style="clear: both;"></div>
@@ -545,11 +551,10 @@
           
 
         <center>
-            <div class="button-div" id='go-back'>Next</div>
+            <div class="button-div" id='go-back' style="border: 0px !important;">Next</div>
         </center>
 
       </div>
-    </center>
 
     </div>
 
@@ -560,11 +565,11 @@
 
   <div class='logout'>
       <div class="home-btn-dialog-box">
-          <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+          <img width="25px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
           &nbsp;
-          <img width="30px;" class='logout-start-over' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+          <img width="25px;" class='logout-start-over' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
           &nbsp;
-          <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+          <img width="25px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
       </div>
         <div style="padding: 20px;">
             {{client_settings.LOGOUT_DIALOG_TEXT}}<br/><br/>
@@ -598,7 +603,7 @@
   <div class='dialog-score dialog-style'>
 
       <div class="home-btn-dialog-box">
-          <button data-theme='b' class='home-btn-dialog'><img width="30px;" src="{{url_root}}/media/mobile/img/cafe/home-icon.png"></button>
+          <button data-theme='b' class='home-btn-dialog'><img width="25px;" src="{{url_root}}/media/mobile/img/cafe/home-icon.png"></button>
       </div>
 
     <div class='dialog-text-notitle default-left-padding'>
@@ -620,7 +625,7 @@
   <div class='dialog-yourmug dialog-style'>
 
       <div class="home-btn-dialog-box">
-          <button data-theme='b' class='home-btn-dialog'><img width="30px;" src="{{url_root}}/media/mobile/img/cafe/home-icon.png"></button>
+          <button data-theme='b' class='home-btn-dialog'><img width="25px;" src="{{url_root}}/media/mobile/img/cafe/home-icon.png"></button>
       </div>
 
     <div class='dialog-text-style default-left-padding'>
@@ -640,18 +645,18 @@
 
   <div class='dialog-continue dialog-style'>
        <div class="home-btn-dialog-box">
-            <div class="home-btn-title" style="width:40%; text-shadow: none;">
+            <div class="home-btn-title" style="width:40%; text-shadow: none; position: relative; left: 15px;">
                 Thanks!
             </div>
             
             <div class="home-btn-wrapper" style="width:55%;display:inline-block; text-align: right;">
-                <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png"> &nbsp;
+                <img width="25px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png"> &nbsp;
                 
-                <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png"> &nbsp;
+                <img width="25px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png"> &nbsp;
                 
-                <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+                <img width="25px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
                 &nbsp;
-                <img width="30px;" class='logout-btn' src="{{url_root}}/media/mobile/img/cafe/CRC_logout_bttn.png">
+                <img width="25px;" class='logout-btn' src="{{url_root}}/media/mobile/img/cafe/CRC_logout_bttn.png">
             </div>
 
          </div> 
@@ -676,37 +681,39 @@
 
  <div class='dialog-email dialog-style'>
        <div class="home-btn-dialog-box">
-            <div class="home-btn-title" style="width:40%;">
+            <div class="home-btn-title" style="width:40%; text-shadow: none; position: relative; left: 15px;">
                 Thanks!
             </div>
             
             <div class="home-btn-wrapper" style="width:55%;display:inline-block; text-align: right;">
-                <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png"> &nbsp;
+                <img width="25px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png"> &nbsp;
                 
-                <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png"> &nbsp;
+                <img width="25px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png"> &nbsp;
                 
-                <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+                <img width="25px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
                 &nbsp;
-                <img width="30px;" class='logout-btn' src="{{url_root}}/media/mobile/img/cafe/CRC_logout_bttn.png">
+                <img width="25px;" class='logout-btn' src="{{url_root}}/media/mobile/img/cafe/CRC_logout_bttn.png">
             </div>
 
          </div> 
 
          <div class='dialog-text-style default-left-padding'>
             Thank you!  Logout now or grade more mugs.
+            <center>
             <div class="standard-btn-div" style="max-width: 250px !important;">
-              <div class='button-div dialog-email-ready' >Continue Grading</div>
+              <div class='button-div dialog-email-ready' >Continue</div>
             </div>
+          </center>
          </div>
   </div>
 
   <div class='dialog-avggrade dialog-style'>
       <div class="home-btn-dialog-box">
-          <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+          <img width="25px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
           &nbsp;
-          <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+          <img width="25px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
           &nbsp;
-          <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+          <img width="25px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
       </div>
 
     <div class='dialog-text-style default-left-padding'>
@@ -720,11 +727,11 @@
 
   <div class='dialog-about dialog-style' style="z-index:999">
       <div class="home-btn-dialog-box">
-          <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+          <img width="25px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
           &nbsp;
-          <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+          <img width="25px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
           &nbsp;
-          <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+          <img width="25px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
       </div>
       <div class='dialog-text-style-noflow small-left-padding'>
           <div class="basic-header">{{client_settings.ABOUT_PAGE_HEADER}}</div>
@@ -735,11 +742,11 @@
 
   <div class='dialog-help-alt dialog-style' style="z-index:999">
       <div class="home-btn-dialog-box">
-          <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+          <img width="25px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
           &nbsp;
-          <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+          <img width="25px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
           &nbsp;
-          <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+          <img width="25px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
       </div>
       <div class='dialog-text-style-noflow small-left-padding'>
           <div class="basic-header">Help</div>
@@ -748,12 +755,13 @@
   </div>
 
   <div class='dialog-help-grade dialog-style' style="z-index:999;">
+
       <div class="home-btn-dialog-box">
-          <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+          <img width="25px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
           &nbsp;
-          <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+          <img width="25px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
           &nbsp;
-          <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+          <img width="25px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
       </div>
       <div class='dialog-text-style-noflow small-left-padding'>
           <div class="basic-header">Help</div>
@@ -762,30 +770,30 @@
           <br/><br/>
           Click "Median Grade" at the top of the far right column to learn more about how this is determined.<br/><br/>
           <em>Q:</em> How can I learn more about the six issues we are grading?<br/>
-          <em>A:</em> Here is an overview of each issue:<br/>
+          <em>A:</em> Here is an overview of each issue:<br/><br/>
 
           <div>
               <em>Implementation of the Affordable Care Act (“Obamacare”)</em><br/>
 
-              California was the first state to pass legislation creating a health insurance marketplace--Covered California. As of Dec 2013, Covered California had over 630,000 enrollees.<br/>
+              California was the first state to pass legislation creating a health insurance marketplace--Covered California. As of Dec 2013, Covered California had over 630,000 enrollees.<br/><br/>
 
               <em>Quality of K-12 public education</em><br/>
 
-              California recently adopted the “common core” challenges, which emphasize critical thinking and analysis in K-12 education to better prepare students for college and the workforce.<br/>
+              California recently adopted the “common core” challenges, which emphasize critical thinking and analysis in K-12 education to better prepare students for college and the workforce.<br/><br/>
 
               <em>Affordability of state colleges and universities</em><br/>
 
-              The 2014-15 draft California budget calls for a 10.8% increase in higher education funding, which could keep current tuition costs stable.<br/>
+              The 2014-15 draft California budget calls for a 10.8% increase in higher education funding, which could keep current tuition costs stable.<br/><br/>
 
               <em>Access to state services for undocumented immigrants</em><br/>
 
               Passed in 2006, California Senate Bill 1569 extends eligibility for undocumented immigrants in California for food assistance, supplemental security income, and health insurance.
-              Passed in 2011, The California Dream Act grants undocumented immigrant access to state aid at public universities and colleges.<br/>
+              Passed in 2011, The California Dream Act grants undocumented immigrant access to state aid at public universities and colleges.<br/><br/>
 
               <em>Laws and regulations regarding recreational marijuana</em><br/>
 
               California was the first state to legalize the distribution of medical marijuana in 1996.
-              Recreational use of marijuana is illegal in the State of California. However, California lawmakers are currently considering legalizing, taxing, and regulating marijuana for recreational use.<br/>
+              Recreational use of marijuana is illegal in the State of California. However, California lawmakers are currently considering legalizing, taxing, and regulating marijuana for recreational use.<br/><br/>
 
               <em>Marriage rights for same-sex partners</em><br/>
 
@@ -809,11 +817,11 @@
 
   <div class='dialog-help-median dialog-style' style="z-index:999">
       <div class="home-btn-dialog-box">
-          <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+          <img width="25px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
           &nbsp;
-          <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+          <img width="25px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
           &nbsp;
-          <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+          <img width="25px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
       </div>
       <div class='dialog-text-style-noflow small-left-padding'>
           <div class="basic-header">Help</div>
@@ -827,11 +835,11 @@
 
   <div class='dialog-help-zipcode dialog-style' style="z-index:999">
       <div class="home-btn-dialog-box">
-          <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+          <img width="25px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
           &nbsp;
-          <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+          <img width="25px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
           &nbsp;
-          <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+          <img width="25px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
       </div>
       <div class='dialog-text-style-noflow small-left-padding'>
           <div class="basic-header">Help</div>
@@ -842,11 +850,11 @@
 
   <div class='dialog-help-dialog dialog-style' style="z-index:999">
       <div class="home-btn-dialog-box">
-          <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+          <img width="25px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
           &nbsp;
-          <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+          <img width="25px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
           &nbsp;
-          <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+          <img width="25px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
       </div>
       <div class='dialog-text-style-noflow small-left-padding'>
           <div class="basic-header">Help</div>
@@ -857,11 +865,11 @@
 
   <div class='dialog-help-map1 dialog-style' style="z-index:999">
       <div class="home-btn-dialog-box">
-          <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+          <img width="25px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
           &nbsp;
-          <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+          <img width="25px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
           &nbsp;
-          <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+          <img width="25px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
       </div>
       <div class='dialog-text-style-noflow small-left-padding'>
           <div class="basic-header">Help</div>
@@ -885,11 +893,11 @@
 
   <div class='dialog-help-map2 dialog-style' style="z-index:999">
       <div class="home-btn-dialog-box">
-          <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+          <img width="25px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
           &nbsp;
-          <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+          <img width="25px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
           &nbsp;
-          <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+          <img width="25px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
       </div>
       <div class='dialog-text-style-noflow small-left-padding'>
           <div class="basic-header">Help</div>
@@ -906,11 +914,11 @@
 
   <div class='dialog-help-map3 dialog-style' style="z-index:999">
       <div class="home-btn-dialog-box">
-          <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+          <img width="25px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
           &nbsp;
-          <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+          <img width="25px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
           &nbsp;
-          <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+          <img width="25px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
       </div>
       <div class='dialog-text-style-noflow small-left-padding'>
           <div class="basic-header">Help</div>
@@ -922,11 +930,11 @@
 
   <div class='dialog-help-comment dialog-style' style="z-index:999">
       <div class="home-btn-dialog-box">
-          <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+          <img width="25px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
           &nbsp;
-          <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+          <img width="25px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
           &nbsp;
-          <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+          <img width="25px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
       </div>
       <div class='dialog-text-style-noflow small-left-padding'>
           <div class="basic-header">Help</div>
@@ -936,11 +944,11 @@
 
   <div class='dialog-help-rate dialog-style' style="z-index:999">
       <div class="home-btn-dialog-box">
-          <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+          <img width="25px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
           &nbsp;
-          <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+          <img width="25px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
           &nbsp;
-          <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+          <img width="25px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
       </div>
       <div class='dialog-text-style-noflow small-left-padding'>
           <div class="basic-header">Help</div>
@@ -953,11 +961,11 @@
 
   <div class='dialog-help-continue dialog-style' style="z-index:999">
       <div class="home-btn-dialog-box">
-          <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+          <img width="25px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
           &nbsp;
-          <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+          <img width="25px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
           &nbsp;
-          <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+          <img width="25px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
       </div>
       <div class='dialog-text-style-noflow small-left-padding'>
           <div class="basic-header">Help</div>
@@ -968,11 +976,11 @@
 
   <div class='dialog-help-logout dialog-style' style="z-index:999">
       <div class="home-btn-dialog-box">
-          <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+          <img width="25px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
           &nbsp;
-          <img width="30px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+          <img width="25px;" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
           &nbsp;
-          <img width="30px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+          <img width="25px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
       </div>
       <div class='dialog-text-style-noflow small-left-padding'>
           <div class="basic-header">Help</div>
