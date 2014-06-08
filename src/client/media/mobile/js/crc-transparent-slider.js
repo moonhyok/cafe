@@ -46,15 +46,13 @@ $(".slider-grade-bubble").on("click",function(e){
 	window.sliders[statement_id-1] = grade_to_score(classList[2].substring(7).replace("p","+"));
 	median = score_to_grade(100*medians[statement_id]);
 	rate.logUserEvent(11,'slider_set ' + statement_id + ' ' + window.sliders[statement_id-1]/100);
-	//alert(median);
+	$(this).parent().children(".bubble-"+median.replace("+","p")).css("border","2px solid #66FFFF");
 	$(".median-grade-"+statement_id).html("Median Grade: " + median);
 	$(".median-grade-"+statement_id).fadeIn(500);
 	$(".skip-button-"+statement_id).hide();
 	}
 	catch(exception){}
 	
-	//$(this).parent().children(".bubble-"+median.replace("+","p")).css("opacity","1.0");
-	//$(this).parent().children(".bubble-"+median.replace("+","p")).css("border","1px solid #000000");
 	//$(this).parent().children(".bubble-"+median.replace("+","p")).innerHTML = "<div style=\"font-size: 10px;\">Median</font>";
 });
 
