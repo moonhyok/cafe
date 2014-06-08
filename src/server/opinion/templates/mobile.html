@@ -59,6 +59,7 @@
 
 <!--JavaScript that needs to be run on init-->
 <script type='text/javascript'>
+
   window.url_root = '{{ url_root }}';
 
   window.sliders = [];
@@ -100,9 +101,6 @@
                   'RETURN_USER_FIRST_TIME': {{return_user_first_time}},
                   'ZIPCODE': {{ zipcode }},
                 };
-
-
-
 
  jQuery(document).ready(function(){
    for (var i = 0; i < window.num_sliders; i++) {
@@ -282,7 +280,7 @@
 
       <!--<img class="capitol-bg" src="{{url_root}}/media/mobile/img/cafe/capitol-landing1.png">-->
 
-      <center><div class='button-div-red first-time-btn' style="position: relative; top: 200px;">begin</div></center>
+      <center><div class='button-div-red first-time-btn' style="position: relative; top: 140px;">begin</div></center>
       
        <!--<div class="landing-img-txt">   
            Take a moment to join <strong>{{num_users}}</strong> others who have graded the State of California on six timely issues.<br/>
@@ -338,7 +336,7 @@
           </div>  
 
           <center>   
-              <div style="padding: 20px; text-align: left; letter-spacing: 2px;font-size: 15px;line-height: 18px;">{{ statement.statement }}</div>
+              <div style="padding-left: 20px;padding-right: 20px; padding-top: 10px; padding-bottom: 10px; text-align: left; letter-spacing: 2px;font-size: 15px;line-height: 18px;">{{ statement.statement }}</div>
 
               <div style="width: 100%;">
                 <img class='endsliders-back-btn' style="width: 45px !important; display: inline-block; position: relative; top: -120px;" id="back-{{statement.id}}" src="{{url_root}}/media/mobile/img/cafe/Skip_V1.png">
@@ -350,7 +348,7 @@
               </div>
                   
               <div style="clear: both;"></div>
-              <a href="#" class="skip-button-{{statement.id}} skip-btn" id="next-{{statement.id}}" style="color: #ffffff;font-size: 16px;">Skip</a>
+              <a href="#" class="skip-button-{{statement.id}} skip-btn" id="next-{{statement.id}}" style="color: #ffffff;font-size: 16px;position:relative;top: -40px;left: 100px;">Skip</a>
               <div class="median-grade-{{statement.id}}" style="font-size: 16px;display: none;letter-spacing: 2px;"></div><br/>
 
               
@@ -432,7 +430,7 @@
          </div> 
       <!--<img class="header-img-topic center" src="{{ url_root }}/media/mobile/img/cafe/CRC_join.png"/>-->
       <div class='dialog-text1 dialog-text-style'>
-          {{ client_settings.DISCUSSION_DIALOG_TEXT1 }}
+          Thank you for grading these issues.  We now invite you to consider and propose additional issues you feel should have priority for attention at the state level.  
       </div><br/>
        <center>
               <div class="discuss-btn-div">

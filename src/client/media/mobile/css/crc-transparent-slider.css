@@ -20,11 +20,11 @@
 		width: 100%; 
 	}
 		.slider-grade-main{
-		border-radius:23px;
-		line-height: 45px;
+		border-radius:20px;
+		line-height: 40px;
 		font-size: 22px;
 		text-align: center;
-		width: 45px;
+		width: 40px;
 		display:inline-block;
 		margin-right: 5px;
 		margin-left: 5px;
@@ -34,11 +34,11 @@
 	}
 
 		.slider-grade-p{
-		border-radius:23px;
-		line-height: 45px;
+		border-radius:20px;
+		line-height: 40px;
 		font-size: 22px;
 		text-align: center;
-		width: 45px;
+		width: 40px;
 		display:inline-block;
 		margin-right: 5px;
 		margin-left: 5px;
@@ -48,11 +48,11 @@
 	}
 
 			.slider-grade-m{
-		border-radius:23px;
-		line-height: 45px;
+		border-radius:20px;
+		line-height: 40px;
 		font-size: 22px;
 		text-align: center;
-		width: 45px;
+		width: 40px;
 		display:inline-block;
 		margin-right: 5px;
 		margin-left: 5px;
@@ -139,6 +139,6 @@
 		color: #FF6600;
 	}
 	.bubble-F{
-		border: 2px solid #990000 !important;
+		border: 2px solid #FF0000 !important;
 		color: #FF0000;
 	}
