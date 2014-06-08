@@ -333,7 +333,7 @@ table.pretty caption {
 		color: #FFFFFF;
 		background-color: #250E00;
 		font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-		z-index: 999;
+		z-index: 998;
 		text-shadow: none;
 		font-size: 17px !important;
 		
@@ -353,7 +353,7 @@ table.pretty caption {
     		background-color: #250E00;
     		font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
     		left: 0px;
-    		z-index: 999;
+    		z-index: 998;
     		text-shadow: none;
     		font-size: 17px !important;
             
@@ -373,7 +373,7 @@ table.pretty caption {
         		background-color: #250E00;
         		font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
         		left: 0px;
-        		z-index: 999;
+        		z-index: 998;
         		text-shadow: none;
         		font-size: 17px !important;
                 
