@@ -331,47 +331,57 @@ table.pretty caption {
 	.instructions{
 		/*position: absolute;*/
 		color: #FFFFFF;
+		background-color: #250E00;
 		font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 		z-index: 999;
 		text-shadow: none;
 		font-size: 17px !important;
 		
-		width: 100%;
+		padding-left: 20px;
+		padding-right: 20px;
+		padding-top: 10px;
 		line-height: 22px;
 		padding-bottom: 5px;
-		padding-top: 5px;
+		position: relative;
+                top: 45px;
 		display:none;
 	}
 
 	.instructions2{
     		/*position: absolute;*/
     		color: #FFFFFF;
+    		background-color: #250E00;
     		font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
     		left: 0px;
     		z-index: 999;
     		text-shadow: none;
     		font-size: 17px !important;
             
-            width: 100%;
-            line-height: 20px;
-            padding-bottom: 5px;
-            		padding-top: 5px;
-    		display:none;
+            padding-left: 20px;
+		padding-right: 20px;
+		line-height: 22px;
+		padding-top: 10px;
+		padding-bottom: 5px;
+		position: relative;
+                top: 45px;
+		display:none;
     }
 
     .instructions3{
         		/*position: absolute;*/
         		color: #FFFFFF;
+        		background-color: #250E00;
         		font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
         		left: 0px;
         		z-index: 999;
         		text-shadow: none;
         		font-size: 17px !important;
                 
-                width: 100%;
-                line-height: 20px;
+                line-height: 22px;
+                padding-top: 10px;
                 padding-bottom: 5px;
-                		padding-top: 5px;
+		position: relative;
+                top: 45px;
         		display:none;
         }
 	
@@ -1031,7 +1041,7 @@ padding-right: 7px;
 .answer {
 	background-color: #c1b39b!important;
 	width: 100% !important;
-	min-height: 250px !important;
+	min-height: 200px !important;
 	font-size: 16px !important;
 	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 	color: #000000;
