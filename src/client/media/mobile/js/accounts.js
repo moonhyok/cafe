@@ -496,6 +496,8 @@ $(document).ready(function() {
         accounts.hideAll();
         $('.endsliders').show();
         $('#slide-1').show();
+        $(".slider-progress-dot").css("background","#000000");
+        $(".slider-progress-dot-"+1).css("background","#FFFFFF");
         window.cur_state = 'grade';
         rate.logUserEvent(7,'first time');
         //$('.top-bar').show();
