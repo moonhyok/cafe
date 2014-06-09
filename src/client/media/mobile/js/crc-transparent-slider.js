@@ -46,8 +46,9 @@ $(".slider-grade-bubble").on("click",function(e){
 	window.sliders[statement_id-1] = grade_to_score(classList[2].substring(7).replace("p","+"));
 	median = score_to_grade(100*medians[statement_id]);
 	rate.logUserEvent(11,'slider_set ' + statement_id + ' ' + window.sliders[statement_id-1]/100);
+
 	$(this).parent().children(".bubble-"+median.replace("+","p")).css("border","2px solid #66FFFF");
-	$(".median-grade-"+statement_id).html("Median Grade: " + median);
+	$(".median-grade-"+statement_id).html("Median grade so far: " + median);
 	$(".median-grade-"+statement_id).fadeIn(500);
 	$(".skip-button-"+statement_id).hide();
 	}
@@ -70,7 +71,8 @@ $(".slider-grade-bubble").on("touchstart",function(e){
 	rate.logUserEvent(11,'slider_set ' + statement_id-1 + ' ' + window.sliders[statement_id-1]/100);
 	median = score_to_grade(100*medians[statement_id]);
 	//alert(median);
-	$(".median-grade-"+statement_id).html("Median Grade: " + median);
+	$(this).parent().children(".bubble-"+median.replace("+","p")).css("border","2px solid #66FFFF");
+	$(".median-grade-"+statement_id).html("Median grade so far: " + median);
 	$(".median-grade-"+statement_id).fadeIn(500);
 	$(".skip-button-"+statement_id).hide();
 	}

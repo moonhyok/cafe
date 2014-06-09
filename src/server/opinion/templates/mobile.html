@@ -336,7 +336,9 @@
           </div>  
 
           <center>   
-              <div style="padding-left: 20px;padding-right: 20px; padding-top: 10px; padding-bottom: 10px; text-align: left; letter-spacing: 2px;font-size: 15px;line-height: 18px;">{{ statement.statement }}</div>
+              <div style="padding-left: 20px;padding-right: 20px; padding-top: 10px; padding-bottom: 5px; text-align: left; letter-spacing: 2px;font-size: 15px;line-height: 18px;">{{ statement.statement }}</div>
+
+              <div class="median-grade-{{statement.id}}" style="font-size: 16px;display: none;letter-spacing: 2px;color: #66FFFF;"></div>
 
               <div style="width: 100%;">
                 <img class='endsliders-back-btn' style="width: 45px !important; display: inline-block; position: relative; top: -120px;" id="back-{{statement.id}}" src="{{url_root}}/media/mobile/img/cafe/Skip_V1.png">
@@ -349,10 +351,6 @@
                   
               <div style="clear: both;"></div>
               <a href="#" class="skip-button-{{statement.id}} skip-btn" id="next-{{statement.id}}" style="color: #ffffff;font-size: 16px;position:relative;top: -40px;left: 100px;">Skip</a>
-              <div class="median-grade-{{statement.id}}" style="font-size: 16px;display: none;letter-spacing: 2px;"></div><br/>
-
-              
-
           </center>
 
       </div>
@@ -762,9 +760,8 @@
       <div class='dialog-text-style-noflow small-left-padding'>
           <div class="basic-header">Help</div>
           The CRC allows visitors to grade issues facing California.
-          Drag the slider handles to assign grades to these 6 issues facing California (click the skip button for issues where you don't want to assign a grade.)
+          Presss the buttons to assign grades to these 6 issues facing California (click the skip button for issues where you don't want to assign a grade.)
           <br/><br/>
-          Click "Median Grade" at the top of the far right column to learn more about how this is determined.<br/><br/>
           <em>Q:</em> How can I learn more about the six issues we are grading?<br/>
           <em>A:</em> Here is an overview of each issue:<br/><br/>
 
