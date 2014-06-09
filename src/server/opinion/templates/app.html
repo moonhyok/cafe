@@ -12,12 +12,25 @@
 	  }
 
 	  #frame {
-	  overflow: scroll; 
+	  overflow: hidden;
+	  position: relative;
+	  left: -50px;
+	  zoom: 1.50;
+	  height: 260px;
+	  width: 220px;
+-moz-transform: scale(1.50);
+-moz-transform-origin: 0 0;
+-o-transform: scale(1.50);
+-o-transform-origin: 0 0;
+-webkit-transform: scale(1.50);
+-webkit-transform-origin: 0 0;
 	  }
 
 	  #message {
 	  color: rgb(78, 48, 15); /* white; */
-	  font-family: sans-serif;
+	  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	  font-size: 24px;
+	  padding-bottom: 10px;
 	  }
 	  </style>
 
@@ -34,21 +47,13 @@
     </head>
     <body>
 	<center>
-	  <!-- 
-	       Common phone screen sizes (h, w):
-	       iPhone 4: (480, 320)
-	       iPhone 5: (560, 320)
-	       iPad portrait: (981, 644)
-	       iPad landscape: (644, 981)
-	    -->
-	  
-	  <iframe id="frame" src="{{ url_root }}/mobile/?refer={{refer}}" height="400" width="330" >
-	  </iframe>
-	  <br/> <br/>
 	  <div id="message">
-	    The California Report Card is optimized for mobile screen sizes.</br></br>
-	    Learn more about the project at <b><a href="http://californiareportcard.org">http://californiareportcard.org</a></b>.
+	    The California Report Card is optimized for mobile screen sizes.</br>
+	    Learn more about the project at <b><a href="http://californiareportcard.org">http://californiareportcard.org</a></b>.<br/>
 	  </div>
+	  
+	  <iframe id="frame" src="{{ url_root }}/mobile/?refer={{refer}}">
+	  </iframe>
 
 	</center>
     </body>
