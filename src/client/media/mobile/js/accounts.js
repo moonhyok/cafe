@@ -322,8 +322,8 @@ var accounts = (function($, d3, console) {
 $(document).ready(function() {
     $('#registerb').click(function(e) {
         //$('#register').find('.ui-btn-active').removeClass('ui-btn-active ui-focus');
-        //e.preventDefault();
-        //e.stopPropagation();
+        e.preventDefault();
+        e.stopPropagation();
 
         if(window.authenticated)
         {
@@ -377,6 +377,7 @@ $(document).ready(function() {
                 data: registrationData,
                 success: function(data) {
                     $("#username-error").hide();
+                    $("#zipcode-error").hide();
                     //$("#email-error").hide();
                     $("#password-error").hide();
 

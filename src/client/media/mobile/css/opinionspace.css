@@ -502,7 +502,7 @@ table.pretty caption {
 	}
 	
 	.regforminput{
-		font-size: 32px !important;
+		font-size: 20px !important;
 		margin: 0px !important;
 		padding-top: 0px !important;
 		font-weight: bold;
@@ -532,7 +532,7 @@ table.pretty caption {
 	.login, .endsliders, .register, .rate{
 	 /* piggy backing the the new divs here for now,  .stats, .help*/
 		display: none;
-		position: fixed;
+		position: absolute;
 		font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 		top: 0;
 		right: 0;
@@ -543,7 +543,7 @@ table.pretty caption {
 		/*background: #76b9b6;*/
 		/*background-image:url('../img/cafe/capitol_clean.jpg');*/
 		z-index: 999;
-		overflow-y: auto;
+		/*overflow-y: auto;*/
 		overflow-x: hidden;
 		text-align: center;
 		text-shadow: none;
@@ -938,7 +938,10 @@ table.pretty caption {
     	line-height: 26px;
     	letter-spacing: 2px;
 
-    	padding: 20px;
+    	padding-left: 20px;
+    	padding-right: 20px;
+    	padding-top: 15px;
+    	padding-bottom: 10px;
 }
 
 .basic-sub-header {
