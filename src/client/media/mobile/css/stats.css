@@ -225,3 +225,8 @@ font-size:14px;
         font-family:verdana, sans-serif;
         font-size:12px;
     }
+
+svg {
+display: block;
+margin: auto;
+}
