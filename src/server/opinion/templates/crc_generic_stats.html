@@ -12,6 +12,8 @@
 <link rel="stylesheet" href="{{url_root}}/media/mobile/css/stats.css" />
 <script src="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.js?2"></script>
 <script type='text/javascript' src='{{url_root}}/media/mobile/jquery-mobile/jquery-1.10.2.min.js'></script>
+<script type='text/javascript' src='{{url_root}}/media/mobile/js/cartogram.js'></script>
+<script type='text/javascript' src='{{url_root}}/media/mobile/js/topojson.js'></script>
 
 
 <div class="home-btn-dialog-box">
@@ -28,8 +30,7 @@
 <center>
 <div class="stats-section">
 Data as of <strong>{{date}}</strong><br>
-    Over <strong>7,000</strong> people have visited and over <strong>20,000</strong> grades have been entered so far. <!-- Of these, <strong>num_participants</strong> participants entered their zip code.-->
-</div>
+    Over <strong>8,000</strong> people have visited and over <strong>20,000</strong> grades have been entered so far.</div>
 
 
 <br>
@@ -45,15 +46,16 @@ Data as of <strong>{{date}}</strong><br>
 	{% endfor %}
     </select><br/><br>
 
-    <script>
+    <!--<script>
         $.get("{{url_root}}/media/mobile/js/geostat.js")
             .fail(function() { 
             $( "#geodistribution" ).html( "<div class='stats-label-big'>GEOGRAPHIC DISTRIBUTION <br/> OF MEDIAN GRADES ASSIGNED</div><br><br><span style=' font-size:14px;color: #f5ebde;'>We will present geographical distribution soon</span><br/><br>" );
             document.getElementById( "#geodistribution" ).style.height="40px";
             })
-    </script>
+    </script>-->
     <center>
-<div id="map"></div>
+        <button type="button" onclick="map_grade_update()">Click to see the cartogram of CALIFORNIA</button>
+        <div id="map" style="height: 370px; width:360px;"></div>
 </center>
 </div>
 <br>
@@ -62,14 +64,15 @@ Data as of <strong>{{date}}</strong><br>
      <div class="stats-label-big">
         PARTICIPANTS PER 10000 POPULATION BY COUNTY
     </div><br>
-    <script>
+    <!--<script>
         $.get("{{url_root}}/media/mobile/js/geostat_population.js")
             .fail(function() { 
             $( "#geopercapita" ).html( "<div class='stats-label-big'>PARTICIPANTS PER  <br/> 10000 POPULATION</div><br><br><span style=' font-size:14px;color: #f5ebde;'>We will present geographical participantion soon</span><br/><br>" );
             document.getElementById( "#geodistribution" ).style.height="40px";
             })
-    </script>
-    <div id="map_capita"></div>
+    </script>-->
+    <button type="button" onclick="map_capita_update()">Click to see the cartogram of CALIFORNIA</button>
+    <div id="map_capita" style="height: 370px; width:360px;"></div>
 </div>
 <br>
 <hr>
@@ -112,22 +115,16 @@ Data as of <strong>{{date}}</strong><br>
 <br>
 <div class="stats-section">
 <strong>Thanks for participating!</strong> <br><br>
-   <div class="issue-txt" id="final-remark">
-   
-Lt. Gov. Gavin Newsom and UC Berkeley Professor Ken Goldberg
-reviewed the data and lessons learned from version 1.0 
-in a public forum at UC Berkeley on 20 March 2014. 
-The event can be viewed at <a href="http://bit.ly/1kv6523" target="_blank">http://bit.ly/1kv6523</a>
-
-</div>
 <br>
 <span style="font-style:Italic;">For more information:</span>
 <a href="http://californiareportcard.org/">californiareportcard.org/</a>
 <div>
 	</center>
-<script type='text/javascript' src='{{url_root}}/media/mobile/js/geostat.js'></script>  
-<script type='text/javascript' src='{{url_root}}/media/mobile/js/map.js'></script>  
-<script type='text/javascript' src='{{url_root}}/media/mobile/js/geostat_population.js'></script>  
-<script type='text/javascript' src='{{url_root}}/media/mobile/js/map_capita.js'></script>  
+<!--<script type='text/javascript' src='{{url_root}}/media/mobile/js/geostat.js'></script>-->
+<!--<script type='text/javascript' src='{{url_root}}/media/mobile/js/map.js'></script>-->
+<!--<script type='text/javascript' src='{{url_root}}/media/mobile/js/geostat_population.js'></script>-->
+<!--<script type='text/javascript' src='{{url_root}}/media/mobile/js/map_capita.js'></script>-->
+<script type='text/javascript' src='{{url_root}}/media/mobile/js/map_capita_carto.js'></script>
+<script type='text/javascript' src='{{url_root}}/media/mobile/js/map_grade_carto.js'></script>
 </body>
 </html>
