@@ -19,15 +19,23 @@ import settings
 imagepath = settings.MEDIA_ROOT + "/mobile/img/dailyupdate/"
 jspath= settings.MEDIA_ROOT + "/mobile/js/"
 import datetime
+import csv
 
 def geostats():
     """produce geojson file for leaflet"""
     f=open(imagepath+'geotest.txt','w')
     geo_json=open('/var/www/latest-version/src/server/opinion/geo.json')
+    #geo_json=open('geo.json')
     geo_data=json.load(geo_json)
     skip_begin_date=datetime.datetime(2014,1,9,0,0,0,0)
     statements = OpinionSpaceStatement.objects.all().order_by('id')
+    ofile  = open(settings.MEDIA_ROOT + "/mobile/js/"+"ca_capita_carto.csv", "wb")
+    writer=csv.writer(ofile,delimiter=',')
+    writer.writerow(['COUNTY','POPULATION','COLOR'])
     for s in statements:
+       issue_ofile=open(settings.MEDIA_ROOT + "/mobile/js/"+"ca_issue"+str(s.id)+"_carto.csv", "wb")
+       writer_issue=csv.writer(issue_ofile,delimiter=',')
+       writer_issue.writerow(['COUNTY','POPULATION','COLOR'])
        skip_ca=0
        for i in range(0,len(geo_data['features'])-1):
           county=geo_data['features'][i]['properties']['NAME']
@@ -65,6 +73,14 @@ def geostats():
                    else:
                       s_skip=s_skip+1
           skip_ca=skip_ca+s_skip
+          if(s.id==1):
+             ratio=10000*float(len(s_grade)+s_skip)/geo_data['features'][i]['properties']['Population']
+             writer.writerow([geo_data['features'][i]['properties']['NAME']+" County",geo_data['features'][i]['properties']['Population'],capita_color(ratio)])
+       
+          if len(s_grade)==0:
+             writer_issue.writerow([geo_data['features'][i]['properties']['NAME']+" County",geo_data['features'][i]['properties']['Population'],'13'])
+          else:
+             writer_issue.writerow([geo_data['features'][i]['properties']['NAME']+" County",geo_data['features'][i]['properties']['Population'],issue_color(1-numpy.median(s_grade))])
           if len(s_grade)+s_skip==0:
              geo_data['features'][i]['properties']["s"+str(s.id)]=10  #for leaflet to show NA color
              geo_data['features'][i]['properties']['PARTICIPANTS']=0
@@ -78,7 +94,7 @@ def geostats():
        f.write("skip ca user:"+str(skip_ca)+'\n')
 
     #find median for non ca zipcode
-    zipcode_nonca=ZipCode.objects.exclude(state='CA')
+    '''zipcode_nonca=ZipCode.objects.exclude(state='CA')
     for s in statements:
         s_grade=[]
         s_skip=0
@@ -127,7 +143,7 @@ def geostats():
     with open(jspath+'geostat.js', 'w') as outfile:
          outfile.write('var geostat=')
          json.dump(geo_data, outfile)
-         outfile.write(';')
+         outfile.write(';')'''
          
 def issues_hist():
    """produce histogram for each issue"""
@@ -253,6 +269,59 @@ def median_index(median):
      if median<=0.01:
         return 12
 
+def issue_color(median):
+    if median<=1 and median>0.99:
+        return 0
+    if median<=0.99 and median>0.92:
+        return 1
+    if median<=0.92 and median>0.86:
+        return 2
+    if median<=0.86 and median>0.81:
+        return 3
+    if median<=0.81 and median>0.69:
+        return 4
+    if median<=0.69 and median>0.63:
+        return 5
+    if median<=0.63 and median>0.56:
+        return 6
+    if median<=0.56 and median>0.44:
+        return 7
+    if median<=0.44 and median>0.38:
+        return 8
+    if median<=0.38 and median>0.32:
+        return 9
+    if median<=0.32 and median>0.19:
+        return 10
+    if median<=0.19 and median>0.01:
+        return 11
+    if median<=0.01 and median>=0:
+        return 12
+
+
+
+
+def capita_color(ratio):
+    #["0", "0.01-0.02", "0.021-0.05", "0.51-0.1", "0.11-0.2","0.21-0.5","0.51-1","1.01-2","2.01-3",">3"];
+    if ratio==0:
+        return 1;
+    elif ratio>0 and ratio<=0.02:
+        return 2;
+    elif ratio>0.02 and ratio<=0.05:
+        return 3;
+    elif ratio>0.05 and ratio<=0.1:
+        return 4;
+    elif ratio>0.1 and ratio<=0.2:
+        return 5;
+    elif ratio>0.2 and ratio<=0.5:
+        return 6;
+    elif ratio>0.5 and ratio<=1:
+        return 7;
+    elif ratio>1 and ratio<=2:
+        return 8;
+    elif ratio>2 and ratio<=3:
+        return 9;
+    else:
+        return 10;
 
 def participant_slider1_hist():
     """produce histogram for all participant above level 8"""
