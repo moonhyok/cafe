@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <head>
 	<meta name='viewport' content='user-scalable=no, width=device-width,initial-scale=1, maximum-scale=1' />
-
+    <title>CRC Stats Page</title>
 </head>
 <style>
 
@@ -54,8 +54,9 @@ Data as of <strong>{{date}}</strong><br>
             })
     </script>-->
     <center>
-        <button type="button" onclick="map_grade_update()">Click to see the cartogram of CALIFORNIA</button>
+        <button type="button" onclick="map_grade_update()">Click to transform the map to a cartogram</button>
         <div id="map" style="height: 370px; width:360px;"></div>
+        The cartogram distorts the map so that each county's area is proportional to its population.
 </center>
 </div>
 <br>
@@ -71,8 +72,9 @@ Data as of <strong>{{date}}</strong><br>
             document.getElementById( "#geodistribution" ).style.height="40px";
             })
     </script>-->
-    <button type="button" onclick="map_capita_update()">Click to see the cartogram of CALIFORNIA</button>
+    <button type="button" onclick="map_capita_update()">Click to transform the map to a cartogram</button>
     <div id="map_capita" style="height: 370px; width:360px;"></div>
+    The cartogram distorts the map so that each county's area is proportional to its population.
 </div>
 <br>
 <hr>
