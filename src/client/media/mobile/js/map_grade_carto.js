@@ -16,7 +16,7 @@ function map_grade_cartogram(){
     .attr("height", height);
     
     var munics = map.append("g")
-    .attr("id", "counties")
+    .attr("id", "grade_counties")
     .selectAll("path");
     
     
@@ -60,7 +60,7 @@ function map_grade_cartogram(){
             munics = munics.data(features)
             .enter()
             .append("path")
-            .attr("class", "counties")
+            .attr("class", "issue_counties")
             .attr("id", function (d) {
                   
                   return d.properties.name;
@@ -105,10 +105,10 @@ function map_grade_cartogram(){
     function change(issue_number) {
         //d3.select("#click_to_run").text("thinking...");
         
-        d3.selectAll("g").remove();
+        d3.selectAll("#grade_counties").remove();
         
         munics = map.append("g")
-        .attr("id", "counties")
+        .attr("id", "grade_counties")
         .selectAll("path");
         
         
