@@ -48,8 +48,12 @@ $(".slider-grade-bubble").on("click",function(e){
 	rate.logUserEvent(11,'slider_set ' + statement_id + ' ' + window.sliders[statement_id-1]/100);
 
 	$(this).parent().children(".bubble-"+median.replace("+","p")).css("border","2px solid #66FFFF");
-	$(".median-grade-"+statement_id).html("Median grade so far: " + median);
+	if (statement_id == 1){
+	$(".median-grade-"+statement_id).html("The median grade so far is highlighted in blue.");
 	$(".median-grade-"+statement_id).fadeIn(500);
+	$(".median-grade-"+statement_id).fadeOut(6000);
+	}
+	
 	$(".skip-button-"+statement_id).hide();
 	}
 	catch(exception){}

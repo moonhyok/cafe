@@ -7,33 +7,9 @@ Brown- 4e300f
 html {
   width: 320px;
   overflow-x: hidden;
-}
-
-@font-face {
-	font-family: 'novecento-medium'; 
-	src: url('title-fonts/novecento_medium.otf'),
-		 url('title-fonts/novecento_medium.woff'),
-		 url('title-fonts/novecento_medium.svg'),
-		 url('title-fonts/novecento_medium.ttf'),
-		 url('title-fonts/novecento_medium.eot');
-}
-
-@font-face {
-	font-family: 'novecento-light'; 
-	src: url('title-fonts/novecento_light.otf'),
-		 url('title-fonts/novecento_light.woff'),
-		 url('title-fonts/novecento_light.svg'),
-		 url('title-fonts/novecento_light.ttf'),
-		 url('title-fonts/novecento_light.eot');
-}
-
-@font-face {
-	font-family: 'novecento-normal'; 
-	src: url('title-fonts/novecento_normal.otf'),
-		 url('title-fonts/novecento_normal.woff'),
-		 url('title-fonts/novecento_normal.svg'),
-		 url('title-fonts/novecento_normal.ttf'),
-		 url('title-fonts/novecento_normal.eot');
+  -webkit-font-smoothing: antialiased;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-weight: 200;
 }
 
 .margin{
@@ -64,7 +40,7 @@ html {
     top: -3px;
     z-index: -1;
     font-size:10px;
-    font-weight: bold;
+    
     
     color: #f5ebdf;
 }
@@ -74,7 +50,7 @@ html {
     z-index: -1;
     top: -1px;
     font-size:12px;
-    font-weight: bold;
+    
     
     color: #f5ebdf;
     background:none;
@@ -253,7 +229,7 @@ table.pretty caption {
 		padding-bottom: 5px;
         position: fixed;
         z-index: 999;
-        background-color: #73251F;
+        background-color: #000000;
 	}
 
 	.ui-slider-input {
@@ -289,6 +265,7 @@ table.pretty caption {
 
 	strong {
 		font-weight: bolder;
+		color: #ee443a;
 	}
 	strong.go-back {
 		color: #54D6F6;
@@ -331,7 +308,7 @@ table.pretty caption {
 	.instructions{
 		/*position: absolute;*/
 		color: #FFFFFF;
-		background-color: #250E00;
+		background-color: #0b1d2a;
 		font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 		z-index: 998;
 		text-shadow: none;
@@ -343,14 +320,14 @@ table.pretty caption {
 		line-height: 20px;
 		padding-bottom: 5px;
 		position: relative;
-                top: 45px;
+                top: 35px;
 		display:none;
 	}
 
 	.instructions2{
     		/*position: absolute;*/
     		color: #FFFFFF;
-    		background-color: #250E00;
+    		background-color: #0b1d2a;
     		font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
     		left: 0px;
     		z-index: 998;
@@ -363,14 +340,14 @@ table.pretty caption {
 		padding-top: 5px;
 		padding-bottom: 5px;
 		position: relative;
-                top: 45px;
+                top: 35px;
 		display:none;
     }
 
     .instructions3{
         		/*position: absolute;*/
         		color: #FFFFFF;
-        		background-color: #250E00;
+        		background-color: #0b1d2a;
         		font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
         		left: 0px;
         		z-index: 998;
@@ -381,7 +358,7 @@ table.pretty caption {
                 padding-top: 5px;
                 padding-bottom: 5px;
 		position: relative;
-                top: 45px;
+                top: 35px;
         		display:none;
         }
 	
@@ -408,7 +385,7 @@ table.pretty caption {
 	
 	.comment-panel{
 		/*background: url('../img/cafe/cafe_notebook.png') repeat-y;*/
-		background-color: #250E00;
+		background-color: #0b1d2a;
 		color: #222222;
 		text-shadow: none;
 		width: 100%;
@@ -470,7 +447,7 @@ table.pretty caption {
     	    vertical-align: middle;
     	    color: #76b9b6;
             font-size:13px;
-            font-weight: bold;
+            
     }
 
     .title-table-label2 {
@@ -480,7 +457,7 @@ table.pretty caption {
             vertical-align: middle;
             color: #76b9b6;
             font-size:13px;
-            font-weight: bold;
+            
     }
 	
 	.grade{
@@ -505,7 +482,7 @@ table.pretty caption {
 		font-size: 20px !important;
 		margin: 0px !important;
 		padding-top: 0px !important;
-		font-weight: bold;
+		
 	}
 
 	.reg_form{
@@ -538,10 +515,10 @@ table.pretty caption {
 		right: 0;
 		width: 100%;
 		height: 100%;
-			background-color: #250E00;
+			/*background-color: #0b1d2a;*/
 		color: #ffffff;
 		/*background: #76b9b6;*/
-		/*background-image:url('../img/cafe/capitol_clean.jpg');*/
+		background-image:url('../img/cafe/capitol-landing7.jpg');
 		z-index: 999;
 		/*overflow-y: auto;*/
 		overflow-x: hidden;
@@ -590,7 +567,7 @@ table.pretty caption {
 		right: 0;
 		width: 100%;
 		height: 100%;
-		background-image: url('../img/cafe/capitol-landing6.jpg');
+		background-image: url('../img/cafe/capitol-landing7.jpg');
 		background-size: cover;
 		/*background-image:url('../img/cafe/cafe_bg.jpg');*/
 		background-color: #ffffff;
@@ -610,17 +587,10 @@ table.pretty caption {
 
 	.landing-img-title{
 	color: #FFFFFF;
-	background-color: #250E00;
-	opacity: 0.9;
-	padding: 10px;
-	font-size: 36px;
+	padding: 5px;
+	font-size: 42px;
 	text-shadow: none;
-	line-height: 50px;
-	text-transform: uppercase;
-	width: 100%;
-	font-weight: 300;
-	letter-spacing: 3px;
-	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	text-align: center;
 	}
 
 	/*.landing-img-title{
@@ -633,47 +603,38 @@ table.pretty caption {
 	text-transform: uppercase;
 	width: 100%;
 	font-weight: 300;
-	letter-spacing: 2px;
+	
 	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 	}*/
 
 	.landing-img-txt{
-	color: #121212;
-	background-color: #f5f5f5;
-	font-size: 18px;
+	color: #EEEEEE;
+	font-size: 20px;
 	text-shadow: none;
-	text-align: left;
-	max-width: 470px;
+	text-align: center;
 	padding: 15px;
-	height: 100px;
-	line-height: 26px;
-	position: absolute;
-	bottom: 0px;
-	letter-spacing: 1px;
 
 	}
 
 	.button-div {
-		background: #73251F;
-		border: 1px solid #000000;
-		border-radius:7px;
-		width: 170px;
+					background: rgba(255,255,255,0.05); 
+			border: 1px white solid;
+		border-radius:10px;
+		width: 180px;
 		font-weight: normal;
-		font-size: 24px;
-		line-height: 44px;
+		font-size: 26px;
+		line-height: 50px;
 		text-align: center;
 		color: #FFFFFF;
 		margin-bottom: 5px;
 		text-shadow: none;
-		letter-spacing: 3px;
-		text-transform: uppercase;
-	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+		font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 		/*position: absolute;
 		bottom: 20px;*/
 	}
 
 		/*.skip-btn {
-		background-color: #73251F;
+		background-color: #57cccc;
 		border: 0px solid #555555;
 		font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 		width: 90px;
@@ -687,7 +648,7 @@ table.pretty caption {
 		text-shadow: none;
 		z-index: 999;
 		position: absolute;
-		letter-spacing: 2px;
+		
 		text-transform: uppercase;
 		bottom: 60px;
 		right: 15px;
@@ -696,7 +657,7 @@ table.pretty caption {
 	}*/
 
 		.button-div-small {
-		background: #73251F;
+		background: #57cccc;
 		border:0px solid #555555;
 		border-radius:10px;
 		width: 80px;
@@ -718,18 +679,16 @@ table.pretty caption {
 
 		.button-div-red {
 
-			background: #250E00; 
-		border: 1px solid #000000;
+			background: rgba(255,255,255,0.05); 
+			border: 1px white solid;
 		border-radius:10px;
-		width: 220px;
+		width: 180px;
 		font-weight: normal;
 		font-size: 26px;
 		line-height: 50px;
 		text-align: center;
 		color: #FFFFFF;
 		margin-bottom: 5px;
-		letter-spacing: 1px;
-		text-transform: uppercase;
 		text-shadow: none;
 		font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 		/*position: absolute;
@@ -870,10 +829,9 @@ table.pretty caption {
 		right: 0;
 		width: 100%;
 		height: 100%;
-		background-color: #250E00;
+		background-color: #0b1d2a;
 		font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 		line-height: 26px;
-		letter-spacing: 2px;
 		font-size: 16px;
 		overflow: auto;
 		z-index: 999;
@@ -936,7 +894,6 @@ table.pretty caption {
     	color: #FFFFFF;
     	font-size: 18px;
     	line-height: 26px;
-    	letter-spacing: 2px;
 
     	padding-left: 20px;
     	padding-right: 20px;
@@ -1036,27 +993,23 @@ padding-right: 7px;
     font-size: 14px !important;
     line-height: 18px;
     color: #DDDDDD !important;
-    letter-spacing: 2px;
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 }
 
 .answer {
-	background-color: #c1b39b!important;
-	width: 100% !important;
+	background-color: transparent !important;
+	opacity: 0.8;
+	width: 95% !important;
 	min-height: 200px !important;
 	font-size: 16px !important;
 	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-	color: #000000;
-	font-weight: normal;
-	border: 0px;
+	color: #ffffff;
+	border: 1px solid white;
+	font-weight: normal !important;
 	border-radius: 0px;
-	letter-spacing: 2px;
 	line-height: 26px;
 	padding-left: 20px !important;
 	padding-right: 20px !important;
-	position:relative;
-	top: -10px;
-	
 	text-shadow: none !important;
 }
 
@@ -1092,27 +1045,56 @@ padding-right: 7px;
 }
 
 .home-btn-dialog-box {
-    padding-top: 10px;
+    padding-top: 5px;
     padding-bottom: 5px;
-    letter-spacing: 2px;
     padding-right: 15px;
+    padding-left: 15px;
     text-align: right;
-    background-color: #73251F;
+
+    background-color: #000000;
+}
+
+.home-btn-wrapper{
+	letter-spacing: 2px;
+}
+
+.statement-style {
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	padding-left: 20px;
+	padding-right: 20px; 
+	padding-top: 10px; 
+	padding-bottom: 5px; 
+	text-align: center; 
+	font-size: 16px;
+	line-height: 20px;
+	color: #ffffff;
+}
+
+.med-grade-box{
+	background-color: rgba(0,0,0,0.8);
+	font-size: 20px;
+	display: none;
+	letter-spacing: 2px;
+	color: #66FFFF;
+	padding-top: 40px;
+	padding-bottom: 40px;
+	padding-right: 15px;
+	padding-left: 15px;
+	position: absolute;
+	top: 170px;
+	width: 100%;
+	z-index: 999;
 }
 
 .home-btn-title{
-
-	width:45%;
 	display:inline-block;
-	font-weight: bold;
 	text-align: left; 
-	font-size: 14px;
-	color: #ffffff;
+	width: 68%;
+	font-size: 16px;
 	position:relative;
+	top: -5px;
+	color: #c0e5ec;
 	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-	bottom: 5px;
-	left: -5px;
-	text-transform: uppercase;
 }
 
 .home-btn-dialog-box .ui-btn-inner{
@@ -1137,7 +1119,7 @@ padding-right: 7px;
 	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 	font-size: 16px;
 	line-height: 22px;
-	letter-spacing: 2px;
+	
 }
 
 .rate-warp {
@@ -1197,7 +1179,7 @@ padding-right: 7px;
     position: absolute;
 	top:0;
 	left: 0;
-	background-color: #250E00;
+	background-color: #0b1d2a;
 	width: 100%;
 	overflow: none;
 	display: none;
@@ -1207,7 +1189,7 @@ padding-right: 7px;
 
 .discuss-btn-div{
 
-		background-image:url('../img/cafe/cafe_bg.png');
+	background-color: #0b1d2a;
 	background-size:cover;
 	position: absolute;
 	bottom: 0px;
@@ -1231,7 +1213,7 @@ padding-right: 7px;
 	height: 100%;
 	text-decoration: none;
 	text-shadow: none;
-	letter-spacing: 1px;
+	
 	padding-right: 20px;
 	padding-left: 20px;
 	padding-top: 10px;
@@ -1248,7 +1230,7 @@ padding-right: 7px;
 	text-decoration: none;
 	text-shadow: none;
 	font-size: 16px;
-	letter-spacing: 2px;
+	
 	padding: 20px;
 	line-height: 20px;
 	max-width: 90%;
@@ -1280,13 +1262,13 @@ padding-right: 7px;
     color: #CCCCCC;
     text-decoration: none;
     font-size: 16px;
-    font-weight: bold;
+    
 }
 
 .dialog-text-style-noflow em {
    color: #CCCCCC;
     text-decoration: none;
-    font-weight: bold;
+    
     font-size: 16px;
 }
 
