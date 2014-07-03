@@ -239,7 +239,7 @@ report_body_text += (new_user_table_header +  new_user_table.get_string())
 #send_mail(report_subject, report_body, report_from, report_recipients)
 
 from django.core.mail import EmailMultiAlternatives
-msg = EmailMultiAlternatives(report_subject, report_body_text, report_from, report_recipients)
+msg = EmailMultiAlternatives("test: " + report_subject, report_body_text, report_from, report_recipients)
 msg.attach_alternative(report_body_html, "text/html")
 msg.send()
 

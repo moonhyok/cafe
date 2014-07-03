@@ -726,6 +726,11 @@ def manual_login(request, user):
     request.session['_auth_user_id'] = user.id
     request.session['_auth_user_backend'] = 'opinion.email-auth.EmailOrUsernameModelBackend'
 
+def connect_visitor_to_user(request, user_id):
+    visitor_id = request.session.get('visitor_id', False)
+    if visitor_id:
+        Visitor.objects.filter(id = visitor_id).update(user = user_id)
+
 def admin_panel_login(request):
 	if request.user.is_authenticated():
 		adminuser = AdminPanelUser.objects.filter(user = request.user.id)
