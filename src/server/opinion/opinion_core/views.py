@@ -352,6 +352,10 @@ def get_csv_report(request):
     response['Content-Disposition'] = 'attachment; filename=report.csv'
     return response
 
+def connect_visitor_to_user(request, user_id):
+	visitor_id = request.session.get('visitor_id', False)
+	if visitor_id:
+		Visitor.objects.filter(id = visitor_id).update(user = user_id)
 
 @admin_required
 def get_overview(request):
