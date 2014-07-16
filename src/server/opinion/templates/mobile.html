@@ -94,10 +94,7 @@
 
   window.user_score = {{init_score}};
 
-  window.conf = { 'SCORE_SCALE_FACTOR'  : {{ client_settings.SCORE_SCALE_FACTOR }},
-                  'YOUR_SCORE_LANGUAGE' : "Your Score",
-                  'INSTRUCTIONS_3'      : "{{ client_settings.INSTRUCTIONS_3 }}",
-                  'FUN_COLORS'          : {{ client_settings.FUN_COLORS }},
+  window.conf = { 
                   'RETURN_USER_FIRST_TIME': {{return_user_first_time}},
                   'ZIPCODE': {{ zipcode }},
                 };
@@ -431,7 +428,7 @@
          </div> 
       <!--<img class="header-img-topic center" src="{{ url_root }}/media/mobile/img/cafe/CRC_join.png"/>-->
       <div class='dialog-text1 dialog-text-style'>
-          Thank you for grading these issues.  We now invite you to consider and propose additional issues you feel should have priority for attention at the state level.  
+          {{client_settings.DISCUSSION_DIALOG_TEXT1}}
       </div><br/>
        <center>
               <div class="discuss-btn-div">
@@ -573,7 +570,8 @@
           <img width="20px;" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
       </div>
         <div style="padding: 20px;">
-            {{client_settings.LOGOUT_DIALOG_TEXT}}<br/><br/>
+            {{client_settings.LOGOUT_DIALOG_TEXT}}
+            <br/><br/>
             <a href="http://californiareportcard.org" target="_blank" style="color: #555555;">http://californiareportcard.org</a><br/><br/>
 	    Twitter: <a href="http://twitter.com/home?status=How%20do%20you%20grade%20California?%20%20Try%20@CAReportCard%20developed%20by%20@Cal%20@GavinNewsom%20%26%20@Ken_Goldberg%20%20http://californiareportcard.org/mobile%20%23CA%20%23Gov" target="_blank" style="color: #555555;">@CAReportCard</a><br/>
 	    Facebook: <a href="http://on.fb.me/1jF60JL" target="_blank" style="color: #555555;">CAReportCard</a><br/><br/>
@@ -633,7 +631,7 @@
         <div class="basic-header" style="width:100%;">Your Mug</div>
         <img class="header-img-topic center" src="{{ url_root }}/media/mobile/img/cafe/map_teaser.png"><br>
 
-        To enter your own idea, click on your mug (highlighted in yellow).
+        {{client_settings.INSTRUCTIONS_2}}
 
       <center>
         <div class="standard-btn-div">
@@ -668,7 +666,7 @@
       </div>-->
 
         <input type="email" id='regemail' name='regemail' class='regforminput' style="font-size: 15px; background-color: #FFFFFF;color: #000000;" placeholder="Email" data-theme='b'></input>
-        <div class="comment-admin-text-b">Your email address will not be displayed and we promise not to share your email address with any third parties.</div>
+        <div class="comment-admin-text-b">{{client_settings.DEMOGRAPHICS_DISCLAIMER}}.</div>
         <br/>
         <center>
             <div class="standard-btn-div">
@@ -699,7 +697,7 @@
          </div> 
 
          <div class='dialog-text-style default-left-padding'>
-            Thank you!  Logout now or grade more mugs.
+            {{client_settings.RESPONSE_SAVED_TEXT2}}
             <center>
             <div class="standard-btn-div" style="max-width: 250px !important;">
               <div class='button-div dialog-email-ready' >Continue</div>
@@ -751,7 +749,7 @@
       </div>
       <div class='dialog-text-style-noflow small-left-padding'>
           <div class="basic-header">Help</div>
-          To learn more about this project, its history, related projects, and the team that built it, visit <a href="http://californiareportcard.org/" target="_blank" style="color: #4e300f;">californiareportcard.org</a>.<br/>
+          {% autoescape off %}{{client_settings.HELP_ABOUT }}{% endautoescape %}<br/>
       </div>
   </div>
 
@@ -766,52 +764,7 @@
       </div>
       <div class='dialog-text-style-noflow small-left-padding'>
           <div class="basic-header">Help</div>
-          The CRC allows visitors to grade issues facing California.
-          Presss the buttons to assign grades to these 6 issues facing California (click the skip button for issues where you don't want to assign a grade.)
-          <br/><br/>
-          <em>Q:</em> How can I learn more about the six issues we are grading?<br/>
-          <em>A:</em> Here is an overview of each issue:<br/><br/>
-
-          <div>
-              <em>Implementation of the Affordable Care Act (“Obamacare”)</em><br/>
-
-              California was the first state to pass legislation creating a health insurance marketplace--Covered California. As of Dec 2013, Covered California had over 630,000 enrollees.<br/><br/>
-
-              <em>Quality of K-12 public education</em><br/>
-
-              California recently adopted the “common core” challenges, which emphasize critical thinking and analysis in K-12 education to better prepare students for college and the workforce.<br/><br/>
-
-              <em>Affordability of state colleges and universities</em><br/>
-
-              The 2014-15 draft California budget calls for a 10.8% increase in higher education funding, which could keep current tuition costs stable.<br/><br/>
-
-              <em>Access to state services for undocumented immigrants</em><br/>
-
-              Passed in 2006, California Senate Bill 1569 extends eligibility for undocumented immigrants in California for food assistance, supplemental security income, and health insurance.
-              Passed in 2011, The California Dream Act grants undocumented immigrant access to state aid at public universities and colleges.<br/><br/>
-
-              <em>Laws and regulations regarding recreational marijuana</em><br/>
-
-              California was the first state to legalize the distribution of medical marijuana in 1996.
-              Recreational use of marijuana is illegal in the State of California. However, California lawmakers are currently considering legalizing, taxing, and regulating marijuana for recreational use.<br/><br/>
-
-              <em>Marriage rights for same-sex partners</em><br/>
-
-              California legalized same sex marriage in 2008. However, Proposition 8, which revoked marriage rights for same sex couples, was also passed in 2008.
-              Proposition 8 was overturned in 2013.<br/><br/>
-          </div>
-
-          More information on the issues is available on our project website.<br/><br/>
-
-          <em>Q:</em> Do I have to grade all issues?<br/>
-          <em>A:</em> No, just click the skip button for issues where you don't want to assign a grade.<br/><br/>
-
-          <em>Q:</em> Why do the sliders require dragging?  If I tap on A, it should go there.<br/>
-          <em>A:</em> We decided to remove the tap feature since as you slide down to see more issues you may accidentally tap the sliders.<br/><br/>
-
-          <em>Q:</em> How can I grade K-12 Education when there are so many aspects, the effectiveness of the teachers, or the quality of school facilities, etc.?<br/>
-          <em>A:</em> That's a great point; we're asking people to give an overall grade, which is indeed a coarse measure!
-          But it's also like grading a student for a class, they may have done well on some things, poorly on others, etc…<br/><br/>
+         {% autoescape off %}{{client_settings.HELP_ASSIGN_GRADES}}{% endautoescape %}
       </div>
   </div>
 
@@ -825,11 +778,7 @@
       </div>
       <div class='dialog-text-style-noflow small-left-padding'>
           <div class="basic-header">Help</div>
-          <em>Q:</em>  After I enter each grade, the Median Grade based on input from all previous participants is revealed.
-          Then I can change my grade: Won’t this bias me and other participants?<br/>
-
-          <em>A:</em> Revealing the Median values is intended to provide instant feedback in contrast to traditional polls and surveys. We realize this may have a biasing effect:
-          some may adjust their grade to be closer to the average resulting in a form of regression toward the mean. We believe this will be rare, especially for Californians;).
+          {% autoescape off %}{{client_settings.HELP_MEDIAN_GRADES}}{% endautoescape %}
       </div>
   </div>
 
@@ -843,8 +792,7 @@
       </div>
       <div class='dialog-text-style-noflow small-left-padding'>
           <div class="basic-header">Help</div>
-          <em>Q:</em> Why do I need to enter my zip code?<br/>
-          <em>A:</em> This will allow participants to compare results by region on a geographic map.
+          {% autoescape off %}{{client_settings.HELP_PRIVACY}}{% endautoescape %}
       </div>
   </div>
 
@@ -858,8 +806,7 @@
       </div>
       <div class='dialog-text-style-noflow small-left-padding'>
           <div class="basic-header">Help</div>
-          You are invited to enter an online “cafe” where you can propose issues that you’d like to see included in the next report card (version 2.0 will come out later this Spring).
-          You’ll be asked to grade other participants’ suggestions. Each participant’s suggestion is represented by a mug on the table.
+         {{client_setting.HELP_CAFE_WELCOME}}
       </div>
   </div>
 
@@ -873,21 +820,7 @@
       </div>
       <div class='dialog-text-style-noflow small-left-padding'>
           <div class="basic-header">Help</div>
-          <em>Q:</em> What should I do on this page?<br/>
-          <em>A:</em> Click any mug (each participant has a mug, we display only 8 at a time)<br/><br/>
-
-          <em>Q:</em> How are the mugs arranged on the table?<br/>
-          <em>A:</em> The placement of each participant's mug is based on how he or she graded the first 6 issues.
-          Think of each issue as one dimension of a 6-dimensional space.
-          The grades you assign define a point in this space.
-          We use dimensionality reduction (currently Principal Component Analysis) to project that space onto the table.
-          If you and another participant assigned very similar grades, your mugs will be close together.
-          Mugs that are distant from yours belong to participants who graded very differently than you.<br/><br/>
-
-          <em>Q:</em> Why do I only see 8-10 mugs arranged on the table?<br/>
-          <em>A:</em> To avoid overcrowding, we display only a few mugs at a time for grading.
-          The selection of which participants’ mugs to display is random but biased toward newer mugs, those that have received fewer ratings.
-          Specifically, the likelihood of displaying a mug is based on its standard error = stdev / sqrt(k) where k is the number of times it has been graded so far, and stdev is the variance of those grades. Over time, this ensures that the confidence, or error-bar on the estimated grade for each mug, tends to be the same length for all mugs. Each time you finish grading a set of mugs, the table will be refreshed with more mugs.<br/><br/>
+   {% autoescape off %}{{client_settings.HELP_CAFE_ABOUT}}{% endautoescape %}
       </div>
   </div>
 
@@ -901,14 +834,7 @@
       </div>
       <div class='dialog-text-style-noflow small-left-padding'>
           <div class="basic-header">Help</div>
-          You can continue grading more mugs and whenever you’re ready, just click on your mug (with the blue coaster) to enter an issue that you’d like to see on the next report card (version 2.0 will come out later this Spring).<br/><br/>
-
-          <em>Q:</em> Why is my mug located at this position on the table?<br/>
-          <em>A:</em> The placement of each participant's mug is based on how he or she graded the first 6 issues.
-          Think of each issue as one dimension of a 6-dimensional space.
-          The grades you assign define a point in this space. We use dimensionality reduction (currently Principal Component Analysis) to project that space onto the table.
-          If you and another participant assigned very similar grades, your mugs will be close together.
-          Mugs that are distant from yours belong to participants who graded very differently than you.
+          {% autoescape off %}{{client_settings.HELP_CAFE_ABOUT_MUGS}}{% endautoescape %}
       </div>
   </div>
 
@@ -922,8 +848,7 @@
       </div>
       <div class='dialog-text-style-noflow small-left-padding'>
           <div class="basic-header">Help</div>
-          You can either log out now and return anytime using the unique link we emailed you.
-          Or you are welcome to continue grading participants’ suggestions for the next report card (version 2.0 will come out later this Spring).
+          {% autoescape off %}{{client_settings.HELP_CAFE_LOGOUT_OR_CONTINUE}}{% endautoescape %}
       </div>
   </div>
 
@@ -938,7 +863,7 @@
       </div>
       <div class='dialog-text-style-noflow small-left-padding'>
           <div class="basic-header">Help</div>
-          Please propose an issue you’d like to see on the next report card (version 2.0 will come out later this Spring).  Click Save when you’re done.
+          {% autoescape off %}{{client_settings.HELP_CAFE_SUGGESTION}}{% endautoescape %}
       </div>
   </div>
 
@@ -952,10 +877,7 @@
       </div>
       <div class='dialog-text-style-noflow small-left-padding'>
           <div class="basic-header">Help</div>
-          <em>Q:</em> How do I grade a suggestion?<br/>
-          <em>A:</em> After clicking a mug, that participant’s suggestion is displayed.
-          You can skip to another one or mark this suggestion as irrelevant or inaccurate
-          (click again to undo).  Otherwise, drag the two slider handles to assign grades.<br/><br/>
+        {% autoescape off %}{{client_settings.HELP_CAFE_GRADE}}{% endautoescape %}
       </div>
   </div>
 
@@ -969,8 +891,7 @@
       </div>
       <div class='dialog-text-style-noflow small-left-padding'>
           <div class="basic-header">Help</div>
-          <em>Q:</em> Why should I enter my email address?<br/>
-          <em>A:</em> So we can send you a unique link to see the grades your suggested issue receives.
+          {% autoescape off %}{{client_settings.HELP_RETURNING_EMAIL}}{% endautoescape %}
       </div>
   </div>
 
@@ -984,7 +905,7 @@
       </div>
       <div class='dialog-text-style-noflow small-left-padding'>
           <div class="basic-header">Help</div>
-          To learn more about this project, its history, related projects, and the team that built it, visit <a href="http://californiareportcard.org/" target="_blank" style="color: #4e300f;">californiareportcard.org</a>.
+          {% autoescape off %}{{client_settings.HELP_ABOUT}}{% endautoescape %}
       </div>
   </div>
 
