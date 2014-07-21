@@ -594,7 +594,6 @@ CONFIGURABLES = {
 
     'RESPONSE_SAVED_HEADER' : {'default':'Response Saved!', 'name':'Response Saved Header'},
 
-
     'EMAIL_ASK_TEXT' : {'display':'TEXTAREA', 'default':config_defaults['EMAIL_ASK_TEXT'],'name':'Ask for Email Text'},
 
     'STATS_BUTTON_TEXT' : {'default':'Stats','name':'Stats Button Text'},
