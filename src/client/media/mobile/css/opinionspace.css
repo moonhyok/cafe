@@ -5,12 +5,71 @@ White- f5ebdf
 Brown- 4e300f
 */
 html {
-  width: 320px;
-  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-weight: 200;
 }
+
+
+.landing {
+		text-align: center;
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: 100%;
+		height: 100%;
+		background-image: url('../img/cafe/capitol-landing7.jpg');
+		background-size: cover;
+		/*background-image:url('../img/cafe/cafe_bg.jpg');*/
+		background-color: #ffffff;
+		/*background: #76b9b6; Old browsers */
+		z-index: 999;
+
+	}
+
+	.landing-img-div{
+	text-align: right;
+	float: right;
+	width: 25%;
+	position: relative;
+	top: -45px;
+	left: -9px;
+	}
+
+.landing-img-title{
+	color: #FFFFFF;
+	padding: 5px;
+	font-size: 42px;
+	text-shadow: none;
+	text-align: center;
+	width: 70%;
+	}
+
+
+	/*.landing-img-title{
+	color: #FFFFFF;
+	background-color: rgba(27,46,91,0.85);
+	padding: 10px;
+	font-size: 36px;
+	text-shadow: none;
+	line-height: 46px;
+	text-transform: uppercase;
+	width: 100%;
+	font-weight: 300;
+	
+	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+	}*/
+
+	.landing-img-txt{
+	color: #EEEEEE;
+	font-size: 20px;
+	text-shadow: none;
+	text-align: center;
+	padding: 15px;
+
+	}
+
+
 
 .margin{
 	background-color: #DDDDDD
@@ -143,8 +202,57 @@ table.pretty caption {
 	#splash {
 		width: 50%;
 		height: auto;
-		padding-top: 30px;
+		padding-top: 30px ;
 	} 
+}
+
+.back-btn-dialog{
+	max-width: 80px;
+}
+
+.home-btn-dialog{
+	max-width: 80px;
+}
+
+.help-btn-dialog{
+	max-width: 80px;
+}
+
+@media (min-width: 768px){
+	.responsive-title{
+		font-size: 68px !important;
+	}
+
+	.responsive-body{
+		font-size: 32px !important;
+		width: 50% !important;
+		line-height: 36px !important;
+	}
+
+	.responsive-header{
+		font-size: 42px !important;
+		padding-bottom: 5px;
+	}
+
+	.basic-header{
+		font-size: 42px !important;
+		padding-bottom: 5px;
+	}
+
+	.responsive-btn{
+		width: 300px !important;
+		font-weight: normal !important;
+		font-size: 44px !important;
+		line-height: 70px !important;
+	}
+
+	.responsive-padding{
+		padding-top: 30px !important;
+	}
+
+	.responsive-next-btn{
+		top: -300px !important;
+	}
 }
 
 /* Landscape phone to portrait tablet */
@@ -558,62 +666,6 @@ table.pretty caption {
 		width: 100px !important;
 		display: inline-block;
 		margin-left: 10px;
-	}
-
-	.landing {
-		text-align: center;
-		position: absolute;
-		top: 0;
-		right: 0;
-		width: 100%;
-		height: 100%;
-		background-image: url('../img/cafe/capitol-landing7.jpg');
-		background-size: cover;
-		/*background-image:url('../img/cafe/cafe_bg.jpg');*/
-		background-color: #ffffff;
-		/*background: #76b9b6; Old browsers */
-		z-index: 999;
-
-	}
-
-	.landing-img-div{
-	text-align: right;
-	float: right;
-	width: 25%;
-	position: relative;
-	top: -45px;
-	left: -9px;
-	}
-
-	.landing-img-title{
-	color: #FFFFFF;
-	padding: 5px;
-	font-size: 42px;
-	text-shadow: none;
-	text-align: center;
-	}
-
-	/*.landing-img-title{
-	color: #FFFFFF;
-	background-color: rgba(27,46,91,0.85);
-	padding: 10px;
-	font-size: 36px;
-	text-shadow: none;
-	line-height: 46px;
-	text-transform: uppercase;
-	width: 100%;
-	font-weight: 300;
-	
-	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-	}*/
-
-	.landing-img-txt{
-	color: #EEEEEE;
-	font-size: 20px;
-	text-shadow: none;
-	text-align: center;
-	padding: 15px;
-
 	}
 
 	.button-div {
@@ -1092,7 +1144,7 @@ padding-right: 7px;
 	width: 68%;
 	font-size: 16px;
 	position:relative;
-	top: -5px;
+	top: -2px;
 	color: #c0e5ec;
 	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 }

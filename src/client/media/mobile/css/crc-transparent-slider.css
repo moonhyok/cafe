@@ -137,3 +137,50 @@
 		border: 2px solid #FF0000;
 		color: #FF0000;
 	}
+
+	@media (min-width: 480px) {
+		.slider-grade-p{
+		border-radius:50px !important;
+		line-height: 100px !important;
+		font-size: 44px !important;
+		text-align: center;
+		width: 100px !important;
+		display:inline-block;
+		}
+
+		.slider-grade-main{
+		border-radius:50px !important;
+		line-height: 100px !important;
+		font-size: 44px !important;
+		text-align: center;
+		width: 100px !important;
+		display:inline-block;
+		}
+
+		.slider-grade-m{
+		border-radius:50px !important;
+		line-height: 100px !important;
+		font-size: 44px !important;
+		text-align: center;
+		width: 100px !important;
+		display:inline-block;
+		}
+
+			.slider-progress-dot{
+				margin-top: 5px;
+		border:1px solid #ffffff !important;
+		border-radius:15px !important;
+		height: 15px !important;
+		width: 15px !important;
+		background: #000000 !important;
+		display:inline-block !important;
+		margin-left: 10px !important;
+	}
+
+	.crc-div-wrapper{
+	max-width: 400px !important;
+	}
+	.slider{
+		max-width: 400px !important;
+	}
+	}
