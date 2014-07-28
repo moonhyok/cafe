@@ -332,6 +332,10 @@ var _blooms = blooms = (function($, d3, console) {
 
             var topBarHeight = $('.top-bar').height();
 
+            var mugsize = "80";
+            if($(window).width() > 768)
+                mugsize="160";
+
             var height = $(window).height()- margin.bottom - margin.top - topBarHeight;
 
             // Stashing away your_mug_data so it can be added after 2 mugs have been rated
@@ -354,7 +358,7 @@ var _blooms = blooms = (function($, d3, console) {
             $('#d3 .loading').hide();
 
              var force = d3.layout.force()
-                 .charge(-600)
+                 .charge(-2000)
                  .size([width, height]);
 
             window.force = force;
@@ -380,8 +384,8 @@ var _blooms = blooms = (function($, d3, console) {
                 console.log({'uid': d.uid,'x':d.x,'y':d.y,'cx': canvasx(d.x),'cy': canvasy(d.y)});
                 return window.url_root + "/media/mobile/img/cafe/cafe" + Math.floor((Math.random()*6)).toString() + ".png";
             })
-            .attr("width", "80") //if this changes, change the margin above
-            .attr("height", "80")
+            .attr("width", mugsize) //if this changes, change the margin above
+            .attr("height", mugsize)
             .attr("opacity", function(d) {
                         return "1";
                 })
@@ -445,7 +449,7 @@ var _blooms = blooms = (function($, d3, console) {
                                 })
                                 });
 
-                                for (var i = 0; i < 100; ++i) force.tick();
+                                for (var i = 0; i < 2000; ++i) force.tick();
                                 force.stop();
 
                                 });

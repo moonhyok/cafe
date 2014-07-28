@@ -149,6 +149,7 @@ html {
 	height: 200px !important;
 	font-size: 16px;
 	border-radius: 0px;
+	max-width: 700px;
 	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 }
 
@@ -208,19 +209,48 @@ table.pretty caption {
 
 .back-btn-dialog{
 	max-width: 80px;
+	min-width: 20px;
 }
 
 .home-btn-dialog{
 	max-width: 80px;
+	min-width: 20px;
 }
 
 .help-btn-dialog{
 	max-width: 80px;
+	min-width: 20px;
+}
+
+.endsliders-back-btn{
+	max-width: 80px;
+	min-width: 20px;
+}
+
+
+.logout-btn-dialog{
+	max-width: 80px;
+	min-width: 20px;
 }
 
 @media (min-width: 768px){
 	.responsive-title{
 		font-size: 68px !important;
+	}
+
+	.instructions-responsive{
+		font-size: 32px !important;
+		line-height: 36px !important;
+		top: 65px !important;
+	}
+
+	.responsive-form{
+		max-width: 500px !important;	
+	}
+
+	.responsive-answer{
+		font-size: 28px !important;	
+		min-height: 300px !important;
 	}
 
 	.responsive-body{
@@ -232,6 +262,7 @@ table.pretty caption {
 	.responsive-header{
 		font-size: 42px !important;
 		padding-bottom: 5px;
+		line-height: 42px !important;
 	}
 
 	.basic-header{
@@ -252,6 +283,7 @@ table.pretty caption {
 
 	.responsive-next-btn{
 		top: -300px !important;
+		width: 100px !important;
 	}
 }
 
@@ -268,10 +300,6 @@ table.pretty caption {
 	html {
 		font-size: 14px;
 	}
-	.answer {
-		font-size: 14px;
-	}
-
 
 	#splash {
 		width: 70%;
@@ -330,7 +358,7 @@ table.pretty caption {
 
 	.menubar {
 		display: none;
-		width: 100%;
+		width: 100% !important;
 		top: 0px;
 		left:0px;
 		padding-top: 7px;
@@ -420,7 +448,7 @@ table.pretty caption {
 		font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 		z-index: 998;
 		text-shadow: none;
-		font-size: 14px !important;
+		font-size: 14px;
 		
 		padding-left: 20px;
 		padding-right: 20px;
@@ -440,7 +468,7 @@ table.pretty caption {
     		left: 0px;
     		z-index: 998;
     		text-shadow: none;
-    		font-size: 14px !important;
+    		font-size: 14px;
             
             padding-left: 20px;
 		padding-right: 20px;
@@ -460,7 +488,7 @@ table.pretty caption {
         		left: 0px;
         		z-index: 998;
         		text-shadow: none;
-        		font-size: 14px !important;
+        		font-size: 14px;
                 
                 line-height: 20px;
                 padding-top: 5px;
@@ -587,7 +615,7 @@ table.pretty caption {
 	}
 	
 	.regforminput{
-		font-size: 20px !important;
+		font-size: 36px !important;
 		margin: 0px !important;
 		padding-top: 0px !important;
 		
@@ -645,7 +673,7 @@ table.pretty caption {
     		width: 100%;
     		height: 100%;
     		color: white;
-    		background-color: #666666;
+    		background-color: #0b1d2a;
     		/*background-image:url('../img/cafe/capitol_clean.jpg');*/
     		z-index: 999;
     		overflow-y: auto;
@@ -656,6 +684,7 @@ table.pretty caption {
 
     	}
 
+
 	.slider-padding{
 	    clear: both;
 	    padding-bottom: 40px;
@@ -663,7 +692,14 @@ table.pretty caption {
 
 	.endsliders-next-btn{
 
-		width: 100px !important;
+		width: 40px;
+		display: inline-block;
+		margin-left: 10px;
+	}
+
+		.endsliders-back-btn-size{
+
+		width: 40px;
 		display: inline-block;
 		margin-left: 10px;
 	}
@@ -830,6 +866,8 @@ table.pretty caption {
 		color: #f5ebdf;
 		text-shadow: none;
 		height: 100%;
+		text-align: center !important;
+		width: 100% !important;
 	}
 	
 	.edit-comment-panel{
@@ -1053,7 +1091,8 @@ padding-right: 7px;
 	opacity: 0.8;
 	width: 95% !important;
 	min-height: 200px !important;
-	font-size: 16px !important;
+	max-width: 700px;
+	font-size: 16px;
 	font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
 	color: #ffffff;
 	border: 1px solid white;
@@ -1133,7 +1172,7 @@ padding-right: 7px;
 	padding-right: 15px;
 	padding-left: 15px;
 	position: absolute;
-	top: 170px;
+	top: 40%;
 	width: 100%;
 	z-index: 999;
 }
@@ -1240,15 +1279,7 @@ padding-right: 7px;
 }
 
 .discuss-btn-div{
-
-	background-color: #0b1d2a;
-	background-size:cover;
-	position: absolute;
-	bottom: 0px;
-	width: 100%;
-	height: 230px;
-	max-height: 40%;
-	padding-top:15px;
+padding-top: 20px;
 }
 
 .stats-iframe{
@@ -1265,6 +1296,7 @@ padding-right: 7px;
 	height: 100%;
 	text-decoration: none;
 	text-shadow: none;
+	text-align: left;
 	
 	padding-right: 20px;
 	padding-left: 20px;

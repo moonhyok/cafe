@@ -283,7 +283,7 @@
 
       <!--<img class="capitol-bg" src="{{url_root}}/media/mobile/img/cafe/capitol-landing1.png">-->
 
-      <center><div class='button-div-red first-time-btn responsive-btn' style="position: relative; top: 80px;">Begin</div></center>
+      <center><div class='button-div-red first-time-btn responsive-btn' style="position: relative; top: 40px;">Begin</div></center>
       
        <!--<div class="landing-img-txt">   
            Take a moment to join <strong>{{num_users}}</strong> others who have graded the State of California on six timely issues.<br/>
@@ -340,11 +340,11 @@
               <div class="median-grade-{{statement.id}} med-grade-box"></div>
 
               <div style="width: 100%;" class="responsive-padding">
-                <img class='endsliders-back-btn responsive-next-btn' style="width: 60px !important; display: inline-block; position: relative; top: -120px" id="back-{{statement.id}}" src="{{url_root}}/media/mobile/img/cafe/Skip_V1.png">
+                <img class='endsliders-back-btn endsliders-back-btn-size responsive-next-btn' style="display: inline-block; position: relative; top: -120px" id="back-{{statement.id}}" src="{{url_root}}/media/mobile/img/cafe/Skip_V1.png">
 
                 <div class="slider" style="display: inline-block;margin-left: 15px;margin-right: 5px;" id="slider-{{statement.id}}"></div>
 
-                <img class='endsliders-next-btn responsive-next-btn' style="width: 60px !important; display: inline-block; position: relative; top: -120px" id="next-{{statement.id}}" src="{{url_root}}/media/mobile/img/cafe/Next_V1.png">
+                <img class='endsliders-next-btn responsive-next-btn' style="display: inline-block; position: relative; top: -120px" id="next-{{statement.id}}" src="{{url_root}}/media/mobile/img/cafe/Next_V1.png">
 
               </div>
                   
@@ -361,7 +361,7 @@
 
   <div class = 'register' id='register'>
       <div class="home-btn-dialog-box">
-            <div class="home-btn-title">
+            <div class="home-btn-title responsive-header">
                 Save Grades
             </div>
             
@@ -376,10 +376,11 @@
          </div> 
 
       <div class= 'registerpanel'>
-          <div class="basic-header2">{{client_settings.ZIP_CODE_INSTRUCTIONS}}: </div>
-
-          <form id='reg_form' class='form-horizontal reg_form'>
+        <center>
+          <div class="basic-header2 responsive-header" style="max-width: 500px;">{{client_settings.ZIP_CODE_INSTRUCTIONS}}:</div>
+          <form id='reg_form' class='reg_form responsive-form'>
               <center>
+
               <div data-role="fieldcontain">
                   <input type ='tel' id='regzip' name='regzip' class='regforminput' value="" placeholder="Zip Code" onBlur="$('.registerb').click();">
                   <div class='alert-error' id='zipcode-error' style='display:none;'></div>
@@ -403,17 +404,18 @@
                   <!--<div class="standard-btn-div" onclick="document.getElementById('registerb').focus();">
                       
                   </div>-->
+                  <div class="button-div registerb responsive-btn" id="registerb">{{client_settings.ZIP_CODE_BUTTON}}</div>
               </center>
           </form>
-          <br/>
-
-           <center> <div class="button-div registerb" id="registerb" style="position:relative;top: -18px;">{{client_settings.ZIP_CODE_BUTTON}}</div></center>
+          </center>
       </div>
+
+
   </div>
 
   <div class='dialog dialog-style'>
       <div class="home-btn-dialog-box">
-            <div class="home-btn-title" style="text-shadow: none;">
+            <div class="home-btn-title responsive-header" style="text-shadow: none;">
                 Join the Discussion
             </div>
             
@@ -427,12 +429,12 @@
 
          </div> 
       <!--<img class="header-img-topic center" src="{{ url_root }}/media/mobile/img/cafe/CRC_join.png"/>-->
-      <div class='dialog-text1 dialog-text-style'>
-          {{client_settings.DISCUSSION_DIALOG_TEXT1}}
-      </div><br/>
        <center>
+        <div class='dialog-text1 dialog-text-style responsive-body'>
+          {{client_settings.DISCUSSION_DIALOG_TEXT1}}
+        </div>
               <div class="discuss-btn-div">
-                  <div class='dialog-ready button-div'> Join </button>
+                  <div class='dialog-ready button-div responsive-btn'> Join </button>
                   <!--<button type='submit' data-theme='b' class='dialog-next'  onclick="$('.dialog-text1').hide();$('.dialog-text2').show();"><font style="font-size: 16px;">Next</font></button>-->
               </div>
       </center>
@@ -440,29 +442,29 @@
 
   <div class='comment-input'>
        <div class="home-btn-dialog-box">
-            <div class="home-btn-title" style="width:50%;">
+            <div class="home-btn-title responsive-header" style="width:50%;">
                 What do you think?
             </div>
             
             <div class="home-btn-wrapper" style="width:45%;display:inline-block; text-align: right;">
-                <img width="12%" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png"> 
+                <img width="6%" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png"> 
                 
-                <img width="12%" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png"> 
+                <img width="6%" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png"> 
                 
-                <img width="12%" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+                <img width="6%" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
                 
-                <img width="12%" class='logout-btn' src="{{url_root}}/media/mobile/img/cafe/CRC_logout_bttn.png">
+                <img width="6%" class='logout-btn' src="{{url_root}}/media/mobile/img/cafe/CRC_logout_bttn.png">
             </div>
 
          </div> 
 
       <center>
           <div class='comment-panel'>
-              <div class="basic-header2" style="text-align:left;">{{topic}}<br/></div>
+              <div class="basic-header2 responsive-body" style="text-align:left;">{{topic}}<br/></div>
               <textarea name='answer' id='entered-comment'></textarea>
-              <div class="standard-btn-div" style="width: 100%;">
-                  <div class='comment-submit-btn button-div' style="display: inline-block;">Post</div>
-                  <div class='comment-cancel-btn button-div' style="display: inline-block; ">Later</div>
+              <div class="standard-btn-div" style="width: 95%; position:relative; left: -50px">
+                  <div class='comment-submit-btn button-div responsive-btn' style="display: inline-block;">Post</div>
+                  <div class='comment-cancel-btn button-div responsive-btn' style="display: inline-block; ">Later</div>
               </div>
           </div>
       </center>
@@ -475,32 +477,32 @@
                 <span class='score-label'></span><span class='score-value'></span>
             </div>-->
 
-            <div class="home-btn-title" style="text-shadow: none;display: inline-block; width: 20%;padding-left: 10px;">
+            <div class="home-btn-title responsive-header" style="width: 50%;text-shadow:none;">
                 The Café 
             </div>
 
-            <div style="display: inline-block;text-align: right; padding-right: 15px; width: 60%;">
-                <img width="12%" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+            <div class="home-btn-wrapper" style="width: 45%;display:inline-block; text-align: right;">
+                <img width="6%" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
                 
                 
                 
-                <img width="12%" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+                <img width="6%" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
                  
                  
                   
-                 <img width="12%" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+                 <img width="6%" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
                 
                 
                 
-                <img width="12%" class='logout-btn' src="{{url_root}}/media/mobile/img/cafe/CRC_logout_bttn.png">
+                <img width="6%" class='logout-btn' src="{{url_root}}/media/mobile/img/cafe/CRC_logout_bttn.png">
             </div>
 
             <!--<span class="stats-wrapper" style="display: none;"><img width="12%" class='my-comment-btn' src="{{url_root}}/media/mobile/img/cafe/CRC_stats_bttn.png"></span>-->
         </div>
 
-            <div class='instructions'>{{client_settings.INSTRUCTIONS_1}}</div>
-            <div class='instructions2'>{{client_settings.INSTRUCTIONS_2}}</div>
-            <div class='instructions3'><div style="padding-right: 5px; padding-left: 5px;">{{client_settings.INSTRUCTIONS_3}}</div>
+            <div class='instructions instructions-responsive'>{{client_settings.INSTRUCTIONS_1}}</div>
+            <div class='instructions2 instructions-responsive'>{{client_settings.INSTRUCTIONS_2}}</div>
+            <div class='instructions3 instructions-responsive'><div style="padding-right: 5px; padding-left: 5px;">{{client_settings.INSTRUCTIONS_3}}</div>
     </center>
   </div>
 
@@ -510,7 +512,7 @@
   <div class='rate' id="rate">
 
       <div class="home-btn-dialog-box">
-            <div class="home-btn-title">
+            <div class="home-btn-title responsive-header">
                 Rate this Idea
             </div>
             
@@ -525,15 +527,16 @@
          </div>
 
     <center>
-       <textarea id='commentInput' class='answer' readonly="true"></textarea>
+       <textarea id='commentInput' class='answer responsive-answer' readonly="true"></textarea>
        <div style="display: none;"><span class="rate-username"></span></div>
     </center>
 
 
     <div id="flag" class="flag-style"></div>
 
+  <center>
     <div class="answerwrapper">
-     <div class='sliders' style="text-align: left;">
+     <div class='sliders responsive-body' style="text-align: left;">
        {{client_settings.RATE_IMPORTANCE_QUESTION}}<br/><br/>
        <center>
        <div class="slider" id="slider-importance"></div>
@@ -549,10 +552,11 @@
           
 
         <center>
-            <div class="button-div" id='go-back'>Next</div>
+            <div class="button-div responsive-btn" id='go-back'>Next</div>
         </center>
 
       </div>
+    </center>
 
     </div>
 
@@ -562,14 +566,20 @@
   <div class='frame'></div>
 
   <div class='logout'>
-      <div class="home-btn-dialog-box">
-          <img width="12%" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
-          
-          <img width="12%" class='logout-start-over' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
-          
-          <img width="12%" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
-      </div>
-        <div style="padding: 12%">
+            <div class="home-btn-dialog-box">
+            <div class="home-btn-title responsive-header">
+            </div>
+            
+            <div class="home-btn-wrapper" style="width:30%;display:inline-block; text-align: right;">
+                <img width="12%" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png"> 
+                
+                <img width="12%" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png"> 
+                
+                <img width="12%" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+            </div>
+
+         </div>
+        <div class="responsive-body">
             {{client_settings.LOGOUT_DIALOG_TEXT}}<br/><br/>
             <a href="http://californiareportcard.org" target="_blank" style="color: #555555;">http://californiareportcard.org</a><br/><br/>
 	    Twitter: <a href="http://twitter.com/home?status=How%20do%20you%20grade%20California?%20%20Try%20@CAReportCard%20developed%20by%20@Cal%20@GavinNewsom%20%26%20@Ken_Goldberg%20%20http://californiareportcard.org/mobile%20%23CA%20%23Gov" target="_blank" style="color: #555555;">@CAReportCard</a><br/>
@@ -643,63 +653,65 @@
 
   <div class='dialog-continue dialog-style'>
        <div class="home-btn-dialog-box">
-            <div class="home-btn-title" style="width:40%; text-shadow: none; position: relative; left: 15px;">
+            <div class="home-btn-title responsive-header" style="width:50%; text-shadow: none; position: relative; left: 15px;">
                 Thanks!
             </div>
             
-            <div class="home-btn-wrapper" style="width:55%;display:inline-block; text-align: right;">
-                <img width="12%" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png"> 
+            <div class="home-btn-wrapper" style="width:45%;display:inline-block; text-align: right;">
+                <img width="6%" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png"> 
                 
-                <img width="12%" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png"> 
+                <img width="6%" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png"> 
                 
-                <img width="12%" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+                <img width="6%" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
                 
-                <img width="12%" class='logout-btn' src="{{url_root}}/media/mobile/img/cafe/CRC_logout_bttn.png">
+                <img width="6%" class='logout-btn' src="{{url_root}}/media/mobile/img/cafe/CRC_logout_bttn.png">
             </div>
 
          </div> 
-
+<center>
     <div class='dialog-text-style responsive-body'>
         <!--<div class='dialog-text-style default-left-padding'>
         {{client_settings.EMAIL_ASK_TEXT}}
       </div>-->
 
-        <input type="email" id='regemail' name='regemail' class='regforminput' style="font-size: 15px; background-color: #FFFFFF;color: #000000;" placeholder="Email" data-theme='b'></input>
+        <center>
+                  <input type="email" id='regemail' name='regemail' class='regforminput' style="font-size: 15px; background-color: #FFFFFF;color: #000000;" placeholder="Email" data-theme='b'></input>
         <div class="comment-admin-text-b">{{client_settings.DEMOGRAPHICS_DISCLAIMER}}.</div>
         <br/>
-        <center>
-            <div class="standard-btn-div">
-                <div class='button-div dialog-continue-ready'>Enter</div>
+            <div class="standard-btn-div" style="position:relative; left: -40px;">
+                <div class='button-div dialog-continue-ready responsive-btn'>Enter</div>
             </div>
             <div class='alert-error' id='email-error' style='display:none;width: 250px;'></div>
         </center>
 
     </div>
+          </center>
   </div>
 
  <div class='dialog-email dialog-style'>
        <div class="home-btn-dialog-box">
-            <div class="home-btn-title" style="width:40%; text-shadow: none; position: relative; left: 15px;">
+            <div class="home-btn-title responsive-header" style="width:50%; text-shadow: none; position: relative; left: 15px;">
                 Thanks!
             </div>
             
-            <div class="home-btn-wrapper" style="width:55%;display:inline-block; text-align: right;">
-                <img width="12%" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png"> 
+            <div class="home-btn-wrapper" style="width:45%;display:inline-block; text-align: right;">
+                <img width="6%" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png"> 
                 
-                <img width="12%" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png"> 
+                <img width="6%" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png"> 
                 
-                <img width="12%" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+                <img width="6%" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
                 
-                <img width="12%" class='logout-btn' src="{{url_root}}/media/mobile/img/cafe/CRC_logout_bttn.png">
+                <img width="6%" class='logout-btn' src="{{url_root}}/media/mobile/img/cafe/CRC_logout_bttn.png">
             </div>
 
          </div> 
 
          <div class='dialog-text-style default-left-padding responsive-body'>
-            {{client_settings.RESPONSE_SAVED_TEXT2}}
             <center>
+              {{client_settings.RESPONSE_SAVED_TEXT2}}
+            <br/>
             <div class="standard-btn-div" style="max-width: 250px !important;">
-              <div class='button-div dialog-email-ready' >Continue</div>
+              <div class='button-div dialog-email-ready responsive-btn' >Continue</div>
             </div>
           </center>
          </div>
@@ -707,11 +719,11 @@
 
   <div class='dialog-avggrade dialog-style'>
       <div class="home-btn-dialog-box">
-          <img width="12%" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+          <img width="6%" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
           
-          <img width="12%" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+          <img width="6%" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
           
-          <img width="12%" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+          <img width="6%" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
       </div>
 
     <div class='dialog-text-style default-left-padding responsive-body'>
@@ -724,12 +736,12 @@
   </div>
 
   <div class='dialog-about dialog-style responsive-body' style="z-index:999">
-      <div class="home-btn-dialog-box">
-          <img width="12%" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+     <div class="home-btn-dialog-box">
+          <img width="6%" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
           
-          <img width="12%" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+          <img width="6%" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
           
-          <img width="12%" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+          <img width="6%" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
       </div>
       <div class='dialog-text-style-noflow small-left-padding responsive-body'>
           <div class="basic-header">{{client_settings.ABOUT_PAGE_HEADER}}</div>
@@ -739,12 +751,12 @@
   </div>
 
   <div class='dialog-help-alt dialog-style' style="z-index:999">
-      <div class="home-btn-dialog-box">
-          <img width="12%" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+     <div class="home-btn-dialog-box">
+          <img width="6%" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
           
-          <img width="12%" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+          <img width="6%" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
           
-          <img width="12%" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+          <img width="6%" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
       </div>
       <div class='dialog-text-style-noflow small-left-padding responsive-body'>
           <div class="basic-header">Help</div>
@@ -754,12 +766,12 @@
 
   <div class='dialog-help-grade dialog-style' style="z-index:999;">
 
-      <div class="home-btn-dialog-box">
-          <img width="12%" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+     <div class="home-btn-dialog-box">
+          <img width="6%" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
           
-          <img width="12%" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+          <img width="6%" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
           
-          <img width="12%" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+          <img width="6%" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
       </div>
       <div class='dialog-text-style-noflow small-left-padding responsive-body'>
           <div class="basic-header">Help</div>
@@ -769,11 +781,11 @@
 
   <div class='dialog-help-median dialog-style' style="z-index:999">
       <div class="home-btn-dialog-box">
-          <img width="12%" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+          <img width="6%" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
           
-          <img width="12%" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+          <img width="6%" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
           
-          <img width="12%" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+          <img width="6%" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
       </div>
       <div class='dialog-text-style-noflow small-left-padding responsive-body'>
           <div class="basic-header">Help</div>
@@ -783,11 +795,11 @@
 
   <div class='dialog-help-zipcode dialog-style' style="z-index:999">
       <div class="home-btn-dialog-box">
-          <img width="12%" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+          <img width="6%" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
           
-          <img width="12%" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+          <img width="6%" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
           
-          <img width="12%" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+          <img width="6%" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
       </div>
       <div class='dialog-text-style-noflow small-left-padding responsive-body'>
           <div class="basic-header">Help</div>
@@ -796,12 +808,12 @@
   </div>
 
   <div class='dialog-help-dialog dialog-style responsive-body' style="z-index:999">
-      <div class="home-btn-dialog-box">
-          <img width="12%" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+     <div class="home-btn-dialog-box">
+          <img width="6%" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
           
-          <img width="12%" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+          <img width="6%" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
           
-          <img width="12%" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+          <img width="6%" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
       </div>
       <div class='dialog-text-style-noflow small-left-padding responsive-body'>
           <div class="basic-header">Help</div>
@@ -811,11 +823,11 @@
 
   <div class='dialog-help-map1 dialog-style' style="z-index:999">
       <div class="home-btn-dialog-box">
-          <img width="12%" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+          <img width="6%" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
           
-          <img width="12%" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+          <img width="6%" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
           
-          <img width="12%" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+          <img width="6%" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
       </div>
       <div class='dialog-text-style-noflow small-left-padding responsive-body'>
           <div class="basic-header">Help</div>
@@ -824,12 +836,12 @@
   </div>
 
   <div class='dialog-help-map2 dialog-style' style="z-index:999">
-      <div class="home-btn-dialog-box">
-          <img width="12%" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+     <div class="home-btn-dialog-box">
+          <img width="6%" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
           
-          <img width="12%" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+          <img width="6%" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
           
-          <img width="12%" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+          <img width="6%" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
       </div>
       <div class='dialog-text-style-noflow small-left-padding responsive-body'>
           <div class="basic-header">Help</div>
@@ -838,12 +850,12 @@
   </div>
 
   <div class='dialog-help-map3 dialog-style' style="z-index:999">
-      <div class="home-btn-dialog-box">
-          <img width="12%" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+     <div class="home-btn-dialog-box">
+          <img width="6%" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
           
-          <img width="12%" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+          <img width="6%" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
           
-          <img width="12%" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+          <img width="6%" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
       </div>
       <div class='dialog-text-style-noflow small-left-padding responsive-body'>
           <div class="basic-header">Help</div>
@@ -853,12 +865,12 @@
 
 
   <div class='dialog-help-comment dialog-style' style="z-index:999">
-      <div class="home-btn-dialog-box">
-          <img width="12%" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+     <div class="home-btn-dialog-box">
+          <img width="6%" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
           
-          <img width="12%" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+          <img width="6%" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
           
-          <img width="12%" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+          <img width="6%" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
       </div>
       <div class='dialog-text-style-noflow small-left-padding responsive-body'>
           <div class="basic-header">Help</div>
@@ -867,12 +879,12 @@
   </div>
 
   <div class='dialog-help-rate dialog-style' style="z-index:999">
-      <div class="home-btn-dialog-box">
-          <img width="12%" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+     <div class="home-btn-dialog-box">
+          <img width="6%" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
           
-          <img width="12%" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+          <img width="6%" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
           
-          <img width="12%" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+          <img width="6%" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
       </div>
       <div class='dialog-text-style-noflow small-left-padding responsive-body'>
           <div class="basic-header">Help</div>
@@ -881,12 +893,12 @@
   </div>
 
   <div class='dialog-help-continue dialog-style' style="z-index:999">
-      <div class="home-btn-dialog-box">
-          <img width="12%" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+     <div class="home-btn-dialog-box">
+          <img width="6%" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
           
-          <img width="12%" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+          <img width="6%" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
           
-          <img width="12%" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+          <img width="6%" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
       </div>
       <div class='dialog-text-style-noflow small-left-padding responsive-body'>
           <div class="basic-header">Help</div>
@@ -895,12 +907,12 @@
   </div>
 
   <div class='dialog-help-logout dialog-style' style="z-index:999">
-      <div class="home-btn-dialog-box">
-          <img width="12%" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+     <div class="home-btn-dialog-box">
+          <img width="6%" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
           
-          <img width="12%" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+          <img width="6%" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
           
-          <img width="12%" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+          <img width="6%" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
       </div>
       <div class='dialog-text-style-noflow small-left-padding responsive-body'>
           <div class="basic-header">Help</div>

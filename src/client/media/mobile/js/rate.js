@@ -422,7 +422,7 @@ var rate = (function($, d3, console) {
 })($, d3, console);
 
 $(document).ready(function() {
-    $('.score-label').text(utils.toTitleCase(window.conf['YOUR_SCORE_LANGUAGE']).trim().replace(':', '') + ' is ');
+    //$('.score-label').text(utils.toTitleCase(window.conf['YOUR_SCORE_LANGUAGE']).trim().replace(':', '') + ' is ');
 
     $('.endsliders-next-btn').click(function(event){ 
         
