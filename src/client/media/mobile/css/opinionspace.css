@@ -288,6 +288,7 @@ table.pretty caption {
 	.responsive-next-btn{
 		top: -300px !important;
 		width: 100px !important;
+		max-width: 100px !important;
 	}
 }
 
