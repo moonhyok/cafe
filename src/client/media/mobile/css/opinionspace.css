@@ -259,6 +259,10 @@ table.pretty caption {
 		line-height: 36px !important;
 	}
 
+	.dialog-text-style-noflow em {    
+    font-size: 32px !important;
+    }
+
 	.responsive-header{
 		font-size: 42px !important;
 		padding-bottom: 5px;
