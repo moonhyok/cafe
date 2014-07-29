@@ -286,7 +286,7 @@ table.pretty caption {
 	}
 
 	.responsive-next-btn{
-		top: -300px !important;
+		top: -200px !important;
 		width: 100px !important;
 		max-width: 100px !important;
 	}
@@ -1177,7 +1177,7 @@ padding-right: 7px;
 	padding-right: 15px;
 	padding-left: 15px;
 	position: absolute;
-	top: 40%;
+	bottom: 20px;
 	width: 100%;
 	z-index: 999;
 }

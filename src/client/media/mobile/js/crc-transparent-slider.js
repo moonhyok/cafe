@@ -47,7 +47,7 @@ $(".slider-grade-bubble").on("click",function(e){
 	median = score_to_grade(100*medians[statement_id]);
 	rate.logUserEvent(11,'slider_set ' + statement_id + ' ' + window.sliders[statement_id-1]/100);
 
-	$(this).parent().children(".bubble-"+median.replace("+","p")).css("border","2px solid #66FFFF");
+	$(this).parent().children(".bubble-"+median.replace("+","p")).css("border","4px solid #66FFFF");
 	if (window.rate_count == 0){
 	$(".median-grade-"+statement_id).html("The median grade so far is highlighted in blue.");
 	$(".median-grade-"+statement_id).fadeIn(500);
@@ -84,7 +84,7 @@ $(this).parent().children(".slider-grade-bubble").css("opacity","1.0");
 	median = score_to_grade(100*medians[statement_id]);
 	rate.logUserEvent(11,'slider_set ' + statement_id + ' ' + window.sliders[statement_id-1]/100);
 
-	$(this).parent().children(".bubble-"+median.replace("+","p")).css("border","2px solid #66FFFF");
+	$(this).parent().children(".bubble-"+median.replace("+","p")).css("border","4px solid #66FFFF");
 	if (window.rate_count == 0){
 	$(".median-grade-"+statement_id).html("The median grade so far is highlighted in blue.");
 	$(".median-grade-"+statement_id).fadeIn(500);
