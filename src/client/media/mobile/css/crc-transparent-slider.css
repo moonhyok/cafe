@@ -20,11 +20,11 @@
 		width: 100%; 
 	}
 		.slider-grade-main{
-		border-radius:20px;
-		line-height: 40px;
+		border-radius:18px;
+		line-height: 35px;
 		font-size: 22px;
 		text-align: center;
-		width: 40px;
+		width: 35px;
 		display:inline-block;
 		margin-right: 5px;
 		margin-left: 5px;
@@ -34,11 +34,11 @@
 	}
 
 		.slider-grade-p{
-		border-radius:20px;
-		line-height: 40px;
+		border-radius:18px;
+		line-height: 35px;
 		font-size: 22px;
 		text-align: center;
-		width: 40px;
+		width: 35px;
 		display:inline-block;
 		margin-right: 5px;
 		margin-left: 5px;
@@ -48,11 +48,11 @@
 	}
 
 			.slider-grade-m{
-		border-radius:20px;
-		line-height: 40px;
+		border-radius:18px;
+		line-height: 35px;
 		font-size: 22px;
 		text-align: center;
-		width: 40px;
+		width: 35px;
 		display:inline-block;
 		margin-right: 5px;
 		margin-left: 5px;
@@ -168,11 +168,9 @@
 
 			.slider-progress-dot{
 				margin-top: 5px;
-		border:1px solid #ffffff !important;
 		border-radius:15px !important;
 		height: 15px !important;
 		width: 15px !important;
-		background: #000000 !important;
 		display:inline-block !important;
 		margin-left: 10px !important;
 	}

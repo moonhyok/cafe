@@ -48,7 +48,7 @@ $(".slider-grade-bubble").on("click",function(e){
 	rate.logUserEvent(11,'slider_set ' + statement_id + ' ' + window.sliders[statement_id-1]/100);
 
 	$(this).parent().children(".bubble-"+median.replace("+","p")).css("border","2px solid #66FFFF");
-	if (statement_id == 1){
+	if (window.rate_count == 0){
 	$(".median-grade-"+statement_id).html("The median grade so far is highlighted in blue.");
 	$(".median-grade-"+statement_id).fadeIn(500);
 	$(".median-grade-"+statement_id).fadeOut(6000);
@@ -57,30 +57,45 @@ $(".slider-grade-bubble").on("click",function(e){
 	$(".skip-button-"+statement_id).hide();
 	}
 	catch(exception){}
+
+	window.rate_count = window.rate_count + 1
 	
 	//$(this).parent().children(".bubble-"+median.replace("+","p")).innerHTML = "<div style=\"font-size: 10px;\">Median</font>";
 });
 
 $(".slider-grade-bubble").on("touchstart",function(e){ 
-	$(this).parent().children(".slider-grade-bubble").css("opacity","1.0"); 
+$(this).parent().children(".slider-grade-bubble").css("opacity","1.0"); 
 	$(this).parent().children(".slider-grade-bubble").css("background-color","transparent"); 
-	
+
 	$(this).css("opacity","1.0"); 
 	$(this).css("background-color","rgba(242,240,209,0.5)");
 	
+	if($(this).parent().parent().parent().attr("id").substring(7).indexOf("importance") > -1)
+	{
+		var classList = $(this).attr('class').split(/\s+/);
+		window.current_rating = grade_to_score(classList[2].substring(7).replace("p","+"));
+		return;
+	}
+
 	try {
 	statement_id = parseInt($(this).parent().parent().parent().attr("id").substring(7));
 	var classList =$(this).attr('class').split(/\s+/);
 	window.sliders[statement_id-1] = grade_to_score(classList[2].substring(7).replace("p","+"));
-	rate.logUserEvent(11,'slider_set ' + statement_id-1 + ' ' + window.sliders[statement_id-1]/100);
 	median = score_to_grade(100*medians[statement_id]);
-	//alert(median);
+	rate.logUserEvent(11,'slider_set ' + statement_id + ' ' + window.sliders[statement_id-1]/100);
+
 	$(this).parent().children(".bubble-"+median.replace("+","p")).css("border","2px solid #66FFFF");
-	$(".median-grade-"+statement_id).html("Median grade so far: " + median);
+	if (window.rate_count == 0){
+	$(".median-grade-"+statement_id).html("The median grade so far is highlighted in blue.");
 	$(".median-grade-"+statement_id).fadeIn(500);
+	$(".median-grade-"+statement_id).fadeOut(6000);
+	}
+	
 	$(".skip-button-"+statement_id).hide();
 	}
 	catch(exception){}
+
+	window.rate_count = window.rate_count + 1
 
 	//median = score_to_grade(100*medians[parseInt($(this).parent().parent().parent().attr("id").substring(7))]);
 	

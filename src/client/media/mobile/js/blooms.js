@@ -442,14 +442,26 @@ var _blooms = blooms = (function($, d3, console) {
 
                    force.on("tick", function() {
                     mugs.attr('x', function(d) {
-                                    return Math.min(Math.max(d.x,margin.left),width);
+                                    var trimmedx = Math.min(Math.max(d.x,margin.left),width);
+                                    var trimmedy = Math.min(Math.max(d.y,margin.bottom),height);
+                                    if (Math.abs(trimmedx-width/2) < 75 && Math.abs(trimmedy-height/2) < 75)
+                                    {
+                                        trimmedx = width/2 + 150;
+                                    }
+                                    return trimmedx;
                                 })
                                 .attr('y', function(d) {
-                                    return Math.min(Math.max(d.y,margin.bottom),height);
+                                    var trimmedx = Math.min(Math.max(d.x,margin.left),width);
+                                    var trimmedy = Math.min(Math.max(d.y,margin.bottom),height);
+                                    if (Math.abs(trimmedx-width/2) < 75 && Math.abs(trimmedy-height/2) < 75)
+                                    {
+                                        trimmedy = width/2 + 150;
+                                    }
+                                    return trimmedy;
                                 })
                                 });
 
-                                for (var i = 0; i < 2000; ++i) force.tick();
+                                for (var i = 0; i < 1000; ++i) force.tick();
                                 force.stop();
 
                                 });
@@ -465,6 +477,10 @@ var _blooms = blooms = (function($, d3, console) {
 
     /** Adds `yourMug` to the canvas as a hidden object. Change the opacity to make it appear */
     function addYourMug() {
+         var mugsize = "90";
+            if($(window).width() > 768)
+                mugsize="180";
+            
         window.your_mug = window.coffeetable_svg.append('svg:image')
         .attr("xlink:href", function(d) {
                     return window.url_root + "/media/mobile/img/cafe/cafeCurUser.png";
@@ -479,8 +495,8 @@ var _blooms = blooms = (function($, d3, console) {
         .datum(function(d) {
             return window.your_mug_data;
         })
-        .attr("width", "90") //if this changes, change the margin above
-        .attr("height", "90")
+        .attr("width", mugsize) //if this changes, change the margin above
+        .attr("height", mugsize)
         .attr("opacity", function(d) {
             return 0;
         })
