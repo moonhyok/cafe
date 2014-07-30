@@ -138,7 +138,7 @@
 		color: #FF0000;
 	}
 
-	@media (min-width: 480px) {
+	@media (min-width: 768px) {
 		.slider-grade-p{
 		border-radius:40px !important;
 		line-height: 80px !important;

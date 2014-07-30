@@ -285,8 +285,21 @@ table.pretty caption {
 		padding-top: 30px !important;
 	}
 
+	.responsive-skip{
+		top: -160px !important; 
+		left: -80px !important;
+	}
+
 	.responsive-next-btn{
 		top: -200px !important;
+		width: 100px !important;
+		max-width: 100px !important;
+	}
+
+	.responsive-go-back{
+		position: relative; 
+		top: -350px !important; 
+		left: 200px !important;
 		width: 100px !important;
 		max-width: 100px !important;
 	}

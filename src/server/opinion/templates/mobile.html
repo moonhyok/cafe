@@ -550,10 +550,16 @@ function googleTranslateElementInit() {
   <center>
     <div class="answerwrapper">
      <div class='sliders responsive-body' style="text-align: left;">
-       {{client_settings.RATE_IMPORTANCE_QUESTION}}<br/><br/>
+       {{client_settings.RATE_IMPORTANCE_QUESTION}}
        <center>
        <div class="slider" id="slider-importance"></div>
+               <img class="responsive-go-back" id='go-back' style="position: relative; top: -200px; left: 100px; width: 50px;" id="next-{{statement.id}}" src="{{url_root}}/media/mobile/img/cafe/Next_V1.png">            
        </center>
+
+       <div style="text-align: right; width: 100%;">
+        <a href="#" class="responsive-body responsive-skip"  onclick="rate.doneRatingNoSave();" style="color: #ffffff;font-size: 16px;font-weight: normal !important;position:relative; top: -85px; left: -100px;">Skip</a> 
+        </div>      
+
 
        <div class="slider-padding"></div>
 
@@ -562,11 +568,12 @@ function googleTranslateElementInit() {
        <!--  How would you rate the State of California on this issue today?<br/>
          <div class="slider" id="slider-grade"></div>
            <div style="clear: both;"></div>-->
-          
+        
 
-        <center>
+
+        <!--<center>
             <div class="button-div responsive-btn" id='go-back'>Next</div>
-        </center>
+        </center>-->
 
       </div>
     </center>
