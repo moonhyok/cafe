@@ -116,8 +116,8 @@ var rate = (function($, d3, console) {
             //TODO FIX!!!
             if (window.user_score == 2) {
                 $('.rate').hide();
-                $('.instructions2').hide();
-                $('.instructions3').show();
+                //$('.instructions2').hide();
+                //$('.instructions3').show();
                 try{
                             blooms.addYourMug();
                             window.your_mug.transition().duration(1500).style("opacity", "1");
@@ -133,7 +133,7 @@ var rate = (function($, d3, console) {
                 $('.rate').hide();
                 // ui has changed!
                 $('.top-bar').trigger('height');
-                $('.instructions2').show();
+                //$('.instructions2').show();
                 //$('.dialog-score').show();
             }
             else{

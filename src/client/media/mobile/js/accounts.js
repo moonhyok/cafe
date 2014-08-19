@@ -733,10 +733,10 @@ $(document).ready(function() {
         rate.initMenubar();
         //$('.scorebox').show();
 
-        if(window.user_score == 0)
+        /*if(window.user_score == 0)
         {
             $('.instructions').show();
-        }
+        }*/
 
         $('.dialog').hide();
         window.prev_state = 'dialog';
