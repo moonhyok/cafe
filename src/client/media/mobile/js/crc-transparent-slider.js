@@ -27,11 +27,15 @@ grades.forEach(function(grade) {
 
 });
 $(".slider-grade-bubble").on("click",function(e){ 
-	$(this).parent().children(".slider-grade-bubble").css("opacity","1.0"); 
-	$(this).parent().children(".slider-grade-bubble").css("background-color","transparent"); 
+	//$(this).parent().children(".slider-grade-bubble").css("opacity","1.0"); 
+	//$(this).parent().children(".slider-grade-bubble").css("background-image","url()"); 
+    
+    $(this).parent().children(".slider-grade-bubble").each( function(i){
+    	$(this).css("background-image",$(this).css("background-image").replace("keypad-down-0","keypad-0"));
+	});
 
-	$(this).css("opacity","1.0"); 
-	$(this).css("background-color","rgba(242,240,209,0.5)");
+	//$(this).css("opacity","1.0"); 
+	$(this).css("background-image",$(this).css("background-image").replace("keypad-0","keypad-down-0"));
 	
 	if($(this).parent().parent().parent().attr("id").substring(7).indexOf("importance") > -1)
 	{
@@ -64,11 +68,8 @@ $(".slider-grade-bubble").on("click",function(e){
 });
 
 $(".slider-grade-bubble").on("touchstart",function(e){ 
-$(this).parent().children(".slider-grade-bubble").css("opacity","1.0"); 
-	$(this).parent().children(".slider-grade-bubble").css("background-color","transparent"); 
 
-	$(this).css("opacity","1.0"); 
-	$(this).css("background-color","rgba(242,240,209,0.5)");
+	$(this).css("background-image",$(this).css("background-image").replace("keypad-0","keypad-down-0"));
 	
 	if($(this).parent().parent().parent().attr("id").substring(7).indexOf("importance") > -1)
 	{
