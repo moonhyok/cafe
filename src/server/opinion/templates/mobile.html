@@ -516,8 +516,7 @@ function googleTranslateElementInit() {
               <div class="basic-header2 responsive-body" style="text-align:left;">{{topic}}<br/></div>
               <textarea name='answer' id='entered-comment'></textarea>
               <div class="standard-btn-div" style="width: 100%;">
-                  <div class='comment-submit-btn button-div responsive-btn' style="display: inline-block;">Post</div>
-                  <div class='comment-cancel-btn button-div responsive-btn' style="display: inline-block; ">Later</div>
+                  <div class='comment-submit-btn button-div-wide responsive-btn' style="display: inline-block;">Post</div>
               </div>
           </div>
       </center>
@@ -622,6 +621,7 @@ function googleTranslateElementInit() {
   <div class='logout'>
             <div class="home-btn-dialog-box">
             <div class="home-btn-title responsive-header">
+              Title
             </div>
             
             <div class="home-btn-wrapper" style="width:30%;display:inline-block; text-align: right;">
@@ -635,10 +635,11 @@ function googleTranslateElementInit() {
          </div>
         <div class="responsive-body">
             {{client_settings.LOGOUT_DIALOG_TEXT}}<br/><br/>
-            <a href="http://californiareportcard.org" target="_blank" style="color: #555555;">http://californiareportcard.org</a><br/><br/>
-	    Twitter: <a href="http://twitter.com/home?status=How%20do%20you%20grade%20California?%20%20Try%20@CAReportCard%20developed%20by%20@Cal%20@GavinNewsom%20%26%20@Ken_Goldberg%20%20http://californiareportcard.org/mobile%20%23CA%20%23Gov" target="_blank" style="color: #555555;">@CAReportCard</a><br/>
-	    Facebook: <a href="http://on.fb.me/1jF60JL" target="_blank" style="color: #555555;">CAReportCard</a><br/><br/>
+	    <a href="http://twitter.com/home?status=How%20do%20you%20grade%20California?%20%20Try%20@CAReportCard%20developed%20by%20@Cal%20@GavinNewsom%20%26%20@Ken_Goldberg%20%20http://californiareportcard.org/mobile%20%23CA%20%23Gov" target="_blank" style="color: #555555;"><img src="{{url_root}}/media/mobile/img/cafe/twitter-button.png" width="102px"></a>
+	    <a href="http://on.fb.me/1jF60JL" target="_blank" style="color: #555555;"><img src="{{url_root}}/media/mobile/img/cafe/facebook-button.png" width="102px"></a>
         </div>
+
+        <div class='comment-submit-btn button-div-wide responsive-btn' style="display: inline-block;">Post</div>
  </div>
 
   <div class='welcome-back'>
