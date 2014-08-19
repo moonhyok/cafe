@@ -308,7 +308,7 @@ var _blooms = blooms = (function($, d3, console) {
         /** Keeps track of which blooms are present, so we can load more when they run out. */
         window.blooms_list = [];
 
-         pullLivePoints(function(object) {
+      pullLivePoints(function(object) {
             var data = object.points;
             var normx = object.normx;
             var normy = object.normy;
@@ -332,9 +332,9 @@ var _blooms = blooms = (function($, d3, console) {
 
             var topBarHeight = $('.top-bar').height();
 
-            var mugsize = "80";
+            var mugsize = 50;
             if($(window).width() > 768)
-                mugsize="160";
+                mugsize=150;
 
             var height = $(window).height()- margin.bottom - margin.top - topBarHeight;
 
@@ -342,26 +342,26 @@ var _blooms = blooms = (function($, d3, console) {
             window.your_mug_data = data.splice(data.length-1, 1)[0];
             window.your_mug_data.ox = window.your_mug_data.x; //keep the original untransformed values
             window.your_mug_data.oy = window.your_mug_data.y;
-            window.your_mug_data.x = (width)/2;//canvasx(window.your_mug_data.x);
-            window.your_mug_data.y = (height)/2;//canvasy(window.your_mug_data.y);
+            window.your_mug_data.x = (width)/2 - 100;//canvasx(window.your_mug_data.x);
+            window.your_mug_data.y = (height)/2; - 100//canvasy(window.your_mug_data.y);
 
 
 
             //center the scaling appropriately
-            var max_x_dev = d3.max(data, function(d) {return Math.abs(d.x-window.your_mug_data.ox);});
-            var max_y_dev = d3.max(data, function(d) {return Math.abs(d.y-window.your_mug_data.oy);});
-            var canvasx = d3.scale.linear().domain([-max_x_dev,max_x_dev]).range([margin.left, width-margin.right]).clamp(true);
-            var canvasy = d3.scale.linear().domain([-max_y_dev,max_y_dev]).range([margin.top, height-margin.bottom]).clamp(true);
+            //var max_x_dev = d3.max(data, function(d) {return Math.abs(d.x-window.your_mug_data.ox);});
+            //var max_y_dev = d3.max(data, function(d) {return Math.abs(d.y-window.your_mug_data.oy);});
+            var canvasx = d3.scale.linear().domain([d3.min(data,function(d) {return d.x;}),d3.max(data,function(d) {return d.x;})]).range([margin.left, width-margin.right]).clamp(true);
+            var canvasy = d3.scale.linear().domain([d3.min(data,function(d) {return d.y;}),d3.max(data,function(d) {return d.y;})]).range([margin.top, height-margin.bottom]).clamp(true);
 
             $('svg').remove();
             // clear anything that's in the div already (e.g. loading button)
             $('#d3 .loading').hide();
 
-             var force = d3.layout.force()
-                 .charge(-2000)
+            /* var force = d3.layout.force()
+                 .charge(-1500)
                  .size([width, height]);
 
-            window.force = force;
+            window.force = force;*/
 
             window.coffeetable_svg = d3.select('#d3')
             .append('svg')
@@ -371,9 +371,34 @@ var _blooms = blooms = (function($, d3, console) {
             // .attr('class', 'main')
             .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
+            var filter = window.coffeetable_svg.append("defs")
+  .append("filter")
+    .attr("id", "blur1")
+  .append("feGaussianBlur")
+    .attr("stdDeviation", 0.5);
+
+                var filter = window.coffeetable_svg.append("defs")
+  .append("filter")
+    .attr("id", "blur2")
+  .append("feGaussianBlur")
+    .attr("stdDeviation", 1);
+
+
+                var filter = window.coffeetable_svg.append("defs")
+  .append("filter")
+    .attr("id", "blur3")
+  .append("feGaussianBlur")
+    .attr("stdDeviation", 1.5);
+
+                var filter = window.coffeetable_svg.append("defs")
+  .append("filter")
+    .attr("id", "blur4")
+  .append("feGaussianBlur")
+    .attr("stdDeviation", 2);
+
             //var rescale = generateRescalingFactor();
 
-            force.nodes(data).start();
+            //force.nodes(data).start();
 
             var mugs = window.coffeetable_svg.selectAll(".bloom")
             .data(data)
@@ -382,19 +407,16 @@ var _blooms = blooms = (function($, d3, console) {
             .attr("xlink:href", function(d) {
                 window.blooms_list.push(d.uid);
                 console.log({'uid': d.uid,'x':d.x,'y':d.y,'cx': canvasx(d.x),'cy': canvasy(d.y)});
-                return window.url_root + "/media/mobile/img/cafe/cafe" + Math.floor((Math.random()*6)).toString() + ".png";
+                return window.url_root + "/media/mobile/img/cafe/cafe6.png";
             })
-            .attr("width", mugsize) //if this changes, change the margin above
-            .attr("height", mugsize)
-            .attr("opacity", function(d) {
-                        return "1";
-                })
+            .attr("width", function(d) {return(mugsize*Math.random()+100)+"";}) //if this changes, change the margin above
+            .attr("height", function(d) {return(mugsize*Math.random()+100)+"";})
+            .attr("x",function(d) {return canvasx(d.x);})
+            .attr("y",function(d) {return canvasy(d.y);})
+            .attr("filter", function(d){return "url(#blur"+(Math.floor(Math.random()*4)+1)+")";})
             //.attr("transform", function(d) {
             //        return choice(["rotate(-65)", "rotate(-45)", "rotate(20)"]);
             //    })
-            .datum(function(d) {
-                return d;
-            })
             .on('click', function(d) {
                 var _this = d3.select(this);
 		        window.cur_clicked_mug = _this;
@@ -421,7 +443,11 @@ var _blooms = blooms = (function($, d3, console) {
                 //utils.hideLoading(0);
             });
 
-                    if(window.user_score >= 2)
+            blooms.addYourMug();
+
+            });
+
+                  /*  if(window.user_score >= 2)
                     {
                          try{
                              blooms.addYourMug();
@@ -438,33 +464,23 @@ var _blooms = blooms = (function($, d3, console) {
                             }catch(err){
                               console.log(err);
                            }
-                    }
+                    }*/
 
-                   force.on("tick", function() {
+                   /*force.on("tick", function() {
                     mugs.attr('x', function(d) {
-                                    var trimmedx = Math.min(Math.max(d.x,margin.left),width);
-                                    var trimmedy = Math.min(Math.max(d.y,margin.bottom),height);
-                                    if (Math.abs(trimmedx-width/2) < 75 && Math.abs(trimmedy-height/2) < 75)
-                                    {
-                                        trimmedx = width/2 + 150;
-                                    }
-                                    return trimmedx;
+
+                                    return d.x;
                                 })
                                 .attr('y', function(d) {
-                                    var trimmedx = Math.min(Math.max(d.x,margin.left),width);
-                                    var trimmedy = Math.min(Math.max(d.y,margin.bottom),height);
-                                    if (Math.abs(trimmedx-width/2) < 75 && Math.abs(trimmedy-height/2) < 75)
-                                    {
-                                        trimmedy = width/2 + 150;
-                                    }
-                                    return trimmedy;
+                                    return d.y;
                                 })
-                                });
+                                });*/
 
-                                for (var i = 0; i < 1000; ++i) force.tick();
-                                force.stop();
+                                //force.start();
+                                //for (var i = 0; i < 1000; ++i) force.tick();
+                                //force.stop();
 
-                                });
+                                
 
      try{
       utils.hideLoading(0);
@@ -477,13 +493,13 @@ var _blooms = blooms = (function($, d3, console) {
 
     /** Adds `yourMug` to the canvas as a hidden object. Change the opacity to make it appear */
     function addYourMug() {
-         var mugsize = "90";
+         var mugsize = "200";
             if($(window).width() > 768)
-                mugsize="180";
+                mugsize="300";
             
         window.your_mug = window.coffeetable_svg.append('svg:image')
         .attr("xlink:href", function(d) {
-                    return window.url_root + "/media/mobile/img/cafe/cafeCurUser.png";
+                    return window.url_root + "/media/mobile/img/cafe/cafe6.png";
 
         })
         .attr('x', function(d) {
@@ -498,7 +514,7 @@ var _blooms = blooms = (function($, d3, console) {
         .attr("width", mugsize) //if this changes, change the margin above
         .attr("height", mugsize)
         .attr("opacity", function(d) {
-            return 0;
+            return 1;
         })
         .on('click', function(d) {
             if(window.refer == ""){

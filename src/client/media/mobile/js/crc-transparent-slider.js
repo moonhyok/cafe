@@ -9,21 +9,21 @@ jQuery(document).ready(function(){
 
 for (var i=1;i<=window.num_sliders;i++)
 {
-	$(".slider-progress").append("<div class=\"slider-progress-dot slider-progress-dot-"+i+"\"></div>")
+	/*$(".slider-progress").append("<div class=\"slider-progress-dot slider-progress-dot-"+i+"\"></div>")*/
 }
 
 //$( ".slider" ).append( "<span class=\"manual-slide manual-slide-left\"><</span>" );
 $( ".slider" ).append( "<div class=\"crc-div-wrapper\"><div class=\"grade-container\"></div></div>" );
 
-grades = ['A+','A','A-','B+','B','B-','C+','C','C-','D+','D','D-','F']
+grades = ['A+','A','A-','B+','B','B-','C+','C','C-','D+']
 grades.forEach(function(grade) { 
 
 	if(grade.indexOf('+') >= 0)
-		$(".grade-container").append("<div class=\"slider-grade-bubble slider-grade-p bubble-" +grade.replace("+","p")+"\">"+grade+"</div>");
+		$(".grade-container").append("<div class=\"slider-grade-bubble slider-grade-p bubble-" +grade.replace("+","p")+"\">"+""+"</div>");
 	else if (grade.indexOf('-') >= 0 ) 
-		$(".grade-container").append("<div class=\"slider-grade-bubble slider-grade-m bubble-" +grade+"\">"+grade+"</div>");
+		$(".grade-container").append("<div class=\"slider-grade-bubble slider-grade-m bubble-" +grade+"\">"+""+"</div>");
 	else	
-		$(".grade-container").append("<div class=\"slider-grade-bubble slider-grade-main bubble-" +grade.replace("+","p")+"\">"+grade+"</div>");
+		$(".grade-container").append("<div class=\"slider-grade-bubble slider-grade-main bubble-" +grade.replace("+","p")+"\">"+""+"</div>");
 
 });
 $(".slider-grade-bubble").on("click",function(e){ 
@@ -47,14 +47,14 @@ $(".slider-grade-bubble").on("click",function(e){
 	median = score_to_grade(100*medians[statement_id]);
 	rate.logUserEvent(11,'slider_set ' + statement_id + ' ' + window.sliders[statement_id-1]/100);
 
-	$(this).parent().children(".bubble-"+median.replace("+","p")).css("border","4px solid #66FFFF");
+	/*$(this).parent().children(".bubble-"+median.replace("+","p")).css("border","4px solid #66FFFF");
 	if (window.rate_count == 0){
 	$(".median-grade-"+statement_id).html("The median grade so far is highlighted in blue.");
 	$(".median-grade-"+statement_id).fadeIn(500);
 	$(".median-grade-"+statement_id).fadeOut(6000);
-	}
+	}*/
 	
-	$(".skip-button-"+statement_id).hide();
+	//$(".skip-button-"+statement_id).hide();
 	}
 	catch(exception){}
 
@@ -84,14 +84,14 @@ $(this).parent().children(".slider-grade-bubble").css("opacity","1.0");
 	median = score_to_grade(100*medians[statement_id]);
 	rate.logUserEvent(11,'slider_set ' + statement_id + ' ' + window.sliders[statement_id-1]/100);
 
-	$(this).parent().children(".bubble-"+median.replace("+","p")).css("border","4px solid #66FFFF");
+	/*$(this).parent().children(".bubble-"+median.replace("+","p")).css("border","4px solid #66FFFF");
 	if (window.rate_count == 0){
 	$(".median-grade-"+statement_id).html("The median grade so far is highlighted in blue.");
 	$(".median-grade-"+statement_id).fadeIn(500);
 	$(".median-grade-"+statement_id).fadeOut(6000);
-	}
+	}*/
 	
-	$(".skip-button-"+statement_id).hide();
+	//$(".skip-button-"+statement_id).hide();
 	}
 	catch(exception){}
 

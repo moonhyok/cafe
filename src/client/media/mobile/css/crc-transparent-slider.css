@@ -20,11 +20,9 @@
 		width: 100%; 
 	}
 		.slider-grade-main{
-		border-radius:20px;
-		line-height: 40px;
-		font-size: 22px;
+		height: 50px;
 		text-align: center;
-		width: 40px;
+		width: 50px;
 		display:inline-block;
 		margin-right: 5px;
 		margin-left: 5px;
@@ -34,11 +32,9 @@
 	}
 
 		.slider-grade-p{
-		border-radius:20px;
-		line-height: 40px;
-		font-size: 22px;
+		height: 50px;
 		text-align: center;
-		width: 40px;
+		width: 50px;
 		display:inline-block;
 		margin-right: 5px;
 		margin-left: 5px;
@@ -48,11 +44,9 @@
 	}
 
 			.slider-grade-m{
-		border-radius:20px;
-		line-height: 40px;
-		font-size: 22px;
+		height: 50px;
 		text-align: center;
-		width: 40px;
+		width: 50px;
 		display:inline-block;
 		margin-right: 5px;
 		margin-left: 5px;
@@ -76,53 +70,53 @@
 	}
 
 	.bubble-Ap{
-		border: 2px solid #00FF00;
-		color: #00FF00;
+		background-image: url('../img/cafe/keypad-09.png');
+		background-size: cover;
 	}
 
 	.bubble-A{
-		border: 2px solid #00FF00;
-		color: #00FF00;
+		background-image: url('../img/cafe/keypad-08.png');
+		background-size: cover;
 	}
 
 	.bubble-A-{
-		border: 2px solid #00FF00;
-		color: #00FF00;
+		background-image: url('../img/cafe/keypad-07.png');
+		background-size: cover;
 	}
 
 	.bubble-Bp{
-		border: 2px solid #99CC00;
-		color: #99CC00;
+		background-image: url('../img/cafe/keypad-06.png');
+		background-size: cover;
 	}
 
 	.bubble-B{
-		border: 2px solid #99CC00;
-		color: #99CC00;
+		background-image: url('../img/cafe/keypad-05.png');
+		background-size: cover;
 	}
 
 	.bubble-B-{
-		border: 2px solid #99CC00;
-		color: #99CC00;
+		background-image: url('../img/cafe/keypad-04.png');
+		background-size: cover;
 	}
 
 	.bubble-Cp{
-		border: 2px solid #dabe5b;
-		color: #dabe5b;
+		background-image: url('../img/cafe/keypad-03.png');
+		background-size: cover;
 	}
 
 	.bubble-C{
-		border: 2px solid #dabe5b;
-		color: #dabe5b;
+		background-image: url('../img/cafe/keypad-02.png');
+		background-size: cover;
 	}
 
 	.bubble-C-{
-		border: 2px solid #dabe5b;
-		color: #dabe5b;
+		background-image: url('../img/cafe/keypad-01.png');
+		background-size: cover;
 	}
 
 	.bubble-Dp{
-		border: 2px solid #FF6600;
-		color: #FF6600;
+		background-image: url('../img/cafe/keypad-00.png');
+		background-size: cover;
 	}
 
 	.bubble-D{

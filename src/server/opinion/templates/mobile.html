@@ -270,22 +270,22 @@
       <br/>
       <br/>
 
-      <center>
-        <div class="landing-img-title responsive-title">
-          <!--<img width="300px;" style="position: relative; left: -10px;padding-top: 5px;padding-bottom: 5px;" src="{{url_root}}/media/mobile/img/cafe/crc-title-img.png">-->
+        <img width="100%" src="{{url_root}}/media/mobile/img/cafe/title_image.png">
+        <div class="landing-img-title">
           {% autoescape off %}{{client_settings.WELCOME_PAGE_HEADER}}{% endautoescape %}
         </div>  
 
-        <div class="landing-img-txt responsive-body">   
+        <div class="landing-img-subtitle">
+          {% autoescape off %}{{client_settings.WELCOME_PAGE_HEADER}}{% endautoescape %}
+        </div> 
+
+        <div class="landing-img-txt">   
            Join <strong>{{num_users}}</strong> others who have contributed to California's collective intelligence.
        </div>
         
-      </center>
-
-
       <!--<img class="capitol-bg" src="{{url_root}}/media/mobile/img/cafe/capitol-landing1.png">-->
 
-      <center><div class='button-div-red first-time-btn responsive-btn' style="position: relative; top: 40px;">Begin</div></center>
+      <center><div class='button-div-red first-time-btn responsive-btn' style="margin-top: 20px;">Begin</div></center>
       
        <!--<div class="landing-img-txt">   
            Take a moment to join <strong>{{num_users}}</strong> others who have graded the State of California on six timely issues.<br/>
@@ -317,11 +317,7 @@ function googleTranslateElementInit() {
                 {{client_settings.REPORT_CARD_HEADER}}
             </div>
 
-            <div class="home-btn-wrapper" style="width:30%;display:inline-block; text-align: right;">
-                <img width="12%" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
-                
-                <img width="12%" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
-                
+            <div class="home-btn-wrapper" style="width:30%;display:inline-block;">
                 <img width="12%" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
             </div>
 
@@ -332,37 +328,35 @@ function googleTranslateElementInit() {
             <div class="home-btn-title responsive-header">
               {{client_settings.REPORT_CARD_HEADER}}
             </div>
-           <div class="home-btn-wrapper" style="width:30%;display:inline-block; text-align: right;">
-            <img width="12%" class='endsliders-back-btn' id="back-{{statement.id}}" src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png"> 
-               
-            <img width="12%" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png"> 
-                
-            <img width="12%" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+           <<div class="home-btn-wrapper" style="width:30%;display:inline-block;">
+                <img width="12%" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
             </div>
           
           </div>  
 
-          <center>
-          <div class="responsive-body" style="text-align: center;padding-bottom: 5px;margin-bottom: 15px; font-size: 12px;width: 100% !important;background: #222222;">Grade the State of California on six timely issues:</div>
-        </center>
-
-          <center>   
-              <div class="slider-progress"></div>
+          <center>  
+              <div class="question-number">Question {{ statement.id }} of {{ statements|length }}</div>
               <div class="statement-style responsive-header">{{ statement.statement }}</div>
 
-              <div class="median-grade-{{statement.id}} med-grade-box"></div>
+              <div class="question-directions">How would you rate this topic?</div>
+
+              <!--<div class="median-grade-{{statement.id}} med-grade-box"></div>-->
 
               <div style="width: 100%;" class="responsive-padding">
-                <img class='endsliders-back-btn endsliders-back-btn-size responsive-next-btn' style="display: inline-block; position: relative; top: -120px;" id="back-{{statement.id}}" src="{{url_root}}/media/mobile/img/cafe/Skip_V1.png">
+                
 
-                <div class="slider" style="display: inline-block;margin-left: 15px;margin-right: 5px;" id="slider-{{statement.id}}"></div>
+                <div class="slider" style="margin-left: 15px;margin-right: 5px;" id="slider-{{statement.id}}"></div>
 
-                <img class='endsliders-next-btn responsive-next-btn' style="display: inline-block; position: relative; top: -120px;" id="next-{{statement.id}}" src="{{url_root}}/media/mobile/img/cafe/Next_V1.png">
+                <center>
+                <img class='endsliders-back-btn endsliders-back-btn-size' style="display: inline-block; width: 10px;position:relative;top:5px;" id="back-{{statement.id}}" src="{{url_root}}/media/mobile/img/cafe/Skip_V1.png">
+                <div class='question-directions' style="display: inline-block;font-size: 12px;padding: 0px;margin: 0px;">SWIPE TO SKIP TO THE NEXT QUESTION</div>
+                <img class='endsliders-next-btn responsive-next-btn' style="display: inline-block; width: 10px;position:relative;top:5px;" id="next-{{statement.id}}" src="{{url_root}}/media/mobile/img/cafe/Next_V1.png">
+              </center>
 
               </div>
                   
               <div style="clear: both;"></div>
-              <a href="#" class="skip-button-{{statement.id}} skip-btn responsive-body" id="next-{{statement.id}}" style="color: #ffffff;font-size: 16px;font-weight: normal !important;position:relative;top: -40px;left: 100px;">Skip</a>
+              <!--<a href="#" class="skip-button-{{statement.id}} skip-btn responsive-body" id="next-{{statement.id}}" style="color: #ffffff;font-size: 16px;font-weight: normal !important;position:relative;top: -40px;left: 100px;">Skip</a>-->
               
           </center>
 
