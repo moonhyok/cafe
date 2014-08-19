@@ -41,6 +41,37 @@ $(".slider-grade-bubble").on("click",function(e){
 	{
 		var classList = $(this).attr('class').split(/\s+/);
 		window.current_rating = grade_to_score(classList[2].substring(7).replace("p","+"));
+		        $('.menubar').show();
+        rate.doneRating();
+
+        try {
+            window.cur_clicked_mug.transition().duration(2000).style("opacity", "0").remove();
+        } catch (err) {
+            console.log(err);
+        }
+        //_this.transition().duration(500).style("opacity", "0");
+        /* Remove this bloom from our bookkeeping array. */
+        var index = jQuery.inArray(window.current_uid, window.blooms_list);
+        if (index >= 0) {
+            window.blooms_list.splice(index, 1);
+        }
+        /* Load more blooms if none left */
+        try {
+            if (window.blooms_list.length <= 2) {
+                console.log("here");
+                utils.showLoading("Loading More Mugs...");
+                window.blooms_list = undefined; //needed to avoid infinite recursing
+                setTimeout(blooms.populateBlooms, 500);
+                //utils.hideLoading();
+                // utils.showLoading("Loading More Ideas...", function() {
+                //     populateBlooms();
+                //});
+                //utils.hideLoading(5000);
+            }
+        } catch (err) {
+         /* undefined variable blooms. */
+         console.log(err);
+        }
 		return;
 	}
 	else

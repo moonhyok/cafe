@@ -98,7 +98,7 @@ var rate = (function($, d3, console) {
         window.cur_state = 'map';
         var myDiv = document.getElementById('rate');
         myDiv.scrollTop = 0;
-        $("#slider-importance").children().children().children(".slider-grade-bubble").css("background-color","transparent"); 
+        //$("#slider-importance").children().children().children(".slider-grade-bubble").css("background-color","transparent"); 
 
             sendAgreementRating({
                 'r1': window.current_rating,
