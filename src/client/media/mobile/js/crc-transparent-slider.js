@@ -43,6 +43,34 @@ $(".slider-grade-bubble").on("click",function(e){
 		window.current_rating = grade_to_score(classList[2].substring(7).replace("p","+"));
 		return;
 	}
+	else
+	{
+		//TODO cleanup
+		$('.first-dialog-nav').hide();
+        $('.slider-nav-box').show();
+
+        if(window.current_slider +1 > window.num_sliders)
+        {
+            window.prev_state = 'grade';
+        window.cur_state = 'register';
+        rate.logUserEvent(5,'sliders finished');
+        rate.storeSliders(window.num_sliders);
+        if (window.authenticated) {
+            for (var i = 1; i <= window.num_sliders; i++) {
+                rate.sendSlider(window.sliders[i], i);
+            }
+
+        }
+        }
+        else
+            {
+                $("#slide-"+window.current_slider).hide();
+                window.current_slider = window.current_slider  + 1;
+                $("#slide-"+window.current_slider).show("slide", { direction: "right" }, 500);
+                /*$(".slider-progress-dot-"+(parseInt(event.target.id.substring(5),10)+1)).css("background","#FFFFFF");*/
+
+            }
+	}
 
 	try {
 	statement_id = parseInt($(this).parent().parent().parent().attr("id").substring(7));

@@ -424,12 +424,11 @@ var rate = (function($, d3, console) {
 $(document).ready(function() {
     //$('.score-label').text(utils.toTitleCase(window.conf['YOUR_SCORE_LANGUAGE']).trim().replace(':', '') + ' is ');
 
-    $('.endsliders-next-btn').click(function(event){ 
-        
+    $('.endsliders-next-btn').click(function(event){         
         $('.first-dialog-nav').hide();
         $('.slider-nav-box').show();
 
-        if(parseInt(event.target.id.substring(5),10)+1 > window.num_sliders)
+        if(window.current_slider +1 > window.num_sliders)
         {
             window.prev_state = 'grade';
         window.cur_state = 'register';
@@ -444,8 +443,9 @@ $(document).ready(function() {
         }
         else
             {
-                $("#slide-"+event.target.id.substring(5)).hide();
-                $("#slide-"+(parseInt(event.target.id.substring(5),10)+1)).show("slide", { direction: "right" }, 500);
+                $("#slide-"+window.current_slider).hide();
+                window.current_slider = window.current_slider  + 1;
+                $("#slide-"+window.current_slider).show("slide", { direction: "right" }, 500);
                 /*$(".slider-progress-dot-"+(parseInt(event.target.id.substring(5),10)+1)).css("background","#FFFFFF");*/
 
             }
@@ -483,11 +483,13 @@ $(document).ready(function() {
         
         if(parseInt(event.target.id.substring(5),10) == 1)
         {
+            window.current_slider = 1;
             return;
         }
 
         $("#slide-"+event.target.id.substring(5)).hide();
         $("#slide-"+(parseInt(event.target.id.substring(5),10)-1)).show("slide", { direction: "left" }, 500);
+        window.current_slider = window.current_slider - 1;
         /*$(".slider-progress-dot-"+(parseInt(event.target.id.substring(5),10))).css("background","#666666");*/
 
         if(parseInt(event.target.id.substring(5),10) == 2)
