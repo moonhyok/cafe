@@ -45,7 +45,7 @@ $(".slider-grade-bubble").on("click",function(e){
 	var classList =$(this).attr('class').split(/\s+/);
 	window.sliders[statement_id-1] = grade_to_score(classList[2].substring(7).replace("p","+"));
 	median = score_to_grade(100*medians[statement_id]);
-	rate.logUserEvent(11,'slider_set ' + statement_id + ' ' + window.sliders[statement_id-1]/100);
+	rate.logUserEvent(11,'slider_set ' + statement_id + ' ' + window.sliders[statement_id-1]/10);
 
 	/*$(this).parent().children(".bubble-"+median.replace("+","p")).css("border","4px solid #66FFFF");
 	if (window.rate_count == 0){
@@ -82,7 +82,7 @@ $(this).parent().children(".slider-grade-bubble").css("opacity","1.0");
 	var classList =$(this).attr('class').split(/\s+/);
 	window.sliders[statement_id-1] = grade_to_score(classList[2].substring(7).replace("p","+"));
 	median = score_to_grade(100*medians[statement_id]);
-	rate.logUserEvent(11,'slider_set ' + statement_id + ' ' + window.sliders[statement_id-1]/100);
+	rate.logUserEvent(11,'slider_set ' + statement_id + ' ' + window.sliders[statement_id-1]/10);
 
 	/*$(this).parent().children(".bubble-"+median.replace("+","p")).css("border","4px solid #66FFFF");
 	if (window.rate_count == 0){

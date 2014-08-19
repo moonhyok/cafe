@@ -126,6 +126,7 @@ def mobile(request,entry_code=None):
 											 'client_data': mobile_client_data(request),
 											 'entry_code': str(entry_code!=None).lower(),
 											 'refer': referrallink,
+                                             'statement_hist': get_statement_histograms(),
 											 'client_settings': get_client_settings(True),
                                              'horizontal_slide': settings.HORIZONTAL_SLIDE,
 											 'topic': DiscussionStatement.objects.filter(is_current=True)[0].statement,

@@ -206,25 +206,25 @@
 
   function grade_to_score(grade) {
     if (grade == 'A+')
-        return 100;
+        return 9;
     else if (grade == 'A')
-        return 92;
+        return 8;
     else if (grade == 'A-')
-        return 86;
+        return 7;
     else if (grade == 'B+')
-        return 81;
+        return 6;
     else if (grade == 'B' )
-        return 69;
+        return 5;
     else if (grade == 'B-')
-        return 62;
+        return 4;
     else if (grade == 'C+')
-        return 56;
+        return 3;
     else if (grade == 'C')
-        return 44;
+        return 2;
     else if (grade == 'C-')
-        return 38;
+        return 1;
     else if (grade == 'D+')
-        return 32;
+        return 0;
     else if (grade == 'D')
         return 19;
     else if (grade == 'D-')
@@ -422,26 +422,72 @@ function googleTranslateElementInit() {
 
   <div class='dialog dialog-style'>
       <div class="home-btn-dialog-box">
-            <div class="home-btn-title responsive-header" style="text-shadow: none;">
-                Join the Discussion
+            <div class="home-btn-title responsive-header">
+                Title
             </div>
             
             <div class="home-btn-wrapper" style="width:30%;display:inline-block; text-align: right;">
                 <img width="12%" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png"> 
-                
-                <img width="12%" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png"> 
-                
-                <img width="12%" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
             </div>
 
          </div> 
       <!--<img class="header-img-topic center" src="{{ url_root }}/media/mobile/img/cafe/CRC_join.png"/>-->
        <center>
         <div class='dialog-text1 dialog-text-style responsive-body'>
-          {{client_settings.DISCUSSION_DIALOG_TEXT1}}
+          How do I compare?
         </div>
+
+        <br/>
+        {% for k,v in statement_hist.iteritems %}
+        
+      <div class="compare-box-{{k.id}}" style="padding-bottom: 10px;">
+        <div class="compare-tag">
+          <div style="font-style: italic;font-weight: bolder;">Question {{k.id}}</div>
+          <div style="font-size: 22px;font-weight: bolder;">{{k.short_version}}</div>
+        </div>
+
+        <canvas id="sparkLineCanvas{{k.id}}" width="160" height="50"></canvas>
+        
+        <div>
+          <script>
+      var canvas = document.getElementById('sparkLineCanvas{{k.id}}');
+      var context = canvas.getContext('2d');
+
+      if ({{k.id}} % 2 == 1)
+        $('.compare-box-{{k.id}}').css("background-color","rgba(0,0,0,0.05)")
+
+      var data = {{v}};
+      var max_of_array = Math.max.apply(Math, data);
+
+      context.beginPath();
+      context.lineWidth = 2;
+      context.strokeStyle = '#B7AF95';
+      context.shadowColor = '#ffffff';
+        context.shadowOffsetX = 1;
+        context.shadowOffsetY = 1;
+      context.moveTo(0, 45 - data[0]/max_of_array*38);
+      for (i = 1; i <= 9; i++)
+      {
+        context.lineTo(i*16, 45 - data[i]/max_of_array*38);
+        context.stroke(); 
+      }
+
+      context.font="italic small-caps bolder 12px sans-serif";
+      context.fillStyle = '#B7AF95';
+      context.fillText("0",0,48);
+
+      context.fillText("9",150,50);
+      </script>
+
+      </div>
+        
+        </div>
+
+        {% endfor %}
+
               <div class="discuss-btn-div">
-                  <div class='dialog-ready button-div responsive-btn'> Join </button>
+                  <div class='dialog-ready button-div responsive-btn' style="display: inline-block;"> Join A </div>
+                  <div class='dialog-ready button-div responsive-btn' style="display: inline-block;"> Join B</div>
                   <!--<button type='submit' data-theme='b' class='dialog-next'  onclick="$('.dialog-text1').hide();$('.dialog-text2').show();"><font style="font-size: 16px;">Next</font></button>-->
               </div>
       </center>
@@ -450,7 +496,7 @@ function googleTranslateElementInit() {
   <div class='comment-input'>
        <div class="home-btn-dialog-box">
             <div class="home-btn-title responsive-header" style="width:50%;">
-                What do you think?
+                Title
             </div>
             
             <div class="home-btn-wrapper" style="width:45%;display:inline-block; text-align: right;">
@@ -469,7 +515,7 @@ function googleTranslateElementInit() {
           <div class='comment-panel'>
               <div class="basic-header2 responsive-body" style="text-align:left;">{{topic}}<br/></div>
               <textarea name='answer' id='entered-comment'></textarea>
-              <div class="standard-btn-div" style="width: 95%; position:relative; left: -50px">
+              <div class="standard-btn-div" style="width: 100%;">
                   <div class='comment-submit-btn button-div responsive-btn' style="display: inline-block;">Post</div>
                   <div class='comment-cancel-btn button-div responsive-btn' style="display: inline-block; ">Later</div>
               </div>
@@ -543,18 +589,12 @@ function googleTranslateElementInit() {
 
   <center>
     <div class="answerwrapper">
-     <div class='sliders responsive-body' style="text-align: left;">
+     <div class='sliders responsive-body' style="text-align: left;font-size: 12px;">
        {{client_settings.RATE_IMPORTANCE_QUESTION}}
        <center>
-       <div class="slider" id="slider-importance"></div>
-               <img class="responsive-go-back" id='go-back' style="position: relative; top: -200px; left: 100px; width: 50px;" id="next-{{statement.id}}" src="{{url_root}}/media/mobile/img/cafe/Next_V1.png">            
+       <div class="slider" id="slider-importance"></div>           
        </center>
-
-       <div style="text-align: right; width: 100%;">
-        <a href="#" class="responsive-body responsive-skip"  onclick="rate.doneRatingNoSave();" style="color: #ffffff;font-size: 16px;font-weight: normal !important;position:relative; top: -85px; left: -100px;">Skip</a> 
-        </div>      
-
-
+  
        <div class="slider-padding"></div>
 
        <div style="clear: both;"></div>
@@ -668,7 +708,7 @@ function googleTranslateElementInit() {
   <div class='dialog-continue dialog-style'>
        <div class="home-btn-dialog-box">
             <div class="home-btn-title responsive-header" style="width:50%; text-shadow: none; position: relative; left: 15px;">
-                Thanks!
+                Title
             </div>
             
             <div class="home-btn-wrapper" style="width:45%;display:inline-block; text-align: right;">
@@ -689,12 +729,12 @@ function googleTranslateElementInit() {
       </div>-->
 
         <center>
-                  <input type="email" id='regemail' name='regemail' class='regforminput' style="font-size: 15px; background-color: #FFFFFF;color: #000000;" placeholder="Email" data-theme='b'></input>
+                  <!--<input type="email" id='regemail' name='regemail' class='regforminput' style="font-size: 15px; background-color: #FFFFFF;color: #000000;" placeholder="Email" data-theme='b'></input>
         <div class="comment-admin-text-b">{{client_settings.DEMOGRAPHICS_DISCLAIMER}}.</div>
-        <br/>
-            <div class="standard-btn-div" style="position:relative; left: -40px;">
-                <div class='button-div dialog-continue-ready responsive-btn'>Enter</div>
-            </div>
+        <br/>-->
+                <div class='button-div-wide dialog-continue-ready responsive-btn'>Button 1</div>
+                <div class='button-div-wide dialog-continue-ready responsive-btn'>Button 2</div>
+                <div class='button-div-wide dialog-continue-ready responsive-btn'>Button 3</div>
             <div class='alert-error' id='email-error' style='display:none;width: 250px;'></div>
         </center>
 
