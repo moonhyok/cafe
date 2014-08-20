@@ -1250,6 +1250,10 @@ padding-right: 7px;
 	display: none !important;
 }
 
+.ui-btn-inner{
+	background-color: #e0dbcb !important;
+}
+
 .home-btn-dialog-box .ui-btn-inner{
     font-family: "Lucida Grande", "Lucida Sans Unicode", Arial, sans-serif;
     line-height: 15px;
