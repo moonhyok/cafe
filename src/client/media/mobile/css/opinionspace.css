@@ -792,7 +792,7 @@ table.pretty caption {
 		background-size: cover;
 		width: 134px;
 		font-weight: bolder;
-		font-size: 22px;
+		font-size: 18px;
 		line-height: 50px;
 		text-align: center;
 		color: #B7AF95;
@@ -1168,7 +1168,7 @@ padding-right: 7px;
 .home-btn-title{
 	display:inline-block;
 	text-align: left; 
-	width: 68%;
+	width: 60%;
 	font-size: 22px;
 	position:relative;
 	font-weight: bolder;
