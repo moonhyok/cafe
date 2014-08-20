@@ -105,7 +105,7 @@
 
  jQuery(document).ready(function(){
    for (var i = 0; i < window.num_sliders; i++) {
-     window.sliders[i] = 42;
+     window.sliders[i] = 4;
      window.skipped[i] = false;
      $(".endslider-slider"+(i+1)).noUiSlider({
        range: [0, 100],
@@ -270,8 +270,8 @@
           </div>
 
           <div class="home-btn-wrapper" style="width:30%;display:inline-block;">
-          <img width="12%" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
-          </div>
+            <img width="30px" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+            </div>
 
       </div>
 
@@ -305,13 +305,6 @@ function googleTranslateElementInit() {
 
   </div>
 
-
-
-  <div style="clear: both;"></div>
-
-
-
-
   <div id='rating' class='endsliders'>        
 
       {% for statement in statements %}              
@@ -319,11 +312,11 @@ function googleTranslateElementInit() {
 
          <div class="home-btn-dialog-box first-dialog-nav">
             <div class="home-btn-title responsive-header">
-                Title
+                Open NYU CAFE
             </div>
 
             <div class="home-btn-wrapper" style="width:30%;display:inline-block;">
-                <img width="12%" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+                <img width="30px" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
             </div>
 
          </div> 
@@ -331,10 +324,10 @@ function googleTranslateElementInit() {
           <div class="home-btn-dialog-box slider-nav-box" style="display: none;">
             
             <div class="home-btn-title responsive-header">
-              Title
+              Open NYU CAFE
             </div>
-           <<div class="home-btn-wrapper" style="width:30%;display:inline-block;">
-                <img width="12%" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+            <div class="home-btn-wrapper" style="width:30%;display:inline-block;">
+                <img width="30px" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
             </div>
           
           </div>  
@@ -374,35 +367,93 @@ function googleTranslateElementInit() {
   <div class = 'register' id='register'>
       <div class="home-btn-dialog-box">
             <div class="home-btn-title responsive-header">
-                Title
+                Open NYU CAFE
             </div>
             
-            <div class="home-btn-wrapper" style="width:30%;display:inline-block; text-align: right;">
-                <img width="12%" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png"> 
-                
-                <img width="12%" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png"> 
-                
-                <img width="12%" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+            <div class="home-btn-wrapper" style="width:30%;display:inline-block;">
+            <img width="30px" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
             </div>
 
          </div> 
 
       <div class= 'registerpanel'>
         <center>
-          <div class="basic-header2 responsive-header" style="max-width: 500px;">{{client_settings.ZIP_CODE_INSTRUCTIONS}}:</div>
+          <div class="basic-header2 responsive-header" style="max-width: 500px;">Answer these questions to compare to others:</div>
+          <!--<div class="basic-header2 responsive-header" style="max-width: 500px;">{{client_settings.ZIP_CODE_INSTRUCTIONS}}:</div>-->
           <form id='reg_form' class='reg_form responsive-form'>
               <center>
 
               <div data-role="fieldcontain">
-                  <input type ='tel' id='regzip' name='regzip' class='regforminput' value="" placeholder="Zip Code" onBlur="$('.registerb').click();">
-                  <div class='alert-error' id='zipcode-error' style='display:none;'></div>
+    <select class="drop-down-class">
+        <option value="none" data-placeholder="true">Your NYU Affiliation</option>
+       <option value="student">NYU Student</option>
+       <option value="faculty">NYU Faculty</option>
+       <option value="admin">NYU Admin</option>
+       <option value="staff">NYU Staff</option>
+       <option value="alum">NYU Alumni</option>
+       <option value="parent">Parent</option>
+       <option value="neighbor">Neighbor</option>
+    </select>
+
+    <br/>
+    <br/>
+
+    <select class="drop-down-class">
+      <option value="N/A" data-placeholder="true">Your School</option>
+<option value="CAS">CAS</option>
+<option value="Continuing">Continuing</option>
+<option value="Courant">Courant</option>
+<option value="Dentistry">Dentistry</option>
+<option value="Fine Arts">Fine Arts</option>
+<option value="Gallatin">Gallatin</option>
+<option value="GSAS">GSAS</option>
+<option value="Liberal Studies">Liberal Studies</option>
+<option value="Nursing">Nursing</option>
+<option value="Polytechnic">Polytechnic</option>
+<option value="Schack">Schack</option>
+<option value="Stern">Stern</option>
+<option value="Tisch">Tisch</option>
+<option value="Wagner">Wagner</option>
+    </select>
+
+    <br/>
+    <br/>
+
+    <select class="drop-down-class">
+        <option value="-" data-placeholder="true">Years at NYU</option>
+       <option value="0">0</option>
+       <option value="1">1</option>
+       <option value="2">2</option>
+       <option value="3">3</option>
+       <option value="4">4</option>
+       <option value="5">5</option>
+       <option value="6">6</option>
+       <option value="7">7</option>
+       <option value="8">8</option>
+       <option value="9">9</option>
+       <option value="10+">10+</option>
+    </select>
+
+              <br/>
+              <br/>
+
+              <div class="button-div registerb responsive-btn" id="registerb" style="font-size: 24px; padding-top:10px;">{{client_settings.ZIP_CODE_BUTTON}}</div>
+              <br/>
+              <div class="button-div-wide registerb responsive-btn">No Thanks</div>
+
               </div>
+
+              <div data-role="fieldcontain" style='display:none;'>
+               <input type ='tel' id='regzip' name='regzip' style="display:none" class='regforminput' value="00000" placeholder="Zip Code" onBlur="$('.registerb').click();">
+
+                  <div class='alert-error' id='zipcode-error' style='display:none;'></div>
+                </div>
 
               <!--These are hidden dummy attributes for book-keeping-->
 
-              <input type='hidden' value='{{ topic }}' name='question'>
-              <input type='hidden' value='{{ url_root }}' name='url'>
               <div data-role="fieldcontain" style="display: none;">
+                              <input type='hidden' value='{{ topic }}' name='question'>
+              <input type='hidden' value='{{ url_root }}' name='url'>
                   <label for="regusername" class='regforminput'>Email:</label>
                   <input type="hidden" id='regusername' name='regusername' class='regforminput' value='{{ random_username }}' placeholder="Email" data-theme='b'/>
                   <div class='alert-error' id='username-error' style='display:none;'></div>
@@ -416,8 +467,6 @@ function googleTranslateElementInit() {
                   <!--<div class="standard-btn-div" onclick="document.getElementById('registerb').focus();">
                       
                   </div>-->
-                  <div class="button-div registerb responsive-btn" id="registerb">{{client_settings.ZIP_CODE_BUTTON}}</div>
-                  <div class="button-div-wide registerb responsive-btn">No Thanks</div>
               </center>
           </form>
           </center>
@@ -429,11 +478,11 @@ function googleTranslateElementInit() {
   <div class='dialog dialog-style'>
       <div class="home-btn-dialog-box">
             <div class="home-btn-title responsive-header">
-                Title
+                Open NYU CAFE
             </div>
             
             <div class="home-btn-wrapper" style="width:30%;display:inline-block; text-align: right;">
-                <img width="12%" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png"> 
+                <img width="30px" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png"> 
             </div>
 
          </div> 
@@ -492,8 +541,8 @@ function googleTranslateElementInit() {
         {% endfor %}
 
               <div class="discuss-btn-div">
-                  <div class='dialog-ready button-div responsive-btn' style="display: inline-block;"> Join A </div>
-                  <div class='dialog-ready button-div responsive-btn' style="display: inline-block;"> Join B</div>
+                  <div class='dialog-ready button-div responsive-btn' style="display: inline-block;">Rate Others' Ideas</div>
+                  <div class='dialog-ready button-div responsive-btn' style="display: inline-block;">Tell Us Your Idea</div>
                   <!--<button type='submit' data-theme='b' class='dialog-next'  onclick="$('.dialog-text1').hide();$('.dialog-text2').show();"><font style="font-size: 16px;">Next</font></button>-->
               </div>
       </center>
@@ -501,18 +550,12 @@ function googleTranslateElementInit() {
 
   <div class='comment-input'>
        <div class="home-btn-dialog-box">
-            <div class="home-btn-title responsive-header" style="width:50%;">
-                Title
+            <div class="home-btn-title responsive-header">
+                Open NYU CAFE
             </div>
             
-            <div class="home-btn-wrapper" style="width:45%;display:inline-block; text-align: right;">
-                <img width="6%" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png"> 
-                
-                <img width="6%" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png"> 
-                
-                <img width="6%" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
-                
-                <img width="6%" class='logout-btn' src="{{url_root}}/media/mobile/img/cafe/CRC_logout_bttn.png">
+            <div class="home-btn-wrapper" style="width:30%;display:inline-block;">
+            <img width="30px" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
             </div>
 
          </div> 
@@ -535,27 +578,15 @@ function googleTranslateElementInit() {
                 <span class='score-label'></span><span class='score-value'></span>
             </div>-->
 
-            <div class="home-btn-title responsive-header" style="width: 50%;">
-                Title
+            <div class="home-btn-title responsive-header" style="width:68%;">
+                Open NYU CAFE
             </div>
 
-            <div class="home-btn-wrapper" style="width: 45%;display:inline-block; text-align: right;">
-                <img width="6%" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
-                
-                
-                
-                <img width="6%" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
-                 
-                 
-                  
-                 <img width="6%" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
-                
-                
-                
-                <img width="6%" class='logout-btn' src="{{url_root}}/media/mobile/img/cafe/CRC_logout_bttn.png">
+            <div class="home-btn-wrapper" style="width:30%;display:inline-block;">
+              <img width="30px" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png" style="position:relative;left:-20px;">
             </div>
 
-            <!--<span class="stats-wrapper" style="display: none;"><img width="12%" class='my-comment-btn' src="{{url_root}}/media/mobile/img/cafe/CRC_stats_bttn.png"></span>-->
+            <!--<span class="stats-wrapper" style="display: none;"><img width="30px" class='my-comment-btn' src="{{url_root}}/media/mobile/img/cafe/CRC_stats_bttn.png"></span>-->
         </div>
 
             <!--<div class='instructions instructions-responsive'>{{client_settings.INSTRUCTIONS_1}}</div>
@@ -571,15 +602,11 @@ function googleTranslateElementInit() {
 
       <div class="home-btn-dialog-box">
             <div class="home-btn-title responsive-header">
-                Title
+                Open NYU CAFE
             </div>
             
-            <div class="home-btn-wrapper" style="width:30%;display:inline-block; text-align: right;">
-                <img width="12%" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png"> 
-                
-                <img width="12%" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png"> 
-                
-                <img width="12%" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+            <div class="home-btn-wrapper" style="width:30%;display:inline-block; text-align: right;">                
+                <img width="30px" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
             </div>
 
          </div>
@@ -627,15 +654,11 @@ function googleTranslateElementInit() {
   <div class='logout'>
             <div class="home-btn-dialog-box">
             <div class="home-btn-title responsive-header">
-              Title
+              Open NYU CAFE
             </div>
             
             <div class="home-btn-wrapper" style="width:30%;display:inline-block; text-align: right;">
-                <img width="12%" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png"> 
-                
-                <img width="12%" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png"> 
-                
-                <img width="12%" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+                <img width="30px" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
             </div>
 
          </div>
@@ -672,7 +695,7 @@ function googleTranslateElementInit() {
   <div class='dialog-score dialog-style'>
 
       <div class="home-btn-dialog-box">
-          <button data-theme='b' class='home-btn-dialog'><img width="12%" src="{{url_root}}/media/mobile/img/cafe/home-icon.png"></button>
+          <button data-theme='b' class='home-btn-dialog'><img width="30px" src="{{url_root}}/media/mobile/img/cafe/home-icon.png"></button>
       </div>
 
     <div class='dialog-text-notitle default-left-padding responsive-body'>
@@ -694,7 +717,7 @@ function googleTranslateElementInit() {
   <div class='dialog-yourmug dialog-style'>
 
       <div class="home-btn-dialog-box">
-          <button data-theme='b' class='home-btn-dialog'><img width="12%" src="{{url_root}}/media/mobile/img/cafe/home-icon.png"></button>
+          <button data-theme='b' class='home-btn-dialog'><img width="30px" src="{{url_root}}/media/mobile/img/cafe/home-icon.png"></button>
       </div>
 
     <div class='dialog-text-style default-left-padding responsive-body'>

@@ -88,6 +88,15 @@ var accounts = (function($, d3, console) {
                     rate.logUserEvent(0,'login');
                     for (var i = 0; i < window.num_sliders; i++) {
                         rate.sendSlider(window.sliders[i], i+1);
+                        //draw line on canvas
+                        var canvas = document.getElementById("sparkLineCanvas"+(i+1));
+                         var context = canvas.getContext('2d');
+                         context.beginPath();
+                        context.lineWidth = 2;
+                        context.strokeStyle = '#6c8c7e';
+                        context.moveTo(window.sliders[i]*16, 45);
+                        context.lineTo(window.sliders[i]*16, 5);
+                        context.stroke(); 
                         //blooms will be populated at the end of this! see callback
                         //there are two calls!!
                     }
@@ -276,6 +285,7 @@ var accounts = (function($, d3, console) {
 	function hideAll(){
 	    $('.register').hide();
 	    $('.landing').hide();
+        $('.demographics').hide();
         $('.endsliders').hide();
         $('.dialog').hide();
         $('.dialog-avggrade').hide();
@@ -499,6 +509,7 @@ $(document).ready(function() {
         /*$(".slider-progress-dot").css("background","#000000");
         $(".slider-progress-dot-"+1).css("background","#FFFFFF");*/
         window.cur_state = 'grade';
+        window.prev_state = 'demographics';
         rate.logUserEvent(7,'first time');
         //$('.top-bar').show();
         //rate.initScore();

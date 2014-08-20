@@ -73,7 +73,9 @@ class OpinionSpaceStatement(Model):
     statement_number = PositiveSmallIntegerField()
     statement = CharField(max_length = 512)
     short_version = CharField(max_length = 128)
+    type = PositiveSmallIntegerField()
     created = DateTimeField(auto_now_add = True)
+
     
     def __unicode__(self):
         return self.statement
