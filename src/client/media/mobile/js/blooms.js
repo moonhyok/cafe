@@ -533,7 +533,7 @@ var _blooms = blooms = (function($, d3, console) {
     function alreadyAuthenticated() {
         //TOFIX utils.showLoading("Loading...");
         populateBlooms();
-        accounts.initLoggedInFeatures();
+        accounts.initLoggedInFeatures(false, true);
         //TOFIX utils.hideLoading();
         //accounts.getNeighborStat();
         /*if(window.conf.RETURN_USER_FIRST_TIME){

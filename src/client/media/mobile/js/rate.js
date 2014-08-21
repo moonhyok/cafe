@@ -503,10 +503,11 @@ $(document).ready(function() {
     $('.comment-submit-btn').click(function() {
         window.comment = $('#entered-comment').val();
         $('.comment-input').hide();
-        $('.dialog-continue').show();
+        $('.burger-page').show();
         $('.scorebox').hide();
         $('.menubar').hide();
         window.prev_state = 'comment';
+        //todo fix
         window.cur_state = 'continue';
         utils.showLoading('');
         rate.logUserEvent(6,'comment submitted');

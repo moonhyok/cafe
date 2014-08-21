@@ -439,7 +439,7 @@ function googleTranslateElementInit() {
 
               <div class="button-div registerb responsive-btn" id="registerb" style="font-size: 18px; padding-top:10px; height: 35px;">Save</div>
               <br/>
-              <div class="button-div-wide registerb responsive-btn">No Thanks</div>
+              <div class="button-div-wide registerb responsive-btn" id="registern">No Thanks</div>
 
               </div>
 
@@ -474,6 +474,42 @@ function googleTranslateElementInit() {
 
 
   </div>
+
+  <div class='burger-page dialog-style'>
+    
+      <div class="home-btn-dialog-box">
+            <div class="home-btn-title responsive-header">
+                Open NYU CAFE
+            </div>
+            
+            <div class="home-btn-wrapper" style="width:30%;display:inline-block; text-align: right;">
+                <span style="font-size: 24px;font-weight:bold;padding-right: 15px;">X</span>
+            </div>
+
+      </div> 
+
+      <div class="burger-div burger-div-about">
+        About
+      </div>
+
+      <div class="burger-div burger-div-compare" style="display: none;">
+        How Do You Compare?
+      </div>
+
+      <div class="burger-div burger-div-others" style="display: none;">
+        Rate Others
+      </div>
+
+      <div class="burger-div burger-div-yours" style="display: none;">
+        Tell Us Your Idea
+      </div>
+
+      <div class="burger-div burger-div-logout">
+        Logout
+      </div>
+
+  </div>
+
 
   <div class='dialog dialog-style'>
       <div class="home-btn-dialog-box">
@@ -564,9 +600,7 @@ function googleTranslateElementInit() {
           <div class='comment-panel'>
               <div class="basic-header2 responsive-body" style="text-align:left;">{{topic}}<br/></div>
               <textarea name='answer' id='entered-comment'></textarea>
-              <div class="standard-btn-div" style="width: 100%;">
                   <div class='comment-submit-btn button-div-wide responsive-btn' style="display: inline-block;">Post</div>
-              </div>
           </div>
       </center>
   </div>
@@ -662,13 +696,13 @@ function googleTranslateElementInit() {
             </div>
 
          </div>
-        <div class="responsive-body">
+        <div class="responsive-body" style="text-align:center;padding-top: 15px;">
             {{client_settings.LOGOUT_DIALOG_TEXT}}<br/><br/>
 	    <a href="http://twitter.com/home?status=How%20do%20you%20grade%20California?%20%20Try%20@CAReportCard%20developed%20by%20@Cal%20@GavinNewsom%20%26%20@Ken_Goldberg%20%20http://californiareportcard.org/mobile%20%23CA%20%23Gov" target="_blank" style="color: #555555;"><img src="{{url_root}}/media/mobile/img/cafe/twitter-button.png" width="102px"></a>
 	    <a href="http://on.fb.me/1jF60JL" target="_blank" style="color: #555555;"><img src="{{url_root}}/media/mobile/img/cafe/facebook-button.png" width="102px"></a>
         </div>
 
-        <div class='comment-submit-btn button-div-wide responsive-btn' style="display: inline-block;">Post</div>
+        <!--<div class='comment-submit-btn button-div responsive-btn' style="display: inline-block;">Email</div>-->
  </div>
 
   <div class='welcome-back'>
@@ -737,34 +771,32 @@ function googleTranslateElementInit() {
 
   <div class='dialog-continue dialog-style'>
        <div class="home-btn-dialog-box">
-            <div class="home-btn-title responsive-header" style="width:50%; text-shadow: none; position: relative; left: 15px;">
-                Title
+            <div class="home-btn-title responsive-header">
+                Open NYU CAFE
             </div>
             
-            <div class="home-btn-wrapper" style="width:45%;display:inline-block; text-align: right;">
-                <img width="6%" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png"> 
-                
-                <img width="6%" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png"> 
-                
-                <img width="6%" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
-                
-                <img width="6%" class='logout-btn' src="{{url_root}}/media/mobile/img/cafe/CRC_logout_bttn.png">
+            <div class="home-btn-wrapper" style="width:30%;display:inline-block; text-align: right;">
+                <img width="30px" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
             </div>
 
          </div> 
 <center>
+  <br/><br/>
     <div class='dialog-text-style responsive-body'>
+      Thank You For Your Input!
+      <div style="font-size: 18px;margin-top: 10px;">Join the discussion by weighing in on issues your colleagues are talking about. </div>
         <!--<div class='dialog-text-style default-left-padding'>
         {{client_settings.EMAIL_ASK_TEXT}}
       </div>-->
 
+      <br/>
         <center>
                   <!--<input type="email" id='regemail' name='regemail' class='regforminput' style="font-size: 15px; background-color: #FFFFFF;color: #000000;" placeholder="Email" data-theme='b'></input>
         <div class="comment-admin-text-b">{{client_settings.DEMOGRAPHICS_DISCLAIMER}}.</div>
         <br/>-->
-                <div class='button-div-wide dialog-continue-ready responsive-btn'>Button 1</div>
-                <div class='button-div-wide dialog-continue-ready responsive-btn'>Button 2</div>
-                <div class='button-div-wide dialog-continue-ready responsive-btn'>Button 3</div>
+                <div class='button-div-wide responsive-btn' onclick="$('.burger-div-others').click();">Rate Others</div>
+                <div class='button-div-wide responsive-btn' onclick="$('.burger-div-yours').click();">Tell Us Your Idea</div>
+                <div class='button-div-wide responsive-btn' onclick="$('.burger-div-logout').click();">Logout</div>
             <div class='alert-error' id='email-error' style='display:none;width: 250px;'></div>
         </center>
 
@@ -820,12 +852,8 @@ function googleTranslateElementInit() {
   </div>
 
   <div class='dialog-about dialog-style responsive-body' style="z-index:999">
-     <div class="home-btn-dialog-box">
-          <img width="5%" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
-          
-          <img width="5%" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
-          
-          <img width="5%" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+     <div class="home-btn-dialog-box" style="padding-top: 5px;">
+          <img width="12%" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
       </div>
       <div class='dialog-text-style-noflow small-left-padding responsive-body'>
           <div class="basic-header">{{client_settings.ABOUT_PAGE_HEADER}}</div>

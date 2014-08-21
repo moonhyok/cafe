@@ -73,7 +73,7 @@ var accounts = (function($, d3, console) {
     //This function is used specifically to login right after registration. This function also
     //  sends the data that has been stored in the window to the server after a successful the login.
 
-    function loginAfterRegister(loginData) {
+    function loginAfterRegister(loginData,dcontinue) {
         $.ajax({
             async : false,
             url: window.url_root + '/accountsjson/login/',
@@ -100,7 +100,7 @@ var accounts = (function($, d3, console) {
                         //blooms will be populated at the end of this! see callback
                         //there are two calls!!
                     }
-                    accounts.initLoggedInFeatures(true);
+                    accounts.initLoggedInFeatures(true,dcontinue);
                     
                     //for (i = 0; i < window.ratings.length - 1; i++) {
                     //    rate.sendAgreementRating(window.ratings[i]);
@@ -201,9 +201,13 @@ var accounts = (function($, d3, console) {
      *  JUSTREGISTERED is a boolean and optional. Used to shortcircuit showGraphs.
      */
 
-    function initLoggedInFeatures(justRegistered) {
+    function initLoggedInFeatures(justRegistered, dcontinue) {
         $('.top-bar').show();
+        $('.burger-div-compare').show();
+                        $('.burger-div-others').show();
+                        $('.burger-div-yours').show();
         justRegistered = typeof justRegistered !== 'undefined' ? justRegistered : false;
+        dcontinue = typeof dcontinue !== 'undefined' ? dcontinue : false;
         $('#regzip').prop('disabled', true);
         //utils.ajaxTempOff(function() {
 
@@ -216,17 +220,17 @@ var accounts = (function($, d3, console) {
                 //$('.score-value').text("" + ~~(data['cur_user_rater_score'] * window.conf.SCORE_SCALE_FACTOR));
                 window.user_score = data['cur_user_rater_score'];
                 //$('.username').text(' ' + data['cur_username']);
-                if (window.user_score == 0) {
+                if (dcontinue){
+                            accounts.hideAll();
+                            $('.dialog-continue').show();
+                        }
+                else {
                             accounts.hideAll();
                             $('.dialog').show();
                             window.cur_state = 'register';
                             window.prev_state = 'dialog';
-                        } else {
-                            accounts.hideAll();
-                            $('.menubar').show();
-                            window.cur_state = 'map';
-                            window.prev_state = 'map';
-                        }
+                        } 
+                
             },
             error: function() {
                 console.log("didn't get sent!");
@@ -290,6 +294,7 @@ var accounts = (function($, d3, console) {
         $('.dialog').hide();
         $('.dialog-avggrade').hide();
         $('.dialog-about').hide();
+        $('.burger-page').hide();
         $('.comment-input').hide();
         $('.menubar').hide();
         $('.rate').hide();
@@ -330,10 +335,14 @@ var accounts = (function($, d3, console) {
 })($, d3, console);
 
 $(document).ready(function() {
-    $('#registerb').click(function(e) {
+    $('.registerb').click(function(e) {
         //$('#register').find('.ui-btn-active').removeClass('ui-btn-active ui-focus');
         e.preventDefault();
         e.stopPropagation();
+
+        var dialogcontinue = false;
+        if ($(this).attr('id') == 'registern')
+            dialogcontinue = true;
 
         if(window.authenticated)
         {
@@ -396,8 +405,7 @@ $(document).ready(function() {
                     if (data.hasOwnProperty('success')) {
                         accounts.setAuthenticated();
                         utils.showLoading("Loading", function() {
-                            
-                            accounts.loginAfterRegister(loginData);
+                            accounts.loginAfterRegister(loginData,dialogcontinue);
                             blooms.populateBlooms();
                             //$('.register').hide();
                             $("#regzip").attr("disabled", true);
@@ -519,6 +527,13 @@ $(document).ready(function() {
         accounts.showLogin();
     });
 
+    $('.register-nothanks').click(function(){
+
+
+        accounts.hideAll();$('.dialog-continue').show()
+
+    });
+
     $('.home-btn-dialog').click(function() {
            window.no_menubar = true;
            //$('.landing-navigation').show();
@@ -609,7 +624,18 @@ $(document).ready(function() {
 
     $('.back-btn-dialog').click(function(){accounts.hideAll();backButtonHandler();});
 
-    $('.help-btn-dialog').click(function() {
+    $('.burger-div-about').click(function(){accounts.hideAll(); $('.dialog-about').show();});
+
+    $('.burger-div-compare').click(function(){accounts.hideAll(); $('.dialog').show();});
+
+    $('.burger-div-others').click(function(){accounts.hideAll();$('.menubar').show(); });
+
+    $('.burger-div-yours').click(function(){accounts.hideAll();$('.comment-input').show(); });
+
+    $('.help-btn-dialog').click(function(){accounts.hideAll(); $('.burger-page').show();})
+
+
+    $('.help2-btn-dialog').click(function() {
                                  if (window.cur_state.indexOf('help') != -1)
                                  {
                                     return;
@@ -819,7 +845,7 @@ $(document).ready(function() {
         //$('.scorebox').show();
     });
 
-    $('.logout-btn').click(function(e) {
+    $('.burger-div-logout').click(function(e) {
         rate.logUserEvent(1,'logout');
         accounts.hideAll();
         window.cur_state = 'logout';
