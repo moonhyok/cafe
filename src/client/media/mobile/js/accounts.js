@@ -643,7 +643,10 @@ $(document).ready(function() {
 
     $('.burger-div-yours').click(function(){accounts.hideAll();$('.comment-input').show(); });
 
-    $('.help-btn-dialog').click(function(){accounts.hideAll(); $('.burger-page').show();})
+    $('.help-btn-dialog').click(
+        function(){accounts.hideAll(); $('.burger-page').show();
+        window.burger_state = $(this).attr('id').substring(5);
+    })
 
 
     $('.help2-btn-dialog').click(function() {

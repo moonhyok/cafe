@@ -694,7 +694,7 @@ table.pretty caption {
 		width: 100%;
 		background-image:url('../img/cafe/capitol-landing.png');
 		background-size: cover;
-		display:none;
+		z-index: 999;
 
 	}
 

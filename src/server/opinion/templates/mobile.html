@@ -70,6 +70,8 @@
 
   window.prev_state = 'home';
 
+  window.burger_state = null;
+
   window.mousedown = 0;
 
   window.rate_count = 0;
@@ -270,7 +272,7 @@
           </div>
 
           <div class="home-btn-wrapper" style="width:30%;display:inline-block;">
-            <img width="30px" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+            <img width="30px" class='help-btn-dialog' id="help-landing" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
             </div>
 
       </div>
@@ -316,7 +318,7 @@ function googleTranslateElementInit() {
             </div>
 
             <div class="home-btn-wrapper" style="width:30%;display:inline-block;">
-                <img width="30px" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+                <img width="30px" class='help-btn-dialog' id="help-endsliders" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
             </div>
 
          </div> 
@@ -371,7 +373,7 @@ function googleTranslateElementInit() {
             </div>
             
             <div class="home-btn-wrapper" style="width:30%;display:inline-block;">
-            <img width="30px" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+            <img width="30px" class='help-btn-dialog' id="help-register" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
             </div>
 
          </div> 
@@ -483,7 +485,7 @@ function googleTranslateElementInit() {
             </div>
             
             <div class="home-btn-wrapper" style="width:30%;display:inline-block; text-align: right;">
-                <span style="font-size: 24px;font-weight:bold;padding-right: 15px;">X</span>
+                <span style="font-size: 24px;font-weight:bold;padding-right: 15px;" onclick="accounts.hideAll();$('.'+window.burger_state).show();">X</span>
             </div>
 
       </div> 
@@ -518,7 +520,7 @@ function googleTranslateElementInit() {
             </div>
             
             <div class="home-btn-wrapper" style="width:30%;display:inline-block; text-align: right;">
-                <img width="30px" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png"> 
+                <img width="30px" class='help-btn-dialog' id="help-dialog" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png"> 
             </div>
 
          </div> 
@@ -585,14 +587,14 @@ function googleTranslateElementInit() {
   </div>
 
       {% for k,v in statement_hist.iteritems %}
-          <div class="detail-box detail-box-{{k.id}}">
+          <div class="detail-box detail-box-{{k.id}}" style="display:none;">
         <div class="home-btn-dialog-box">
             <div class="home-btn-title responsive-header">
                 Open NYU CAFE
             </div>
             
             <div class="home-btn-wrapper" style="width:30%;display:inline-block; text-align: right;">
-                <img width="30px" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png"> 
+                <img width="30px" class='help-btn-dialog' id="help-detail-box-{{k.id}}" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png"> 
             </div>
 
          </div> 
@@ -658,7 +660,7 @@ function googleTranslateElementInit() {
             </div>
             
             <div class="home-btn-wrapper" style="width:30%;display:inline-block;">
-            <img width="30px" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+            <img width="30px" class='help-btn-dialog' id="help-comment-input" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
             </div>
 
          </div> 
@@ -684,7 +686,7 @@ function googleTranslateElementInit() {
             </div>
 
             <div class="home-btn-wrapper" style="width:30%;display:inline-block;">
-              <img width="30px" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png" style="position:relative;left:-20px;">
+              <img width="30px" class='help-btn-dialog' id="help-menubar" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png" style="position:relative;left:-20px;">
             </div>
 
             <!--<span class="stats-wrapper" style="display: none;"><img width="30px" class='my-comment-btn' src="{{url_root}}/media/mobile/img/cafe/CRC_stats_bttn.png"></span>-->
@@ -707,7 +709,7 @@ function googleTranslateElementInit() {
             </div>
             
             <div class="home-btn-wrapper" style="width:30%;display:inline-block; text-align: right;">                
-                <img width="30px" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+                <img width="30px" class='help-btn-dialog' id="help-rate" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
             </div>
 
          </div>
@@ -847,7 +849,7 @@ function googleTranslateElementInit() {
             </div>
             
             <div class="home-btn-wrapper" style="width:30%;display:inline-block; text-align: right;">
-                <img width="30px" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+                <img width="30px" class='help-btn-dialog' id='help-dialog-continue' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
             </div>
 
          </div> 
@@ -924,7 +926,7 @@ function googleTranslateElementInit() {
 
   <div class='dialog-about dialog-style responsive-body' style="z-index:999">
      <div class="home-btn-dialog-box" style="padding-top: 5px;">
-          <img width="12%" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+          <span style="font-size: 24px;font-weight:bold;padding-right: 15px;" onclick="accounts.hideAll();$('.burger-page').show();">X</span>
       </div>
       <div class='dialog-text-style-noflow small-left-padding responsive-body'>
           <div class="basic-header">{{client_settings.ABOUT_PAGE_HEADER}}</div>
