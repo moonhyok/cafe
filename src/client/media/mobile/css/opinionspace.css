@@ -674,6 +674,30 @@ table.pretty caption {
 
 	}
 
+	.close-page
+	{
+		width: 95%; 
+		text-align:right;
+		padding-top: 5px;
+		font-size: 24px;
+		font-weight:bold;
+		color: #b7af95;
+		text-shadow: 1px 1px #ffffff;
+	}
+
+	.detail-box{
+
+		position: absolute;
+		top: 0px; 
+		left: 0px;
+		height: 100%; 
+		width: 100%;
+		background-image:url('../img/cafe/capitol-landing.png');
+		background-size: cover;
+		display:none;
+
+	}
+
 	.my-comment, .stats, .help, .leaderboard, .comment-input{
     	 /* piggy backing the the new divs here for now,  .stats, .help*/
     		display: none;

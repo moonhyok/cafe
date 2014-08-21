@@ -97,6 +97,16 @@ var accounts = (function($, d3, console) {
                         context.moveTo(window.sliders[i]*16, 45);
                         context.lineTo(window.sliders[i]*16, 5);
                         context.stroke(); 
+
+                        var canvas = document.getElementById("sparkLineCanvasDetail"+(i+1));
+                         var context = canvas.getContext('2d');
+                         context.beginPath();
+                        context.lineWidth = 2;
+                        context.strokeStyle = '#6c8c7e';
+                        context.moveTo(window.sliders[i]*30, 90);
+                        context.lineTo(window.sliders[i]*30, 5);
+                        context.stroke(); 
+
                         //blooms will be populated at the end of this! see callback
                         //there are two calls!!
                     }
@@ -288,6 +298,7 @@ var accounts = (function($, d3, console) {
 
 	function hideAll(){
 	    $('.register').hide();
+        $('.detail-box').hide();
 	    $('.landing').hide();
         $('.demographics').hide();
         $('.endsliders').hide();

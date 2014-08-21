@@ -531,10 +531,11 @@ function googleTranslateElementInit() {
         <br/>
         {% for k,v in statement_hist.iteritems %}
         
-      <div class="compare-box-{{k.id}}" style="padding-bottom: 10px;">
+      <div class="compare-box-{{k.id}}" style="padding-bottom: 10px;" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();">
         <div class="compare-tag">
-          <div style="font-style: italic;font-weight: bolder;">Question {{k.id}}</div>
-          <div style="font-size: 22px;font-weight: bolder;">{{k.short_version}}</div>
+          <!--<div style="font-size: 12px; font-style: italic;font-weight: bolder;" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();">{{k.id}}. </div>-->
+          <div style="font-size: 18px;font-weight: bolder;" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();">{{k.short_version}}</div>
+          <div style="font-size: 12px; font-weight: bolder;" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();">click to see more >></div>
         </div>
 
         <canvas id="sparkLineCanvas{{k.id}}" width="160" height="50"></canvas>
@@ -573,7 +574,6 @@ function googleTranslateElementInit() {
       </div>
         
         </div>
-
         {% endfor %}
 
               <div class="discuss-btn-div">
@@ -583,6 +583,73 @@ function googleTranslateElementInit() {
               </div>
       </center>
   </div>
+
+      {% for k,v in statement_hist.iteritems %}
+          <div class="detail-box detail-box-{{k.id}}">
+        <div class="home-btn-dialog-box">
+            <div class="home-btn-title responsive-header">
+                Open NYU CAFE
+            </div>
+            
+            <div class="home-btn-wrapper" style="width:30%;display:inline-block; text-align: right;">
+                <img width="30px" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png"> 
+            </div>
+
+         </div> 
+
+         
+         <div class="close-page" onclick="accounts.hideAll();$('.dialog').show();">
+           X
+          </div>
+
+         <div class="statement-style">
+          <div style="font-style: italic;font-weight: bolder;padding-top: 20px;font-size: 14px;">Question {{k.id}}</div>
+         {{ k.statement }} 
+         </div>
+
+
+      <center>     
+        <div style="margin-left: 15px;">
+          <canvas id="sparkLineCanvasDetail{{k.id}}" width="290" height="100" style="background-color: rgba(255,255,255,0.4)"></canvas>
+          <script>
+      var canvas = document.getElementById('sparkLineCanvasDetail{{k.id}}');
+      var context = canvas.getContext('2d');
+
+      var data = {{v}};
+      var max_of_array = Math.max.apply(Math, data);
+
+      context.beginPath();
+      context.lineWidth = 2;
+      context.strokeStyle = '#B7AF95';
+      context.shadowColor = '#ffffff';
+        context.shadowOffsetX = 1;
+        context.shadowOffsetY = 1;
+      context.moveTo(0, 90 - data[0]/max_of_array*76);
+      for (i = 1; i <= 9; i++)
+      {
+        context.lineTo(i*32, 90 - data[i]/max_of_array*76);
+        context.stroke(); 
+      }
+
+      context.font="italic small-caps bolder 12px sans-serif";
+      context.fillStyle = '#B7AF95';
+      context.fillText("0",0,96);
+
+      context.fillText("9",280,100);
+      </script>
+
+      </div>
+
+                       <div class="discuss-btn-div">
+                  <div class='dialog-ready button-div responsive-btn' style="display: inline-block;">Rate Others' Ideas</div>
+                  <div class='dialog-ready2 button-div responsive-btn' style="display: inline-block;">Tell Us Your Idea</div>
+                  <!--<button type='submit' data-theme='b' class='dialog-next'  onclick="$('.dialog-text1').hide();$('.dialog-text2').show();"><font style="font-size: 16px;">Next</font></button>-->
+              </div>
+    </center>
+
+
+        </div>
+       {% endfor %} 
 
   <div class='comment-input'>
        <div class="home-btn-dialog-box">
