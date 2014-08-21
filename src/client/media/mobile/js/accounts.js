@@ -790,6 +790,22 @@ $(document).ready(function() {
         window.prev_state = 'dialog';
         window.cur_state = 'map';
     });
+
+        $('.dialog-ready2').click(function() {
+        rate.logUserEvent(8,'dialog 1');
+        accounts.hideAll();
+        rate.initMenubar();
+        //$('.scorebox').show();
+
+        /*if(window.user_score == 0)
+        {
+            $('.instructions').show();
+        }*/
+
+        $('.comment-input').show();
+        window.prev_state = 'dialog';
+        window.cur_state = 'comment';
+    });
     
     $('.dialog-score-ready').click(function() {
         rate.logUserEvent(8,'dialog 2');
