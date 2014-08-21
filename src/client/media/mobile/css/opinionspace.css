@@ -1367,6 +1367,24 @@ padding-right: 7px;
 
 }
 
+.map-frame{
+	background-image:url('../img/cafe/capitol-landing.png');
+  background-size: cover;
+	/*background-size:cover;*/
+	width: 90%;
+	height: 100%;
+	position: absolute;
+	top:48px;
+	left: 0;
+	font-size: 20px;
+	text-shadow: 1px 1px #ffffff;
+	font-weight: bolder;
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-top: 15px;
+	color: #b7af95;
+}
+
 .dialog-style{
     position: absolute;
 	top:0;

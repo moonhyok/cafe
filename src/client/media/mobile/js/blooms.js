@@ -336,14 +336,14 @@ var _blooms = blooms = (function($, d3, console) {
             if($(window).width() > 768)
                 mugsize=150;
 
-            var height = $(window).height()- margin.bottom - margin.top - topBarHeight;
+            var height = $(window).height()*.8- margin.bottom - margin.top - topBarHeight;
 
             // Stashing away your_mug_data so it can be added after 2 mugs have been rated
             window.your_mug_data = data.splice(data.length-1, 1)[0];
             window.your_mug_data.ox = window.your_mug_data.x; //keep the original untransformed values
             window.your_mug_data.oy = window.your_mug_data.y;
-            window.your_mug_data.x = (width)/2 - 100;//canvasx(window.your_mug_data.x);
-            window.your_mug_data.y = (height)/2; - 100//canvasy(window.your_mug_data.y);
+            window.your_mug_data.x = (width)/2 - 50;//canvasx(window.your_mug_data.x);
+            window.your_mug_data.y = (height)/2 - 50;//canvasy(window.your_mug_data.y);
 
 
 
@@ -409,8 +409,8 @@ var _blooms = blooms = (function($, d3, console) {
                 console.log({'uid': d.uid,'x':d.x,'y':d.y,'cx': canvasx(d.x),'cy': canvasy(d.y)});
                 return window.url_root + "/media/mobile/img/cafe/cafe6.png";
             })
-            .attr("width", function(d) {return(mugsize*Math.random()+100)+"";}) //if this changes, change the margin above
-            .attr("height", function(d) {return(mugsize*Math.random()+100)+"";})
+            .attr("width", function(d) {return(mugsize*Math.random()+50)+"";}) //if this changes, change the margin above
+            .attr("height", function(d) {return(mugsize*Math.random()+50)+"";})
             .attr("x",function(d) {return canvasx(d.x);})
             .attr("y",function(d) {return canvasy(d.y);})
             .attr("filter", function(d){return "url(#blur"+(Math.floor(Math.random()*4)+1)+")";})
@@ -488,14 +488,14 @@ var _blooms = blooms = (function($, d3, console) {
          console.log(err);
       }
 
-    $('#d3').height($(window).height() - $('.top-bar').height());
+    /*$('#d3').height($(window).height() - $('.top-bar').height());*/
     }
 
     /** Adds `yourMug` to the canvas as a hidden object. Change the opacity to make it appear */
     function addYourMug() {
-         var mugsize = "200";
+         var mugsize = "150";
             if($(window).width() > 768)
-                mugsize="300";
+                mugsize="200";
             
         window.your_mug = window.coffeetable_svg.append('svg:image')
         .attr("xlink:href", function(d) {
@@ -558,7 +558,7 @@ $(document).ready(function() {
         blooms.alreadyAuthenticated();
     }
 
-    $('#d3').height($(window).height() - $('.top-bar').height());
+    /*$('#d3').height($(window).height() - $('.top-bar').height());*/
 
     $('.top-bar').on('height', function() {
         //_blooms.populateBlooms();
