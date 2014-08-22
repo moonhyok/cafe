@@ -1183,7 +1183,7 @@ padding-right: 7px;
 .answer {
 	background-color: transparent !important;
 	width: 90% !important;
-	/*height: 100px !important;*/
+	min-height: 150px !important;
 	max-width: 700px;
 	font-size: 18px !important;
 	font-family: DroidSans;
