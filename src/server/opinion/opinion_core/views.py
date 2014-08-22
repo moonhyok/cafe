@@ -167,7 +167,7 @@ def confirmation_mail(request):
         message = render_to_string('registration/confirmation_email.txt',
                                         { 'url_root': settings.URL_ROOT, 
 										 'entrycode': entrycode,
-										 'user_id': request.user.id-361,
+										 'user_id': request.user.id,
                                           })
         try:
            #send_mail(subject, message, Settings.objects.string('DEFAULT_FROM_EMAIL'), email_list)
@@ -253,7 +253,7 @@ def crcstats(request,entry_code=None):
                                                                                             'date':datetime.date.today(),
                                                                                             'comment':comment,
                                                                                             'left_comment': (comment != ''),
-                                                                                            'participant': uid-361,
+                                                                                            'participant': uid,
                                                                                             'entrycode': entry_code,
                                                                                             'uid':uid,
                                                                                             'given': given,
@@ -2193,7 +2193,7 @@ def os_save_comment_agreement(request, os_id, user_id, disc_stmt_id = None):
     if agreement is None:
 		return json_error('Invalid value')
 	
-    return save_agreement_rating(request, agreement, int(user_id)+361, os_id, disc_stmt)
+    return save_agreement_rating(request, agreement, int(user_id), os_id, disc_stmt)
 	
 @auth_required
 def os_save_comment_rating(request, os_id, user_id, disc_stmt_id = None):
@@ -2213,7 +2213,7 @@ def os_save_comment_rating(request, os_id, user_id, disc_stmt_id = None):
     if rating is None:
 		return json_error('Invalid value')
 		
-    return save_insightful_rating(request, rating, int(user_id)+361, os_id, disc_stmt)
+    return save_insightful_rating(request, rating, int(user_id), os_id, disc_stmt)
 
 @auth_required
 def os_update_comment(request, os_id, user_id, disc_stmt_id = None):
@@ -2639,7 +2639,7 @@ def os_never_seen_comments_json(request,os_id,disc_stmt_id=None):
 	# Get the user ratings
 	uids = []
 	for comment in never_seen_comments:
-		uids.append(comment['uid']+361)
+		uids.append(comment['uid'])
 	user_ratings = get_user_ratings(request, os, uids)
 	
 	# Get user data

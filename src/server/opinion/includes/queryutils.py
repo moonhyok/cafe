@@ -90,7 +90,7 @@ def get_user_ratings(request, os, uids):
 	list_ratings = []
 	for ratings in other_ratings:
 		ratings_copy = list(ratings)
-		ratings_copy[0] = ratings_copy[0] - 361
+		ratings_copy[0] = ratings_copy[0]
 		if ratings_copy[2] < MIN_FLOAT:
 			ratings_copy[2] = handle_small_float(ratings[2])
 		list_ratings.append(ratings_copy)
@@ -1170,7 +1170,7 @@ def format_discussion_comment(request_user, response):
 	"""
 	#print len(response.comment.split()) > 3, response.query_weight
 	
-	return {'uid': response.user.id-361,
+	return {'uid': response.user.id,
 			'username': get_formatted_username(response.user),
 			#'location': get_location(response.user),
 			'cid': response.id,
