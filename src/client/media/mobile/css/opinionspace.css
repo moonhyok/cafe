@@ -1182,15 +1182,20 @@ padding-right: 7px;
 
 .answer {
 	background-color: transparent !important;
-	width: 95% !important;
-	min-height: 200px !important;
+	width: 90% !important;
+	/*height: 100px !important;*/
 	max-width: 700px;
 	font-size: 18px !important;
 	font-family: DroidSans;
+	text-align: left;
+	margin-bottom: 15px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	margin-top: 10px;
 	color: #442b10;
-	border: none !important;
+	border: 1px solid #cccccc !important;
 	border-radius: 0px;
-	line-height: 26px;
+	line-height: 18px;
 	padding-left: 20px !important;
 	padding-right: 20px !important;
 	text-shadow: 1px 1px 1px #F7F4DD;
@@ -1560,12 +1565,12 @@ padding-top: 20px;
     }
    
    .rate-username{
-	 font-size: 13px;
-	 font-family: "Lucida Grande", "Lucida Sans Unicode", Arial, sans-serif;
+	 font-size: 18px;
+	 font-family: DroidSans;
+	 position:relative;
+	 top: 5px;
 	 color: #442b10;
 	 text-align: center !important;
-	 position: relative;
-	 top: -5px;
 	 
    }
 

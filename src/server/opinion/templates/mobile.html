@@ -414,12 +414,18 @@ function googleTranslateElementInit() {
 <option value="Fine Arts">Fine Arts</option>
 <option value="Gallatin">Gallatin</option>
 <option value="GSAS">GSAS</option>
+<option value="Institute for the Study of the Ancient World">Institute for the Study of the Ancient World</option>
 <option value="Liberal Studies">Liberal Studies</option>
 <option value="Nursing">Nursing</option>
 <option value="Polytechnic">Polytechnic</option>
+<option value="Preston Robert Tisch Center for Hospitality, Tourism, and Sports Management">Preston Robert Tisch Center for Hospitality, Tourism, and Sports Management</option>
 <option value="Schack">Schack</option>
+<option value="School of Medicine">School of Medicine</option>
+<option value="School of Law">School of Law</option>
+<option value="Silver School of Social Work">Silver School of Social Work</option>
+<option value="Steinhardt School of Culture, Education, and Human Development">Steinhardt School of Culture, Education, and Human Development</option>
 <option value="Stern">Stern</option>
-<option value="Tisch">Tisch</option>
+<option value="Tisch School of the Arts">Tisch School of the Arts</option>
 <option value="Wagner">Wagner</option>
     </select>
 
@@ -720,8 +726,9 @@ function googleTranslateElementInit() {
          </div>
 
     <center>
-       <textarea id='commentInput' class='answer responsive-answer' readonly="true"></textarea>
-       <div style="display: none;"><span class="rate-username"></span></div>
+      <div><span class="rate-username"></span></div>
+       <div id='commentInput' class='answer responsive-answer'></div>
+       
     </center>
 
 
@@ -732,7 +739,9 @@ function googleTranslateElementInit() {
      <div class='sliders responsive-body' style="text-align: left;font-size: 18px;font-family: DroidSans;">
        {{client_settings.RATE_IMPORTANCE_QUESTION}}
        <center>
-       <div class="slider" id="slider-importance"></div>           
+       <div class="slider" id="slider-importance"></div>    
+        
+        <img id='go-back' style="display: inline-block; width: 55px; position:relative;left: 3px;" src="{{url_root}}/media/mobile/img/cafe/skip-btn.png">       
        </center>
   
        <div class="slider-padding"></div>
@@ -742,9 +751,6 @@ function googleTranslateElementInit() {
        <!--  How would you rate the State of California on this issue today?<br/>
          <div class="slider" id="slider-grade"></div>
            <div style="clear: both;"></div>-->
-        
-
-
         <!--<center>
             <div class="button-div responsive-btn" id='go-back'>Next</div>
         </center>-->
