@@ -510,7 +510,7 @@ $(document).ready(function() {
     $('.comment-submit-btn').click(function() {
         window.comment = $('#entered-comment').val();
         $('.comment-input').hide();
-        $('.burger-page').show();
+        $('.dialog-continue').show();
         $('.scorebox').hide();
         $('.menubar').hide();
         $('.instructions-light').hide();
