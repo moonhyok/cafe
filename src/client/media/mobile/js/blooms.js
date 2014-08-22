@@ -422,7 +422,7 @@ var _blooms = blooms = (function($, d3, console) {
 		        window.cur_clicked_mug = _this;
                 window.prev_state = 'map';
                 //utils.showLoading("Loading Suggestion...");
-                    $('.instructions').hide();
+                    $('.instructions-light').hide();
                     $('.scorebox').hide();
                     $('.menubar').hide();
                     window.cur_state = 'rate';
@@ -521,7 +521,7 @@ var _blooms = blooms = (function($, d3, console) {
                 $('.comment-input').slideDown();
                 $('.scorebox').hide();
                 $('.menubar').hide();
-                $('.instructions3').hide();
+                $('.instructions-light').hide();
                 window.cur_state = 'comment';
             }
         })
