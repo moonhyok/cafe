@@ -97,9 +97,10 @@ $(".slider-grade-bubble").on("click",function(e){
         }
         else
             {
-                $("#slide-"+window.current_slider).hide();
+                setTimeout(function(){$("#slide-"+window.current_slider).hide();
                 window.current_slider = window.current_slider  + 1;
                 $("#slide-"+window.current_slider).show("slide", { direction: "right" }, 500);
+            },50);
                 /*$(".slider-progress-dot-"+(parseInt(event.target.id.substring(5),10)+1)).css("background","#FFFFFF");*/
 
             }
