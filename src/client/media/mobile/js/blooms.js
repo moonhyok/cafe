@@ -324,7 +324,7 @@ var _blooms = blooms = (function($, d3, console) {
             top: 0,
             left: 0,
             right: 80,
-            bottom: 70
+            bottom: 90
             };
 
 
@@ -343,7 +343,7 @@ var _blooms = blooms = (function($, d3, console) {
             window.your_mug_data.ox = window.your_mug_data.x; //keep the original untransformed values
             window.your_mug_data.oy = window.your_mug_data.y;
             window.your_mug_data.x = (width)/2 - 50;//canvasx(window.your_mug_data.x);
-            window.your_mug_data.y = (height)/2 - 50;//canvasy(window.your_mug_data.y);
+            window.your_mug_data.y = (height)/2 - 80;//canvasy(window.your_mug_data.y);
 
 
 
@@ -375,26 +375,26 @@ var _blooms = blooms = (function($, d3, console) {
   .append("filter")
     .attr("id", "blur1")
   .append("feGaussianBlur")
-    .attr("stdDeviation", 0.5);
+    .attr("stdDeviation", 0.2);
 
                 var filter = window.coffeetable_svg.append("defs")
   .append("filter")
     .attr("id", "blur2")
   .append("feGaussianBlur")
-    .attr("stdDeviation", 1);
+    .attr("stdDeviation", 1.2);
 
 
                 var filter = window.coffeetable_svg.append("defs")
   .append("filter")
     .attr("id", "blur3")
   .append("feGaussianBlur")
-    .attr("stdDeviation", 1.5);
+    .attr("stdDeviation", 1.8);
 
                 var filter = window.coffeetable_svg.append("defs")
   .append("filter")
     .attr("id", "blur4")
   .append("feGaussianBlur")
-    .attr("stdDeviation", 2);
+    .attr("stdDeviation", 2.4);
 
             //var rescale = generateRescalingFactor();
 
@@ -409,8 +409,8 @@ var _blooms = blooms = (function($, d3, console) {
                 console.log({'uid': d.uid,'x':d.x,'y':d.y,'cx': canvasx(d.x),'cy': canvasy(d.y)});
                 return window.url_root + "/media/mobile/img/cafe/cafe6.png";
             })
-            .attr("width", function(d) {return(mugsize*Math.random()+50)+"";}) //if this changes, change the margin above
-            .attr("height", function(d) {return(mugsize*Math.random()+50)+"";})
+            .attr("width", function(d) {return(mugsize*Math.random()+60)+"";}) //if this changes, change the margin above
+            .attr("height", function(d) {return(mugsize*Math.random()+60)+"";})
             .attr("x",function(d) {return canvasx(d.x);})
             .attr("y",function(d) {return canvasy(d.y);})
             .attr("filter", function(d){return "url(#blur"+(Math.floor(Math.random()*4)+1)+")";})
@@ -443,7 +443,7 @@ var _blooms = blooms = (function($, d3, console) {
                 //utils.hideLoading(0);
             });
 
-            blooms.addYourMug();
+            //blooms.addYourMug();
 
             });
 
@@ -514,7 +514,7 @@ var _blooms = blooms = (function($, d3, console) {
         .attr("width", mugsize) //if this changes, change the margin above
         .attr("height", mugsize)
         .attr("opacity", function(d) {
-            return 1;
+            return 0.0;
         })
         .on('click', function(d) {
             if(window.refer == ""){

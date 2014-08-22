@@ -112,10 +112,11 @@ var rate = (function($, d3, console) {
                 'cid': window.current_uid
             });
             
-            
             //TODO FIX!!!
             if (window.user_score == 2) {
                 $('.rate').hide();
+                $('.instructions-light').show();
+                $('.instructions-light').html("Please join the discussion! Tap your sphere at the center to tell us your idea.")
                 //$('.instructions2').hide();
                 //$('.instructions3').show();
                 try{
@@ -133,6 +134,7 @@ var rate = (function($, d3, console) {
                 $('.rate').hide();
                 // ui has changed!
                 $('.top-bar').trigger('height');
+                $('.instructions-light').hide();
                 //$('.instructions2').show();
                 //$('.dialog-score').show();
             }
@@ -506,6 +508,7 @@ $(document).ready(function() {
         $('.burger-page').show();
         $('.scorebox').hide();
         $('.menubar').hide();
+        $('.instructions-light').hide();
         window.prev_state = 'comment';
         //todo fix
         window.cur_state = 'continue';

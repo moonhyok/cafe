@@ -4,9 +4,20 @@ BG- 76b9b6
 White- f5ebdf
 Brown- 4e300f
 */
+
+@font-face {
+    font-family: DroidSans;
+    src: url('../css/Droid_Sans/DroidSans.ttf');
+}
+
+@font-face {
+    font-family: DroidSans-Bold;
+    src: url('../css/Droid_Sans/DroidSans-Bold.ttf');
+}
+
 html {
   -webkit-font-smoothing: antialiased;
-  font-family: "Lucida Grande", "Lucida Sans Unicode", Arial, sans-serif;
+  font-family: DroidSans;
   font-weight: 200;
 }
 
@@ -15,7 +26,6 @@ body{
   background-size: cover;
   overflow: hidden;
 }
-
 
 .landing {
 		position: absolute;
@@ -26,7 +36,7 @@ body{
 		background-image: url('../img/cafe/capitol-landing.png');
 		background-size: cover;
 		/*background-image:url('../img/cafe/cafe_bg.jpg');*/
-		background-color: #b7af95;
+		background-color: #442b10;
 		/*background: #76b9b6; Old browsers */
 		z-index: 999;
 
@@ -42,31 +52,36 @@ body{
 	}
 
 .landing-img-title{
-	color: #B7AF95;
+	color: #442b10;
 	padding-left: 20px;
 	padding-top: 10px;
 	padding-bottom: 10px;
 	font-size: 22px;
-	text-shadow: 1px 1px #ffffff;
+	text-shadow: 1px 1px 1px #F7F4DD;
 	font-weight: 400;
 	line-height: 28px;
+	font-family: DroidSans-Bold;
  }
 
  .landing-img-subtitle{
-	color: #B7AF95;
+	color: #442b10;
 	padding-left: 20px;
 	padding-bottom: 10px;
 	font-size: 26px;
-	text-shadow: 1px 1px #ffffff;
+	text-shadow: 1px 1px 1px #F7F4DD;
 	font-weight: bolder;
+	font-family: DroidSans-Bold;
  }
 
 	.landing-img-txt{
-	color: #B7AF95;
+	color: #442b10;
 	padding-left: 20px;
+	padding-right: 25px;
+	text-align: justify;
 	font-size: 17px;
-	text-shadow: 1px 1px #ffffff;
+	text-shadow: 1px 1px 1px #F7F4DD;
 	font-weight: 400;
+	font-family: DroidSans;
 	}
 
 
@@ -91,7 +106,7 @@ body{
 .slider-agree-labels{
 	font-size:11px;
 	
-	color: #b7af95;
+	color: #442b10;
 }
 
 .slider-range-labels{
@@ -101,7 +116,7 @@ body{
     font-size:10px;
     
     
-    color: #b7af95;
+    color: #442b10;
 }
 
 .grade-labels {
@@ -111,7 +126,7 @@ body{
     font-size:12px;
     
     
-    color: #b7af95;
+    color: #442b10;
     background:none;
 }
 
@@ -121,7 +136,7 @@ body{
     top: -15px;
     font-size:24px;
 
-    color: #b7af95;
+    color: #442b10;
     background:none;
 }
 
@@ -142,7 +157,7 @@ body{
 
 #entered-comment{
 	display:inline;
-	color: #b7af95;
+	color: #442b10;
 	background-color: #efece4;
 	text-shadow: none;
 	width: 100% !important;
@@ -150,7 +165,7 @@ body{
 	font-size: 16px;
 	border-radius: 0px;
 	max-width: 700px;
-	font-family: "Lucida Grande", "Lucida Sans Unicode", Arial, sans-serif;
+	font-family: DroidSans;
 }
 
 /* This prevents the jQuery navbar buttons from staying pressed */
@@ -225,6 +240,22 @@ table.pretty caption {
 .logout-btn-dialog{
 	max-width: 80px;
 	min-width: 20px;
+}
+
+.instructions-light{
+	position:fixed;
+	bottom: 0px;
+	left: 0px;
+	font-size: 20px;
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-top: 10px;
+	height: 80px;
+	width: 90%;
+	text-shadow: none;
+	display: none;
+	color: #442b10;
+	background-color: rgba(255,255,255,0.8);
 }
 
 @media (min-width: 768px){
@@ -370,7 +401,7 @@ table.pretty caption {
 
 	.menubar {
     text-align: right;
-    color: #B7AF95;
+    color: #442b10;
     width: 100%;
     height: 44px;
     box-shadow: 0px 2px 2px #888888;
@@ -439,7 +470,7 @@ table.pretty caption {
 	}
 
 	.header {
-		color: #b7af95;
+		color: #442b10;
 		text-shadow: none;
 		
 		width: 95%;
@@ -450,15 +481,15 @@ table.pretty caption {
 		padding-left: 6px;
 		padding-bottom: 5px;
 		padding-top: 5px;
-		font-family: "Lucida Grande", "Lucida Sans Unicode", Arial, sans-serif;
+		font-family: DroidSans;
 		/*margin-bottom: 20px; */
 	}
 
 	.instructions{
 		/*position: absolute;*/
-		color: #B7AF95;
+		color: #442b10;
 		background-color: #0b1d2a;
-		font-family: "Lucida Grande", "Lucida Sans Unicode", Arial, sans-serif;
+		font-family: DroidSans;
 		z-index: 998;
 		text-shadow: none;
 		font-size: 14px;
@@ -475,7 +506,7 @@ table.pretty caption {
 
 	.instructions2{
     		/*position: absolute;*/
-    		color: #B7AF95;
+    		color: #442b10;
     		background-color: #0b1d2a;
     		font-family: "Lucida Grande", "Lucida Sans Unicode", Arial, sans-serif;
     		left: 0px;
@@ -495,7 +526,7 @@ table.pretty caption {
 
     .instructions3{
         		/*position: absolute;*/
-        		color: #B7AF95;
+        		color: #442b10;
         		background-color: #0b1d2a;
         		font-family: "Lucida Grande", "Lucida Sans Unicode", Arial, sans-serif;
         		left: 0px;
@@ -558,7 +589,7 @@ table.pretty caption {
 	    width:299px;
 	    background-color: #396d6b;
 	    border: solid 0px #76b9b6;
-	    color: #b7af95;
+	    color: #442b10;
 	}
 
 	.title-table td{
@@ -607,7 +638,7 @@ table.pretty caption {
     }
 	
 	.grade{
-		font-family: "Lucida Grande", "Lucida Sans Unicode", Arial, sans-serif;
+		font-family: DroidSans;
 		color: #4e300f;
 		text-shadow: none;
 		font-size: 28px;
@@ -616,7 +647,7 @@ table.pretty caption {
 	}
 	
 	.grade2{
-		font-family: "Lucida Grande", "Lucida Sans Unicode", Arial, sans-serif;
+		font-family: DroidSans;
 		color: #4e300f;
 		text-shadow: none;
 		font-size: 28px;
@@ -656,13 +687,13 @@ table.pretty caption {
 	 /* piggy backing the the new divs here for now,  .stats, .help*/
 		display: none;
 		position: absolute;
-		font-family: "Lucida Grande", "Lucida Sans Unicode", Arial, sans-serif;
+		font-family: DroidSans;
 		top: 0;
 		right: 0;
 		width: 100%;
 		height: 100%;
 			/*background-color: #0b1d2a;*/
-		color: #b7af95;
+		color: #442b10;
 		/*background: #76b9b6;*/
 		background-image:url('../img/cafe/capitol-landing.png');
 		z-index: 999;
@@ -681,8 +712,8 @@ table.pretty caption {
 		padding-top: 5px;
 		font-size: 24px;
 		font-weight:bold;
-		color: #b7af95;
-		text-shadow: 1px 1px #ffffff;
+		color: #442b10;
+		text-shadow: 1px 1px 1px #F7F4DD;
 	}
 
 	.detail-box{
@@ -706,7 +737,7 @@ table.pretty caption {
     		right: 0;
     		width: 100%;
     		height: 100%;
-    		color: #b7af95;
+    		color: #442b10;
     		background-image:url('../img/cafe/capitol-landing.png');
     		background-size: cover;
     		/*background-image:url('../img/cafe/capitol_clean.jpg');*/
@@ -746,14 +777,13 @@ table.pretty caption {
 				background-image:url('../img/cafe/button-default.png');
 		background-size: cover;
 		width: 134px;
-		font-weight: bolder;
 		font-size: 18px;
 		padding-top: 3px;
 		height: 45px;
 		text-align: center;
-		color: #B7AF95;
+		color: #442b10;
 		margin-bottom: 5px;
-		font-family: "Lucida Grande", "Lucida Sans Unicode", Arial, sans-serif;
+		font-family: DroidSans-Bold;
 		/*position: absolute;
 		bottom: 20px;*/
 	}
@@ -763,13 +793,12 @@ table.pretty caption {
 		background-size: cover;
 		border-radius: 2px;
 		width: 280px;
-		font-weight: bolder;
 		font-size: 18px;
 		line-height: 50px;
 		text-align: center;
-		color: #B7AF95;
+		color: #442b10;
 		margin-bottom: 5px;
-		font-family: "Lucida Grande", "Lucida Sans Unicode", Arial, sans-serif;
+		font-family: DroidSans-Bold;
 		/*position: absolute;
 		bottom: 20px;*/
 	}
@@ -781,9 +810,9 @@ table.pretty caption {
 		font-size: 22px;
 		padding-top: 15px;
 		text-align: center;
-		color: #B7AF95;
+		color: #442b10;
 		text-shadow: 1px 1px white;
-		font-family: "Lucida Grande", "Lucida Sans Unicode", Arial, sans-serif;
+		font-family: DroidSans-Bold;
 	}
 
 		/*.skip-btn {
@@ -839,9 +868,9 @@ table.pretty caption {
 		font-size: 18px;
 		line-height: 50px;
 		text-align: center;
-		color: #B7AF95;
+		color: #442b10;
 		margin-bottom: 5px;
-		font-family: "Lucida Grande", "Lucida Sans Unicode", Arial, sans-serif;
+		font-family: DroidSans-Bold;
 		/*position: absolute;
 		bottom: 20px;*/
 	}
@@ -926,7 +955,7 @@ table.pretty caption {
 	}
 
 	.registerpanel{
-		color: #b7af95;
+		color: #442b10;
 		text-shadow: none;
 		height: 100%;
 		text-align: center !important;
@@ -934,14 +963,14 @@ table.pretty caption {
 	}
 	
 	.edit-comment-panel{
-		color: #b7af95;
+		color: #442b10;
 		text-shadow: none;
 		width: 100%;
 	}
 	
 	.loginpanel{
 		background-color: #FAEBCD;
-		color: #b7af95;
+		color: #442b10;
 		
 		text-shadow: none;
 		text-align: center;
@@ -976,15 +1005,15 @@ table.pretty caption {
 		overflow-x: hidden;
 		text-align: left;
 		position: absolute;
-		color: #b7af95;
-		text-shadow: 1px 1px #ffffff;
+		color: #442b10;
+		text-shadow: 1px 1px 1px #F7F4DD;
 		top: 0;
 		right: 0;
 		width: 100%;
 		height: 100%;
 		background-image:url('../img/cafe/capitol-landing.png');
     	background-size: cover;
-		font-family: "Lucida Grande", "Lucida Sans Unicode", Arial, sans-serif;
+		font-family: DroidSans-Bold;
 		line-height: 26px;
 		font-size: 22px;
 		overflow: auto;
@@ -998,7 +1027,7 @@ table.pretty caption {
 		top: 0;
 	/*bottom: 0;
 	right: 0; */
-	color: #b7af95;
+	color: #442b10;
 	width: 100%;
 	height: 100%;
 	background-color: #76b9b6;
@@ -1011,9 +1040,9 @@ table.pretty caption {
 	}
 
 .landing-header {
-	font-family: "Lucida Grande", "Lucida Sans Unicode", Arial, sans-serif;
+	font-family: DroidSans-Bold;
 	text-shadow: none;
-	color: #b7af95;
+	color: #442b10;
 	font-size: 42px;
 	text-align: center;
 	width: 100%;
@@ -1023,7 +1052,7 @@ table.pretty caption {
 .rc-sub-header {
     text-align: center;
     padding-bottom: 10px;
-    font-family: "Lucida Grande", "Lucida Sans Unicode", Arial, sans-serif;
+    font-family: DroidSans-Bold;
     font-size: 16px;
     line-height: 20px;
     width: 95%;
@@ -1033,19 +1062,19 @@ table.pretty caption {
 }
 
 .basic-header {
-	font-family: "Lucida Grande", "Lucida Sans Unicode", Arial, sans-serif;
+	font-family: DroidSans;
 	text-shadow: none;
 	text-align: center !important;
-	color: #B7AF95;
+	color: #442b10;
 	font-size: 28px;
 	line-height: 32px;
 }
 
 .basic-header2 {
-	font-family: "Lucida Grande", "Lucida Sans Unicode", Arial, sans-serif;
-    	text-shadow: 1px 1px #ffffff;
+	font-family: DroidSans-Bold;
+    	text-shadow: 1px 1px 1px #F7F4DD;
     	text-align: left !important;
-    	color: #B7AF95;
+    	color: #442b10;
     	font-size: 22px;
     	line-height: 26px;
     	font-weight: bolder;
@@ -1057,9 +1086,9 @@ table.pretty caption {
 }
 
 .basic-sub-header {
-	font-family: "Lucida Grande", "Lucida Sans Unicode", Arial, sans-serif;
+	font-family: DroidSans;
 	text-shadow: none;
-	color: #b7af95;
+	color: #442b10;
 	font-size: 18px;
 	line-height: 20px;
 	padding-bottom: 10px;
@@ -1074,8 +1103,8 @@ padding-top: 10px;
 padding-bottom: 10px;
 position: relative;
 top: -10px;
-font-family: "Lucida Grande", "Lucida Sans Unicode", Arial, sans-serif;
-color: #B7AF95;
+font-family: DroidSans;
+color: #442b10;
 width: 100%;
 background-color: #808080;
 line-height:24px;
@@ -1083,17 +1112,17 @@ line-height:24px;
 
 .basic-fine-print{
 font-size: 14px;
-color: #b7af95;
+color: #442b10;
 
 line-height:16px;
 text-align:right;
 padding-right: 5px;
-font-family: "Lucida Grande", "Lucida Sans Unicode", Arial, sans-serif;
+font-family: DroidSans;
 padding-left: 5px;
 }
 
 .about-link a {
-color: #b7af95;
+color: #442b10;
 font-size: 16px;
 padding-right: 7px;
 }
@@ -1101,9 +1130,9 @@ padding-right: 7px;
 .landing-desc {
 	padding-top: 5px;
 	line-height: 27px;
-	font-family: "Lucida Grande", "Lucida Sans Unicode", Arial, sans-serif;
+	font-family: DroidSans;
 	text-shadow: none;
-	color: #b7af95;
+	color: #442b10;
 	font-size: 28px;
 	height: 100%;
 	left: 0;
@@ -1156,16 +1185,15 @@ padding-right: 7px;
 	width: 95% !important;
 	min-height: 200px !important;
 	max-width: 700px;
-	font-size: 32px !important;
-	font-family: "Lucida Grande", "Lucida Sans Unicode", Arial, sans-serif;
-	color: #b7af95;
+	font-size: 18px !important;
+	font-family: DroidSans;
+	color: #442b10;
 	border: none !important;
-	font-weight: bolder !important;
 	border-radius: 0px;
 	line-height: 26px;
 	padding-left: 20px !important;
 	padding-right: 20px !important;
-	text-shadow: 1px 1px #ffffff;
+	text-shadow: 1px 1px 1px #F7F4DD;
 }
 
 .standard-btn-div {
@@ -1201,7 +1229,7 @@ padding-right: 7px;
 
 .home-btn-dialog-box {
     text-align: right;
-    color: #B7AF95;
+    color: #442b10;
     width: 100%;
     height: 44px;
     box-shadow: 0px 2px 2px #888888;
@@ -1216,7 +1244,7 @@ padding-right: 7px;
 	font-size: 22px;
 	font-weight: bolder;
 	text-shadow: 1px 1px white;
-	font-family: "Lucida Grande", "Lucida Sans Unicode", Arial, sans-serif;
+	font-family: DroidSans-Bold;
 }
 
 .home-btn-wrapper{
@@ -1225,40 +1253,40 @@ padding-right: 7px;
 }
 
 .statement-style {
-	font-family: "Lucida Grande", "Lucida Sans Unicode", Arial, sans-serif;
+	font-family: DroidSans-Bold;
 	padding-left: 20px;
 	padding-right: 20px; 
 	padding-top: 5px; 
 	padding-bottom: 5px; 
 	text-align: left; 
-	font-size: 20px;
-	text-shadow: 1px 1px #ffffff;
+	font-size: 17px;
+	text-shadow: 1px 1px 1px #F7F4DD;
 	font-weight: bolder;
-	color: #b7af95;
+	color: #442b10;
 }
 
 .question-number{
-	font-family: "Lucida Grande", "Lucida Sans Unicode", Arial, sans-serif;
+	font-family: DroidSans;
 	padding-left: 20px;
 	padding-right: 20px; 
 	padding-top: 10px; 
 	text-align: left; 
-	font-style: italic; 
-	font-size: 14px;
-	text-shadow: 1px 1px #ffffff;
+	font-size: 17px;
+	text-shadow: 1px 1px 1px #F7F4DD;
 	font-weight: bolder;
-	color: #b7af95;
+	color: #442b10;
 }
 
 .question-directions{
-	font-family: "Lucida Grande", "Lucida Sans Unicode", Arial, sans-serif;
+	font-family: DroidSans;
 	padding-left: 20px;
 	padding-right: 20px; 
-	padding-top: 10px;  
-	font-size: 14px;
-	text-shadow: 1px 1px #ffffff;
+	padding-top: 10px; 
+	padding-bottom: 5px; 
+	font-size: 17px;
+	text-shadow: 1px 1px 1px #F7F4DD;
 	font-weight: bolder;
-	color: #b7af95;
+	color: #442b10;
 }
 
 .med-grade-box{
@@ -1291,13 +1319,13 @@ padding-right: 7px;
 }
 
 .home-btn-dialog-box .ui-btn-inner{
-    font-family: "Lucida Grande", "Lucida Sans Unicode", Arial, sans-serif;
+    font-family: DroidSans-Bold;
     line-height: 15px;
     padding: 0px;
 }
 
 .home-btn-dialog-box .ui-btn{
-    font-family: "Lucida Grande", "Lucida Sans Unicode", Arial, sans-serif;
+    font-family: DroidSans-Bold;
     line-height: 20px;
     /*border-radius: 0px !important;*/
 }
@@ -1306,10 +1334,10 @@ padding-right: 7px;
 	/*background-color: #E7E1D8;*/
 	/*background: url('../img/cafe/cafe_notebook.png') repeat-y;*/
 	text-shadow: none;
-	color: #B7AF95;
+	color: #442b10;
 	padding-left: 20px;
 	padding-right: 20px;
-	font-family: "Lucida Grande", "Lucida Sans Unicode", Arial, sans-serif;
+	font-family: DroidSans-Bold;
 	font-size: 16px;
 	line-height: 22px;
 	
@@ -1340,7 +1368,7 @@ padding-right: 7px;
 
 	position: absolute;
 	top: -50px;
-	background-color: #b7af95;
+	background-color: #442b10;
 }
 
 .rate-loading {
@@ -1350,7 +1378,7 @@ padding-right: 7px;
 	right: 0;
 	width: 100%;
 	background-color: #76b9b6;
-	color: #b7af95;
+	color: #442b10;
 	padding: 20px 0;
 	text-align: center;
 }
@@ -1362,7 +1390,7 @@ padding-right: 7px;
   background-size: cover;
 	/*background-size:cover;*/
 	width: 100%;
-	height: 100%;
+	height: 80%;
 	/*z-index: 999; */
 
 }
@@ -1377,12 +1405,12 @@ padding-right: 7px;
 	top:48px;
 	left: 0;
 	font-size: 20px;
-	text-shadow: 1px 1px #ffffff;
+	text-shadow: 1px 1px 1px #F7F4DD;
 	font-weight: bolder;
 	padding-left: 20px;
 	padding-right: 20px;
 	padding-top: 15px;
-	color: #b7af95;
+	color: #442b10;
 }
 
 .dialog-style{
@@ -1409,8 +1437,8 @@ padding-top: 20px;
 }
 
 .compare-tag{
-	color: #B7AF95;
-	text-shadow: 1px 1px #ffffff;
+	color: #442b10;
+	text-shadow: 1px 1px 1px #F7F4DD;
 	display: inline-block;
 	width: 140px;
 }
@@ -1418,11 +1446,11 @@ padding-top: 20px;
 .dialog-text-style {
 	position: relative;
     vertical-align: middle;
-    font-family: "Lucida Grande", "Lucida Sans Unicode", Arial, sans-serif;
-	color: #B7AF95;
+    font-family: DroidSans;
+	color: #442b10;
 	height: 100%;
 	text-decoration: none;
-	text-shadow: 1px 1px #ffffff;
+	text-shadow: 1px 1px 1px #F7F4DD;
 	text-align: left;
 	font-weight: bolder;
 	
@@ -1437,8 +1465,8 @@ padding-top: 20px;
 .dialog-text-style-noflow {
 	position: relative;
     vertical-align: middle;
-    font-family: "Lucida Grande", "Lucida Sans Unicode", Arial, sans-serif;
-	color: #B7AF95;
+	font-family: DroidSans;
+	color: #442b10;
 	text-decoration: none;
 	text-shadow: none;
 	font-size: 16px;
@@ -1534,7 +1562,7 @@ padding-top: 20px;
    .rate-username{
 	 font-size: 13px;
 	 font-family: "Lucida Grande", "Lucida Sans Unicode", Arial, sans-serif;
-	 color: #b7af95;
+	 color: #442b10;
 	 text-align: center !important;
 	 position: relative;
 	 top: -5px;
@@ -1555,7 +1583,7 @@ padding-top: 20px;
 	text-align: right;
 	 padding: 3px;
 	margin: 1px;
-	color: #b7af95;
+	color: #442b10;
  	}
 
 

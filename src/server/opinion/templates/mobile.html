@@ -286,13 +286,14 @@
           How can technology enhance learning at NYU?
         </div> -->
 
-        <div class="landing-img-txt">   
-           Please take 5 minutes to join <strong>{{num_users}}</strong> students, staff, and faculty to consider how technologies could enhance learning at NYU.
+        <div class="landing-img-txt">  
+        We’d like your input: please take 5 mins to share your perspectives.  
+        We’ll provide Apple iPads to the most insightful suggestions.<br/><br/>Participants so far:  {{num_users}}. 
        </div>
         
       <!--<img class="capitol-bg" src="{{url_root}}/media/mobile/img/cafe/capitol-landing1.png">-->
 
-      <center><div class='button-div-red first-time-btn responsive-btn' style="margin-top: 10px;">Get Started</div></center>
+      <center><div class='button-div-red first-time-btn responsive-btn' style="margin-top: 10px;">Begin</div></center>
       
        <!--<div class="landing-img-txt">   
            Take a moment to join <strong>{{num_users}}</strong> others who have graded the State of California on six timely issues.<br/>
@@ -338,7 +339,11 @@ function googleTranslateElementInit() {
               <div class="question-number">Question {{ statement.id }} of {{ statements|length }}</div>
               <div class="statement-style responsive-header">{{ statement.statement }}</div>
 
-              <div class="question-directions">How would you rate this topic?</div>
+              {% if statement.id == 3 %}
+              <div class="question-directions">0 (Not at all)   -  9 (Very far ahead)</div>
+              {% else %}
+              <div class="question-directions">0 (Not at all)  -  9 (Extensively)</div>
+              {% endif %}
 
               <!--<div class="median-grade-{{statement.id}} med-grade-box"></div>-->
 
@@ -348,9 +353,9 @@ function googleTranslateElementInit() {
                 <div class="slider" style="margin-left: 15px;margin-right: 5px;" id="slider-{{statement.id}}"></div>
 
                 <center>
-                <img class='endsliders-back-btn endsliders-back-btn-size' style="display: inline-block; width: 10px;position:relative;top:5px;" id="back-{{statement.id}}" src="{{url_root}}/media/mobile/img/cafe/Skip_V1.png">
-                <div class='question-directions' style="display: inline-block;font-size: 12px;padding: 0px;margin: 0px;">SWIPE TO SKIP TO THE NEXT QUESTION</div>
-                <img class='endsliders-next-btn responsive-next-btn' style="display: inline-block; width: 10px;position:relative;top:5px;" id="next-{{statement.id}}" src="{{url_root}}/media/mobile/img/cafe/Next_V1.png">
+                <!--<img class='endsliders-back-btn endsliders-back-btn-size' style="display: inline-block; width: 10px;position:relative;top:5px;" id="back-{{statement.id}}" src="{{url_root}}/media/mobile/img/cafe/Skip_V1.png">
+                <div class='question-directions' style="display: inline-block;font-size: 16px;padding: 0px;margin: 0px;">SWIPE TO SKIP TO THE NEXT QUESTION</div>-->
+                <img class='endsliders-next-btn responsive-next-btn' style="display: inline-block; width: 55px; padding-top: 15px;position:relative;left: 3px;" id="next-{{statement.id}}" src="{{url_root}}/media/mobile/img/cafe/skip-btn.png">
               </center>
 
               </div>
@@ -439,9 +444,9 @@ function googleTranslateElementInit() {
               <br/>
               <br/>
 
-              <div class="button-div registerb responsive-btn" id="registerb" style="font-size: 18px; padding-top:10px; height: 35px;">Save</div>
+              <div class="button-div-red registerb responsive-btn" id="registerb" style="font-size: 18px;">Save</div>
               <br/>
-              <div class="button-div-wide registerb responsive-btn" id="registern">No Thanks</div>
+              <!--<div class="button-div-wide registerb responsive-btn" id="registern">No Thanks</div>-->
 
               </div>
 
@@ -555,7 +560,7 @@ function googleTranslateElementInit() {
 
       context.beginPath();
       context.lineWidth = 2;
-      context.strokeStyle = '#B7AF95';
+      context.strokeStyle = '#442b10';
       context.shadowColor = '#ffffff';
         context.shadowOffsetX = 1;
         context.shadowOffsetY = 1;
@@ -567,7 +572,7 @@ function googleTranslateElementInit() {
       }
 
       context.font="italic small-caps bolder 12px sans-serif";
-      context.fillStyle = '#B7AF95';
+      context.fillStyle = '#442b10';
       context.fillText("0",0,48);
 
       context.fillText("9",150,50);
@@ -579,8 +584,8 @@ function googleTranslateElementInit() {
         {% endfor %}
 
               <div class="discuss-btn-div">
-                  <div class='dialog-ready button-div responsive-btn' style="display: inline-block;">Rate Others' Ideas</div>
-                  <div class='dialog-ready2 button-div responsive-btn' style="display: inline-block;">Tell Us Your Idea</div>
+                  <div class='dialog-ready button-div-red responsive-btn' style="display: inline-block;">Next</div>
+                  <!--<div class='dialog-ready2 button-div responsive-btn' style="display: inline-block;">Tell Us Your Idea</div>-->
                   <!--<button type='submit' data-theme='b' class='dialog-next'  onclick="$('.dialog-text1').hide();$('.dialog-text2').show();"><font style="font-size: 16px;">Next</font></button>-->
               </div>
       </center>
@@ -622,7 +627,7 @@ function googleTranslateElementInit() {
 
       context.beginPath();
       context.lineWidth = 2;
-      context.strokeStyle = '#B7AF95';
+      context.strokeStyle = '#442b10';
       context.shadowColor = '#ffffff';
         context.shadowOffsetX = 1;
         context.shadowOffsetY = 1;
@@ -634,7 +639,7 @@ function googleTranslateElementInit() {
       }
 
       context.font="italic small-caps bolder 12px sans-serif";
-      context.fillStyle = '#B7AF95';
+      context.fillStyle = '#442b10';
       context.fillText("0",0,96);
 
       context.fillText("9",280,100);
@@ -724,7 +729,7 @@ function googleTranslateElementInit() {
 
   <center>
     <div class="answerwrapper">
-     <div class='sliders responsive-body' style="text-align: left;font-size: 12px;">
+     <div class='sliders responsive-body' style="text-align: left;font-size: 18px;font-family: DroidSans;">
        {{client_settings.RATE_IMPORTANCE_QUESTION}}
        <center>
        <div class="slider" id="slider-importance"></div>           
@@ -752,9 +757,13 @@ function googleTranslateElementInit() {
   </div>
 
   <div class="map-frame">
-    <center>{{ topic }}</center><br/>
-  <div id='d3' class="d3-canvas"></div>
+    <div class="instructions-light">
+    Each sphere represents a participant.
+    Tap any sphere to begin.
+    </div>
 
+      {{ topic }}<br/>
+  <div id='d3' class="d3-canvas"></div><br>
   </div>
   <div class='frame'></div>
 

@@ -782,12 +782,14 @@ $(document).ready(function() {
     $('.dialog-ready').click(function() {
         rate.logUserEvent(8,'dialog 1');
         rate.initMenubar();
+
+
         //$('.scorebox').show();
 
-        /*if(window.user_score == 0)
+        if(window.user_score == 0)
         {
-            $('.instructions').show();
-        }*/
+            $('.instructions-light').show();
+        }
 
         $('.dialog').hide();
         window.prev_state = 'dialog';
