@@ -522,6 +522,7 @@ $(document).ready(function() {
         $('.scorebox').hide();
         $('.menubar').hide();
         $('.instructions-light').hide();
+        window.your_mug.transition().duration(2000).style("opacity", "0.4");
         window.prev_state = 'comment';
         //todo fix
         window.cur_state = 'continue';
