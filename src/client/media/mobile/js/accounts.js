@@ -938,4 +938,11 @@ $(document).ready(function() {
         backButtonHandler();
     };
 
+    /*$('.button-div-red').on("touchstart", function (e){
+        $(this).css("color","#8c6239");
+    });
+    $('.button-div-red').on("mouseover", function (e){
+        $(this).css("color","#8c6239");
+    });*/
+
 });

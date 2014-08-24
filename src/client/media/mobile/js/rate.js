@@ -452,7 +452,14 @@ $(document).ready(function() {
             {
                 $("#slide-"+window.current_slider).hide();
                 window.current_slider = window.current_slider  + 1;
-                $("#slide-"+window.current_slider).show("slide", { direction: "right" }, 500);
+
+                var ua = navigator.userAgent.toLowerCase();
+                var isAndroid = ua.indexOf("android") > -1; //&& ua.indexOf("mobile");
+                if(isAndroid) {
+                    $("#slide-"+window.current_slider).fadeIn(500);
+                }   
+                else
+                    $("#slide-"+window.current_slider).show("slide", { direction: "right" }, 500);
                 /*$(".slider-progress-dot-"+(parseInt(event.target.id.substring(5),10)+1)).css("background","#FFFFFF");*/
 
             }
