@@ -418,6 +418,7 @@ $(document).ready(function() {
                         utils.showLoading("Loading", function() {
                             accounts.loginAfterRegister(loginData,dialogcontinue);
                             blooms.populateBlooms();
+                            window.scrollTo(0,0); 
                             //$('.register').hide();
                             $("#regzip").attr("disabled", true);
                             utils.hideLoading();
@@ -523,6 +524,7 @@ $(document).ready(function() {
         //accounts.firstTime();
         window.history.pushState("", "", '#');
         accounts.hideAll();
+        window.scrollTo(0,0);
         $('.endsliders').show();
         $('#slide-1').show();
         /*$(".slider-progress-dot").css("background","#000000");

@@ -108,6 +108,7 @@ $(".slider-grade-bubble").on("click",function(e){
                     $("#slide-"+window.current_slider).show("slide", { direction: "right" }, 500);
 
                 $("#slide-"+(window.current_slider-1)).hide();
+                window.scrollTo(0,0); 
             },50);
                 /*$(".slider-progress-dot-"+(parseInt(event.target.id.substring(5),10)+1)).css("background","#FFFFFF");*/
 

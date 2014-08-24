@@ -246,11 +246,12 @@ table.pretty caption {
 	position:fixed;
 	bottom: 0px;
 	left: 0px;
-	font-size: 20px;
+	font-size: 16px;
+	line-height: 18px;
 	padding-left: 20px;
 	padding-right: 20px;
 	padding-top: 10px;
-	height: 80px;
+	height: 65px;
 	width: 90%;
 	text-shadow: none;
 	display: none;
