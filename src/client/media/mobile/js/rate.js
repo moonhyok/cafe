@@ -450,7 +450,6 @@ $(document).ready(function() {
         }
         else
             {
-                $("#slide-"+window.current_slider).hide();
                 window.current_slider = window.current_slider  + 1;
 
                 var ua = navigator.userAgent.toLowerCase();
@@ -460,6 +459,8 @@ $(document).ready(function() {
                 }   
                 else
                     $("#slide-"+window.current_slider).show("slide", { direction: "right" }, 500);
+
+                $("#slide-"+window.current_slider).hide();
                 /*$(".slider-progress-dot-"+(parseInt(event.target.id.substring(5),10)+1)).css("background","#FFFFFF");*/
 
             }
