@@ -357,12 +357,6 @@ var _blooms = blooms = (function($, d3, console) {
             // clear anything that's in the div already (e.g. loading button)
             $('#d3 .loading').hide();
 
-            /* var force = d3.layout.force()
-                 .charge(-1500)
-                 .size([width, height]);
-
-            window.force = force;*/
-
             window.coffeetable_svg = d3.select('#d3')
             .append('svg')
             .attr('width', width + margin.left + margin.right)
@@ -398,7 +392,7 @@ var _blooms = blooms = (function($, d3, console) {
 
             //var rescale = generateRescalingFactor();
 
-            //force.nodes(data).start();
+            
 
             var mugs = window.coffeetable_svg.selectAll(".bloom")
             .data(data)
@@ -445,6 +439,11 @@ var _blooms = blooms = (function($, d3, console) {
 
             //blooms.addYourMug();
 
+           /* mugs.transition().
+            attr("x",0)
+            .duration(10000) // this is 1s
+            .delay(100);*/
+
             });
 
                   /*  if(window.user_score >= 2)
@@ -466,17 +465,6 @@ var _blooms = blooms = (function($, d3, console) {
                            }
                     }*/
 
-                   /*force.on("tick", function() {
-                    mugs.attr('x', function(d) {
-
-                                    return d.x;
-                                })
-                                .attr('y', function(d) {
-                                    return d.y;
-                                })
-                                });*/
-
-                                //force.start();
                                 //for (var i = 0; i < 1000; ++i) force.tick();
                                 //force.stop();
 
