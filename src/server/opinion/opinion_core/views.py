@@ -287,9 +287,9 @@ def crc_generic_stats(request):
                                                                                             }))
 
 def app(request, username=None):
-	if request.mobile:
+	#if request.mobile:
 		#return HttpResponseRedirect(URL_ROOT + "/mobile/")
-            return mobile(request)
+    return mobile(request)
 # 	create_visitor(request)
 # 	if username != None:
 # 		if not Settings.objects.boolean('SOFT_ENTRY_CODES'):
@@ -299,8 +299,8 @@ def app(request, username=None):
 # 			elif len(DiscussionComment.objects.filter(user = users[0])) == 0:
 # 				username = NULL_USER_INDICATOR
 # 		return render_to_response('app.html', context_instance = RequestContext(request, {'username': username, 'client_settings':get_client_settings()}))
-	else:
-		return render_to_response('app.html', context_instance = RequestContext(request, {'client_settings':get_client_settings(),'refer': request.GET.get('refer','')}))
+	#else:
+	#	return render_to_response('app.html', context_instance = RequestContext(request, {'client_settings':get_client_settings(),'refer': request.GET.get('refer','')}))
 
 def get_client_settings(dic=False):
 	client_settings = {}
