@@ -19,6 +19,7 @@ html {
   -webkit-font-smoothing: antialiased;
   font-family: DroidSans;
   font-weight: 200;
+  background-color: #e2decf !important;
 }
 
 body{
@@ -56,7 +57,9 @@ body{
 	padding-left: 20px;
 	padding-top: 10px;
 	padding-bottom: 10px;
+	text-align: left;
 	font-size: 22px;
+	max-width: 620px;
 	text-shadow: 1px 1px 1px #F7F4DD;
 	font-weight: 400;
 	line-height: 24px;
@@ -76,11 +79,11 @@ body{
 	.landing-img-txt{
 	color: #442b10;
 	padding-left: 20px;
+	max-width: 620px;
 	padding-right: 25px;
 	text-align: justify;
 	font-size: 17px;
 	text-shadow: 1px 1px 1px #F7F4DD;
-	font-weight: 400;
 	font-family: DroidSans;
 	}
 
@@ -246,6 +249,9 @@ table.pretty caption {
 	position:fixed;
 	bottom: 0px;
 	left: 0px;
+	right: 0px;
+	margin-right: auto;
+	margin-left: auto;
 	font-size: 16px;
 	line-height: 18px;
 	padding-left: 20px;
@@ -253,6 +259,7 @@ table.pretty caption {
 	padding-top: 10px;
 	height: 65px;
 	width: 90%;
+	max-width: 620px;
 	text-shadow: none;
 	display: none;
 	color: #442b10;
@@ -270,6 +277,11 @@ table.pretty caption {
 		top: 65px !important;
 	}
 
+	.instructions-light{
+		height: 100px !important;
+		padding-bottom: 20px !important;
+	}
+
 	.responsive-form{
 		max-width: 500px !important;	
 	}
@@ -279,9 +291,14 @@ table.pretty caption {
 		min-height: 300px !important;
 	}
 
+	.endsliders-next-btn{
+		width: 80px !important;
+		height: 80px !important;
+	}
+
 	.responsive-body{
-		font-size: 32px !important;
-		width: 50% !important;
+		font-size: 22px !important;
+		padding: 0px !important;
 		line-height: 36px !important;
 	}
 
@@ -290,21 +307,14 @@ table.pretty caption {
     }
 
 	.responsive-header{
-		font-size: 42px !important;
-		padding-bottom: 5px;
-		line-height: 42px !important;
+		font-size: 32px !important;
+		padding-bottom: 10px;
+		line-height: 32px !important;
 	}
 
 	.basic-header{
 		font-size: 42px !important;
 		padding-bottom: 5px;
-	}
-
-	.responsive-btn{
-		width: 300px !important;
-		font-weight: normal !important;
-		font-size: 44px !important;
-		line-height: 70px !important;
 	}
 
 	.responsive-padding{
@@ -404,6 +414,7 @@ table.pretty caption {
     text-align: right;
     color: #442b10;
     width: 100%;
+    max-width: 780px;
     height: 44px;
     box-shadow: 0px 2px 2px #888888;
     text-shadow: 1px 1px white;
@@ -568,6 +579,7 @@ table.pretty caption {
 		/*background: url('../img/cafe/cafe_notebook.png') repeat-y;*/
 		width: 100%;
 		height: 100%;
+		max-width: 620px;
 	}
 	
 	.cardtable{
@@ -709,6 +721,7 @@ table.pretty caption {
 	.close-page
 	{
 		width: 95%; 
+		max-width: 620px;
 		text-align:right;
 		padding-top: 5px;
 		font-size: 24px;
@@ -762,11 +775,6 @@ table.pretty caption {
 	    padding-bottom: 40px;
 	}
 
-	.endsliders-next-btn{
-
-		width: 15px;
-		display: inline-block;xww
-	}
 
 		.endsliders-back-btn-size{
 
@@ -1237,6 +1245,7 @@ padding-right: 7px;
     text-align: right;
     color: #442b10;
     width: 100%;
+    max-width: 620px;
     height: 44px;
     box-shadow: 0px 2px 2px #888888;
     background-image:url('../img/cafe/rounded-base.png');
@@ -1264,6 +1273,8 @@ padding-right: 7px;
 	padding-right: 20px; 
 	padding-top: 5px; 
 	padding-bottom: 5px; 
+	width: 100%;
+	max-width: 620px;
 	text-align: left; 
 	font-size: 17px;
 	text-shadow: 1px 1px 1px #F7F4DD;
@@ -1277,6 +1288,8 @@ padding-right: 7px;
 	padding-right: 20px; 
 	padding-top: 10px; 
 	text-align: left; 
+	width: 100%;
+	max-width: 620px;
 	font-size: 17px;
 	text-shadow: 1px 1px 1px #F7F4DD;
 	font-weight: bolder;
@@ -1396,9 +1409,20 @@ padding-right: 7px;
   background-size: cover;
 	/*background-size:cover;*/
 	width: 100%;
+	max-width: 620px;
 	height: 80%;
 	/*z-index: 999; */
 
+}
+
+.full-page{
+		background-image:url('../img/cafe/capitol-landing.png');
+  background-size: cover;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
 }
 
 .map-frame{
@@ -1407,9 +1431,13 @@ padding-right: 7px;
 	/*background-size:cover;*/
 	width: 90%;
 	height: 100%;
+	max-width: 768px;
 	position: absolute;
 	top:48px;
-	left: 0;
+	left:0;
+    right:0;
+    margin-left:auto;
+    margin-right:auto;
 	font-size: 20px;
 	text-shadow: 1px 1px 1px #F7F4DD;
 	font-weight: bolder;
@@ -1455,6 +1483,7 @@ padding-top: 20px;
     font-family: DroidSans;
 	color: #442b10;
 	height: 100%;
+	max-width: 620px;
 	text-decoration: none;
 	text-shadow: 1px 1px 1px #F7F4DD;
 	text-align: left;
@@ -1476,10 +1505,11 @@ padding-top: 20px;
 	text-decoration: none;
 	text-shadow: none;
 	font-size: 16px;
+	text-align: left;
+	max-width: 620px;
 	
 	padding: 20px;
 	line-height: 20px;
-	max-width: 90%;
 }
 
 .dialog-text-style-noflow br {

@@ -134,30 +134,39 @@ margin-right: 3px;
 
 	@media (min-width: 768px) {
 		.slider-grade-p{
-		border-radius:40px !important;
-		line-height: 80px !important;
-		font-size: 40px !important;
+		height: 80px;
 		text-align: center;
-		width: 80px !important;
+		width: 80px;
 		display:inline-block;
+margin-right: 3px;
+		margin-left: 5px;
+		margin-bottom: 5px;
+		margin-top: 5px;
+		opacity: 1.0;
 		}
 
 		.slider-grade-main{
-		border-radius:40px !important;
-		line-height: 80px !important;
-		font-size: 40px !important;
+		height: 80px;
 		text-align: center;
-		width: 80px !important;
+		width: 80px;
 		display:inline-block;
+margin-right: 3px;
+		margin-left: 5px;
+		margin-bottom: 5px;
+		margin-top: 5px;
+		opacity: 1.0;
 		}
 
 		.slider-grade-m{
-		border-radius:40px !important;
-		line-height: 80px !important;
-		font-size: 40px !important;
+		height: 80px;
 		text-align: center;
-		width: 80px !important;
+		width: 80px;
 		display:inline-block;
+margin-right: 3px;
+		margin-left: 5px;
+		margin-bottom: 5px;
+		margin-top: 5px;
+		opacity: 1.0;
 		}
 
 			.slider-progress-dot{

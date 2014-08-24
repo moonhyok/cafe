@@ -101,8 +101,8 @@ $(".slider-grade-bubble").on("click",function(e){
                 window.current_slider = window.current_slider  + 1;
                 var ua = navigator.userAgent.toLowerCase();
                 var isAndroid = ua.indexOf("android") > -1; //&& ua.indexOf("mobile");
-                if(isAndroid) {
-                    $("#slide-"+window.current_slider).fadeIn(500);
+                if(isAndroid || screen.width >= 700) {
+                    $("#slide-"+window.current_slider).fadeIn(1000);
                 }   
                 else
                     $("#slide-"+window.current_slider).show("slide", { direction: "right" }, 500);

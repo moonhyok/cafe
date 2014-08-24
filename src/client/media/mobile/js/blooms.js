@@ -328,7 +328,7 @@ var _blooms = blooms = (function($, d3, console) {
             };
 
 
-            var width = $(window).width() - margin.right - margin.left;
+            var width = $('.map-frame').width() - margin.right - margin.left;
 
             var topBarHeight = $('.top-bar').height();
 
@@ -336,7 +336,7 @@ var _blooms = blooms = (function($, d3, console) {
             if($(window).width() > 768)
                 mugsize=150;
 
-            var height = $(window).height()*.8- margin.bottom - margin.top - topBarHeight;
+            var height = $('.map-frame').height()*.8- margin.bottom - margin.top - topBarHeight;
 
             // Stashing away your_mug_data so it can be added after 2 mugs have been rated
             window.your_mug_data = data.splice(data.length-1, 1)[0];

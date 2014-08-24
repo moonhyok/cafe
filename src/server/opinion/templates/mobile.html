@@ -265,7 +265,10 @@
 
 <body>
 
+ <div class="full-page">
+
   <div class='landing'>
+      <center>
       <div class="home-btn-dialog-box landing-navigation">
           <div class="home-btn-title responsive-header">
                 Open NYU CAFE
@@ -276,24 +279,21 @@
             </div>
 
       </div>
-
-        <img width="100%" src="{{url_root}}/media/mobile/img/cafe/title_image.png" style="margin-top:3px;">
-        <div class="landing-img-title">
+        <img width="100%" src="{{url_root}}/media/mobile/img/cafe/title_image.png" style="margin-top:3px;max-width: 620px;">
+        <div class="landing-img-title responsive-body">
           How can technology enhance learning at NYU?
-        </div>  
-
+        </div> 
         <!--<div class="landing-img-subtitle">
           How can technology enhance learning at NYU?
         </div> -->
 
-        <div class="landing-img-txt">  
+        <div class="landing-img-txt responsive-body">  
         We’d like your input: please take 5 mins to share your perspectives.  
         We’ll provide Apple iPads to the most insightful suggestions.<br/>Participants so far:  {{num_users}}. 
        </div>
-        
-      <!--<img class="capitol-bg" src="{{url_root}}/media/mobile/img/cafe/capitol-landing1.png">-->
 
-      <center><div class='button-div-red first-time-btn responsive-btn' style="margin-top: 10px;">Begin</div></center><br/><br/><br/>
+       <div class='button-div-red first-time-btn responsive-btn' style="margin-top: 10px;">Begin</div></center><br/><br/><br/>
+
       
        <!--<div class="landing-img-txt">   
            Take a moment to join <strong>{{num_users}}</strong> others who have graded the State of California on six timely issues.<br/>
@@ -312,7 +312,7 @@ function googleTranslateElementInit() {
 
       {% for statement in statements %}              
         <div class="endsliders-slide" id="slide-{{statement.id}}">
-
+          <center>
          <div class="home-btn-dialog-box first-dialog-nav">
             <div class="home-btn-title responsive-header">
                 Open NYU CAFE
@@ -336,13 +336,13 @@ function googleTranslateElementInit() {
           </div>  
 
           <center>  
-              <div class="question-number">Question {{ statement.id }} of {{ statements|length }}</div>
-              <div class="statement-style responsive-header">{{ statement.statement }}</div>
+              <div class="question-number responsive-body">Question {{ statement.id }} of {{ statements|length }}</div>
+              <div class="statement-style responsive-body">{{ statement.statement }}</div>
 
               {% if statement.id == 3 %}
-              <div class="question-directions">0 (Not at all)   -  9 (Very far ahead)</div>
+              <div class="question-directions responsive-body">0 (Not at all)   -  9 (Very far ahead)</div>
               {% else %}
-              <div class="question-directions">0 (Not at all)  -  9 (Extensively)</div>
+              <div class="question-directions responsive-body">0 (Not at all)  -  9 (Extensively)</div>
               {% endif %}
 
               <!--<div class="median-grade-{{statement.id}} med-grade-box"></div>-->
@@ -355,7 +355,7 @@ function googleTranslateElementInit() {
                 <center>
                 <!--<img class='endsliders-back-btn endsliders-back-btn-size' style="display: inline-block; width: 10px;position:relative;top:5px;" id="back-{{statement.id}}" src="{{url_root}}/media/mobile/img/cafe/Skip_V1.png">
                 <div class='question-directions' style="display: inline-block;font-size: 16px;padding: 0px;margin: 0px;">SWIPE TO SKIP TO THE NEXT QUESTION</div>-->
-                <img class='endsliders-next-btn responsive-next-btn' style="display: inline-block; width: 55px; padding-top: 15px;position:relative;left: 3px;" id="next-{{statement.id}}" src="{{url_root}}/media/mobile/img/cafe/skip-btn.png">
+                <img class='endsliders-next-btn' style="display: inline-block; width: 55px; padding-top: 15px;position:relative;left: 3px;" id="next-{{statement.id}}" src="{{url_root}}/media/mobile/img/cafe/skip-btn.png">
               </center>
 
               </div>
@@ -364,6 +364,7 @@ function googleTranslateElementInit() {
               <!--<a href="#" class="skip-button-{{statement.id}} skip-btn responsive-body" id="next-{{statement.id}}" style="color: #ffffff;font-size: 16px;font-weight: normal !important;position:relative;top: -40px;left: 100px;">Skip</a>-->
               
           </center>
+        </center>
 
       </div>
   
@@ -372,6 +373,7 @@ function googleTranslateElementInit() {
   </div>
 
   <div class = 'register' id='register'>
+    <center>
       <div class="home-btn-dialog-box">
             <div class="home-btn-title responsive-header">
                 Open NYU CAFE
@@ -484,12 +486,12 @@ function googleTranslateElementInit() {
           </form>
           </center>
       </div>
-
+</center>
 
   </div>
 
   <div class='burger-page dialog-style'>
-    
+    <center>
       <div class="home-btn-dialog-box">
             <div class="home-btn-title responsive-header">
                 Open NYU CAFE
@@ -501,6 +503,7 @@ function googleTranslateElementInit() {
 
       </div> 
 
+      <div style="max-width: 620px; width: 100%; border: 2px solid white;margin-top: 5px;">
       <div class="burger-div burger-div-about">
         About
       </div>
@@ -520,11 +523,14 @@ function googleTranslateElementInit() {
       <div class="burger-div burger-div-logout">
         Exit Application
       </div>
+    </div>
+    </center>
 
   </div>
 
 
   <div class='dialog dialog-style'>
+    <center>
       <div class="home-btn-dialog-box">
             <div class="home-btn-title responsive-header">
                 Open NYU CAFE
@@ -536,15 +542,14 @@ function googleTranslateElementInit() {
 
          </div> 
       <!--<img class="header-img-topic center" src="{{ url_root }}/media/mobile/img/cafe/CRC_join.png"/>-->
-       <center>
-        <div class='dialog-text1 dialog-text-style responsive-body'>
+        <div class='dialog-text1 dialog-text-style'>
           How do I compare?
         </div>
 
         <br/>
         {% for k,v in statement_hist.iteritems %}
         
-      <div class="compare-box-{{k.id}}" style="padding-bottom: 10px;" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();">
+      <div class="compare-box-{{k.id}}" style="padding-bottom: 10px;max-width:620px;" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();">
         <div class="compare-tag">
           <!--<div style="font-size: 12px; font-style: italic;font-weight: bolder;" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();">{{k.id}}. </div>-->
           <div style="font-size: 18px;font-weight: bolder;" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();">{{k.short_version}}</div>
@@ -599,6 +604,7 @@ function googleTranslateElementInit() {
 
       {% for k,v in statement_hist.iteritems %}
           <div class="detail-box detail-box-{{k.id}}" style="display:none;">
+            <center>
         <div class="home-btn-dialog-box">
             <div class="home-btn-title responsive-header">
                 Open NYU CAFE
@@ -616,7 +622,7 @@ function googleTranslateElementInit() {
           </div>
 
          <div class="statement-style">
-          <div style="font-style: italic;font-weight: bolder;padding-top: 20px;font-size: 14px;">Question {{k.id}}</div>
+          <div style="font-style: italic;font-weight: bolder;padding-top: 20px;font-size: 14px;padding-bottom: 10px;">Question {{k.id}}</div>
          {{ k.statement }} 
          </div>
 
@@ -658,11 +664,12 @@ function googleTranslateElementInit() {
               </div>-->
     </center>
 
-
+</center>
         </div>
        {% endfor %} 
 
   <div class='comment-input'>
+    <center>
        <div class="home-btn-dialog-box">
             <div class="home-btn-title responsive-header">
                 Open NYU CAFE
@@ -681,6 +688,7 @@ function googleTranslateElementInit() {
                   <div class='comment-submit-btn button-div-wide responsive-btn' style="display: inline-block;">Post</div>
           </div>
       </center>
+    </center>
   </div>
 
   <div class="top-bar">
@@ -711,7 +719,7 @@ function googleTranslateElementInit() {
   <div class="margin"></div>
 
   <div class='rate' id="rate">
-
+    <center>
       <div class="home-btn-dialog-box">
             <div class="home-btn-title responsive-header">
                 Open NYU CAFE
@@ -734,7 +742,7 @@ function googleTranslateElementInit() {
 
   <center>
     <div class="answerwrapper">
-     <div class='sliders responsive-body' style="text-align: left;font-size: 18px;font-family: DroidSans;">
+     <div class='sliders responsive-body' style="text-align: left;font-size: 18px;font-family: DroidSans;max-width: 620px;">
        {{client_settings.RATE_IMPORTANCE_QUESTION}}<br/><br/>
        <center>
         0 (Not at all)  -  9 (Extremely)
@@ -758,11 +766,13 @@ function googleTranslateElementInit() {
     </center>
 
     </div>
+  </center>
 
   </div>
 
+<center>
   <div class="map-frame">
-    <div class="instructions-light">
+    <div class="instructions-light responsive-body">
     Each sphere represents a participant.
     Tap any sphere to begin.
     </div>
@@ -770,9 +780,12 @@ function googleTranslateElementInit() {
       {{ topic }}<br/>
   <div id='d3' class="d3-canvas"></div><br>
   </div>
+</center>
+
   <div class='frame'></div>
 
   <div class='logout'>
+    <center>
             <div class="home-btn-dialog-box">
             <div class="home-btn-title responsive-header">
               Open NYU CAFE
@@ -790,6 +803,7 @@ function googleTranslateElementInit() {
         </div>
 
         <!--<div class='comment-submit-btn button-div responsive-btn' style="display: inline-block;">Email</div>-->
+      </center>
  </div>
 
   <div class='welcome-back'>
@@ -857,6 +871,7 @@ function googleTranslateElementInit() {
   </div>
 
   <div class='dialog-continue dialog-style'>
+    <center>
        <div class="home-btn-dialog-box">
             <div class="home-btn-title responsive-header">
                 Open NYU CAFE
@@ -888,6 +903,7 @@ function googleTranslateElementInit() {
         </center>
 
     </div>
+          </center>
           </center>
   </div>
 
@@ -938,15 +954,17 @@ function googleTranslateElementInit() {
     </div>
   </div>
 
-  <div class='dialog-about dialog-style responsive-body' style="z-index:999">
+  <div class='dialog-about dialog-style'>
+    <center>
      <div class="home-btn-dialog-box" style="padding-top: 5px;">
           <span style="font-size: 24px;font-weight:bold;padding-right: 15px;" onclick="accounts.hideAll();$('.burger-page').show();">X</span>
       </div>
-      <div class='dialog-text-style-noflow small-left-padding responsive-body'>
-          <div class="basic-header">{{client_settings.ABOUT_PAGE_HEADER}}</div>
-	  <center>{{num_users}} participants so far.</center><br/>
+      <div class='dialog-text-style-noflow responsive-body'>
+       <center> {{client_settings.ABOUT_PAGE_HEADER}}<br/>
+	  {{num_users}} participants so far.</center><br/>
 	  {% autoescape off %}{{client_settings.ABOUT_PAGE_TEXT }}{% endautoescape %}
       </div>
+    </center>
   </div>
 
   <div class='dialog-help-alt dialog-style' style="z-index:999">
@@ -1154,6 +1172,8 @@ function googleTranslateElementInit() {
   ga('send', 'pageview');
 
 </script>
+
+</div>
 
 </body>
 </html>
