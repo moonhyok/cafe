@@ -1072,11 +1072,11 @@ table.pretty caption {
 }
 
 .basic-header2 {
-	font-family: DroidSans-Bold;
+	font-family: DroidSans;
     	text-shadow: 1px 1px 1px #F7F4DD;
     	text-align: left !important;
     	color: #442b10;
-    	font-size: 22px;
+    	font-size: 18px;
     	line-height: 26px;
     	font-weight: bolder;
 
