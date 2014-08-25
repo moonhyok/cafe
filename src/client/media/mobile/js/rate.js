@@ -164,7 +164,7 @@ var rate = (function($, d3, console) {
                }
 
                if (window.blooms_list.length <= 2) {
-               utils.showLoading("Loading More Mugs...");
+               utils.showLoading("Loading More Spheres...");
                window.blooms_list = undefined; //needed to avoid infinite recursing
                setTimeout(blooms.populateBlooms, 500);
                }
