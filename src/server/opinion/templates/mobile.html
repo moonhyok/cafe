@@ -749,7 +749,7 @@ function googleTranslateElementInit() {
         0 (Not at all)  -  9 (Extremely)
        <div class="slider" id="slider-importance"></div>    
         
-        <img id='go-back' style="width: 55px; position:relative;left: 3px;" src="{{url_root}}/media/mobile/img/cafe/skip-btn.png">       
+        <img id='go-back' class="responsive-go" style="width: 55px; position:relative;left: 3px;" src="{{url_root}}/media/mobile/img/cafe/skip-btn.png">       
        </center>
   
        <div class="slider-padding"></div>
@@ -774,11 +774,9 @@ function googleTranslateElementInit() {
 <center>
   <div class="map-frame">
     <div class="instructions-light responsive-body">
-    Each sphere represents a participant.
-    Tap any sphere to begin.
+    Each sphere represents a participant. Tap any sphere to begin.
     </div>
-
-      {{ topic }}<br/>
+    <div>{{ topic }}</div>
   <div id='d3' class="d3-canvas"></div><br>
   </div>
 </center>

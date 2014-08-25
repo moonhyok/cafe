@@ -246,24 +246,17 @@ table.pretty caption {
 }
 
 .instructions-light{
-	position:fixed;
-	bottom: 0px;
-	left: 0px;
-	right: 0px;
-	margin-right: auto;
-	margin-left: auto;
 	font-size: 16px;
 	line-height: 18px;
-	padding-left: 20px;
-	padding-right: 20px;
+	height: 40px !important;
+	margin-top: 0px;
 	padding-top: 10px;
-	height: 65px;
-	width: 90%;
+	width: 100%;
 	max-width: 620px;
 	text-shadow: none;
 	display: none;
 	color: #442b10;
-	background-color: rgba(255,255,255,0.8);
+	background-color: rgba(255,255,255,0.6);
 }
 
 @media (min-width: 768px){
@@ -275,11 +268,6 @@ table.pretty caption {
 		font-size: 32px !important;
 		line-height: 36px !important;
 		top: 65px !important;
-	}
-
-	.instructions-light{
-		height: 100px !important;
-		padding-bottom: 20px !important;
 	}
 
 	.responsive-form{
@@ -297,9 +285,8 @@ table.pretty caption {
 	}
 
 	.responsive-body{
-		font-size: 22px !important;
-		padding: 0px !important;
-		line-height: 36px !important;
+		font-size: 20px !important;
+		line-height: 22px !important;
 	}
 
 	.dialog-text-style-noflow em {    
@@ -332,12 +319,9 @@ table.pretty caption {
 		max-width: 100px !important;
 	}
 
-	.responsive-go-back{
-		position: relative; 
-		top: -350px !important; 
-		left: 200px !important;
-		width: 100px !important;
-		max-width: 100px !important;
+	.responsive-go{
+		height: 80px !important;
+		width: 80px !important;
 	}
 }
 
