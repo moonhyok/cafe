@@ -920,6 +920,39 @@ $(document).ready(function() {
         $('.logout').hide();
         $('.login').show();
     });
+
+    $('.button-div-red').on('mouseover',function(e){
+        $(this).css("background-image",$(this).css("background-image").replace("default","default-down"));
+    });
+
+    $('.button-div-red').on('mouseout',function(e){
+        $(this).css("background-image",$(this).css("background-image").replace("default-down","default"));
+    });
+
+    $('.button-div-red').on('touchstart',function(e){
+        $(this).css("background-image",$(this).css("background-image").replace("default","default-down"));
+    });
+
+    $('.button-div-red').on('touchend',function(e){
+        $(this).css("background-image",$(this).css("background-image").replace("default-down","default"));
+    });
+
+        $('.button-div-wide').on('mouseover',function(e){
+        $(this).css("background-image",$(this).css("background-image").replace("wide","wide-down"));
+    });
+
+    $('.button-div-wide').on('mouseout',function(e){
+        $(this).css("background-image",$(this).css("background-image").replace("wide-down","wide"));
+    });
+
+    $('.button-div-wide').on('touchstart',function(e){
+        $(this).css("background-image",$(this).css("background-image").replace("wide","wide-down"));
+    });
+
+    $('.button-div-wide').on('touchend',function(e){
+        $(this).css("background-image",$(this).css("background-image").replace("wide-down","wide"));
+    });
+
     
     $('#regrade-btn').click(function(){
 		$('.welcome-back').hide();
