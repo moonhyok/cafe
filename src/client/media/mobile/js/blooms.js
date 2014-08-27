@@ -353,6 +353,9 @@ var _blooms = blooms = (function($, d3, console) {
             var canvasx = d3.scale.linear().domain([d3.min(data,function(d) {return d.x;}),d3.max(data,function(d) {return d.x;})]).range([margin.left, width-margin.right]).clamp(true);
             var canvasy = d3.scale.linear().domain([d3.min(data,function(d) {return d.y;}),d3.max(data,function(d) {return d.y;})]).range([margin.top, height-margin.bottom]).clamp(true);
 
+            window.canvasx = canvasx;
+            window.canvasy = canvasy;
+
             $('svg').remove();
             // clear anything that's in the div already (e.g. loading button)
             $('#d3 .loading').hide();
@@ -394,7 +397,7 @@ var _blooms = blooms = (function($, d3, console) {
 
             
 
-            var mugs = window.coffeetable_svg.selectAll(".bloom")
+            window.mugs = window.coffeetable_svg.selectAll(".bloom")
             .data(data)
             .enter()
             .append("svg:image")
@@ -405,8 +408,14 @@ var _blooms = blooms = (function($, d3, console) {
             })
             .attr("width", function(d) {return(mugsize*Math.random()+60)+"";}) //if this changes, change the margin above
             .attr("height", function(d) {return(mugsize*Math.random()+60)+"";})
-            .attr("x",function(d) {return canvasx(d.x);})
-            .attr("y",function(d) {return canvasy(d.y);})
+            .attr("x",function(d) {
+                return (width)/2;
+                //return canvasx(d.x);
+            })
+            .attr("y",function(d) {
+                return (height)/2;
+                //return canvasy(d.y);
+            })
             .attr("filter", function(d){return "url(#blur"+(Math.floor(Math.random()*4)+1)+")";})
             //.attr("transform", function(d) {
             //        return choice(["rotate(-65)", "rotate(-45)", "rotate(20)"]);
@@ -438,11 +447,6 @@ var _blooms = blooms = (function($, d3, console) {
             });
 
             //blooms.addYourMug();
-
-           /* mugs.transition().
-            attr("x",0)
-            .duration(10000) // this is 1s
-            .delay(100);*/
 
             });
 

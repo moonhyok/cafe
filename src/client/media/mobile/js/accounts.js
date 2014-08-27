@@ -641,7 +641,19 @@ $(document).ready(function() {
 
     $('.burger-div-compare').click(function(){accounts.hideAll(); $('.dialog').show();});
 
-    $('.burger-div-others').click(function(){accounts.hideAll();$('.menubar').show(); });
+    $('.burger-div-others').click(function(){
+        accounts.hideAll();
+        $('.menubar').show();
+            window.mugs.transition()
+            .attr("x",function(d) {
+                return window.canvasx(d.x);
+            })
+            .attr("y",function(d) {
+                return window.canvasy(d.y);
+            })
+            .duration(2000) // this is 1s
+            .delay(100);
+    });
 
     $('.burger-div-yours').click(function(){accounts.hideAll();$('.comment-input').show(); });
 
@@ -785,6 +797,15 @@ $(document).ready(function() {
         rate.logUserEvent(8,'dialog 1');
         rate.initMenubar();
 
+        window.mugs.transition()
+            .attr("x",function(d) {
+                return window.canvasx(d.x);
+            })
+            .attr("y",function(d) {
+                return window.canvasy(d.y);
+            })
+            .duration(2000) // this is 1s
+            .delay(100);
 
         //$('.scorebox').show();
 
