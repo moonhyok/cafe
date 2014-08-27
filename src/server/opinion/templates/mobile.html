@@ -16,6 +16,8 @@
 
 <!-- for best viewing on mobile phones -->
 <meta name='viewport' content='user-scalable=no, width=device-width,initial-scale=1, maximum-scale=1' />
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
 
 <!-- CSS stylesheets -->
 <link rel='stylesheet' type='text/css' href='{{url_root}}/media/mobile/css/reset.css?nonce={{random_password}}' />
@@ -340,9 +342,9 @@ function googleTranslateElementInit() {
               <div class="statement-style responsive-body">{{ statement.statement }}</div>
 
               {% if statement.id == 3 %}
-              <div class="question-directions responsive-body">0 (Not at all)   -  9 (Very far ahead)</div>
+              <div class="question-directions responsive-body">(Not at all) 0 -  9 (Very far ahead)</div>
               {% else %}
-              <div class="question-directions responsive-body">0 (Not at all)  -  9 (Extensively)</div>
+              <div class="question-directions responsive-body">(Not at all) 0 -  9 (Extensively)</div>
               {% endif %}
 
               <!--<div class="median-grade-{{statement.id}} med-grade-box"></div>-->
@@ -743,10 +745,10 @@ function googleTranslateElementInit() {
 
   <center>
     <div class="answerwrapper">
-     <div class='sliders responsive-body' style="text-align: left;font-size: 18px;font-family: DroidSans;max-width: 620px;">
-       {{client_settings.RATE_IMPORTANCE_QUESTION}}<br/><br/>
+     <div class='sliders responsive-body' style="text-align: left;font-size: 16px; line-height: 17px; font-family: DroidSans;max-width: 620px;">
+       {{client_settings.RATE_IMPORTANCE_QUESTION}}<br/>
        <center>
-        0 (Not at all)  -  9 (Extremely)
+        (Not at all) 0   -  9 (Extremely)
        <div class="slider" id="slider-importance"></div>    
         
         <img id='go-back' class="responsive-go" style="width: 55px; position:relative;left: 3px;" src="{{url_root}}/media/mobile/img/cafe/skip-btn.png">       

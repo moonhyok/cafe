@@ -423,7 +423,7 @@ var _blooms = blooms = (function($, d3, console) {
                 
                 $('.rate-username').html('Suggested by Participant #'+d.uid);
                 var commentData = rate.pullComment(d.uid, 'uid', comments);
-                var content = commentData.comment;
+                var content = '"'+commentData.comment+'"';
                 var cid = commentData.cid;
                 window.current_cid = cid;
                 window.current_uid = d.uid;
