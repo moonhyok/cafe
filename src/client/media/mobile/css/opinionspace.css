@@ -165,7 +165,7 @@ body{
 	background-color: #efece4;
 	text-shadow: none;
 	width: 100% !important;
-	height: 200px !important;
+	height: 120px !important;
 	font-size: 16px;
 	border-radius: 0px;
 	max-width: 700px;
@@ -276,11 +276,6 @@ table.pretty caption {
 	.responsive-answer{
 		font-size: 28px !important;	
 		min-height: 300px !important;
-	}
-
-	.endsliders-next-btn{
-		width: 80px !important;
-		height: 80px !important;
 	}
 
 	.responsive-body{
@@ -652,7 +647,7 @@ table.pretty caption {
 	}
 	
 	.regforminput{
-		font-size: 36px !important;
+		font-size: 18px !important;
 		margin: 0px !important;
 		padding-top: 0px !important;
 		

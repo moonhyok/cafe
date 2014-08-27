@@ -357,7 +357,7 @@ function googleTranslateElementInit() {
                 <center>
                 <!--<img class='endsliders-back-btn endsliders-back-btn-size' style="display: inline-block; width: 10px;position:relative;top:5px;" id="back-{{statement.id}}" src="{{url_root}}/media/mobile/img/cafe/Skip_V1.png">
                 <div class='question-directions' style="display: inline-block;font-size: 16px;padding: 0px;margin: 0px;">SWIPE TO SKIP TO THE NEXT QUESTION</div>-->
-                <img class='endsliders-next-btn' style="display: inline-block; width: 55px; padding-top: 15px;position:relative;left: 3px;" id="next-{{statement.id}}" src="{{url_root}}/media/mobile/img/cafe/skip-btn.png">
+                <div id='go-back' class='endsliders-next-btn button-div-wide responsive-btn' style="display: inline-block;">Skip</div>
               </center>
 
               </div>
@@ -687,8 +687,13 @@ function googleTranslateElementInit() {
       <center>
           <div class='comment-panel'>
               <div class="basic-header2 responsive-body" style="text-align:left;">{{topic}}<br/></div>
-              <textarea name='answer' id='entered-comment'></textarea>
-                  <div class='comment-submit-btn button-div-wide responsive-btn' style="display: inline-block;">Post</div>
+              <textarea name='answer' id='entered-comment' maxlength="500"></textarea>
+              <div style="max-width: 400px;font-size: 14px; text-align: left; width: 95%; padding-left: 15px;">
+                Please enter your email address so we can reach you if your idea is
+selected to win one of the 3 iPads.  We promise to keep your email confidential and will not share it with anyone.
+                <input type="email" id='regemail' name='regemail' class='regforminput' style="font-size: 15px; background-color: #FFFFFF;color: #000000;" placeholder="Email (Optional)" data-theme='b'></input>
+              </div>
+              <div class='comment-submit-btn button-div-wide responsive-btn' style="display: inline-block;">Post</div>
           </div>
       </center>
     </center>
@@ -751,7 +756,8 @@ function googleTranslateElementInit() {
         (Not at all) 0   -  9 (Extremely)
        <div class="slider" id="slider-importance"></div>    
         
-        <img id='go-back' class="responsive-go" style="width: 55px; position:relative;left: 3px;" src="{{url_root}}/media/mobile/img/cafe/skip-btn.png">       
+        <div id='go-back' class='button-div-wide responsive-btn' style="display: inline-block;">Skip</div>
+
        </center>
   
        <div class="slider-padding"></div>
