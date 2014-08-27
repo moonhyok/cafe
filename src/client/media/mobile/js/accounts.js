@@ -103,8 +103,8 @@ var accounts = (function($, d3, console) {
                          context.beginPath();
                         context.lineWidth = 2;
                         context.strokeStyle = '#6c8c7e';
-                        context.moveTo(window.sliders[i]*30, 90);
-                        context.lineTo(window.sliders[i]*30, 5);
+                        context.moveTo(window.sliders[i]*32, 90);
+                        context.lineTo(window.sliders[i]*32, 5);
                         context.stroke(); 
 
                         //blooms will be populated at the end of this! see callback
