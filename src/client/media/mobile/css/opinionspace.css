@@ -250,6 +250,7 @@ table.pretty caption {
 	height: 40px !important;
 	margin-top: 0px;
 	padding-top: 10px;
+	padding-bottom: 5px;
 	width: 100%;
 	max-width: 620px;
 	text-shadow: none;

@@ -342,8 +342,8 @@ var _blooms = blooms = (function($, d3, console) {
             window.your_mug_data = data.splice(data.length-1, 1)[0];
             window.your_mug_data.ox = window.your_mug_data.x; //keep the original untransformed values
             window.your_mug_data.oy = window.your_mug_data.y;
-            window.your_mug_data.x = (width)/2 - 50;//canvasx(window.your_mug_data.x);
-            window.your_mug_data.y = (height)/2 - 80;//canvasy(window.your_mug_data.y);
+            window.your_mug_data.x = (width)/2;//canvasx(window.your_mug_data.x);
+            window.your_mug_data.y = (height)/2;//canvasy(window.your_mug_data.y);
 
 
 
@@ -395,6 +395,10 @@ var _blooms = blooms = (function($, d3, console) {
 
             //var rescale = generateRescalingFactor();
 
+            if(window.user_score >= 2)
+                {
+                    blooms.addYourMug();
+                }
             
 
             window.mugs = window.coffeetable_svg.selectAll(".bloom")
@@ -446,7 +450,18 @@ var _blooms = blooms = (function($, d3, console) {
                 //utils.hideLoading(0);
             });
 
-            //blooms.addYourMug();
+            if(window.user_score >= 2)
+                {
+                    window.mugs.transition()
+            .attr("x",function(d) {
+                return window.canvasx(d.x);
+            })
+            .attr("y",function(d) {
+                return window.canvasy(d.y);
+            })
+            .duration(0) // this is 1s
+            .delay(0);
+                }
 
             });
 
@@ -485,9 +500,9 @@ var _blooms = blooms = (function($, d3, console) {
 
     /** Adds `yourMug` to the canvas as a hidden object. Change the opacity to make it appear */
     function addYourMug() {
-         var mugsize = "150";
+         var mugsize = 150;
             if($(window).width() > 768)
-                mugsize="200";
+                mugsize=250;
             
         window.your_mug = window.coffeetable_svg.append('svg:image')
         .attr("xlink:href", function(d) {
@@ -495,18 +510,18 @@ var _blooms = blooms = (function($, d3, console) {
 
         })
         .attr('x', function(d) {
-            return window.your_mug_data.x;
+            return window.your_mug_data.x-mugsize/2;
         })
         .attr('y', function(d) {
-            return window.your_mug_data.y;
+            return window.your_mug_data.y -mugsize/2;
         })
         .datum(function(d) {
             return window.your_mug_data;
         })
-        .attr("width", mugsize) //if this changes, change the margin above
-        .attr("height", mugsize)
+        .attr("width", mugsize+"") //if this changes, change the margin above
+        .attr("height", mugsize+"")
         .attr("opacity", function(d) {
-            return 0.0;
+            return 0.4;
         })
         .on('click', function(d) {
             if(window.refer == ""){
@@ -516,7 +531,22 @@ var _blooms = blooms = (function($, d3, console) {
                 $('.instructions-light').hide();
                 window.cur_state = 'comment';
             }
+        });
+
+        window.coffeetable_svg.append('svg:text')
+        .text("You")
+        .attr('x', function(d) {
+            return window.your_mug_data.x-20;
         })
+        .attr('y', function(d) {
+            return window.your_mug_data.y;
+        })
+        .attr("font-size",25)
+        .attr("opacity",1.0)
+        .transition()
+        .attr("opacity",0.0)
+        .duration(10000);
+
 
     }
 
