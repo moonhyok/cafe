@@ -322,9 +322,9 @@ var _blooms = blooms = (function($, d3, console) {
 
         margin = {
             top: 0,
-            left: 0,
+            left: 10,
             right: 80,
-            bottom: 90
+            bottom: 50
             };
 
 

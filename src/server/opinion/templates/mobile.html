@@ -786,6 +786,7 @@ selected to win one of the 3 iPads.  We promise to keep your email confidential 
     </div>
     <div style="text-align: left;margin-top: 3px;">{{ topic }}</div>
   <div id='d3' class="d3-canvas"></div>
+  <a href="#" style="position:relative;top:-40px;color:#442b10;text-align: left;" onclick="accounts.hideAll();$('.dialog-help-map1').show();">About the map<a>
   </div>
 </center>
 
@@ -1046,17 +1047,15 @@ selected to win one of the 3 iPads.  We promise to keep your email confidential 
   </div>
 
   <div class='dialog-help-map1 dialog-style' style="z-index:999">
+    <center>
       <div class="home-btn-dialog-box">
-          <img width="6%" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
-          
-          <img width="6%" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
-          
-          <img width="6%" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+          <span style="font-size: 24px;font-weight:bold;padding-right: 15px;" onclick="accounts.hideAll();$('.menubar').show();">X</span>
       </div>
       <div class='dialog-text-style-noflow small-left-padding responsive-body'>
           <div class="basic-header">Help</div>
    {% autoescape off %}{{client_settings.HELP_CAFE_ABOUT}}{% endautoescape %}
       </div>
+    </center>
   </div>
 
   <div class='dialog-help-map2 dialog-style' style="z-index:999">
