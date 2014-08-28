@@ -162,9 +162,9 @@ body{
 #entered-comment{
 	display:inline;
 	color: #442b10;
-	background-color: #efece4;
+	background-color: #ffffff;
 	text-shadow: none;
-	width: 100% !important;
+	width: 95% !important;
 	height: 120px !important;
 	font-size: 16px;
 	border-radius: 0px;
