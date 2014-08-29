@@ -1292,7 +1292,8 @@ def os_show(request, os_id, disc_stmt_id = None):
 	#.values_list('id', 'statement', 'short_version'))
 	
     for s in statements_objects:
-        statements.append((s.id,s.statement,s.short_version,numpy.median(UserRating.objects.filter(opinion_space_statement=s,is_current=True).values_list('rating'))))
+        statements.append((s.id,s.statement,s.short_version,
+                           list(numpy.median(UserRating.objects.filter(opinion_space_statement=s,is_current=True).values_list('rating')))))
 
 	# Get all discussion statements for the selected Opinion Space
     current_disc_stmt = None
@@ -1452,7 +1453,7 @@ def os_show(request, os_id, disc_stmt_id = None):
 	      'never_seen_comments': os_never_seen_comments_json(request,os_id,disc_stmt_id),
               'cur_comment_id': cur_comment_id,
 			  'date' : date_dict}
-    
+
     return json_result(result)
 
 @auth_required

@@ -909,7 +909,7 @@ $(document).ready(function() {
         $('.logout').show();
         e.preventDefault();
         e.stopPropagation();
-        window.history.pushState("", "", '/mobile');
+	// window.history.pushState("", "", '/mobile');
 
         $.ajax({
             url: window.url_root + '/accountsjson/logout/',

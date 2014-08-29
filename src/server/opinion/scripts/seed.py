@@ -4,7 +4,6 @@ from opinion.opinion_core.models import *
 from django.contrib.auth.models import User
 from random import *
 from opinion.includes.mathutils import *
-from opinion.scripts.recalculate_discussion_weights import main as update_query_weights
 
 # Get the first OS
 first_os = OpinionSpace.objects.get(pk = 1)
@@ -75,5 +74,3 @@ for user in User.objects.all():
 		i+=1
 		
 print "ratings created"
-
-update_query_weights()

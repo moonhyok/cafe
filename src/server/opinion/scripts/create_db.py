@@ -36,16 +36,16 @@ site = Site(id = 1,
 site.save()
 
 # Create the OS
-os_election = OpinionSpace(name = 'Fujitsu Learning',
+os_election = OpinionSpace(name = 'Open NYU',
 						   created_by = super_user)
 os_election.save()
 
 # Create the OS statements
 os_election_stmts = {}
 os_election_stmt_strings = {}
-os_election_stmt_strings[0] = 'Google Docs can help students learn math by enabling them to work together to solve problems.'
-os_election_stmt_strings[1] = 'Social Media games like "Words with Friends" can teach students about collective problem solving.'
-os_election_stmt_strings[2] = 'Twitter can expose students to new perspectives on topics they are studying.'
+os_election_stmt_strings[0] = 'To what degree have you already used technology in classes at NYU?'
+os_election_stmt_strings[1] = 'To what degree do you feel technology could enhance learning in NYU classes?'
+os_election_stmt_strings[2] = 'To what degree do you feel NYU is ahead of peer universities in our use of technology in classes?'
 os_election_stmt_strings[3] = 'Facebook can improve student\'s social skills.'
 os_election_stmt_strings[4] = 'A degree from an on-line school like Khan Academy is equivalent to a high-school diploma.'
 os_election_stmt_strings[5] = 'Nothing can replace a pencil and paper for learning.'
@@ -57,9 +57,9 @@ os_election_stmt_strings[7] = 'Video lectures are better than traditional lectur
 #		os_election_stmt_strings[i]=('Statement ' + str(i) + ' is a dummy statement created for the purposes of testing')
 
 os_election_stmt_shorts = {}
-os_election_stmt_shorts[0] = 'Google Docs'
-os_election_stmt_shorts[1] = 'Collective Problem Solving'
-os_election_stmt_shorts[2] = 'Twitter'
+os_election_stmt_shorts[0] = 'Use of Technology'
+os_election_stmt_shorts[1] = 'Enhance Learning'
+os_election_stmt_shorts[2] = 'NYU Leading'
 os_election_stmt_shorts[3] = 'Facebook Social Skills'
 os_election_stmt_shorts[4] = 'Online Degree'
 os_election_stmt_shorts[5] = 'Pencil/Paper'
@@ -75,6 +75,7 @@ for i in range(0, numStatements):
     os_election_stmts[i] = OpinionSpaceStatement(opinion_space = os_election,
                                                  statement_number = i,
                                                  statement = os_election_stmt_strings.get(i),
+						 type = 1,
                                                  short_version = os_election_stmt_shorts.get(i))
     os_election_stmts[i].save()
 
