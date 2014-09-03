@@ -542,10 +542,10 @@ var _blooms = blooms = (function($, d3, console) {
             return window.your_mug_data.y;
         })
         .attr("font-size",25)
-        .attr("opacity",1.0)
-        .transition()
-        .attr("opacity",0.0)
-        .duration(10000);
+        .attr("opacity",1.0);
+        //.transition()
+        //.attr("opacity",0.0)
+        //.duration(10000);
 
 
     }

@@ -36,7 +36,7 @@ site = Site(id = 1,
 site.save()
 
 # Create the OS
-os_election = OpinionSpace(name = 'Fujitsu Learning',
+os_election = OpinionSpace(name = 'Open NYU',
 						   created_by = super_user)
 os_election.save()
 
