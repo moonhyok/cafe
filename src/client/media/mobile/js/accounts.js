@@ -809,6 +809,7 @@ $(document).ready(function() {
     $('.dialog-ready').click(function() {
         rate.logUserEvent(8,'dialog 1');
         rate.initMenubar();
+        $('.map-info').show();
 
         window.mugs.transition()
             .attr("x",function(d) {
