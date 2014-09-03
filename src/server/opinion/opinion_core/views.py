@@ -1293,7 +1293,7 @@ def os_show(request, os_id, disc_stmt_id = None):
 	
     for s in statements_objects:
         statements.append((s.id,s.statement,s.short_version,
-                           list(numpy.median(UserRating.objects.filter(opinion_space_statement=s,is_current=True).values_list('rating')))))
+                           numpy.median(UserRating.objects.filter(opinion_space_statement=s,is_current=True).values_list('rating'))))
 
 	# Get all discussion statements for the selected Opinion Space
     current_disc_stmt = None
