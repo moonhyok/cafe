@@ -1190,8 +1190,17 @@ def format_general_discussion_comment(response):
 	Formats a data structure holding the information for a disucssion comment
 	with no relation to a user
 	"""
-	z = ZipCodeLog.objects.get(user=response.user).location if ZipCodeLog.objects.filter(user=response.user).exists() else None
-	tag = AdminCommentTag.objects.get(comment=response) if AdminCommentTag.objects.filter(comment=response).exists() else None
+	tag, z = "", None
+	zipcode=""
+	city_state=""
+	if ZipCodeLog.objects.filter(user=response.user).exists():
+		ZipCodeLog.objects.get(user=response.user).location
+
+	if AdminCommentTag.objects.filter(comment=response).exists():
+		tag = AdminCommentTag.objects.get(comment=response).tag
+	if z:
+		zipcode = z.code
+		city_state = (z.city + ", " + z.state)
 
 
 	return {'uid': response.user.id,
@@ -1204,9 +1213,9 @@ def format_general_discussion_comment(response):
 		'comment': response.comment,
 		'rev_score': get_reviewer_score(response.user),
 		'vis_vars': get_visual_variables(response),
-		'zipcode' : (z.code) if z else "",
-		'city_state' : (z.city + ", " + z.state) if z else "",
-		'tag' : tag.tag if tag else ""
+		'zipcode' : zipcode,
+		'city_state' : city_state,
+		'tag' : tag,
 		}
 
 def format_user_object(user, os_id, ds_id = None):
