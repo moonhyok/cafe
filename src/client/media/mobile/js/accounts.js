@@ -572,11 +572,23 @@ $(document).ready(function() {
 
 
     var backButtonHandler = function() {
-               window.cur_state = window.prev_state;
                accounts.hideAll();
+
+                if (window.cur_state == 'grade' && window.current_slider > 1)
+                  {
+                    window.current_slider = window.current_slider - 1;
+
+                    $(".endsliders-slide").hide();
+                    $('.endsliders').show();
+                    $("#slide-"+window.current_slider).show();
+                    window.scrollTo(0,0);
+                    window.history.pushState("", "", '#');
+                    return;
+                  }
+
                if (window.prev_state == 'home'){
-                  $('.landing').show();
-                  window.prev_state = 'home';
+                    $('.landing').show();
+                    window.prev_state = 'home';
                }
                else if (window.prev_state == 'grade')
                {
@@ -630,8 +642,8 @@ $(document).ready(function() {
                 }
                 else if (window.prev_state.indexOf('help') != -1)
                 {
-                    $('.dialog-help-alt').show();
-                    window.prev_state = 'home';
+                    $('.burger-page').show();
+                    window.prev_state = 'help';
                 }
                 else if (window.prev_state == 'stats')
                 {
@@ -642,6 +654,7 @@ $(document).ready(function() {
 
                window.scrollTo(0,0);
                window.history.pushState("", "", '#');
+               window.cur_state = window.prev_state;
 
 
             }
