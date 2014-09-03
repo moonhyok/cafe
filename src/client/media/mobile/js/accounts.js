@@ -359,6 +359,8 @@ $(document).ready(function() {
         {
             accounts.hideAll();
             $('.dialog').show();
+            window.prev_state = 'register';
+            window.cur_state = 'dialog';
             return;
         }
 
@@ -522,16 +524,20 @@ $(document).ready(function() {
 
     $('.first-time-btn').click(function() {
         //accounts.firstTime();
-        window.history.pushState("", "", '#');
         accounts.hideAll();
         window.scrollTo(0,0);
         $('.endsliders').show();
+        $('.endsliders-slide').hide();
         $('#slide-1').show();
+        window.current_slider = 1;
+
         /*$(".slider-progress-dot").css("background","#000000");
         $(".slider-progress-dot-"+1).css("background","#FFFFFF");*/
         window.cur_state = 'grade';
-        window.prev_state = 'demographics';
+        window.prev_state = 'home';
         rate.logUserEvent(7,'first time');
+
+        window.history.pushState("", "", '#');
         //$('.top-bar').show();
         //rate.initScore();
     });
@@ -567,6 +573,7 @@ $(document).ready(function() {
 
     var backButtonHandler = function() {
                window.cur_state = window.prev_state;
+               accounts.hideAll();
                if (window.prev_state == 'home'){
                   $('.landing').show();
                   window.prev_state = 'home';
@@ -574,17 +581,10 @@ $(document).ready(function() {
                else if (window.prev_state == 'grade')
                {
                   $('.endsliders').show();
+                  $('.endsliders-slide').hide();
+                  $('#slide-1').show();
+                  window.current_slider = 1;
                   window.prev_state = 'home';
-                }
-                else if (window.prev_state == 'median')
-                 {
-                    $('.dialog-avggrade').show();
-                    window.prev_state = 'grade';
-                }
-                else if (window.prev_state == 'rate')
-                {
-                  $('.rate').show();
-                  window.prev_state = 'map';
                 }
                 else if (window.prev_state == 'register')
                 {
@@ -596,6 +596,17 @@ $(document).ready(function() {
                   $('.dialog').show();
                   window.prev_state = 'register';
                 }
+                else if (window.prev_state == 'median')
+                 {
+                    $('.dialog-avggrade').show();
+                    window.prev_state = 'grade';
+                }
+                else if (window.prev_state == 'rate')
+                {
+                  $('.rate').show();
+                  window.prev_state = 'map';
+                }
+
                 else if (window.prev_state == 'map')
                 {
                     window.prev_state = 'dialog';
@@ -630,7 +641,7 @@ $(document).ready(function() {
                 }
 
                window.scrollTo(0,0);
-                window.history.pushState("", "", '#');
+               window.history.pushState("", "", '#');
 
 
             }
@@ -659,6 +670,8 @@ $(document).ready(function() {
 
     $('.help-btn-dialog').click(
         function(){accounts.hideAll(); $('.burger-page').show();
+        window.prev_state = window.cur_state;
+        window.cur_state = 'help';
         window.burger_state = $(this).attr('id').substring(5);
     })
 
