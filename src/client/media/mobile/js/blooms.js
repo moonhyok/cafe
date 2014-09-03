@@ -525,11 +525,12 @@ var _blooms = blooms = (function($, d3, console) {
         })
         .on('click', function(d) {
             if(window.refer == ""){
-                $('.comment-input').slideDown();
-                $('.scorebox').hide();
+                accounts.hideAll();
+                $('.comment-input').show();
                 $('.menubar').hide();
                 $('.instructions-light').hide();
                 window.cur_state = 'comment';
+                window.prev_state = 'map';
             }
         });
 
@@ -542,7 +543,17 @@ var _blooms = blooms = (function($, d3, console) {
             return window.your_mug_data.y;
         })
         .attr("font-size",25)
-        .attr("opacity",1.0);
+        .attr("opacity",1.0)
+        .on('click', function(d) {
+            if(window.refer == ""){
+                accounts.hideAll();
+                $('.comment-input').show();
+                $('.menubar').hide();
+                $('.instructions-light').hide();
+                window.cur_state = 'comment';
+                window.prev_state = 'map';
+            }
+        });
         //.transition()
         //.attr("opacity",0.0)
         //.duration(10000);
