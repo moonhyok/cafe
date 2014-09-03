@@ -492,28 +492,6 @@ $(document).ready(function() {
             }
     });
 
-
-    $('.endsliders-back-btn').click(function(event){ 
-        
-        if(parseInt(event.target.id.substring(5),10) == 1)
-        {
-            window.current_slider = 1;
-            return;
-        }
-
-        $("#slide-"+event.target.id.substring(5)).hide();
-        $("#slide-"+(parseInt(event.target.id.substring(5),10)-1)).show("slide", { direction: "left" }, 500);
-        window.current_slider = window.current_slider - 1;
-        /*$(".slider-progress-dot-"+(parseInt(event.target.id.substring(5),10))).css("background","#666666");*/
-
-        if(parseInt(event.target.id.substring(5),10) == 2)
-        {
-            $('.first-dialog-nav').show();
-            $('.slider-nav-box').hide();
-        }
-
-    });
-
     $('.comment-submit-btn').click(function() {
         window.comment = $('#entered-comment').val();
         $('.comment-input').hide();
