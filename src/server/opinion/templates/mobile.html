@@ -409,7 +409,7 @@ function googleTranslateElementInit() {
     <br/>
 
     <select class="drop-down-class">
-      <option value="N/A" data-placeholder="true">Your School</option>
+      <option value="N/A" data-placeholder="true">School Affiliation</option>
 <option value="CAS">CAS</option>
 <option value="Continuing">Continuing and Professional Studies</option>
 <option value="Courant">Courant</option>
@@ -545,7 +545,7 @@ function googleTranslateElementInit() {
          </div> 
       <!--<img class="header-img-topic center" src="{{ url_root }}/media/mobile/img/cafe/CRC_join.png"/>-->
         <div class='dialog-text1 dialog-text-style'>
-          How do I compare?
+          How do my answers compare to the other respondents?
         </div>
 
         <br/>
@@ -555,13 +555,14 @@ function googleTranslateElementInit() {
         <div class="compare-tag">
           <!--<div style="font-size: 12px; font-style: italic;font-weight: bolder;" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();">{{k.id}}. </div>-->
           <div style="font-size: 18px;font-weight: bolder;" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();">{{k.short_version}}</div>
-          <div style="font-size: 14px; font-weight: bolder;" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();">click to see more >></div>
+          <div style="font-size: 14px; font-weight: bolder;" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();">more info >></div>
         </div>
 
-        <canvas id="sparkLineCanvas{{k.id}}" width="160" height="50"></canvas>
+        <canvas id="sparkLineCanvas{{k.id}}" width="160" height="58"></canvas>
         
         <div>
-          <script>
+      
+      <!--<script>
       var canvas = document.getElementById('sparkLineCanvas{{k.id}}');
       var context = canvas.getContext('2d');
 
@@ -589,6 +590,37 @@ function googleTranslateElementInit() {
       context.fillText("0",0,48);
 
       context.fillText("9",150,50);
+      </script>-->
+
+      <script>
+      var canvas = document.getElementById('sparkLineCanvas{{k.id}}');
+      var context = canvas.getContext('2d');
+
+      if ({{k.id}} % 2 == 1)
+        $('.compare-box-{{k.id}}').css("background-color","rgba(0,0,0,0.05)")
+
+      var data = {{v}};
+      var max_of_array = Math.max.apply(Math, data);
+
+      context.beginPath();
+      context.lineWidth = 6;
+      context.strokeStyle = '#442b10';
+      context.shadowColor = '#ffffff';
+        context.shadowOffsetX = 1;
+        context.shadowOffsetY = 1;
+      //context.moveTo(0, 45 - data[0]/max_of_array*38);
+      for (i = 0; i <= 9; i++)
+      {
+        context.moveTo(i*16+5, 45);
+        context.lineTo(i*16+5, 45 - data[i]/max_of_array*38);
+        context.stroke(); 
+      }
+
+      context.font="italic small-caps bolder 12px sans-serif";
+      context.fillStyle = '#442b10';
+      context.fillText("0",0,58);
+
+      context.fillText("9",145,58);
       </script>
 
       </div>
@@ -631,7 +663,7 @@ function googleTranslateElementInit() {
 
       <center>     
         <div style="margin-left: 15px;">
-          <canvas id="sparkLineCanvasDetail{{k.id}}" width="290" height="100" style="background-color: rgba(255,255,255,0.4)"></canvas>
+          <canvas id="sparkLineCanvasDetail{{k.id}}" width="300" height="105" style="background-color: rgba(255,255,255,0.4)"></canvas>
           <script>
       var canvas = document.getElementById('sparkLineCanvasDetail{{k.id}}');
       var context = canvas.getContext('2d');
@@ -640,23 +672,24 @@ function googleTranslateElementInit() {
       var max_of_array = Math.max.apply(Math, data);
 
       context.beginPath();
-      context.lineWidth = 2;
+      context.lineWidth = 10;
       context.strokeStyle = '#442b10';
       context.shadowColor = '#ffffff';
         context.shadowOffsetX = 1;
         context.shadowOffsetY = 1;
-      context.moveTo(0, 90 - data[0]/max_of_array*76);
-      for (i = 1; i <= 9; i++)
+      //context.moveTo(0, 90 - data[0]/max_of_array*76);
+      for (i = 0; i <= 9; i++)
       {
-        context.lineTo(i*32, 90 - data[i]/max_of_array*76);
+        context.moveTo(i*29+10, 90);
+        context.lineTo(i*29+10, 90 - data[i]/max_of_array*76);
         context.stroke(); 
       }
 
       context.font="italic small-caps bolder 12px sans-serif";
       context.fillStyle = '#442b10';
-      context.fillText("0",0,96);
+      context.fillText("0",5,104);
 
-      context.fillText("9",280,100);
+      context.fillText("9",267,104);
       </script>
 
       </div>
