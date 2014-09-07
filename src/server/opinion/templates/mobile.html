@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang='en'>
 
-<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
+  <head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
 
     <!-- Social media stuff -->
     <meta property="og:title" content="California Report Card"/>
@@ -12,331 +12,331 @@
 
     <link rel="image_src" href="{{ url_root }}/media/mobile/img/cafe/cafe-title-cropped.png"/>
 
-<title>Open NYU CAFE</title>
+    <title>Open NYU CAFE</title>
 
-<!-- for best viewing on mobile phones -->
-<meta name='viewport' content='user-scalable=no, width=device-width,initial-scale=1, maximum-scale=1' />
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <!-- for best viewing on mobile phones -->
+    <meta name='viewport' content='user-scalable=no, width=device-width,initial-scale=1, maximum-scale=1' />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
-<!-- CSS stylesheets -->
-<link rel='stylesheet' type='text/css' href='{{url_root}}/media/mobile/css/reset.css?nonce={{random_password}}' />
-<!--<link rel='stylesheet' type='text/css' href='{{url_root}}/media/mobile/bootstrap/css/bootstrap-responsive.min.css?nonce={{random_password}}' />-->
-<link rel='stylesheet' type='text/css' href='{{url_root}}/media/mobile/jquery-mobile/jquery.mobile-1.3.2.min.css' />
- <link rel='stylesheet' type='text/css' href='{{url_root}}/media/mobile/css/themes/cafe-jquery-new-v2.min.css'/> 
-<link href="{{url_root}}/media/mobile/css/jquery.nouislider.min.css" rel="stylesheet">
-<link rel='stylesheet' type='text/css' href='{{url_root}}/media/mobile/css/opinionspace.css?nonce={{random_password}}' />
+    <!-- CSS stylesheets -->
+    <link rel='stylesheet' type='text/css' href='{{url_root}}/media/mobile/css/reset.css?nonce={{random_password}}' />
+    <!--<link rel='stylesheet' type='text/css' href='{{url_root}}/media/mobile/bootstrap/css/bootstrap-responsive.min.css?nonce={{random_password}}' />-->
+    <link rel='stylesheet' type='text/css' href='{{url_root}}/media/mobile/jquery-mobile/jquery.mobile-1.3.2.min.css' />
+    <link rel='stylesheet' type='text/css' href='{{url_root}}/media/mobile/css/themes/cafe-jquery-new-v2.min.css'/> 
+    <link href="{{url_root}}/media/mobile/css/jquery.nouislider.min.css" rel="stylesheet">
+    <link rel='stylesheet' type='text/css' href='{{url_root}}/media/mobile/css/opinionspace.css?nonce={{random_password}}' />
 
-{% if horizontal_slide %}
-<link rel='stylesheet' type='text/css' href='{{url_root}}/media/mobile/css/crc-transparent-slider-horizontal.css?nonce={{random_password}}' />
-{% else %}
-<link rel='stylesheet' type='text/css' href='{{url_root}}/media/mobile/css/crc-transparent-slider.css?nonce={{random_password}}' />
-{% endif %}
-
-
-<!-- JavaScript -->
-<script type='text/javascript' src='{{url_root}}/media/mobile/jquery-mobile/jquery-1.10.2.min.js'></script>
-<script type='text/javascript' src='{{url_root}}/media/js/jquery-ui-1.10.4.custom.min.js'></script>
-<script src="{{url_root}}/media/mobile/js/jquery.nouislider.min.js"></script>
-<script type='text/javascript' src='{{url_root}}/media/mobile/js/csrf-ajax.js'></script>
-<script type='text/javascript' src='{{url_root}}/media/mobile/js/d3.v2.min.js'></script>
-<script src="{{url_root}}/media/mobile/js/d3-timeline.js"></script>
-<script type='text/javascript' src='{{url_root}}/media/mobile/js/blooms.js?nonce={{random_password}}'></script>
-<script type='text/javascript' src='{{url_root}}/media/mobile/js/rate.js?nonce={{random_password}}'></script>
-<script type='text/javascript' src='{{url_root}}/media/mobile/js/accounts.js?nonce={{random_password}}'></script>
-
-{% if horizontal_slide %}
-<script type='text/javascript' src='{{url_root}}/media/mobile/js/crc-transparent-slider-horizontal.js?nonce={{random_password}}'></script>
-{% else %}
-<script type='text/javascript' src='{{url_root}}/media/mobile/js/crc-transparent-slider.js?nonce={{random_password}}'></script>
-{% endif %}
-
-<script type='text/javascript' src='{{url_root}}/media/mobile/js/utils.js'></script>
-
-<script type='text/javascript' src='{{url_root}}/media/mobile/jquery-mobile/jquery.mobile-1.3.2.min.js'></script>
-
-<!-- <script type="text/javascript" src="http://www.google.com/jsapi"></script> -->
-<script type='text/javascript' src='{{url_root}}/media/mobile/js/analytics-trk.js'></script>
+    {% if horizontal_slide %}
+    <link rel='stylesheet' type='text/css' href='{{url_root}}/media/mobile/css/crc-transparent-slider-horizontal.css?nonce={{random_password}}' />
+    {% else %}
+    <link rel='stylesheet' type='text/css' href='{{url_root}}/media/mobile/css/crc-transparent-slider.css?nonce={{random_password}}' />
+    {% endif %}
 
 
-<!--JavaScript that needs to be run on init-->
-<script type='text/javascript'>
+    <!-- JavaScript -->
+    <script type='text/javascript' src='{{url_root}}/media/mobile/jquery-mobile/jquery-1.10.2.min.js'></script>
+    <script type='text/javascript' src='{{url_root}}/media/js/jquery-ui-1.10.4.custom.min.js'></script>
+    <script src="{{url_root}}/media/mobile/js/jquery.nouislider.min.js"></script>
+    <script type='text/javascript' src='{{url_root}}/media/mobile/js/csrf-ajax.js'></script>
+    <script type='text/javascript' src='{{url_root}}/media/mobile/js/d3.v2.min.js'></script>
+    <script src="{{url_root}}/media/mobile/js/d3-timeline.js"></script>
+    <script type='text/javascript' src='{{url_root}}/media/mobile/js/blooms.js?nonce={{random_password}}'></script>
+    <script type='text/javascript' src='{{url_root}}/media/mobile/js/rate.js?nonce={{random_password}}'></script>
+    <script type='text/javascript' src='{{url_root}}/media/mobile/js/accounts.js?nonce={{random_password}}'></script>
 
-  window.url_root = '{{ url_root }}';
+    {% if horizontal_slide %}
+    <script type='text/javascript' src='{{url_root}}/media/mobile/js/crc-transparent-slider-horizontal.js?nonce={{random_password}}'></script>
+    {% else %}
+    <script type='text/javascript' src='{{url_root}}/media/mobile/js/crc-transparent-slider.js?nonce={{random_password}}'></script>
+    {% endif %}
 
-  window.sliders = [];
+    <script type='text/javascript' src='{{url_root}}/media/mobile/js/utils.js'></script>
 
-  window.skipped = [];
+    <script type='text/javascript' src='{{url_root}}/media/mobile/jquery-mobile/jquery.mobile-1.3.2.min.js'></script>
 
-  window.email_saved = false;
+    <!-- <script type="text/javascript" src="http://www.google.com/jsapi"></script> -->
+    <script type='text/javascript' src='{{url_root}}/media/mobile/js/analytics-trk.js'></script>
 
-  window.prev_state = 'home';
 
-  window.burger_state = null;
+    <!--JavaScript that needs to be run on init-->
+    <script type='text/javascript'>
 
-  window.mousedown = 0;
+     window.url_root = '{{ url_root }}';
 
-  window.rate_count = 0;
+     window.sliders = [];
 
-  window.current_rating = 50;
+     window.skipped = [];
 
-  window.cur_state = 'home';
+     window.email_saved = false;
 
-  window.toggle_flag1 = false;
+     window.prev_state = 'home';
 
-  window.toggle_flag2 = false;
+     window.burger_state = null;
 
-  window.current_slider = 1;
+     window.mousedown = 0;
 
-  window.entry_code = {{ entry_code }} ;
+     window.rate_count = 0;
 
-  window.registration_in_progress = false;
+     window.current_rating = 50;
 
-  window.landing = true;
+     window.cur_state = 'home';
 
-  window.slider_shift = 6.15;
+     window.toggle_flag1 = false;
 
-  window.num_sliders = {{ statements|length }};
+     window.toggle_flag2 = false;
 
-  window.refer = '{{ refer }}';
+     window.current_slider = 1;
 
-  window.user_score = {{init_score}};
+     window.entry_code = {{ entry_code }} ;
 
-  window.conf = { 
-                  'RETURN_USER_FIRST_TIME': {{return_user_first_time}},
-                  'ZIPCODE': {{ zipcode }},
-                };
+     window.registration_in_progress = false;
 
- jQuery(document).ready(function(){
-   for (var i = 0; i < window.num_sliders; i++) {
-     window.sliders[i] = 4;
-     window.skipped[i] = false;
-     $(".endslider-slider"+(i+1)).noUiSlider({
-       range: [0, 100],
-       start: window.sliders[i] ,
-       step: 5,
-       handles: 1,
-       connect: false,
-       behaviour: "none",
-       slide: function() {
-       var id = $(this).data('statement');
-       $('#g' + id).html( score_to_grade( $(this).val() ) );
+     window.landing = true;
+
+     window.slider_shift = 6.15;
+
+     window.num_sliders = {{ statements|length }};
+
+     window.refer = '{{ refer }}';
+
+     window.user_score = {{init_score}};
+
+     window.conf = { 
+       'RETURN_USER_FIRST_TIME': {{return_user_first_time}},
+       'ZIPCODE': {{ zipcode }},
+     };
+
+     jQuery(document).ready(function(){
+       for (var i = 0; i < window.num_sliders; i++) {
+	 window.sliders[i] = 4;
+	 window.skipped[i] = false;
+	 $(".endslider-slider"+(i+1)).noUiSlider({
+	   range: [0, 100],
+	   start: window.sliders[i] ,
+	   step: 5,
+	   handles: 1,
+	   connect: false,
+	   behaviour: "none",
+	   slide: function() {
+	     var id = $(this).data('statement');
+	     $('#g' + id).html( score_to_grade( $(this).val() ) );
+	   }
+	 }).change(function () {
+	   var id = $(this).attr('id');
+	   id = parseInt(id.substring(1, id.length)); // strips the leading 's'
+	   update_score(id);
+	 });
+
        }
-     }).change(function () {
-      var id = $(this).attr('id');
-      id = parseInt(id.substring(1, id.length)); // strips the leading 's'
-      update_score(id);
+
+       $(".rating-slider").noUiSlider({
+	 range: [0, 100], start: 50, step: 5, handles: 1,connect: false, behaviour: "none"
+       });
+
+       $(".slider-progress-dot-"+1).css("background","#FFFFFF");
+       
+       /*var html_label ="<div class='slider-range-labels'><div class='alignleft'>{{client_settings.SLIDER1_LEFT}}</div><div class='alignright'>{{client_settings.SLIDER1_RIGHT}}</div></div>";
+	  $('.rating-slider1 > .noUi-base').append( html_label );
+	  
+	  var html_label ="<div class='slider-range-labels'><div class='alignleft'>{{client_settings.SLIDER2_LEFT}}</div><div class='alignright'>{{client_settings.SLIDER2_RIGHT}}</div></div>";
+	  $('.rating-slider2 > .noUi-base').append( html_label );*/
+       
+       $(".change-rating-slider").noUiSlider({
+	 range: [0, 100], start: 50, step: 5, handles: 1,connect: false, behaviour: "none"
+       });
+
+       // give the statement sliders some color
+       var _grades = {'A' : 5, 'B' : 25, 'C': 50, 'D': 75, 'F' : 96 };
+       $.map( _grades, function(position, letter) {
+	 var span = '<span class="grade-labels" style="left:'+position+'%;">'+letter+'</span>';
+	 $('.statement-slider > .noUi-base').append( span );
+	 $('.rating-slider > .noUi-base').append( span );
+       });
+
+
+       /* var _grades = {'1' : 30, '2' : 40, '3': 50, '4': 60, '5': 70};
+	  $.map( _grades, function(position, letter) {
+	  var span = '<span class="rate-dot-labels" style="left:'+position+'%;">.</span>';
+	  $('.rating-slider > .noUi-base').append( span );
+	  });*/
+
      });
 
-   }
+     /*stats.setConf("{{ client_settings.AGREEMENT_HISTOGRAM_TEXT }}",
+        "{{ client_settings.LEGEND_AGREEMENT_LEFT }}",
+        "{{ client_settings.LEGEND_AGREEMENT_RIGHT }}",
+        "{{ client_settings.INSIGHT_HISTOGRAM_TEXT }}",
+        "{{ client_settings.LEGEND_INSIGHT_LEFT }}",
+        "{{ client_settings.LEGEND_INSIGHT_RIGHT }}"
+        );*/
 
-  $(".rating-slider").noUiSlider({
-    range: [0, 100], start: 50, step: 5, handles: 1,connect: false, behaviour: "none"
-  });
+     var finishedStatements=[];
 
-  $(".slider-progress-dot-"+1).css("background","#FFFFFF");
-  
-  /*var html_label ="<div class='slider-range-labels'><div class='alignleft'>{{client_settings.SLIDER1_LEFT}}</div><div class='alignright'>{{client_settings.SLIDER1_RIGHT}}</div></div>";
-  $('.rating-slider1 > .noUi-base').append( html_label );
-  
-  var html_label ="<div class='slider-range-labels'><div class='alignleft'>{{client_settings.SLIDER2_LEFT}}</div><div class='alignright'>{{client_settings.SLIDER2_RIGHT}}</div></div>";
-  $('.rating-slider2 > .noUi-base').append( html_label );*/
-  
-  $(".change-rating-slider").noUiSlider({
-    range: [0, 100], start: 50, step: 5, handles: 1,connect: false, behaviour: "none"
-  });
+     for(var l = 0; l < window.num_sliders; l++) {
+       finishedStatements.push(0);
+     }
 
-  // give the statement sliders some color
-  var _grades = {'A' : 5, 'B' : 25, 'C': 50, 'D': 75, 'F' : 96 };
-  $.map( _grades, function(position, letter) {
-    var span = '<span class="grade-labels" style="left:'+position+'%;">'+letter+'</span>';
-    $('.statement-slider > .noUi-base').append( span );
-    $('.rating-slider > .noUi-base').append( span );
-  });
+     var medians = {{ medians|safe }};
 
+     function score_to_grade(score1) {
+       var score = 100 - score1;
+       
+       if (score == 100)
+         return 'A+';
+       else if (score > 92)
+       return 'A';
+       else if (score > 86)
+       return 'A-';
+       else if (score > 81)
+       return 'B+';
+       else if (score > 69 )
+       return 'B';
+       else if (score > 63 )
+       return 'B-';
+       else if (score > 56 )
+       return 'C+';
+       else if (score > 44 )
+       return 'C';
+       else if (score > 38 )
+       return 'C-';
+       else if (score > 32 )
+       return 'D+';
+       else if (score > 19 )
+       return 'D';
+       else if (score == 0 )
+       return 'F';
+       else
+         return 'D-';
+     }
 
- /* var _grades = {'1' : 30, '2' : 40, '3': 50, '4': 60, '5': 70};
-  $.map( _grades, function(position, letter) {
-    var span = '<span class="rate-dot-labels" style="left:'+position+'%;">.</span>';
-    $('.rating-slider > .noUi-base').append( span );
-  });*/
+     function grade_to_score(grade) {
+       if (grade == 'A+')
+         return 9;
+       else if (grade == 'A')
+       return 8;
+       else if (grade == 'A-')
+       return 7;
+       else if (grade == 'B+')
+       return 6;
+       else if (grade == 'B' )
+       return 5;
+       else if (grade == 'B-')
+       return 4;
+       else if (grade == 'C+')
+       return 3;
+       else if (grade == 'C')
+       return 2;
+       else if (grade == 'C-')
+       return 1;
+       else if (grade == 'D+')
+       return 0;
+       else if (grade == 'D')
+       return 19;
+       else if (grade == 'D-')
+       return 10;
+       else
+         return 0;
+     }
 
- });
+     function statementsComplete() {
+       for(var i = 0; i < window.num_sliders; i++) {
+	 if (finishedStatements[i]==0) {
+	   return false;
+	 }
+       }
+       return true;
+     }
 
- /*stats.setConf("{{ client_settings.AGREEMENT_HISTOGRAM_TEXT }}",
-               "{{ client_settings.LEGEND_AGREEMENT_LEFT }}",
-               "{{ client_settings.LEGEND_AGREEMENT_RIGHT }}",
-               "{{ client_settings.INSIGHT_HISTOGRAM_TEXT }}",
-               "{{ client_settings.LEGEND_INSIGHT_LEFT }}",
-               "{{ client_settings.LEGEND_INSIGHT_RIGHT }}"
-              );*/
+     /** Updates statement number STATEMENT (which is of type number). */
+     function update_score(statement) {
+       /* $('#g' + statement).css('opacity', 1);
+	  console.log(medians[statement]);
+	  $('#o' + statement).html(score_to_grade(medians[statement]*100))
+	  window.sliders[statement] = $('#s' + statement).val();
+	  document.getElementById('tr'+statement).style.backgroundColor = "rgba(255, 255, 0, 0.8)";
+	  finishedStatements[statement-1]= 1;
+	  rate.logUserEvent(11,'slider_set ' + statement + ' ' + window.sliders[statement]/100);*/
+     }
 
- var finishedStatements=[];
-
- for(var l = 0; l < window.num_sliders; l++) {
-    finishedStatements.push(0);
- }
-
- var medians = {{ medians|safe }};
-
- function score_to_grade(score1) {
-    var score = 100 - score1;
-  
-    if (score == 100)
-        return 'A+';
-    else if (score > 92)
-        return 'A';
-    else if (score > 86)
-        return 'A-';
-    else if (score > 81)
-        return 'B+';
-    else if (score > 69 )
-        return 'B';
-    else if (score > 63 )
-        return 'B-';
-    else if (score > 56 )
-        return 'C+';
-    else if (score > 44 )
-        return 'C';
-    else if (score > 38 )
-        return 'C-';
-    else if (score > 32 )
-        return 'D+';
-    else if (score > 19 )
-        return 'D';
-    else if (score == 0 )
-        return 'F';
-    else
-        return 'D-';
- }
-
-  function grade_to_score(grade) {
-    if (grade == 'A+')
-        return 9;
-    else if (grade == 'A')
-        return 8;
-    else if (grade == 'A-')
-        return 7;
-    else if (grade == 'B+')
-        return 6;
-    else if (grade == 'B' )
-        return 5;
-    else if (grade == 'B-')
-        return 4;
-    else if (grade == 'C+')
-        return 3;
-    else if (grade == 'C')
-        return 2;
-    else if (grade == 'C-')
-        return 1;
-    else if (grade == 'D+')
-        return 0;
-    else if (grade == 'D')
-        return 19;
-    else if (grade == 'D-')
-        return 10;
-    else
-        return 0;
- }
-
- function statementsComplete() {
-  for(var i = 0; i < window.num_sliders; i++) {
-    if (finishedStatements[i]==0) {
-      return false;
-    }
-  }
-  return true;
- }
-
-    /** Updates statement number STATEMENT (which is of type number). */
- function update_score(statement) {
-  /* $('#g' + statement).css('opacity', 1);
-   console.log(medians[statement]);
-   $('#o' + statement).html(score_to_grade(medians[statement]*100))
-   window.sliders[statement] = $('#s' + statement).val();
-   document.getElementById('tr'+statement).style.backgroundColor = "rgba(255, 255, 0, 0.8)";
-   finishedStatements[statement-1]= 1;
-   rate.logUserEvent(11,'slider_set ' + statement + ' ' + window.sliders[statement]/100);*/
-}
-
-</script>
+    </script>
 
     <meta name="google-translate-customization" content="eafde824bc8e224d-e21501ea7ec3fcff-g772450b68a5f36d7-1d"></meta>
 
-</head>
+  </head>
 
-<body>
+  <body>
 
- <div class="full-page">
+    <div class="full-page">
 
-  <div class='landing'>
-      <center>
-      <div class="home-btn-dialog-box landing-navigation">
-          <div class="home-btn-title responsive-header">
-                Open NYU CAFE
-          </div>
-
-          <div class="home-btn-wrapper" style="width:30%;display:inline-block;">
-            <img width="30px" class='help-btn-dialog' id="help-landing" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
-            </div>
-
-      </div>
-        <img width="100%" src="{{url_root}}/media/mobile/img/cafe/title_image.png" style="margin-top:3px;max-width: 620px;">
-        <div class="landing-img-title responsive-body">
-          How can technology enhance learning at NYU?
-        </div> 
-        <!--<div class="landing-img-subtitle">
-          How can technology enhance learning at NYU?
-        </div> -->
-
-        <div class="landing-img-txt responsive-body">  
-        Please take 5 minutes to answer a few brief survey questions, evaluate ideas from your community, and share your perspectives.  
-       </div>
-
-       <div class='button-div-red first-time-btn responsive-btn' style="margin-top: 10px;">Begin</div></center><br/><br/><br/>
-
-      
-       <!--<div class="landing-img-txt">   
-           Take a moment to join <strong>{{num_users}}</strong> others who have graded the State of California on six timely issues.<br/>
-       </div>-->
-
-   <!--    <div id="google_translate_element" style="position: relative; top: 100px;"></div><script type="text/javascript">
-function googleTranslateElementInit() {
-  new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'es', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, multilanguagePage: true, gaTrack: true, gaId: 'UA-34341740-14'}, 'google_translate_element');
-}
-</script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>-->
-        
-
-  </div>
-
-  <div id='rating' class='endsliders'>        
-
-      {% for statement in statements %}              
-        <div class="endsliders-slide" id="slide-{{statement.id}}">
-          <center>
-         <div class="home-btn-dialog-box first-dialog-nav">
-            <div class="home-btn-title responsive-header">
-                Open NYU CAFE
-            </div>
-
-            <div class="home-btn-wrapper" style="width:30%;display:inline-block;">
-                <img width="30px" class='help-btn-dialog' id="help-endsliders" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
-            </div>
-
-         </div> 
-
-          <div class="home-btn-dialog-box slider-nav-box" style="display: none;">
-            
+      <div class='landing'>
+	<center>
+	  <div class="home-btn-dialog-box landing-navigation">
             <div class="home-btn-title responsive-header">
               Open NYU CAFE
             </div>
-            <div class="home-btn-wrapper" style="width:30%;display:inline-block;">
-                <img width="30px" class='help-btn-dialog' id="help-endsliders" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
-            </div>
-          
-          </div>  
 
-          <center>  
+            <div class="home-btn-wrapper" style="width:30%;display:inline-block;">
+              <img width="30px" class='help-btn-dialog' id="help-landing" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+            </div>
+
+	  </div>
+          <img width="100%" src="{{url_root}}/media/mobile/img/cafe/title_image.png" style="margin-top:3px;max-width: 620px;">
+          <div class="landing-img-title responsive-body">
+            How can technology enhance learning at NYU?
+          </div> 
+          <!--<div class="landing-img-subtitle">
+          How can technology enhance learning at NYU?
+          </div> -->
+
+          <div class="landing-img-txt responsive-body">  
+            Please take 5 minutes to answer a few brief survey questions, evaluate ideas from your community, and share your perspectives.  
+	  </div>
+
+	  <div class='button-div-red first-time-btn responsive-btn' style="margin-top: 10px;">Begin</div></center><br/><br/><br/>
+
+	  
+	  <!--<div class="landing-img-txt">   
+          Take a moment to join <strong>{{num_users}}</strong> others who have graded the State of California on six timely issues.<br/>
+	  </div>-->
+
+	  <!--    <div id="google_translate_element" style="position: relative; top: 100px;"></div><script type="text/javascript">
+	  function googleTranslateElementInit() {
+	  new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'es', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, multilanguagePage: true, gaTrack: true, gaId: 'UA-34341740-14'}, 'google_translate_element');
+	  }
+	  </script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>-->
+          
+
+      </div>
+
+      <div id='rating' class='endsliders'>        
+
+	{% for statement in statements %}              
+        <div class="endsliders-slide" id="slide-{{statement.id}}">
+          <center>
+            <div class="home-btn-dialog-box first-dialog-nav">
+              <div class="home-btn-title responsive-header">
+                Open NYU CAFE
+              </div>
+
+              <div class="home-btn-wrapper" style="width:30%;display:inline-block;">
+                <img width="30px" class='help-btn-dialog' id="help-endsliders" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+              </div>
+
+            </div> 
+
+            <div class="home-btn-dialog-box slider-nav-box" style="display: none;">
+              
+              <div class="home-btn-title responsive-header">
+		Open NYU CAFE
+              </div>
+              <div class="home-btn-wrapper" style="width:30%;display:inline-block;">
+                <img width="30px" class='help-btn-dialog' id="help-endsliders" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+              </div>
+              
+            </div>  
+
+            <center>  
               <div class="question-number responsive-body">Question {{ statement.id }} of {{ statements|length }}</div>
               <div class="statement-style responsive-body">{{ statement.statement }}</div>
 
@@ -354,392 +354,392 @@ function googleTranslateElementInit() {
                 <div class="slider" style="margin-left: 15px;margin-right: 5px;" id="slider-{{statement.id}}"></div>
 
                 <center>
-                <!--<img class='endsliders-back-btn endsliders-back-btn-size' style="display: inline-block; width: 10px;position:relative;top:5px;" id="back-{{statement.id}}" src="{{url_root}}/media/mobile/img/cafe/Skip_V1.png">
-                <div class='question-directions' style="display: inline-block;font-size: 16px;padding: 0px;margin: 0px;">SWIPE TO SKIP TO THE NEXT QUESTION</div>-->
-                <div class='endsliders-next-btn button-div-wide responsive-btn' style="display: inline-block;position:relative;left:5px;">Skip</div>
-              </center>
+                  <!--<img class='endsliders-back-btn endsliders-back-btn-size' style="display: inline-block; width: 10px;position:relative;top:5px;" id="back-{{statement.id}}" src="{{url_root}}/media/mobile/img/cafe/Skip_V1.png">
+                  <div class='question-directions' style="display: inline-block;font-size: 16px;padding: 0px;margin: 0px;">SWIPE TO SKIP TO THE NEXT QUESTION</div>-->
+                  <div class='endsliders-next-btn button-div-wide responsive-btn' style="display: inline-block;position:relative;left:5px;">Skip</div>
+		</center>
 
               </div>
-                  
+              
               <div style="clear: both;"></div>
               <!--<a href="#" class="skip-button-{{statement.id}} skip-btn responsive-body" id="next-{{statement.id}}" style="color: #ffffff;font-size: 16px;font-weight: normal !important;position:relative;top: -40px;left: 100px;">Skip</a>-->
               
+            </center>
           </center>
-        </center>
+
+	</div>
+	
+	{% endfor %}
 
       </div>
-  
-  {% endfor %}
 
-  </div>
-
-  <div class = 'register' id='register'>
-    <center>
-      <div class="home-btn-dialog-box">
+      <div class = 'register' id='register'>
+	<center>
+	  <div class="home-btn-dialog-box">
             <div class="home-btn-title responsive-header">
-                Open NYU CAFE
+              Open NYU CAFE
             </div>
             
             <div class="home-btn-wrapper" style="width:30%;display:inline-block;">
-            <img width="30px" class='help-btn-dialog' id="help-register" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+              <img width="30px" class='help-btn-dialog' id="help-register" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
             </div>
 
-         </div> 
+          </div> 
 
-      <div class= 'registerpanel'>
-        <center>
-          <div class="basic-header2 responsive-header" style="max-width: 500px;">Please answer the following profile questions:</div>
-          <!--<div class="basic-header2 responsive-header" style="max-width: 500px;">{{client_settings.ZIP_CODE_INSTRUCTIONS}}:</div>-->
-          <form id='reg_form' class='reg_form responsive-form'>
-              <center>
-
-              <div data-role="fieldcontain">
-    <select class="drop-down-class">
-        <option value="none" data-placeholder="true">Your NYU Affiliation</option>
-       <option value="student">NYU Student</option>
-       <option value="faculty">NYU Faculty</option>
-       <option value="admin">NYU Admin</option>
-       <option value="staff">NYU Staff</option>
-       <option value="alum">NYU Alumni</option>
-       <option value="parent">Parent</option>
-       <option value="neighbor">Neighbor</option>
-    </select>
-
-    <br/>
-    <br/>
-
-    <select class="drop-down-class">
-      <option value="N/A" data-placeholder="true">School Affiliation</option>
-<option value="CAS">CAS</option>
-<option value="Continuing">Continuing and Professional Studies</option>
-<option value="Courant">Courant</option>
-<option value="Dentistry">Dentistry</option>
-<option value="Fine Arts">Fine Arts</option>
-<option value="Gallatin">Gallatin</option>
-<option value="GSAS">GSAS</option>
-<option value="Institute for the Study of the Ancient World">Institute for the Study of the Ancient World</option>
-<option value="Liberal Studies">Liberal Studies</option>
-<option value="Nursing">Nursing</option>
-<option value="Polytechnic">Polytechnic</option>
-<option value="Preston Robert Tisch Center for Hospitality, Tourism, and Sports Management">Preston Robert Tisch Center for Hospitality, Tourism, and Sports Management</option>
-<option value="Schack">Schack</option>
-<option value="School of Medicine">School of Medicine</option>
-<option value="School of Law">School of Law</option>
-<option value="Silver School of Social Work">Silver School of Social Work</option>
-<option value="Steinhardt School of Culture, Education, and Human Development">Steinhardt School of Culture, Education, and Human Development</option>
-<option value="Stern">Stern</option>
-<option value="Tisch School of the Arts">Tisch School of the Arts</option>
-<option value="Wagner">Wagner</option>
-<option value="tNA">None of the Above</option>
-    </select>
-
-    <br/>
-    <br/>
-
-    <select class="drop-down-class">
-        <option value="-" data-placeholder="true">Years at NYU</option>
-       <option value="0">0</option>
-       <option value="1">1</option>
-       <option value="2">2</option>
-       <option value="3">3</option>
-       <option value="4">4</option>
-       <option value="5">5</option>
-       <option value="6">6</option>
-       <option value="7">7</option>
-       <option value="8">8</option>
-       <option value="9">9</option>
-       <option value="10+">10+</option>
-    </select>
-
-              <br/>
-              <br/>
-
-              <div class="button-div-red registerb responsive-btn" id="registerb" style="font-size: 18px;">Save</div>
-              <br/>
-              <!--<div class="button-div-wide registerb responsive-btn" id="registern">No Thanks</div>-->
-
-              </div>
-
-              <div data-role="fieldcontain" style='display:none;'>
-               <input type ='tel' id='regzip' name='regzip' style="display:none" class='regforminput' value="00000" placeholder="Zip Code" onBlur="$('.registerb').click();">
-
-                  <div class='alert-error' id='zipcode-error' style='display:none;'></div>
-                </div>
-
-              <!--These are hidden dummy attributes for book-keeping-->
-
-              <div data-role="fieldcontain" style="display: none;">
-                              <input type='hidden' value='{{ topic }}' name='question'>
-              <input type='hidden' value='{{ url_root }}' name='url'>
-                  <label for="regusername" class='regforminput'>Email:</label>
-                  <input type="hidden" id='regusername' name='regusername' class='regforminput' value='{{ random_username }}' placeholder="Email" data-theme='b'/>
-                  <div class='alert-error' id='username-error' style='display:none;'></div>
-              </div>
-
-              <div data-role="fieldcontain" style='display:none;'>
-                  <label for="regpassword1" class='regforminput' style="display: none;">Password:</label>
-                  <input type ='hidden' id='regpassword1' name='regpassword1' class='regforminput' value='{{ random_password }}' placeholder="Password">
-                  <div class='alert-error' id='password-error'></div>
-              </div>
-                  <!--<div class="standard-btn-div" onclick="document.getElementById('registerb').focus();">
-                      
-                  </div>-->
-              </center>
-          </form>
-          </center>
-      </div>
-</center>
-
-  </div>
-
-  <div class='burger-page dialog-style'>
-    <center>
-      <div class="home-btn-dialog-box">
-            <div class="home-btn-title responsive-header">
-                Open NYU CAFE
-            </div>
-            
-            <div class="home-btn-wrapper" style="width:30%;display:inline-block; text-align: right;">
-                <span style="font-size: 24px;font-weight:bold;padding-right: 15px;" onclick="accounts.hideAll();$('.'+window.burger_state).show();window.prev_state='help';window.cur_state=window.burger_state;">X</span>
-            </div>
-
-      </div> 
-
-      <div style="max-width: 620px; width: 100%; border: 2px solid white;margin-top: 5px;">
-      <div class="burger-div burger-div-about">
-        About
-      </div>
-
-      <div class="burger-div burger-div-compare" style="display: none;">
-        How Do You Compare?
-      </div>
-
-      <div class="burger-div burger-div-others" style="display: none;">
-        Rate Others
-      </div>
-
-      <div class="burger-div burger-div-yours" style="display: none;">
-        Tell Us Your Idea
-      </div>
-
-      <div class="burger-div burger-div-logout">
-        Exit Application
-      </div>
-    </div>
-    </center>
-
-  </div>
-
-
-  <div class='dialog dialog-style'>
-    <center>
-      <div class="home-btn-dialog-box">
-            <div class="home-btn-title responsive-header">
-                Open NYU CAFE
-            </div>
-            
-            <div class="home-btn-wrapper" style="width:30%;display:inline-block; text-align: right;">
-                <img width="30px" class='help-btn-dialog' id="help-dialog" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png"> 
-            </div>
-
-         </div> 
-      <!--<img class="header-img-topic center" src="{{ url_root }}/media/mobile/img/cafe/CRC_join.png"/>-->
-        <div class='dialog-text1 dialog-text-style'>
-          How do my answers compare to the other respondents?
-        </div>
-
-        <br/>
-        {% for k,v in statement_hist.iteritems %}
-        
-      <div class="compare-box-{{k.id}}" style="padding-bottom: 10px;max-width:620px;" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();">
-        <div class="compare-tag">
-          <!--<div style="font-size: 12px; font-style: italic;font-weight: bolder;" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();">{{k.id}}. </div>-->
-          <div style="font-size: 18px;font-weight: bolder;" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();">{{k.short_version}}</div>
-          <div style="font-size: 14px; font-weight: bolder;" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();">more info >></div>
-        </div>
-
-        <canvas id="sparkLineCanvas{{k.id}}" width="160" height="58"></canvas>
-        
-        <div>
-      
-      <!--<script>
-      var canvas = document.getElementById('sparkLineCanvas{{k.id}}');
-      var context = canvas.getContext('2d');
-
-      if ({{k.id}} % 2 == 1)
-        $('.compare-box-{{k.id}}').css("background-color","rgba(0,0,0,0.05)")
-
-      var data = {{v}};
-      var max_of_array = Math.max.apply(Math, data);
-
-      context.beginPath();
-      context.lineWidth = 2;
-      context.strokeStyle = '#442b10';
-      context.shadowColor = '#ffffff';
-        context.shadowOffsetX = 1;
-        context.shadowOffsetY = 1;
-      context.moveTo(0, 45 - data[0]/max_of_array*38);
-      for (i = 1; i <= 9; i++)
-      {
-        context.lineTo(i*16, 45 - data[i]/max_of_array*38);
-        context.stroke(); 
-      }
-
-      context.font="italic small-caps bolder 12px sans-serif";
-      context.fillStyle = '#442b10';
-      context.fillText("0",0,48);
-
-      context.fillText("9",150,50);
-      </script>-->
-
-      <script>
-      var canvas = document.getElementById('sparkLineCanvas{{k.id}}');
-      var context = canvas.getContext('2d');
-
-      if ({{k.id}} % 2 == 1)
-        $('.compare-box-{{k.id}}').css("background-color","rgba(0,0,0,0.05)")
-
-      var data = {{v}};
-      var max_of_array = Math.max.apply(Math, data);
-
-      context.beginPath();
-      context.lineWidth = 6;
-      context.strokeStyle = '#442b10';
-      context.shadowColor = '#ffffff';
-        context.shadowOffsetX = 1;
-        context.shadowOffsetY = 1;
-      //context.moveTo(0, 45 - data[0]/max_of_array*38);
-      for (i = 0; i <= 9; i++)
-      {
-        context.moveTo(i*16+5, 45);
-        context.lineTo(i*16+5, 45 - data[i]/max_of_array*38);
-        context.stroke(); 
-      }
-
-      context.font="italic small-caps bolder 12px sans-serif";
-      context.fillStyle = '#442b10';
-      context.fillText("0",0,58);
-
-      context.fillText("9",145,58);
-      </script>
-
-      </div>
-        
-        </div>
-        {% endfor %}
-
-              <div class="discuss-btn-div">
-                  <div class='dialog-ready button-div-red responsive-btn' style="display: inline-block;">Next</div>
-                  <!--<div class='dialog-ready2 button-div responsive-btn' style="display: inline-block;">Tell Us Your Idea</div>-->
-                  <!--<button type='submit' data-theme='b' class='dialog-next'  onclick="$('.dialog-text1').hide();$('.dialog-text2').show();"><font style="font-size: 16px;">Next</font></button>-->
-              </div>
-      </center>
-  </div>
-
-      {% for k,v in statement_hist.iteritems %}
-          <div class="detail-box detail-box-{{k.id}}" style="display:none;">
+	  <div class= 'registerpanel'>
             <center>
-        <div class="home-btn-dialog-box">
+              <div class="basic-header2 responsive-header" style="max-width: 500px;">Please answer the following profile questions:</div>
+              <!--<div class="basic-header2 responsive-header" style="max-width: 500px;">{{client_settings.ZIP_CODE_INSTRUCTIONS}}:</div>-->
+              <form id='reg_form' class='reg_form responsive-form'>
+		<center>
+
+		  <div data-role="fieldcontain">
+		    <select class="drop-down-class">
+		      <option value="none" data-placeholder="true">Your NYU Affiliation</option>
+		      <option value="student">NYU Student</option>
+		      <option value="faculty">NYU Faculty</option>
+		      <option value="admin">NYU Admin</option>
+		      <option value="staff">NYU Staff</option>
+		      <option value="alum">NYU Alumni</option>
+		      <option value="parent">Parent</option>
+		      <option value="neighbor">Neighbor</option>
+		    </select>
+
+		    <br/>
+		    <br/>
+
+		    <select class="drop-down-class">
+		      <option value="N/A" data-placeholder="true">School Affiliation</option>
+		      <option value="CAS">CAS</option>
+		      <option value="Continuing">Continuing and Professional Studies</option>
+		      <option value="Courant">Courant</option>
+		      <option value="Dentistry">Dentistry</option>
+		      <option value="Fine Arts">Fine Arts</option>
+		      <option value="Gallatin">Gallatin</option>
+		      <option value="GSAS">GSAS</option>
+		      <option value="Institute for the Study of the Ancient World">Institute for the Study of the Ancient World</option>
+		      <option value="Liberal Studies">Liberal Studies</option>
+		      <option value="Nursing">Nursing</option>
+		      <option value="Polytechnic">Polytechnic</option>
+		      <option value="Preston Robert Tisch Center for Hospitality, Tourism, and Sports Management">Preston Robert Tisch Center for Hospitality, Tourism, and Sports Management</option>
+		      <option value="Schack">Schack</option>
+		      <option value="School of Medicine">School of Medicine</option>
+		      <option value="School of Law">School of Law</option>
+		      <option value="Silver School of Social Work">Silver School of Social Work</option>
+		      <option value="Steinhardt School of Culture, Education, and Human Development">Steinhardt School of Culture, Education, and Human Development</option>
+		      <option value="Stern">Stern</option>
+		      <option value="Tisch School of the Arts">Tisch School of the Arts</option>
+		      <option value="Wagner">Wagner</option>
+		      <option value="tNA">None of the Above</option>
+		    </select>
+
+		    <br/>
+		    <br/>
+
+		    <select class="drop-down-class">
+		      <option value="-" data-placeholder="true">Years at NYU</option>
+		      <option value="0">0</option>
+		      <option value="1">1</option>
+		      <option value="2">2</option>
+		      <option value="3">3</option>
+		      <option value="4">4</option>
+		      <option value="5">5</option>
+		      <option value="6">6</option>
+		      <option value="7">7</option>
+		      <option value="8">8</option>
+		      <option value="9">9</option>
+		      <option value="10+">10+</option>
+		    </select>
+
+		    <br/>
+		    <br/>
+
+		    <div class="button-div-red registerb responsive-btn" id="registerb" style="font-size: 18px;">Save</div>
+		    <br/>
+		    <!--<div class="button-div-wide registerb responsive-btn" id="registern">No Thanks</div>-->
+
+		  </div>
+
+		  <div data-role="fieldcontain" style='display:none;'>
+		    <input type ='tel' id='regzip' name='regzip' style="display:none" class='regforminput' value="00000" placeholder="Zip Code" onBlur="$('.registerb').click();">
+
+                    <div class='alert-error' id='zipcode-error' style='display:none;'></div>
+                  </div>
+
+		  <!--These are hidden dummy attributes for book-keeping-->
+
+		  <div data-role="fieldcontain" style="display: none;">
+                    <input type='hidden' value='{{ topic }}' name='question'>
+		    <input type='hidden' value='{{ url_root }}' name='url'>
+                    <label for="regusername" class='regforminput'>Email:</label>
+                    <input type="hidden" id='regusername' name='regusername' class='regforminput' value='{{ random_username }}' placeholder="Email" data-theme='b'/>
+                    <div class='alert-error' id='username-error' style='display:none;'></div>
+		  </div>
+
+		  <div data-role="fieldcontain" style='display:none;'>
+                    <label for="regpassword1" class='regforminput' style="display: none;">Password:</label>
+                    <input type ='hidden' id='regpassword1' name='regpassword1' class='regforminput' value='{{ random_password }}' placeholder="Password">
+                    <div class='alert-error' id='password-error'></div>
+		  </div>
+                  <!--<div class="standard-btn-div" onclick="document.getElementById('registerb').focus();">
+                  
+                  </div>-->
+		</center>
+              </form>
+            </center>
+	  </div>
+	</center>
+
+      </div>
+
+      <div class='burger-page dialog-style'>
+	<center>
+	  <div class="home-btn-dialog-box">
             <div class="home-btn-title responsive-header">
-                Open NYU CAFE
+              Open NYU CAFE
             </div>
             
             <div class="home-btn-wrapper" style="width:30%;display:inline-block; text-align: right;">
-                <img width="30px" class='help-btn-dialog' id="help-detail-box-{{k.id}}" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png"> 
+              <span style="font-size: 24px;font-weight:bold;padding-right: 15px;" onclick="accounts.hideAll();$('.'+window.burger_state).show();window.prev_state='help';window.cur_state=window.burger_state;">X</span>
             </div>
 
-         </div> 
+	  </div> 
 
-         
-         <div class="close-page" onclick="accounts.hideAll();$('.dialog').show();">
-           X
+	  <div style="max-width: 620px; width: 100%; border: 2px solid white;margin-top: 5px;">
+	    <div class="burger-div burger-div-about">
+              About
+	    </div>
+
+	    <div class="burger-div burger-div-compare" style="display: none;">
+              How Do You Compare?
+	    </div>
+
+	    <div class="burger-div burger-div-others" style="display: none;">
+              Rate Others
+	    </div>
+
+	    <div class="burger-div burger-div-yours" style="display: none;">
+              Tell Us Your Idea
+	    </div>
+
+	    <div class="burger-div burger-div-logout">
+              Exit Application
+	    </div>
+	  </div>
+	</center>
+
+      </div>
+
+
+      <div class='dialog dialog-style'>
+	<center>
+	  <div class="home-btn-dialog-box">
+            <div class="home-btn-title responsive-header">
+              Open NYU CAFE
+            </div>
+            
+            <div class="home-btn-wrapper" style="width:30%;display:inline-block; text-align: right;">
+              <img width="30px" class='help-btn-dialog' id="help-dialog" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png"> 
+            </div>
+
+          </div> 
+	  <!--<img class="header-img-topic center" src="{{ url_root }}/media/mobile/img/cafe/CRC_join.png"/>-->
+          <div class='dialog-text1 dialog-text-style'>
+            How do my answers compare to the other respondents?
           </div>
 
-         <div class="statement-style">
-          <div style="font-style: italic;font-weight: bolder;padding-top: 20px;font-size: 14px;padding-bottom: 10px;">Question {{k.id}}</div>
-         {{ k.statement }} 
-         </div>
+          <br/>
+          {% for k,v in statement_hist.iteritems %}
+          
+	  <div class="compare-box-{{k.id}}" style="padding-bottom: 10px;max-width:620px;" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();">
+            <div class="compare-tag">
+              <!--<div style="font-size: 12px; font-style: italic;font-weight: bolder;" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();">{{k.id}}. </div>-->
+              <div style="font-size: 18px;font-weight: bolder;" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();">{{k.short_version}}</div>
+              <div style="font-size: 14px; font-weight: bolder;" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();">more info >></div>
+            </div>
 
+            <canvas id="sparkLineCanvas{{k.id}}" width="160" height="58"></canvas>
+            
+            <div>
+	      
+	      <!--<script>
+	      var canvas = document.getElementById('sparkLineCanvas{{k.id}}');
+	      var context = canvas.getContext('2d');
 
-      <center>     
-        <div style="margin-left: 15px;">
-          <canvas id="sparkLineCanvasDetail{{k.id}}" width="300" height="105" style="background-color: rgba(255,255,255,0.4)"></canvas>
-          <script>
-      var canvas = document.getElementById('sparkLineCanvasDetail{{k.id}}');
-      var context = canvas.getContext('2d');
+	      if ({{k.id}} % 2 == 1)
+              $('.compare-box-{{k.id}}').css("background-color","rgba(0,0,0,0.05)")
 
-      var data = {{v}};
-      var max_of_array = Math.max.apply(Math, data);
+	      var data = {{v}};
+	      var max_of_array = Math.max.apply(Math, data);
 
-      context.beginPath();
-      context.lineWidth = 10;
-      context.strokeStyle = '#442b10';
-      context.shadowColor = '#ffffff';
-        context.shadowOffsetX = 1;
-        context.shadowOffsetY = 1;
-      //context.moveTo(0, 90 - data[0]/max_of_array*76);
-      for (i = 0; i <= 9; i++)
-      {
-        context.moveTo(i*29+10, 90);
-        context.lineTo(i*29+10, 90 - data[i]/max_of_array*76);
-        context.stroke(); 
-      }
+	      context.beginPath();
+	      context.lineWidth = 2;
+	      context.strokeStyle = '#442b10';
+	      context.shadowColor = '#ffffff';
+              context.shadowOffsetX = 1;
+              context.shadowOffsetY = 1;
+	      context.moveTo(0, 45 - data[0]/max_of_array*38);
+	      for (i = 1; i <= 9; i++)
+	      {
+              context.lineTo(i*16, 45 - data[i]/max_of_array*38);
+              context.stroke(); 
+	      }
 
-      context.font="italic small-caps bolder 12px sans-serif";
-      context.fillStyle = '#442b10';
-      context.fillText("0",5,104);
+	      context.font="italic small-caps bolder 12px sans-serif";
+	      context.fillStyle = '#442b10';
+	      context.fillText("0",0,48);
 
-      context.fillText("9",267,104);
-      </script>
+	      context.fillText("9",150,50);
+	      </script>-->
 
+	      <script>
+	       var canvas = document.getElementById('sparkLineCanvas{{k.id}}');
+	       var context = canvas.getContext('2d');
+
+	       if ({{k.id}} % 2 == 1)
+		 $('.compare-box-{{k.id}}').css("background-color","rgba(0,0,0,0.05)")
+
+	       var data = {{v}};
+	       var max_of_array = Math.max.apply(Math, data);
+
+	       context.beginPath();
+	       context.lineWidth = 6;
+	       context.strokeStyle = '#442b10';
+	       context.shadowColor = '#ffffff';
+               context.shadowOffsetX = 1;
+               context.shadowOffsetY = 1;
+	       //context.moveTo(0, 45 - data[0]/max_of_array*38);
+	       for (i = 0; i <= 9; i++)
+	       {
+		 context.moveTo(i*16+5, 45);
+		 context.lineTo(i*16+5, 45 - data[i]/max_of_array*38);
+		 context.stroke(); 
+	       }
+
+	       context.font="italic small-caps bolder 12px sans-serif";
+	       context.fillStyle = '#442b10';
+	       context.fillText("0",0,58);
+
+	       context.fillText("9",145,58);
+	      </script>
+
+	    </div>
+            
+          </div>
+          {% endfor %}
+
+          <div class="discuss-btn-div">
+            <div class='dialog-ready button-div-red responsive-btn' style="display: inline-block;">Next</div>
+            <!--<div class='dialog-ready2 button-div responsive-btn' style="display: inline-block;">Tell Us Your Idea</div>-->
+            <!--<button type='submit' data-theme='b' class='dialog-next'  onclick="$('.dialog-text1').hide();$('.dialog-text2').show();"><font style="font-size: 16px;">Next</font></button>-->
+          </div>
+	</center>
       </div>
 
-              <!--<div class="discuss-btn-div">
-                  <div class='dialog-ready button-div responsive-btn' style="display: inline-block;">Next</div>
-              </div>-->
-    </center>
-
-</center>
-        </div>
-       {% endfor %} 
-
-  <div class='comment-input'>
-    <center>
-       <div class="home-btn-dialog-box">
+      {% for k,v in statement_hist.iteritems %}
+      <div class="detail-box detail-box-{{k.id}}" style="display:none;">
+        <center>
+          <div class="home-btn-dialog-box">
             <div class="home-btn-title responsive-header">
-                Open NYU CAFE
+              Open NYU CAFE
+            </div>
+            
+            <div class="home-btn-wrapper" style="width:30%;display:inline-block; text-align: right;">
+              <img width="30px" class='help-btn-dialog' id="help-detail-box-{{k.id}}" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png"> 
+            </div>
+
+          </div> 
+
+          
+          <div class="close-page" onclick="accounts.hideAll();$('.dialog').show();">
+            X
+          </div>
+
+          <div class="statement-style">
+            <div style="font-style: italic;font-weight: bolder;padding-top: 20px;font-size: 14px;padding-bottom: 10px;">Question {{k.id}}</div>
+            {{ k.statement }} 
+          </div>
+
+
+	  <center>     
+            <div style="margin-left: 15px;">
+              <canvas id="sparkLineCanvasDetail{{k.id}}" width="300" height="105" style="background-color: rgba(255,255,255,0.4)"></canvas>
+              <script>
+	       var canvas = document.getElementById('sparkLineCanvasDetail{{k.id}}');
+	       var context = canvas.getContext('2d');
+
+	       var data = {{v}};
+	       var max_of_array = Math.max.apply(Math, data);
+
+	       context.beginPath();
+	       context.lineWidth = 10;
+	       context.strokeStyle = '#442b10';
+	       context.shadowColor = '#ffffff';
+               context.shadowOffsetX = 1;
+               context.shadowOffsetY = 1;
+	       //context.moveTo(0, 90 - data[0]/max_of_array*76);
+	       for (i = 0; i <= 9; i++)
+	       {
+		 context.moveTo(i*29+10, 90);
+		 context.lineTo(i*29+10, 90 - data[i]/max_of_array*76);
+		 context.stroke(); 
+	       }
+
+	       context.font="italic small-caps bolder 12px sans-serif";
+	       context.fillStyle = '#442b10';
+	       context.fillText("0",5,104);
+
+	       context.fillText("9",267,104);
+	      </script>
+
+	    </div>
+
+            <!--<div class="discuss-btn-div">
+            <div class='dialog-ready button-div responsive-btn' style="display: inline-block;">Next</div>
+            </div>-->
+	  </center>
+
+	</center>
+      </div>
+      {% endfor %} 
+
+      <div class='comment-input'>
+	<center>
+	  <div class="home-btn-dialog-box">
+            <div class="home-btn-title responsive-header">
+              Open NYU CAFE
             </div>
             
             <div class="home-btn-wrapper" style="width:30%;display:inline-block;">
-            <img width="30px" class='help-btn-dialog' id="help-comment-input" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+              <img width="30px" class='help-btn-dialog' id="help-comment-input" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
             </div>
 
-         </div> 
+          </div> 
 
-      <center>
-          <div class='comment-panel'>
+	  <center>
+            <div class='comment-panel'>
               <div class="basic-header2 responsive-body" style="text-align:left;">{{topic}}<br/></div>
               <textarea name='answer' id='entered-comment' maxlength="500"></textarea>
               <div style="max-width: 400px;font-size: 14px; text-align: left; width: 95%; padding-left: 15px;">
                 Please enter your email address so we can reach you if your idea is
-selected to win one of the 3 iPads.  We promise to keep your email confidential and will not share it with anyone.
+		selected to win one of the 3 iPads.  We promise to keep your email confidential and will not share it with anyone.
                 <input type="email" id='regemail' name='regemail' class='regforminput' style="font-size: 15px; background-color: #FFFFFF;color: #000000;" placeholder="Email (Optional)" data-theme='b'></input>
               </div>
               <div class='comment-submit-btn button-div-wide responsive-btn' style="display: inline-block;">Post</div>
-          </div>
-      </center>
-    </center>
-  </div>
+            </div>
+	  </center>
+	</center>
+      </div>
 
-  <div class="top-bar">
-    <center>
-        <div class='menubar'>
+      <div class="top-bar">
+	<center>
+          <div class='menubar'>
             <!--<div class="scorebox">
-                <span class='score-label'></span><span class='score-value'></span>
+            <span class='score-label'></span><span class='score-value'></span>
             </div>-->
 
             <div class="home-btn-title responsive-header" style="width:68%;">
-                Open NYU CAFE
+              Open NYU CAFE
             </div>
 
             <div class="home-btn-wrapper" style="width:30%;display:inline-block;">
@@ -747,474 +747,474 @@ selected to win one of the 3 iPads.  We promise to keep your email confidential 
             </div>
 
             <!--<span class="stats-wrapper" style="display: none;"><img width="30px" class='my-comment-btn' src="{{url_root}}/media/mobile/img/cafe/CRC_stats_bttn.png"></span>-->
-        </div>
+          </div>
 
-            <!--<div class='instructions instructions-responsive'>{{client_settings.INSTRUCTIONS_1}}</div>
-            <div class='instructions2 instructions-responsive'>{{client_settings.INSTRUCTIONS_2}}</div>
-            <div class='instructions3 instructions-responsive'><div style="padding-right: 5px; padding-left: 5px;">{{client_settings.INSTRUCTIONS_3}}</div>-->
-    </center>
-  </div>
+          <!--<div class='instructions instructions-responsive'>{{client_settings.INSTRUCTIONS_1}}</div>
+          <div class='instructions2 instructions-responsive'>{{client_settings.INSTRUCTIONS_2}}</div>
+          <div class='instructions3 instructions-responsive'><div style="padding-right: 5px; padding-left: 5px;">{{client_settings.INSTRUCTIONS_3}}</div>-->
+	</center>
+      </div>
 
 
-  <div class="margin"></div>
+      <div class="margin"></div>
 
-  <div class='rate' id="rate">
-    <center>
-      <div class="home-btn-dialog-box">
+      <div class='rate' id="rate">
+	<center>
+	  <div class="home-btn-dialog-box">
             <div class="home-btn-title responsive-header">
-                Open NYU CAFE
+              Open NYU CAFE
             </div>
             
             <div class="home-btn-wrapper" style="width:30%;display:inline-block; text-align: right;">                
-                <img width="30px" class='help-btn-dialog' id="help-rate" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+              <img width="30px" class='help-btn-dialog' id="help-rate" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
             </div>
 
-         </div>
+          </div>
 
-    <center>
-      <div><span class="rate-username"></span></div>
-       <div id='commentInput' class='answer responsive-answer'></div>
-       
-    </center>
+	  <center>
+	    <div><span class="rate-username"></span></div>
+	    <div id='commentInput' class='answer responsive-answer'></div>
+	    
+	  </center>
 
 
-    <div id="flag" class="flag-style"></div>
+	  <div id="flag" class="flag-style"></div>
 
-  <center>
-    <div class="answerwrapper">
-     <div class='sliders responsive-body' style="text-align: center;font-size: 18px; line-height: 20px; font-family: DroidSans-Bold;max-width: 620px;">
-       {{client_settings.RATE_IMPORTANCE_QUESTION}}<br/><br/>
-       <center>
-        (Not at all) 0   -  9 (Extremely)
-       <div class="slider" id="slider-importance"></div>    
-        
-        <div id='go-back' class='button-div-wide responsive-btn' style="display: inline-block;">Skip</div>
+	  <center>
+	    <div class="answerwrapper">
+	      <div class='sliders responsive-body' style="text-align: center;font-size: 18px; line-height: 20px; font-family: DroidSans-Bold;max-width: 620px;">
+		{{client_settings.RATE_IMPORTANCE_QUESTION}}<br/><br/>
+		<center>
+		  (Not at all) 0   -  9 (Extremely)
+		  <div class="slider" id="slider-importance"></div>    
+		  
+		  <div id='go-back' class='button-div-wide responsive-btn' style="display: inline-block;">Skip</div>
 
-       </center>
-  
-       <div class="slider-padding"></div>
+		</center>
+		
+		<div class="slider-padding"></div>
 
-       <div style="clear: both;"></div>
+		<div style="clear: both;"></div>
 
-       <!--  How would you rate the State of California on this issue today?<br/>
-         <div class="slider" id="slider-grade"></div>
-           <div style="clear: both;"></div>-->
-        <!--<center>
-            <div class="button-div responsive-btn" id='go-back'>Next</div>
-        </center>-->
+		<!--  How would you rate the State of California on this issue today?<br/>
+		<div class="slider" id="slider-grade"></div>
+		<div style="clear: both;"></div>-->
+		<!--<center>
+		<div class="button-div responsive-btn" id='go-back'>Next</div>
+		</center>-->
+
+	      </div>
+	  </center>
+
+	    </div>
+	</center>
 
       </div>
-    </center>
 
-    </div>
-  </center>
-
-  </div>
-
-  <div class="map-frame">
-    <center>
-    <div class="instructions-light responsive-body">
-    Rate suggestions from fellow NYU community members by tapping on a sphere below. 
-    </div>
-    <div style="text-align: left;margin-top: 3px;">{{ topic }}</div>
-  <div id='d3' class="d3-canvas"></div>
-  </center>
-  <a href="#" class="map-info" style="position:relative;top:-75px;color:#442b10;text-align: left;display:none;" onclick="accounts.hideAll();$('.dialog-help-map1').show();window.cur_state = 'faq';window.prev_state = 'map';"><img width="30px" src="{{url_root}}/media/mobile/img/cafe/info_button.png"><a>
-  </div>
+      <div class="map-frame">
+	<center>
+	  <div class="instructions-light responsive-body">
+	    Rate suggestions from fellow NYU community members by tapping on a sphere below. 
+	  </div>
+	  <div style="text-align: left;margin-top: 3px;">{{ topic }}</div>
+	  <div id='d3' class="d3-canvas"></div>
+	</center>
+	<a href="#" class="map-info" style="position:relative;top:-75px;color:#442b10;text-align: left;display:none;" onclick="accounts.hideAll();$('.dialog-help-map1').show();window.cur_state = 'faq';window.prev_state = 'map';"><img width="30px" src="{{url_root}}/media/mobile/img/cafe/info_button.png"><a>
+      </div>
 
 
-  <div class='frame'></div>
+      <div class='frame'></div>
 
-  <div class='logout'>
-    <center>
-            <div class="home-btn-dialog-box">
+      <div class='logout'>
+	<center>
+          <div class="home-btn-dialog-box">
             <div class="home-btn-title responsive-header">
               Open NYU CAFE
             </div>
             
             <div class="home-btn-wrapper" style="width:30%;display:inline-block; text-align: right;">
-                <img width="30px" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+              <img width="30px" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
             </div>
 
-         </div>
-        <div class="responsive-body" style="text-align:center;padding-top: 15px;">
+          </div>
+          <div class="responsive-body" style="text-align:center;padding-top: 15px;">
             {{client_settings.LOGOUT_DIALOG_TEXT}}<br/><br/>
 	    <a href="https://twitter.com/home?status=How%20can%20technology%20enhance%20learning%20at%20@nyuniversity?%20Take%205%20mins%20to%20share%20your%20perspectives%20opinion.berkeley.edu/open-nyu/v1" target="_blank" style="color: #555555;"><img src="{{url_root}}/media/mobile/img/cafe/twitter-button.png" width="102px"></a>
 	    <a href="http://hrefshare.com/f145" target="_blank" style="color: #555555;"><img src="{{url_root}}/media/mobile/img/cafe/facebook-button.png" width="102px"></a>
-        </div>
+          </div>
 
-        <!--<div class='comment-submit-btn button-div responsive-btn' style="display: inline-block;">Email</div>-->
-      </center>
- </div>
+          <!--<div class='comment-submit-btn button-div responsive-btn' style="display: inline-block;">Email</div>-->
+	</center>
+      </div>
 
-  <div class='welcome-back'>
-     <div class='landing-intro default-left-padding'>
-        <div class='landing-header'>
+      <div class='welcome-back'>
+	<div class='landing-intro default-left-padding'>
+          <div class='landing-header'>
             {% autoescape off %}{{client_settings.WELCOME_PAGE_HEADER}}{% endautoescape %}
-        </div>
-     </div>
+          </div>
+	</div>
 
-    <div class='landing-desc default-left-padding responsive-body'>
-        <center>
+	<div class='landing-desc default-left-padding responsive-body'>
+          <center>
             <div class="standard-btn-div">
-                <button type='submit' data-theme='b' id='regrade-btn' ><font style="font-size: 16px;">Change grades</font></button>
-                <button type='cancel' data-theme='b' id='garden-btn' ><font style="font-size: 16px;">Discussion</font></button>
+              <button type='submit' data-theme='b' id='regrade-btn' ><font style="font-size: 16px;">Change grades</font></button>
+              <button type='cancel' data-theme='b' id='garden-btn' ><font style="font-size: 16px;">Discussion</font></button>
             </div>
-        </center>
-        <div class="comment-admin-text">
+          </center>
+          <div class="comment-admin-text">
             <a class="comment-admin-text-a" href="#" onclick="$('.dialog-about').show();$('.welcome-back').hide();window.landing=false;" target="_blank">About</a>
-        </div>
-    </div>
+          </div>
+	</div>
 
-  </div>
-
-  <div class='dialog-score dialog-style'>
-
-      <div class="home-btn-dialog-box">
-          <button data-theme='b' class='home-btn-dialog'><img width="30px" src="{{url_root}}/media/mobile/img/cafe/home-icon.png"></button>
       </div>
 
-    <div class='dialog-text-notitle default-left-padding responsive-body'>
-        <div class="scorebox-fake">
-          {{client_settings.YOUR_SCORE_LANGUAGE}} is 100
-        </div>
+      <div class='dialog-score dialog-style'>
 
-        <br/>
-        {{client_settings.SCORE_DIALOG_TEXT}}
-
-      <center>
-        <div class="standard-btn-div">
-            <button type='submit' data-theme='b' class='dialog-score-ready' ><font style="font-size: 16px;">Next</font></button>
-        </div>
-      </center>
-    </div>
-  </div>
-
-  <div class='dialog-yourmug dialog-style'>
-
-      <div class="home-btn-dialog-box">
+	<div class="home-btn-dialog-box">
           <button data-theme='b' class='home-btn-dialog'><img width="30px" src="{{url_root}}/media/mobile/img/cafe/home-icon.png"></button>
+	</div>
+
+	<div class='dialog-text-notitle default-left-padding responsive-body'>
+          <div class="scorebox-fake">
+            {{client_settings.YOUR_SCORE_LANGUAGE}} is 100
+          </div>
+
+          <br/>
+          {{client_settings.SCORE_DIALOG_TEXT}}
+
+	  <center>
+            <div class="standard-btn-div">
+              <button type='submit' data-theme='b' class='dialog-score-ready' ><font style="font-size: 16px;">Next</font></button>
+            </div>
+	  </center>
+	</div>
       </div>
 
-    <div class='dialog-text-style default-left-padding responsive-body'>
-        <div class="basic-header" style="width:100%;">Your Mug</div>
-        <img class="header-img-topic center" src="{{ url_root }}/media/mobile/img/cafe/map_teaser.png"><br>
+      <div class='dialog-yourmug dialog-style'>
 
-        {{client_settings.INSTRUCTIONS_2}}
+	<div class="home-btn-dialog-box">
+          <button data-theme='b' class='home-btn-dialog'><img width="30px" src="{{url_root}}/media/mobile/img/cafe/home-icon.png"></button>
+	</div>
 
-      <center>
-        <div class="standard-btn-div">
-            <button type='submit' data-theme='b' class='dialog-yourmug-ready' ><font style="font-size: 16px;">Next</font></button>
-        </div>
-      </center>
+	<div class='dialog-text-style default-left-padding responsive-body'>
+          <div class="basic-header" style="width:100%;">Your Mug</div>
+          <img class="header-img-topic center" src="{{ url_root }}/media/mobile/img/cafe/map_teaser.png"><br>
 
-    </div>
-  </div>
+          {{client_settings.INSTRUCTIONS_2}}
 
-  <div class='dialog-continue dialog-style'>
-    <center>
-       <div class="home-btn-dialog-box">
+	  <center>
+            <div class="standard-btn-div">
+              <button type='submit' data-theme='b' class='dialog-yourmug-ready' ><font style="font-size: 16px;">Next</font></button>
+            </div>
+	  </center>
+
+	</div>
+      </div>
+
+      <div class='dialog-continue dialog-style'>
+	<center>
+	  <div class="home-btn-dialog-box">
             <div class="home-btn-title responsive-header">
-                Open NYU CAFE
+              Open NYU CAFE
             </div>
             
             <div class="home-btn-wrapper" style="width:30%;display:inline-block; text-align: right;">
-                <img width="30px" class='help-btn-dialog' id='help-dialog-continue' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+              <img width="30px" class='help-btn-dialog' id='help-dialog-continue' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
             </div>
 
-         </div> 
-<center>
-  <br/><br/>
-    <div class='dialog-text-style responsive-body'>
-      Thank You For Your Input!
-      <div style="font-size: 18px;margin-top: 10px;">You can continue to contribute to the discussion by reading and evaluating the ideas of others.</div>
-        <!--<div class='dialog-text-style default-left-padding'>
-        {{client_settings.EMAIL_ASK_TEXT}}
-      </div>-->
+          </div> 
+	  <center>
+	    <br/><br/>
+	    <div class='dialog-text-style responsive-body'>
+	      Thank You For Your Input!
+	      <div style="font-size: 18px;margin-top: 10px;">You can continue to contribute to the discussion by reading and evaluating the ideas of others.</div>
+              <!--<div class='dialog-text-style default-left-padding'>
+              {{client_settings.EMAIL_ASK_TEXT}}
+	      </div>-->
 
-      <br/>
-        <center>
-                  <!--<input type="email" id='regemail' name='regemail' class='regforminput' style="font-size: 15px; background-color: #FFFFFF;color: #000000;" placeholder="Email" data-theme='b'></input>
-        <div class="comment-admin-text-b">{{client_settings.DEMOGRAPHICS_DISCLAIMER}}.</div>
-        <br/>-->
+	      <br/>
+              <center>
+                <!--<input type="email" id='regemail' name='regemail' class='regforminput' style="font-size: 15px; background-color: #FFFFFF;color: #000000;" placeholder="Email" data-theme='b'></input>
+		<div class="comment-admin-text-b">{{client_settings.DEMOGRAPHICS_DISCLAIMER}}.</div>
+		<br/>-->
                 <div class='button-div-wide responsive-btn' onclick="$('.burger-div-others').click();">Rate Others</div>
                 <div class='button-div-wide responsive-btn' onclick="$('.burger-div-yours').click();">Edit Your Idea</div>
                 <div class='button-div-wide responsive-btn' onclick="$('.burger-div-logout').click();">Exit Application</div>
-            <div class='alert-error' id='email-error' style='display:none;width: 250px;'></div>
+		<div class='alert-error' id='email-error' style='display:none;width: 250px;'></div>
+              </center>
+
+	    </div>
+          </center>
         </center>
+      </div>
 
-    </div>
-          </center>
-          </center>
-  </div>
-
- <div class='dialog-email dialog-style'>
-       <div class="home-btn-dialog-box">
-            <div class="home-btn-title responsive-header" style="width:50%; text-shadow: none; position: relative; left: 15px;">
-                Thanks!
-            </div>
+      <div class='dialog-email dialog-style'>
+	<div class="home-btn-dialog-box">
+          <div class="home-btn-title responsive-header" style="width:50%; text-shadow: none; position: relative; left: 15px;">
+            Thanks!
+          </div>
+          
+          <div class="home-btn-wrapper" style="width:45%;display:inline-block; text-align: right;">
+            <img width="6%" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png"> 
             
-            <div class="home-btn-wrapper" style="width:45%;display:inline-block; text-align: right;">
-                <img width="6%" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png"> 
-                
-                <img width="6%" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png"> 
-                
-                <img width="6%" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
-                
-                <img width="6%" class='logout-btn' src="{{url_root}}/media/mobile/img/cafe/CRC_logout_bttn.png">
-            </div>
+            <img width="6%" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png"> 
+            
+            <img width="6%" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+            
+            <img width="6%" class='logout-btn' src="{{url_root}}/media/mobile/img/cafe/CRC_logout_bttn.png">
+          </div>
 
-         </div> 
+        </div> 
 
-         <div class='dialog-text-style default-left-padding responsive-body'>
-            <center>
-              {{client_settings.RESPONSE_SAVED_TEXT2}}
+        <div class='dialog-text-style default-left-padding responsive-body'>
+          <center>
+            {{client_settings.RESPONSE_SAVED_TEXT2}}
             <br/>
             <div class="standard-btn-div" style="max-width: 250px !important;">
               <div class='button-div dialog-email-ready responsive-btn' >Continue</div>
             </div>
           </center>
-         </div>
-  </div>
+        </div>
+      </div>
 
-  <div class='dialog-avggrade dialog-style'>
-      <div class="home-btn-dialog-box">
+      <div class='dialog-avggrade dialog-style'>
+	<div class="home-btn-dialog-box">
           <img width="6%" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
           
           <img width="6%" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
           
           <img width="6%" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+	</div>
+
+	<div class='dialog-text-style default-left-padding responsive-body'>
+	  <div class="basic-header" style="width:100%;">{{client_settings.AVG_EXPLAIN_HEADER}}</div>
+	  <center>
+	    <img src="{{ url_root }}/media/mobile/img/cafe/avggrade.png" class="center" style="width:300px;padding-top:3px;"><br>
+	  </center>
+          Based on the grades from {{num_users}} participants so far, {{client_settings.AVG_EXPLAIN_TEXT}}
+	</div>
       </div>
 
-    <div class='dialog-text-style default-left-padding responsive-body'>
-      <div class="basic-header" style="width:100%;">{{client_settings.AVG_EXPLAIN_HEADER}}</div>
-     <center>
-      <img src="{{ url_root }}/media/mobile/img/cafe/avggrade.png" class="center" style="width:300px;padding-top:3px;"><br>
-     </center>
-        Based on the grades from {{num_users}} participants so far, {{client_settings.AVG_EXPLAIN_TEXT}}
-    </div>
-  </div>
-
-  <div class='dialog-about dialog-style'>
-    <center>
-     <div class="home-btn-dialog-box" style="padding-top: 5px;">
-          <span style="font-size: 24px;font-weight:bold;padding-right: 15px;" onclick="accounts.hideAll();$('.burger-page').show();">X</span>
+      <div class='dialog-about dialog-style'>
+	<center>
+	  <div class="home-btn-dialog-box" style="padding-top: 5px;">
+            <span style="font-size: 24px;font-weight:bold;padding-right: 15px;" onclick="accounts.hideAll();$('.burger-page').show();">X</span>
+	  </div>
+	  <div class='dialog-text-style-noflow responsive-body'>
+	    <center> {{client_settings.ABOUT_PAGE_HEADER}}<br/>
+	      {{num_users}} participants so far.</center><br/>
+	    {% autoescape off %}{{client_settings.ABOUT_PAGE_TEXT }}{% endautoescape %}
+	  </div>
+	</center>
       </div>
-      <div class='dialog-text-style-noflow responsive-body'>
-       <center> {{client_settings.ABOUT_PAGE_HEADER}}<br/>
-	  {{num_users}} participants so far.</center><br/>
-	  {% autoescape off %}{{client_settings.ABOUT_PAGE_TEXT }}{% endautoescape %}
-      </div>
-    </center>
-  </div>
 
-  <div class='dialog-help-alt dialog-style' style="z-index:999">
-     <div class="home-btn-dialog-box">
+      <div class='dialog-help-alt dialog-style' style="z-index:999">
+	<div class="home-btn-dialog-box">
           <img width="6%" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
           
           <img width="6%" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
           
           <img width="6%" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
-      </div>
-      <div class='dialog-text-style-noflow small-left-padding responsive-body'>
+	</div>
+	<div class='dialog-text-style-noflow small-left-padding responsive-body'>
           <div class="basic-header">Help</div>
           {% autoescape off %}{{client_settings.HELP_ABOUT }}{% endautoescape %}<br/>
+	</div>
       </div>
-  </div>
 
-  <div class='dialog-help-grade dialog-style' style="z-index:999;">
+      <div class='dialog-help-grade dialog-style' style="z-index:999;">
 
-     <div class="home-btn-dialog-box">
+	<div class="home-btn-dialog-box">
           <img width="6%" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
           
           <img width="6%" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
           
           <img width="6%" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
-      </div>
-      <div class='dialog-text-style-noflow small-left-padding responsive-body'>
+	</div>
+	<div class='dialog-text-style-noflow small-left-padding responsive-body'>
           <div class="basic-header">Help</div>
-         {% autoescape off %}{{client_settings.HELP_ASSIGN_GRADES}}{% endautoescape %}
+          {% autoescape off %}{{client_settings.HELP_ASSIGN_GRADES}}{% endautoescape %}
+	</div>
       </div>
-  </div>
 
-  <div class='dialog-help-median dialog-style' style="z-index:999">
-      <div class="home-btn-dialog-box">
+      <div class='dialog-help-median dialog-style' style="z-index:999">
+	<div class="home-btn-dialog-box">
           <img width="6%" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
           
           <img width="6%" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
           
           <img width="6%" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
-      </div>
-      <div class='dialog-text-style-noflow small-left-padding responsive-body'>
+	</div>
+	<div class='dialog-text-style-noflow small-left-padding responsive-body'>
           <div class="basic-header">Help</div>
           {% autoescape off %}{{client_settings.HELP_MEDIAN_GRADES}}{% endautoescape %}
+	</div>
       </div>
-  </div>
 
-  <div class='dialog-help-zipcode dialog-style' style="z-index:999">
-      <div class="home-btn-dialog-box">
+      <div class='dialog-help-zipcode dialog-style' style="z-index:999">
+	<div class="home-btn-dialog-box">
           <img width="6%" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
           
           <img width="6%" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
           
           <img width="6%" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
-      </div>
-      <div class='dialog-text-style-noflow small-left-padding responsive-body'>
+	</div>
+	<div class='dialog-text-style-noflow small-left-padding responsive-body'>
           <div class="basic-header">Help</div>
           {% autoescape off %}{{client_settings.HELP_PRIVACY}}{% endautoescape %}
+	</div>
       </div>
-  </div>
 
-  <div class='dialog-help-dialog dialog-style responsive-body' style="z-index:999">
-     <div class="home-btn-dialog-box">
+      <div class='dialog-help-dialog dialog-style responsive-body' style="z-index:999">
+	<div class="home-btn-dialog-box">
           <img width="6%" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
           
           <img width="6%" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
           
           <img width="6%" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
-      </div>
-      <div class='dialog-text-style-noflow small-left-padding responsive-body'>
+	</div>
+	<div class='dialog-text-style-noflow small-left-padding responsive-body'>
           <div class="basic-header">Help</div>
-         {{client_setting.HELP_CAFE_WELCOME}}
+          {{client_setting.HELP_CAFE_WELCOME}}
+	</div>
       </div>
-  </div>
 
-  <div class='dialog-help-map1 dialog-style' style="z-index:999">
-    <center>
-      <div class="home-btn-dialog-box">
-          <span style="font-size: 24px;font-weight:bold;padding-right: 15px;" onclick="accounts.hideAll();$('.menubar').show();">X</span>
+      <div class='dialog-help-map1 dialog-style' style="z-index:999">
+	<center>
+	  <div class="home-btn-dialog-box">
+            <span style="font-size: 24px;font-weight:bold;padding-right: 15px;" onclick="accounts.hideAll();$('.menubar').show();">X</span>
+	  </div>
+	  <div class='dialog-text-style-noflow responsive-body'>
+            <div class="basic-header" style="padding-top: 5px;">About the Map</div>
+	    {% autoescape off %}{{client_settings.HELP_CAFE_ABOUT}}{% endautoescape %}
+	  </div>
+	</center>
       </div>
-      <div class='dialog-text-style-noflow responsive-body'>
-          <div class="basic-header" style="padding-top: 5px;">About the Map</div>
-   {% autoescape off %}{{client_settings.HELP_CAFE_ABOUT}}{% endautoescape %}
-      </div>
-    </center>
-  </div>
 
-  <div class='dialog-help-map2 dialog-style' style="z-index:999">
-     <div class="home-btn-dialog-box">
+      <div class='dialog-help-map2 dialog-style' style="z-index:999">
+	<div class="home-btn-dialog-box">
           <img width="6%" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
           
           <img width="6%" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
           
           <img width="6%" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
-      </div>
-      <div class='dialog-text-style-noflow responsive-body'>
+	</div>
+	<div class='dialog-text-style-noflow responsive-body'>
           <div class="basic-header">Help</div>
           {% autoescape off %}{{client_settings.HELP_CAFE_ABOUT_MUGS}}{% endautoescape %}
+	</div>
       </div>
-  </div>
 
-  <div class='dialog-help-map3 dialog-style' style="z-index:999">
-     <div class="home-btn-dialog-box">
+      <div class='dialog-help-map3 dialog-style' style="z-index:999">
+	<div class="home-btn-dialog-box">
           <img width="6%" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
           
           <img width="6%" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
           
           <img width="6%" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
-      </div>
-      <div class='dialog-text-style-noflow responsive-body'>
+	</div>
+	<div class='dialog-text-style-noflow responsive-body'>
           <div class="basic-header">Help</div>
           {% autoescape off %}{{client_settings.HELP_CAFE_LOGOUT_OR_CONTINUE}}{% endautoescape %}
+	</div>
       </div>
-  </div>
 
 
-  <div class='dialog-help-comment dialog-style' style="z-index:999">
-     <div class="home-btn-dialog-box">
+      <div class='dialog-help-comment dialog-style' style="z-index:999">
+	<div class="home-btn-dialog-box">
           <img width="6%" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
           
           <img width="6%" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
           
           <img width="6%" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
-      </div>
-      <div class='dialog-text-style-noflow small-left-padding responsive-body'>
+	</div>
+	<div class='dialog-text-style-noflow small-left-padding responsive-body'>
           <div class="basic-header">Help</div>
           {% autoescape off %}{{client_settings.HELP_CAFE_SUGGESTION}}{% endautoescape %}
+	</div>
       </div>
-  </div>
 
-  <div class='dialog-help-rate dialog-style' style="z-index:999">
-     <div class="home-btn-dialog-box">
+      <div class='dialog-help-rate dialog-style' style="z-index:999">
+	<div class="home-btn-dialog-box">
           <img width="6%" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
           
           <img width="6%" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
           
           <img width="6%" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
-      </div>
-      <div class='dialog-text-style-noflow small-left-padding responsive-body'>
+	</div>
+	<div class='dialog-text-style-noflow small-left-padding responsive-body'>
           <div class="basic-header">Help</div>
-        {% autoescape off %}{{client_settings.HELP_CAFE_GRADE}}{% endautoescape %}
+          {% autoescape off %}{{client_settings.HELP_CAFE_GRADE}}{% endautoescape %}
+	</div>
       </div>
-  </div>
 
-  <div class='dialog-help-continue dialog-style' style="z-index:999">
-     <div class="home-btn-dialog-box">
+      <div class='dialog-help-continue dialog-style' style="z-index:999">
+	<div class="home-btn-dialog-box">
           <img width="6%" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
           
           <img width="6%" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
           
           <img width="6%" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
-      </div>
-      <div class='dialog-text-style-noflow small-left-padding responsive-body'>
+	</div>
+	<div class='dialog-text-style-noflow small-left-padding responsive-body'>
           <div class="basic-header">Help</div>
           {% autoescape off %}{{client_settings.HELP_RETURNING_EMAIL}}{% endautoescape %}
+	</div>
       </div>
-  </div>
 
-  <div class='dialog-help-logout dialog-style' style="z-index:999">
-     <div class="home-btn-dialog-box">
+      <div class='dialog-help-logout dialog-style' style="z-index:999">
+	<div class="home-btn-dialog-box">
           <img width="6%" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
           
           <img width="6%" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
           
           <img width="6%" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
-      </div>
-      <div class='dialog-text-style-noflow small-left-padding responsive-body'>
+	</div>
+	<div class='dialog-text-style-noflow small-left-padding responsive-body'>
           <div class="basic-header">Help</div>
           {% autoescape off %}{{client_settings.HELP_ABOUT}}{% endautoescape %}
+	</div>
       </div>
-  </div>
 
- <!--prefetch images-->
-  <div style="display:none">
-    <img src="{{url_root}}/media/mobile/img/cafe/button-default-down.png">
-    <img src="{{url_root}}/media/mobile/img/cafe/button-wide-down.png">
-    <img src="{{url_root}}/media/mobile/img/cafe/keypad-00.png">
-    <img src="{{url_root}}/media/mobile/img/cafe/keypad-01.png">
-    <img src="{{url_root}}/media/mobile/img/cafe/keypad-02.png">
-    <img src="{{url_root}}/media/mobile/img/cafe/keypad-03.png">
-    <img src="{{url_root}}/media/mobile/img/cafe/keypad-04.png">
-    <img src="{{url_root}}/media/mobile/img/cafe/keypad-05.png">
-    <img src="{{url_root}}/media/mobile/img/cafe/keypad-06.png">
-    <img src="{{url_root}}/media/mobile/img/cafe/keypad-07.png">
-    <img src="{{url_root}}/media/mobile/img/cafe/keypad-08.png">
-    <img src="{{url_root}}/media/mobile/img/cafe/keypad-09.png">
-    <img src="{{url_root}}/media/mobile/img/cafe/keypad-down-00.png">
-    <img src="{{url_root}}/media/mobile/img/cafe/keypad-down-01.png">
-    <img src="{{url_root}}/media/mobile/img/cafe/keypad-down-02.png">
-    <img src="{{url_root}}/media/mobile/img/cafe/keypad-down-03.png">
-    <img src="{{url_root}}/media/mobile/img/cafe/keypad-down-04.png">
-    <img src="{{url_root}}/media/mobile/img/cafe/keypad-down-05.png">
-    <img src="{{url_root}}/media/mobile/img/cafe/keypad-down-06.png">
-    <img src="{{url_root}}/media/mobile/img/cafe/keypad-down-07.png">
-    <img src="{{url_root}}/media/mobile/img/cafe/keypad-down-08.png">
-    <img src="{{url_root}}/media/mobile/img/cafe/keypad-down-09.png">
+      <!--prefetch images-->
+      <div style="display:none">
+	<img src="{{url_root}}/media/mobile/img/cafe/button-default-down.png">
+	<img src="{{url_root}}/media/mobile/img/cafe/button-wide-down.png">
+	<img src="{{url_root}}/media/mobile/img/cafe/keypad-00.png">
+	<img src="{{url_root}}/media/mobile/img/cafe/keypad-01.png">
+	<img src="{{url_root}}/media/mobile/img/cafe/keypad-02.png">
+	<img src="{{url_root}}/media/mobile/img/cafe/keypad-03.png">
+	<img src="{{url_root}}/media/mobile/img/cafe/keypad-04.png">
+	<img src="{{url_root}}/media/mobile/img/cafe/keypad-05.png">
+	<img src="{{url_root}}/media/mobile/img/cafe/keypad-06.png">
+	<img src="{{url_root}}/media/mobile/img/cafe/keypad-07.png">
+	<img src="{{url_root}}/media/mobile/img/cafe/keypad-08.png">
+	<img src="{{url_root}}/media/mobile/img/cafe/keypad-09.png">
+	<img src="{{url_root}}/media/mobile/img/cafe/keypad-down-00.png">
+	<img src="{{url_root}}/media/mobile/img/cafe/keypad-down-01.png">
+	<img src="{{url_root}}/media/mobile/img/cafe/keypad-down-02.png">
+	<img src="{{url_root}}/media/mobile/img/cafe/keypad-down-03.png">
+	<img src="{{url_root}}/media/mobile/img/cafe/keypad-down-04.png">
+	<img src="{{url_root}}/media/mobile/img/cafe/keypad-down-05.png">
+	<img src="{{url_root}}/media/mobile/img/cafe/keypad-down-06.png">
+	<img src="{{url_root}}/media/mobile/img/cafe/keypad-down-07.png">
+	<img src="{{url_root}}/media/mobile/img/cafe/keypad-down-08.png">
+	<img src="{{url_root}}/media/mobile/img/cafe/keypad-down-09.png">
 
-  </div>
+      </div>
 
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      <script>
+       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+				m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-34341740-14', 'citizenreportcard.org');
-  ga('send', 'pageview');
+       ga('create', 'UA-34341740-14', 'citizenreportcard.org');
+       ga('send', 'pageview');
 
-</script>
+      </script>
 
-</div>
+    </div>
 
-</body>
+  </body>
 </html>
