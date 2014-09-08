@@ -419,7 +419,12 @@ $(document).ready(function() {
 
                     if (data.hasOwnProperty('success')) {
                         accounts.setAuthenticated();
-                        utils.showLoading("Loading", function() {
+
+                        var loading = "Loading"
+                        if (window.lang = "es")
+                            loading = "Cargando"
+
+                        utils.showLoading(loading, function() {
                             accounts.loginAfterRegister(loginData,dialogcontinue);
                             blooms.populateBlooms();
                             window.scrollTo(0,0); 
@@ -468,6 +473,8 @@ $(document).ready(function() {
                             //TODO: why doesn't this come up under form_errors[zip_code]
                                 if (data['form_errors']['__all__'][0]) {
                                     $("#zipcode-error").html(data['form_errors']['__all__'][0]);
+                                    if(window.lang == 'es')
+                                        $("#zipcode-error").html('El código postal debe tener 5 dígito');
                                     $("#zipcode-error").show();
                                 }
                             } catch(err) { }
@@ -1008,6 +1015,8 @@ $(document).ready(function() {
 		$('.welcome-back').hide();
 		$('.endsliders').show();
 	});
+
+    $('.translate-btn').click(function(){utils.translateAll();})
 	
 	$('#garden-btn').click(function(){
 		$('.welcome-back').hide();

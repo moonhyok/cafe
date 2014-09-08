@@ -12,7 +12,7 @@
 
     <link rel="image_src" href="{{ url_root }}/media/mobile/img/cafe/cafe-title-cropped.png"/>
 
-    <title>Open NYU CAFE</title>
+    <title>{{client_settings.WELCOME_PAGE_TITLE}}</title>
 
     <!-- for best viewing on mobile phones -->
     <meta name='viewport' content='user-scalable=no, width=device-width,initial-scale=1, maximum-scale=1' />
@@ -44,6 +44,7 @@
     <script type='text/javascript' src='{{url_root}}/media/mobile/js/blooms.js?nonce={{random_password}}'></script>
     <script type='text/javascript' src='{{url_root}}/media/mobile/js/rate.js?nonce={{random_password}}'></script>
     <script type='text/javascript' src='{{url_root}}/media/mobile/js/accounts.js?nonce={{random_password}}'></script>
+    <script type='text/javascript' src='{{url_root}}/media/mobile/js/translations.js?nonce={{random_password}}'></script>
 
     {% if horizontal_slide %}
     <script type='text/javascript' src='{{url_root}}/media/mobile/js/crc-transparent-slider-horizontal.js?nonce={{random_password}}'></script>
@@ -101,6 +102,8 @@
      window.refer = '{{ refer }}';
 
      window.user_score = {{init_score}};
+
+     window.lang = 'en'
 
      window.conf = { 
        'RETURN_USER_FIRST_TIME': {{return_user_first_time}},
@@ -273,7 +276,7 @@
 	<center>
 	  <div class="home-btn-dialog-box landing-navigation">
             <div class="home-btn-title responsive-header">
-              Open NYU CAFE
+              <span>{{client_settings.WELCOME_PAGE_TITLE}}</span> <a href="#" class="translate-btn">Español</a>
             </div>
 
             <div class="home-btn-wrapper" style="width:30%;display:inline-block;">
@@ -282,16 +285,16 @@
 
 	  </div>
           <img width="100%" src="{{url_root}}/media/mobile/img/cafe/title_image.png" style="margin-top:3px;max-width: 620px;">
-          <div class="landing-img-title responsive-body">
-            How can technology enhance learning at NYU?
+          <div class="landing-img-title responsive-body" style="display:none;">
+            {{topic}}
           </div> 
           <!--<div class="landing-img-subtitle">
           How can technology enhance learning at NYU?
           </div> -->
 
           <div class="landing-img-txt responsive-body">  
-            Please take 5 minutes to answer a few brief survey questions, evaluate ideas from your community, and share your perspectives.  
-	  </div>
+            {{client_settings.WELCOME_PAGE_TEXT1}}  
+	        </div>
 
 	  <div class='button-div-red first-time-btn responsive-btn' style="margin-top: 10px;">Begin</div></center><br/><br/><br/>
 
@@ -316,7 +319,7 @@
           <center>
             <div class="home-btn-dialog-box first-dialog-nav">
               <div class="home-btn-title responsive-header">
-                Open NYU CAFE
+                <span>{{client_settings.WELCOME_PAGE_TITLE}}</span> <a href="#" class="translate-btn">Español</a>
               </div>
 
               <div class="home-btn-wrapper" style="width:30%;display:inline-block;">
@@ -328,7 +331,7 @@
             <div class="home-btn-dialog-box slider-nav-box" style="display: none;">
               
               <div class="home-btn-title responsive-header">
-		Open NYU CAFE
+		              <span>{{client_settings.WELCOME_PAGE_TITLE}}</span> <a href="#" class="translate-btn">Español</a>
               </div>
               <div class="home-btn-wrapper" style="width:30%;display:inline-block;">
                 <img width="30px" class='help-btn-dialog' id="help-endsliders" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
@@ -337,14 +340,9 @@
             </div>  
 
             <center>  
-              <div class="question-number responsive-body">Question {{ statement.id }} of {{ statements|length }}</div>
-              <div class="statement-style responsive-body">{{ statement.statement }}</div>
-
-              {% if statement.id == 3 %}
-              <div class="question-directions responsive-body">(Not at all) 0 -  9 (Very far ahead)</div>
-              {% else %}
-              <div class="question-directions responsive-body">(Not at all) 0 -  9 (Extensively)</div>
-              {% endif %}
+              <div class="question-number responsive-body"><span>Question</span> {{ statement.id }} of {{ statements|length }}</div>
+              <div class="statement-style responsive-body english">{{ statement.statement }}</div>
+              <div class="statement-style responsive-body spanish" style="display:none;">{{ statement.spanish_statement }}</div>
 
               <!--<div class="median-grade-{{statement.id}} med-grade-box"></div>-->
 
@@ -377,7 +375,7 @@
 	<center>
 	  <div class="home-btn-dialog-box">
             <div class="home-btn-title responsive-header">
-              Open NYU CAFE
+              <span>{{client_settings.WELCOME_PAGE_TITLE}}</span> <a href="#" class="translate-btn">Español</a>
             </div>
             
             <div class="home-btn-wrapper" style="width:30%;display:inline-block;">
@@ -388,12 +386,12 @@
 
 	  <div class= 'registerpanel'>
             <center>
-              <div class="basic-header2 responsive-header" style="max-width: 500px;">Please answer the following profile questions:</div>
+              <div class="basic-header2 responsive-header" style="max-width: 500px;">{{client_settings.ZIP_CODE_INSTRUCTIONS}}</div>
               <!--<div class="basic-header2 responsive-header" style="max-width: 500px;">{{client_settings.ZIP_CODE_INSTRUCTIONS}}:</div>-->
               <form id='reg_form' class='reg_form responsive-form'>
 		<center>
 
-		  <div data-role="fieldcontain">
+		  <!--<div data-role="fieldcontain">
 		    <select class="drop-down-class">
 		      <option value="none" data-placeholder="true">Your NYU Affiliation</option>
 		      <option value="student">NYU Student</option>
@@ -452,7 +450,12 @@
 		    </select>
 
 		    <br/>
-		    <br/>
+		    <br/>-->
+              <div data-role="fieldcontain" >
+        <input type ='tel' id='regzip' name='regzip' class='regforminput' placeholder="Zip Code" onBlur="$('.registerb').click();">
+
+                    <div class='alert-error' id='zipcode-error' style='display:none;'></div>
+                  </div>
 
 		    <div class="button-div-red registerb responsive-btn" id="registerb" style="font-size: 18px;">Save</div>
 		    <br/>
@@ -460,11 +463,6 @@
 
 		  </div>
 
-		  <div data-role="fieldcontain" style='display:none;'>
-		    <input type ='tel' id='regzip' name='regzip' style="display:none" class='regforminput' value="00000" placeholder="Zip Code" onBlur="$('.registerb').click();">
-
-                    <div class='alert-error' id='zipcode-error' style='display:none;'></div>
-                  </div>
 
 		  <!--These are hidden dummy attributes for book-keeping-->
 
@@ -496,7 +494,7 @@
 	<center>
 	  <div class="home-btn-dialog-box">
             <div class="home-btn-title responsive-header">
-              Open NYU CAFE
+              <span>{{client_settings.WELCOME_PAGE_TITLE}}</span> <a href="#" class="translate-btn">Español</a>
             </div>
             
             <div class="home-btn-wrapper" style="width:30%;display:inline-block; text-align: right;">
@@ -535,7 +533,7 @@
 	<center>
 	  <div class="home-btn-dialog-box">
             <div class="home-btn-title responsive-header">
-              Open NYU CAFE
+              <span>{{client_settings.WELCOME_PAGE_TITLE}}</span> <a href="#" class="translate-btn">Español</a>
             </div>
             
             <div class="home-btn-wrapper" style="width:30%;display:inline-block; text-align: right;">
@@ -641,7 +639,7 @@
         <center>
           <div class="home-btn-dialog-box">
             <div class="home-btn-title responsive-header">
-              Open NYU CAFE
+              <span>{{client_settings.WELCOME_PAGE_TITLE}}</span> <a href="#" class="translate-btn">Español</a>
             </div>
             
             <div class="home-btn-wrapper" style="width:30%;display:inline-block; text-align: right;">
@@ -656,7 +654,7 @@
           </div>
 
           <div class="statement-style">
-            <div style="font-style: italic;font-weight: bolder;padding-top: 20px;font-size: 14px;padding-bottom: 10px;">Question {{k.id}}</div>
+            <div style="font-style: italic;font-weight: bolder;padding-top: 20px;font-size: 14px;padding-bottom: 10px;"><span>Question</span> {{k.id}}</div>
             {{ k.statement }} 
           </div>
 
@@ -707,7 +705,7 @@
 	<center>
 	  <div class="home-btn-dialog-box">
             <div class="home-btn-title responsive-header">
-              Open NYU CAFE
+              <span>{{client_settings.WELCOME_PAGE_TITLE}}</span> <a href="#" class="translate-btn">Español</a>
             </div>
             
             <div class="home-btn-wrapper" style="width:30%;display:inline-block;">
@@ -721,8 +719,7 @@
               <div class="basic-header2 responsive-body" style="text-align:left;">{{topic}}<br/></div>
               <textarea name='answer' id='entered-comment' maxlength="500"></textarea>
               <div style="max-width: 400px;font-size: 14px; text-align: left; width: 95%; padding-left: 15px;">
-                Please enter your email address so we can reach you if your idea is
-		selected to win one of the 3 iPads.  We promise to keep your email confidential and will not share it with anyone.
+                Please enter your email address. We promise to keep your email confidential and will not share it with anyone.
                 <input type="email" id='regemail' name='regemail' class='regforminput' style="font-size: 15px; background-color: #FFFFFF;color: #000000;" placeholder="Email (Optional)" data-theme='b'></input>
               </div>
               <div class='comment-submit-btn button-div-wide responsive-btn' style="display: inline-block;">Post</div>
@@ -731,38 +728,13 @@
 	</center>
       </div>
 
-      <div class="top-bar">
-	<center>
-          <div class='menubar'>
-            <!--<div class="scorebox">
-            <span class='score-label'></span><span class='score-value'></span>
-            </div>-->
-
-            <div class="home-btn-title responsive-header" style="width:68%;">
-              Open NYU CAFE
-            </div>
-
-            <div class="home-btn-wrapper" style="width:30%;display:inline-block;">
-              <img width="30px" class='help-btn-dialog' id="help-menubar" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png" style="position:relative;left:-20px;">
-            </div>
-
-            <!--<span class="stats-wrapper" style="display: none;"><img width="30px" class='my-comment-btn' src="{{url_root}}/media/mobile/img/cafe/CRC_stats_bttn.png"></span>-->
-          </div>
-
-          <!--<div class='instructions instructions-responsive'>{{client_settings.INSTRUCTIONS_1}}</div>
-          <div class='instructions2 instructions-responsive'>{{client_settings.INSTRUCTIONS_2}}</div>
-          <div class='instructions3 instructions-responsive'><div style="padding-right: 5px; padding-left: 5px;">{{client_settings.INSTRUCTIONS_3}}</div>-->
-	</center>
-      </div>
-
-
       <div class="margin"></div>
 
       <div class='rate' id="rate">
 	<center>
 	  <div class="home-btn-dialog-box">
             <div class="home-btn-title responsive-header">
-              Open NYU CAFE
+              <span>{{client_settings.WELCOME_PAGE_TITLE}}</span> <a href="#" class="translate-btn">Español</a>
             </div>
             
             <div class="home-btn-wrapper" style="width:30%;display:inline-block; text-align: right;">                
@@ -773,7 +745,8 @@
 
 	  <center>
 	    <div><span class="rate-username"></span></div>
-	    <div id='commentInput' class='answer responsive-answer'></div>
+	    <div id='commentInput' class='answer responsive-answer english'></div>
+      <div id='commentInputSpanish' class='answer responsive-answer spanish' style="display: none;"></div>
 	    
 	  </center>
 
@@ -812,7 +785,29 @@
       </div>
 
       <div class="map-frame">
-	<center>
+         <div class="top-bar">
+     <center>
+          <div class='menubar'>
+            <!--<div class="scorebox">
+            <span class='score-label'></span><span class='score-value'></span>
+            </div>-->
+            <div class="home-btn-title responsive-header" style="width:68%;">
+              <span>{{client_settings.WELCOME_PAGE_TITLE}}</span> <a href="#" class="translate-btn">Español</a>
+            </div>
+
+            <div class="home-btn-wrapper" style="width:30%;display:inline-block;">
+              <img width="30px" class='help-btn-dialog' id="help-menubar" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png" style="position:relative;left:-20px;">
+            </div>
+
+            <!--<span class="stats-wrapper" style="display: none;"><img width="30px" class='my-comment-btn' src="{{url_root}}/media/mobile/img/cafe/CRC_stats_bttn.png"></span>-->
+          </div>
+
+          <!--<div class='instructions instructions-responsive'>{{client_settings.INSTRUCTIONS_1}}</div>
+          <div class='instructions2 instructions-responsive'>{{client_settings.INSTRUCTIONS_2}}</div>
+          <div class='instructions3 instructions-responsive'><div style="padding-right: 5px; padding-left: 5px;">{{client_settings.INSTRUCTIONS_3}}</div>-->
+       </center>
+      </div>
+  <center>
 	  <div class="instructions-light responsive-body">
 	    Rate suggestions from fellow NYU community members by tapping on a sphere below. 
 	  </div>
@@ -829,7 +824,7 @@
 	<center>
           <div class="home-btn-dialog-box">
             <div class="home-btn-title responsive-header">
-              Open NYU CAFE
+              <span>{{client_settings.WELCOME_PAGE_TITLE}}</span> <a href="#" class="translate-btn">Español</a>
             </div>
             
             <div class="home-btn-wrapper" style="width:30%;display:inline-block; text-align: right;">
@@ -915,7 +910,7 @@
 	<center>
 	  <div class="home-btn-dialog-box">
             <div class="home-btn-title responsive-header">
-              Open NYU CAFE
+              <span>{{client_settings.WELCOME_PAGE_TITLE}}</span> <a href="#" class="translate-btn">Español</a>
             </div>
             
             <div class="home-btn-wrapper" style="width:30%;display:inline-block; text-align: right;">
@@ -1215,6 +1210,5 @@
       </script>
 
     </div>
-
   </body>
 </html>
