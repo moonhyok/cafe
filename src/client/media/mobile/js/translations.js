@@ -78,6 +78,9 @@ var translations = {
                         'Ahora puede cerrar sesión o calificar más esferas',
 
                     'Thank you for participating!':
-                        '¡Gracias!'
+                        '¡Gracias!',
+
+                    'Post':
+                        'Guardar'
 
                     }
