@@ -1737,3 +1737,29 @@ def user_author_score(user):
          score = score + score_to_int(100*a.agreement)*100
      return score
 
+def translate_to_english(comment):
+	import goslate
+	googleTranslate = goslate.Goslate()
+    return googleTranslate.translate(comment,'en')
+
+def translate_to_spanish(comment):
+	import goslate
+	googleTranslate = goslate.Goslate()
+    return googleTranslate.translate(comment,'es')
+
+def translate_all_comments():
+	import goslate
+	googleTranslate = goslate.Goslate()
+    for comment in DiscussionComment.objects.all():
+
+    try:
+        spanComment = translate_to_spanish(comment.comment)
+    except BaseException:
+        print("there was an error in translating: " + comment.comment)
+        
+    if len(spanComment) > 1024:
+        comment.spanish_comment = spanComment[0:1023]
+    else:
+        comment.spanish_comment = spanComment
+
+    comment.save()

@@ -29,6 +29,7 @@
 					}
 					allowTagEditing();
 					allowCommentEditing();
+					allowSpanishCommentEditing();
 				} else {
 					//alert("Your search did not match any users");
 					$("#message").show();
@@ -83,9 +84,18 @@
 			var city_state = document.createElement('td');
 			city_state.innerHTML = searchResult.city_state;
 
+
 			var comment = document.createElement('td');
 			comment.innerHTML = searchResult.comment;
 			comment.className = "comment";
+
+			var spanish_comment = document.createElement('td');
+			spanish_comment.innerHTML = searchResult.spanish_comment;
+			spanish_comment.className = "spanish_comment";
+
+			var original_language = document.createElement('td');
+			original_language.innerHTML = searchResult.original_language;
+			original_language.className = "original_language";
 
 			var tag = document.createElement('td');
 			tag.className = "tag"
@@ -98,6 +108,8 @@
 			row.appendChild(zipcode);
 			row.appendChild(city_state);
 			row.appendChild(comment);
+			row.appendChild(spanish_comment);
+			row.appendChild(original_language);
 			row.appendChild(tag);
 			dojo.byId('tableBody').appendChild(row);
 		}
@@ -184,8 +196,17 @@
 	function allowCommentEditing() {
 		$(".comment").click(function() {
 			var cid = $(this).parent().attr('id').split("-")[1];
-			var url = "{{url_root}}/adminpanel/proofread/" + "?cid=" + cid;
+			var url = "{{url_root}}/adminpanel/proofread/" + "?cid=" + cid + '&' + 'language=english';
 			var url = newwindow=window.open(url,'Edit Comment');
+			if (window.focus) {newwindow.focus()}
+		});
+	}
+
+	function allowSpanishCommentEditing() {
+		$(".spanish_comment").click(function() {
+			var cid = $(this).parent().attr('id').split("-")[1];
+			var url = "{{url_root}}/adminpanel/proofread/" + "?cid=" + cid + '&' + 'language=spanish';;
+			var url = newwindow=window.open(url,'Edit Spanish Comment');
 			if (window.focus) {newwindow.focus()}
 		});
 	}
@@ -226,12 +247,14 @@
     <thead> 
     <tr> 
         <th width="5%"><input type="checkbox" id="checkAll"/></th>
-        <th width="10%">User ID</th> 
-		<th width="10%">Email</th>
-		<th width="10%">Zipcode</th> 
+        <th width="5%">User ID</th> 
+		<th width="7.5%">Email</th>
+		<th width="5%">Zipcode</th> 
         <th width="10%">City, State</th> 
-        <th width="35%">Response (click to edit)</th>
-        <th width="20%">Tag (click to edit)</th>
+        <th width="25%">Response (click to edit)</th>
+        <th width="25%">Response in Spanish (click to edit)</th>
+        <th width="7.5%">Original Language (click to edit)</th>
+        <th width="10%">Tag (click to edit)</th>
 
     </tr> 
     </thead> 
@@ -243,4 +266,3 @@
 </table>
     </p>
 {% endblock %}
-

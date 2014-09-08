@@ -701,29 +701,40 @@ def install_client(request):
 
 @admin_required
 def proof_read_comments(request):
-	cid = request.REQUEST.get('cid',-1)
-	updated = None
-	if request.method == 'POST':
-		for key in request.POST:
-			query = DiscussionComment.objects.filter(id=key)
-			if len(query) == 0:
-				return HttpResponse("This comment does not exist", status = 404)
-			else:
-				query[0].comment = request.POST[key]
-				query[0].save()
-				updated = True
-				cid = key
+    cid = request.REQUEST.get('cid',-1)
+    language = request.REQUEST.get('language', 'english')
+    updated = None
+    if request.method == 'POST':
+        for key in request.POST:
+            if key != 'language':
+                query = DiscussionComment.objects.filter(id=key)
+                if len(query) == 0:
+                    return HttpResponse("This comment does not exist", status = 404)
+                else:
+                    if language == 'english':
+                        query[0].comment = request.POST[key]
+                    else: # we will return here to implement MANDARIN
+                        query[0].spanish_comment = request.POST[key]
+                    if query[0].original_language == language: # Sets the translation_is_reviewed flag to True if the comment we are editing and 
+                        query[0].translation_is_reviewed = True
+                    query[0].save()
+                    updated = True
+                    cid = key
 
-	if cid == -1:
-		return HttpResponse("This comment does not exist", status = 404)
-	else:
-		query = DiscussionComment.objects.filter(id=cid)
-		if len(query) == 0:
-			return HttpResponse("This comment does not exist", status = 404)
-		data = []
-		data.append({'type': cid,'text':query[0].comment})
-		form = ProofreadForm().create_form(data)	
-		return render_to_response('proofread.html', context_instance = RequestContext(request, {'form':form, 'saved':updated}))
+    if cid == -1:
+        return HttpResponse("This comment does not exist", status = 404)
+    else:
+        query = DiscussionComment.objects.filter(id=cid)
+        if len(query) == 0:
+            return HttpResponse("This comment does not exist", status = 404)
+        data = []
+        if language == 'english':
+            data.append({'type': cid,'text':query[0].comment, 'language': language})
+        else: # we will return here
+            data.append({'type': cid,'text':query[0].spanish_comment, 'language' : language})
+
+        form = ProofreadForm().create_form(data)    
+        return render_to_response('proofread.html', context_instance = RequestContext(request, {'form':form, 'saved':updated}))
         
 def manual_login(request, user):
     connect_visitor_to_user(request, user.id)
@@ -2091,19 +2102,22 @@ def os_save_rating(request, os_id):
 def os_save_comment(request, os_id, disc_stmt_id = None):
     params = request.REQUEST
     
+
     new_comment = params.get('comment', False)
     new_comment = decode_to_unicode(new_comment)
+    comment_language = params.get("commentLanguage", "english")
+    comment_language = decode_to_unicode(comment_language) # What does decode to unicode do?
     
     if new_comment != False:
-		
-		# Get a reference to the discussion question
+        
+        # Get a reference to the discussion question
         if disc_stmt_id == None:
-			disc_stmt = DiscussionStatement.objects.filter(opinion_space = os_id, is_current = True)[0]
+            disc_stmt = DiscussionStatement.objects.filter(opinion_space = os_id, is_current = True)[0]
         else:
-			try:
-				disc_stmt = DiscussionStatement.objects.get(id = disc_stmt_id)
-			except DiscussionStatement.DoesNotExist:
-				return json_error('That discussion statement does not exist.')
+            try:
+                disc_stmt = DiscussionStatement.objects.get(id = disc_stmt_id)
+            except DiscussionStatement.DoesNotExist:
+                return json_error('That discussion statement does not exist.')
         
         new_comment = new_comment.strip()[:MAX_COMMENT_LENGTH]
         old_comment = DiscussionComment.objects.filter(user = request.user,
@@ -2117,7 +2131,7 @@ def os_save_comment(request, os_id, disc_stmt_id = None):
             old_comment_recent = old_comment[0]
             old_comment_text = decode_to_unicode(old_comment_recent.comment)
             if old_comment_text == new_comment:
-	
+    
                 # Get previous revisions
                 prev_comments = get_revisions_and_suggestions(request.user, os_id, disc_stmt)
                 return json_result({'success': True, 'prev_comments': prev_comments})
@@ -2126,30 +2140,44 @@ def os_save_comment(request, os_id, disc_stmt_id = None):
         
         # Save new comment if it's not an empty string
         if new_comment != '':
-            comment = DiscussionComment(user = request.user,
-                                        opinion_space_id = os_id,
-                                        discussion_statement = disc_stmt,
-                                        comment = new_comment,
-                                        query_weight = -1,
-                                        is_current = True)
-			# Set score variables as the previous comment's score 
+            if comment_language == 'english':
+                comment = DiscussionComment(user = request.user,
+                                            opinion_space_id = os_id,
+                                            discussion_statement = disc_stmt,
+                                            comment = new_comment,
+                                            spanish_comment = translate_to_spanish(new_comment),
+                                            original_language = comment_language,
+                                            query_weight = -1,
+                                            is_current = True)
+            else: # comment is in Spanish
+                comment = DiscussionComment(user = request.user,
+                                            opinion_space_id = os_id,
+                                            discussion_statement = disc_stmt,
+                                            comment = translate_to_english(new_comment),
+                                            spanish_comment =  new_comment,
+                                            original_language = comment_language,
+                                            query_weight = -1,
+                                            is_current = True)      
+          
+
+            # Set score variables as the previous comment's score 
             if old_comment_recent:
-            	comment.average_rating = old_comment_recent.average_rating
-            	comment.average_score = old_comment_recent.average_score
-            	comment.score_sum = old_comment_recent.score_sum
-            	comment.normalized_score = old_comment_recent.normalized_score
-            	comment.normalized_score_sum = old_comment_recent.normalized_score_sum
-            	comment.confidence = old_comment_recent.confidence
-            	comment.query_weight = old_comment_recent.query_weight
+                comment.average_rating = old_comment_recent.average_rating
+                comment.average_score = old_comment_recent.average_score
+                comment.score_sum = old_comment_recent.score_sum
+                comment.normalized_score = old_comment_recent.normalized_score
+                comment.normalized_score_sum = old_comment_recent.normalized_score_sum
+                comment.confidence = old_comment_recent.confidence
+                comment.query_weight = old_comment_recent.query_weight
 
             comment.save()
             update_query_weight(comment)
-			
-			# Check the comment for profanity
+            
+            # Check the comment for profanity
             profanity_result = check_bad_words(new_comment)
             if profanity_result[0]:
-            	pfc = ProfanityFlaggedComment(comment = comment, profanity = profanity_result[1], original_words = profanity_result[2])
-            	pfc.save()
+                pfc = ProfanityFlaggedComment(comment = comment, profanity = profanity_result[1], original_words = profanity_result[2])
+                pfc.save()
     
     # Get previous revisions
     prev_comments = get_revisions_and_suggestions(request.user, os_id, disc_stmt)
