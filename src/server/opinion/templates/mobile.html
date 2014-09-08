@@ -716,7 +716,10 @@
 
     <center>
             <div class='comment-panel'>
-              <div class="basic-header2 responsive-body" style="text-align:left;">{{topic}}<br/></div>
+              <div class="basic-header2 responsive-body english" style="text-align:left;">{{topic}}</div>
+              <div class="basic-header2 responsive-body spanish" style="text-align:left;">{{topic_spanish}}</div>
+              <br/>
+
               <textarea name='answer' id='entered-comment' maxlength="500"></textarea>
               <div style="max-width: 400px;font-size: 14px; text-align: left; width: 95%; padding-left: 15px;">
                 Please enter your email address. We promise to keep your email confidential and will not share it with anyone.
@@ -811,7 +814,8 @@
     <div class="instructions-light responsive-body">
       Each sphere represents a participant. Tap any sphere to begin. 
     </div>
-    <div style="text-align: left;margin-top: 3px;">{{ topic }}</div>
+    <div style="text-align: left;margin-top: 3px;" class="english">{{ topic }}</div>
+    <div style="text-align: left;margin-top: 3px;" class="spanish">{{ topic_spanish }}</div>
     <div id='d3' class="d3-canvas"></div>
   </center>
   <a href="#" class="map-info" style="position:relative;top:-75px;color:#442b10;text-align: left;display:none;" onclick="accounts.hideAll();$('.dialog-help-map1').show();window.cur_state = 'faq';window.prev_state = 'map';"><img width="30px" src="{{url_root}}/media/mobile/img/cafe/info_button.png"><a>
@@ -1107,7 +1111,17 @@
     <div class='dialog-text-style-noflow responsive-body'>
             <div class="basic-header" style="padding-top: 5px;">About the Map</div>
       <span class="english">{% autoescape off %}{{client_settings.HELP_CAFE_ABOUT}}{% endautoescape %}</span>
-      <span class="spanish">{% autoescape off %}{{client_settings.HELP_CAFE_ABOUT_SPANISH}}{% endautoescape %}</span>
+      <span class="spanish"><em>P:</em>¿Cómo funcionan las esferas?<br/>
+          <em>R:</em> Presiona sobre cualquier esfera (cada esfera representa la sugerencia de algún participante) Se muestra solo una sugerencia a la vez<br/><br/>
+
+          <em>P:</em>¿Cómo las esferas se encuentra organizadas en el espacio?<br/>
+          <em>R:</em> La ubicación de las esferas en el espacio está basada en las calificaciones de los participantes en los primeros 3 temas. Cada tema representa una dimensión en un espacio tridimensional. Las calificaciones de los participantes definen un punto en este espacio. Usamos reducción dimensional (actualmente análisis de componentes principales) para proyectar este espacio tridimensional en un plano de dos dimensiones. Si usted y algún otro participante asignan calificaciones similares, sus esferas se encontrarán cercanas una de otra. Sin embargo, las esferas que aparecen alejadas pertenecen a participantes cuyas calificaciones son muy diferentes a las tuyas. <br/><br/>
+
+          <em>P:</em> ¿Por qué solo visualizo 8-10 esferas? <br/>
+          <em>R:</em> A modo de evitar una super población de esferas, solo se muestran al mismo tiempo un pequeño grupo de estas para su calificación. Aunque se eligen aleatoriamente las esferas a mostrar, existe una tendencia a desplegar las más nuevas, es decir aquellas que recibieron pocas calificaciones.<br/><br/>
+
+          <em>P:</em> ¿Cómo se determina cuales esferas serán mostradas? <br/>
+          <em>R:</em> Específicamente, la probabilidad de que una esfera sea desplegada está basada en su error estándar = stdev/sqrt(k) donde k es el número de calificaciones que la esfera ha recibido hasta el momento, y stdev es la varianza de estas calificaciones. A lo largo del tiempo, esto asegura que, la confianza o error-bar en las calificaciones estimadas sobre cada esfera tienda a ser de la misma longitud para todas las esferas. Cada vez que termines de calificar un grupo de esferas, el espacio se actualizará mostrando nuevas esferas. <br/><br/></span>
     </div>
   </center>
       </div>

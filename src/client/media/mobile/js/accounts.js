@@ -1017,6 +1017,8 @@ $(document).ready(function() {
 	});
 
     $('.translate-btn').click(function(){utils.translateAll();})
+
+    $('.spanish').hide();
 	
 	$('#garden-btn').click(function(){
 		$('.welcome-back').hide();

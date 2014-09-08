@@ -130,6 +130,7 @@ def mobile(request,entry_code=None):
                        'client_settings': get_client_settings(True),
                                              'horizontal_slide': settings.HORIZONTAL_SLIDE,
                        'topic': DiscussionStatement.objects.filter(is_current=True)[0].statement,
+                       'topic_spanish': DiscussionStatement.objects.filter(is_current=True)[0].spanish_statement,
                        'short_topic': DiscussionStatement.objects.filter(is_current=True)[0].short_version,
                        'statements': statements,
                        'init_score': len(get_fully_rated_responses(request, disc_stmt)),
@@ -685,9 +686,9 @@ def install_client(request):
                 question = DiscussionStatement.objects.filter(is_current=True)[0]
                 question.statement = request.POST[key]
                 question.save()
-            elif key == 'Discussion Question Short':
+            elif key == 'Discussion Question Spanish':
                 question = DiscussionStatement.objects.filter(is_current=True)[0]
-                question.short_version = request.POST[key]
+                question.spanish_statement = request.POST[key]
                 question.save()
             else:
                 statement = OpinionSpaceStatement.objects.filter(id=key)
@@ -697,7 +698,7 @@ def install_client(request):
         updated = True
     data = []
     data.append({'type': 'question','text':DiscussionStatement.objects.filter(is_current=True)[0].statement})
-    data.append({'type': 'squestion','text':DiscussionStatement.objects.filter(is_current=True)[0].short_version})
+    data.append({'type': 'squestion','text':DiscussionStatement.objects.filter(is_current=True)[0].spanish_statement})
     statements = OpinionSpaceStatement.objects.all()
     for s in statements:
         data.append({'type': 'statement','text':s.statement,'id': s.id})
