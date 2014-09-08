@@ -553,7 +553,7 @@
             <div class="compare-tag">
               <!--<div style="font-size: 12px; font-style: italic;font-weight: bolder;" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();">{{k.id}}. </div>-->
               <div style="font-size: 18px;font-weight: bolder;" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();">{{k.short_version}}</div>
-              <div style="font-size: 14px; font-weight: bolder;" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();">more info >></div>
+              <div style="font-size: 14px; font-weight: bolder;" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();"><span>more info</span> >></div>
             </div>
 
             <canvas id="sparkLineCanvas{{k.id}}" width="160" height="58"></canvas>
@@ -809,7 +809,7 @@
       </div>
   <center>
     <div class="instructions-light responsive-body">
-      Rate suggestions from fellow NYU community members by tapping on a sphere below. 
+      Each sphere represents a participant. Tap any sphere to begin. 
     </div>
     <div style="text-align: left;margin-top: 3px;">{{ topic }}</div>
     <div id='d3' class="d3-canvas"></div>
