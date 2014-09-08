@@ -716,7 +716,7 @@ def install_client(request):
     data.append({'type': 'squestion','text':DiscussionStatement.objects.filter(is_current=True)[0].spanish_statement})
     statements = OpinionSpaceStatement.objects.all()
     for s in statements:
-        data.append({'type': 'statement','text':s.statement,'id': s.id, 'spanish': s.spanish_statement, 'short': s.short_version, 'short_spanish':s.spanish_short_version})
+        data.append({'type': 'statement','text':s.statement,'id': s.id, 'spanish': s.spanish_statement, 'short_version': s.short_version, 'short_spanish':s.spanish_short_version})
     form = InstallForm().create_form(data)  
     return render_to_response('install.html', context_instance = RequestContext(request, {'form':form, 'saved':updated, 'categories':CATEGORIES}))
 

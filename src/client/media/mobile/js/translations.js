@@ -67,8 +67,17 @@ var translations = {
 
                     'About the Map':
                         'Ayuda',
-                        
+
                     'About the CRC':
-                        'Acerca de Califique California'
+                        'Acerca de Califique California',
+
+                    'Thank You!':
+                        '¡Gracias!',
+
+                    'You can continue to contribute to the discussion by reading and evaluating the ideas of others.':
+                        'Ahora puede cerrar sesión o calificar más esferas',
+
+                    'Thank you for participating!':
+                        '¡Gracias!'
 
                     }

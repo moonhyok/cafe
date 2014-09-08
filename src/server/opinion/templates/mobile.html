@@ -552,7 +552,8 @@
     <div class="compare-box-{{k.id}}" style="padding-bottom: 10px;max-width:620px;" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();">
             <div class="compare-tag">
               <!--<div style="font-size: 12px; font-style: italic;font-weight: bolder;" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();">{{k.id}}. </div>-->
-              <div style="font-size: 18px;font-weight: bolder;" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();">{{k.short_version}}</div>
+              <div style="font-size: 18px;font-weight: bolder;" class="english" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();">{{k.short_version}}</div>
+              <div style="font-size: 18px;font-weight: bolder;" class="spanish" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();">{{k.spanish_short_version}}</div>
               <div style="font-size: 14px; font-weight: bolder;" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();"><span>more info</span> >></div>
             </div>
 
@@ -655,7 +656,8 @@
 
           <div class="statement-style">
             <div style="font-style: italic;font-weight: bolder;padding-top: 20px;font-size: 14px;padding-bottom: 10px;"><span>Question</span> {{k.id}}</div>
-            {{ k.statement }} 
+            <span class="english">{{ k.statement }}</span>
+            <span class="spanish">{{ k.spanish_statement }}</span>
           </div>
 
 
@@ -759,9 +761,9 @@
     <center>
       <div class="answerwrapper">
         <div class='sliders responsive-body' style="text-align: center;font-size: 18px; line-height: 20px; font-family: DroidSans-Bold;max-width: 620px;">
-    {{client_settings.RATE_IMPORTANCE_QUESTION}}<br/><br/>
+    <span>{{client_settings.RATE_IMPORTANCE_QUESTION}}</span><br/><br/>
     <center>
-      (Not at all) 0   -  9 (Extremely)
+      <!--(Not at all) 0   -  9 (Extremely)-->
       <div class="slider" id="slider-importance"></div>    
       
       <div id='go-back' class='button-div-wide responsive-btn' style="display: inline-block;">Skip</div>
@@ -837,9 +839,19 @@
 
           </div>
           <div class="responsive-body" style="text-align:center;padding-top: 15px;">
-            {{client_settings.LOGOUT_DIALOG_TEXT}}<br/><br/>
+            <span>{{client_settings.LOGOUT_DIALOG_TEXT}}</span><br/><br/>
       <a href="https://twitter.com/home?status=How%20can%20technology%20enhance%20learning%20at%20@nyuniversity?%20Take%205%20mins%20to%20share%20your%20perspectives%20opinion.berkeley.edu/open-nyu/v1" target="_blank" style="color: #555555;"><img src="{{url_root}}/media/mobile/img/cafe/twitter-button.png" width="102px"></a>
       <a href="http://hrefshare.com/f145" target="_blank" style="color: #555555;"><img src="{{url_root}}/media/mobile/img/cafe/facebook-button.png" width="102px"></a>
+
+            <span class="english"> Election and Voter Information: <a href="http://www.sos.ca.gov/elections/new-voter/" target="_blank" style="color: #555555;">CAVoterInformation</a><br/><br/>
+
+
+      California Online Voting Registration: <a href="http://registertovote.ca.gov" target="_blank" style="color: #555555;"> CAVoterRegistration </a><br/><br/></span>
+
+          <span class="spanish"> Información sobre las elecciones y los votantes: <a href="http://www.sos.ca.gov/elections/new-voter/spanish/" target="_blank" style="color: #555555;">California Información al Votante</a><br/>
+
+      Inscripción de votante en línea de California: <a href="http://registertovote.ca.gov/es/" target="_blank" style="color: #555555;">Registro de Votantes de California</a><br/></span>
+
           </div>
 
           <!--<div class='comment-submit-btn button-div responsive-btn' style="display: inline-block;">Email</div>-->
@@ -925,7 +937,7 @@
     <center>
       <br/><br/>
       <div class='dialog-text-style responsive-body'>
-        Thank You For Your Input!
+        <span>Thank You!</span>
         <div style="font-size: 18px;margin-top: 10px;">You can continue to contribute to the discussion by reading and evaluating the ideas of others.</div>
               <!--<div class='dialog-text-style default-left-padding'>
               {{client_settings.EMAIL_ASK_TEXT}}
