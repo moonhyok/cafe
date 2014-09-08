@@ -8,7 +8,11 @@ var rate = (function($, d3, console) {
 
     // update the questions element in the html
     function updateDescriptions(answer, content) {
-        answer.value = content;
+        $('#commentInput').html(content);
+    }
+
+    function updateDescriptionsSpanish(answer, content) {
+        $('#commentInputSpanish').html(content);
     }
     
     function logUserEvent(logtype,buttonType) {
@@ -98,7 +102,12 @@ var rate = (function($, d3, console) {
         window.cur_state = 'map';
         var myDiv = document.getElementById('rate');
         myDiv.scrollTop = 0;
-        $("#slider-importance").children().children().children(".slider-grade-bubble").css("background-color","transparent"); 
+
+        $("#slider-importance").children().children().children(".slider-grade-bubble").each( function(i){
+        $(this).css("background-image",$(this).css("background-image").replace("keypad-down-0","keypad-0"));
+        });
+
+        //$("#slider-importance").children().children().children(".slider-grade-bubble").css("background-color","transparent"); 
 
             sendAgreementRating({
                 'r1': window.current_rating,
@@ -112,12 +121,13 @@ var rate = (function($, d3, console) {
                 'cid': window.current_uid
             });
             
-            
             //TODO FIX!!!
             if (window.user_score == 2) {
                 $('.rate').hide();
-                $('.instructions2').hide();
-                $('.instructions3').show();
+                $('.instructions-light').show();
+                $('.instructions-light').html("Now it’s your turn. Tap your sphere below to provide your suggestion.")
+                //$('.instructions2').hide();
+                //$('.instructions3').show();
                 try{
                             blooms.addYourMug();
                             window.your_mug.transition().duration(1500).style("opacity", "1");
@@ -133,7 +143,8 @@ var rate = (function($, d3, console) {
                 $('.rate').hide();
                 // ui has changed!
                 $('.top-bar').trigger('height');
-                $('.instructions2').show();
+                $('.instructions-light').hide();
+                //$('.instructions2').show();
                 //$('.dialog-score').show();
             }
             else{
@@ -157,7 +168,7 @@ var rate = (function($, d3, console) {
                }
 
                if (window.blooms_list.length <= 2) {
-               utils.showLoading("Loading More Mugs...");
+               utils.showLoading("Loading More Spheres...");
                window.blooms_list = undefined; //needed to avoid infinite recursing
                setTimeout(blooms.populateBlooms, 500);
                }
@@ -215,11 +226,13 @@ var rate = (function($, d3, console) {
         }
 
         comment = comments[index]['comment'];
+        var spanish_comment = comments[index]['spanish_comment'];
         cid = comments[index]['cid'];
         return {
-            comment: comment,
-            uid: uid,
-            cid: cid
+            'comment': comment,
+            'spanish_comment': spanish_comment,
+            'uid': uid,
+            'cid': cid
         };
     }
 
@@ -314,7 +327,7 @@ var rate = (function($, d3, console) {
             url: window.url_root + "/os/saverating/1/",
             data: {
                 'id': number,
-                'rating': rating / 100
+                'rating': rating / 10,
             },
             success: function(data) {
                 if (data.hasOwnProperty('success')) {
@@ -333,11 +346,17 @@ var rate = (function($, d3, console) {
     // The function also calls the the sendInsightRating to completly send the entire rating
 
     function sendAgreementRating(rating) {
+
+        var language = 'english'
+        if(window.lang == 'es')
+            language = 'spanish'
+
         $.ajax({
             type: "POST",
             url: window.url_root + "/os/savecommentagreement/1/" + rating.cid + "/",
             data: {
-                "agreement": rating.r1 / 100.0
+                "agreement": rating.r1 / 10.0,
+                "raterViewingLanguage": language
             },
             success: function(data) {
                 if (data.hasOwnProperty('success')) {
@@ -357,12 +376,18 @@ var rate = (function($, d3, console) {
 
 
     function sendInsightRating(rating) {
+
+        var language = 'english'
+        if(window.lang == 'es')
+            language = 'spanish'
+
         $.ajax({
             type: "POST",
             dataType: 'json',
             url: window.url_root + "/os/savecommentrating/1/" + rating.cid + "/",
             data: {
-                "rating": rating.r2 / 100.0
+                "rating": rating.r2 / 10.0,
+                "raterViewingLanguage": language
             },
             success: function(data) {
                 if (data.hasOwnProperty('success')) {
@@ -376,12 +401,17 @@ var rate = (function($, d3, console) {
     }
 
     function sendComment(comment) {
+        var language = 'english'
+        if(window.lang == 'es')
+            language = 'spanish'
+
         $.ajax({
             type: "POST",
             dataType: 'json',
             url: window.url_root + "/os/savecomment/1/",
             data: {
-                "comment": comment
+                "comment": comment,
+                "commentLanguage" : language
             },
             success: function(data) {
                 if (data.hasOwnProperty('success')) {
@@ -411,6 +441,7 @@ var rate = (function($, d3, console) {
         'getComment' : getComment,
         'getCommentByUID' : getCommentByUID,
         'storeRating' : storeRating,
+        'updateDescriptionsSpanish': updateDescriptionsSpanish,
         'saveRating' : saveRating,
         'storeSliders' : storeSliders,
         'sendSlider' : sendSlider,
@@ -422,14 +453,13 @@ var rate = (function($, d3, console) {
 })($, d3, console);
 
 $(document).ready(function() {
-    $('.score-label').text(utils.toTitleCase(window.conf['YOUR_SCORE_LANGUAGE']).trim().replace(':', '') + ' is ');
+    //$('.score-label').text(utils.toTitleCase(window.conf['YOUR_SCORE_LANGUAGE']).trim().replace(':', '') + ' is ');
 
-    $('.endsliders-next-btn').click(function(event){ 
-        
+    $('.endsliders-next-btn').click(function(event){         
         $('.first-dialog-nav').hide();
         $('.slider-nav-box').show();
 
-        if(parseInt(event.target.id.substring(5),10)+1 > window.num_sliders)
+        if(window.current_slider +1 > window.num_sliders)
         {
             window.prev_state = 'grade';
         window.cur_state = 'register';
@@ -444,9 +474,17 @@ $(document).ready(function() {
         }
         else
             {
-                $("#slide-"+event.target.id.substring(5)).hide();
-                $("#slide-"+(parseInt(event.target.id.substring(5),10)+1)).show("slide", { direction: "right" }, 500);
-                $(".slider-progress-dot-"+(parseInt(event.target.id.substring(5),10)+1)).css("background","#FFFFFF");
+                window.current_slider = window.current_slider  + 1;
+                var ua = navigator.userAgent.toLowerCase();
+                var isAndroid = ua.indexOf("android") > -1; //&& ua.indexOf("mobile");
+                if(isAndroid || screen.width >= 700) {
+                    $("#slide-"+window.current_slider).fadeIn(1000);
+                }   
+                else
+                    $("#slide-"+window.current_slider).show("slide", { direction: "right" }, 500);
+
+                $("#slide-"+(window.current_slider-1)).hide();
+                /*$(".slider-progress-dot-"+(parseInt(event.target.id.substring(5),10)+1)).css("background","#FFFFFF");*/
 
             }
     });
@@ -473,29 +511,9 @@ $(document).ready(function() {
             {
                 $("#slide-"+event.target.id.substring(5)).hide();
                 $("#slide-"+(parseInt(event.target.id.substring(5),10)+1)).show("slide", { direction: "right" }, 500);
-                $(".slider-progress-dot-"+(parseInt(event.target.id.substring(5),10)+1)).css("background","#FFFFFF");
+                /*$(".slider-progress-dot-"+(parseInt(event.target.id.substring(5),10)+1)).css("background","#FFFFFF");*/
 
             }
-    });
-
-
-    $('.endsliders-back-btn').click(function(event){ 
-        
-        if(parseInt(event.target.id.substring(5),10) == 1)
-        {
-            return;
-        }
-
-        $("#slide-"+event.target.id.substring(5)).hide();
-        $("#slide-"+(parseInt(event.target.id.substring(5),10)-1)).show("slide", { direction: "left" }, 500);
-        $(".slider-progress-dot-"+(parseInt(event.target.id.substring(5),10))).css("background","#666666");
-
-        if(parseInt(event.target.id.substring(5),10) == 2)
-        {
-            $('.first-dialog-nav').show();
-            $('.slider-nav-box').hide();
-        }
-
     });
 
     $('.comment-submit-btn').click(function() {
@@ -504,7 +522,10 @@ $(document).ready(function() {
         $('.dialog-continue').show();
         $('.scorebox').hide();
         $('.menubar').hide();
+        $('.instructions-light').hide();
+        window.your_mug.transition().duration(2000).style("opacity", "0.4");
         window.prev_state = 'comment';
+        //todo fix
         window.cur_state = 'continue';
         utils.showLoading('');
         rate.logUserEvent(6,'comment submitted');

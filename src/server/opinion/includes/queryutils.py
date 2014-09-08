@@ -92,7 +92,7 @@ def get_user_ratings(request, os, uids):
 	list_ratings = []
 	for ratings in other_ratings:
 		ratings_copy = list(ratings)
-		ratings_copy[0] = ratings_copy[0] - 361
+		ratings_copy[0] = ratings_copy[0]
 		if ratings_copy[2] < MIN_FLOAT:
 			ratings_copy[2] = handle_small_float(ratings[2])
 		list_ratings.append(ratings_copy)
@@ -354,6 +354,13 @@ def get_new_responses(user,os,disc_stmt,num_responses=0):
 					responses.append(dict)
 	responses.sort(key= lambda n: n['created'], reverse = True)
 	return responses[:num_responses]
+
+
+def get_statement_histograms():
+	output = {}
+	for s in OpinionSpaceStatement.objects.order_by('id'):
+		output[s] = json.dumps(numpy.histogram(UserRating.objects.filter(is_current=True,opinion_space_statement=s).values_list('rating'), bins=10)[0].tolist())
+	return output
 	
 # return all suggestions if num_suggestions = -1
 def get_new_suggestions(user,os,disc_stmt, num_suggestions=0):
@@ -943,10 +950,11 @@ def save_agreement_rating(request, agreement, user_id, os_id, disc_stmt):
 	    return json_error('That comment does not exist.')
 
 	comment = comment[0]
+	rater_viewing_language = request.REQUEST.get("raterViewingLanguage", "english")
 
 	# Update and store a new comment agreement
-	CommentAgreement.objects.filter(comment = comment, rater = request.user, is_current = True).update(is_current = False)
-	ca = CommentAgreement(comment = comment, rater = request.user, agreement = agreement, is_current = True)
+	CommentAgreement.objects.filter(comment = comment, rater = request.user, is_current = True,rater_viewing_language = rater_viewing_language).update(is_current = False)
+	ca = CommentAgreement(comment = comment, rater = request.user, agreement = agreement, is_current = True,rater_viewing_language = rater_viewing_language)
 	ca.save()
 
 	# Recalculate the rater's reviewer score
@@ -982,9 +990,10 @@ def save_insightful_rating(request, rating, user_id, os_id, disc_stmt):
 	    return json_error('That comment does not exist.')
 
 	comment = comment[0]
+	rater_viewing_language = request.REQUEST.get("raterViewingLanguage", "english")
 
 	# Check if the rating is an early bird
-	ratings = comment.ratings.filter(is_current = True, comment = comment).order_by('created')
+	ratings = comment.ratings.filter(is_current = True, comment = comment,rater_viewing_language = rater_viewing_language).order_by('created')
 	eb = 0
 	if len(ratings) <= 5:
 	    eb = 1
@@ -1003,8 +1012,8 @@ def save_insightful_rating(request, rating, user_id, os_id, disc_stmt):
 	score = calculate_reputation_score(os_id, comment_rater, comment_ratee, rating)
 	
 	# Update the comment rating
-	CommentRating.objects.filter(comment = comment, rater = request.user, is_current = True).update(is_current = False)
-	cr = CommentRating(comment = comment, rater = request.user, rating = rating, score = score, reviewer_score = 1, is_current = True, early_bird = eb)
+	CommentRating.objects.filter(comment = comment, rater = request.user, is_current = True,rater_viewing_language = rater_viewing_language).update(is_current = False)
+	cr = CommentRating(comment = comment, rater = request.user, rating = rating, score = score, reviewer_score = 1, is_current = True, early_bird = eb,rater_viewing_language = rater_viewing_language)
 	cr.save()
 		
 	# Update the comment object with a new average rating and average score
@@ -1164,7 +1173,9 @@ def format_discussion_comment(request_user, response):
 	with relation to a user (request_user)
 	"""
 	#print len(response.comment.split()) > 3, response.query_weight
-	return {'uid': response.user.id-361,
+	
+	return {'uid': response.user.id,
+
 			'username': get_formatted_username(response.user),
 			#'location': get_location(response.user),
 			'cid': response.id,
@@ -1174,6 +1185,7 @@ def format_discussion_comment(request_user, response):
 			'confidence': sanitize_comment_confidence(response.confidence),
 			'norm_score': sanitize_comment_score(response.normalized_score_sum),
 			'comment': response.comment,
+			'spanish_comment': response.spanish_comment,
 			'rev_score': get_reviewer_score(response.user),
 			'vis_vars': [0,0,0]}
 			#'prev_comments': get_revisions_and_suggestions(response.user, response.opinion_space, response.discussion_statement,False) }
@@ -1184,8 +1196,17 @@ def format_general_discussion_comment(response):
 	Formats a data structure holding the information for a disucssion comment
 	with no relation to a user
 	"""
-	z = ZipCodeLog.objects.get(user=response.user).location if ZipCodeLog.objects.filter(user=response.user).exists() else None
-	tag = AdminCommentTag.objects.get(comment=response) if AdminCommentTag.objects.filter(comment=response).exists() else None
+	tag, z = "", None
+	zipcode=""
+	city_state=""
+	if ZipCodeLog.objects.filter(user=response.user).exists():
+		ZipCodeLog.objects.get(user=response.user).location
+
+	if AdminCommentTag.objects.filter(comment=response).exists():
+		tag = AdminCommentTag.objects.get(comment=response).tag
+	if z:
+		zipcode = z.code
+		city_state = (z.city + ", " + z.state)
 
 	return {'uid': response.user.id,
 		'username': get_formatted_username(response.user),
@@ -1195,11 +1216,13 @@ def format_general_discussion_comment(response):
 		'confidence': sanitize_comment_confidence(response.confidence),
 		'norm_score': sanitize_comment_score(response.normalized_score_sum),
 		'comment': response.comment,
+		'spanish_comment': response.spanish_comment,
+		'original_language': response.original_language,
 		'rev_score': get_reviewer_score(response.user),
 		'vis_vars': get_visual_variables(response),
-		'zipcode' : (z.code) if z else "",
-		'city_state' : (z.city + ", " + z.state) if z else "",
-		'tag' : tag.tag if tag else ""
+		'zipcode' : zipcode,
+		'city_state' : city_state,
+		'tag' : tag,
 		}
 
 def format_user_object(user, os_id, ds_id = None):
@@ -1717,6 +1740,7 @@ def user_author_score(user):
      return score
 
 
+
 #### For the send report and the overview page (helper functions)
 ## Functions
 # Utility for displaying demographics
@@ -1948,3 +1972,31 @@ def format_pretty_nightly_statistics_table():
 	# 			printed.append(fcomment.comment)
 
 	#send_mail(report_subject, report_body, report_from, report_recipients)
+
+def translate_to_english(comment):
+	import goslate
+	googleTranslate = goslate.Goslate()
+	return googleTranslate.translate(comment,'en')
+
+def translate_to_spanish(comment):
+	import goslate
+	googleTranslate = goslate.Goslate()
+	return googleTranslate.translate(comment,'es')
+
+def translate_all_comments():
+	import goslate
+	googleTranslate = goslate.Goslate()
+
+	for comment in DiscussionComment.objects.all():
+		try:
+			spanComment = translate_to_spanish(comment.comment)
+		except BaseException:
+			print("there was an error in translating: " + comment.comment)
+        
+		if len(spanComment) > 1024:
+			comment.spanish_comment = spanComment[0:1023]
+		else:
+			comment.spanish_comment = spanComment
+
+		comment.save()
+

@@ -73,7 +73,7 @@ var accounts = (function($, d3, console) {
     //This function is used specifically to login right after registration. This function also
     //  sends the data that has been stored in the window to the server after a successful the login.
 
-    function loginAfterRegister(loginData) {
+    function loginAfterRegister(loginData,dcontinue) {
         $.ajax({
             async : false,
             url: window.url_root + '/accountsjson/login/',
@@ -88,10 +88,31 @@ var accounts = (function($, d3, console) {
                     rate.logUserEvent(0,'login');
                     for (var i = 0; i < window.num_sliders; i++) {
                         rate.sendSlider(window.sliders[i], i+1);
+                        //draw line on canvas
+                        var canvas = document.getElementById("sparkLineCanvas"+(i+1));
+                         var context = canvas.getContext('2d');
+                         context.beginPath();
+                        context.lineWidth = 0;
+                        context.fillStyle = '#6c8c7e';
+                        context.moveTo(window.sliders[i]*16-5+5, 0);
+                        context.lineTo(window.sliders[i]*16+5, 5);
+                        context.lineTo(window.sliders[i]*16+5+5, 0);
+                        context.fill(); 
+
+                        var canvas = document.getElementById("sparkLineCanvasDetail"+(i+1));
+                         var context = canvas.getContext('2d');
+                           context.beginPath();
+                        context.lineWidth = 0;
+                        context.fillStyle = '#6c8c7e';
+                        context.moveTo(window.sliders[i]*29-10+10, 0);
+                        context.lineTo(window.sliders[i]*29+10, 10);
+                        context.lineTo(window.sliders[i]*29+10+10, 0);
+                        context.fill();  
+
                         //blooms will be populated at the end of this! see callback
                         //there are two calls!!
                     }
-                    accounts.initLoggedInFeatures(true);
+                    accounts.initLoggedInFeatures(true,dcontinue);
                     
                     //for (i = 0; i < window.ratings.length - 1; i++) {
                     //    rate.sendAgreementRating(window.ratings[i]);
@@ -192,9 +213,13 @@ var accounts = (function($, d3, console) {
      *  JUSTREGISTERED is a boolean and optional. Used to shortcircuit showGraphs.
      */
 
-    function initLoggedInFeatures(justRegistered) {
+    function initLoggedInFeatures(justRegistered, dcontinue) {
         $('.top-bar').show();
+        $('.burger-div-compare').show();
+                        $('.burger-div-others').show();
+                        $('.burger-div-yours').show();
         justRegistered = typeof justRegistered !== 'undefined' ? justRegistered : false;
+        dcontinue = typeof dcontinue !== 'undefined' ? dcontinue : false;
         $('#regzip').prop('disabled', true);
         //utils.ajaxTempOff(function() {
 
@@ -207,17 +232,17 @@ var accounts = (function($, d3, console) {
                 //$('.score-value').text("" + ~~(data['cur_user_rater_score'] * window.conf.SCORE_SCALE_FACTOR));
                 window.user_score = data['cur_user_rater_score'];
                 //$('.username').text(' ' + data['cur_username']);
-                if (window.user_score == 0) {
+                if (dcontinue){
+                            accounts.hideAll();
+                            $('.dialog-continue').show();
+                        }
+                else {
                             accounts.hideAll();
                             $('.dialog').show();
                             window.cur_state = 'register';
                             window.prev_state = 'dialog';
-                        } else {
-                            accounts.hideAll();
-                            $('.menubar').show();
-                            window.cur_state = 'map';
-                            window.prev_state = 'map';
-                        }
+                        } 
+                
             },
             error: function() {
                 console.log("didn't get sent!");
@@ -275,11 +300,14 @@ var accounts = (function($, d3, console) {
 
 	function hideAll(){
 	    $('.register').hide();
+        $('.detail-box').hide();
 	    $('.landing').hide();
+        $('.demographics').hide();
         $('.endsliders').hide();
         $('.dialog').hide();
         $('.dialog-avggrade').hide();
         $('.dialog-about').hide();
+        $('.burger-page').hide();
         $('.comment-input').hide();
         $('.menubar').hide();
         $('.rate').hide();
@@ -320,15 +348,21 @@ var accounts = (function($, d3, console) {
 })($, d3, console);
 
 $(document).ready(function() {
-    $('#registerb').click(function(e) {
+    $('.registerb').click(function(e) {
         //$('#register').find('.ui-btn-active').removeClass('ui-btn-active ui-focus');
         e.preventDefault();
         e.stopPropagation();
+
+        var dialogcontinue = false;
+        if ($(this).attr('id') == 'registern')
+            dialogcontinue = true;
 
         if(window.authenticated)
         {
             accounts.hideAll();
             $('.dialog').show();
+            window.prev_state = 'register';
+            window.cur_state = 'dialog';
             return;
         }
 
@@ -385,10 +419,15 @@ $(document).ready(function() {
 
                     if (data.hasOwnProperty('success')) {
                         accounts.setAuthenticated();
-                        utils.showLoading("Loading", function() {
-                            
-                            accounts.loginAfterRegister(loginData);
+
+                        var loading = "Loading"
+                        if (window.lang = "es")
+                            loading = "Cargando"
+
+                        utils.showLoading(loading, function() {
+                            accounts.loginAfterRegister(loginData,dialogcontinue);
                             blooms.populateBlooms();
+                            window.scrollTo(0,0); 
                             //$('.register').hide();
                             $("#regzip").attr("disabled", true);
                             utils.hideLoading();
@@ -434,6 +473,8 @@ $(document).ready(function() {
                             //TODO: why doesn't this come up under form_errors[zip_code]
                                 if (data['form_errors']['__all__'][0]) {
                                     $("#zipcode-error").html(data['form_errors']['__all__'][0]);
+                                    if(window.lang == 'es')
+                                        $("#zipcode-error").html('El código postal debe tener 5 dígito');
                                     $("#zipcode-error").show();
                                 }
                             } catch(err) { }
@@ -492,20 +533,33 @@ $(document).ready(function() {
 
     $('.first-time-btn').click(function() {
         //accounts.firstTime();
-        window.history.pushState("", "", '#');
         accounts.hideAll();
+        window.scrollTo(0,0);
         $('.endsliders').show();
+        $('.endsliders-slide').hide();
         $('#slide-1').show();
-        $(".slider-progress-dot").css("background","#000000");
-        $(".slider-progress-dot-"+1).css("background","#FFFFFF");
+        window.current_slider = 1;
+
+        /*$(".slider-progress-dot").css("background","#000000");
+        $(".slider-progress-dot-"+1).css("background","#FFFFFF");*/
         window.cur_state = 'grade';
+        window.prev_state = 'home';
         rate.logUserEvent(7,'first time');
+
+        window.history.pushState("", "", '#');
         //$('.top-bar').show();
         //rate.initScore();
     });
 
     $('.login-btn').click(function() {
         accounts.showLogin();
+    });
+
+    $('.register-nothanks').click(function(){
+
+
+        accounts.hideAll();$('.dialog-continue').show()
+
     });
 
     $('.home-btn-dialog').click(function() {
@@ -527,25 +581,31 @@ $(document).ready(function() {
 
 
     var backButtonHandler = function() {
-               window.cur_state = window.prev_state;
+               accounts.hideAll();
+
+                if (window.cur_state == 'grade' && window.current_slider > 1)
+                  {
+                    window.current_slider = window.current_slider - 1;
+
+                    $(".endsliders-slide").hide();
+                    $('.endsliders').show();
+                    $("#slide-"+window.current_slider).show();
+                    window.scrollTo(0,0);
+                    window.history.pushState("", "", '#');
+                    return;
+                  }
+
                if (window.prev_state == 'home'){
-                  $('.landing').show();
-                  window.prev_state = 'home';
+                    $('.landing').show();
+                    window.prev_state = 'home';
                }
                else if (window.prev_state == 'grade')
                {
                   $('.endsliders').show();
+                  $('.endsliders-slide').hide();
+                  $('#slide-1').show();
+                  window.current_slider = 1;
                   window.prev_state = 'home';
-                }
-                else if (window.prev_state == 'median')
-                 {
-                    $('.dialog-avggrade').show();
-                    window.prev_state = 'grade';
-                }
-                else if (window.prev_state == 'rate')
-                {
-                  $('.rate').show();
-                  window.prev_state = 'map';
                 }
                 else if (window.prev_state == 'register')
                 {
@@ -557,6 +617,17 @@ $(document).ready(function() {
                   $('.dialog').show();
                   window.prev_state = 'register';
                 }
+                else if (window.prev_state == 'median')
+                 {
+                    $('.dialog-avggrade').show();
+                    window.prev_state = 'grade';
+                }
+                else if (window.prev_state == 'rate')
+                {
+                  $('.rate').show();
+                  window.prev_state = 'map';
+                }
+
                 else if (window.prev_state == 'map')
                 {
                     window.prev_state = 'dialog';
@@ -580,8 +651,8 @@ $(document).ready(function() {
                 }
                 else if (window.prev_state.indexOf('help') != -1)
                 {
-                    $('.dialog-help-alt').show();
-                    window.prev_state = 'home';
+                    $('.burger-page').show();
+                    window.prev_state = 'help';
                 }
                 else if (window.prev_state == 'stats')
                 {
@@ -591,14 +662,43 @@ $(document).ready(function() {
                 }
 
                window.scrollTo(0,0);
-                window.history.pushState("", "", '#');
+               window.history.pushState("", "", '#');
+               window.cur_state = window.prev_state;
 
 
             }
 
     $('.back-btn-dialog').click(function(){accounts.hideAll();backButtonHandler();});
 
-    $('.help-btn-dialog').click(function() {
+    $('.burger-div-about').click(function(){accounts.hideAll(); $('.dialog-about').show();});
+
+    $('.burger-div-compare').click(function(){accounts.hideAll(); $('.dialog').show();});
+
+    $('.burger-div-others').click(function(){
+        accounts.hideAll();
+        $('.menubar').show();
+            window.mugs.transition()
+            .attr("x",function(d) {
+                return window.canvasx(d.x);
+            })
+            .attr("y",function(d) {
+                return window.canvasy(d.y);
+            })
+            .duration(2000) // this is 1s
+            .delay(100);
+    });
+
+    $('.burger-div-yours').click(function(){accounts.hideAll();$('.comment-input').show(); });
+
+    $('.help-btn-dialog').click(
+        function(){accounts.hideAll(); $('.burger-page').show();
+        window.prev_state = window.cur_state;
+        window.cur_state = 'help';
+        window.burger_state = $(this).attr('id').substring(5);
+    })
+
+
+    $('.help2-btn-dialog').click(function() {
                                  if (window.cur_state.indexOf('help') != -1)
                                  {
                                     return;
@@ -731,16 +831,44 @@ $(document).ready(function() {
     $('.dialog-ready').click(function() {
         rate.logUserEvent(8,'dialog 1');
         rate.initMenubar();
+        $('.map-info').show();
+
+        window.mugs.transition()
+            .attr("x",function(d) {
+                return window.canvasx(d.x);
+            })
+            .attr("y",function(d) {
+                return window.canvasy(d.y);
+            })
+            .duration(2000) // this is 1s
+            .delay(100);
+
         //$('.scorebox').show();
 
         if(window.user_score == 0)
         {
-            $('.instructions').show();
+            $('.instructions-light').show();
         }
 
         $('.dialog').hide();
         window.prev_state = 'dialog';
         window.cur_state = 'map';
+    });
+
+        $('.dialog-ready2').click(function() {
+        rate.logUserEvent(8,'dialog 1');
+        accounts.hideAll();
+        rate.initMenubar();
+        //$('.scorebox').show();
+
+        /*if(window.user_score == 0)
+        {
+            $('.instructions').show();
+        }*/
+
+        $('.comment-input').show();
+        window.prev_state = 'dialog';
+        window.cur_state = 'comment';
     });
     
     $('.dialog-score-ready').click(function() {
@@ -808,7 +936,7 @@ $(document).ready(function() {
         //$('.scorebox').show();
     });
 
-    $('.logout-btn').click(function(e) {
+    $('.burger-div-logout').click(function(e) {
         rate.logUserEvent(1,'logout');
         accounts.hideAll();
         window.cur_state = 'logout';
@@ -817,7 +945,7 @@ $(document).ready(function() {
         $('.logout').show();
         e.preventDefault();
         e.stopPropagation();
-        window.history.pushState("", "", '/mobile');
+	// window.history.pushState("", "", '/mobile');
 
         $.ajax({
             url: window.url_root + '/accountsjson/logout/',
@@ -849,11 +977,46 @@ $(document).ready(function() {
         $('.logout').hide();
         $('.login').show();
     });
+
+    $('.button-div-red').on('mouseover',function(e){
+        $(this).css("background-image",$(this).css("background-image").replace("default","default-down"));
+    });
+
+    $('.button-div-red').on('mouseout',function(e){
+        $(this).css("background-image",$(this).css("background-image").replace("default-down","default"));
+    });
+
+    $('.button-div-red').on('touchstart',function(e){
+        $(this).css("background-image",$(this).css("background-image").replace("default","default-down"));
+    });
+
+    $('.button-div-red').on('touchend',function(e){
+        $(this).css("background-image",$(this).css("background-image").replace("default-down","default"));
+    });
+
+        $('.button-div-wide').on('mouseover',function(e){
+        $(this).css("background-image",$(this).css("background-image").replace("wide","wide-down"));
+    });
+
+    $('.button-div-wide').on('mouseout',function(e){
+        $(this).css("background-image",$(this).css("background-image").replace("wide-down","wide"));
+    });
+
+    $('.button-div-wide').on('touchstart',function(e){
+        $(this).css("background-image",$(this).css("background-image").replace("wide","wide-down"));
+    });
+
+    $('.button-div-wide').on('touchend',function(e){
+        $(this).css("background-image",$(this).css("background-image").replace("wide-down","wide"));
+    });
+
     
     $('#regrade-btn').click(function(){
 		$('.welcome-back').hide();
 		$('.endsliders').show();
 	});
+
+    $('.translate-btn').click(function(){utils.translateAll();})
 	
 	$('#garden-btn').click(function(){
 		$('.welcome-back').hide();
@@ -868,5 +1031,12 @@ $(document).ready(function() {
     window.onpopstate = function(event) {
         backButtonHandler();
     };
+
+    /*$('.button-div-red').on("touchstart", function (e){
+        $(this).css("color","#8c6239");
+    });
+    $('.button-div-red').on("mouseover", function (e){
+        $(this).css("color","#8c6239");
+    });*/
 
 });

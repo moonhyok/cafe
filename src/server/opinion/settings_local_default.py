@@ -20,6 +20,7 @@ EMAIL_HOST = 'localhost'
 EMAIL_HOST_PASSWORD = ''
 EMAIL_HOST_USER = ''
 EMAIL_PORT = 25
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 MEDIA_DIR_NAME = "media"
 
@@ -28,7 +29,7 @@ SECRET_KEY = 'REPLACE_THIS_WITH_SECRET_KEY'
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = os.path.dirname(DOC_ROOT) + '/' + MEDIA_DIR_NAME + '/'
+MEDIA_ROOT = '/Users/angela/Documents/GitHub/cafe/src/client/media'
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
@@ -133,7 +134,7 @@ IMAGE_WIDTH = 49
 IMAGE_HEIGHT = 65
 
 # Email report recipients
-EMAIL_RECIPIENTS = None
+EMAIL_RECIPIENTS = ["angelaslin@berkeley.edu"] # before it was set to None
 TROUBLESHOOT_EMAIL_RECIPIENTS = ['patel.jay@berkeley.edu']
 
 # Social media keys
@@ -163,6 +164,7 @@ CHOICE_TF = (('true', 'Yes'), ('false', 'No'))
 
 CATEGORIES = [ ('Welcome Page Customizations',
                 ['WELCOME_PAGE_TITLE', 
+                 'WELCOME_PAGE_HEADER',
                  'WELCOME_PAGE_TEXT1',
                  'WELCOME_PAGE_TEXT2',
                  'WELCOME_PAGE_ABOUT_LINK'
@@ -181,6 +183,10 @@ CATEGORIES = [ ('Welcome Page Customizations',
                  'AVG_EXPLAIN_TEXT',
                  ],['2.png']),
 
+               ('Demographics',
+                ['DEMOGRAPHICS_DISCLAIMER'
+                ], []),
+
                ('Zip Code',
                 ['ZIP_CODE_INSTRUCTIONS',
                  'ZIP_CODE_BUTTON',
@@ -196,14 +202,32 @@ CATEGORIES = [ ('Welcome Page Customizations',
                  'INSTRUCTIONS_3',
                  'YOUR_SCORE_LANGUAGE',
                  'SCORE_DIALOG_TEXT',
+                 'RATE_IMPORTANCE_QUESTION',
                  'RESPONSE_SAVED_HEADER',
-                 'RESPONSE_SAVED_TEXT',
+                 'RESPONSE_SAVED_TEXT1',
+                 'RESPONSE_SAVED_TEXT2',
                  'EMAIL_ASK_TEXT',
                  'STATS_BUTTON_TEXT',
                  'LOGOUT_BUTTON_TEXT',
                  'LOGOUT_DIALOG_TEXT',
                  'START_OVER_BUTTON_TEXT'
                  ],[]),
+
+
+               ('Help Pages',
+                ['HELP_ABOUT',
+                 'HELP_ASSIGN_GRADES',
+                 'HELP_MEDIAN_GRADES',
+                 'HELP_PRIVACY',
+                 'HELP_CAFE_WELCOME',
+                 'HELP_CAFE_ABOUT',
+                 'HELP_CAFE_ABOUT_MUGS',
+                 'HELP_CAFE_LOGOUT_OR_CONTINUE',
+                 'HELP_CAFE_SUGGESTION',
+                 'HELP_CAFE_GRADE',
+                 'HELP_RETURNING_EMAIL'
+                ], []),
+
 
                ('Sliders',
                 [ 'SLIDER1_LEFT',
@@ -240,6 +264,7 @@ for category in CATEGORIES:
 config_defaults = {
     'WELCOME_PAGE_TEXT1' : "Take a moment to assign grades and share ideas about California's government.",
     'WELCOME_PAGE_TEXT2' : "Works best when holding your mobile screen vertically.",
+    'DEMOGRAPHICS_DISCLAIMER': 'Your email address will not be displayed and we promise not to share your email address with any third parties.',
     'ABOUT_PAGE_TEXT' : '''
           <strong>Overview</strong><br/>
           The California Report Card is based on a new interactive platform that engages public interest in government.
@@ -247,7 +272,7 @@ config_defaults = {
           visitors are invited to grade how effectively state representatives are working to address 6 key subjects.
           Visitors are then asked for suggestions on how California should spend the 2014 budget surplus.
           The platform is designed to engage visitors by providing instant feedback, a unique visualization of opinions, and a new approach to eliciting and rating suggestions.
-          The Report Card uses CAFE, a "Collective Assessment and Feedback Engine," modeled after grassroots discussions over coffee, to assess changes over time and to engage public interest in state government.
+          The Report Card uses CAFE, a "Collective Assessment and Feedback Engine," modeled after grassroots over coffee, to assess changes over time and to engage public interest in state government.
           <br/><br/>
 
           <strong>Privacy</strong><br/>
@@ -272,15 +297,135 @@ config_defaults = {
           The California Report Card<br/>
           <a href="http://californiareportcard.org/">http://californiareportcard.org/</a>''',
     'INSTRUCTIONS_1' : 'Click on any mug to begin',
-    'INSTRUCTIONS_2' : 'To enter your own idea, click on your mug (highlighted in yellow).',
-    'INSTRUCTIONS_3' : "Now what's your idea?  Click on your mug (in yellow) to join the discussion.",
+    'INSTRUCTIONS_2' : 'To enter your own idea, click on your mug (highlighted in green).',
+    'INSTRUCTIONS_3' : "Now what's your idea?  Click on your mug (in green) to join the discussion.",
     'SCORE_DIALOG_TEXT' : "You earn points by rating others and when others rate your idea. Rate one more person's idea before entering your own...",
-    'RESPONSE_SAVED_TEXT': "Continue to read and evaluate other's ideas to earn more points. You can see detailed statistics in the stats page.", 
+    'RATE_IMPORTANCE_QUESTION': "How important is this issue for the next Report Card?",
+    
+    'RESPONSE_SAVED_TEXT1': "Thank you for providing feedback on a way this course could be enhanced to " \
+    "make it more valuable for you. You can log out now and return using the unique link that will be emailed " \
+    "to you. Or you are welcome to continue grading other students\' ideas.", 
+    
+    'RESPONSE_SAVED_TEXT2': "Thank you for participating!  Logout now or grade more mugs.",
+
+    'RETURNING_TEXT': "If you have already registered your email with M-Cafe, please enter it here." \
+    "You will be able to update your evaluations, add a new suggestion, and read/rate other participants.",
+    'HELP_ABOUT': '''To learn more about this project, its history, related projects, and the team that built '''\
+    '''it, visit <a href="http://opinion.berkeley.edu/" target="_blank" style="color: #ffffff;">opinion.berkeley.edu</a>.''',
+    
+     'HELP_ABOUT': '''To learn more about this project, its history, related projects, and the team that built '''\
+    '''it, visit <a href="http://opinion.berkeley.edu/" target="_blank" style="color: #ffffff;">opinion.berkeley.edu</a>.''',
+    
+    'HELP_ASSIGN_GRADES': '''The CRC allows visitors to grade issues facing California. \
+Press the buttons to assign grades to these 6 issues facing California (click the skip button for issues where you don\'t want to assign a grade.) \
+          <br/><br/> \
+          <em>Q:</em> How can I learn more about the six issues we are grading?<br/> \
+          <em>A:</em> Here is an overview of each issue:<br/><br/> \
+           \
+          <div> <em>Implementation of the Affordable Care Act (\'Obamacare\')</em><br/>  \
+
+              California was the first state to pass legislation creating a health insurance marketplace--Covered California. As of Dec 2013, Covered California had over 630,000 enrollees.<br/><br/> \
+
+              <em>Quality of K-12 public education</em><br/> \
+
+              California recently adopted the \"common core\" challenges, which emphasize critical thinking and analysis in K-12 education to better prepare students for college and the workforce.<br/><br/> \ 
+
+              <em>Affordability of state colleges and universities</em><br/> \
+              \
+              The 2014-15 draft California budget calls for a 10.8% increase in higher education funding, which could keep current tuition costs stable.<br/><br/> \
+
+              <em>Access to state services for undocumented immigrants</em><br/> \
+              \
+              Passed in 2006, California Senate Bill 1569 extends eligibility for undocumented immigrants in California for food assistance, supplemental security income, and health insurance. \
+              Passed in 2011, The California Dream Act grants undocumented immigrant access to state aid at public universities and colleges.<br/><br/> \
+
+              <em>Laws and regulations regarding recreational marijuana</em><br/> \
+
+              California was the first state to legalize the distribution of medical marijuana in 1996. \
+              Recreational use of marijuana is illegal in the State of California. However, California lawmakers are currently considering legalizing, taxing, and regulating marijuana for recreational use.<br/><br/> \
+
+              <em>Marriage rights for same-sex partners</em><br/> \
+
+              California legalized same sex marriage in 2008. However, Proposition 8, which revoked marriage rights for same sex couples, was also passed in 2008. \
+              Proposition 8 was overturned in 2013.<br/><br/> \
+          </div> \
+
+          More information on the issues is available on our project website.<br/><br/> \
+
+          <em>Q:</em> Do I have to grade all issues?<br/> \
+          <em>A:</em> No, just click the skip button for issues where you don't want to assign a grade.<br/><br/> \
+
+          <em>Q:</em> Why do the sliders require dragging?  If I tap on A, it should go there.<br/> \
+          <em>A:</em> We decided to remove the tap feature since as you slide down to see more issues you may accidentally tap the sliders.<br/><br/> \
+
+          <em>Q:</em> How can I grade K-12 Education when there are so many aspects, the effectiveness of the teachers, or the quality of school facilities, etc.?<br/> \
+          <em>A:</em> That\'s a great point; we\'re asking people to give an overall grade, which is indeed a coarse measure! \
+          But it\'s also like grading a student for a class, they may have done well on some things, poorly on others, etc...<br/><br/>''',
+    
+    'HELP_MEDIAN_GRADES': '''<em>Q:</em>  After I enter each grade, the Median Grade based on input from all previous participants is revealed. \
+          Then I can change my grade: Won\'t this bias me and other participants?<br/> \
+
+          <em>A:</em> Revealing the Median values is intended to provide instant feedback \
+in contrast to traditional polls and surveys. We realize this may have a biasing effect: some may adjust their \
+grade to be closer to the average resulting in a form of regression toward the mean. We believe this will be rare, especially for Californians.''',
+    
+    'HELP_PRIVACY': '''<em>Q:</em> Why do I need to enter my zip code?<br/> \
+          <em>A:</em> This will allow participants to compare results by region on a geographic map.''',
+    
+    'HELP_CAFE_WELCOME': "You are invited to enter an online \"cafe\" where you can propose issues that you\'d like to \
+see included in the next report card (version 2.0 will come out later this Spring). \
+You\'ll be asked to grade other participants\' suggestions. Each participant\'s suggestion is represented by a mug on the table.",
+    
+    'HELP_CAFE_ABOUT': '''<em>Q:</em> What should I do on this page?<br/> \
+          <em>A:</em> Click any mug (each participant has a mug, we display only 8 at a time)<br/><br/> \
+\
+          <em>Q:</em> How are the mugs arranged on the table?<br/> \
+          <em>A:</em> The placement of each participant's mug is based on how he or she graded the first 6 issues. \
+          Think of each issue as one dimension of a 6-dimensional space. \
+          The grades you assign define a point in this space.  \
+          We use dimensionality reduction (currently Principal Component Analysis) to project that space onto the table. \
+          If you and another participant assigned very similar grades, your mugs will be close together.\
+          Mugs that are distant from yours belong to participants who graded very differently than you.<br/><br/> \
+\
+          <em>Q:</em> Why do I only see 8-10 mugs arranged on the table?<br/> \
+          <em>A:</em> To avoid overcrowding, we display only a few mugs at a time for grading. \
+          The selection of which participants\' mugs to display is random but biased toward newer mugs, those that have received fewer ratings. \
+          Specifically, the likelihood of displaying a mug is based on its standard error = stdev / sqrt(k) where k is the number \
+of times it has been graded so far, and stdev is the variance of those grades. Over time, this ensures that the confidence, or \
+error-bar on the estimated grade for each mug, tends to be the same length for all mugs. Each time you finish grading a set of mugs, \
+the table will be refreshed with more mugs.<br/><br/>''',
+    
+    'HELP_CAFE_ABOUT_MUGS': '''You can continue grading more mugs and whenever you\'re ready, just click on your mug \
+(with the blue coaster) to enter an issue that you\'d like to see on the next report card (version 2.0 will come \
+out later this Spring).<br/><br/> \
+          <em>Q:</em> Why is my mug located at this position on the table?<br/> \
+          <em>A:</em> The placement of each participant's mug is based on how he or she graded the first 6 issues. \
+          Think of each issue as one dimension of a 6-dimensional space. \
+          The grades you assign define a point in this space. We use dimensionality reduction (currently Principal \
+Component Analysis) to project that space onto the table. \
+If you and another participant assigned very similar grades, your mugs will be close together. \
+Mugs that are distant from yours belong to participants who graded very differently than you.''',
+    
+    'HELP_CAFE_LOGOUT_OR_CONTINUE': 'You can either log out now and return anytime using the unique link we emailed you. \
+Or you are welcome to continue grading participants\' suggestions for the next report card (version 2.0 will come out later this Spring).' ,
+    
+    'HELP_CAFE_SUGGESTION': 'Please propose an issue you\'d like to see on the next report card \
+(version 2.0 will come out later this Spring).  Click Save when you\'re done.',
+    
+    'HELP_CAFE_GRADE': '''<em>Q:</em> How do I grade a suggestion?<br/> \
+          <em>A:</em> After clicking a mug, that participant\'s suggestion is displayed. \
+          You can skip to another one or mark this suggestion as irrelevant or inaccurate \
+          (click again to undo).  Otherwise, drag the two slider handles to assign grades.<br/><br/>''',
+    
+    'HELP_RETURNING_EMAIL': '''<em>Q:</em> Why should I enter my email address?<br/>''' \
+    '''<em>A:</em> So we can send you a unique link to see the grades your suggested issue receives.''',
+    
+
     'EMAIL_ASK_TEXT' : "Please provide your email to receive a customized link where you can see how others rate your idea.",
     'LOGOUT_DIALOG_TEXT' : """Thank you for participating!""",
     'REPORT_CARD_INST' : "Drag the handle to grade from A to F how well you feel California's elected officials are working to address the following 6 subjects:",
     'ZIP_CODE_INSTRUCTIONS' : "Enter your zip code to save your grades and join the discussion",
-    'DISCUSSION_DIALOG_TEXT1' : "Each participant has a mug on the table. We're discussing:", 
+    'DISCUSSION_DIALOG_TEXT1' : "Thank you for grading these issues.  We now invite you to consider and propose additional issues you feel should have priority for attention at the state level.", 
     'DISCUSSION_DIALOG_TEXT2' : '',
     'AVG_EXPLAIN_TEXT' : "The Median Grade is based on the grades from all participants thusfar."
 }
@@ -391,6 +536,7 @@ CONFIGURABLES = {
     ##########################
 
     'WELCOME_PAGE_TITLE':{'default':'California Report Card','name':'Welcome Page Title'},
+    'WELCOME_PAGE_HEADER':{'default':'''California<br />Report Card''','name':'Welcome Page Header'},
     'WELCOME_PAGE_TEXT1':{'display':'TEXTAREA', 'default':config_defaults['WELCOME_PAGE_TEXT1'],'name':'Welcome Page Top'},
     'WELCOME_PAGE_TEXT2':{'display':'TEXTAREA', 'default':config_defaults['WELCOME_PAGE_TEXT2'],'name':'Welcome Page Bottom'},
     'WELCOME_PAGE_ABOUT_LINK' : {'default':'ABOUT','name':'Welcome Page - About Link'},
@@ -398,12 +544,33 @@ CONFIGURABLES = {
     'ABOUT_PAGE_HEADER':{'default':'About','name':'About Page Header'},
     'ABOUT_PAGE_TEXT':{'display':'TEXTAREA', 'default':config_defaults['ABOUT_PAGE_TEXT'],'name':'About Page Text (HTML)'},
 
-    'REPORT_CARD_HEADER':{'default':"Grade California's State Government",'name':'Report Card Header'},
+    'REPORT_CARD_HEADER':{'default':"Grade California",'name':'Report Card Header'},
     'REPORT_CARD_NEXT_BUTTON':{'default':'Next','name':'Report Card Next Button'},
     'REPORT_CARD_INST' : {'display':'TEXTAREA', 'default':config_defaults['REPORT_CARD_INST'],'name':'Report Card Instructions'},
     'AVG_EXPLAIN_HEADER' : {'default':"Median Grades",'name':'Averages Explanation Header'},
     'AVG_EXPLAIN_TEXT' : {'display':'TEXTAREA', 'default':config_defaults['AVG_EXPLAIN_TEXT'],'name':'Avg Explanation Text'},
     
+ 
+    'DEMOGRAPHICS_DISCLAIMER':{'display': 'TEXTAREA', 'default': config_defaults['DEMOGRAPHICS_DISCLAIMER'], 'name': 'Demographics Disclaimer'},
+
+    'RESPONSE_SAVED_TEXT1':{'display': 'TEXTAREA', 'default': config_defaults['RESPONSE_SAVED_TEXT1'], 'name': 'Response Saved - Use Email Link or Continue'},
+    'RESPONSE_SAVED_TEXT2':{'display': 'TEXTAREA', 'default': config_defaults['RESPONSE_SAVED_TEXT2'], 'name': 'Response Saved - Continue or Logout'},
+
+    'RETURNING_TEXT':{'display': 'TEXTAREA', 'default': config_defaults['RETURNING_TEXT'], 'name': 'Returning Users Prompt'},
+
+
+    'HELP_ABOUT': {'display': 'TEXTAREA', 'default': config_defaults['HELP_ABOUT'], 'name': 'Help - Learn about the team'},
+    'HELP_ASSIGN_GRADES': {'display': 'TEXTAREA', 'default': config_defaults['HELP_ASSIGN_GRADES'], 'name': 'Help - How to Assign Grades'},
+    'HELP_MEDIAN_GRADES': {'display': 'TEXTAREA', 'default': config_defaults['HELP_MEDIAN_GRADES'], 'name': 'Help - How are Median Grades Calculated'},
+    'HELP_PRIVACY': {'display': 'TEXTAREA', 'default': config_defaults['HELP_PRIVACY'], 'name': 'Help - Privacy and Email'},
+    'HELP_CAFE_WELCOME': {'display': 'TEXTAREA', 'default': config_defaults['HELP_CAFE_WELCOME'], 'name': 'Help - Welcome to the CAFE portion'},
+    'HELP_CAFE_ABOUT': {'display': 'TEXTAREA', 'default': config_defaults['HELP_CAFE_ABOUT'], 'name': 'Help - About the CAFE portion'},
+    'HELP_CAFE_ABOUT_MUGS': {'display': 'TEXTAREA', 'default': config_defaults['HELP_CAFE_ABOUT_MUGS'], 'name': 'Help - Mug Positioning Algorithm'},
+    'HELP_CAFE_LOGOUT_OR_CONTINUE': {'display': 'TEXTAREA', 'default': config_defaults['HELP_CAFE_LOGOUT_OR_CONTINUE'], 'name': 'Help - Logout or Continue Grading'},
+    'HELP_CAFE_SUGGESTION': {'display': 'TEXTAREA', 'default': config_defaults['HELP_CAFE_SUGGESTION'], 'name': 'Help - Suggestion'},
+    'HELP_CAFE_GRADE': {'display': 'TEXTAREA', 'default': config_defaults['HELP_CAFE_GRADE'], 'name': 'Help - Grade a Suggestion'},
+    'HELP_RETURNING_EMAIL': {'display': 'TEXTAREA', 'default': config_defaults['HELP_RETURNING_EMAIL'], 'name': 'Help - Returning Email Link'}, 
+
     'ZIP_CODE_INSTRUCTIONS':{'display':'TEXTAREA', 'default':config_defaults['ZIP_CODE_INSTRUCTIONS'],'name':'Zip Code Instructions'},
     'ZIP_CODE_BUTTON':{'default':'Save and Join','name':'Zip Code Button'},
 
@@ -423,8 +590,9 @@ CONFIGURABLES = {
     'YOUR_SCORE_LANGUAGE': {'default':'Your Score', 'name':'Language for scoring system, (Note: This is not just number of ratings.'},
     'SCORE_DIALOG_TEXT' : {'display':'TEXTAREA', 'default':config_defaults['SCORE_DIALOG_TEXT'],'name':'Score Dialog Text'},
 
+    'RATE_IMPORTANCE_QUESTION' : {'display':'TEXTAREA', 'default':config_defaults['RATE_IMPORTANCE_QUESTION'],'name':'Rate Importance Question - Other People\'s Suggestsions'},
+
     'RESPONSE_SAVED_HEADER' : {'default':'Response Saved!', 'name':'Response Saved Header'},
-    'RESPONSE_SAVED_TEXT' : {'display':'TEXTAREA', 'default':config_defaults['RESPONSE_SAVED_TEXT'],'name':'Response Saved Text'},
 
     'EMAIL_ASK_TEXT' : {'display':'TEXTAREA', 'default':config_defaults['EMAIL_ASK_TEXT'],'name':'Ask for Email Text'},
 

@@ -4,9 +4,9 @@ import environ
 import settings
 
 host = "localhost"
-passwd = settings.DATABASE_PASSWORD
-user = settings.DATABASE_USER
-dbname = settings.DATABASE_NAME
+passwd = ''#settings.DATABASE_PASSWORD
+user = 'root'#settings.DATABASE_USER
+dbname = 'crc2'#settings.DATABASE_NAME
 
 db = MySQLdb.connect(host=host, user=user, passwd=passwd, db=dbname)
 cursor = db.cursor()

@@ -20,44 +20,38 @@
 		width: 100%; 
 	}
 		.slider-grade-main{
-		border-radius:20px;
-		line-height: 40px;
-		font-size: 22px;
+		height: 50px;
 		text-align: center;
-		width: 40px;
+		width: 50px;
 		display:inline-block;
-		margin-right: 5px;
-		margin-left: 5px;
-		margin-bottom: 5px;
-		margin-top: 5px;
+margin-right: 3px;
+		margin-left: 3px;
+		margin-bottom: 2px;
+		margin-top: 3px;
 		opacity: 1.0;
 	}
 
 		.slider-grade-p{
-		border-radius:20px;
-		line-height: 40px;
-		font-size: 22px;
+		height: 50px;
 		text-align: center;
-		width: 40px;
+		width: 50px;
 		display:inline-block;
-		margin-right: 5px;
-		margin-left: 5px;
-		margin-bottom: 5px;
-		margin-top: 5px;
+		margin-right: 3px;
+		margin-left: 3px;
+		margin-bottom: 2px;
+		margin-top: 3px;
 		opacity: 1.0;
 	}
 
 			.slider-grade-m{
-		border-radius:20px;
-		line-height: 40px;
-		font-size: 22px;
+		height: 50px;
 		text-align: center;
-		width: 40px;
+		width: 50px;
 		display:inline-block;
-		margin-right: 5px;
-		margin-left: 5px;
-		margin-bottom: 5px;
-		margin-top: 5px;
+margin-right: 3px;
+		margin-left: 3px;
+		margin-bottom: 2px;
+		margin-top: 3px;
 		opacity: 1.0;
 	}
 
@@ -76,53 +70,53 @@
 	}
 
 	.bubble-Ap{
-		border: 2px solid #00FF00;
-		color: #00FF00;
+		background-image: url('../img/cafe/keypad-09.png');
+		background-size: cover;
 	}
 
 	.bubble-A{
-		border: 2px solid #00FF00;
-		color: #00FF00;
+		background-image: url('../img/cafe/keypad-08.png');
+		background-size: cover;
 	}
 
 	.bubble-A-{
-		border: 2px solid #00FF00;
-		color: #00FF00;
+		background-image: url('../img/cafe/keypad-07.png');
+		background-size: cover;
 	}
 
 	.bubble-Bp{
-		border: 2px solid #99CC00;
-		color: #99CC00;
+		background-image: url('../img/cafe/keypad-06.png');
+		background-size: cover;
 	}
 
 	.bubble-B{
-		border: 2px solid #99CC00;
-		color: #99CC00;
+		background-image: url('../img/cafe/keypad-05.png');
+		background-size: cover;
 	}
 
 	.bubble-B-{
-		border: 2px solid #99CC00;
-		color: #99CC00;
+		background-image: url('../img/cafe/keypad-04.png');
+		background-size: cover;
 	}
 
 	.bubble-Cp{
-		border: 2px solid #dabe5b;
-		color: #dabe5b;
+		background-image: url('../img/cafe/keypad-03.png');
+		background-size: cover;
 	}
 
 	.bubble-C{
-		border: 2px solid #dabe5b;
-		color: #dabe5b;
+		background-image: url('../img/cafe/keypad-02.png');
+		background-size: cover;
 	}
 
 	.bubble-C-{
-		border: 2px solid #dabe5b;
-		color: #dabe5b;
+		background-image: url('../img/cafe/keypad-01.png');
+		background-size: cover;
 	}
 
 	.bubble-Dp{
-		border: 2px solid #FF6600;
-		color: #FF6600;
+		background-image: url('../img/cafe/keypad-00.png');
+		background-size: cover;
 	}
 
 	.bubble-D{
@@ -136,4 +130,58 @@
 	.bubble-F{
 		border: 2px solid #FF0000;
 		color: #FF0000;
+	}
+
+	@media (min-width: 768px) {
+		.slider-grade-p{
+		height: 80px;
+		text-align: center;
+		width: 80px;
+		display:inline-block;
+margin-right: 3px;
+		margin-left: 5px;
+		margin-bottom: 5px;
+		margin-top: 5px;
+		opacity: 1.0;
+		}
+
+		.slider-grade-main{
+		height: 80px;
+		text-align: center;
+		width: 80px;
+		display:inline-block;
+margin-right: 3px;
+		margin-left: 5px;
+		margin-bottom: 5px;
+		margin-top: 5px;
+		opacity: 1.0;
+		}
+
+		.slider-grade-m{
+		height: 80px;
+		text-align: center;
+		width: 80px;
+		display:inline-block;
+margin-right: 3px;
+		margin-left: 5px;
+		margin-bottom: 5px;
+		margin-top: 5px;
+		opacity: 1.0;
+		}
+
+			.slider-progress-dot{
+				margin-top: 5px;
+		border-radius:15px !important;
+		height: 15px !important;
+		width: 15px !important;
+		display:inline-block !important;
+		margin-left: 10px !important;
+	}
+
+	.crc-div-wrapper{
+	max-width: 300px !important;
+	}
+	.slider{
+		max-width: 400px !important;
+	}
 	}

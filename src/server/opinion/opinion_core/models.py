@@ -73,7 +73,10 @@ class OpinionSpaceStatement(Model):
     statement_number = PositiveSmallIntegerField()
     statement = CharField(max_length = 512)
     short_version = CharField(max_length = 128)
+    type = PositiveSmallIntegerField()
     created = DateTimeField(auto_now_add = True)
+    spanish_statement = CharField(max_length = 512)
+
     
     def __unicode__(self):
         return self.statement
@@ -143,6 +146,9 @@ class DiscussionComment(Model):
     is_current = BooleanField(db_index = True)
     query_weight = FloatField(null = True, db_index = True)
     created = DateTimeField(auto_now_add = True, db_index = True)
+    original_language = CharField(max_length = 50, default='english')
+    spanish_comment = CharField(max_length = 1024)
+    translation_is_reviewed = BooleanField()
     
     def __unicode__(self):
         return unicode(self.comment)
@@ -181,6 +187,7 @@ class CommentRating(Model):
     is_current = BooleanField(db_index = True)
     early_bird = NullBooleanField(db_index = True, blank = True)
     created = DateTimeField(auto_now_add = True, db_index = True)
+    rater_viewing_language = CharField(max_length = 64, default='english')
     
     def __unicode__(self):
         return unicode(self.rating)
@@ -195,6 +202,7 @@ class CommentAgreement(Model):
     agreement = FloatField(db_index = True)
     is_current = BooleanField(db_index = True)
     created = DateTimeField(auto_now_add = True, db_index = True)
+    rater_viewing_language = CharField(max_length = 64, default='english')
     
     def __unicode__(self):
         return unicode(self.rating)

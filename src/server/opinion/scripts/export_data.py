@@ -50,8 +50,11 @@ for u in users:
 
 for u in users:
 	comment = DiscussionComment.objects.filter(is_current=True,user=u, blacklisted=False)
-	z = ZipCodeLog.objects.get(user=u).location if ZipCodeLog.objects.filter(user=u).exists() else None
-	tag = AdminCommentTag.objects.get(comment=comment) if AdminCommentTag.objects.filter(comment=comment).exists() else None
+	z, tag = None, None
+	if ZipCodeLog.objects.filter(user=u).exists():
+		z = ZipCodeLog.objects.get(user=u).location
+	if AdminCommentTag.objects.filter(comment=comment).exists():
+		tag = AdminCommentTag.objects.get(comment=comment)
 
 	statements = [.5] * NUM_STATEMENTS
 	for i in range(0,NUM_STATEMENTS):
@@ -85,19 +88,30 @@ for u in users:
 			score = 0
 			lscrore = 0
 
+	zipcode, city_state, tag = "", "", ""
+	if z:
+		zipode = z.code
+		city_state = z.city + "," + z.state
+	if tag:
+		tag = tag.tag
+
+	author_score, participation_score = 0, 0
+	if c:
+		author_score = get_author_score(u)
+		participation_score = get_participation_score(u)
 
 
 	outfile.writerow([u.id,
 			  DateFormat(u.date_joined).format('Y-m-d h:i:s A'),
 			  u.email,
-			  (z.code) if z else "",
-			  (z.city + ", " + z.state) if z else "",
+			  zipcode,
+			  city_state,
 			  c,
-			  tag.tag if tag else "",
+			  tag,
 			  #str(score),
 			  #str(ascore)
-                          get_author_score(u) if c else 0,
-                          get_participation_score(u) if c else 0,
+			  author_score,
+			  participation_score,
                   ] + list(map(str, statements)) + 			  
 			  [str(num_agreement),
 			  str(num_insight),

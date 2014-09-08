@@ -95,9 +95,6 @@ def return_zipcode(request):
 
 @cache_control(no_cache=True)
 def mobile(request,entry_code=None):
-    for i in range(15): # checking when mobile is called
-      print()
-    print("Calling mobile!")
     create_visitor(request)
     os = get_os(1)
     disc_stmt = get_disc_stmt(os, 1)
@@ -112,7 +109,7 @@ def mobile(request,entry_code=None):
         if medians[str(s.id)] <= 1e-5:
             medians[str(s.id)] = 0
         statement_labels[str(s.id)] = s.statement
-    
+  
     random_username = 'user'+ ''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(10))+'@example.com';
     random_password = ''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(10));
     num_users = len(active_users)
@@ -124,22 +121,23 @@ def mobile(request,entry_code=None):
     return render_to_response('mobile.html', context_instance = RequestContext(request, {'url_root' : settings.URL_ROOT,
                                                                                          'return_user_first_time':str(return_user_first_time(request,entry_code)).lower(),
                                                                                          'zipcode': str(return_zipcode(request)),
-                                             'loggedIn' : str(request.user.is_authenticated()).lower(),
-                                             'change_prompt' : str(request.user.is_authenticated()).lower(),
-                                             'client_data': mobile_client_data(request),
-                                             'entry_code': str(entry_code!=None).lower(),
-                                             'refer': referrallink,
-                                             'client_settings': get_client_settings(True),
-                                             'horizontal_slide': False,
-                                             'topic': DiscussionStatement.objects.filter(is_current=True)[0].statement,
-                                             'short_topic': DiscussionStatement.objects.filter(is_current=True)[0].short_version,
-                                             'statements': statements,
-                                             'init_score': len(get_fully_rated_responses(request, disc_stmt)),
-                                             'random_username': random_username,
-                                             'random_password': random_password,
-                                             'num_users': num_users,
+                       'loggedIn' : str(request.user.is_authenticated()).lower(),
+                       'change_prompt' : str(request.user.is_authenticated()).lower(),
+                       'client_data': mobile_client_data(request),
+                       'entry_code': str(entry_code!=None).lower(),
+                       'refer': referrallink,
+                                             'statement_hist': get_statement_histograms(),
+                       'client_settings': get_client_settings(True),
+                                             'horizontal_slide': settings.HORIZONTAL_SLIDE,
+                       'topic': DiscussionStatement.objects.filter(is_current=True)[0].statement,
+                       'short_topic': DiscussionStatement.objects.filter(is_current=True)[0].short_version,
+                       'statements': statements,
+                       'init_score': len(get_fully_rated_responses(request, disc_stmt)),
+                       'random_username': random_username,
+                       'random_password': random_password,
+                       'num_users': num_users,
                                              'statement_labels': json.dumps(statement_labels),
-                                             'medians': json.dumps(medians)}))
+                       'medians': json.dumps(medians)}))
 
 def confirmation_mail(request):
     email = request.REQUEST.get('mail','')
@@ -168,8 +166,9 @@ def confirmation_mail(request):
         email_list = [email]
         message = render_to_string('registration/confirmation_email.txt',
                                         { 'url_root': settings.URL_ROOT, 
-                                         'entrycode': entrycode,
-                                         'user_id': request.user.id-361,
+										 'entrycode': entrycode,
+										 'user_id': request.user.id,
+
                                           })
         try:
            #send_mail(subject, message, Settings.objects.string('DEFAULT_FROM_EMAIL'), email_list)
@@ -255,7 +254,7 @@ def crcstats(request,entry_code=None):
                                                                                             'date':datetime.date.today(),
                                                                                             'comment':comment,
                                                                                             'left_comment': (comment != ''),
-                                                                                            'participant': uid-361,
+                                                                                            'participant': uid,
                                                                                             'entrycode': entry_code,
                                                                                             'uid':uid,
                                                                                             'given': given,
@@ -289,20 +288,21 @@ def crc_generic_stats(request):
                                                                                             }))
 
 def app(request, username=None):
-    if request.mobile:
-        #return HttpResponseRedirect(URL_ROOT + "/mobile/")
-            return mobile(request)
-#   create_visitor(request)
-#   if username != None:
-#       if not Settings.objects.boolean('SOFT_ENTRY_CODES'):
-#           users = User.objects.filter(username = username)
-#           if users.count()==0:
-#               username = NULL_USER_INDICATOR
-#           elif len(DiscussionComment.objects.filter(user = users[0])) == 0:
-#               username = NULL_USER_INDICATOR
-#       return render_to_response('app.html', context_instance = RequestContext(request, {'username': username, 'client_settings':get_client_settings()}))
-    else:
-        return render_to_response('app.html', context_instance = RequestContext(request, {'client_settings':get_client_settings(),'refer': request.GET.get('refer','')}))
+	#if request.mobile:
+		#return HttpResponseRedirect(URL_ROOT + "/mobile/")
+    return mobile(request)
+# 	create_visitor(request)
+# 	if username != None:
+# 		if not Settings.objects.boolean('SOFT_ENTRY_CODES'):
+# 			users = User.objects.filter(username = username)
+# 			if users.count()==0:
+# 				username = NULL_USER_INDICATOR
+# 			elif len(DiscussionComment.objects.filter(user = users[0])) == 0:
+# 				username = NULL_USER_INDICATOR
+# 		return render_to_response('app.html', context_instance = RequestContext(request, {'username': username, 'client_settings':get_client_settings()}))
+	#else:
+	#	return render_to_response('app.html', context_instance = RequestContext(request, {'client_settings':get_client_settings(),'refer': request.GET.get('refer','')}))
+
 
 def get_client_settings(dic=False):
     client_settings = {}
@@ -707,17 +707,24 @@ def install_client(request):
 @admin_required
 def proof_read_comments(request):
     cid = request.REQUEST.get('cid',-1)
+    language = request.REQUEST.get('language', 'english')
     updated = None
     if request.method == 'POST':
         for key in request.POST:
-            query = DiscussionComment.objects.filter(id=key)
-            if len(query) == 0:
-                return HttpResponse("This comment does not exist", status = 404)
-            else:
-                query[0].comment = request.POST[key]
-                query[0].save()
-                updated = True
-                cid = key
+            if key != 'language':
+                query = DiscussionComment.objects.filter(id=key)
+                if len(query) == 0:
+                    return HttpResponse("This comment does not exist", status = 404)
+                else:
+                    if language == 'english':
+                        query[0].comment = request.POST[key]
+                    else: # we will return here to implement MANDARIN
+                        query[0].spanish_comment = request.POST[key]
+                    if query[0].original_language == language: # Sets the translation_is_reviewed flag to True if the comment we are editing and 
+                        query[0].translation_is_reviewed = True
+                    query[0].save()
+                    updated = True
+                    cid = key
 
     if cid == -1:
         return HttpResponse("This comment does not exist", status = 404)
@@ -726,7 +733,10 @@ def proof_read_comments(request):
         if len(query) == 0:
             return HttpResponse("This comment does not exist", status = 404)
         data = []
-        data.append({'type': cid,'text':query[0].comment})
+        if language == 'english':
+            data.append({'type': cid,'text':query[0].comment, 'language': language})
+        else: # we will return here
+            data.append({'type': cid,'text':query[0].spanish_comment, 'language' : language})
         form = ProofreadForm().create_form(data)    
         return render_to_response('proofread.html', context_instance = RequestContext(request, {'form':form, 'saved':updated}))
         
@@ -735,6 +745,11 @@ def manual_login(request, user):
     request.session['user_id'] = user.id
     request.session['_auth_user_id'] = user.id
     request.session['_auth_user_backend'] = 'opinion.email-auth.EmailOrUsernameModelBackend'
+
+def connect_visitor_to_user(request, user_id):
+    visitor_id = request.session.get('visitor_id', False)
+    if visitor_id:
+        Visitor.objects.filter(id = visitor_id).update(user = user_id)
 
 def admin_panel_login(request):
     if request.user.is_authenticated():
@@ -1292,7 +1307,8 @@ def os_show(request, os_id, disc_stmt_id = None):
     #.values_list('id', 'statement', 'short_version'))
     
     for s in statements_objects:
-        statements.append((s.id,s.statement,s.short_version,numpy.median(UserRating.objects.filter(opinion_space_statement=s,is_current=True).values_list('rating'))))
+        statements.append((s.id,s.statement,s.short_version,
+                           numpy.median(UserRating.objects.filter(opinion_space_statement=s,is_current=True).values_list('rating'))))
 
     # Get all discussion statements for the selected Opinion Space
     current_disc_stmt = None
@@ -1451,8 +1467,9 @@ def os_show(request, os_id, disc_stmt_id = None):
               'adminpanel_uids': adminpanel_uids,
           'never_seen_comments': os_never_seen_comments_json(request,os_id,disc_stmt_id),
               'cur_comment_id': cur_comment_id,
-              'date' : date_dict}
-    
+			  'date' : date_dict}
+
+
     return json_result(result)
 
 @auth_required
@@ -2090,8 +2107,11 @@ def os_save_rating(request, os_id):
 def os_save_comment(request, os_id, disc_stmt_id = None):
     params = request.REQUEST
     
+
     new_comment = params.get('comment', False)
     new_comment = decode_to_unicode(new_comment)
+    comment_language = params.get("commentLanguage", "english")
+    #comment_language = decode_to_unicode(comment_language) # What does decode to unicode do?
     
     if new_comment != False:
         
@@ -2125,12 +2145,26 @@ def os_save_comment(request, os_id, disc_stmt_id = None):
         
         # Save new comment if it's not an empty string
         if new_comment != '':
-            comment = DiscussionComment(user = request.user,
-                                        opinion_space_id = os_id,
-                                        discussion_statement = disc_stmt,
-                                        comment = new_comment,
-                                        query_weight = -1,
-                                        is_current = True)
+            if comment_language == 'english':
+                comment = DiscussionComment(user = request.user,
+                                            opinion_space_id = os_id,
+                                            discussion_statement = disc_stmt,
+                                            comment = new_comment,
+                                            spanish_comment = translate_to_spanish(new_comment),
+                                            original_language = comment_language,
+                                            query_weight = -1,
+                                            is_current = True)
+            else: # comment is in Spanish
+                comment = DiscussionComment(user = request.user,
+                                            opinion_space_id = os_id,
+                                            discussion_statement = disc_stmt,
+                                            comment = translate_to_english(new_comment),
+                                            spanish_comment =  new_comment,
+                                            original_language = comment_language,
+                                            query_weight = -1,
+                                            is_current = True)      
+          
+
             # Set score variables as the previous comment's score 
             if old_comment_recent:
                 comment.average_rating = old_comment_recent.average_rating
@@ -2191,10 +2225,11 @@ def os_save_comment_agreement(request, os_id, user_id, disc_stmt_id = None):
     
     agreement = request.REQUEST.get('agreement', None)
     if agreement is None:
-        return json_error('Invalid value')
-    
-    return save_agreement_rating(request, agreement, int(user_id)+361, os_id, disc_stmt)
-    
+
+  		return json_error('Invalid value')
+	
+    return save_agreement_rating(request, agreement, int(user_id), os_id, disc_stmt)
+	
 @auth_required
 def os_save_comment_rating(request, os_id, user_id, disc_stmt_id = None):
     if int(user_id) == request.user.id:
@@ -2211,9 +2246,10 @@ def os_save_comment_rating(request, os_id, user_id, disc_stmt_id = None):
 
     rating = request.REQUEST.get('rating', None)
     if rating is None:
-        return json_error('Invalid value')
-        
-    return save_insightful_rating(request, rating, int(user_id)+361, os_id, disc_stmt)
+		  return json_error('Invalid value')
+		
+    return save_insightful_rating(request, rating, int(user_id), os_id, disc_stmt)
+
 
 @auth_required
 def os_update_comment(request, os_id, user_id, disc_stmt_id = None):
@@ -2621,43 +2657,43 @@ def os_never_seen_comments(request,os_id,disc_stmt_id=None):
     return json_result(result)
     
 def os_never_seen_comments_json(request,os_id,disc_stmt_id=None):
-    os = get_os(os_id)
-    
-    if disc_stmt_id == None:
-        disc_stmt = os.discussion_statements.filter(is_current = True)
-    else:
-        disc_stmt = DiscussionStatement.objects.filter(id = disc_stmt_id)
-    
-    if os == None or len(disc_stmt) == 0:
-        return json_error('Invalid Request')
-    
-    never_seen_comments = get_never_seen_comments(request.user,os,disc_stmt[0],7, False)
-    
-    # create log 
-    create_comments_returned_log(request, os, never_seen_comments, LogCommentsReturned.unrated)
-    
-    # Get the user ratings
-    uids = []
-    for comment in never_seen_comments:
-        uids.append(comment['uid']+361)
-    user_ratings = get_user_ratings(request, os, uids)
-    
-    # Get user data
-    user_data = {}
-    for tup in user_ratings:
-        data = get_user_data(tup[0])
-        if len(data) > 0:
-            user_data[tup[0]] = data    
-    result = {'comments': never_seen_comments,
-                        'ratings': user_ratings,
-                        'user_data': user_data,
-                        'sorted_comments_ids': sort_by_response_score(never_seen_comments),
-                        'sorted_avg_agreement':sort_by_avg_agreement(never_seen_comments)}
-    nc = NeverSeenCache(value=json.dumps(result))
-    nc.save()
-    return result
-    
-@auth_required  
+	os = get_os(os_id)
+	
+	if disc_stmt_id == None:
+		disc_stmt = os.discussion_statements.filter(is_current = True)
+	else:
+		disc_stmt = DiscussionStatement.objects.filter(id = disc_stmt_id)
+	
+	if os == None or len(disc_stmt) == 0:
+		return json_error('Invalid Request')
+	
+	never_seen_comments = get_never_seen_comments(request.user,os,disc_stmt[0],7, False)
+	
+	# create log 
+	create_comments_returned_log(request, os, never_seen_comments, LogCommentsReturned.unrated)
+	
+	# Get the user ratings
+	uids = []
+	for comment in never_seen_comments:
+		uids.append(comment['uid'])
+	user_ratings = get_user_ratings(request, os, uids)
+	
+	# Get user data
+	user_data = {}
+	for tup in user_ratings:
+		data = get_user_data(tup[0])
+		if len(data) > 0:
+			user_data[tup[0]] = data	
+	result = {'comments': never_seen_comments,
+						'ratings': user_ratings,
+						'user_data': user_data,
+						'sorted_comments_ids': sort_by_response_score(never_seen_comments),
+						'sorted_avg_agreement':sort_by_avg_agreement(never_seen_comments)}
+	nc = NeverSeenCache(value=json.dumps(result))
+	nc.save()
+	return result
+	
+@auth_required	
 def os_rated_updated_comments(request,os_id,disc_stmt_id=None):
     os = get_os(os_id)
     
