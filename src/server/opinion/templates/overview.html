@@ -127,6 +127,7 @@
 			<tbody id="overviewcontent">
 			</tbody>
         </table>
+        {% autoescape off %}{{report_table_html}}{% endautoescape %} 
 <div id='locationTable'>
 			<table id="users" class="overviewTable" style="padding-top:4px;">
         	<thead>
@@ -312,6 +313,8 @@ vis.render();
                 <th>Feedback</th>
                 </tr>
             </thead>
-        </table>       
+        </table>  
+
+
     </p>
 {% endblock %}
