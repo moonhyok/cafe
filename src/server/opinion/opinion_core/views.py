@@ -690,10 +690,20 @@ def install_client(request):
                 question = DiscussionStatement.objects.filter(is_current=True)[0]
                 question.spanish_statement = request.POST[key]
                 question.save()
+            elif key[0] == 'c':
+                statement = OpinionSpaceStatement.objects.filter(id=key[1:])
+                if len(statement) > 0:
+                    statement[0].short_version = request.POST[key]
+                    statement[0].save()
             elif key[0] == 's':
                 statement = OpinionSpaceStatement.objects.filter(id=key[1:])
                 if len(statement) > 0:
                     statement[0].spanish_statement = request.POST[key]
+                    statement[0].save()
+            elif key[0] == 'k':
+                statement = OpinionSpaceStatement.objects.filter(id=key[1:])
+                if len(statement) > 0:
+                    statement[0].spanish_short_version = request.POST[key]
                     statement[0].save()
             else:
                 statement = OpinionSpaceStatement.objects.filter(id=key)
@@ -706,7 +716,7 @@ def install_client(request):
     data.append({'type': 'squestion','text':DiscussionStatement.objects.filter(is_current=True)[0].spanish_statement})
     statements = OpinionSpaceStatement.objects.all()
     for s in statements:
-        data.append({'type': 'statement','text':s.statement,'id': s.id, 'spanish': s.spanish_statement})
+        data.append({'type': 'statement','text':s.statement,'id': s.id, 'spanish': s.spanish_statement, 'short': s.short_version, 'short_spanish':s.spanish_short_version})
     form = InstallForm().create_form(data)  
     return render_to_response('install.html', context_instance = RequestContext(request, {'form':form, 'saved':updated, 'categories':CATEGORIES}))
 
