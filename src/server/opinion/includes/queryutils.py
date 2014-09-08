@@ -948,10 +948,11 @@ def save_agreement_rating(request, agreement, user_id, os_id, disc_stmt):
 	    return json_error('That comment does not exist.')
 
 	comment = comment[0]
+	rater_viewing_language = request.REQUEST.get("raterViewingLanguage", "english")
 
 	# Update and store a new comment agreement
-	CommentAgreement.objects.filter(comment = comment, rater = request.user, is_current = True).update(is_current = False)
-	ca = CommentAgreement(comment = comment, rater = request.user, agreement = agreement, is_current = True)
+	CommentAgreement.objects.filter(comment = comment, rater = request.user, is_current = True,rater_viewing_language = rater_viewing_language).update(is_current = False)
+	ca = CommentAgreement(comment = comment, rater = request.user, agreement = agreement, is_current = True,rater_viewing_language = rater_viewing_language)
 	ca.save()
 
 	# Recalculate the rater's reviewer score
@@ -987,9 +988,10 @@ def save_insightful_rating(request, rating, user_id, os_id, disc_stmt):
 	    return json_error('That comment does not exist.')
 
 	comment = comment[0]
+	rater_viewing_language = request.REQUEST.get("raterViewingLanguage", "english")
 
 	# Check if the rating is an early bird
-	ratings = comment.ratings.filter(is_current = True, comment = comment).order_by('created')
+	ratings = comment.ratings.filter(is_current = True, comment = comment,rater_viewing_language = rater_viewing_language).order_by('created')
 	eb = 0
 	if len(ratings) <= 5:
 	    eb = 1
@@ -1008,8 +1010,8 @@ def save_insightful_rating(request, rating, user_id, os_id, disc_stmt):
 	score = calculate_reputation_score(os_id, comment_rater, comment_ratee, rating)
 	
 	# Update the comment rating
-	CommentRating.objects.filter(comment = comment, rater = request.user, is_current = True).update(is_current = False)
-	cr = CommentRating(comment = comment, rater = request.user, rating = rating, score = score, reviewer_score = 1, is_current = True, early_bird = eb)
+	CommentRating.objects.filter(comment = comment, rater = request.user, is_current = True,rater_viewing_language = rater_viewing_language).update(is_current = False)
+	cr = CommentRating(comment = comment, rater = request.user, rating = rating, score = score, reviewer_score = 1, is_current = True, early_bird = eb,rater_viewing_language = rater_viewing_language)
 	cr.save()
 		
 	# Update the comment object with a new average rating and average score
@@ -1180,6 +1182,7 @@ def format_discussion_comment(request_user, response):
 			'confidence': sanitize_comment_confidence(response.confidence),
 			'norm_score': sanitize_comment_score(response.normalized_score_sum),
 			'comment': response.comment,
+			'spanish_comment': response.spanish_comment,
 			'rev_score': get_reviewer_score(response.user),
 			'vis_vars': [0,0,0]}
 			#'prev_comments': get_revisions_and_suggestions(response.user, response.opinion_space, response.discussion_statement,False) }
@@ -1211,6 +1214,8 @@ def format_general_discussion_comment(response):
 		'confidence': sanitize_comment_confidence(response.confidence),
 		'norm_score': sanitize_comment_score(response.normalized_score_sum),
 		'comment': response.comment,
+		'spanish_comment': response.spanish_comment,
+		'original_language': response.original_language,
 		'rev_score': get_reviewer_score(response.user),
 		'vis_vars': get_visual_variables(response),
 		'zipcode' : zipcode,
