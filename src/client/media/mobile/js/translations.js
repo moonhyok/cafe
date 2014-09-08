@@ -63,6 +63,12 @@ var translations = {
                         'más información',
 
                     'Each sphere represents a participant. Tap any sphere to begin.':
-                        'Cada espera representa a un participante. Presiona sobre cualquiera de ellas para comenzar.'
+                        'Cada espera representa a un participante. Presiona sobre cualquiera de ellas para comenzar.',
+
+                    'About the Map':
+                        'Ayuda',
+                        
+                    'About the CRC':
+                        'Acerca de Califique California'
 
                     }

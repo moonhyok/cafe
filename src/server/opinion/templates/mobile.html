@@ -996,9 +996,34 @@
             <span style="font-size: 24px;font-weight:bold;padding-right: 15px;" onclick="accounts.hideAll();$('.burger-page').show();">X</span>
     </div>
     <div class='dialog-text-style-noflow responsive-body'>
-      <center> {{client_settings.ABOUT_PAGE_HEADER}}<br/>
-        {{num_users}} participants so far.</center><br/>
-      {% autoescape off %}{{client_settings.ABOUT_PAGE_TEXT }}{% endautoescape %}
+      <center>{{client_settings.ABOUT_PAGE_HEADER}}</center><br/>
+      <span class="english">{% autoescape off %}{{client_settings.ABOUT_PAGE_TEXT }}{% endautoescape %}</span>
+      <span class="spanish">      <em> Información General </em> <br/>
+      CRC es una plataforma en línea desarrollada por la iniciativa de Datos y Democracia del centro de investigación CITRIS en la UC Berkeley y el vicegobernador de California Gavin Newson. La misma explora cómo los smartphones y las redes pueden mejorar la comunicación entre los ciudadanos y los responsable del gobierno. CRC permite a sus usuarios calificar al estado de California en temas de actualidad así como también posibilita sugerir nuevos temas a ser incluidos en futuras versiones de la aplicación. El proyecto pretende incrementar la participación ciudadana y ayudar a que los líderes gubernamentales, de todos los niveles, estén permanentemente informados acerca de la opinión y prioridades de sus electores. <br/>
+
+      CRC funciona en cualquier pantalla, sin embargo está optimizado para operar en pantallas de teléfonos móviles en posición vertical.
+      Cualquier persona puede participar tomándose unos minutos para asignar calificaciones al estado de California sobre temas como: salud, educación, matrimonio igualitario, derechos de los inmigrantes, y despenalización de la mariguana. Además, los participantes son invitados a “entrar” a un “café en línea” donde pueden proponer temas a ser incluidos en la próxima versión de la aplicación (versión 2.0 que estará disponible a finales de primavera). <br/> <br/>
+
+      <em> P: </em> ¿Cuál es la motivación para crear CRC? <br/>
+      <em> R: </em> Estamos explorando nuevos modelos de intercambio de información y compromiso ciudadano en cuestiones políticas y de interés general. No pretendemos que el modelo propuesto por CRC sea la única respuesta; somos conscientes de que es una novedosa metáfora y una nueva manera de recolectar información de la ciudadanía. ¿Estimulará CRC a pensar sobre asuntos de interés público y a reflexionar sobre cómo la opinión pública puede volverse representativa? Queremos ver cómo las personas responden a los temas planteados, como los patrones de respuestas cambian a lo largo del tiempo, y si las calificaciones pueden actuar como catalizadores de discusiones, donde los participantes proponen nuevos temas y al mismo tiempo evalúan las sugerencias de otros. Seguiremos trabajando en desarrollo de nuevas versiones y modelos basados en las respuestas y datos obtenidos. <br/> <br/>
+
+
+      <em> Privacidad </em> <br/>
+      Cualquier información de identificación personal será removida de los comentarios y sugerencias. Respetaremos tu privacidad y no compartiremos con terceros tu dirección de correo electrónico. <br/> <br/>
+
+      <em> Significancia Estadística </em> <br/>
+      A diferencia de las encuestas y los sondeos telefónicos aleatorios, aquí, la participación es autoseleccionada y disponible, hasta el momento, para angloparlantes con acceso a un smartphone o a un navegador web (estamos trabajando en una extensión para el idioma Español y en hacerla accesible para personas con discapacidad). <br/> <br/>
+      
+      A diferencia de las encuestas y sondeos tradicionales, en CRC los usuarios obtienen una retroalimentación instantánea de su opinión ya que la calificación media es presentada luego de introducir calificaciones. Somos conscientes que esta funcionalidad podría sesgar las calificaciones ya que algunos participantes podrían estar tentados a ajustar su calificación a la media produciendo una suerte de regresión hacia la media. <br/> <br/>
+      
+      A modo de presentar los niveles de consenso presentaremos a través de histogramas los datos de las calificaciones, además, demostraremos las diferencias de opinión en las distintas regiones por medio de un mapa geográfico. <br/> <br/>
+
+      <em> Más </em> <br/>
+      Para información de contacto favor consulte el sitio web de CRC. Para detalles sobre la historia del proyecto, estadísticas a la fecha, enlaces relacionados, y descarga de datos anónimos favor visite: <br/> <br/>
+
+
+      <em> California Report Card </em> <br/>
+      <a href='http://californiareportcard.org'> http://californiareportcard.org </a></span>
     </div>
   </center>
       </div>
@@ -1081,7 +1106,8 @@
     </div>
     <div class='dialog-text-style-noflow responsive-body'>
             <div class="basic-header" style="padding-top: 5px;">About the Map</div>
-      {% autoescape off %}{{client_settings.HELP_CAFE_ABOUT}}{% endautoescape %}
+      <span class="english">{% autoescape off %}{{client_settings.HELP_CAFE_ABOUT}}{% endautoescape %}</span>
+      <span class="spanish">{% autoescape off %}{{client_settings.HELP_CAFE_ABOUT_SPANISH}}{% endautoescape %}</span>
     </div>
   </center>
       </div>
@@ -1096,7 +1122,8 @@
   </div>
   <div class='dialog-text-style-noflow responsive-body'>
           <div class="basic-header">Help</div>
-          {% autoescape off %}{{client_settings.HELP_CAFE_ABOUT_MUGS}}{% endautoescape %}
+          <span class="english">{% autoescape off %}{{client_settings.HELP_CAFE_ABOUT_MUGS}}{% endautoescape %}</span>
+          <span class="spanish"></span>
   </div>
       </div>
 
