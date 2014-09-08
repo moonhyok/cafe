@@ -2106,7 +2106,7 @@ def os_save_comment(request, os_id, disc_stmt_id = None):
     new_comment = params.get('comment', False)
     new_comment = decode_to_unicode(new_comment)
     comment_language = params.get("commentLanguage", "english")
-    comment_language = decode_to_unicode(comment_language) # What does decode to unicode do?
+    #comment_language = decode_to_unicode(comment_language) # What does decode to unicode do?
     
     if new_comment != False:
         
