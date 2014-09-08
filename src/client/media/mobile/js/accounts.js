@@ -92,20 +92,22 @@ var accounts = (function($, d3, console) {
                         var canvas = document.getElementById("sparkLineCanvas"+(i+1));
                          var context = canvas.getContext('2d');
                          context.beginPath();
-                        context.lineWidth = 2;
-                        context.strokeStyle = '#6c8c7e';
-                        context.moveTo(window.sliders[i]*16, 45);
-                        context.lineTo(window.sliders[i]*16, 5);
-                        context.stroke(); 
+                        context.lineWidth = 0;
+                        context.fillStyle = '#6c8c7e';
+                        context.moveTo(window.sliders[i]*16-5+5, 0);
+                        context.lineTo(window.sliders[i]*16+5, 5);
+                        context.lineTo(window.sliders[i]*16+5+5, 0);
+                        context.fill(); 
 
                         var canvas = document.getElementById("sparkLineCanvasDetail"+(i+1));
                          var context = canvas.getContext('2d');
-                         context.beginPath();
-                        context.lineWidth = 2;
-                        context.strokeStyle = '#6c8c7e';
-                        context.moveTo(window.sliders[i]*32, 90);
-                        context.lineTo(window.sliders[i]*32, 5);
-                        context.stroke(); 
+                           context.beginPath();
+                        context.lineWidth = 0;
+                        context.fillStyle = '#6c8c7e';
+                        context.moveTo(window.sliders[i]*29-10+10, 0);
+                        context.lineTo(window.sliders[i]*29+10, 10);
+                        context.lineTo(window.sliders[i]*29+10+10, 0);
+                        context.fill();  
 
                         //blooms will be populated at the end of this! see callback
                         //there are two calls!!
@@ -417,7 +419,12 @@ $(document).ready(function() {
 
                     if (data.hasOwnProperty('success')) {
                         accounts.setAuthenticated();
-                        utils.showLoading("Loading", function() {
+
+                        var loading = "Loading"
+                        if (window.lang = "es")
+                            loading = "Cargando"
+
+                        utils.showLoading(loading, function() {
                             accounts.loginAfterRegister(loginData,dialogcontinue);
                             blooms.populateBlooms();
                             window.scrollTo(0,0); 
@@ -466,6 +473,8 @@ $(document).ready(function() {
                             //TODO: why doesn't this come up under form_errors[zip_code]
                                 if (data['form_errors']['__all__'][0]) {
                                     $("#zipcode-error").html(data['form_errors']['__all__'][0]);
+                                    if(window.lang == 'es')
+                                        $("#zipcode-error").html('El código postal debe tener 5 dígito');
                                     $("#zipcode-error").show();
                                 }
                             } catch(err) { }
@@ -1006,6 +1015,10 @@ $(document).ready(function() {
 		$('.welcome-back').hide();
 		$('.endsliders').show();
 	});
+
+    $('.translate-btn').click(function(){utils.translateAll();})
+
+    $('.spanish').hide();
 	
 	$('#garden-btn').click(function(){
 		$('.welcome-back').hide();

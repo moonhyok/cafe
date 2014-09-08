@@ -437,11 +437,13 @@ var _blooms = blooms = (function($, d3, console) {
                 $('.rate-username').html('Suggested by Participant #'+d.uid);
                 var commentData = rate.pullComment(d.uid, 'uid', comments);
                 var content = '"'+commentData.comment+'"';
+                var contentSpanish = '"'+commentData.spanish_comment+'"';
                 var cid = commentData.cid;
                 window.current_cid = cid;
                 window.current_uid = d.uid;
                 //$('.rate-loading').show();
                 rate.updateDescriptions(document.getElementById('commentInput'), content);
+                rate.updateDescriptionsSpanish(document.getElementById('commentInputSpanish'), contentSpanish);
                 $('.rate').show();
                 /*$('.rate').slideDown(function() {
                     $('.rate-loading').hide();
@@ -618,7 +620,13 @@ $(document).ready(function() {
         try {
             if (window.blooms_list.length <= 2) {
                 console.log("here");
-                utils.showLoading("Loading More Spheres...");
+
+                var loading = "Loading More Spheres..."
+                if(window.lang == 'es')
+                    loading = "Cargando"
+
+                utils.showLoading(loading);
+
                 window.blooms_list = undefined; //needed to avoid infinite recursing
                 setTimeout(blooms.populateBlooms, 500);
                 //utils.hideLoading();

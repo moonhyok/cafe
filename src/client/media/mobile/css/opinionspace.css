@@ -82,7 +82,7 @@ body{
 	padding-left: 20px;
 	max-width: 620px;
 	padding-right: 25px;
-	text-align: justify;
+	text-align: center;
 	font-size: 17px;
 	text-shadow: 1px 1px 1px #F7F4DD;
 	font-family: DroidSans;
@@ -103,7 +103,10 @@ body{
 
 .top-bar{
     display:none;
-    width: 100%;
+    width: 110%;
+    position:relative;
+    left: -20px;
+    z-index: 999;
     background-color: rgba(255, 255, 255,0.0);
 }
 
@@ -245,8 +248,8 @@ table.pretty caption {
 }
 
 .instructions-light{
-	font-size: 16px;
-	line-height: 18px;
+	font-size: 15px;
+	line-height: 17px;
 	height: 40px !important;
 	margin-top: 0px;
 	padding-top: 10px;
@@ -289,7 +292,7 @@ table.pretty caption {
     }
 
 	.responsive-header{
-		font-size: 32px !important;
+		font-size: 24px !important;
 		padding-bottom: 10px;
 		line-height: 32px !important;
 	}
@@ -397,10 +400,11 @@ table.pretty caption {
     height: 44px;
     box-shadow: 0px 2px 2px #888888;
     text-shadow: 1px 1px white;
+    font-family: DroidSans-Bold;
     padding-left: 20px;
-    background-image:url('../img/cafe/rounded-base.png');
+    z-index: 999;
+    background-image: url('../img/cafe/rounded-base.png');
 	background-size: cover;
-	diplay: none;
 	}
 
 	.ui-slider-input {
@@ -1235,7 +1239,7 @@ padding-right: 7px;
 	display:inline-block;
 	text-align: left; 
 	width: 60%;
-	font-size: 22px;
+	font-size: 17px;
 	font-weight: bolder;
 	text-shadow: 1px 1px white;
 	font-family: DroidSans-Bold;
@@ -1408,23 +1412,26 @@ padding-right: 7px;
 	background-image:url('../img/cafe/capitol-landing.png');
   background-size: cover;
 	/*background-size:cover;*/
+	font-family: DroidSans;
 	width: 90%;
 	height: 100%;
 	max-width: 768px;
 	position: absolute;
-	top:48px;
+	top:0px;
 	left:0;
     right:0;
     margin-left:auto;
     margin-right:auto;
-	font-size: 17px;
+	font-size: 15px;
 	text-shadow: 1px 1px 1px #F7F4DD;
 	font-weight: bolder;
-	line-height: 19px;
-	padding-left: 20px;
-	padding-right: 20px;
-	padding-top: 8px;
+	line-height: 18px;
 	color: #442b10;
+}
+
+.translate-btn{
+	font-size:14px;
+	padding-left:10px;
 }
 
 .dialog-style{
@@ -1472,8 +1479,8 @@ padding-top: 20px;
 	padding-right: 20px;
 	padding-left: 20px;
 	padding-top: 10px;
-	font-size: 26px;
-	line-height: 26px;
+	font-size: 16px;
+	line-height: 18px;
 
 }
 

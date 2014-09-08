@@ -7,12 +7,17 @@ Comment Updated!
 {% endif %}
 <p/>
 	<form method="POST" action="."><table>
-			{% for field in form %}
+			{% for field in form.visible_fields %}
 					<tr>
 	        			<td>Comment Text:</td>
 						<td>{{ field }}</td>
 	      			</tr>
 			{% endfor %}
+			
+			{% for field in form.hidden_fields %}
+			    {{field}}
+			{% endfor %}
+
   	</table>
   	<input type=submit value='Save Changes'>
 	</form>

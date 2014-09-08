@@ -42,9 +42,12 @@ class InstallForm(Form):
 			if d['type'] == 'question':
 				self.fields['Discussion Question'] = CharField(initial=d['text'], widget=Textarea(attrs={'style':'width:350px;height:75px'}))
 			elif d['type'] == 'squestion':
-				self.fields['Discussion Question Short'] = CharField(initial=d['text'], widget=Textarea(attrs={'style':'width:350px;height:75px'}))
+				self.fields['Discussion Question Spanish'] = CharField(initial=d['text'], widget=Textarea(attrs={'style':'width:350px;height:75px'}))
 			else:
 				self.fields[str(d['id'])] = CharField(initial=d['text'], widget=Textarea(attrs={'style':'width:350px;height:75px'}))
+				self.fields['c'+str(d['id'])] = CharField(initial=d['short_version'], widget=Textarea(attrs={'style':'width:350px;height:75px'}))
+				self.fields['s'+str(d['id'])] = CharField(initial=d['spanish'], widget=Textarea(attrs={'style':'width:350px;height:75px'}))
+				self.fields['k'+str(d['id'])] = CharField(initial=d['short_spanish'], widget=Textarea(attrs={'style':'width:350px;height:75px'}))
 		return self
 		
 class ProofreadForm(Form):

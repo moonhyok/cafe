@@ -65,11 +65,59 @@ var utils = (function($, d3, console) {
         });
     }
 
+    function invertObj (obj) {
+
+    var new_obj = {};
+
+    for (var prop in obj) {
+        if(obj.hasOwnProperty(prop)) {
+            new_obj[obj[prop]] = prop;
+        }
+    }
+
+    return new_obj;
+    };
+
+    function translateAll() {
+        var a = document.body.getElementsByTagName("*");
+        var index;
+        for (index = 0; index < a.length; index++)
+        {
+            var text = a[index].innerHTML.trim();
+
+            if(window.lang == 'en'){
+                if (text in translations)
+                    a[index].innerHTML = translations[text]
+            }
+            else
+            {
+                var backTrans = invertObj(translations)
+                if (text in backTrans)
+                    a[index].innerHTML = backTrans[text]
+            }
+        }
+
+        if(window.lang == 'en')
+           {
+            $('.spanish').show();
+            $('.english').hide();
+            window.lang = 'es'
+           } 
+        else
+        {
+            $('.spanish').hide();
+            $('.english').show();
+            window.lang = 'en'
+        }
+            
+    }
+
     return {
         'showLoading': showLoading,
         'showLoadingNewPts': showLoadingNewPts,
         'hideLoading': hideLoading,
-        'toTitleCase': toTitleCase
+        'toTitleCase': toTitleCase,
+        'translateAll': translateAll
     };
 
 

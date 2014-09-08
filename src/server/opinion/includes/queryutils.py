@@ -7,6 +7,8 @@ import random
 import numpy
 import math
 import time
+from django.utils.dateformat import DateFormat
+from prettytable import *
 
 """
 
@@ -948,10 +950,11 @@ def save_agreement_rating(request, agreement, user_id, os_id, disc_stmt):
 	    return json_error('That comment does not exist.')
 
 	comment = comment[0]
+	rater_viewing_language = request.REQUEST.get("raterViewingLanguage", "english")
 
 	# Update and store a new comment agreement
-	CommentAgreement.objects.filter(comment = comment, rater = request.user, is_current = True).update(is_current = False)
-	ca = CommentAgreement(comment = comment, rater = request.user, agreement = agreement, is_current = True)
+	CommentAgreement.objects.filter(comment = comment, rater = request.user, is_current = True,rater_viewing_language = rater_viewing_language).update(is_current = False)
+	ca = CommentAgreement(comment = comment, rater = request.user, agreement = agreement, is_current = True,rater_viewing_language = rater_viewing_language)
 	ca.save()
 
 	# Recalculate the rater's reviewer score
@@ -987,9 +990,10 @@ def save_insightful_rating(request, rating, user_id, os_id, disc_stmt):
 	    return json_error('That comment does not exist.')
 
 	comment = comment[0]
+	rater_viewing_language = request.REQUEST.get("raterViewingLanguage", "english")
 
 	# Check if the rating is an early bird
-	ratings = comment.ratings.filter(is_current = True, comment = comment).order_by('created')
+	ratings = comment.ratings.filter(is_current = True, comment = comment,rater_viewing_language = rater_viewing_language).order_by('created')
 	eb = 0
 	if len(ratings) <= 5:
 	    eb = 1
@@ -1008,8 +1012,8 @@ def save_insightful_rating(request, rating, user_id, os_id, disc_stmt):
 	score = calculate_reputation_score(os_id, comment_rater, comment_ratee, rating)
 	
 	# Update the comment rating
-	CommentRating.objects.filter(comment = comment, rater = request.user, is_current = True).update(is_current = False)
-	cr = CommentRating(comment = comment, rater = request.user, rating = rating, score = score, reviewer_score = 1, is_current = True, early_bird = eb)
+	CommentRating.objects.filter(comment = comment, rater = request.user, is_current = True,rater_viewing_language = rater_viewing_language).update(is_current = False)
+	cr = CommentRating(comment = comment, rater = request.user, rating = rating, score = score, reviewer_score = 1, is_current = True, early_bird = eb,rater_viewing_language = rater_viewing_language)
 	cr.save()
 		
 	# Update the comment object with a new average rating and average score
@@ -1171,6 +1175,7 @@ def format_discussion_comment(request_user, response):
 	#print len(response.comment.split()) > 3, response.query_weight
 	
 	return {'uid': response.user.id,
+
 			'username': get_formatted_username(response.user),
 			#'location': get_location(response.user),
 			'cid': response.id,
@@ -1180,6 +1185,7 @@ def format_discussion_comment(request_user, response):
 			'confidence': sanitize_comment_confidence(response.confidence),
 			'norm_score': sanitize_comment_score(response.normalized_score_sum),
 			'comment': response.comment,
+			'spanish_comment': response.spanish_comment,
 			'rev_score': get_reviewer_score(response.user),
 			'vis_vars': [0,0,0]}
 			#'prev_comments': get_revisions_and_suggestions(response.user, response.opinion_space, response.discussion_statement,False) }
@@ -1202,7 +1208,6 @@ def format_general_discussion_comment(response):
 		zipcode = z.code
 		city_state = (z.city + ", " + z.state)
 
-
 	return {'uid': response.user.id,
 		'username': get_formatted_username(response.user),
 		'email' : response.user.email,
@@ -1211,6 +1216,8 @@ def format_general_discussion_comment(response):
 		'confidence': sanitize_comment_confidence(response.confidence),
 		'norm_score': sanitize_comment_score(response.normalized_score_sum),
 		'comment': response.comment,
+		'spanish_comment': response.spanish_comment,
+		'original_language': response.original_language,
 		'rev_score': get_reviewer_score(response.user),
 		'vis_vars': get_visual_variables(response),
 		'zipcode' : zipcode,
@@ -1731,4 +1738,265 @@ def user_author_score(user):
      for a in CommentAgreement.objects.filter(comment = current_comment[0]):
          score = score + score_to_int(100*a.agreement)*100
      return score
+
+
+
+#### For the send report and the overview page (helper functions)
+## Functions
+# Utility for displaying demographics
+def display_demographic(line, demographic):
+    if demographic != None and demographic != '':
+        return '\t' + demographic
+    else:
+        return '\t' + '--'
+
+# Table row function
+def create_table_row_user(user):
+    table_row = ''
+    
+    time_joined_display = DateFormat(user.date_joined).format('h:i:s A')
+    user_data_login = UserData.objects.filter(user = user, key = 'first_login')
+    if len(user_data_login) > 0:
+        time_joined_display = DateFormat(datetime.datetime.fromtimestamp(float(user_data_login[0].value))).format('h:i:s A')
+
+    username_display = str(user.id)
+    if user.email != '':
+		email_display = user.email
+    else:
+		email_display = '--'
+
+    zip_qs = ZipCodeLog.objects.filter(user=user)
+    if zip_qs:
+	    zipcode, location = zip_qs[0].location.code, zip_qs[0].location.city + ", " + zip_qs[0].location.state
+    else:
+	    zipcode, location = "--", "--"
+
+    num_ideas_rated = CommentRating.objects.filter(rater = user).count()
+    
+    ## Did they leave a comment?
+    # TODO: make sure it is the current discussion questions
+    comment="--"
+    if DiscussionComment.objects.filter(user=user).exists():
+        comment = DiscussionComment.objects.filter(user = user)[0]
+
+    row = [time_joined_display, username_display, zipcode, location, num_ideas_rated, comment, email_display]
+    row = map(lambda x: str(x), row)
+    return "\t".join(row)
+
+def list_to_td(L):
+    row_data = map(lambda x: "<td>" + x + "</td>", L)
+    return  "".join(row_data)
+################################################
+
+def format_pretty_nightly_statistics_table():
+	TIME_FRAME = datetime.date.today() - datetime.timedelta(days=1)		
+	# Subject
+	df_now = DateFormat(datetime.datetime.now())
+	report_subject = '[California Report Card] Activity Digest for ' + df_now.format('l, F jS, Y')
+
+	# Body
+	report_body_html = ''
+	report_body_text = ''
+
+	## Header
+	report_header = report_subject
+	report_body_html += "<h2>%s</h2>" % report_header
+	report_body_html += "californiareportcard.org"
+
+	report_body_text += "<h2>%s</h2>" % report_header
+	report_body_text += "californiareportcard.org"
+
+	active_users = list(User.objects.filter(is_active=True))
+
+	#Report Table
+	report_table_html = ''
+	report_table_text = ''
+
+	## Quick stats
+	report_body_html += "<h3>Number of users so far: %s</h3><hr>" % len(active_users)
+	report_body_text += "<h3>Number of users so far: %s</h3><hr>" % len(active_users)
+
+	# We aren't collecting feedback now (12/26)
+	"""
+	### Feedback
+	feedbacks = Feedback.objects.filter(created__gte = datetime.date.today() - datetime.timedelta(days=1))
+	feedback_display = ''
+	feedback_display += '<h3>Feedback:</h3>'
+	for feedback in feedbacks:
+	feedback_line = ''
+	if feedback.user != None:
+	    feedback_line += feedback.user.username + ' ' + feedback.user.email
+	else:
+	    feedback_line += 'Anonymous'
+	feedback_line += ' at ' + DateFormat(feedback.created).format('h:i:s A') + ': ' + decode_to_unicode(feedback.feedback)
+	feedback_display += feedback_line + '\n'
+	report_body += feedback_display
+	"""
+
+	if Settings.objects.boolean('USE_ENTRY_CODES'):
+		users = []
+		users_objects = UserData.objects.filter(key = 'first_login', updated__gte = datetime.datetime.now())
+		for ud in users_objects:
+		    users.append(ud.user) 
+	else:
+		users = User.objects.filter(is_active=True,date_joined__gte = datetime.datetime.now() - datetime.timedelta(days=1))
+
+
+	# Participation Statistics
+	participation_legend = {
+		1 : 'visited the site, pressed "Begin"', 
+		2 : 'submitted grades',
+		3 : 'submitted zip code',
+		4 : 'submitted CA zip code',
+		5 : 'rated at least 2 other participant\'s ideas',
+		6 : 'submitted a valid idea',
+		7 : 'submitted email address',
+		8 : 'submitted valid email address',
+		9 : 'returns using unique URL',
+		#10 : '9+ rates'
+	}
+
+
+
+	entrycodes = []
+	for u in users:
+		entrycodes.extend(list(EntryCode.objects.filter(username=u.username)))
+
+	participation_reached = { 
+		1 : LogUserEvents.objects.filter(details='first time',log_type=7, created__gte=TIME_FRAME).count(),
+		2 : LogUserEvents.objects.filter(details='sliders finished',log_type=5, created__gte=TIME_FRAME).count(),
+		3 : len(users),
+		4 : sum([ZipCodeLog.objects.filter(user = u)[0].location.state == 'CA' if ZipCodeLog.objects.filter(user=u).exists() else False for u in users]),
+		5 : sum([CommentRating.objects.filter(rater = u).count() >= 2 for u in users]),
+		6 : sum([DiscussionComment.objects.filter(user = u).exists() for u in users]),
+		7 : sum([bool(u.email) for u in users]),
+		8 : sum([bool(u.email) for u in users]),
+		9 : sum([e.first_login for e in entrycodes])
+		#	10 : 'under construction', 
+	}
+
+
+	pr = participation_reached
+
+	participation_stopped = {
+		1 : pr[1] - pr[2],
+		2 : pr[2] - (pr[3] + pr[4]),
+		3 : pr[3] - pr[5],
+		4 : pr[4] - pr[5],
+		5 : pr[5] - pr[6],
+		6 : pr[6] - (pr[7] + pr[8]),
+		7 : pr[7],
+		8 : pr[8],
+		9 : pr[9],
+		10 : '--'
+	}
+
+	for k in participation_stopped:
+		participation_stopped[k] = max(0, participation_stopped[k])
+
+	participation_table_header = "<h3>Participation Summary:</h3>"
+	participation_table = PrettyTable(['Level', 'Actions', '# Who Reached Level', '# Who Stopped At Level'])
+
+	for p in sorted(participation_legend.keys()):
+		row = [str(p), participation_legend[p], 
+	       str(participation_reached[p]), str(participation_stopped[p])]
+		participation_table.add_row(row)
+
+	report_table_html += (participation_table_header + participation_table.get_html_string(attributes= {'border' : '1'}))
+	report_table_text += (participation_table_header + participation_table.get_string())
+
+	## New users
+
+	new_user_table_header = '<h3>New users that registered today: (%s) </h3>' % (len(users))
+	new_user_table = PrettyTable( ['Time Registered (PST)', 'User ID', 'Zip Code', 'Location', '# Ideas Rated', 'Idea', 'Email address'])
+
+	for user in users:	
+	    row_data = create_table_row_user(user).split("\t")
+	    new_user_table.add_row(row_data)
+
+	report_table_html += (new_user_table_header +  new_user_table.get_html_string(attributes= {'border' : '1'}))
+	report_table_text += (new_user_table_header +  new_user_table.get_string())
+
+	# Add table to the report_body_html and report_body_text
+	report_body_html += report_table_text
+	report_body_text += report_table_html
+
+	return { "report_subject" : report_subject,
+	         "report_body_text" : report_body_text,
+	         "report_body_html" : report_body_html,
+	         "report_table_html" : report_table_html,
+	         "report_table_text" : report_table_text }
+
+	## Daily Statistics
+	# daily_statistics = ""
+	# daily_statistics += '<h3>Total new users: ' + str(len(users)) + '</h3>'
+	# report_body += daily_statistics
+
+
+
+	## Top comments
+	# OS_ID = 1
+	# report_body_html += "<hr><h3>Top comments from the past week:</h3>" 
+	# report_body_text += "<hr><h3>Top comments from the past week:</h3>" 
+
+	# os = OpinionSpace.objects.get(pk = OS_ID)
+	# discussion_statement_objects = os.discussion_statements.filter(is_current = True)
+	# comments = DiscussionComment.objects.filter(user__in = active_users, is_current = True, discussion_statement = discussion_statement_objects[0], confidence__lte = .15, confidence__isnull = False).order_by('-normalized_score_sum')[0:20]
+	# count = 1
+	# for comment in comments:
+	# 	if comment.created.date() >= datetime.date.today() - datetime.timedelta(days=7):
+	#             #   "\nEmail: " + comment.user.email  + \
+	#             line = "\n"+str(count)+". User ID: "+ str(comment.user.id)   + "\nComment:"  + decode_to_unicode(comment.comment) + "\nNormalized Score: " + str(comment.normalized_score_sum) + "\n"
+	#             report_body_html += (line.replace("\n", "<br>"))
+	#             report_body_text += line
+	#             count+=1
+
+
+	# ## Flagged comments
+
+	# report_body_html += "<hr><h3>Unmoderated flagged comments:</h3>" 
+	# report_body_text += "<hr><h3>Unmoderated flagged comments:</h3>" 
+
+	# flagged = FlaggedComment.objects.all().order_by('comment')
+	# printed = []
+	# for fcomment in flagged:
+	#     if not fcomment.comment.blacklisted:
+	#     #if fcomment.created.date() >= datetime.date.today() - datetime.timedelta(days=7):
+	# 	if fcomment.comment.discussion_statement == discussion_statement_objects[0]:
+	# 		if fcomment.comment not in printed and not_admin_approved(fcomment.comment):
+
+	#                     # + '\nEmail: ' + fcomment.comment.user.email + \
+	# 			line= 'User ID: ' + str(fcomment.comment.user.id) + "\nComment: " + decode_to_unicode(fcomment.comment.comment) + '\n\n'
+	#                         report_body_html += (line.replace("\n", "<br>"))
+	#                         report_body_text += line
+	# 			printed.append(fcomment.comment)
+
+	#send_mail(report_subject, report_body, report_from, report_recipients)
+
+def translate_to_english(comment):
+	import goslate
+	googleTranslate = goslate.Goslate()
+	return googleTranslate.translate(comment,'en')
+
+def translate_to_spanish(comment):
+	import goslate
+	googleTranslate = goslate.Goslate()
+	return googleTranslate.translate(comment,'es')
+
+def translate_all_comments():
+	import goslate
+	googleTranslate = goslate.Goslate()
+
+	for comment in DiscussionComment.objects.all():
+		try:
+			spanComment = translate_to_spanish(comment.comment)
+		except BaseException:
+			print("there was an error in translating: " + comment.comment)
+        
+		if len(spanComment) > 1024:
+			comment.spanish_comment = spanComment[0:1023]
+		else:
+			comment.spanish_comment = spanComment
+
+		comment.save()
 

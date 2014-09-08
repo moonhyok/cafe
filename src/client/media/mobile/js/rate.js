@@ -10,6 +10,10 @@ var rate = (function($, d3, console) {
     function updateDescriptions(answer, content) {
         $('#commentInput').html(content);
     }
+
+    function updateDescriptionsSpanish(answer, content) {
+        $('#commentInputSpanish').html(content);
+    }
     
     function logUserEvent(logtype,buttonType) {
         $.ajax({
@@ -121,7 +125,7 @@ var rate = (function($, d3, console) {
             if (window.user_score == 2) {
                 $('.rate').hide();
                 $('.instructions-light').show();
-                $('.instructions-light').html("Please join the discussion! Tap your sphere at the center to tell us your idea.")
+                $('.instructions-light').html("Now it’s your turn. Tap your sphere below to provide your suggestion.")
                 //$('.instructions2').hide();
                 //$('.instructions3').show();
                 try{
@@ -222,11 +226,13 @@ var rate = (function($, d3, console) {
         }
 
         comment = comments[index]['comment'];
+        var spanish_comment = comments[index]['spanish_comment'];
         cid = comments[index]['cid'];
         return {
-            comment: comment,
-            uid: uid,
-            cid: cid
+            'comment': comment,
+            'spanish_comment': spanish_comment,
+            'uid': uid,
+            'cid': cid
         };
     }
 
@@ -321,7 +327,7 @@ var rate = (function($, d3, console) {
             url: window.url_root + "/os/saverating/1/",
             data: {
                 'id': number,
-                'rating': rating / 100
+                'rating': rating / 10,
             },
             success: function(data) {
                 if (data.hasOwnProperty('success')) {
@@ -340,11 +346,17 @@ var rate = (function($, d3, console) {
     // The function also calls the the sendInsightRating to completly send the entire rating
 
     function sendAgreementRating(rating) {
+
+        var language = 'english'
+        if(window.lang == 'es')
+            language = 'spanish'
+
         $.ajax({
             type: "POST",
             url: window.url_root + "/os/savecommentagreement/1/" + rating.cid + "/",
             data: {
-                "agreement": rating.r1 / 100.0
+                "agreement": rating.r1 / 10.0,
+                "raterViewingLanguage": language
             },
             success: function(data) {
                 if (data.hasOwnProperty('success')) {
@@ -364,12 +376,18 @@ var rate = (function($, d3, console) {
 
 
     function sendInsightRating(rating) {
+
+        var language = 'english'
+        if(window.lang == 'es')
+            language = 'spanish'
+
         $.ajax({
             type: "POST",
             dataType: 'json',
             url: window.url_root + "/os/savecommentrating/1/" + rating.cid + "/",
             data: {
-                "rating": rating.r2 / 100.0
+                "rating": rating.r2 / 10.0,
+                "raterViewingLanguage": language
             },
             success: function(data) {
                 if (data.hasOwnProperty('success')) {
@@ -383,12 +401,17 @@ var rate = (function($, d3, console) {
     }
 
     function sendComment(comment) {
+        var language = 'english'
+        if(window.lang == 'es')
+            language = 'spanish'
+
         $.ajax({
             type: "POST",
             dataType: 'json',
             url: window.url_root + "/os/savecomment/1/",
             data: {
-                "comment": comment
+                "comment": comment,
+                "commentLanguage" : language
             },
             success: function(data) {
                 if (data.hasOwnProperty('success')) {
@@ -418,6 +441,7 @@ var rate = (function($, d3, console) {
         'getComment' : getComment,
         'getCommentByUID' : getCommentByUID,
         'storeRating' : storeRating,
+        'updateDescriptionsSpanish': updateDescriptionsSpanish,
         'saveRating' : saveRating,
         'storeSliders' : storeSliders,
         'sendSlider' : sendSlider,
