@@ -83,10 +83,14 @@ var utils = (function($, d3, console) {
             return
 
         window.translation_lock = true
+
         var a = document.body.getElementsByTagName("*");
         var index;
         for (index = 0; index < a.length; index++)
         {
+            if(a[index].innerHTML == undefined)
+                continue
+            
             var text = a[index].innerHTML.trim();
 
             if(window.lang == 'en'){

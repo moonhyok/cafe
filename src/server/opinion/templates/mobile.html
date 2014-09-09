@@ -71,6 +71,8 @@
 
      window.email_saved = false;
 
+     window.translation_lock = false;
+
      window.prev_state = 'home';
 
      window.burger_state = null;
@@ -452,7 +454,7 @@
         <br/>
         <br/>-->
               <div data-role="fieldcontain" >
-        <input type ='tel' id='regzip' name='regzip' class='regforminput' placeholder="Zip Code" onBlur="$('.registerb').click();">
+        <input type ='tel' id='regzip' name='regzip' class='regforminput' placeholder="Zip Code">
 
                     <div class='alert-error' id='zipcode-error' style='display:none;'></div>
                   </div>
