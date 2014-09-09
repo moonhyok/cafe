@@ -1030,7 +1030,7 @@ $(document).ready(function() {
         window.no_menubar = false;
 	});
 
-    $('.home-btn-title').click(function(){accounts.hideAll();$('.landing').show();})
+    //$('.home-btn-title').click(function(){accounts.hideAll();$('.landing').show();})
 
     window.onpopstate = function(event) {
         backButtonHandler();
