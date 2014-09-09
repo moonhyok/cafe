@@ -104,7 +104,7 @@ var rate = (function($, d3, console) {
         myDiv.scrollTop = 0;
 
         $("#slider-importance").children().children().children(".slider-grade-bubble").each( function(i){
-        $(this).css("background-image",$(this).css("background-image").replace("keypad-down-0","keypad-0"));
+        $(this).css("background-image",$(this).css("background-image").replace("keypad-down","keypad"));
         });
 
         //$("#slider-importance").children().children().children(".slider-grade-bubble").css("background-color","transparent"); 

@@ -1506,7 +1506,7 @@ padding-top: 20px;
                           }
 
 .dialog-text-style-noflow a:link {
-    color: #4e300f; !important;
+    color: #4e300f !important;
     text-decoration: underline;
     text-shadow: none;
     font-size: 15px;
@@ -1514,7 +1514,7 @@ padding-top: 20px;
 }
 
 .dialog-text-style-noflow a:visited {
-    color: #4e300f; !important;
+    color: #4e300f !important;
     text-decoration: underline;
     text-shadow: none;
     font-size: 15px;

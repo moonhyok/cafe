@@ -71,6 +71,8 @@
 
      window.email_saved = false;
 
+     window.translation_lock = false;
+
      window.prev_state = 'home';
 
      window.burger_state = null;
@@ -215,31 +217,31 @@
 
      function grade_to_score(grade) {
        if (grade == 'A+')
-         return 9;
+         return 10;
        else if (grade == 'A')
-       return 8;
+       return 10.0 - 10.0/12;
        else if (grade == 'A-')
-       return 7;
+       return 10.0 - 20.0/12;
        else if (grade == 'B+')
-       return 6;
+       return 10.0 - 30.0/12;
        else if (grade == 'B' )
-       return 5;
+       return 10.0 - 40.0/12;
        else if (grade == 'B-')
-       return 4;
+       return 10.0 - 50.0/12;
        else if (grade == 'C+')
-       return 3;
+       return 10.0 - 60.0/12;
        else if (grade == 'C')
-       return 2;
+       return 10.0 - 70.0/12;
        else if (grade == 'C-')
-       return 1;
+       return 10.0 - 80.0/12;
        else if (grade == 'D+')
-       return 0;
+       return 10.0 - 90.0/12;
        else if (grade == 'D')
-       return 19;
+       return 10.0 - 100.0/12;
        else if (grade == 'D-')
-       return 10;
+       return 10.0 - 110.0/12;
        else
-         return 0;
+         return 10.0 - 120.0/12;
      }
 
      function statementsComplete() {
@@ -452,7 +454,7 @@
         <br/>
         <br/>-->
               <div data-role="fieldcontain" >
-        <input type ='tel' id='regzip' name='regzip' class='regforminput' placeholder="Zip Code" onBlur="$('.registerb').click();">
+        <input type ='tel' id='regzip' name='regzip' class='regforminput' placeholder="Zip Code">
 
                     <div class='alert-error' id='zipcode-error' style='display:none;'></div>
                   </div>
@@ -1009,12 +1011,14 @@
       <div class='dialog-about dialog-style'>
   <center>
     <div class="home-btn-dialog-box" style="padding-top: 5px;">
+      <a href="#" class="translate-btn">Español</a>
             <span style="font-size: 24px;font-weight:bold;padding-right: 15px;" onclick="accounts.hideAll();$('.burger-page').show();">X</span>
     </div>
     <div class='dialog-text-style-noflow responsive-body'>
+      <br/>
       <center>{{client_settings.ABOUT_PAGE_HEADER}}</center><br/>
       <span class="english">{% autoescape off %}{{client_settings.ABOUT_PAGE_TEXT }}{% endautoescape %}</span>
-      <span class="spanish">      <em> Información General </em> <br/>
+      <span class="spanish"> <em> Información General </em> <br/>
       CRC es una plataforma en línea desarrollada por la iniciativa de Datos y Democracia del centro de investigación CITRIS en la UC Berkeley y el vicegobernador de California Gavin Newson. La misma explora cómo los smartphones y las redes pueden mejorar la comunicación entre los ciudadanos y los responsable del gobierno. CRC permite a sus usuarios calificar al estado de California en temas de actualidad así como también posibilita sugerir nuevos temas a ser incluidos en futuras versiones de la aplicación. El proyecto pretende incrementar la participación ciudadana y ayudar a que los líderes gubernamentales, de todos los niveles, estén permanentemente informados acerca de la opinión y prioridades de sus electores. <br/>
 
       CRC funciona en cualquier pantalla, sin embargo está optimizado para operar en pantallas de teléfonos móviles en posición vertical.
@@ -1118,10 +1122,11 @@
       <div class='dialog-help-map1 dialog-style' style="z-index:999">
   <center>
     <div class="home-btn-dialog-box">
+            <a href="#" class="translate-btn">Español</a>
             <span style="font-size: 24px;font-weight:bold;padding-right: 15px;" onclick="accounts.hideAll();$('.menubar').show();">X</span>
     </div>
     <div class='dialog-text-style-noflow responsive-body'>
-            <div class="basic-header" style="padding-top: 5px;">About the Map</div>
+            <div style="padding-top: 5px;">About the Map</div>
       <span class="english">{% autoescape off %}{{client_settings.HELP_CAFE_ABOUT}}{% endautoescape %}</span>
       <span class="spanish"><em>P:</em>¿Cómo funcionan las esferas?<br/>
           <em>R:</em> Presiona sobre cualquier esfera (cada esfera representa la sugerencia de algún participante) Se muestra solo una sugerencia a la vez<br/><br/>

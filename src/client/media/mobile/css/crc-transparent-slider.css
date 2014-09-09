@@ -29,6 +29,10 @@ margin-right: 3px;
 		margin-bottom: 2px;
 		margin-top: 3px;
 		opacity: 1.0;
+		color: #8d8273;
+		font-size: 28px;
+		font-family: DroidSans;
+		line-height: initial;
 	}
 
 		.slider-grade-p{
@@ -41,6 +45,10 @@ margin-right: 3px;
 		margin-bottom: 2px;
 		margin-top: 3px;
 		opacity: 1.0;
+		color: #8d8273;
+		font-size: 28px;
+		font-family: DroidSans;
+		line-height: initial;
 	}
 
 			.slider-grade-m{
@@ -53,6 +61,10 @@ margin-right: 3px;
 		margin-bottom: 2px;
 		margin-top: 3px;
 		opacity: 1.0;
+		color: #8d8273;
+		font-size: 28px;
+		font-family: DroidSans;
+		line-height: initial;
 	}
 
 	.slider-progress-dot{
@@ -70,103 +82,117 @@ margin-right: 3px;
 	}
 
 	.bubble-Ap{
-		background-image: url('../img/cafe/keypad-09.png');
+		background-image: url('../img/cafe/keypad.png');
 		background-size: cover;
 	}
 
 	.bubble-A{
-		background-image: url('../img/cafe/keypad-08.png');
+		background-image: url('../img/cafe/keypad.png');
 		background-size: cover;
 	}
 
 	.bubble-A-{
-		background-image: url('../img/cafe/keypad-07.png');
+		background-image: url('../img/cafe/keypad.png');
 		background-size: cover;
 	}
 
 	.bubble-Bp{
-		background-image: url('../img/cafe/keypad-06.png');
+		background-image: url('../img/cafe/keypad.png');
 		background-size: cover;
 	}
 
 	.bubble-B{
-		background-image: url('../img/cafe/keypad-05.png');
+		background-image: url('../img/cafe/keypad.png');
 		background-size: cover;
 	}
 
 	.bubble-B-{
-		background-image: url('../img/cafe/keypad-04.png');
+		background-image: url('../img/cafe/keypad.png');
 		background-size: cover;
 	}
 
 	.bubble-Cp{
-		background-image: url('../img/cafe/keypad-03.png');
+		background-image: url('../img/cafe/keypad.png');
 		background-size: cover;
 	}
 
 	.bubble-C{
-		background-image: url('../img/cafe/keypad-02.png');
+		background-image: url('../img/cafe/keypad.png');
 		background-size: cover;
 	}
 
 	.bubble-C-{
-		background-image: url('../img/cafe/keypad-01.png');
+		background-image: url('../img/cafe/keypad.png');
 		background-size: cover;
 	}
 
 	.bubble-Dp{
-		background-image: url('../img/cafe/keypad-00.png');
+		background-image: url('../img/cafe/keypad.png');
 		background-size: cover;
 	}
 
 	.bubble-D{
-		border: 2px solid #FF6600;
-		color: #FF6600;
+		background-image: url('../img/cafe/keypad.png');
+		background-size: cover;
 	}
 	.bubble-D-{
-		border: 2px solid #FF6600;
-		color: #FF6600;
+		background-image: url('../img/cafe/keypad.png');
+		background-size: cover;
 	}
 	.bubble-F{
-		border: 2px solid #FF0000;
-		color: #FF0000;
+		background-image: url('../img/cafe/keypad.png');
+		background-size: cover;
 	}
 
+	.spacer{
+			margin-bottom: 5px;
+		}
+
 	@media (min-width: 768px) {
+		.spacer{
+			margin-bottom: 10px;
+		}
+
 		.slider-grade-p{
-		height: 80px;
+		height: 70px;
 		text-align: center;
-		width: 80px;
+		width: 70px;
 		display:inline-block;
-margin-right: 3px;
-		margin-left: 5px;
-		margin-bottom: 5px;
-		margin-top: 5px;
+		margin-right: 6px;
+		margin-left: 6px;
+		margin-bottom: 6px;
+		margin-top: 6px;
 		opacity: 1.0;
+				color: #8d8273;
+		font-size: 38px;
 		}
 
 		.slider-grade-main{
-		height: 80px;
+		height: 70px;
 		text-align: center;
-		width: 80px;
+		width: 70px;
 		display:inline-block;
-margin-right: 3px;
-		margin-left: 5px;
-		margin-bottom: 5px;
-		margin-top: 5px;
+	margin-right: 6px;
+		margin-left: 6px;
+		margin-bottom: 6px;
+		margin-top: 6px;
 		opacity: 1.0;
+		color: #8d8273;
+		font-size: 38px;
 		}
 
 		.slider-grade-m{
-		height: 80px;
+		height: 70px;
 		text-align: center;
-		width: 80px;
+		width: 70px;
 		display:inline-block;
-margin-right: 3px;
-		margin-left: 5px;
-		margin-bottom: 5px;
-		margin-top: 5px;
+	margin-right: 6px;
+		margin-left: 6px;
+		margin-bottom: 6px;
+		margin-top: 6px;
 		opacity: 1.0;
+		color: #8d8273;
+		font-size: 38px;
 		}
 
 			.slider-progress-dot{
@@ -179,9 +205,9 @@ margin-right: 3px;
 	}
 
 	.crc-div-wrapper{
-	max-width: 300px !important;
+	max-width: 320px !important;
 	}
 	.slider{
-		max-width: 400px !important;
+		max-width: 420px !important;
 	}
 	}
