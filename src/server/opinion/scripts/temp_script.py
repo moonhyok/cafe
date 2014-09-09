@@ -4,13 +4,22 @@ from opinion.opinion_core.models import *
 import numpy as np
 from opinion.includes.queryutils import *
 import json
-from django.db.models import Q
 
-try:
-    super_user = User.objects.get(pk = 1)
-    super_user.set_password('admin')
-    super_user.save()
-except User.DoesNotExist:
-    print 'Error: you must have a super user account in order to set up the database properly!'
-    sys.exit()
+import csv
+with open('spanish_comments.csv', 'rb') as csvfile:
+	spamreader = csv.reader(csvfile, delimiter=',', quotechar='"')
+	count = 1
+	for row in spamreader:
+		if count != 1:
+			comment = DiscussionComment.objects.filter(id=count)
+			if len(comment) != 0:
+				comment = comment[0]
+				comment.comment = row[2]
+				comment.spanish_comment = row[4]
+				a = AdminCommentTag(tag = row[1], comment = comment) 
+				a.save()
+				comment.save()
+				print count,row[1],row[2],row[4]
+		count = count + 1
+
 

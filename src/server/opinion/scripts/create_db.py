@@ -53,8 +53,8 @@ os_election_stmt_strings[6] = 'Facebook causes distraction for primary and secon
 os_election_stmt_strings[7] = 'Video lectures are better than traditional lectures as they free up class time for group discussions.'
 
 os_election_stmt_sstrings = {}
-os_election_stmt_sstrings[0] = 'Aplicación de la Ley de Cuidado de Salud Asequible ("Obamacare")'
-os_election_stmt_sstrings[1] = 'Calidad de la educación pública K-12'
+os_election_stmt_sstrings[0] = 'Aplicacion de la Ley de Cuidado de Salud Asequible ("Obamacare")'
+os_election_stmt_sstrings[1] = 'Calidad de la educacion publica K-12'
 os_election_stmt_sstrings[2] = 'Asequibilidad de los colleges y universidades estatales'
 os_election_stmt_sstrings[3] = 'Acceso de inmigrantes indocumentados a servicios estatales'
 os_election_stmt_sstrings[4] = 'Leyes y regulaciones con respecto al uso recreativo de la mariguana'
@@ -80,7 +80,7 @@ os_election_stmt_sshorts = {}
 os_election_stmt_sshorts[0] = 'Obamacare'
 os_election_stmt_sshorts[1] = 'K12'
 os_election_stmt_sshorts[2] = 'Los Colleges'
-os_election_stmt_sshorts[3] = 'Inmigración'
+os_election_stmt_sshorts[3] = 'Inmigracion'
 os_election_stmt_sshorts[4] = 'Mariguana'
 os_election_stmt_sshorts[5] = 'Derecho al matrimonio'
 os_election_stmt_sshorts[6] = 'Facebook Distraction'
@@ -95,13 +95,13 @@ for i in range(0, numStatements):
     os_election_stmts[i] = OpinionSpaceStatement(opinion_space = os_election,
                                                  statement_number = i,
                                                  statement = os_election_stmt_strings.get(i),
-                                                 spanish_statement = os_election_stmt_sstrings.get(i)
+                                                 spanish_statement = os_election_stmt_sstrings.get(i),
 						                         type = 1,
-                                                 spanish_short_version = os_election_stmt_sshorts.get(i)
+                                                 spanish_short_version = os_election_stmt_sshorts.get(i),
                                                  short_version = os_election_stmt_shorts.get(i))
     os_election_stmts[i].save()
 
-disc = DiscussionStatement(opinion_space = os_election, statement = 'What issue should be included in the next report card and why is it important to Californians?', spanish_statement = '¿Cuál problema piensa debe ser incluído en la próxima Report Card, y por qué cree es importante para los Californianos?', short_version='How can social media be used to benefit primary and secondary learning?', is_current = True)
+disc = DiscussionStatement(opinion_space = os_election, statement = 'What issue should be included in the next report card and why is it important to Californians?', spanish_statement = 'Cual problema piensa debe ser incluido en la proxima Report Card, y por que cree es importante para los Californianos?', short_version='How can social media be used to benefit primary and secondary learning?', is_current = True)
 disc.save()
 
 # These are the initial eigenvectors
