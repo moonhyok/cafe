@@ -15,15 +15,15 @@ for (var i=1;i<=window.num_sliders;i++)
 //$( ".slider" ).append( "<span class=\"manual-slide manual-slide-left\"><</span>" );
 $( ".slider" ).append( "<div class=\"crc-div-wrapper\"><div class=\"grade-container\"></div></div>" );
 
-grades = ['A-','A','A+','B-','B','B+','C-','C','C+','D+']
+grades = ['A+','A','A-','B+','B','B-','C+','C','C-','D+','D','D-','F']
 grades.forEach(function(grade) { 
 
 	if(grade.indexOf('+') >= 0)
-		$(".grade-container").append("<div class=\"slider-grade-bubble slider-grade-p bubble-" +grade.replace("+","p")+"\">"+""+"</div>");
+		$(".grade-container").append("<div class=\"slider-grade-bubble slider-grade-p bubble-" +grade.replace("+","p")+"\"><div class=\"spacer\"></div>"+grade+"</div>");
 	else if (grade.indexOf('-') >= 0 ) 
-		$(".grade-container").append("<div class=\"slider-grade-bubble slider-grade-m bubble-" +grade+"\">"+""+"</div>");
+		$(".grade-container").append("<div class=\"slider-grade-bubble slider-grade-m bubble-" +grade+"\"><div class=\"spacer\"></div>"+grade+"</div>");
 	else	
-		$(".grade-container").append("<div class=\"slider-grade-bubble slider-grade-main bubble-" +grade.replace("+","p")+"\">"+""+"</div>");
+		$(".grade-container").append("<div class=\"slider-grade-bubble slider-grade-main bubble-" +grade.replace("+","p")+"\"><div class=\"spacer\"></div>"+grade+"</div>");
 
 });
 $(".slider-grade-bubble").on("click",function(e){ 
@@ -31,11 +31,11 @@ $(".slider-grade-bubble").on("click",function(e){
 	//$(this).parent().children(".slider-grade-bubble").css("background-image","url()"); 
     
     $(this).parent().children(".slider-grade-bubble").each( function(i){
-    	$(this).css("background-image",$(this).css("background-image").replace("keypad-down-0","keypad-0"));
+    	$(this).css("background-image",$(this).css("background-image").replace("keypad-down","keypad"));
 	});
 
 	//$(this).css("opacity","1.0"); 
-	$(this).css("background-image",$(this).css("background-image").replace("keypad-0","keypad-down-0"));
+	$(this).css("background-image",$(this).css("background-image").replace("keypad","keypad-down"));
 	
 	if($(this).parent().parent().parent().attr("id").substring(7).indexOf("importance") > -1)
 	{

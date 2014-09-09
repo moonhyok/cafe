@@ -217,31 +217,31 @@
 
      function grade_to_score(grade) {
        if (grade == 'A+')
-         return 9;
+         return 10;
        else if (grade == 'A')
-       return 8;
+       return 10.0 - 10.0/12;
        else if (grade == 'A-')
-       return 7;
+       return 10.0 - 20.0/12;
        else if (grade == 'B+')
-       return 6;
+       return 10.0 - 30.0/12;
        else if (grade == 'B' )
-       return 5;
+       return 10.0 - 40.0/12;
        else if (grade == 'B-')
-       return 4;
+       return 10.0 - 50.0/12;
        else if (grade == 'C+')
-       return 3;
+       return 10.0 - 60.0/12;
        else if (grade == 'C')
-       return 2;
+       return 10.0 - 70.0/12;
        else if (grade == 'C-')
-       return 1;
+       return 10.0 - 80.0/12;
        else if (grade == 'D+')
-       return 0;
+       return 10.0 - 90.0/12;
        else if (grade == 'D')
-       return 19;
+       return 10.0 - 100.0/12;
        else if (grade == 'D-')
-       return 10;
+       return 10.0 - 110.0/12;
        else
-         return 0;
+         return 10.0 - 120.0/12;
      }
 
      function statementsComplete() {
@@ -1120,10 +1120,11 @@
       <div class='dialog-help-map1 dialog-style' style="z-index:999">
   <center>
     <div class="home-btn-dialog-box">
+            <a href="#" class="translate-btn">Español</a>
             <span style="font-size: 24px;font-weight:bold;padding-right: 15px;" onclick="accounts.hideAll();$('.menubar').show();">X</span>
     </div>
     <div class='dialog-text-style-noflow responsive-body'>
-            <div class="basic-header" style="padding-top: 5px;">About the Map</div>
+            <div style="padding-top: 5px;">About the Map</div>
       <span class="english">{% autoescape off %}{{client_settings.HELP_CAFE_ABOUT}}{% endautoescape %}</span>
       <span class="spanish"><em>P:</em>¿Cómo funcionan las esferas?<br/>
           <em>R:</em> Presiona sobre cualquier esfera (cada esfera representa la sugerencia de algún participante) Se muestra solo una sugerencia a la vez<br/><br/>
