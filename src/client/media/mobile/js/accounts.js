@@ -421,7 +421,7 @@ $(document).ready(function() {
                         accounts.setAuthenticated();
 
                         var loading = "Loading"
-                        if (window.lang = "es")
+                        if (window.lang == "es")
                             loading = "Cargando"
 
                         utils.showLoading(loading, function() {

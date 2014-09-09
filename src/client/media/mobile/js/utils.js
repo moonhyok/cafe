@@ -79,6 +79,10 @@ var utils = (function($, d3, console) {
     };
 
     function translateAll() {
+        if(window.translation_lock)
+            return
+
+        window.translation_lock = true
         var a = document.body.getElementsByTagName("*");
         var index;
         for (index = 0; index < a.length; index++)
@@ -109,6 +113,8 @@ var utils = (function($, d3, console) {
             $('.english').show();
             window.lang = 'en'
         }
+
+        window.translation_lock = false
             
     }
 
