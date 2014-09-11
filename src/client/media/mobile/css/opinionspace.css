@@ -22,6 +22,10 @@ html {
   background-color: #e2decf !important;
 }
 
+a {
+	color: #442b10 !important;
+}
+
 body{
   background-image:url('../img/cafe/capitol-landing.png');
   background-size: cover;
