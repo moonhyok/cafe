@@ -223,6 +223,7 @@ var accounts = (function($, d3, console) {
         justRegistered = typeof justRegistered !== 'undefined' ? justRegistered : false;
         dcontinue = typeof dcontinue !== 'undefined' ? dcontinue : false;
         $('#regzip').prop('disabled', true);
+        $('.registerb').html("Next");
         //utils.ajaxTempOff(function() {
 
         $.ajax({
