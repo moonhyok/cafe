@@ -536,8 +536,12 @@ var _blooms = blooms = (function($, d3, console) {
             }
         });
 
+        var youText = "You"
+        if(window.lang == 'es')
+            youText = "Usted"
+
         window.coffeetable_svg.append('svg:text')
-        .text("You")
+        .text(youText)
         .attr('x', function(d) {
             return window.your_mug_data.x-20;
         })
@@ -623,10 +627,7 @@ $(document).ready(function() {
 
                 var loading = "Loading More Spheres..."
                 if(window.lang == 'es')
-                    {
-                        loading = "Cargando más esferas..."
-                        alert('test')
-                    }
+                    loading = "Cargando más esferas..."
 
                 utils.showLoading(loading);
 

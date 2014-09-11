@@ -91,24 +91,25 @@ var accounts = (function($, d3, console) {
                         //draw line on canvas
                         var canvas = document.getElementById("sparkLineCanvas"+(i+1));
                          var context = canvas.getContext('2d');
-                         context.beginPath();
-                        context.lineWidth = 0;
-                        context.fillStyle = '#6c8c7e';
-                        var convertedSlider = Math.floor(1.2*window.sliders[i]);
-                        context.moveTo(convertedSlider*12-5+5, 0);
-                        context.lineTo(convertedSlider*12+5, 5);
-                        context.lineTo(convertedSlider*12+5+5, 0);
-                        context.fill(); 
+                        
+                        context.beginPath();
+                        context.lineWidth = 6;
+                        context.strokeStyle = '#6c8c7e';
+                        var convertedSlider = Math.round(1.2*window.sliders[i]);
+                        var data = window.statement_processed_data[i];
+                        var max_of_array = Math.max.apply(Math, data);
+                        context.moveTo(convertedSlider*12+5, 45);
+                        context.lineTo(convertedSlider*12+5, 45 - data[convertedSlider]/max_of_array*38);
+                        context.stroke(); 
 
                         var canvas = document.getElementById("sparkLineCanvasDetail"+(i+1));
                          var context = canvas.getContext('2d');
                            context.beginPath();
-                        context.lineWidth = 0;
-                        context.fillStyle = '#6c8c7e';
-                        context.moveTo(convertedSlider*29-10+10, 0);
-                        context.lineTo(convertedSlider*29+10, 10);
-                        context.lineTo(convertedSlider*29+10+10, 0);
-                        context.fill();  
+                        context.lineWidth = 10;
+                        context.strokeStyle = '#6c8c7e';
+                        context.moveTo(convertedSlider*23+10, 90);
+                        context.lineTo(convertedSlider*23+10, 90 - data[convertedSlider]/max_of_array*76);
+                        context.stroke();  
 
                         //blooms will be populated at the end of this! see callback
                         //there are two calls!!

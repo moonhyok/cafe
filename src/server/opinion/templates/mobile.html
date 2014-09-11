@@ -101,6 +101,8 @@
 
      window.slider_shift = 6.15;
 
+     window.statement_processed_data = {};
+
      window.num_sliders = {{ statements|length }};
 
      window.refer = '{{ refer }}';
@@ -554,6 +556,8 @@
          var data = {{v}};
          var max_of_array = Math.max.apply(Math, data);
 
+         window.statement_processed_data[({{k.id}}-1)] = data
+
          context.beginPath();
          context.lineWidth = 6;
          context.strokeStyle = '#442b10';
@@ -793,8 +797,8 @@
           </div>
           <div class="responsive-body" style="text-align:center;padding-top: 15px;">
             <span>{{client_settings.LOGOUT_DIALOG_TEXT}}</span><br/><br/>
-      <a href="https://twitter.com/home?status=How%20can%20technology%20enhance%20learning%20at%20@nyuniversity?%20Take%205%20mins%20to%20share%20your%20perspectives%20opinion.berkeley.edu/open-nyu/v1" target="_blank" style="color: #555555;"><img src="{{url_root}}/media/mobile/img/cafe/twitter-button.png" width="102px"></a>
-      <a href="http://hrefshare.com/f145" target="_blank" style="color: #555555;"><img src="{{url_root}}/media/mobile/img/cafe/facebook-button.png" width="102px"></a><br/>
+      <a href="http://twitter.com/home?status=How%20do%20you%20grade%20California?%20%20Try%20@CAReportCard%20developed%20by%20@Cal%20@GavinNewsom%20%26%20@Ken_Goldberg%20%20http://californiareportcard.org/mobile%20%23CA%20%23Gov" target="_blank" style="color: #555555;"><img src="{{url_root}}/media/mobile/img/cafe/twitter-button.png" width="102px"></a>
+      <a href="http://on.fb.me/1jF60JL" target="_blank" style="color: #555555;"><img src="{{url_root}}/media/mobile/img/cafe/facebook-button.png" width="102px"></a><br/>
 
             <span class="english"> Election and Voter Information: <a href="http://www.sos.ca.gov/elections/new-voter/" target="_blank" style="color: #555555;">CAVoterInformation</a><br/><br/>
 
