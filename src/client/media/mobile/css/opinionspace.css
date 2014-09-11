@@ -293,7 +293,7 @@ table.pretty caption {
 	}
 
 	.dialog-text-style-noflow em {    
-    font-size: 32px !important;
+    font-size: 19px !important;
     }
 
 	.responsive-header{
@@ -1535,7 +1535,7 @@ padding-top: 20px;
 }
 
 .dialog-text-style-noflow em {
-   color: #CCCCCC;
+   color: #4e300f;
     text-decoration: none;
     
     font-size: 16px;
