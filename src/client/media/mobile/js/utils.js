@@ -118,6 +118,13 @@ var utils = (function($, d3, console) {
             window.lang = 'en'
         }
 
+        if(window.lang == 'en'){
+                    $('.instructions-light').html("Please join the conversation by clicking your sphere to add your own suggestion for the next report card.")
+                }
+                else{
+                    $('.instructions-light').html("Ahora es su turno. Presione sobre su esfera para introducir su sugerencia.")
+                }
+
         window.translation_lock = false
             
     }
