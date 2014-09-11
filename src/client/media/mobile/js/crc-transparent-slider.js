@@ -15,7 +15,7 @@ for (var i=1;i<=window.num_sliders;i++)
 //$( ".slider" ).append( "<span class=\"manual-slide manual-slide-left\"><</span>" );
 $( ".slider" ).append( "<div class=\"crc-div-wrapper\"><div class=\"grade-container\"></div></div>" );
 
-grades = ['A+','A','A-','B+','B','B-','C+','C','C-','D+','D','D-','F']
+grades = ['A-','A','A+','B-','B','B+','C-','C','C+','D-','D','D+','F']
 grades.forEach(function(grade) { 
 
 	if(grade.indexOf('+') >= 0)
