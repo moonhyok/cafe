@@ -125,7 +125,7 @@ var rate = (function($, d3, console) {
             if (window.user_score == 2) {
                 $('.rate').hide();
                 $('.instructions-light').show();
-                $('.instructions-light').html("Now it’s your turn. Tap your sphere below to provide your suggestion.")
+                $('.instructions-light').html("Please join the conversation by clicking your sphere to add your own suggestion for the next report card.")
                 //$('.instructions2').hide();
                 //$('.instructions3').show();
                 try{

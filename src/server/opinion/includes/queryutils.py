@@ -359,7 +359,7 @@ def get_new_responses(user,os,disc_stmt,num_responses=0):
 def get_statement_histograms():
 	output = {}
 	for s in OpinionSpaceStatement.objects.order_by('id'):
-		output[s] = json.dumps(numpy.histogram(UserRating.objects.filter(is_current=True,opinion_space_statement=s).values_list('rating'), bins=10)[0].tolist())
+		output[s] = json.dumps(numpy.histogram(UserRating.objects.filter(is_current=True,opinion_space_statement=s).values_list('rating'), bins=13)[0].tolist())
 	return output
 	
 # return all suggestions if num_suggestions = -1

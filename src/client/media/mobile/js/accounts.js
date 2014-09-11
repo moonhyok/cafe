@@ -94,9 +94,9 @@ var accounts = (function($, d3, console) {
                          context.beginPath();
                         context.lineWidth = 0;
                         context.fillStyle = '#6c8c7e';
-                        context.moveTo(window.sliders[i]*16-5+5, 0);
-                        context.lineTo(window.sliders[i]*16+5, 5);
-                        context.lineTo(window.sliders[i]*16+5+5, 0);
+                        context.moveTo(window.sliders[i]*12-5+5, 0);
+                        context.lineTo(window.sliders[i]*12+5, 5);
+                        context.lineTo(window.sliders[i]*12+5+5, 0);
                         context.fill(); 
 
                         var canvas = document.getElementById("sparkLineCanvasDetail"+(i+1));

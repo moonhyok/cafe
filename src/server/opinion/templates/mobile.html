@@ -474,7 +474,7 @@
       </div>
 
       <div class="burger-div burger-div-logout">
-              Exit Application
+              Exit
       </div>
     </div>
   </center>
@@ -561,18 +561,18 @@
                context.shadowOffsetX = 1;
                context.shadowOffsetY = 1;
          //context.moveTo(0, 45 - data[0]/max_of_array*38);
-         for (i = 0; i <= 9; i++)
+         for (i = 0; i <= 12; i++)
          {
-     context.moveTo(i*16+5, 45);
-     context.lineTo(i*16+5, 45 - data[i]/max_of_array*38);
+     context.moveTo(i*12+5, 45);
+     context.lineTo(i*12+5, 45 - data[i]/max_of_array*38);
      context.stroke(); 
          }
 
          context.font="italic small-caps bolder 12px sans-serif";
          context.fillStyle = '#442b10';
-         context.fillText("0",0,58);
+         context.fillText("F",0,58);
 
-         context.fillText("9",145,58);
+         context.fillText("A+",145,58);
         </script>
 
       </div>
@@ -631,18 +631,18 @@
                context.shadowOffsetX = 1;
                context.shadowOffsetY = 1;
          //context.moveTo(0, 90 - data[0]/max_of_array*76);
-         for (i = 0; i <= 9; i++)
+         for (i = 0; i <= 12; i++)
          {
-     context.moveTo(i*29+10, 90);
-     context.lineTo(i*29+10, 90 - data[i]/max_of_array*76);
+     context.moveTo(i*23+10, 90);
+     context.lineTo(i*23+10, 90 - data[i]/max_of_array*76);
      context.stroke(); 
          }
 
          context.font="italic small-caps bolder 12px sans-serif";
          context.fillStyle = '#442b10';
-         context.fillText("0",5,104);
+         context.fillText("F",5,104);
 
-         context.fillText("9",267,104);
+         context.fillText("A+",277,104);
         </script>
 
       </div>
@@ -903,7 +903,7 @@
     <br/>-->
                 <div class='button-div-wide responsive-btn' onclick="$('.burger-div-others').click();">Rate Others</div>
                 <div class='button-div-wide responsive-btn' onclick="$('.burger-div-yours').click();">Edit Your Idea</div>
-                <div class='button-div-wide responsive-btn' onclick="$('.burger-div-logout').click();">Exit Application</div>
+                <div class='button-div-wide responsive-btn' onclick="$('.burger-div-logout').click();">Exit</div>
     <div class='alert-error' id='email-error' style='display:none;width: 250px;'></div>
               </center>
 
