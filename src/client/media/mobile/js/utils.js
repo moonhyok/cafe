@@ -118,10 +118,10 @@ var utils = (function($, d3, console) {
             window.lang = 'en'
         }
 
-        if(window.lang == 'en' && window.user_score == 2){
+        if(window.lang == 'en' && window.user_score >= 2){
                     $('.instructions-light').html("Please join the conversation by clicking your sphere to add your own suggestion for the next report card.")
                 }
-                else{
+       else if (window.lang == 'es' && window.user_score >= 2){
                     $('.instructions-light').html("Ahora es su turno. Presione sobre su esfera para introducir su sugerencia.")
                 }
 
