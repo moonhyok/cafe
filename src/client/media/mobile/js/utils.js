@@ -109,12 +109,14 @@ var utils = (function($, d3, console) {
            {
             $('.spanish').show();
             $('.english').hide();
+            $('#regemail').attr("placeholder","Email (Opcional)");
             window.lang = 'es'
            } 
         else
         {
             $('.spanish').hide();
             $('.english').show();
+            $('#regemail').attr("placeholder","Email (Optional)");
             window.lang = 'en'
         }
 
