@@ -23,7 +23,7 @@ var translations = {
                     'Question':
                         'Pregunta',
 
-                    'Enter your zip code to save your grades and join the discussion':
+                    'Please enter your zip code to save your grades and join the discussion':
                         'Ingrese su código postal para guardar sus calificaciones',
 
                     'Skip':
