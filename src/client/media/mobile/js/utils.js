@@ -118,7 +118,7 @@ var utils = (function($, d3, console) {
             window.lang = 'en'
         }
 
-        if(window.lang == 'en'){
+        if(window.lang == 'en' && window.user_score == 2){
                     $('.instructions-light').html("Please join the conversation by clicking your sphere to add your own suggestion for the next report card.")
                 }
                 else{
