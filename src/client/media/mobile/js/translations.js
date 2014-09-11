@@ -81,6 +81,9 @@ var translations = {
                         '¡Gracias!',
 
                     'Post':
-                        'Guardar'
+                        'Guardar',
+
+                    'Please grade the State of California on:':
+                        'Asigne calificaciones al Estado de California:'
 
                     }
