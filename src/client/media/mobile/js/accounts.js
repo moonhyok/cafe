@@ -1012,6 +1012,14 @@ $(document).ready(function() {
         $(this).css("background-image",$(this).css("background-image").replace("wide-down","wide"));
     });
 
+    $('#reg_form').bind("keyup keypress", function(e) {
+    var code = e.keyCode || e.which; 
+     if (code  == 13) {               
+        $('.registerb').click();
+        return false;
+    }
+    });
+
     
     $('#regrade-btn').click(function(){
 		$('.welcome-back').hide();
