@@ -406,7 +406,7 @@ table.pretty caption {
     box-shadow: 0px 2px 2px #888888;
     text-shadow: 1px 1px white;
     font-family: DroidSans-Bold, sans-serif;
-    padding-left: 20px;
+    padding-left: 10px;
     z-index: 999;
     background-image: url('../img/cafe/rounded-base.png');
 	background-size: cover;
