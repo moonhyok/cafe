@@ -623,7 +623,7 @@ $(document).ready(function() {
 
                 var loading = "Loading More Spheres..."
                 if(window.lang == 'es')
-                    loading = "Cargando"
+                    loading = "Cargando más esferas"
 
                 utils.showLoading(loading);
 
