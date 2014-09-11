@@ -59,7 +59,11 @@ $(".slider-grade-bubble").on("click",function(e){
         try {
             if (window.blooms_list.length <= 2) {
                 console.log("here");
-                utils.showLoading("Loading More Spheres...");
+                var loading = "Loading More Spheres..."
+                if(window.lang == 'es')
+                    loading = "Cargando más esferas..."
+
+                utils.showLoading(loading);
                 window.blooms_list = undefined; //needed to avoid infinite recursing
                 setTimeout(blooms.populateBlooms, 500);
                 //utils.hideLoading();
