@@ -296,7 +296,7 @@ table.pretty caption {
     }
 
 	.responsive-header{
-		font-size: 24px !important;
+		font-size: 19px !important;
 		padding-bottom: 10px;
 		line-height: 32px !important;
 	}
@@ -1432,8 +1432,11 @@ padding-right: 7px;
 }
 
 .translate-btn{
-	font-size:12px;
+	font-size:17px;
 	padding-left:10px;
+	font-family: DroidSans, sans-serif;
+	font-weight: normal;
+
 }
 
 .dialog-style{
