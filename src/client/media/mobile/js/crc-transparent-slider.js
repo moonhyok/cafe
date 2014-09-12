@@ -31,6 +31,7 @@ $(".slider-grade-bubble").on("click",function(e){
 	//$(this).parent().children(".slider-grade-bubble").css("background-image","url()"); 
     
     $(this).parent().children(".slider-grade-bubble").each( function(i){
+    	$(this).css("background-image",$(this).css("background-image").replace("keypad-hover","keypad"));
     	$(this).css("background-image",$(this).css("background-image").replace("keypad-down","keypad"));
 	});
 
@@ -144,41 +145,23 @@ $(".slider-grade-bubble").on("click",function(e){
 
 $(".slider-grade-bubble").on("touchstart",function(e){ 
 
-	$(this).css("background-image",$(this).css("background-image").replace("keypad-0","keypad-down-0"));
-	
-	if($(this).parent().parent().parent().attr("id").substring(7).indexOf("importance") > -1)
-	{
-		var classList = $(this).attr('class').split(/\s+/);
-		window.current_rating = grade_to_score(classList[2].substring(7).replace("p","+"));
-		return;
-	}
+	//$(this).parent().children(".slider-grade-bubble").css("opacity","1.0"); 
+	//$(this).parent().children(".slider-grade-bubble").css("background-image","url()"); 
+    
+    $(this).parent().children(".slider-grade-bubble").each( function(i){
+    	$(this).css("background-image",$(this).css("background-image").replace("keypad-hover","keypad"));
+    	$(this).css("background-image",$(this).css("background-image").replace("keypad-down","keypad"));
+	});
 
-	try {
-	statement_id = parseInt($(this).parent().parent().parent().attr("id").substring(7));
-	var classList =$(this).attr('class').split(/\s+/);
-	window.sliders[statement_id-1] = grade_to_score(classList[2].substring(7).replace("p","+"));
-	median = score_to_grade(100*medians[statement_id]);
-	rate.logUserEvent(11,'slider_set ' + statement_id + ' ' + window.sliders[statement_id-1]/10);
-
-	/*$(this).parent().children(".bubble-"+median.replace("+","p")).css("border","4px solid #66FFFF");
-	if (window.rate_count == 0){
-	$(".median-grade-"+statement_id).html("The median grade so far is highlighted in blue.");
-	$(".median-grade-"+statement_id).fadeIn(500);
-	$(".median-grade-"+statement_id).fadeOut(6000);
-	}*/
-	
-	//$(".skip-button-"+statement_id).hide();
-	}
-	catch(exception){}
-
-	window.rate_count = window.rate_count + 1
-
-	//median = score_to_grade(100*medians[parseInt($(this).parent().parent().parent().attr("id").substring(7))]);
-	
-	//$(this).parent().children(".bubble-"+median.replace("+","p")).css("opacity","1.0");
-	//$(this).parent().children(".bubble-"+median.replace("+","p")).css("border","1px solid #000000");
-	//$(this).parent().children(".bubble-"+median.replace("+","p")).innerHTML = "<div style=\"font-size: 10px;\">Median</font>";
 });
+
+    $('.slider-grade-bubble').on('mouseover',function(e){
+        $(this).css("background-image",$(this).css("background-image").replace("keypad","keypad-hover"));
+    });
+
+    $('.slider-grade-bubble').on('mouseout',function(e){
+        $(this).css("background-image",$(this).css("background-image").replace("keypad-hover","keypad"));
+    });
 //$(".slider-grade-bubble").on("mouseover",function(e){ $(this).css("opacity","0.5"); });
 
 
