@@ -1,6 +1,6 @@
 var translations = {
                     'California Report Card': 
-                        'Califique California',
+                        'Califica a California',
                     
                     'Español': 
                         'English',
@@ -24,7 +24,7 @@ var translations = {
                         'Pregunta',
 
                     'Please enter your zip code to save your grades and join the discussion':
-                        'Ingrese su código postal para guardar sus calificaciones',
+                        'Ponga su código postal y guardar sus calificaciones.',
 
                     'Skip':
                         'Saltar',
@@ -36,7 +36,7 @@ var translations = {
                         'Su dirección de correo electrónico no será publicada y además nos comprometemos a no compartirla con terceros.',
 
                     'Next':
-                        'Siguiente',
+                        'Proseguir',
 
                     'Edit Your Idea':
                         'Editar su Idea',
@@ -57,7 +57,7 @@ var translations = {
                         'Califica a otros',
 
                     'How do my answers compare to the other respondents?':
-                        '¿Cómo mis respuestas se comparan a las de otros?',
+                        '¿Cómo se comparan mis calificaciones con las de los otros?',
 
                     'Please join the conversation by clicking your sphere to add your own suggestion for the next report card.':
                         'Ahora es su turno. Presione sobre su esfera para introducir su sugerencia',
@@ -66,7 +66,7 @@ var translations = {
                         'más información',
 
                     'Each sphere represents a participant. Tap any sphere to begin.':
-                        'Cada espera representa a un participante. Presiona sobre cualquiera de ellas para comenzar.',
+                        'Cada esfera representa a un participante.  Presiona cualquiera de ellas para comenzar.',
 
                     'About the Map':
                         'Ayuda',
@@ -87,6 +87,6 @@ var translations = {
                         'Guardar',
 
                     'Please grade the State of California on:':
-                        'Asigne calificaciones al Estado de California:'
+                        'Póngale una calificación al Estado de California:'
 
                     }
