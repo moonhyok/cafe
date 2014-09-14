@@ -87,6 +87,9 @@ var translations = {
                         'Guardar',
 
                     'Please grade the State of California on:':
-                        'Póngale una calificación al Estado de California:'
+                        'Póngale una calificación al Estado de California:',
+
+                    'of':
+                        '/'
 
                     }
