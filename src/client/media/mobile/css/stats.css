@@ -1,6 +1,7 @@
 body{
     font-family: verdana, sans-serif;
-    background-color: #76b9b7;
+    background-image:url('../img/cafe/capitol-landing.png');
+    background-size: cover;
     color: #4f300b;
     font-size:14px;
     
