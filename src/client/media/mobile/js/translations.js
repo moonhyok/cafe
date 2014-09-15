@@ -56,7 +56,7 @@ var translations = {
                     'Rate Others':
                         'Califica a otros',
 
-                    'How do my answers compare to the other respondents?':
+                    'How do your answers compare to the other respondents?':
                         '¿Cómo se comparan mis calificaciones con las de los otros?',
 
                     'Please join the conversation by clicking your sphere to add your own suggestion for the next report card.':
