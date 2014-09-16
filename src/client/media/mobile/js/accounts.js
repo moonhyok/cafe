@@ -95,11 +95,20 @@ var accounts = (function($, d3, console) {
                         context.beginPath();
                         context.lineWidth = 6;
                         context.strokeStyle = '#39b54a';
-                        var convertedSlider = Math.round(1.2*window.sliders[i]);
+                        var convertedSlider = 12-Math.round(1.2*window.sliders[i]);
+
+                        if(window.skipped[i])
+                            convertedSlider = 13
+
                         var data = window.statement_processed_data[i];
                         var max_of_array = Math.max.apply(Math, data);
-                        context.moveTo(convertedSlider*12+5, 45);
-                        context.lineTo(convertedSlider*12+5, 45 - data[convertedSlider]/max_of_array*38);
+
+                        var skipOffset = 0
+                        if (convertedSlider == 13)
+                            skipOffset = 7
+
+                        context.moveTo(convertedSlider*11+5+skipOffset, 45);
+                        context.lineTo(convertedSlider*11+5+skipOffset, 45 - data[convertedSlider]/max_of_array*38);
                         context.stroke(); 
 
                         var canvas = document.getElementById("sparkLineCanvasDetail"+(i+1));
@@ -107,8 +116,8 @@ var accounts = (function($, d3, console) {
                            context.beginPath();
                         context.lineWidth = 10;
                         context.strokeStyle = '#39b54a';
-                        context.moveTo(convertedSlider*23+10, 90);
-                        context.lineTo(convertedSlider*23+10, 90 - data[convertedSlider]/max_of_array*76);
+                        context.moveTo(convertedSlider*22+10+skipOffset, 90);
+                        context.lineTo(convertedSlider*22+10+skipOffset, 90 - data[convertedSlider]/max_of_array*76);
                         context.stroke();  
 
                         //blooms will be populated at the end of this! see callback

@@ -23,7 +23,7 @@ var translations = {
                     'Question':
                         'Pregunta',
 
-                    'Please enter your zip code to save your grades and join the discussion':
+                    'Please enter your zip code to see how your grades compare to those of others':
                         'Ponga su código postal y guardar sus calificaciones.',
 
                     'Skip':
@@ -33,7 +33,7 @@ var translations = {
                         'Salir',
 
                     'Your email address will not be displayed and we promise not to share your email address with any third parties.':
-                        'Su dirección de correo electrónico no será publicada y además nos comprometemos a no compartirla con terceros.',
+                        'Su dirección de correo electrónico no se mostrará y prometemos no compartir su dirección con ningún tercero.',
 
                     'Next':
                         'Proseguir',
@@ -42,7 +42,7 @@ var translations = {
                         'Editar su Idea',
 
                     'How important is this issue for the next Report Card?':
-                        '¿Cuán importante es este asunto como para ser incluido en la próxima Report Card?',
+                        '¿Qué tan importante es esta cuestión en la próxima Libreta de calificaciones?',
 
                     'Zipcode must be 5 digits':
                     'El código postal debe tener 5 dígito',
@@ -56,8 +56,8 @@ var translations = {
                     'Rate Others':
                         'Califica a otros',
 
-                    'How do your answers compare to the other respondents?':
-                        '¿Cómo se comparan mis calificaciones con las de los otros?',
+                    'How do your answers compare to the other respondents? Your grade is marked in green.':
+                        '¿Cómo se comparan mis respuestas con las de los demás encuestados? Su valoración está marcada en verde.',
 
                     'Please join the conversation by clicking your sphere to add your own suggestion for the next report card.':
                         'Ahora es su turno. Presione sobre su esfera para introducir su sugerencia',
@@ -72,16 +72,16 @@ var translations = {
                         'Ayuda',
 
                     'About the CRC':
-                        'Acerca de Califique California',
+                        'Acerca de la Libreta de calificaciones de California',
 
                     'Thank You!':
                         '¡Gracias!',
 
                     'You can continue to contribute to the discussion by reading and evaluating the ideas of others.':
-                        'Ahora puede cerrar sesión o calificar más esferas',
+                        'Puede seguir contribuyendo al debate leyendo y evaluando las ideas de los demás.',
 
                     'Thank you for participating!':
-                        '¡Gracias!',
+                        '¡Gracias por participar!',
 
                     'Post':
                         'Guardar',

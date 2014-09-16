@@ -403,7 +403,7 @@
 
     <div class= 'registerpanel'>
             <center>
-              <div class="basic-header2 responsive-header" style="max-width: 500px;">{{client_settings.ZIP_CODE_INSTRUCTIONS}}</div>
+              <div class="basic-header2 responsive-body" style="max-width: 500px;">{{client_settings.ZIP_CODE_INSTRUCTIONS}}</div>
             
               <form id='reg_form' class='reg_form responsive-form'>
             <center>
@@ -498,7 +498,7 @@
           </div> 
     <!--<img class="header-img-topic center" src="{{ url_root }}/media/mobile/img/cafe/CRC_join.png"/>-->
           <div class='dialog-text1 dialog-text-style'>
-            <span>How do your answers compare to the other respondents?</span> <span class="english">Your grade is marked in green.</span>
+            <span>How do your answers compare to the other respondents? Your grade is marked in green.</span>
           </div>
 
           <br/>
@@ -512,7 +512,7 @@
               <div style="font-size: 14px; font-weight: bolder;" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();"><span>more info</span> >></div>
             </div>
 
-            <canvas id="sparkLineCanvas{{k.id}}" width="160" height="58"></canvas>
+            <canvas id="sparkLineCanvas{{k.id}}" width="175" height="58"></canvas>
             
             <div>
         
@@ -565,18 +565,23 @@
                context.shadowOffsetX = 1;
                context.shadowOffsetY = 1;
          //context.moveTo(0, 45 - data[0]/max_of_array*38);
-         for (i = 0; i <= 12; i++)
+         for (i = 0; i <= 13; i++)
          {
-     context.moveTo(i*12+5, 45);
-     context.lineTo(i*12+5, 45 - data[i]/max_of_array*38);
+          var skipOffset = 0
+          if (i == 13)
+            skipOffset = 7
+
+     context.moveTo(i*11+5+skipOffset, 45);
+     context.lineTo(i*11+5+skipOffset, 45 - data[i]/max_of_array*38);
      context.stroke(); 
          }
 
          context.font="italic small-caps bolder 12px sans-serif";
          context.fillStyle = '#442b10';
-         context.fillText("F",0,58);
+         context.fillText("A+",0,58);
 
-         context.fillText("A+",145,58);
+         context.fillText("F",133,58);
+         context.fillText("Ø",149,58);
         </script>
 
       </div>
@@ -620,7 +625,7 @@
 
     <center>     
             <div style="margin-left: 15px;">
-              <canvas id="sparkLineCanvasDetail{{k.id}}" width="300" height="105" style="background-color: rgba(255,255,255,0.4)"></canvas>
+              <canvas id="sparkLineCanvasDetail{{k.id}}" width="315" height="105" style="background-color: rgba(255,255,255,0.4)"></canvas>
               <script>
          var canvas = document.getElementById('sparkLineCanvasDetail{{k.id}}');
          var context = canvas.getContext('2d');
@@ -634,25 +639,33 @@
                context.shadowOffsetX = 1;
                context.shadowOffsetY = 1;
          //context.moveTo(0, 90 - data[0]/max_of_array*76);
-         for (i = 0; i <= 12; i++)
+         for (i = 0; i <= 13; i++)
          {
-     context.moveTo(i*23+10, 90);
-     context.lineTo(i*23+10, 90 - data[i]/max_of_array*76);
-     context.stroke(); 
+          var skipOffset = 0
+          if (i == 13)
+            skipOffset = 7
+
+          context.moveTo(i*22+10+skipOffset, 90);
+          context.lineTo(i*22+10+skipOffset, 90 - data[i]/max_of_array*76);
+          context.stroke(); 
          }
 
          context.font="italic small-caps bolder 12px sans-serif";
          context.fillStyle = '#442b10';
-         context.fillText("F",5,104);
+         context.fillText("A+",5,104);
 
-         context.fillText("A+",277,104);
+         context.fillText("F",268,104);
+         context.fillText("Ø",296,102);
         </script>
 
-<div id="detail-more-info-{{k.id}}" class="dialog-text-style responsive-body english"></div>
+<div id="detail-emore-info-{{k.id}}" class="dialog-text-style responsive-body english"></div>
+<div id="detail-smore-info-{{k.id}}" class="dialog-text-style responsive-body spanish"></div>
   
   <script>
   var detail_text = ["","California was the first state to pass legislation creating a health insurance marketplace--Covered California. As of Dec 2013, Covered California had over 630,000 enrollees.", "California recently adopted the \"common core\" challenges, which emphasize critical thinking and analysis in K-12 education to better prepare students for college and the workforce.", "The 2014-15 draft California budget calls for a 10.8% increase in higher education funding, which could keep current tuition costs stable.", "Passed in 2006, California Senate Bill 1569 extends eligibility for undocumented immigrants in California for food assistance, supplemental security income, and health insurance. Passed in 2011, The California Dream Act grants undocumented immigrant access to state aid at public universities and colleges.","California was the first state to legalize the distribution of medical marijuana in 1996. Recreational use of marijuana is illegal in the State of California. However, California lawmakers are currently considering legalizing, taxing, and regulating marijuana for recreational use.", "California legalized same sex marriage in 2008. However, Proposition 8, which revoked marriage rights for same sex couples, was also passed in 2008. Proposition 8 was overturned in 2013."]
-  document.getElementById("detail-more-info-{{k.id}}").innerHTML = detail_text[{{k.id}}];
+  var sdetail_text = ["","California fue el primer estado aprobar una ley para crear un mercado de seguros de salud -- Covered California (California cubierta). Hasta diciembre de 2013, Covered California tenía más de 630,000 afiliados.", "Hace poco California adoptó el desafío de los «estándares», que hace hincapié en el pensamiento crítico y el análisis en la educación de K-12 (jardín de infancia hasta 12º grado) para preparar mejor a los estudiantes para la universidad y la vida laboral.", "El proyecto de presupuesto de California de 2014-15 reclama un aumento del 10.8% en la financiación de la educación superior, que podrían mantener los gastos de matrícula actuales estables.", "Adoptada en el 2006, la Ley 1569 del Senado de California amplía la elegibilidad de los inmigrantes indocumentados en California para asistencia alimentaria, seguridad de ingresos suplementarios y seguro de salud. Adoptada en el 2011, la Ley del Sueño de California otorga a los inmigrantes indocumentados acceso a ayuda estatal en los colegios y universidades públicas.","California fue el primer estado en legalizar la distribución de la marihuana en el año 1996. El uso recreativo de la marihuana es ilegal en el Estado de California. Sin embargo, los legisladores de California están actualmente considerando legalizar, gravar y regular la marihuana para su uso recreativo.", "California legalizó el matrimonio entre parejas del mismo sexo en 2008. Sin embargo, la Proposición 8, que recovó los derechos de contraer matrimonio de las parejas del mismo sexo, también fue aprobada en 2008. La Proposición 8 fue revocada en 2013."]
+  document.getElementById("detail-emore-info-{{k.id}}").innerHTML = detail_text[{{k.id}}];
+  document.getElementById("detail-smore-info-{{k.id}}").innerHTML = sdetail_text[{{k.id}}];
   </script>
 
       </div>
@@ -754,11 +767,8 @@
 
       <div class="map-frame">
          <div class="top-bar">
-     <center>
+        <center>
           <div class='menubar'>
-            <!--<div class="scorebox">
-            <span class='score-label'></span><span class='score-value'></span>
-            </div>-->
             <div class="home-btn-title responsive-header" style="width:62%;font-size: 16px;">
               <span class="landing-page-banner">{{client_settings.WELCOME_PAGE_TITLE}}</span> 
             </div>
@@ -766,27 +776,24 @@
             <div class="home-btn-wrapper" style="width:35%;display:inline-block;">
               <a href="#" class="translate-btn">Español</a><img width="30px" class='help-btn-dialog' id="help-menubar" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png" style="position:relative;left:-5px;">
             </div>
-
-            <!--<span class="stats-wrapper" style="display: none;"><img width="30px" class='my-comment-btn' src="{{url_root}}/media/mobile/img/cafe/CRC_stats_bttn.png"></span>-->
           </div>
-
-          <!--<div class='instructions instructions-responsive'>{{client_settings.INSTRUCTIONS_1}}</div>
-          <div class='instructions2 instructions-responsive'>{{client_settings.INSTRUCTIONS_2}}</div>
-          <div class='instructions3 instructions-responsive'><div style="padding-right: 5px; padding-left: 5px;">{{client_settings.INSTRUCTIONS_3}}</div>-->
        </center>
       </div>
-  <center>
-    <div class="instructions-light responsive-body">
-      Each sphere represents a participant. Tap any sphere to begin. 
-    </div>
-    <div style="text-align: left;margin-top: 3px;" class="english">{{ topic }}</div>
-    <div style="text-align: left;margin-top: 3px;" class="spanish">{{ topic_spanish }}</div>
-    <div id='d3' class="d3-canvas"></div>
-  </center>
-  <a href="#" class="map-info" style="position:relative;top:-75px;color:#442b10;text-align: left;display:none;" onclick="accounts.hideAll();$('.dialog-help-map1').show();window.cur_state = 'faq';window.prev_state = 'map';"><img width="30px" src="{{url_root}}/media/mobile/img/cafe/info_button.png"></a>
+      
+    <center>
+      <div class="instructions-light responsive-body">
+        Each sphere represents a participant. Tap any sphere to begin. 
       </div>
 
 
+      <div style="text-align: center;margin-top: 6px;" class="english responsive-body"><span>{{ topic }}</span></div>
+      <div style="text-align: center;margin-top: 6px;" class="spanish responsive-body"><span>{{ topic_spanish }}</span></div>
+      <div style="text-align: right;"><a href="#" class="map-info" style="color:#442b10;position:relative;top:5px;" onclick="accounts.hideAll();$('.dialog-help-map1').show();window.cur_state = 'faq';window.prev_state = 'map';"><img width="30px" src="{{url_root}}/media/mobile/img/cafe/info_button.png"></a></div>
+
+      <div id='d3' class="d3-canvas"></div>
+    </center>
+  </div>
+ 
       <div class='frame'></div>
 
       <div class='logout'>
@@ -1011,30 +1018,22 @@
       <a href='http://californiareportcard.org'> http://californiareportcard.org </a>
       {% endautoescape %}</span>
       <span class="spanish"> <em> Información General </em> <br/>
-      CRC es una plataforma en línea desarrollada por la iniciativa de Datos y Democracia del centro de investigación CITRIS en la UC Berkeley y el vicegobernador de California Gavin Newson. La misma explora cómo los smartphones y las redes pueden mejorar la comunicación entre los ciudadanos y los responsable del gobierno. CRC permite a sus usuarios calificar al estado de California en temas de actualidad así como también posibilita sugerir nuevos temas a ser incluidos en futuras versiones de la aplicación. El proyecto pretende incrementar la participación ciudadana y ayudar a que los líderes gubernamentales, de todos los niveles, estén permanentemente informados acerca de la opinión y prioridades de sus electores. <br/>
+      La Libreta de calificaciones de California (CRC, por sus siglas en inglés) es una plataforma en línea desarrollada por CITRIS Data y Democracy Initiative de UC Berkeley y del Teniente Gobernador Gavin Newsom que explora cómo los smartphones y redes pueden mejorar la comunicación entre los líderes públicos y gubernamentales. La CRC permite a los visitantes valorar las cuestiones a las que se enfrenta California y sugerir cuestiones para próximas libretas de calificaciones. El proyecto busca aumentar la participación del público y ayudar a los líderes de todos niveles a mantenerse informados sobre las opiniones y prioridades cambiantes de sus constituyentes. Cualquiera puede participar dedicando unos minutos a valorar el Estado de California en cuestiones como: Sanidad, Educación, Igualdad de matrimonio, Derechos de los inmigrantes y Despenalización de la marihuana. Actualmente aceptamos respuestas en inglés y español. Es importante indicar que la traducción es una forma de arte. Todos los resultados de Google Translate los revisan y editan personas que hablan dichos idiomas de manera fluido, pero los errores son inevitables. Si encuentra un error grave, envíe un correo electrónico a translate@californiareportcard.org. <br/> <br/>
 
-      CRC funciona en cualquier dispositivo, sin embargo está optimizado para operar en teléfonos móviles utilizados en posición vertical.
-      Cualquier persona puede participar tomándose unos minutos para asignar calificaciones al estado de California sobre temas como: salud, educación, matrimonio igualitario, derechos de los inmigrantes, y despenalización de la marihuana. <br/> <br/>
-
-      <em> P: </em> ¿Cuál es la motivación para crear CRC? <br/>
-      <em> R: </em> Estamos explorando nuevos modelos de intercambio de información y compromiso ciudadano en cuestiones políticas y de interés general. No pretendemos que el modelo propuesto por CRC sea la única respuesta; somos consientes de que es una novedosa metáfora y una nueva manera de recolectar información de la ciudadanía. ¿Estimulará CRC a pensar sobre asuntos de interés público y a reflexionar sobre cómo la opinión pública puede volverse representativa? Queremos ver cómo las personas responden a los temas planteados, como los patrones de respuestas cambian a lo largo del tiempo, y si las calificaciones pueden actuar como catalizadores de discusiones, donde los participantes proponen nuevos temas y al mismo tiempo evalúan las sugerencias de otros. Seguiremos trabajando en el desarrollo de nuevas versiones y modelos basados en las respuestas y datos obtenidos. <br/> <br/>
+      <em> P: </em> ¿Cuál es la motivación de la CRC? <br/>
+      <em> R: </em> Estamos explorando nuevos modelos para el intercambio de información y participación en las cuestiones políticas. No afirmamos que el modelo CRC es la respuesta: es una nueva metáfora y manera de recopilar información. ¿Alentará la CRC a la gente para que piense en cuestiones políticas y cómo está representada la opinión pública? Tenemos curiosidad de ver cómo responde la gente, cómo cambian los patrones de respuesta con el tiempo, y si la valoración será un catalizador para el debate, en el que los participantes proponen nuevas cuestiones para la próxima libreta de calificaciones y evalúan las sugerencias de otros participantes. Seguiremos trabajando para desarrollar nuevas versiones y modelos basados en las respuestas y datos. <br/> <br/>
 
 
       <em> Privacidad </em> <br/>
-     Cualquier información personal será removida de los comentarios y sugerencias. Respetaremos tu privacidad y no compartiremos con terceros tu dirección de correo electrónico. <br/> <br/>
+     Los comentarios y sugerencias serán analizados para omitir la información identificable. Respetamos su privacidad y no compartiremos su dirección de correo electrónico con terceros.  <br/> <br/>
 
-      <em> Significancia Estadística </em> <br/>
-      A diferencia de las encuestas y los sondeos telefónicos aleatorios, aquí, la participación es autoseleccionada y disponible, hasta el momento, para angloparlantes con acceso a un smartphone o a un navegador web. <br/> <br/>
-      
-      A diferencia de las encuestas y sondeos tradicionales, en CRC los usuarios obtienen una retroalimentación instantánea de su opinión ya que la calificación media es presentada luego de introducir calificaciones. Somos conscientes que esta funcionalidad podría sesgar las calificaciones ya que algunos participantes podrían estar tentados a ajustar su calificación a la media produciendo una suerte de regresión hacia la media. <br/> <br/>
-      
-      A modo de presentar los niveles de consenso presentaremos a través de histogramas los datos de las calificaciones, además, demostraremos las diferencias de opinión en las distintas regiones por medio de un mapa geográfico. <br/> <br/>
+      <em> Relevancia estadística </em> <br/>
+      La CRC es diferente de las encuestas telefónicas y sondeos aleatorios. De momento la participación es auto selectiva y accesible para las personas de habla inglesa con acceso a un smartphone o navegador. Después de introducir cada valoración, se revela una calificación media basada en las entradas de todos los participantes anteriores. El objetivo es proporcionar información instantánea a diferencia de las encuestas y sondeos tradicionales. Somos conscientes de que esto puede tener un efecto distorsionante: algunas personas pueden ajustar sus valoraciones para que se acerquen más a la media, lo que resulta en una forma de regresión hacia la media. Incluiremos información sobre el número de dichos ajustes y los valores previos y anteriores en el conjunto de datos abierto. También presentaremos los datos de la valoración como histogramas para transmitir los niveles de consenso y geográficamente para transmitir las diferencias por región. También presentaremos los datos de la valoración como histogramas para transmitir los niveles de consenso y geográficamente para transmitir las diferencias por región. <br/> <br/>
 
       <em> Más </em> <br/>
-      Para información de contacto favor consulte el sitio web de CRC. Para detalles sobre la historia del proyecto, estadísticas a la fecha, enlaces relacionados, y descarga de datos anónimos favor visite: <br/> <br/>
+     Consulte el sitio web de CRC para la información de contacto, información sobre la historia del proyecto, estadísticas hasta la fecha, enlaces relacionados y para descargar datos anónimos cuando estén disponibles: <br/>
 
-
-      <em> California Report Card </em> <br/>
+      <em> Libreta de calificaciones de California</em> <br/>
       <a href='http://californiareportcard.org'> http://californiareportcard.org </a></span>
     </div>
   </center>
@@ -1120,17 +1119,14 @@
     <div class='dialog-text-style-noflow responsive-body'>
             <div style="padding-top: 5px;">About the Map</div>
       <span class="english">{% autoescape off %}{{client_settings.HELP_CAFE_ABOUT}}{% endautoescape %}</span>
-      <span class="spanish"><em>P:</em>¿Cómo funcionan las esferas?<br/>
-          <em>R:</em> Presiona sobre cualquier esfera (cada esfera representa la sugerencia de algún participante) Se muestra solo una sugerencia a la vez<br/><br/>
+      <span class="spanish"><em>P:</em>¿Cómo funcional las esferas?<br/>
+          <em>R:</em> Haga clic en cualquier esfera (cada esfera individual representa la respuesta de un participante). Sólo mostramos una a la vez. <br/><br/>
 
-          <em>P:</em>¿Cómo las esferas se encuentra organizadas en el espacio?<br/>
-          <em>R:</em> La ubicación de las esferas en el espacio está basada en las calificaciones de los participantes en los primeros 3 temas. Cada tema representa una dimensión en un espacio tridimensional. Las calificaciones de los participantes definen un punto en este espacio. Usamos reducción dimensional (actualmente análisis de componentes principales) para proyectar este espacio tridimensional en un plano de dos dimensiones. Si usted y algún otro participante asignan calificaciones similares, sus esferas se encontrarán cercanas una de otra. Sin embargo, las esferas que aparecen alejadas pertenecen a participantes cuyas calificaciones son muy diferentes a las tuyas. <br/><br/>
+          <em>P:</em>¿Cómo están organizadas las esferas?<br/>
+          <em>R:</em> La colocación de la esfera de cada participante se basa en cómo valoró las 3 primeras cuestiones. Cada cuestión representa una dimensión de un espacio tridimensional. Las valoraciones que asigne definen un punto en este espacio. Usamos la reducción dimensional (actualmente, Análisis del componente principal) para proyectar ese espacio en un plano bidimensional. Si usted u otro participante asignan puntos muy similares, sus esferas estarán muy próximas entre sí. Las esferas que estén lejos de la suya pertenecen a participantes que valoraron de forma diferente las tres primeras preguntas.  <br/><br/>
 
-          <em>P:</em> ¿Por qué solo visualizo 8-10 esferas? <br/>
-          <em>R:</em> A modo de evitar una super población de esferas, solo se muestran al mismo tiempo un pequeño grupo de estas para su calificación. Aunque se eligen aleatoriamente las esferas a mostrar, existe una tendencia a desplegar las más nuevas, es decir aquellas que recibieron pocas calificaciones.<br/><br/>
-
-          <em>P:</em> ¿Cómo se determina cuales esferas serán mostradas? <br/>
-          <em>R:</em> Específicamente, la probabilidad de que una esfera sea desplegada está basada en su error estándar = stdev/sqrt(k) donde k es el número de calificaciones que la esfera ha recibido hasta el momento, y stdev es la varianza de estas calificaciones. A lo largo del tiempo, esto asegura que, la confianza o error-bar en las calificaciones estimadas sobre cada esfera tienda a ser de la misma longitud para todas las esferas. Cada vez que termines de calificar un grupo de esferas, el espacio se actualizará mostrando nuevas esferas. <br/><br/></span>
+          <em>P:</em> ¿Por qué sólo veo entre 8 y 10 esferas? <br/>
+          <em>R:</em> Para evitar la saturación, mostramos sólo unas cuantas esferas a la vez para valorar. Elegimos mostrar la esfera de cada participante aleatoriamente, pero está sesgado hacia las esferas más recientes, aquellas que han recibido menos valoraciones.<br/><br/> </span>
     </div>
   </center>
       </div>

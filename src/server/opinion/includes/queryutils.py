@@ -358,16 +358,16 @@ def get_new_responses(user,os,disc_stmt,num_responses=0):
 
 def get_statement_histograms():
 	output = {}
-	old_data = [[ 83, 139, 102 ,132 ,606 , 82 , 72 ,320 , 94 , 31 ,140 , 57 , 94],
-				[ 37, 30, 29  ,52 ,310 ,102 ,144 ,495 ,157  ,72 ,324 ,119, 101],
-				[ 31, 39  ,37  ,64 ,240 , 72 , 85 ,426 ,196 , 91 ,424 ,150 ,152],
-				[ 84, 46  ,40  ,53 ,309 , 96 ,195 ,419  ,70 , 40 ,165 , 51  ,62],
-				[ 56, 34  ,38  ,67 ,373  ,79  ,95 ,456 ,143 , 67 ,255, 106 ,133],
-				[223, 195 ,115 ,139 ,581  ,85 ,105 ,247  ,33  ,22 , 76 , 39 , 80]]
+	old_data = [[ 83, 139, 102 ,132 ,606 , 82 , 72 ,320 , 94 , 31 ,140 , 57 , 94, 328],
+				[ 37, 30, 29  ,52 ,310 ,102 ,144 ,495 ,157  ,72 ,324 ,119, 101, 307],
+				[ 31, 39  ,37  ,64 ,240 , 72 , 85 ,426 ,196 , 91 ,424 ,150 ,152, 272],
+				[ 84, 46  ,40  ,53 ,309 , 96 ,195 ,419  ,70 , 40 ,165 , 51  ,62, 650],
+				[ 56, 34  ,38  ,67 ,373  ,79  ,95 ,456 ,143 , 67 ,255, 106 ,133, 378],
+				[223, 195 ,115 ,139 ,581  ,85 ,105 ,247  ,33  ,22 , 76 , 39 , 80, 286]]
 
 	for s in OpinionSpaceStatement.objects.order_by('id'):
 		slist = old_data[s.id-1]
-		slist.reverse()
+		#slist.reverse()
 		output[s] = json.dumps(slist)#json.dumps(numpy.histogram(UserRating.objects.filter(is_current=True,opinion_space_statement=s).values_list('rating'), bins=13)[0].tolist())
 	return output
 	

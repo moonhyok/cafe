@@ -467,6 +467,8 @@ $(document).ready(function() {
         $('.first-dialog-nav').hide();
         $('.slider-nav-box').show();
 
+        window.skipped[window.current_slider-1] = true;
+
         if(window.current_slider +1 > window.num_sliders)
         {
             window.prev_state = 'grade';

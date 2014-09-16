@@ -1246,6 +1246,7 @@ padding-right: 7px;
 	width: 60%;
 	font-size: 17px;
 	font-weight: bold;
+	font-family: DroidSans, sans-serif;
 	text-shadow: 1px 1px white;
 	
 }
@@ -1432,12 +1433,14 @@ padding-right: 7px;
 }
 
 .translate-btn{
-	font-size: 17px;
-	font-weight: bold;
-	text-shadow: 1px 1px white;
-	font-family: sans-serif;
-	margin-right: 10px;
-	text-align: right; 
+	font-size: 17px !important;
+	font-weight: bold !important;
+	text-shadow: 1px 1px white !important;
+	font-family: sans-serif !important;
+	margin-right: 10px !important;
+	text-align: right !important; 
+	font-family: DroidSans, sans-serif !important;
+	color: #442b10 !important;
 }
 
 .dialog-style{
