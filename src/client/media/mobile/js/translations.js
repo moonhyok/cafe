@@ -23,11 +23,11 @@ var translations = {
                     'Question':
                         'Pregunta',
 
-                    'Please enter your zip code to see how your grades compare to those of others':
-                        'Ponga su código postal y guardar sus calificaciones.',
+                    'Please enter your zip code to compare your grades with the grades of others.':
+                        'Ingrese su código postal para comparar sus calificaciones con las de otros.',
 
                     'Skip':
-                        'Saltar',
+                        'Omitir',
 
                     'Exit':
                         'Salir',
@@ -36,7 +36,7 @@ var translations = {
                         'Su dirección de correo electrónico no se mostrará y prometemos no compartir su dirección con ningún tercero.',
 
                     'Next':
-                        'Proseguir',
+                        'Continuar',
 
                     'Edit Your Idea':
                         'Editar su Idea',
@@ -69,7 +69,7 @@ var translations = {
                         'Cada esfera representa a un participante.  Presiona cualquiera de ellas para comenzar.',
 
                     'About the Map':
-                        'Ayuda',
+                        'Acerca del mapa',
 
                     'About the CRC':
                         'Acerca de la Libreta de calificaciones de California',
@@ -87,7 +87,7 @@ var translations = {
                         'Guardar',
 
                     'Please grade the State of California on:':
-                        'Póngale una calificación al Estado de California:',
+                        'Califique al Estado de California:',
 
                     'of':
                         '/'
