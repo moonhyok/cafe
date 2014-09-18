@@ -23,8 +23,8 @@ var translations = {
                     'Question':
                         'Pregunta',
 
-                    'Please enter your zip code to compare your grades with the grades of others.':
-                        'Ingrese su código postal para comparar sus calificaciones con las de otros.',
+                    'Please enter your zip code to compare your grades with the grades of others':
+                        'Ingrese su código postal para comparar sus calificaciones con las de otros',
 
                     'Skip':
                         'Omitir',
