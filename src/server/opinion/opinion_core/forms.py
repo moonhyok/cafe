@@ -1,4 +1,4 @@
-from django.forms import ModelForm, CharField, Form, ChoiceField, DateField, Textarea, TextInput,PasswordInput, Select
+from django.forms import ModelForm, CharField, Form, ChoiceField, DateField, Textarea, TextInput,PasswordInput, Select, HiddenInput
 from opinion_core.models import UserDemographics
 from opinion.settings import CATEGORIES
 
@@ -57,6 +57,7 @@ class ProofreadForm(Form):
 	def create_form(self, data):
 		for d in data:
 			self.fields[d['type']] = CharField(initial=d['text'], widget=Textarea(attrs={'style':'width:600px;height:300px'}))
+			self.fields['language'] =CharField(required=False, initial=d['language'], widget=HiddenInput())
 		return self
 		
 class AdminPanelLoginForm(Form):
