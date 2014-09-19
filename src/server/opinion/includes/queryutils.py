@@ -1927,8 +1927,8 @@ def format_pretty_nightly_statistics_table():
 	report_table_text += (new_user_table_header +  new_user_table.get_string())
 
 	# Add table to the report_body_html and report_body_text
-	report_body_html += report_table_text
-	report_body_text += report_table_html
+	report_body_html += report_table_html
+	report_body_text += report_table_text
 
 	return { "report_subject" : report_subject,
 	         "report_body_text" : report_body_text,
