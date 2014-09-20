@@ -222,6 +222,8 @@ table.pretty caption {
 	position: relative;
 	left: -7px;
 	top: 5px;
+	cursor: pointer;
+	cursor: hand;
 }
 
 /* Large desktop */
@@ -716,6 +718,8 @@ table.pretty caption {
 		font-weight:bold;
 		color: #442b10;
 		text-shadow: 1px 1px 1px #F7F4DD;
+		cursor: pointer;
+		cursor: hand;
 	}
 
 	.detail-box{
@@ -796,6 +800,9 @@ table.pretty caption {
 		color: #442b10;
 		margin-bottom: 5px;
 		font-family: DroidSans-Bold, sans-serif;
+
+		cursor: pointer;
+		cursor: hand;
 		/*position: absolute;
 		bottom: 20px;*/
 	}
@@ -810,6 +817,8 @@ table.pretty caption {
 		color: #442b10;
 		text-shadow: 1px 1px white;
 		font-family: DroidSans-Bold, sans-serif;
+		cursor: pointer;
+		cursor: hand;
 	}
 
 		/*.skip-btn {
@@ -868,6 +877,9 @@ table.pretty caption {
 		color: #442b10;
 		margin-bottom: 5px;
 		font-family: DroidSans-Bold, sans-serif;
+		
+		cursor: pointer;
+		cursor: hand;
 		/*position: absolute;
 		bottom: 20px;*/
 	}

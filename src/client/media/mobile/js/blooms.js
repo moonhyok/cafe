@@ -421,6 +421,8 @@ var _blooms = blooms = (function($, d3, console) {
                 //return canvasy(d.y);
             })
             .attr("filter", function(d){return "url(#blur"+(Math.floor(Math.random()*4)+1)+")";})
+            .style("cursor","pointer")
+            .style("cursor","hand")
             //.attr("transform", function(d) {
             //        return choice(["rotate(-65)", "rotate(-45)", "rotate(20)"]);
             //    })
@@ -525,6 +527,8 @@ var _blooms = blooms = (function($, d3, console) {
         .attr("opacity", function(d) {
             return 0.4;
         })
+        .style("cursor","pointer")
+        .style("cursor","hand")
         .on('click', function(d) {
             if(window.refer == ""){
                 accounts.hideAll();
