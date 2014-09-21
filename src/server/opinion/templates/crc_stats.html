@@ -190,7 +190,7 @@ Your participation score grows as you grade the issues others have suggested (10
 <div class="stats-section-title" id="geodistribution">
     <div class="stats-label-big">
         <span class="english">Median Grades For Each County</span>
-        <span class="spanish">El número medio</span>
+        <span class="spanish">Calificación media por condado</span>
     </div><br>
 
     <select id="CA_selector" class="english" onchange="changeData(this)" >
@@ -215,16 +215,18 @@ Your participation score grows as you grade the issues others have suggested (10
             })
     </script>-->
     <center>
-        <button type="button" onclick="map_grade_update()">Click to transform the map to a cartogram</button>
+        <button type="button" onclick="map_grade_update()"><span class="english">Click to transform the map to a cartogram</span><span class="spanish">Clic para transformar el mapa a un cartograma</span></button>
         <div id="map" style="height: 370px; width:360px;"></div>
-        The cartogram distorts the map so that each county's area is proportional to its population.
+        <span class="english">The cartogram distorts the map so that each county's area is proportional to its population.</span>
+        <span class="spanish">El cartograma distorciona el mapa de manera que el área de cada condado es proporcional a su población</span>
 </center>
 </div>
 <br>
 <hr>
 <div class="stat-section-title" id="geopercapita">
      <div class="stats-label-big">
-        Participants per 10,000 County Residents
+        <span class="english">Participants per 10,000 County Residents</span>
+            <span class="spanish">Participantes por 10.000 residentes de los condados</span>
     </div><br>
     <!--<script>
         $.get("{{url_root}}/media/mobile/js/geostat_population.js")
@@ -233,9 +235,10 @@ Your participation score grows as you grade the issues others have suggested (10
             document.getElementById( "#geodistribution" ).style.height="40px";
             })
     </script>-->
-    <button type="button" onclick="map_capita_update()">Click to transform the map to a cartogram</button>
+    <button type="button" onclick="map_capita_update()"><span class="english">Click to transform the map to a cartogram</span><span class="spanish">Clic para transformar el mapa a un cartograma</span></button>
     <div id="map_capita" style="height: 370px; width:360px;"></div>
-    The cartogram distorts the map so that each county's area is proportional to its population.
+    <span class="english">The cartogram distorts the map so that each county's area is proportional to its population.</span>
+        <span class="spanish">El cartograma distorciona el mapa de manera que el área de cada condado es proporcional a su población</span>
 </div>
 <br>
 <hr>
