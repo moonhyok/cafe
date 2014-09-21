@@ -134,8 +134,10 @@ legend.append("text")
     
 }
 
-var map_capita_instance=map_capita_cartogram();
+$( document ).ready(function() {
+window.map_capita_instance=map_capita_cartogram();
+});
 
 function map_capita_update(){
-    map_capita_instance.do_update();
+    window.map_capita_instance.do_update();
 }

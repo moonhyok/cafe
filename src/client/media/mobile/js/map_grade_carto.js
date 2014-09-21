@@ -214,13 +214,15 @@ function map_grade_cartogram(){
     
 }
 
-var map_grade_instance=map_grade_cartogram();
+$( document ).ready(function() {
+window.map_grade_instance=map_grade_cartogram();
+});
 
 function map_grade_update(){
-    map_grade_instance.do_update();
+    window.map_grade_instance.do_update();
 }
 
 function changeData(sel){
-    map_grade_instance.change(sel.value);
+    window.map_grade_instance.change(sel.value);
 
 }
