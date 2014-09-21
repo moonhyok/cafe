@@ -100,6 +100,7 @@ def mobile(request,entry_code=None):
     disc_stmt = get_disc_stmt(os, 1)
     active_users = list(User.objects.filter(is_active=True)) #forces eval so lazy eval doesn't act too smart!!!
     referrallink = request.GET.get('refer','')
+    language = request.GET.get('lang','en')
 
     statements = OpinionSpaceStatement.objects.all().order_by('id')
     medians = {}
@@ -126,6 +127,7 @@ def mobile(request,entry_code=None):
                        'client_data': mobile_client_data(request),
                        'entry_code': str(entry_code!=None).lower(),
                        'refer': referrallink,
+                       'language':language,
                                              'statement_hist': get_statement_histograms(),
                        'client_settings': get_client_settings(True),
                                              'horizontal_slide': settings.HORIZONTAL_SLIDE,

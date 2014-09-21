@@ -1056,6 +1056,9 @@ $(document).ready(function() {
         backButtonHandler();
     };
 
+    if(window.refer_language != 'en')
+        utils.translateAll();
+
     /*$('.button-div-red').on("touchstart", function (e){
         $(this).css("color","#8c6239");
     });
