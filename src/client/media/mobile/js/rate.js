@@ -540,6 +540,11 @@ $(document).ready(function() {
         utils.showLoading('');
         rate.logUserEvent(6,'comment submitted');
         rate.sendComment($('#entered-comment').val());
+
+        if ($('#regemail').val()){
+                accounts.sendEmail($('#regemail').val());
+            }
+            
         utils.hideLoading('');
         //if ($('#regemail').val()){
 	//		accounts.sendEmail($('#regemail').val());
