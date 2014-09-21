@@ -38,14 +38,14 @@ var carto = d3.cartogram()
             });
 
 // Load ca.csv
-d3.csv("../media/mobile/js/ca_capita_carto.csv", function (data) {
+d3.csv("http://californiareportcard.org/v26/media/mobile/js/ca_capita_carto.csv", function (data) {
        data.forEach(function (d) {
                     vote_data.set(d.COUNTY, [d.POPULATION ,d.COLOR]);
                     })
        });
 
 // This loads test the topojson file and creates the map.
-d3.json("../media/mobile/js/ca.topojson", function (data) {
+d3.json("http://californiareportcard.org/v26/media/mobile/js/ca.topojson", function (data) {
         topology = data;
         geometries = topology.objects.counties.geometries;
         
