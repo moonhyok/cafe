@@ -10,7 +10,7 @@ $.get(window.userhist1_url) // check if the histogram exists
            document.getElementById( "userhist1" ).style.height="20px";
 	    }
 	    else{
-			$( "#userhist1" ).html( "<span style=' font-size:14px;color: #f5ebde;'>You haven't received any grade on this question</span><br/>" );
+			$( "#userhist1" ).html( "<span style=' font-size:14px;'>You haven't received any grades</span><br/>" );
 			document.getElementById( "userhist1" ).style.height="20px";
 		}
     })
