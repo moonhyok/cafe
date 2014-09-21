@@ -10,9 +10,13 @@
 <script type='text/javascript' src='{{url_root}}/media/mobile/js/cartogram.js'></script>
 <script type='text/javascript' src='{{url_root}}/media/mobile/js/topojson.js'></script>
 </head>
-<style>
 
-</style>
+<script>
+$( document ).ready(function() {
+    $(".spanish").hide();
+});
+</script>
+
 <body>
 
 <!--<div class="home-btn-dialog-box">
@@ -23,23 +27,41 @@
 
 <br>
 <center>
-<div class="stats-section">
-Data as of <strong>{{date}}</strong><br>
-    Over <strong>10,000</strong> people have visited and over <strong>30,000</strong> grades have been entered so far.</div>
 
+<div class="stats-section">
+
+<div style="text-align: right; width: 100%;">
+<a href="#" class="english" onclick="$('.english').hide();$('.spanish').show();">Español</a>
+<a href="#" class="spanish" onclick="$('.spanish').hide();$('.english').show();">English</a>
+</div>
+
+<span class="english">Date:</span><span class="spanish">La fecha:</span>
+
+<strong>{{date}}</strong><br>
+    <span class="english">Over <strong>10,000</strong> people from all 58 counties have visited and over <strong>30,000</strong> grades have been entered so far.</span>
+    <span class="spanish"><strong>10 000</strong> personas de los 58 condados han concedido más de <strong>30 000</strong> notas al estado de California</span></div>
 
 <br>
 <hr>
 <div class="stats-section-title" id="geodistribution">
     <div class="stats-label-big">
-        GEOGRAPHIC DISTRIBUTION OF MEDIAN GRADES ASSIGNED
+        <span class="english">Median Grades For Each County</span>
+        <span class="spanish">El número medio</span>
     </div><br>
-    <span style="font-size:16px; font-weight:bold">Select an issue:</span> <br>
-    <select id="CA_selector" onchange="changeData(this)" >
+
+    <select id="CA_selector" class="english" onchange="changeData(this)" >
 	{% for median in medians %}
-	<option value="{{median.id}}">{{median.id}}. {{ median.statement}}</option>
+	<option value="{{median.id}}">{{median.id}}. {{ median.statement.short_version}}</option>
 	{% endfor %}
-    </select><br/><br>
+    </select>
+
+    <select id="CA_selector" class="spanish" onchange="changeData(this)" >
+    {% for median in medians %}
+    <option value="{{median.id}}">{{median.id}}. {{ median.statement.spanish_short_version}}</option>
+    {% endfor %}
+    </select>
+
+    <br/><br>
 
     <!--<script>
         $.get("{{url_root}}/media/mobile/js/geostat.js")
@@ -58,7 +80,7 @@ Data as of <strong>{{date}}</strong><br>
 <hr>
 <div class="stat-section-title" id="geopercapita">
      <div class="stats-label-big">
-        PARTICIPANTS PER 10000 POPULATION BY COUNTY
+        Participants per 10,000 County Residents
     </div><br>
     <!--<script>
         $.get("{{url_root}}/media/mobile/js/geostat_population.js")
@@ -77,7 +99,7 @@ Data as of <strong>{{date}}</strong><br>
 
 <div class="stats-section-title">
     <div class="stats-label-big">
-        GRADES ASSIGNED TO THE STATE OF CALIFORNIA
+        Histogram of Grades
     </div>
 
 <div class='dialog dialog-style'>
@@ -88,7 +110,8 @@ Data as of <strong>{{date}}</strong><br>
           
     <div class="compare-box-{{k.id}}" style="padding-bottom: 10px;width: 310px; margin: 20px; display: inline-block">
             
-            {{k.statement}}        
+            <span class="english">{{k.statement}}</span>
+            <span class="spanish">{{k.spanish_statement}}</span>
 
             <canvas id="sparkLineCanvas{{k.id}}" width="300" height="80"></canvas>
             
@@ -139,19 +162,13 @@ Data as of <strong>{{date}}</strong><br>
 
       </div>
 
+<span class="english"><h1>Thanks for participating!</h1></span>
+<span class="spanish"><h1>¡Gracias por participar!</h1></span>
 
 </div>
-<br>
-<hr>
-<br>
-<div class="stats-section">
-<strong>Thanks for participating!</strong> <br><br>
-<br>
-<span style="font-style:Italic;">For more information:</span>
-<a href="http://californiareportcard.org/">californiareportcard.org/</a>
-<div>
+
 	</center>
-    
+
 <script type='text/javascript' src='{{url_root}}/media/mobile/js/map_capita_carto.js'></script>
 <script type='text/javascript' src='{{url_root}}/media/mobile/js/map_grade_carto.js'></script>
 

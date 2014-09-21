@@ -1,12 +1,23 @@
 <!DOCTYPE html>
 <head>
 	<meta name='viewport' content='user-scalable=no, width=device-width,initial-scale=1, maximum-scale=1' />
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.css" />
+<link rel="stylesheet" href="{{url_root}}/media/mobile/css/stats.css" />
+<script src="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.js?2"></script>
+<script type='text/javascript' src='{{url_root}}/media/mobile/jquery-mobile/jquery-1.10.2.min.js'></script>
+<script type='text/javascript' src='{{url_root}}/media/mobile/js/cartogram.js'></script>
+<script type='text/javascript' src='{{url_root}}/media/mobile/js/topojson.js'></script>
+
 	<script type='text/javascript'>
 		window.userhist1_url="{{url_root}}/media/mobile/img/dailyupdate/{{uid}}_1.png"
 		window.userhist2_url="{{url_root}}/media/mobile/img/dailyupdate/{{uid}}_2.png"
 		window.show_hist1={{show_hist1}}
 		window.show_hist2={{show_hist2}}	
 		window.id={{uid}}
+    $( document ).ready(function() {
+    $(".spanish").hide();
+});
     </script>
 </head>
 <style>
@@ -26,28 +37,17 @@
     <img width="30px;" id="help-btn" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
 </div>-->
 
-<div class="title-header">
-    <img width="270px;" src="{{url_root}}/media/mobile/img/cafe/CRC_stat_title_03.png"><br>
-    <img width="210px;" src="{{url_root}}/media/mobile/img/cafe/CRC_stat_title_02.png">
-</div>
 <br>
 <center>
 {%if level8%}
 <div class="stats-section">
 Thank you for suggesting an issue for the next California Report Card!
 <br><br>
-<span style="font-weight:bold;">{{numberRater}} Californians have graded your suggestion so far and your grades are plotted below.<br><br></span>
 
-<span style="font-weight:bold;">Your participant score is {{score}}.</span><br>
-You can increase your score anytime by returning to grade more suggestions by other participants: <a href="{{url_root}}/?refer={{entrycode}}" target="_blank">My California Report Card Cafe</a>.<br><br>
-
-<span style="font-weight:bold">Since you joined on {{LastVisit}}, {{newUser}} new participants have entered grades.</span><br><br>
+<span>Your participant score is {{score}}.</span>
+You can increase your score anytime by returning to grade more suggestions by other participants: <a href="{{url_root}}/?refer={{entrycode}}" target="_blank">California Report Card</a>.<br><br>
 
 Your participation score grows as you grade the issues others have suggested (100 points for each up to 10,000 points), and based on how others grade the issue you suggested (up to 30,000 points).<br><br>
-
-See bottom of this page for more info on the Participation Score and to register for the Public Forum on 20 March <a href="http://bit.ly/1ii67bm" target="_blank">http://bit.ly/1ii67bm</a><br><br>
-
-Participants with the highest scores will be eligible to be invited to meet with Lt. Gov. Gavin Newsom, Professor Ken Goldberg, and the CRC team at UC Berkeley on 20 March 2014 to discuss the data and lessons learned from version 1.0 and the most important issues for version 2.0.
 </div>
 {%endif%}
 
@@ -57,14 +57,14 @@ Participants with the highest scores will be eligible to be invited to meet with
 
 <div class="stats-section-title">
     <div class="stats-label-big">
-        YOUR SUGGESTION FOR VERSION 2.0 OF THE CRC:
+        Your Suggestion:
     </div>
 </div>
 <br>
 {% if left_comment %}
 <div class="stats-section-title">
     <div class="issue-text">
-        <span style="font-size:14px; font-weight:bold; color:#662E09;"><b>{{comment}}</b></span>
+        <span style="font-size:14px;"><b>{{comment}}</b></span>
     </div>
 </div>
 {% else %}
@@ -85,7 +85,7 @@ Participants with the highest scores will be eligible to be invited to meet with
 <br>
 <div class="stats-section-title">
     <div class="stats-label-big">
-        GRADES ASSIGNED TO YOUR SUGGESTION
+        Your Suggestion's Grades
     </div>
 </div>
 
@@ -96,12 +96,12 @@ Participants with the highest scores will be eligible to be invited to meet with
 
          <center>
          <div class="responsive-div-1">
-             <div style="text-align:left;font-weight:bold;min-height:30px;">"How important is this issue for the next Report Card?"</div>
+             <div style="text-align:left;min-height:30px;">"How important is this issue for the next Report Card?"</div>
              <div class="stat-img" id="userhist1"></div><br>
          </div>
 
-         <div class="responsive-div-2">
-            <div style="text-align:left;font-weight:bold;min-height:30px;">"How would you grade California on this issue?"</div>
+         <div class="responsive-div-2" style="display: none;">
+            <div style="text-align:left;min-height:30px;">"How would you grade California on this issue?"</div>
              <div class="stat-img" id="userhist2"></div><br>
          </div>
          </center>
@@ -125,38 +125,63 @@ Participants with the highest scores will be eligible to be invited to meet with
 <hr>
 
 <div class="stats-section-title">
-    <div class="stats-label-big">
-        GRADES ASSIGNED TO THE STATE OF CALIFORNIA
-    </div>
+<div class='dialog dialog-style'>
+  <center>       
+          {% for k,v in statement_hist.iteritems %}
+          
+    <div class="compare-box-{{k.id}}" style="padding-bottom: 10px;width: 310px; margin: 20px; display: inline-block">
+            
+            <span class="english">{{k.statement}}</span>
+            <span class="spanish">{{k.spanish_statement}}</span>
 
-    <span style="font-size:12px;">The median grade is marked in brown</span><br><br>
+            <canvas id="sparkLineCanvas{{k.id}}" width="300" height="80"></canvas>
+            
+            <div>
 
-    {% for median in medians %}
-
-    <div class="responsive-img-box-{{median.id}}">
-        <div style="text-align:left;font-weight:bold;min-height:30px;">Issue {{median.id}}: {{median.statement}}</div>
-
-        <div class="stat-img" id="{{median.id}}">
-
-
-        </div>
-        {% autoescape off %}
         <script>
-			$.get('{{url_root}}/media/mobile/img/dailyupdate/{{median.statement}}.png')
-			.done(function() {
-            var img = $('<img/>');
-            img.attr('src', '{{url_root}}/media/mobile/img/dailyupdate/{{median.statement}}.png');
-            img.appendTo('#{{median.id}}');
-            })
-            .fail(function() {
-            $( "#{{median.id}}" ).html( "<br><span style=' font-size:14px;color: #f5ebde;'>We will present histograms soon</span><br/><br>" );
-            document.getElementById( "#{{median.id}}" ).style.height="20px";
-            })
-        </script>
-        {% endautoescape %}
+         var canvas = document.getElementById('sparkLineCanvas{{k.id}}');
+         var context = canvas.getContext('2d');
 
-    </div>
-    {% endfor %}
+         //if ({{k.id}} % 2 == 1)
+         //    $('.compare-box-{{k.id}}').css("background-color","rgba(0,0,0,0.05)")
+
+         var data = {{v}};
+         var max_of_array = Math.max.apply(Math, data);
+
+         //window.statement_processed_data[({{k.id}}-1)] = data
+
+         context.beginPath();
+         context.lineWidth = 10;
+         context.strokeStyle = '#442b10';
+         context.shadowColor = '#ffffff';
+               context.shadowOffsetX = 1;
+               context.shadowOffsetY = 1;
+         //context.moveTo(0, 45 - data[0]/max_of_array*38);
+         for (i = 0; i <= 13; i++)
+         {
+          var skipOffset = 0
+          if (i == 13)
+            skipOffset = 7
+
+     context.moveTo(i*21+5+skipOffset, 68);
+     context.lineTo(i*21+5+skipOffset, 68 - data[i]/max_of_array*65);
+     context.stroke(); 
+         }
+
+         context.font="italic small-caps bolder 12px sans-serif";
+         context.fillStyle = '#442b10';
+         context.fillText("A+",0,80);
+
+         context.fillText("F",163,80);
+         context.fillText("Ø",277,80);
+        </script>
+
+      </div>
+            
+          </div>
+          {% endfor %}
+
+      </div>
 </div>
 <br>
 <hr>
@@ -164,58 +189,60 @@ Participants with the highest scores will be eligible to be invited to meet with
 
 <div class="stats-section-title" id="geodistribution">
     <div class="stats-label-big">
-        GEOGRAPHIC DISTRIBUTION OF MEDIAN GRADES ASSIGNED
+        <span class="english">Median Grades For Each County</span>
+        <span class="spanish">El número medio</span>
     </div><br>
-    <span style="font-size:16px; font-weight:bold">Select an issue:</span> <br>
-    <select id="CA_selector" onchange="changeData(this)" >
-	{% for median in medians %}
-	<option value="{{median.id}}">{{median.id}}. {{ median.statement}}</option>
-	{% endfor %}
-    </select><br/><br>
 
-    <script>
+    <select id="CA_selector" class="english" onchange="changeData(this)" >
+  {% for median in medians %}
+  <option value="{{median.id}}">{{median.id}}. {{ median.statement.short_version}}</option>
+  {% endfor %}
+    </select>
+
+    <select id="CA_selector" class="spanish" onchange="changeData(this)" >
+    {% for median in medians %}
+    <option value="{{median.id}}">{{median.id}}. {{ median.statement.spanish_short_version}}</option>
+    {% endfor %}
+    </select>
+
+    <br/><br>
+
+    <!--<script>
         $.get("{{url_root}}/media/mobile/js/geostat.js")
             .fail(function() { 
             $( "#geodistribution" ).html( "<div class='stats-label-big'>GEOGRAPHIC DISTRIBUTION <br/> OF MEDIAN GRADES ASSIGNED</div><br><br><span style=' font-size:14px;color: #f5ebde;'>We will present geographical distribution soon</span><br/><br>" );
             document.getElementById( "#geodistribution" ).style.height="40px";
             })
-    </script>
-<center><div id="map"></div></center>
-
+    </script>-->
+    <center>
+        <button type="button" onclick="map_grade_update()">Click to transform the map to a cartogram</button>
+        <div id="map" style="height: 370px; width:360px;"></div>
+        The cartogram distorts the map so that each county's area is proportional to its population.
+</center>
 </div>
 <br>
 <hr>
 <div class="stat-section-title" id="geopercapita">
      <div class="stats-label-big">
-        PARTICIPANTS PER 10000 POPULATION BY COUNTY
+        Participants per 10,000 County Residents
     </div><br>
-    <script>
+    <!--<script>
         $.get("{{url_root}}/media/mobile/js/geostat_population.js")
             .fail(function() { 
             $( "#geopercapita" ).html( "<div class='stats-label-big'>PARTICIPANTS PER  <br/> 10000 POPULATION</div><br><br><span style=' font-size:14px;color: #f5ebde;'>We will present geographical participantion soon</span><br/><br>" );
             document.getElementById( "#geodistribution" ).style.height="40px";
             })
-    </script>
-    <div id="map_capita"></div>
+    </script>-->
+    <button type="button" onclick="map_capita_update()">Click to transform the map to a cartogram</button>
+    <div id="map_capita" style="height: 370px; width:360px;"></div>
+    The cartogram distorts the map so that each county's area is proportional to its population.
 </div>
-
 <br>
 <hr>
-<div class="stats-section">
-<strong>Thanks for participating!</strong> <br><br>
-Please consider joining us for the Public Forum on 20 March <a href="http://bit.ly/1ii67bm" target="_blank">http://bit.ly/1ii67bm</a><br><br>
-
-Participants with the highest scores will be eligible to be invited to meet with Lt. Gov. Gavin Newsom, Professor Ken Goldberg, and the CRC team at UC Berkeley on 20 March 2014 to discuss the data and lessons learned from version 1.0 and the most important issues for version 2.0.
-</div>
-<br>
-<span style="font-style:Italic;">For more information:</span>
-<a href="http://californiareportcard.org/" target="_blank">californiareportcard.org/</a>
 
 	</center>
-<script type='text/javascript' src='{{url_root}}/media/mobile/js/geostat.js'></script>  
-<script type='text/javascript' src='{{url_root}}/media/mobile/js/map.js'></script>  
 <script type='text/javascript' src='{{url_root}}/media/mobile/js/crcstats.js'></script>
-<script type='text/javascript' src='{{url_root}}/media/mobile/js/geostat_population.js'></script>  
-<script type='text/javascript' src='{{url_root}}/media/mobile/js/map_capita.js'></script>  
+<script type='text/javascript' src='{{url_root}}/media/mobile/js/map_capita_carto.js'></script>
+<script type='text/javascript' src='{{url_root}}/media/mobile/js/map_grade_carto.js'></script>
 </body>
 </html>

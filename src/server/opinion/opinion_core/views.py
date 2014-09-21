@@ -260,6 +260,7 @@ def crcstats(request,entry_code=None):
                                                                                             'participant': uid,
                                                                                             'entrycode': entry_code,
                                                                                             'uid':uid,
+                                                                                            'statement_hist': get_statement_histograms(),
                                                                                             'given': given,
                                                                                             'received': received,
                                                                                             'score': min(score,30000),
@@ -281,7 +282,7 @@ def crc_generic_stats(request):
     statements = OpinionSpaceStatement.objects.all().order_by('id')
     medians = []
     for s in statements:
-        medians.append({'statement': s.statement, 'id':s.id})
+        medians.append({'statement': s, 'id':s.id})
 
     return render_to_response('crc_generic_stats.html', context_instance = RequestContext(request, {'num_participants': len(active_users),
                                                                                             'date':datetime.date.today(),
