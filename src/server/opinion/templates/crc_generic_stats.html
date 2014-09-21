@@ -85,32 +85,66 @@ Data as of <strong>{{date}}</strong><br>
         GRADES ASSIGNED TO THE STATE OF CALIFORNIA
     </div>
 
-    <span style="font-size:12px;">The median grade is marked in brown</span><br><br>
+<div class='dialog dialog-style'>
+  <center>
+    <div class="home-btn-dialog-box">
+            
+          {% for k,v in statement_hist.iteritems %}
+          
+    <div class="compare-box-{{k.id}}" style="padding-bottom: 10px;width: 310px; margin: 20px; display: inline-block">
+            
+            {{k.statement}}        
 
-    {% for median in medians %}
-     <div class="responsive-img-box-{{median.id}}">
-       <strong>Issue {{median.id}}: {{median.statement}}</strong>
- 
-         <div class="stat-img" id="{{median.id}}">
- 
- 
-         </div>
-    {% autoescape off %}
+            <canvas id="sparkLineCanvas{{k.id}}" width="300" height="80"></canvas>
+            
+            <div>
+
         <script>
-			$.get('{{url_root}}/media/mobile/img/dailyupdate/{{median.statement}}.png')
-			.done(function() { 
-            var img = $('<img/>');
-            img.attr('src', '{{url_root}}/media/mobile/img/dailyupdate/{{median.statement}}.png');
-            img.appendTo('#{{median.id}}');
-            })
-            .fail(function() { 
-            $( "#{{median.id}}" ).html( "<br><span style=' font-size:14px;color: #f5ebde;'>We will present histograms soon</span><br/><br>" );
-            document.getElementById( "#{{median.id}}" ).style.height="20px";
-            })
+         var canvas = document.getElementById('sparkLineCanvas{{k.id}}');
+         var context = canvas.getContext('2d');
+
+         //if ({{k.id}} % 2 == 1)
+         //    $('.compare-box-{{k.id}}').css("background-color","rgba(0,0,0,0.05)")
+
+         var data = {{v}};
+         var max_of_array = Math.max.apply(Math, data);
+
+         //window.statement_processed_data[({{k.id}}-1)] = data
+
+         context.beginPath();
+         context.lineWidth = 10;
+         context.strokeStyle = '#442b10';
+         context.shadowColor = '#ffffff';
+               context.shadowOffsetX = 1;
+               context.shadowOffsetY = 1;
+         //context.moveTo(0, 45 - data[0]/max_of_array*38);
+         for (i = 0; i <= 13; i++)
+         {
+          var skipOffset = 0
+          if (i == 13)
+            skipOffset = 7
+
+     context.moveTo(i*21+5+skipOffset, 68);
+     context.lineTo(i*21+5+skipOffset, 68 - data[i]/max_of_array*65);
+     context.stroke(); 
+         }
+
+         context.font="italic small-caps bolder 12px sans-serif";
+         context.fillStyle = '#442b10';
+         context.fillText("A+",0,80);
+
+         context.fillText("F",163,80);
+         context.fillText("Ø",277,80);
         </script>
-    {% endautoescape %}
-    </div>
-    {% endfor %}
+
+      </div>
+            
+          </div>
+          {% endfor %}
+
+      </div>
+
+
 </div>
 <br>
 <hr>

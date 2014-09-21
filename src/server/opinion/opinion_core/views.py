@@ -283,6 +283,7 @@ def crc_generic_stats(request):
 
     return render_to_response('crc_generic_stats.html', context_instance = RequestContext(request, {'num_participants': len(active_users),
                                                                                             'date':datetime.date.today(),
+                                                                                            'statement_hist': get_statement_histograms(),
                                                                                             'num_ratings': CommentAgreement.objects.filter(rater__in = active_users, is_current=True).count()*2,
                                                                                             'url_root' : settings.URL_ROOT,
                                                                                             'medians': medians,
