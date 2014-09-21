@@ -247,7 +247,7 @@ def crcstats(request,entry_code=None):
     statements = OpinionSpaceStatement.objects.all().order_by('id')
     medians = []
     for s in statements:
-        medians.append({'statement': s.statement,'id':s.id})
+        medians.append({'statement': s,'id':s.id})
 
     return render_to_response('crc_stats.html', context_instance = RequestContext(request, {'num_participants': len(active_users),
                                                                                             'level8':level8,
