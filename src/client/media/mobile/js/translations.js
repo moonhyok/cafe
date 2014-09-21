@@ -56,8 +56,8 @@ var translations = {
                     'Rate Others':
                         'Califica a otros',
 
-                    'How do your answers compare to the other respondents? Your grade is marked in green.':
-                        '¿Cómo se comparan mis respuestas con las de los demás encuestados? Su valoración está marcada en verde.',
+                    'The plots below show the grades of others. The blue lines indicate the grades you entered.':
+                        '¿Cómo se comparan mis respuestas con las de los demás encuestados? Su valoración está marcada en azul.',
 
                     'Please join the conversation by clicking your sphere to add your own suggestion for the next report card.':
                         'Ahora es su turno. Presione sobre su esfera para introducir su sugerencia',

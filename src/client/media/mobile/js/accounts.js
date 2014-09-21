@@ -94,7 +94,7 @@ var accounts = (function($, d3, console) {
                         
                         context.beginPath();
                         context.lineWidth = 6;
-                        context.strokeStyle = '#39b54a';
+                        context.strokeStyle = '#0F85D4';
                         var convertedSlider = 12-Math.round(1.2*window.sliders[i]);
 
                         if(window.skipped[i])
@@ -115,7 +115,7 @@ var accounts = (function($, d3, console) {
                          var context = canvas.getContext('2d');
                            context.beginPath();
                         context.lineWidth = 10;
-                        context.strokeStyle = '#39b54a';
+                        context.strokeStyle = '#0F85D4';
                         context.moveTo(convertedSlider*22+10+skipOffset, 90);
                         context.lineTo(convertedSlider*22+10+skipOffset, 90 - data[convertedSlider]/max_of_array*76);
                         context.stroke();  
