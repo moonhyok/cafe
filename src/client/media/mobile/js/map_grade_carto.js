@@ -40,14 +40,14 @@ function map_grade_cartogram(){
                 });
     
     // Load ca.csv
-    d3.csv("../media/mobile/js/ca_issue1_carto.csv", function (data) {
+    d3.csv("http://californiareportcard.org/v26/media/mobile/js/ca_issue1_carto.csv", function (data) {
            data.forEach(function (d) {
                         vote_data.set(d.COUNTY, [d.POPULATION ,d.COLOR]);
                         })
            });
     
     // This loads test the topojson file and creates the map.
-    d3.json("../media/mobile/js/ca.topojson", function (data) {
+    d3.json("http://californiareportcard.org/v26/media/mobile/js/ca.topojson", function (data) {
             topology = data;
             geometries = topology.objects.counties.geometries;
             
@@ -119,14 +119,14 @@ function map_grade_cartogram(){
         .translate([0.52*width, 0.28*height]);
         
 
-        d3.csv("../media/mobile/js/ca_issue"+issue_number+"_carto.csv", function (data) {
+        d3.csv("http://californiareportcard.org/v26/media/mobile/js/ca_issue"+issue_number+"_carto.csv", function (data) {
                data.forEach(function (d) {
                             vote_data.set(d.COUNTY, [d.POPULATION ,d.COLOR]);
                             })
                });
         
         // This loads test the topojson file and creates the map.
-        d3.json("../media/mobile/js/ca.topojson", function (data) {
+        d3.json("http://californiareportcard.org/v26/media/mobile/js/ca.topojson", function (data) {
                 topology = data;
                 geometries = topology.objects.counties.geometries;
                 
