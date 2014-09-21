@@ -23,11 +23,11 @@ $.get(window.userhist2_url) // check if the histogram exists
 
     }).fail(function() { 
 		if (window.show_hist2){
-           $( "#userhist2" ).html( "<span style=' font-size:14px;color: #f5ebde;'>The statistics are calculated on a daily basis. Please revisit tomorrow</span><br/>" );
+           $( "#userhist2" ).html( "<span style=' font-size:14px;'>The statistics are calculated on a daily basis. Please revisit tomorrow</span><br/>" );
            document.getElementById( "userhist2" ).style.height="20px";
 	    }
 	    else{
-			$( "#userhist2" ).html( "<span style=' font-size:14px;color: #f5ebde;'>You haven't received any grade on this question</span><br/>" );
+			$( "#userhist2" ).html( "<span style=' font-size:14px;'>You haven't received any grades</span><br/>" );
 			document.getElementById( "userhist2" ).style.height="20px";
 		}
     })
