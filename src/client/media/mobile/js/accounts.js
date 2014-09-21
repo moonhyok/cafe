@@ -270,22 +270,6 @@ var accounts = (function($, d3, console) {
             url: window.url_root + "/confirmationmail/",
             data: {'mail':mail},
             success: function(data) {
-                if (data.hasOwnProperty('success')) {
-                    //console.log("data was sent!")
-                    window.email_saved = true;
-                    $('.dialog-email').show();
-                    window.cur_state = 'email';
-                    $('.dialog-continue').hide();
-                    $("#email-error").hide();
-                    window.prev_state = 'continue';
-                }
-                else{
-
-                 $("#email-error").show();
-                 $("#email-error").text(data['error']);
-                 console.log(data['error']);
-
-                }
             }
         });
 	}
