@@ -1043,7 +1043,10 @@ $(document).ready(function() {
     };
 
     if(window.refer_language != 'en')
-        utils.translateAll();
+        {
+            utils.translateAll();
+            rate.logUserEvent(0,'translate ' + window.lang)
+        }
 
     /*$('.button-div-red').on("touchstart", function (e){
         $(this).css("color","#8c6239");
