@@ -1022,7 +1022,7 @@ $(document).ready(function() {
 		$('.endsliders').show();
 	});
 
-    $('.translate-btn').click(function(){utils.translateAll();})
+    $('.translate-btn').click(function(){utils.translateAll();rate.logUserEvent(0,'translate ' + window.lang);})
 
     $('.spanish').hide();
 	
