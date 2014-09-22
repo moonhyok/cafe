@@ -208,7 +208,7 @@ var _blooms = blooms = (function($, d3, console) {
         $.ajax({
             async: false,
             dataType: "json",
-            url: window.url_root + '/os/show/' + show_id + '/',
+            url: window.url_root + '/os/show/' + show_id + '/?nonce='+Math.random(),
             success: function(d1) {
                 data1 = d1;
                 eigens = data1['eigenvectors'];
