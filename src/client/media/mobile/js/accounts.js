@@ -150,6 +150,7 @@ var accounts = (function($, d3, console) {
             type: "GET",
             dataType: 'json',
             url: window.url_root + '/os/show/1/',
+            data: {'nonce': Math.random()},
             success: function(data) {
                 try {
                     var comment = data['cur_user_comment'][0][0];
@@ -240,6 +241,7 @@ var accounts = (function($, d3, console) {
             type: "GET",
             dataType: 'json',
             url: window.url_root + '/os/show/1/',
+            data: {'nonce': Math.random()},
             success: function(data) {
                 //$('.score-value').text("" + ~~(data['cur_user_rater_score'] * window.conf.SCORE_SCALE_FACTOR));
                 window.user_score = data['cur_user_rater_score'];
