@@ -73,7 +73,10 @@
 			inputTd.appendChild(checkBox);
 
 			var user = document.createElement('td');
-			user.innerHTML = searchResult.username // + ' <a href="' + searchResult.reset_link + '"> PW reset link</a>';
+			user.innerHTML = searchResult.username; // + ' <a href="' + searchResult.reset_link + '"> PW reset link</a>';
+
+			var time = document.createElement('td');
+			time.innerHTML = searchResult.joined; 
 
 			var email = document.createElement('td');
 			email.innerHTML = searchResult.email;
@@ -104,6 +107,7 @@
 
 			row.appendChild(inputTd);
 			row.appendChild(user);
+			row.appendChild(time);
 			row.appendChild(email);
 			row.appendChild(zipcode);
 			row.appendChild(city_state);
@@ -248,6 +252,7 @@
     <tr> 
         <th width="5%"><input type="checkbox" id="checkAll"/></th>
         <th width="5%">User ID</th> 
+        <th width="5%">Time</th>
 		<th width="7.5%">Email</th>
 		<th width="5%">Zipcode</th> 
         <th width="10%">City, State</th> 

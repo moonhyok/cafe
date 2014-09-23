@@ -1232,6 +1232,7 @@ def format_general_discussion_comment(response):
 		'zipcode' : zipcode,
 		'city_state' : city_state,
 		'tag' : tag,
+		'joined': response.user.date_joined.isoformat()
 		}
 
 def format_user_object(user, os_id, ds_id = None):
