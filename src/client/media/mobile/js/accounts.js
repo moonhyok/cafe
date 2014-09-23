@@ -1037,6 +1037,7 @@ $(document).ready(function() {
 	});
 
     $('.landing-page-banner').click(function(){accounts.hideAll();$('.landing').show();})
+    $('.landing-page-banner-logout').click(function(){location.reload();})
 
     window.onpopstate = function(event) {
         backButtonHandler();
