@@ -5,7 +5,7 @@ import numpy as np
 import random
 import os
 
-data =  int(os.popen("./total_users_apache_logs.sh").readlines()[0].rstrip())
+data =  int(os.popen("/var/www/latest-version/src/server/opinion/scripts/total_users_apache_logs.sh").readlines()[0].rstrip())
 print data
 su = User.objects.filter(id=1)[0]
 udo  = UserData.objects.filter(user=su,key='total_count').delete()

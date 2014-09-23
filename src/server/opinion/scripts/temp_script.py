@@ -15,11 +15,11 @@ with open('spanish_comments.csv', 'rb') as csvfile:
 			if len(comment) != 0:
 				comment = comment[0]
 				comment.comment = row[2]
-				comment.spanish_comment = row[4]
-				a = AdminCommentTag(tag = row[1], comment = comment) 
-				a.save()
+				#comment.spanish_comment = row[4]
+				#a = AdminCommentTag(tag = row[1], comment = comment) 
+				#a.save()
 				comment.save()
-				print count,row[1],row[2],row[4]
+				print count,row[1],row[2],comment.spanish_comment
 		count = count + 1
 
 

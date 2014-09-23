@@ -48,7 +48,7 @@ def main():
 	    disaster_boost = 0
 
 	    if 'earthquake' in comment.comment or 'safety' in comment.comment or 'nuclear' in comment.comment or 'sea level' in comment.comment or 'climate' in comment.comment:
-	        disaster_boost = 500
+	        disaster_boost = 0
 
 		num_ratings = comment_id_to_num_ratings_map[comment.id]
 		weight = max_weight - num_ratings + disaster_boost

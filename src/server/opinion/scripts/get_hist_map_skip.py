@@ -480,7 +480,7 @@ def participant_slider2_hist():
                  fig2.set_size_inches(5,5)
                  plt.savefig(imagepath+str(cur_user.id)+'_2.png',facecolor=fig2.get_facecolor(),edgecolor='none',dpi=100,format='png')
 
-geostats()
+#geostats()
 participant_slider1_hist()
 participant_slider2_hist()
-issues_hist()
+#issues_hist()

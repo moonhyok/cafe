@@ -23,7 +23,7 @@ for user in user_today_email:
         email_list = [user.email]
         message = render_to_string('registration/confirmation_email.txt',
                                   {'entrycode': entrycode[0].code,
-                                   'user_id': user.id-361,
+                                   'user_id': user.id,
                                     })
         try:
            send_mail(subject, message, Settings.objects.string('DEFAULT_FROM_EMAIL'), email_list)

@@ -9,7 +9,7 @@ The fields of the file look like this:
 zip,type,primary_city,acceptable_cities,unacceptable_cities,state,county,timezone,area_codes,latitude,longitude,world_region,country,decommissioned,estimated_population,notes
 """
 
-fname = '../../../doc/zip_code_database.csv'
+fname = '../../../../doc/zip_code_database.csv'
 raw_input("Using zipcode db located at: " \
           + os.path.abspath(fname) + ", ok? [y]")
 
