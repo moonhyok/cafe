@@ -121,7 +121,7 @@ var utils = (function($, d3, console) {
         }
 
         if(window.lang == 'en' && window.user_score >= 2){
-                    $('.instructions-light').html("Please join the conversation by clicking your sphere to add your own suggestion for the next report card.")
+                    $('.instructions-light').html("Please join the conversation by clicking your sphere to add your own suggestion.")
                 }
        else if (window.lang == 'es' && window.user_score >= 2){
                     $('.instructions-light').html("Ahora es su turno. Presione sobre su esfera para introducir su sugerencia.")
