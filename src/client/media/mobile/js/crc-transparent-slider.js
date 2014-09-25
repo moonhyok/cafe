@@ -16,14 +16,18 @@ for (var i=1;i<=window.num_sliders;i++)
 $( ".slider" ).append( "<div class=\"crc-div-wrapper\"><div class=\"grade-container\"></div></div>" );
 
 grades = ['A-','A','A+','B-','B','B+','C-','C','C+','D-','D','D+','F']
+grades = ['A-','A','A+','B-','B','B+','C-','C','C+', 'F']
+grade_map = {
+    'F':0, 'C-':1, 'C':2, 'C+':3, 'B-':4, 'B':5, 'B+':6, 'A-':7, 'A':8, 'A+':9,
+}
 grades.forEach(function(grade) { 
 
 	if(grade.indexOf('+') >= 0)
-		$(".grade-container").append("<div class=\"slider-grade-bubble slider-grade-p bubble-" +grade.replace("+","p")+"\"><div class=\"spacer\"></div>"+grade+"</div>");
+		$(".grade-container").append("<div class=\"slider-grade-bubble slider-grade-p bubble-" +grade.replace("+","p")+"\"><div class=\"spacer\"></div>"+grade_map[grade]+"</div>");
 	else if (grade.indexOf('-') >= 0 ) 
-		$(".grade-container").append("<div class=\"slider-grade-bubble slider-grade-m bubble-" +grade+"\"><div class=\"spacer\"></div>"+grade+"</div>");
+		$(".grade-container").append("<div class=\"slider-grade-bubble slider-grade-m bubble-" +grade+"\"><div class=\"spacer\"></div>"+grade_map[grade]+"</div>");
 	else	
-		$(".grade-container").append("<div class=\"slider-grade-bubble slider-grade-main bubble-" +grade.replace("+","p")+"\"><div class=\"spacer\"></div>"+grade+"</div>");
+		$(".grade-container").append("<div class=\"slider-grade-bubble slider-grade-main bubble-" +grade.replace("+","p")+"\"><div class=\"spacer\"></div>"+grade_map[grade]+"</div>");
 
 });
 $(".slider-grade-bubble").on("click",function(e){ 

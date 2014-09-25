@@ -363,7 +363,10 @@ def get_statement_histograms():
 				[ 31, 39  ,37  ,64 ,240 , 72 , 85 ,426 ,196 , 91 ,424 ,150 ,152, 272],
 				[ 84, 46  ,40  ,53 ,309 , 96 ,195 ,419  ,70 , 40 ,165 , 51  ,62, 650],
 				[ 56, 34  ,38  ,67 ,373  ,79  ,95 ,456 ,143 , 67 ,255, 106 ,133, 378],
-				[223, 195 ,115 ,139 ,581  ,85 ,105 ,247  ,33  ,22 , 76 , 39 , 80, 286]]
+				[223, 195 ,115 ,139 ,581  ,85 ,105 ,247  ,33  ,22 , 76 , 39 , 80, 286],]
+        statements = OpinionSpaceStatement.objects.order_by('id')
+        for i in range(len(statements) - len(old_data)):
+                old_data += [random.choice(old_data)]
 
 	for s in OpinionSpaceStatement.objects.order_by('id'):
 		slist = old_data[s.id-1]

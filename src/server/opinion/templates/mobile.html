@@ -273,7 +273,7 @@
     </script>
 
     <meta name="google-translate-customization" content="eafde824bc8e224d-e21501ea7ec3fcff-g772450b68a5f36d7-1d"></meta>
-
+    <style>.translate-btn { display: none; }</style>
   </head>
 
   <body>
@@ -292,7 +292,7 @@
             </div>
 
     </div>
-          <img width="100%" src="{{url_root}}/media/mobile/img/cafe/title_image.jpg" style="margin-top:3px;max-width: 620px;">
+          <img width="100%" src="{{url_root}}/media/mobile/img/cafe/title_image2.jpg" style="margin-top:3px;max-width: 620px;max-height:300px;">
           <div class="landing-img-title responsive-body" style="display:none;">
             {{topic}}
           </div> 
@@ -301,14 +301,19 @@
           </div> -->
 
           <div class="landing-img-txt responsive-body">  
-            <span class="english">Join the <strong>{{num_users}}</strong> others who are contributing to California's collective intelligence.</span>
+            <span class="english">
+THIS IS A TEST. THIS IS ONLY A TEST.</br></br>
+
+Imagine that a major earthquake has just occurred nearby. Cell phone, internet, water, and electricity services are no longer functioning and many of the buildings around you have severe structural damage. Traffic is gridlocked, debris has made it difficult to move from your current location, and public transportation is inoperable.</br></br>
+Join the <strong>{{num_users}}</strong> others who have participated in this scenario.
+</span>
             <span class="spanish">Únete a los <strong>{{num_users}}</strong> que ya contribuyeron a la inteligencia colectiva de California.</span>
           </div>
 
           <div class='button-div-red first-time-btn responsive-btn' style="margin-top: 10px;">Begin</div><br/><br/><br/>
 
           <span class="english">
-          <a href="http://en.wikipedia.org/wiki/California_Report_Card" target="_blank">More Information</a>
+          <a href="" target="_blank">More Information</a>
           </span>
           <span class="spanish">
           <a href="http://en.wikipedia.org/wiki/California_Report_Card" target="_blank">Más información</a>
@@ -359,7 +364,7 @@
 
             <center>  
               <div class="question-number responsive-body"><span>Question</span> {{ statement.id }} <span>of</span> {{ statements|length }}.</div>
-              <div class="question-number responsive-body">Please grade the State of California on:</div>
+              <div class="question-number responsive-body">Please select how strongly you agree with the following statement:</div>
               <div class="statement-style responsive-body english">{{ statement.statement }}</div>
               <div class="statement-style responsive-body spanish" style="display:none;">{{ statement.spanish_statement }}</div>
 
@@ -414,7 +419,23 @@
                <input type ='tel' id='regzip' name='regzip' class='regforminput' placeholder="Zip Code">
 
                <div class='alert-error' id='zipcode-error' style='display:none;'></div>
+
+<br></br>
+
+<select>
+I have experienced severe shaking (enough to cause damage)
+  <option value="0">My Earthquake Experience</option>
+  <option value="1">I have never experienced an earthquake.</option>
+  <option value="2">I have experienced some shaking.</option>
+  <option value="3">I have experienced strong shaking (enough to move heavy objects)</option>
+  <option value="4">I have experienced severe shaking (enough to cause damage)</option>
+</select>
+
               </div>
+
+
+              </div>
+
 
         <div class="button-div-red registerb responsive-btn" id="registerb" style="font-size: 18px;">Save</div>
         <br/>
@@ -470,7 +491,7 @@
       </div>
 
       <div class="burger-div burger-div-others" style="display: none;">
-              Rate Others
+              Rate Ideas
       </div>
 
       <div class="burger-div burger-div-yours" style="display: none;">
@@ -500,7 +521,7 @@
           </div> 
     <!--<img class="header-img-topic center" src="{{ url_root }}/media/mobile/img/cafe/CRC_join.png"/>-->
           <div class='dialog-text1 dialog-text-style'>
-            <span>The plots below show the grades of others. The blue lines indicate the grades you entered.</span>
+            <span>The plots below show the ratings of others. The blue lines indicate the grades you entered.</span>
           </div>
 
           <br/>
@@ -511,7 +532,7 @@
               <!--<div style="font-size: 12px; font-style: italic;font-weight: bolder;" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();">{{k.id}}. </div>-->
               <div style="font-size: 18px;font-weight: bolder;" class="english" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();">{{k.short_version}}</div>
               <div style="font-size: 18px;font-weight: bolder;" class="spanish" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();">{{k.spanish_short_version}}</div>
-              <div style="font-size: 14px; font-weight: bolder;cursor: pointer;cursor: hand;" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();"><span>more info</span> >></div>
+              <div style="font-size: 14px; font-weight: bolder;cursor: pointer;cursor: hand;" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();"><span>learn more</span> >></div>
             </div>
 
             <canvas id="sparkLineCanvas{{k.id}}" width="175" height="58"></canvas>
@@ -664,7 +685,16 @@
 <div id="detail-smore-info-{{k.id}}" class="dialog-text-style responsive-body spanish"></div>
   
   <script>
-  var detail_text = ["","California was the first state to pass legislation creating a health insurance marketplace--Covered California. As of Dec 2013, Covered California had over 630,000 enrollees.", "California recently adopted the \"common core\" challenges, which emphasize critical thinking and analysis in K-12 education to better prepare students for college and the workforce.", "The 2014-15 draft California budget calls for a 10.8% increase in higher education funding, which could keep current tuition costs stable.", "Passed in 2006, California Senate Bill 1569 extends eligibility for undocumented immigrants in California for food assistance, supplemental security income, and health insurance. Passed in 2011, The California Dream Act grants undocumented immigrant access to state aid at public universities and colleges.","California was the first state to legalize the distribution of medical marijuana in 1996. Recreational use of marijuana is illegal in the State of California. However, California lawmakers are currently considering legalizing, taxing, and regulating marijuana for recreational use.", "California legalized same sex marriage in 2008. However, Proposition 8, which revoked marriage rights for same sex couples, was also passed in 2008. Proposition 8 was overturned in 2013."]
+  var detail_text = ["",
+		     "feeling",
+		     "drop",
+		     "heavy",
+		     "plan",
+		     "supplies",
+		     "close",
+		     "risk",
+		     "gov",
+   ]
   var sdetail_text = ["","California fue el primer estado aprobar una ley para crear un mercado de seguros de salud -- Covered California (California cubierta). Hasta diciembre de 2013, Covered California tenía más de 630,000 afiliados.", "Hace poco California adoptó el desafío de los «estándares», que hace hincapié en el pensamiento crítico y el análisis en la educación de K-12 (jardín de infancia hasta 12º grado) para preparar mejor a los estudiantes para la universidad y la vida laboral.", "El proyecto de presupuesto de California de 2014-15 reclama un aumento del 10.8% en la financiación de la educación superior, que podrían mantener los gastos de matrícula actuales estables.", "Adoptada en el 2006, la Ley 1569 del Senado de California amplía la elegibilidad de los inmigrantes indocumentados en California para asistencia alimentaria, seguridad de ingresos suplementarios y seguro de salud. Adoptada en el 2011, la Ley del Sueño de California otorga a los inmigrantes indocumentados acceso a ayuda estatal en los colegios y universidades públicas.","California fue el primer estado en legalizar la distribución de la marihuana en el año 1996. El uso recreativo de la marihuana es ilegal en el Estado de California. Sin embargo, los legisladores de California están actualmente considerando legalizar, gravar y regular la marihuana para su uso recreativo.", "California legalizó el matrimonio entre parejas del mismo sexo en 2008. Sin embargo, la Proposición 8, que recovó los derechos de contraer matrimonio de las parejas del mismo sexo, también fue aprobada en 2008. La Proposición 8 fue revocada en 2013."]
   document.getElementById("detail-emore-info-{{k.id}}").innerHTML = detail_text[{{k.id}}];
   document.getElementById("detail-smore-info-{{k.id}}").innerHTML = sdetail_text[{{k.id}}];
@@ -814,10 +844,16 @@
             <span>{{client_settings.LOGOUT_DIALOG_TEXT}}</span><br/><br/>
       <!-- <span class="english"><a href="http://hrefshare.com/9bdd3" target="_blank" style="color: #555555;"><img src="{{url_root}}/media/mobile/img/cafe/twitter-button.png" width="102px"></a> -->
       <!-- <a href="http://hrefshare.com/d3660" target="_blank" style="color: #555555;"><img src="{{url_root}}/media/mobile/img/cafe/facebook-button.png" width="102px"></a><br/> -->
-      <span class="english"><a href="http://twitter.com/intent/tweet?text=How%20do%20you%20grade%20California%3F%20Try%20%40CAReportCard%20developed%20by%20%40Cal%20%40GavinNewsom%20%26%20%40Ken_Goldberg%20http%3A%2F%2Fcaliforniareportcard.org%2F2.0%2F%20%23CA%20%23GOV" target="_blank" style="color: #555555;"><img src="{{url_root}}/media/mobile/img/cafe/twitter-button.png" width="102px"></a>
-      <a href="https://www.facebook.com/dialog/feed?app_id=123050457758183&link=http%3A%2F%2Fcaliforniareportcard.org%2F2.0%2F%20&picture=http%3A%2F%2Fcaliforniareportcard.org%2Fcrc%2Fwp-content%2Fuploads%2FCRCv2_Facebook-Share-link_graphic-01.jpg&name=California%20Report%20Card%20v2.0&caption=%20&description=How%20do%20you%20grade%20California%3F%20%20Try%20%40CAReportCard%20developed%20by%20%40Cal%20%40GavinNewsom%20%26%20%40Ken_Goldberg%20%20http&redirect_uri=http%3A%2F%2Fwww.facebook.com%2F" target="_blank" style="color: #555555;"><img src="{{url_root}}/media/mobile/img/cafe/facebook-button.png" width="102px"></a><br/>
+      <span class="english"><a href="" target="_blank" style="color: #555555;"><img src="{{url_root}}/media/mobile/img/cafe/twitter-button.png" width="102px"></a>
+      <a href="" target="_blank" style="color: #555555;"><img src="{{url_root}}/media/mobile/img/cafe/facebook-button.png" width="102px"></a><br/>
 
-             Election and Voter Information: <a href="http://www.sos.ca.gov/elections/new-voter/" target="_blank" style="color: #555555;">CAVoterInformation</a><br/><br/>
+Share this Earthquake Drill with your friends and see how their scores compare.
+<br></br>
+
+<a href="http://earthquakecountry.org/sevensteps/">Seven Steps to Earthquake Safety</a><br></br>
+
+  <!--           Election and Voter Information: <a href="http://www.sos.ca.gov/elections/new-voter/" target="_blank" style="color: #555555;">CAVoterInformation</a>-->
+<br/><br/>
 
 
       <!--California Online Voting Registration: <a href="http://registertovote.ca.gov" target="_blank" style="color: #555555;"> CAVoterRegistration </a><br/><br/></span>-->
@@ -921,7 +957,7 @@
       <br/><br/>
       <div class='dialog-text-style responsive-body'>
         <span>Thank You!</span>
-        <div style="font-size: 18px;margin-top: 10px;">You can continue to contribute to the discussion by reading and evaluating the ideas of others.</div>
+        <div style="font-size: 18px;margin-top: 10px;">{{client_settings.EMAIL_ASK_TEXT}}</div>
               <!--<div class='dialog-text-style default-left-padding'>
               {{client_settings.EMAIL_ASK_TEXT}}
         </div>-->
@@ -931,8 +967,9 @@
                 <!--<input type="email" id='regemail' name='regemail' class='regforminput' style="font-size: 15px; background-color: #FFFFFF;color: #000000;" placeholder="Email" data-theme='b'></input>
     <div class="comment-admin-text-b">{{client_settings.DEMOGRAPHICS_DISCLAIMER}}.</div>
     <br/>-->
-                <div class='button-div-wide responsive-btn' onclick="$('.burger-div-others').click();">Rate Others</div>
-                <div class='button-div-wide responsive-btn' onclick="$('.burger-div-yours').click();">Edit Your Idea</div>
+                <div class='button-div-wide responsive-btn' onclick="$('.burger-div-others').click();">Rate Ideas</div>
+                <div class='button-div-wide responsive-btn' onclick="$('.burger-div-compare').click();">View Scores & Learn More</div>
+                <div class='button-div-wide responsive-btn' onclick="$('.burger-div-yours').click();">Suggest and Edit Your Idea</div>
                 <div class='button-div-wide responsive-btn' onclick="$('.burger-div-logout').click();">Exit</div>
     <div class='alert-error' id='email-error' style='display:none;width: 250px;'></div>
               </center>
@@ -999,28 +1036,22 @@
       <br/>
       <center>{{client_settings.ABOUT_PAGE_HEADER}}</center><br/>
       <span class="english">{% autoescape off %}<em> Overview </em> <br/>
-      The CRC is an online platform developed by the CITRIS Data and Democracy Initiative at UC Berkeley and Lt. Governor Gavin Newsom that explores how smartphones and networks can enhance communication between the public and government leaders. The CRC allows visitors to grade issues facing California and to suggest issues for future report cards. The project aims to increase public engagement and to help leaders at all levels stay informed about the changing opinions and priorities of their constituents.
+Earthquake preparedness is a critical issue facing Californians. In Northern California alone, a major earthquake has the potential to cause over $2 billion in damage, and adversely affect millions of lives. Proper preparation for earthquakes is an important step that individuals can take to prevent damage to themselves and their homes.
 
-      Anyone can participate by taking a few minutes to assign grades to the State of California on issues such as: Healthcare, Education, Marriage Equality, Immigrant Rights, and Marijuana Decriminalization. We currently support responses in both English and Spanish. It is important to note that translation is an art form.  All Google Translate results are reviewed and edited by fluent speakers but flaws are inevitable. If you spot an egregious error, please email <a href="mailto: translate@californiareportcard.org">translate@californiareportcard.org</a>. <br/> <br/>
+Quake CAFE is an online platform designed with three goals in mind. (1) Allow visitors to rate themselves on their attitudes and actual level of preparedness if a major earthquake were to strike in that moment. (2) Provide resources to help educate visitors about steps they can take to better prepare. (3) Allow visitors to compare their own ratings to others, and provide open-ended comments about ways that governments and communities can help people better prepare for a major disaster. 
 
-      <em> Q: </em> What’s the motivation for the CRC? <br/>
-      <em> A: </em> We’re exploring new models for exchange of information and engagement with political issues. We don’t claim the CRC model is the answer: it’s one new metaphor and mode of collecting information. Will the CRC encourage people to think about public issues and how public opinion gets represented? We’re curious to see how people respond, how patterns of responses change over time, and if the grading will be a catalyst for the discussion, where participants propose new issues for the next report card and evaluate the suggestions of other participants. We’ll keep working to develop new versions and models based on the responses and data. <br/> <br/>
-
+Quake CAFE was designed for mobile devices, but works on any internet-connected, and has Spanish-language support. Quake CAFE integrates elements from the Opinion Space project (http://opinion.berkeley.edu/) developed by researchers and designers at the CITRIS Data and Democracy Initiative and the World Bank’s “Citizen Report Cards” to assess government performance.  The most recent version of this platform is the California Report Card (californiareportcard.org) - a free online platform accessible on mobile devices and desktop computers  that allows participants to assess government performance on timely policy issues and suggest issues for increased priority at the state level. 
+ <br/> <br/>
 
       <em> Privacy </em> <br/>
-      Comments and suggestions will be scanned to omit identifiable information. We respect your privacy and will not share your email address with third parties. <br/> <br/>
+Comments and suggestions will be scanned to omit identifiable information. We respect your privacy and will not share email address with third parties. All information will be de-identified before analyses and reports are published.
+ <br/> <br/>
 
-      <em> Statistical Significance </em> <br/>
-      The CRC differs from randomized telephone polls and surveys. Participation is self-selective and accessible so far only to English speakers with access to a smart phone or web browser. After you enter each grade, the Median Grade based on input from all previous participants is revealed. This is intended to provide instant feedback in contrast to traditional polls and surveys. We realize this may have a biasing effect: some may adjust their grade to be closer to the average resulting in a form of regression toward the mean. We will include details on the number of such adjustments and the before and after values in the open dataset. We will also present the grade data as histograms to convey levels of consensus and geographically to convey differences by region. <br/> <br/>
-      
-      We will also present the grade data as histograms to convey levels of consensus and geographically to convey differences by region.<br/> <br/>
+      <em> More Information </em> <br/>
+      Please visit the Quake CAFE website for more about the project history, statistics to date, related links, and to download de-identified data when it is available. <br/> <br/>
 
-      <em> More </em> <br/>
-      Please see the CRC website for contact info, details about the project history, stats to date, related links, and to download anonymized data when it is available: <br/> <br/>
-
-
-      <em> California Report Card </em> <br/>
-      <a href='http://californiareportcard.org'> http://californiareportcard.org </a>
+<!--      <em> California Report Card </em> <br/>
+      <a href='http://californiareportcard.org'> http://californiareportcard.org </a> -->
       {% endautoescape %}</span>
       <span class="spanish"> <em> Información General </em> <br/>
       La Libreta de calificaciones de California (CRC, por sus siglas en inglés) es una plataforma en línea desarrollada por CITRIS Data y Democracy Initiative de UC Berkeley y del Teniente Gobernador Gavin Newsom que explora cómo los smartphones y redes pueden mejorar la comunicación entre los líderes públicos y gubernamentales. La CRC permite a los visitantes valorar las cuestiones a las que se enfrenta California y sugerir cuestiones para próximas libretas de calificaciones. El proyecto busca aumentar la participación del público y ayudar a los líderes de todos niveles a mantenerse informados sobre las opiniones y prioridades cambiantes de sus constituyentes. Cualquiera puede participar dedicando unos minutos a valorar el Estado de California en cuestiones como: Sanidad, Educación, Igualdad de matrimonio, Derechos de los inmigrantes y Despenalización de la marihuana. Actualmente aceptamos respuestas en inglés y español. Es importante indicar que la traducción es una forma de arte. Todos los resultados de Google Translate los revisan y editan personas que hablan dichos idiomas de manera fluido, pero los errores son inevitables. Si encuentra un error grave, envíe un correo electrónico a translate@californiareportcard.org. <br/> <br/>
