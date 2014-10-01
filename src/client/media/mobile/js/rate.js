@@ -472,9 +472,11 @@ $(document).ready(function() {
         if(window.current_slider +1 > window.num_sliders)
         {
             window.prev_state = 'grade';
-        window.cur_state = 'register';
+	    window.cur_state = 'dialog';
+            //window.cur_state = 'register';
         rate.logUserEvent(5,'sliders finished');
-        rate.storeSliders(window.num_sliders);
+	    $('.dialog-continue').show();
+            //rate.storeSliders(window.num_sliders);
         if (window.authenticated) {
             for (var i = 1; i <= window.num_sliders; i++) {
                 rate.sendSlider(window.sliders[i], i);

@@ -670,10 +670,19 @@ $(document).ready(function() {
 
     $('.burger-div-about').click(function(){accounts.hideAll(); $('.dialog-about').show();});
 
-    $('.burger-div-compare').click(function(){accounts.hideAll(); $('.dialog').show();});
+    $('.burger-div-compare').click(function(){accounts.hideAll(); 
+	if (!window.authenticated) {
+	    accounts.showRegister();
+	    return;
+	}
+					      $('.dialog').show();});
 
     $('.burger-div-others').click(function(){
         accounts.hideAll();
+	if (!window.authenticated) {
+	    accounts.showRegister();
+	    return;
+	}
         $('.menubar').show();
             window.mugs.transition()
             .attr("x",function(d) {
