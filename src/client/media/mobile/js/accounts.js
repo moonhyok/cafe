@@ -670,7 +670,9 @@ $(document).ready(function() {
 
     $('.burger-div-about').click(function(){accounts.hideAll(); $('.dialog-about').show();});
 
-    $('.burger-div-compare').click(function(){accounts.hideAll(); 
+    $('.burger-div-compare').click(function(){
+	accounts.hideAll();
+	window.compare_button_clicked = true;
 	if (!window.authenticated) {
 	    accounts.showRegister();
 	    return;
@@ -837,6 +839,16 @@ $(document).ready(function() {
 
     $('.dialog-ready').click(function() {
         rate.logUserEvent(8,'dialog 1');
+
+	if (window.compare_button_clicked) {
+	    window.compare_button_clicked = false;
+            $('.dialog').hide();
+	    $('.dialog-continue').show();
+            window.prev_state = 'dialog';
+            window.cur_state = 'dialog';
+	    return;
+	}
+
         rate.initMenubar();
         $('.map-info').show();
 
@@ -1032,6 +1044,9 @@ $(document).ready(function() {
 	});
 
     $('.translate-btn').click(function(){utils.translateAll();rate.logUserEvent(0,'translate ' + window.lang);})
+    $('.skip-map-btn').click(function(){
+	$('.dialog-continue').show();
+    })
 
     $('.spanish').hide();
 	
