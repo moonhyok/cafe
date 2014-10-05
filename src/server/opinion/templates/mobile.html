@@ -364,7 +364,11 @@ Join the <strong>{{num_users}}</strong> others who have participated in this sce
 
             <center>  
               <div class="question-number responsive-body"><span>Question</span> {{ statement.id }} <span>of</span> {{ statements|length }}.</div>
-              <div class="question-number responsive-body">Please select how strongly you agree with the following statement:</div>
+
+	      {% if statement.id == 1 %}
+              <div class="question-number responsive-body">Please select how strongly you agree with the following statement:</div>	      
+	      {% endif %}
+	      
               <div class="statement-style responsive-body english">{{ statement.statement }}</div>
               <div class="statement-style responsive-body spanish" style="display:none;">{{ statement.spanish_statement }}</div>
 
@@ -372,6 +376,9 @@ Join the <strong>{{num_users}}</strong> others who have participated in this sce
 
               <div style="width: 100%;" class="responsive-padding">
                 
+	      {% if statement.id == 1 %}
+		<div class="question-number responsive-body"><center>0 (strongly disagree) to 9 (strongly agree)</center></div>
+	      {% endif %}
 
                 <div class="slider" style="margin-left: 15px;margin-right: 5px;" id="slider-{{statement.id}}"></div>
 

@@ -92,9 +92,10 @@ $(".slider-grade-bubble").on("click",function(e){
         if(window.current_slider +1 > window.num_sliders)
         {
             window.prev_state = 'grade';
-        window.cur_state = 'register';
+        window.cur_state = 'dialog';
         rate.logUserEvent(5,'sliders finished');
-        rate.storeSliders(window.num_sliders);
+            //rate.storeSliders(window.num_sliders);
+	    $('.dialog-continue').show();
         
         if (window.authenticated) {
             for (var i = 1; i <= window.num_sliders; i++) {
