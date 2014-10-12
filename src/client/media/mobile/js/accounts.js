@@ -251,6 +251,9 @@ var accounts = (function($, d3, console) {
                             $('.dialog-continue').show();
                         }
                 else {
+		    if (window.suggest_ideas_clicked) {
+			return;
+		    }		    
                             accounts.hideAll();
                             $('.dialog').show();
                             window.cur_state = 'register';
@@ -432,6 +435,10 @@ $(document).ready(function() {
                             window.conf.ZIPCODE=registrationData.zipcode;
                             window.prev_state = 'register';
                             window.cur_state = 'dialog';
+
+			        if (window.suggest_ideas_clicked) {
+				    $('.burger-div-others').click();
+				}
 
 			                //Slow TODO
 			                //accounts.getNeighborStat();
@@ -680,6 +687,8 @@ $(document).ready(function() {
 					      $('.dialog').show();});
 
     $('.burger-div-others').click(function(){
+	window.suggest_ideas_clicked = true;
+
         accounts.hideAll();
 	if (!window.authenticated) {
 	    accounts.showRegister();
