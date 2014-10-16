@@ -231,6 +231,9 @@ var accounts = (function($, d3, console) {
                         $('.burger-div-others').show();
                         $('.burger-div-yours').show();
         justRegistered = typeof justRegistered !== 'undefined' ? justRegistered : false;
+
+	window.justRegisteredFlag = justRegistered;
+
         dcontinue = typeof dcontinue !== 'undefined' ? dcontinue : false;
         $('#regzip').prop('disabled', true);
         $('.registerb').html("Next");
@@ -257,7 +260,7 @@ var accounts = (function($, d3, console) {
                             accounts.hideAll();
                             $('.dialog').show();
                             window.cur_state = 'register';
-                            window.prev_state = 'dialog';
+                            window.prev_state = 'continue';
                         } 
                 
             },
@@ -600,7 +603,7 @@ $(document).ready(function() {
                     return;
                   }
 
-               if (window.prev_state == 'home'){
+               if (window.current_slider == 1 || window.prev_state == 'home'){
                     $('.landing').show();
                     window.prev_state = 'home';
                }
@@ -608,14 +611,14 @@ $(document).ready(function() {
                {
                   $('.endsliders').show();
                   $('.endsliders-slide').hide();
-                  $('#slide-1').show();
-                  window.current_slider = 1;
-                  window.prev_state = 'home';
+                  $('#slide-'+window.current_slider).show();
+		  window.cur_state = 'grade';
+                  //window.prev_state = 'home';
                 }
                 else if (window.prev_state == 'register')
                 {
                   $('.register').show();
-                  window.prev_state = 'grade';
+                  window.prev_state = 'continue';
                 }
                 else if (window.prev_state == 'dialog')
                 {
@@ -632,7 +635,6 @@ $(document).ready(function() {
                   $('.rate').show();
                   window.prev_state = 'map';
                 }
-
                 else if (window.prev_state == 'map')
                 {
                     window.prev_state = 'dialog';
@@ -646,7 +648,7 @@ $(document).ready(function() {
                 }
                 else if (window.prev_state == 'continue')
                 {
-                   window.prev_state = 'comment';
+                   window.prev_state = 'grade';
                    $('.dialog-continue').show();
                 }
                 else if (window.prev_state == 'email')
@@ -1071,6 +1073,8 @@ $(document).ready(function() {
 
     $('.landing-page-banner').click(function(){accounts.hideAll();$('.landing').show();})
     $('.landing-page-banner-logout').click(function(){location.reload();})
+
+    window.justRegisteredFlag = false;
 
     window.onpopstate = function(event) {
         backButtonHandler();
