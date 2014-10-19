@@ -92,7 +92,7 @@ $(".slider-grade-bubble").on("click",function(e){
         if(window.current_slider +1 > window.num_sliders)
         {
             window.prev_state = 'grade';
-        window.cur_state = 'dialog';
+        window.cur_state = 'continue';
         rate.logUserEvent(5,'sliders finished');
             //rate.storeSliders(window.num_sliders);
 	    $('.dialog-continue').show();

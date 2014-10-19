@@ -15,7 +15,7 @@ os_stmts = OpinionSpaceStatement.objects.filter(opinion_space = first_os)
 disc_stmt = first_os.discussion_statements.filter(is_current = True)[0]
 
 # Create random users
-for i in range(30, 75):
+for i in range(0, 10):
     print "Creating user %s/30..." % (i + 1)
     
     user = User.objects.create_user('user_%d' % i, 'user_%d@gmail.com' % i, 'test')

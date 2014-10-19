@@ -554,7 +554,7 @@ I have experienced severe shaking (enough to cause damage)
               <!--<div style="font-size: 12px; font-style: italic;font-weight: bolder;" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();">{{k.id}}. </div>-->
               <div style="font-size: 18px;font-weight: bolder;" class="english" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();">{{k.short_version}}</div>
               <div style="font-size: 18px;font-weight: bolder;" class="spanish" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();">{{k.spanish_short_version}}</div>
-              <div style="font-size: 14px; font-weight: bolder;cursor: pointer;cursor: hand;" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();"><span>learn more</span> >></div>
+              <div style="font-size: 14px; font-weight: bolder;cursor: pointer;cursor: hand;" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();window.prev_state='dialog';"><span>learn more</span> >></div>
             </div>
 
             <canvas id="sparkLineCanvas{{k.id}}" width="175" height="58"></canvas>
@@ -657,8 +657,8 @@ I have experienced severe shaking (enough to cause damage)
           </div> 
 
           
-          <div class="close-page" onclick="accounts.hideAll();$('.dialog').show();">
-            X
+          <div class="close-page" style="text-decoration:underline;" onclick="accounts.hideAll();$('.dialog').show();window.prev_state='register';">
+            Back
           </div>
 
           <div class="statement-style">
@@ -992,9 +992,9 @@ Learn more about how you can better prepare: </br>
                 <!--<input type="email" id='regemail' name='regemail' class='regforminput' style="font-size: 15px; background-color: #FFFFFF;color: #000000;" placeholder="Email" data-theme='b'></input>
     <div class="comment-admin-text-b">{{client_settings.DEMOGRAPHICS_DISCLAIMER}}.</div>
     <br/>-->
-                <div class='button-div-wide responsive-btn' onclick="$('.burger-div-compare').click();">Compare Score & Learn More</div>
-               <div class='button-div-wide responsive-btn' onclick="$('.burger-div-others').click();">Suggest Ideas for Preparedness</div>
-<!--                <div class='button-div-wide responsive-btn' onclick="$('.burger-div-yours').click();">Suggest Ideas for Preparedness</div>-->
+                <div class='button-div-wide responsive-btn' onclick="$('.burger-div-compare').click();window.prev_state='continue';">Compare Score & Learn More</div>
+               <div class='button-div-wide responsive-btn' onclick="$('.burger-div-others').click();window.prev_state='continue';">Suggest Ideas for Preparedness</div>
+<!--                <div class='button-div-wide responsive-btn' onclick="$('.burger-div-yours').click();window.prev_state='continue';">Suggest Ideas for Preparedness</div>-->
           <!--      <div class='button-div-wide responsive-btn' onclick="$('.burger-div-logout').click();">Explore Resources</div> -->
                 <div class='button-div-wide responsive-btn' onclick="$('.burger-div-logout').click();">Exit</div>
     <div class='alert-error' id='email-error' style='display:none;width: 250px;'></div>
