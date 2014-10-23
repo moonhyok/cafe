@@ -45,7 +45,7 @@ $(".slider-grade-bubble").on("click",function(e){
 	if($(this).parent().parent().parent().attr("id").substring(7).indexOf("importance") > -1)
 	{
 		var classList = $(this).attr('class').split(/\s+/);
-		window.current_rating = grade_to_score(classList[2].substring(7).replace("p","+"));
+		window.current_rating = grade_map[classList[2].substring(7).replace("p","+")];
 		        $('.menubar').show();
         rate.doneRating();
 
@@ -128,7 +128,7 @@ $(".slider-grade-bubble").on("click",function(e){
 	try {
 	statement_id = parseInt($(this).parent().parent().parent().attr("id").substring(7));
 	var classList =$(this).attr('class').split(/\s+/);
-	window.sliders[statement_id-1] = grade_to_score(classList[2].substring(7).replace("p","+"));
+	window.sliders[statement_id-1] = grade_map[classList[2].substring(7).replace("p","+")];
 	median = score_to_grade(100*medians[statement_id]);
 	rate.logUserEvent(11,'slider_set ' + statement_id + ' ' + window.sliders[statement_id-1]/10);
 

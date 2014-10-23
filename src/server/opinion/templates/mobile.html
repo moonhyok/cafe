@@ -610,14 +610,14 @@ I have experienced severe shaking (enough to cause damage)
                context.shadowOffsetX = 1;
                context.shadowOffsetY = 1;
          //context.moveTo(0, 45 - data[0]/max_of_array*38);
-         for (i = 0; i <= 13; i++)
+         for (i = 0; i <= 10; i++)
          {
           var skipOffset = 0
-          if (i == 13)
+          if (i == 10)
             skipOffset = 7
 
-     context.moveTo(i*11+5+skipOffset, 45);
-     context.lineTo(i*11+5+skipOffset, 45 - data[i]/max_of_array*38);
+     context.moveTo(i*15+6+skipOffset, 45);
+     context.lineTo(i*15+6+skipOffset, Math.min(45 - data[i]/max_of_array*38,43));
      context.stroke(); 
          }
 
@@ -625,8 +625,8 @@ I have experienced severe shaking (enough to cause damage)
          context.fillStyle = '#442b10';
          context.fillText("0",0,58);
 
-         context.fillText("9",133,58);
-         context.fillText("Ø",149,58);
+         context.fillText("9",137,58);
+         context.fillText("Ø",156,58);
         </script>
 
       </div>
@@ -684,14 +684,14 @@ I have experienced severe shaking (enough to cause damage)
                context.shadowOffsetX = 1;
                context.shadowOffsetY = 1;
          //context.moveTo(0, 90 - data[0]/max_of_array*76);
-         for (i = 0; i <= 13; i++)
+         for (i = 0; i <= 10; i++)
          {
           var skipOffset = 0
-          if (i == 13)
+          if (i == 10)
             skipOffset = 7
 
-          context.moveTo(i*22+10+skipOffset, 90);
-          context.lineTo(i*22+10+skipOffset, 90 - data[i]/max_of_array*76);
+          context.moveTo(i*28+10+skipOffset, 90);
+          context.lineTo(i*28+10+skipOffset, Math.min(90 - data[i]/max_of_array*76, 86));
           context.stroke(); 
          }
 
@@ -699,8 +699,8 @@ I have experienced severe shaking (enough to cause damage)
          context.fillStyle = '#442b10';
          context.fillText("0",5,104);
 
-         context.fillText("9",268,104);
-         context.fillText("Ø",296,102);
+         context.fillText("9",258,104);
+         context.fillText("Ø",292,102);
         </script>
 
 <div id="detail-emore-info-{{k.id}}" class="dialog-text-style responsive-body english"></div>
