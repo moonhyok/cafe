@@ -95,20 +95,21 @@ var accounts = (function($, d3, console) {
                         context.beginPath();
                         context.lineWidth = 6;
                         context.strokeStyle = '#0F85D4';
-                        var convertedSlider = 12-Math.round(1.2*window.sliders[i]);
+                        var convertedSlider = window.sliders[i];
+			console.log(convertedSlider)
 
                         if(window.skipped[i])
-                            convertedSlider = 13
+                            convertedSlider = 10
 
                         var data = window.statement_processed_data[i];
                         var max_of_array = Math.max.apply(Math, data);
 
                         var skipOffset = 0
-                        if (convertedSlider == 13)
+                        if (convertedSlider == 10)
                             skipOffset = 7
 
-                        context.moveTo(convertedSlider*11+5+skipOffset, 45);
-                        context.lineTo(convertedSlider*11+5+skipOffset, 45 - data[convertedSlider]/max_of_array*38);
+                        context.moveTo(convertedSlider*15+6+skipOffset, 45);
+                        context.lineTo(convertedSlider*15+6+skipOffset, Math.min(45 - data[convertedSlider]/max_of_array*38,42));
                         context.stroke(); 
 
                         var canvas = document.getElementById("sparkLineCanvasDetail"+(i+1));
@@ -116,8 +117,8 @@ var accounts = (function($, d3, console) {
                            context.beginPath();
                         context.lineWidth = 10;
                         context.strokeStyle = '#0F85D4';
-                        context.moveTo(convertedSlider*22+10+skipOffset, 90);
-                        context.lineTo(convertedSlider*22+10+skipOffset, 90 - data[convertedSlider]/max_of_array*76);
+                        context.moveTo(convertedSlider*28+10+skipOffset, 90);
+                        context.lineTo(convertedSlider*28+10+skipOffset, Math.min(90 - data[convertedSlider]/max_of_array*76, 86));
                         context.stroke();  
 
                         //blooms will be populated at the end of this! see callback
