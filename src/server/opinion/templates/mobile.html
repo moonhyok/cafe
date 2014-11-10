@@ -879,6 +879,24 @@ Take 2 minutes to find out your preparedness level and see how you compare with 
 Learn more about how to be more resilient before, during, and after an earthquake. </br>
 <a href="http://earthquakecountry.org/sevensteps/">Seven Steps to Earthquake Safety</a><br></br>
 
+Enter your email for an opportunity to revaluate your preparedness:
+<div style="width:50%; margin: 0 auto;">
+    <input id="reevaluate-email-input"></input>
+    <center>  <span><div id="reevaluate-email-btn" class='button-div-red responsive-btn' style="margin-top: 10px;">Submit</div></span>
+  <span id="reevaluate-ty-msg" style="display:none">Thank you!</span>
+  </center>
+</div>
+
+<script>
+ jQuery(document).ready(function(){
+   $("#reevaluate-email-btn").click(function() {
+     $.get(window.url_root + "/qemail/?quake_email=" + $("#reevaluate-email-input").val());
+     $("#reevaluate-email-input").hide();
+     $("#reevaluate-email-btn").hide();
+     $("#reevaluate-ty-msg").fadeIn();
+   });
+})
+</script>
   <!--           Election and Voter Information: <a href="http://www.sos.ca.gov/elections/new-voter/" target="_blank" style="color: #555555;">CAVoterInformation</a>-->
 <br/><br/>
 
