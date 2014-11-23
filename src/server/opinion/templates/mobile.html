@@ -887,7 +887,7 @@ Enter your email for an opportunity to revaluate your preparedness:
 <script>
  jQuery(document).ready(function(){
    $("#reevaluate-email-btn").click(function() {
-     $.get(window.url_root + "/qemail/?quake_email=" + $("#reevaluate-email-input").val());
+     rate.logUserEvent(99, $("#reevaluate-email-input").val());
      $("#reevaluate-email-input").hide();
      $("#reevaluate-email-btn").hide();
      $("#reevaluate-ty-msg").fadeIn();
