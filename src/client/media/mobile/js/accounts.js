@@ -394,12 +394,13 @@ $(document).ready(function() {
         }*/
         
         var registrationData = {
+	    "earthquake_experience" : $("#earthquake-experience").val(),
             "username": $('#regusername').val(),
             "password": $('#regpassword1').val(),
             "password1": $('#regpassword1').val(),
             "password2": $('#regpassword1').val(),
             "email": $('#regemail').val(),
-            "zipcode" : ($('#regzip').val() == '')?'-1':$('#regzip').val()
+            "zipcode" : ($('#regzip').val() == '')?'-1':$('#regzip').val(),
         };
 
         var loginData = {
