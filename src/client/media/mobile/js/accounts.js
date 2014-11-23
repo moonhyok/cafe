@@ -8,6 +8,7 @@ var accounts = (function($, d3, console) {
     // a function to pull up the registration prompt
 
     function showRegister() {
+	
         $('.register').show();
         //$('#finishRegistration').click(function() {});
     }
@@ -686,9 +687,15 @@ $(document).ready(function() {
 	window.compare_button_clicked = true;
 	if (!window.authenticated) {
 	    accounts.showRegister();
+	    window.prev_state = window.cur_state;
+            window.cur_state = 'register';
 	    return;
 	}
-					      $('.dialog').show();});
+	$('.dialog').show();
+	window.prev_state = window.cur_state;
+        window.cur_state = 'dialog';
+
+    });
 
     $('.burger-div-others').click(function(){
 	window.suggest_ideas_clicked = true;
