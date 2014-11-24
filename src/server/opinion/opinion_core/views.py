@@ -139,6 +139,7 @@ def mobile(request,entry_code=None):
                        'random_username': random_username,
                        'random_password': random_password,
                        'num_users': num_users,
+                       'encouragement_text': random.randint(0, 1),
                                              'statement_labels': json.dumps(statement_labels),
                        'medians': json.dumps(medians)}))
 

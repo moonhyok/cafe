@@ -999,7 +999,13 @@ Enter your email for an opportunity to revaluate your preparedness:
       <br/><br/>
       <div class='dialog-text-style responsive-body'>
         <span>Thank You! Below are several options to help you, your friends, and your family increase resilience and better prepare for a major earthquake.<br/><br/>See how your preparedness ratings compare to others' and learn more about how you can be better prepared. View and rate others' ideas for how the California State government can help people better prepare (and suggest your own idea). Share this survey with your friends and family to make sure they are prepared.</span>
-        <div style="font-size: 18px;margin-top: 10px;">{{client_settings.EMAIL_ASK_TEXT}}</div>
+        <div style="font-size: 18px;margin-top: 10px;">
+	  {% if encouragement_text == 0 %}
+	    {{client_settings.EMAIL_ASK_TEXT}}
+	  {% else %}
+	    {{client_settings.EMAIL_ASK_TEXT}}
+	  {% endif %}
+	</div>
               <!--<div class='dialog-text-style default-left-padding'>
               {{client_settings.EMAIL_ASK_TEXT}}
         </div>-->
