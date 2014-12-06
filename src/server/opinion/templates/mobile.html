@@ -429,7 +429,7 @@ Take 2 minutes to see how prepared you are, and join the <strong>{{num_users}}</
 
           </div> 
 <div class='dialog-text-style responsive-body'><center>
-	<span></br>Please enter your zip code and share your past earthquake experience.</span></div></center>
+	<span></br>Please enter your zip code and share your past earthquake experience.</span>
 
 
     <div class= 'registerpanel'>
@@ -445,14 +445,18 @@ Take 2 minutes to see how prepared you are, and join the <strong>{{num_users}}</
                <div class='alert-error' id='zipcode-error' style='display:none;'></div>
 
 <br></br>
-<br></br>
-<select id="earthquake-experience">
-  <option value="0">Have you experienced an earthquake?</option>
+
+<div class="basic-header2 responsive-body" style="max-width: 500px;">Have you experienced an earthquake?</br>
+	      <select id="earthquake-experience">
+		  <option value="0">Select an answer...</option>
   <option value="1">No, I have never experienced an earthquake.</option>
   <option value="2">I have experienced some shaking.</option>
   <option value="3">I have experienced strong shaking (enough to move heavy objects)</option>
   <option value="4">I have experienced severe shaking (enough to cause damage)</option>
 </select>
+
+</div>
+</div></center>
 
               </div>
 
@@ -872,14 +876,15 @@ Take 2 minutes to see how prepared you are, and join the <strong>{{num_users}}</
       <span class="english"><a href="http://twitter.com/intent/tweet?text=How+prepared+are+you+for+a+major+earthquake+right+now%3F+Reply+with+%23quakecafe+on+a+scale+from+0+to+9+or+visit+quakecafe.org" target="_blank" style="color: #555555;"><img src="{{url_root}}/media/mobile/img/cafe/twitter-button.png" width="102px"></a>
       <a href="https://www.facebook.com/dialog/feed?app_id=123050457758183&link=http%3A%2F%2Fquakecafe.org&picture=http%3A%2F%2Fcaliforniareportcard.org%2Fcrc%2Fwp-content%2Fuploads%2FQuakeCAFE_How-Prepared-Are-You_Version1_SM-01.jpg&name=QuakeCAFE&caption=%20&description=How%20prepared%20are%20you%3F%20Try%20QuakeCAFE%20developed%20by%20%40Cal%20%40GavinNewsom%20%26%20%40Ken_Goldberg%20http%3A%2F%2Fquakecafe.org%20%23Shakeout&redirect_uri=http%3A%2F%2Fwww.facebook.com%2F" target="_blank" style="color: #555555;"><img src="{{url_root}}/media/mobile/img/cafe/facebook-button.png" width="102px"></a><br/>
 
-<br></br>
+      <br></br>
 Learn more about how to be more resilient before, during, and after an earthquake. </br>
 <a href="http://earthquakecountry.org/sevensteps/">Seven Steps to Earthquake Safety</a><br></br>
 
 Enter your email for an opportunity to revaluate your preparedness:
-<div style="width:50%; margin: 0 auto;">
-    <input id="reevaluate-email-input"></input>
-    <center>  <span><div id="reevaluate-email-btn" class='button-div-red responsive-btn' style="margin-top: 10px;">Submit</div></span>
+  <center>
+<div id="reevaluate-email-div" class="responsive-form">
+      <input id="reevaluate-email-input"></input>
+     <span><div id="reevaluate-email-btn" class='button-div-red responsive-btn' style="margin-top: 10px;">Submit</div></span>
   <span id="reevaluate-ty-msg" style="display:none">Thank you!</span>
   </center>
 </div>
