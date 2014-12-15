@@ -93,8 +93,8 @@ var accounts = (function($, d3, console) {
                          var context = canvas.getContext('2d');
                         
                         context.beginPath();
-                        context.lineWidth = 6;
-                        context.strokeStyle = '#0F85D4';
+                        context.lineWidth = 3;
+                        context.strokeStyle = '#FF00FF';
                         var convertedSlider = 12-Math.round(1.2*window.sliders[i]);
 
                         if(window.skipped[i])
@@ -107,17 +107,19 @@ var accounts = (function($, d3, console) {
                         if (convertedSlider == 13)
                             skipOffset = 7
 
-                        context.moveTo(convertedSlider*11+5+skipOffset, 45);
-                        context.lineTo(convertedSlider*11+5+skipOffset, 45 - data[convertedSlider]/max_of_array*38);
+                        context.moveTo(convertedSlider*11+5+skipOffset-6, 5);
+                        context.lineTo(convertedSlider*11+5+skipOffset, 10);
+                        context.lineTo(convertedSlider*11+5+skipOffset+6, 5);
                         context.stroke(); 
 
                         var canvas = document.getElementById("sparkLineCanvasDetail"+(i+1));
                          var context = canvas.getContext('2d');
                            context.beginPath();
-                        context.lineWidth = 10;
-                        context.strokeStyle = '#0F85D4';
-                        context.moveTo(convertedSlider*22+10+skipOffset, 90);
-                        context.lineTo(convertedSlider*22+10+skipOffset, 90 - data[convertedSlider]/max_of_array*76);
+                        context.lineWidth = 5;
+                        context.strokeStyle = '#FF00FF';
+			context.moveTo(convertedSlider*22+10+skipOffset-9, 5);
+                        context.lineTo(convertedSlider*22+10+skipOffset, 10);
+                        context.lineTo(convertedSlider*22+10+skipOffset+9, 5);
                         context.stroke();  
 
                         //blooms will be populated at the end of this! see callback

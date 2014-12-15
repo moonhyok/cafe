@@ -151,7 +151,14 @@ var rate = (function($, d3, console) {
                 $('.rate').hide();
                 // ui has changed!
                 $('.top-bar').trigger('height');
-                $('.instructions-light').hide();
+                //$('.instructions-light').hide();
+		if(window.lang == 'en'){
+                    $('.instructions-light').show();
+                    $('.instructions-light').html("You're halfway done!")
+                }
+                else{
+                    $('.instructions-light').hide();
+                }
                 //$('.instructions2').show();
                 //$('.dialog-score').show();
             }

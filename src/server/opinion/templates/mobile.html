@@ -301,8 +301,8 @@
           </div> -->
 
           <div class="landing-img-txt responsive-body">  
-            <span class="english">Join the <strong>{{num_users}}</strong> others who are contributing to California's collective intelligence.</span>
-            <span class="spanish">Únete a los <strong>{{num_users}}</strong> que ya contribuyeron a la inteligencia colectiva de California.</span>
+            <span class="english">Join <strong>{{num_users}}</strong> others to amplify California's collective intelligence.</span>
+            <span class="spanish">Únete a los <strong>{{num_users}}</strong> otros para amplificar la inteligencia colectiva de California</span>
           </div>
 
           <div class='button-div-red first-time-btn responsive-btn' style="margin-top: 10px;">Begin</div><br/><br/><br/>
@@ -313,6 +313,10 @@
           <span class="spanish">
           <a href="http://en.wikipedia.org/wiki/California_Report_Card" target="_blank">Más información</a>
           </span>
+
+          <div class="landing-disclaimer">
+		A project by the CITRIS Data & Democracy Initiative at UC Berkeley
+	  </div>
 
           </center>
 
@@ -377,6 +381,9 @@
     </center>
 
               </div>
+
+              <div class="statement-style responsive-body english grade-feedback" style="text-align: center;">At the end you’ll have a chance to give us more feedback</div>
+              <div class="statement-style responsive-body spanish grade-feedback" style="display:none;"></div>
               
               <div style="clear: both;"></div>
               <!--<a href="#" class="skip-button-{{statement.id}} skip-btn responsive-body" id="next-{{statement.id}}" style="color: #ffffff;font-size: 16px;font-weight: normal !important;position:relative;top: -40px;left: 100px;">Skip</a>-->
@@ -455,7 +462,7 @@
             </div>
             
             <div class="home-btn-wrapper" style="width:35%;display:inline-block; text-align: right;">
-              <span style="font-size: 24px;font-weight:bold;padding-right: 15px;" onclick="accounts.hideAll();$('.'+window.burger_state).show();window.prev_state='help';window.cur_state=window.burger_state;">X</span>
+              <span style="font-size: 24px;font-weight:bold;padding-right: 15px;" onclick="accounts.hideAll();$('.'+window.burger_state).show();window.prev_state='help';window.cur_state=window.burger_state;">&#11013;</span>
             </div>
 
     </div> 
@@ -500,7 +507,7 @@
           </div> 
     <!--<img class="header-img-topic center" src="{{ url_root }}/media/mobile/img/cafe/CRC_join.png"/>-->
           <div class='dialog-text1 dialog-text-style'>
-            <span>The plots below show the grades of others. The blue lines indicate the grades you entered.</span>
+            <span>The plots below show the grades of others. The pink lines indicate the grades you entered.</span>
           </div>
 
           <br/>
@@ -815,7 +822,7 @@
       <!-- <span class="english"><a href="http://hrefshare.com/9bdd3" target="_blank" style="color: #555555;"><img src="{{url_root}}/media/mobile/img/cafe/twitter-button.png" width="102px"></a> -->
       <!-- <a href="http://hrefshare.com/d3660" target="_blank" style="color: #555555;"><img src="{{url_root}}/media/mobile/img/cafe/facebook-button.png" width="102px"></a><br/> -->
       <span class="english"><a href="http://twitter.com/intent/tweet?text=How%20do%20you%20grade%20California%3F%20Try%20%40CAReportCard%20developed%20by%20%40Cal%20%40GavinNewsom%20%26%20%40Ken_Goldberg%20http%3A%2F%2Fcaliforniareportcard.org%2F2.0%2F%20%23CA%20%23GOV" target="_blank" style="color: #555555;"><img src="{{url_root}}/media/mobile/img/cafe/twitter-button.png" width="102px"></a>
-      <a href="https://www.facebook.com/dialog/feed?app_id=123050457758183&link=http%3A%2F%2Fcaliforniareportcard.org%2F2.0%2F%20&picture=http%3A%2F%2Fcaliforniareportcard.org%2Fcrc%2Fwp-content%2Fuploads%2FCRCv2_Facebook-Share-link_graphic-01.jpg&name=California%20Report%20Card%20v2.0&caption=%20&description=How%20do%20you%20grade%20California%3F%20%20Try%20%40CAReportCard%20developed%20by%20%40Cal%20%40GavinNewsom%20%26%20%40Ken_Goldberg%20%20http&redirect_uri=http%3A%2F%2Fwww.facebook.com%2F" target="_blank" style="color: #555555;"><img src="{{url_root}}/media/mobile/img/cafe/facebook-button.png" width="102px"></a><br/>
+      <a href="https://www.facebook.com/dialog/feed?app_id=694165360698061&link=http%3A%2F%2Fcaliforniareportcard.org%2F2.0%2F&picture=http%3A%2F%2Fcaliforniareportcard.org%2Fcrc%2Fwp-content%2Fuploads%2FCRCv2_Facebook-Share-link_graphic-01.jpg&name=The%20California%20Report%20Card&caption=%20&description=How%20do%20you%20grade%20California%3F%20%20Try%20%40CAReportCard%20developed%20by%20%40Cal%20%40GavinNewsom%20%26%20%40Ken_Goldberg%20%20http&redirect_uri=http%3A%2F%2Fwww.facebook.com%2F" target="_blank" style="color: #555555;"><img src="{{url_root}}/media/mobile/img/cafe/facebook-button.png" width="102px"></a><br/>
 
              Election and Voter Information: <a href="http://www.sos.ca.gov/elections/new-voter/" target="_blank" style="color: #555555;">CAVoterInformation</a><br/><br/>
 
@@ -826,7 +833,7 @@
           <span class="spanish"> 
 
             <a href="http://twitter.com/intent/tweet?text=%C2%BFC%C3%B3mo%20califica%20a%20California%3F%20Pruebe%20%40CalificaaCA%20desarrollado%20por%20%40Cal%20%40GavinNewsom%20%26%20%40Ken_Goldberg%20%C2%A0http%3A%2F%2Fcaliforniareportcard.org%2F2.0%2F%20%23C" target="_blank" style="color: #555555;"><img src="{{url_root}}/media/mobile/img/cafe/twitter-button.png" width="102px"></a>
-      <a href="https://www.facebook.com/dialog/feed?app_id=123050457758183&link=http%3A%2F%2Fcaliforniareportcard.org%2F2.0%2F%20&picture=http%3A%2F%2Fcaliforniareportcard.org%2Fcrc%2Fwp-content%2Fuploads%2FCRCv2_Facebook-Share-link_Spanish-011.jpg&name=Califica%20a%20California&caption=%20&description=%C2%BFC%C3%B3mo%20califica%20a%20California%3F%20Pruebe%20%40CalificaaCA%20desarrollado%20por%20%40Cal%20%40GavinNewsom%20%26%20%40Ken_Goldberg%20%C2%A0http%3A%2F%2Fcaliforniareportcard.org%2F2.0%2F%20%23CA%20%23Gov&redirect_uri=http%3A%2F%2Fwww.facebook.com%2F" target="_blank" style="color: #555555;"><img src="{{url_root}}/media/mobile/img/cafe/facebook-button.png" width="102px"></a><br/>
+      <a href="https://www.facebook.com/dialog/feed?app_id=694165360698061&link=http%3A%2F%2Fcaliforniareportcard.org%2F2.0%2F%20&picture=http%3A%2F%2Fcaliforniareportcard.org%2Fcrc%2Fwp-content%2Fuploads%2FCRCv2_Facebook-Share-link_Spanish-011.jpg&name=Califica%20a%20California&caption=%20&description=%C2%BFC%C3%B3mo%20califica%20a%20California%3F%20Pruebe%20%40CalificaaCA%20desarrollado%20por%20%40Cal%20%40GavinNewsom%20%26%20%40Ken_Goldberg%20%C2%A0http%3A%2F%2Fcaliforniareportcard.org%2F2.0%2F%20%23CA%20%23Gov&redirect_uri=http%3A%2F%2Fwww.facebook.com%2F" target="_blank" style="color: #555555;"><img src="{{url_root}}/media/mobile/img/cafe/facebook-button.png" width="102px"></a><br/>
 
             Información sobre las elecciones y los votantes: <a href="http://www.sos.ca.gov/elections/new-voter/spanish/" target="_blank" style="color: #555555;">California Información al Votante</a><br/><br/>
 
@@ -921,7 +928,7 @@
       <br/><br/>
       <div class='dialog-text-style responsive-body'>
         <span>Thank You!</span>
-        <div style="font-size: 18px;margin-top: 10px;">You can continue to contribute to the discussion by reading and evaluating the ideas of others.</div>
+        <div style="font-size: 18px;margin-top: 10px;">We encourage you to amplify CA's collective intelligence by reading and evaluating more ideas.</div>
               <!--<div class='dialog-text-style default-left-padding'>
               {{client_settings.EMAIL_ASK_TEXT}}
         </div>-->
@@ -931,7 +938,7 @@
                 <!--<input type="email" id='regemail' name='regemail' class='regforminput' style="font-size: 15px; background-color: #FFFFFF;color: #000000;" placeholder="Email" data-theme='b'></input>
     <div class="comment-admin-text-b">{{client_settings.DEMOGRAPHICS_DISCLAIMER}}.</div>
     <br/>-->
-                <div class='button-div-wide responsive-btn' onclick="$('.burger-div-others').click();">Rate Others</div>
+                <div class='button-div-wide responsive-btn' onclick="$('.burger-div-others').click();">Continue</div>
                 <div class='button-div-wide responsive-btn' onclick="$('.burger-div-yours').click();">Edit Your Idea</div>
                 <div class='button-div-wide responsive-btn' onclick="$('.burger-div-logout').click();">Exit</div>
     <div class='alert-error' id='email-error' style='display:none;width: 250px;'></div>
@@ -993,7 +1000,7 @@
   <center>
     <div class="home-btn-dialog-box" style="padding-top: 5px;">
             <a href="#" class="translate-btn">Español</a>
-            <span style="font-size: 24px;font-weight:bold;padding-right: 15px;" onclick="accounts.hideAll();$('.burger-page').show();">X</span>
+            <span style="font-size: 24px;font-weight:bold;padding-right: 15px;" onclick="accounts.hideAll();$('.burger-page').show();">&#11013;</span>
     </div>
     <div class='dialog-text-style-noflow responsive-body'>
       <br/>
@@ -1119,7 +1126,7 @@
   <center>
     <div class="home-btn-dialog-box">
             <a href="#" class="translate-btn">Español</a>
-            <span style="font-size: 24px;font-weight:bold;padding-right: 15px;" onclick="accounts.hideAll();$('.menubar').show();">X</span>
+            <span style="font-size: 24px;font-weight:bold;padding-right: 15px;" onclick="accounts.hideAll();$('.menubar').show();">&#11013;</span>
     </div>
     <div class='dialog-text-style-noflow responsive-body'>
             <div style="padding-top: 5px;">About the Map</div>

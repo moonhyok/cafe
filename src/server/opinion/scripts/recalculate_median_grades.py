@@ -3,7 +3,8 @@ import environ
 from opinion.opinion_core.models import *
 import numpy as np
 
-active_users = list(User.objects.filter(is_active=True))
+begin_date=datetime.datetime(2014,9,20,0,0,0,0)
+active_users = list(User.objects.filter(last_login__gte=begin_date))
 skip_begin_date=datetime.datetime(2014,1,9,0,0,0,0)
 
 for s in OpinionSpaceStatement.objects.all():
