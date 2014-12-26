@@ -1,6 +1,6 @@
 *.pyc
 .DS_Store
-./**/settings_local.py
-./**/dailyupdate/*.png
 src/.idea
 venv/
+src/client/media/mobile/img/dailyupdate/*
+

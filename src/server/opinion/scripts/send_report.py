@@ -14,7 +14,7 @@ title = " " + url_list[len(url_list) - 1] + " "
 
 
 # From
-report_from = 'CRC-Daily-Activity-Summary@citizenreportcard.org'
+report_from = 'CRC-Daily-Activity-Summary@californiareportcard.org'
 
 # Recipients
 if EMAIL_RECIPIENTS:
@@ -31,7 +31,7 @@ report_body_text = report_information['report_body_text']
 report_body_html = report_information['report_body_html']
 
 from django.core.mail import EmailMultiAlternatives
-msg = EmailMultiAlternatives("test: " + report_subject, report_body_text, report_from, report_recipients)
+msg = EmailMultiAlternatives(report_subject, report_body_text, report_from, report_recipients)
 msg.attach_alternative(report_body_html, "text/html")
 msg.send()
 
