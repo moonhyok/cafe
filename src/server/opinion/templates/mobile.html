@@ -560,7 +560,7 @@ Take 2 minutes to see how prepared you are, and join the <strong>{{num_users}}</
               <!--<div style="font-size: 12px; font-style: italic;font-weight: bolder;" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();">{{k.id}}. </div>-->
               <div style="font-size: 18px;font-weight: bolder;" class="english" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();">{{k.short_version}}</div>
               <div style="font-size: 18px;font-weight: bolder;" class="spanish" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();">{{k.spanish_short_version}}</div>
-              <div style="font-size: 14px; font-weight: bolder;cursor: pointer;cursor: hand;" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();window.prev_state='dialog';"><span>learn more</span> >></div>
+              <div style="font-size: 14px; font-weight: bolder;cursor: pointer;cursor: hand;" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();window.prev_state='dialog';"><span style="text-decoration: underline;">learn more >></span></div>
             </div>
 
             <canvas id="sparkLineCanvas{{k.id}}" width="175" height="58"></canvas>
@@ -726,7 +726,12 @@ Take 2 minutes to see how prepared you are, and join the <strong>{{num_users}}</
   document.getElementById("detail-smore-info-{{k.id}}").innerHTML = sdetail_text[{{k.id}}];
   </script>
 
-      </div>
+	    </div>
+
+	    <div class="close-page" style="text-decoration:underline;text-align:center;" onclick="accounts.hideAll();$('.dialog').show();window.prev_state='register';">
+            Back
+          </div>
+
             <!--<div class="discuss-btn-div">
             <div class='dialog-ready button-div responsive-btn' style="display: inline-block;">Next</div>
             </div>-->
