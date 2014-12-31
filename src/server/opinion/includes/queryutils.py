@@ -371,7 +371,11 @@ def get_statement_histograms():
 	for s in OpinionSpaceStatement.objects.order_by('id'):
 		slist = old_data[s.id-1]
 		#slist.reverse()
-		output[s] = json.dumps(numpy.histogram(UserRating.objects.filter(is_current=True,opinion_space_statement=s).values_list('rating'), bins=11)[0].tolist())
+                non_skip_ratings = UserRating.objects.filter(is_current=True,opinion_space_statement=s).exclude(rating=0.45).values_list('rating')
+                raw_histogram = numpy.histogram(non_skip_ratings, bins=10)[0]
+                skip_ratings_count = UserRating.objects.filter(is_current=True,opinion_space_statement=s, rating=0.45).count()
+                histogram = raw_histogram.tolist() + [skip_ratings_count]
+		output[s] = json.dumps(histogram)
 	return output
 	
 # return all suggestions if num_suggestions = -1
