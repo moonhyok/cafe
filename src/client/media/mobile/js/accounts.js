@@ -8,7 +8,6 @@ var accounts = (function($, d3, console) {
     // a function to pull up the registration prompt
 
     function showRegister() {
-	
         $('.register').show();
         //$('#finishRegistration').click(function() {});
     }
@@ -233,9 +232,6 @@ var accounts = (function($, d3, console) {
                         $('.burger-div-others').show();
                         $('.burger-div-yours').show();
         justRegistered = typeof justRegistered !== 'undefined' ? justRegistered : false;
-
-	window.justRegisteredFlag = justRegistered;
-
         dcontinue = typeof dcontinue !== 'undefined' ? dcontinue : false;
         $('#regzip').prop('disabled', true);
         $('.registerb').html("Next");
@@ -256,13 +252,10 @@ var accounts = (function($, d3, console) {
                             $('.dialog-continue').show();
                         }
                 else {
-		    if (window.suggest_ideas_clicked) {
-			return;
-		    }		    
                             accounts.hideAll();
                             $('.dialog').show();
                             window.cur_state = 'register';
-                            window.prev_state = 'continue';
+                            window.prev_state = 'dialog';
                         } 
                 
             },
@@ -442,10 +435,6 @@ $(document).ready(function() {
                             window.prev_state = 'register';
                             window.cur_state = 'dialog';
 
-			        if (window.suggest_ideas_clicked) {
-				    $('.burger-div-others').click();
-				}
-
 			                //Slow TODO
 			                //accounts.getNeighborStat();
 
@@ -606,7 +595,7 @@ $(document).ready(function() {
                     return;
                   }
 
-               if (window.current_slider == 1 || window.prev_state == 'home'){
+               if (window.prev_state == 'home'){
                     $('.landing').show();
                     window.prev_state = 'home';
                }
@@ -614,14 +603,14 @@ $(document).ready(function() {
                {
                   $('.endsliders').show();
                   $('.endsliders-slide').hide();
-                  $('#slide-'+window.current_slider).show();
-		  window.cur_state = 'grade';
-                  //window.prev_state = 'home';
+                  $('#slide-1').show();
+                  window.current_slider = 1;
+                  window.prev_state = 'home';
                 }
                 else if (window.prev_state == 'register')
                 {
                   $('.register').show();
-                  window.prev_state = 'continue';
+                  window.prev_state = 'grade';
                 }
                 else if (window.prev_state == 'dialog')
                 {
@@ -638,6 +627,7 @@ $(document).ready(function() {
                   $('.rate').show();
                   window.prev_state = 'map';
                 }
+
                 else if (window.prev_state == 'map')
                 {
                     window.prev_state = 'dialog';
@@ -651,7 +641,7 @@ $(document).ready(function() {
                 }
                 else if (window.prev_state == 'continue')
                 {
-                   window.prev_state = 'grade';
+                   window.prev_state = 'comment';
                    $('.dialog-continue').show();
                 }
                 else if (window.prev_state == 'email')
@@ -682,29 +672,10 @@ $(document).ready(function() {
 
     $('.burger-div-about').click(function(){accounts.hideAll(); $('.dialog-about').show();});
 
-    $('.burger-div-compare').click(function(){
-	accounts.hideAll();
-	window.compare_button_clicked = true;
-	if (!window.authenticated) {
-	    accounts.showRegister();
-	    window.prev_state = window.cur_state;
-            window.cur_state = 'register';
-	    return;
-	}
-	$('.dialog').show();
-	window.prev_state = window.cur_state;
-        window.cur_state = 'dialog';
-
-    });
+    $('.burger-div-compare').click(function(){accounts.hideAll(); $('.dialog').show();});
 
     $('.burger-div-others').click(function(){
-	window.suggest_ideas_clicked = true;
-
         accounts.hideAll();
-	if (!window.authenticated) {
-	    accounts.showRegister();
-	    return;
-	}
         $('.menubar').show();
             window.mugs.transition()
             .attr("x",function(d) {
@@ -859,16 +830,6 @@ $(document).ready(function() {
 
     $('.dialog-ready').click(function() {
         rate.logUserEvent(8,'dialog 1');
-
-	if (window.compare_button_clicked) {
-	    window.compare_button_clicked = false;
-            $('.dialog').hide();
-	    $('.dialog-continue').show();
-            window.prev_state = 'dialog';
-            window.cur_state = 'dialog';
-	    return;
-	}
-
         rate.initMenubar();
         $('.map-info').show();
 
@@ -1064,9 +1025,6 @@ $(document).ready(function() {
 	});
 
     $('.translate-btn').click(function(){utils.translateAll();rate.logUserEvent(0,'translate ' + window.lang);})
-    $('.skip-map-btn').click(function(){
-	$('.dialog-continue').show();
-    })
 
     $('.spanish').hide();
 	
@@ -1082,8 +1040,6 @@ $(document).ready(function() {
 
     $('.landing-page-banner').click(function(){accounts.hideAll();$('.landing').show();})
     $('.landing-page-banner-logout').click(function(){location.reload();})
-
-    window.justRegisteredFlag = false;
 
     window.onpopstate = function(event) {
         backButtonHandler();

@@ -560,7 +560,7 @@ Take 2 minutes to see how prepared you are, and join the <strong>{{num_users}}</
               <!--<div style="font-size: 12px; font-style: italic;font-weight: bolder;" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();">{{k.id}}. </div>-->
               <div style="font-size: 18px;font-weight: bolder;" class="english" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();">{{k.short_version}}</div>
               <div style="font-size: 18px;font-weight: bolder;" class="spanish" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();">{{k.spanish_short_version}}</div>
-              <div style="font-size: 14px; font-weight: bolder;cursor: pointer;cursor: hand;" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();window.prev_state='dialog';"><span style="text-decoration: underline;">learn more >></span></div>
+              <div style="font-size: 14px; font-weight: bolder;cursor: pointer;cursor: hand;" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();"><span style="text-decoration:underline;">learn more</span> >></div>
             </div>
 
             <canvas id="sparkLineCanvas{{k.id}}" width="175" height="58"></canvas>
@@ -663,8 +663,8 @@ Take 2 minutes to see how prepared you are, and join the <strong>{{num_users}}</
           </div> 
 
           
-          <div class="close-page" style="text-decoration:underline;" onclick="accounts.hideAll();$('.dialog').show();window.prev_state='register';">
-            Back
+          <div class="close-page" onclick="accounts.hideAll();$('.dialog').show();">
+            X
           </div>
 
           <div class="statement-style">
@@ -838,7 +838,6 @@ Take 2 minutes to see how prepared you are, and join the <strong>{{num_users}}</
             </div>
 
             <div class="home-btn-wrapper" style="width:35%;display:inline-block;">
-	      <a style="margin-center:20px" class="skip-map-btn" href="#">[go back]   </a>
               <a href="#" class="translate-btn">Español</a><img width="30px" class='help-btn-dialog' id="help-menubar" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png" style="position:relative;left:-5px;">
             </div>
           </div>
@@ -1027,9 +1026,9 @@ Re-evaluate: Enter your e-mail to be sent the survey again at a later time in or
                 <!--<input type="email" id='regemail' name='regemail' class='regforminput' style="font-size: 15px; background-color: #FFFFFF;color: #000000;" placeholder="Email" data-theme='b'></input>
     <div class="comment-admin-text-b">{{client_settings.DEMOGRAPHICS_DISCLAIMER}}.</div>
     <br/>-->
-                <div class='button-div-wide responsive-btn' onclick="$('.burger-div-compare').click();window.prev_state='continue';">See Results & Learn More</div>
-               <div class='button-div-wide responsive-btn' onclick="$('.burger-div-others').click();window.prev_state='continue';">See and Suggest Ideas</div>
-<!--                <div class='button-div-wide responsive-btn' onclick="$('.burger-div-yours').click();window.prev_state='continue';">Suggest Ideas for Preparedness</div>-->
+                <div class='button-div-wide responsive-btn' onclick="$('.burger-div-compare').click();">See Results & Learn More</div>
+               <div class='button-div-wide responsive-btn' onclick="$('.burger-div-others').click();">See and Suggest Ideas</div>
+<!--                <div class='button-div-wide responsive-btn' onclick="$('.burger-div-yours').click();">Suggest Ideas for Preparedness</div>-->
           <!--      <div class='button-div-wide responsive-btn' onclick="$('.burger-div-logout').click();">Explore Resources</div> -->
                 <div class='button-div-wide responsive-btn' onclick="$('.burger-div-logout').click();">Exit and Share</div>
     <div class='alert-error' id='email-error' style='display:none;width: 250px;'></div>
