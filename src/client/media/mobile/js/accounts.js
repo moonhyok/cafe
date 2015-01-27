@@ -388,7 +388,7 @@ $(document).ready(function() {
         }*/
         
         var registrationData = {
-	    "earthquake_experience" : $("#earthquake-experience").val(),
+//	    "earthquake_experience" : $("#earthquake-experience").val(),
             "username": $('#regusername').val(),
             "password": $('#regpassword1').val(),
             "password1": $('#regpassword1').val(),
