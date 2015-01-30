@@ -430,7 +430,7 @@ Take 2 minutes to see how prepared you are, and join the <strong>{{num_users}}</
 
           </div> 
 <div class='dialog-text-style responsive-body'><center>
-	<span></br>Please enter your zip code to compare your earthquake preparedness.</span>
+	<span></br>Please enter your zip code to see how you compare with others.</span>
 
 
     <div class= 'registerpanel'>
@@ -804,6 +804,8 @@ Take 2 minutes to see how prepared you are, and join the <strong>{{num_users}}</
     <span>{{client_settings.RATE_IMPORTANCE_QUESTION}}</span><br/><br/>
     <center>
       <!--(Not at all) 0   -  9 (Extremely)-->
+      <div class="question-number responsive-body" style="padding-left:0px;"><center>0 (not helpful) to 9 (very helpful)</center></div>
+
       <div class="slider" id="slider-importance"></div>    
       
       <div id='go-back' class='button-div-wide responsive-btn' style="display: inline-block;">Skip</div>
@@ -844,14 +846,15 @@ Take 2 minutes to see how prepared you are, and join the <strong>{{num_users}}</
        </center>
       </div>
       
-    <center>
-      <div class="instructions-light responsive-body" style="font-size: 10px; width:100%">
-        Each sphere represents another participant's suggestion to the topic question. <!-- Spheres are arranged based on how similar participants are in their level of preparedness. Users who were more similar in preparedness level to each other have spheres that are closer together. --> Tap a sphere to read and respond to a suggestion.
-      </div></br>
-
-
-      <div style="text-align: center;margin-top: 6px;" class="english responsive-body"><span>{{ topic }}</span></div>
+	 <center>
+	         <div style="text-align: center;margin-top: 6px;" class="english responsive-body"><span>{{ topic }}</span></div>
       <div style="text-align: center;margin-top: 6px;" class="spanish responsive-body"><span>{{ topic_spanish }}</span></div>
+</br>
+      <div class="instructions-light responsive-body" style="font-size: 10px; width:100%">
+        <!-- Each sphere represents another participant's suggestion to the topic question. <!-- Spheres are arranged based on how similar participants are in their level of preparedness. Users who were more similar in preparedness level to each other have spheres that are closer together. Tap a sphere to read and respond to a suggestion. --> Inside each white ball is an idea.  Click any ball to reveal and rate the idea.
+      </div>
+
+
       <div style="text-align: right;"><a href="#" class="map-info" style="color:#442b10;position:relative;top:5px;" onclick="accounts.hideAll();$('.dialog-help-map1').show();window.cur_state = 'faq';window.prev_state = 'map';"><img width="30px" src="{{url_root}}/media/mobile/img/cafe/info_button.png"></a></div>
 
       <div id='d3' class="d3-canvas"></div>
