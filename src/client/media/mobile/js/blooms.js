@@ -411,6 +411,7 @@ var _blooms = blooms = (function($, d3, console) {
                 console.log({'uid': d.uid,'x':d.x,'y':d.y,'cx': canvasx(d.x),'cy': canvasy(d.y)});
                 return window.url_root + "/media/mobile/img/cafe/cafe6.png";
             })
+            .attr("shake", function(d) { return 1; })
             .attr("width", function(d) {return(mugsize*Math.random()+60)+"";}) //if this changes, change the margin above
             .attr("height", function(d) {return(mugsize*Math.random()+60)+"";})
             .attr("x",function(d) {
