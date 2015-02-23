@@ -138,8 +138,9 @@ def mobile(request,entry_code=None):
                        'init_score': len(get_fully_rated_responses(request, disc_stmt)),
                        'random_username': random_username,
                        'random_password': random_password,
-                       'num_users': num_users,
-                                             'statement_labels': json.dumps(statement_labels),
+                       'num_users': num_users,  
+                       'num_users_format': format (int(num_users), ',d'),
+                       'statement_labels': json.dumps(statement_labels),
                        'medians': json.dumps(medians)}))
 
 def confirmation_mail(request):

@@ -36,7 +36,7 @@
     {% endif %}
 
 
-    <!-- JavaScript -->
+    <!-- JavaScript -->    
     <script type='text/javascript' src='{{url_root}}/media/mobile/jquery-mobile/jquery-1.10.2.min.js'></script>
     <script type='text/javascript' src='{{url_root}}/media/js/jquery-ui-1.10.4.custom.min.js'></script>
     <script src="{{url_root}}/media/mobile/js/jquery.nouislider.min.js"></script>
@@ -61,6 +61,8 @@
     <!-- <script type="text/javascript" src="http://www.google.com/jsapi"></script> -->
     <script type='text/javascript' src='{{url_root}}/media/mobile/js/analytics-trk.js'></script>
 
+    <script src="//cdnjs.cloudflare.com/ajax/libs/waypoints/2.0.3/waypoints.min.js"></script>
+   <script src='{{url_root}}/media/mobile/js/jquery.counterup.min.js'></script>
 
     <!--JavaScript that needs to be run on init-->
     <script type='text/javascript'>
@@ -119,6 +121,11 @@
      };
 
      jQuery(document).ready(function(){
+        $('.counter').counterUp({
+            delay: 10,
+            time: 750
+        });
+
        for (var i = 0; i < window.num_sliders; i++) {
    window.sliders[i] = 4;
    window.skipped[i] = false;
@@ -301,8 +308,8 @@
           </div> -->
 
           <div class="landing-img-txt responsive-body">  
-            <span class="english">Join <strong>{{num_users}}</strong> others to amplify California's collective intelligence.</span>
-            <span class="spanish">Únete a los <strong>{{num_users}}</strong> otros para amplificar la inteligencia colectiva de California</span>
+            <span class="english">Join <strong class="counter">{{num_users_format}}</strong> others to amplify California's collective intelligence.</span>
+            <span class="spanish">Únete a los <strong class="counter">{{num_users_format}}</strong> otros para amplificar la inteligencia colectiva de California</span>
           </div>
 
           <div class='button-div-red first-time-btn responsive-btn' style="margin-top: 10px;">Begin</div><br/><br/><br/>
