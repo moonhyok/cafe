@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name='viewport' content='user-scalable=no, width=device-width,initial-scale=1, maximum-scale=1' />
+    <title>CRC Stats Page</title>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.css" />
+<link rel="stylesheet" href="{{url_root}}/media/mobile/css/stats.css" />
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script src="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.js?2"></script>
+<script type='text/javascript' src='{{url_root}}/media/mobile/jquery-mobile/jquery-1.10.2.min.js'></script>
+<script type='text/javascript' src='{{url_root}}/media/mobile/js/cartogram.js'></script>
+<script type='text/javascript' src='{{url_root}}/media/mobile/js/topojson.js'></script>
+</head>
+
+<script>
+$( document ).ready(function() {
+    $(".spanish").hide();
+});
+</script>
+
+<body>
+
+<!--<div class="home-btn-dialog-box">
+    <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+    <a href="{{url_root}}/"><img width="30px;" id="home-btn" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png"></a>
+    <img width="30px;" id="help-btn" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
+</div>-->
+
+<br>
+<center>
+
+<div class="stats-section">
+<h1>Statistics For Your Organization</h1>
+<h2>Total Visitors:  {{vistorlist.count}} </h2>
+
+<h2>Grades Assigned to The State</h2>
+<table class="table table-bordered">
+<tr style="background-color: #222222; color: #ffffff;">
+<th>Issue</th>
+<th>Median Grade</th>
+</tr>
+{% for statement,grade in grades %}
+	<tr>
+		<td>{{statement}}</td>
+		<td>{{grade}}</td>
+	</tr>
+{% endfor %}
+</table>
+
+<h2>Suggested New Issues</h2>
+<table class="table table-bordered">
+<tr style="background-color: #222222; color: #ffffff;">
+<th>Time</th>
+<th>Issue</th>
+</tr>
+{% for response in responses %}
+        <tr>
+                <td>{{response.created}}</td>
+                <td>{{response.comment}}</td>
+        </tr>
+{% endfor %}
+</table>
+</div>
+
+	</center>
+
+
+<!--<script type='text/javascript' src='{{url_root}}/media/mobile/js/geostat.js'></script>-->
+<!--<script type='text/javascript' src='{{url_root}}/media/mobile/js/map.js'></script>-->
+<!--<script type='text/javascript' src='{{url_root}}/media/mobile/js/geostat_population.js'></script>-->
+<!--<script type='text/javascript' src='{{url_root}}/media/mobile/js/map_capita.js'></script>-->
+</body>
+</html>
