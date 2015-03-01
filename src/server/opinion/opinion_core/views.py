@@ -16,6 +16,7 @@ from opinion.includes.profanityutils import *
 from opinion.includes.queryutils import *
 from opinion.includes.smsutils import *
 from opinion.includes.accountutils import *
+from opinion.includes.organizationutils import *
 from opinion.settings import *
 from opinion.settings_local import DATABASE_ENGINE
 from opinion.settings_local import ASSETS_LOCAL
@@ -101,6 +102,7 @@ def mobile(request,entry_code=None):
     active_users = list(User.objects.filter(is_active=True)) #forces eval so lazy eval doesn't act too smart!!!
     referrallink = request.GET.get('refer','')
     language = request.GET.get('lang','en')
+    org_id = request.GET.get('orgid','')
 
     statements = OpinionSpaceStatement.objects.all().order_by('id')
     medians = {}
@@ -127,6 +129,7 @@ def mobile(request,entry_code=None):
                        'client_data': mobile_client_data(request),
                        'entry_code': str(entry_code!=None).lower(),
                        'refer': referrallink,
+		       'org_id': org_id,
                        'language':language,
                                              'statement_hist': get_statement_histograms(),
                        'client_settings': get_client_settings(True),
@@ -1181,8 +1184,8 @@ def search(request, os_id, username=''):
     
     #return json_result({'success':True, 
     #                    'data':[format_user_object(u, os_id) for u in user]})
-
-    return json_result({'success':True, 'data':[format_general_discussion_comment(c) for c in comments]})
+    l = getTopicFrequencyMap()
+    return json_result({'success':True, 'data':[format_general_discussion_comment(c,l) for c in comments]})
 
     
 @admin_required
@@ -2771,3 +2774,36 @@ def os_first_time_log(request):
         first_time_data_structure['created'] = str(time.time())
     request.session['first_time_data'] = json.dumps(first_time_data_structure)
     return json_result(first_time_data_structure)
+
+def getTopicFrequencyMap():
+        probability_table = {}
+        total_comments = 0
+        for c in DiscussionComment.objects.all():
+                total_comments = total_comments + 1
+                topic = getTopic(c).lower()
+                if topic in probability_table:
+                        probability_table[topic] = probability_table[topic] + 1.0
+                else:   
+                        probability_table[topic] = 1.0
+
+        for k in probability_table:
+                probability_table[k] = probability_table[k]/total_comments
+
+        return probability_table
+
+def getTopic(comment):
+        tag = AdminCommentTag.objects.filter(comment=comment)
+        if tag.count() > 0 and len(tag[0].tag) > 0:
+                return tag[0].tag.split()[0]
+        else:
+                return 'None'
+
+def getOrganizationData(request):
+	orgid = request.REQUEST.get('orgid','') 
+
+	if orgid == '':
+		return mobile(request)	
+
+	data = get_organization_data(orgid)
+	return render_to_response('organization.html', context_instance = RequestContext(request, data))
+

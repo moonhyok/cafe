@@ -1199,7 +1199,7 @@ def format_discussion_comment(request_user, response):
 			'vis_vars': [0,0,0]}
 			#'prev_comments': get_revisions_and_suggestions(response.user, response.opinion_space, response.discussion_statement,False) }
 
-def format_general_discussion_comment(response):
+def format_general_discussion_comment(response, topic_map = None):
 	
 	"""
 	Formats a data structure holding the information for a disucssion comment
@@ -1217,11 +1217,18 @@ def format_general_discussion_comment(response):
 		zipcode = z.code
 		city_state = (z.city + ", " + z.state)
 
+	is_novel = False
+	if not topic_map == None:
+		t = novelty1(response, topic_map)
+		if t > 5.3:
+			is_novel = True
+
 	return {'uid': response.user.id,
 		'username': get_formatted_username(response.user),
 		'email' : response.user.email,
 		'location': get_location(response.user),
 		'cid': response.id,
+		'is_novel': is_novel,
 		'confidence': sanitize_comment_confidence(response.confidence),
 		'norm_score': sanitize_comment_score(response.normalized_score_sum),
 		'comment': response.comment,
@@ -2009,4 +2016,15 @@ def translate_all_comments():
 			comment.spanish_comment = spanComment
 
 		comment.save()
+
+def novelty1(comment,topic_map):
+        first_rating = comment
+        return -numpy.log(topic_map[getTopic(first_rating).lower()])+numpy.mean(CommentAgreement.objects.filter(is_current=True, comment=comment).values_list('agreement'))
+
+def getTopic(comment):
+        tag = AdminCommentTag.objects.filter(comment=comment)
+        if tag.count() > 0 and len(tag[0].tag) > 0:
+                return tag[0].tag.split()[0]
+        else:
+                return 'None'
 

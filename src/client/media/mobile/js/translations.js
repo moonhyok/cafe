@@ -38,6 +38,9 @@ var translations = {
                     'Next':
                         'Continuar',
 
+		   'Continue':
+                        'Continuar',
+
                     'Edit Your Idea':
                         'Editar su Idea',
 
@@ -90,6 +93,8 @@ var translations = {
                         'Califique al Estado de California:',
 
                     'of':
-                        '/'
+                        '/',
 
+		    'We encourage you to amplify CA\'s collective intelligence by reading and evaluating more ideas.':
+		    'Lo alentamos a incrementar la inteligencia colectiva de California al leer y evaluar más ideas.'
                     }

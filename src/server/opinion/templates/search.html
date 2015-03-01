@@ -66,6 +66,7 @@
 			var row = document.createElement('tr');
 			var id = searchResult.uid + "-" + searchResult.cid;
 			row.setAttribute("id", id);
+			row.className = "dark";
 
 			var inputTd = document.createElement('td');
 			var checkBox = document.createElement('input');
@@ -73,7 +74,10 @@
 			inputTd.appendChild(checkBox);
 
 			var user = document.createElement('td');
-			user.innerHTML = searchResult.username; // + ' <a href="' + searchResult.reset_link + '"> PW reset link</a>';
+			user.innerHTML = searchResult.username; // + ' <a href="' + searchResult.reset_link + '">No</a>';
+
+			var novel = document.createElement('td');
+			novel.innerHTML = searchResult.is_novel;
 
 			var time = document.createElement('td');
 			time.innerHTML = searchResult.joined; 
@@ -107,6 +111,7 @@
 
 			row.appendChild(inputTd);
 			row.appendChild(user);
+			row.appendChild(novel);
 			row.appendChild(time);
 			row.appendChild(email);
 			row.appendChild(zipcode);
@@ -251,14 +256,15 @@
     <thead> 
     <tr> 
         <th width="5%"><input type="checkbox" id="checkAll"/></th>
-        <th width="5%">User ID</th> 
+        <th width="3%">User ID</th> 
+        <th width="3%">Novel</th> 
         <th width="5%">Time</th>
 		<th width="7.5%">Email</th>
-		<th width="5%">Zipcode</th> 
+		<th width="3%">Zipcode</th> 
         <th width="10%">City, State</th> 
         <th width="25%">Response (click to edit)</th>
         <th width="25%">Response in Spanish (click to edit)</th>
-        <th width="7.5%">Original Language (click to edit)</th>
+        <th width="5%">Original Language (click to edit)</th>
         <th width="10%">Tag (click to edit)</th>
 
     </tr> 

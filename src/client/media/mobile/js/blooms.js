@@ -379,20 +379,19 @@ var _blooms = blooms = (function($, d3, console) {
   .append("filter")
     .attr("id", "blur2")
   .append("feGaussianBlur")
-    .attr("stdDeviation", 1.2);
-
+    .attr("stdDeviation",0.8 );
 
                 var filter = window.coffeetable_svg.append("defs")
   .append("filter")
     .attr("id", "blur3")
   .append("feGaussianBlur")
-    .attr("stdDeviation", 1.8);
+    .attr("stdDeviation", 1.2);
 
                 var filter = window.coffeetable_svg.append("defs")
   .append("filter")
     .attr("id", "blur4")
   .append("feGaussianBlur")
-    .attr("stdDeviation", 2.4);
+    .attr("stdDeviation", 1.8);
 
             //var rescale = generateRescalingFactor();
 
@@ -413,6 +412,7 @@ var _blooms = blooms = (function($, d3, console) {
             })
             .attr("width", function(d) {return(mugsize*Math.random()+60)+"";}) //if this changes, change the margin above
             .attr("height", function(d) {return(mugsize*Math.random()+60)+"";})
+	    .attr("opacity", 1.0)
             .attr("x",function(d) {
                 return (width)/2;
                 //return canvasx(d.x);
@@ -427,6 +427,12 @@ var _blooms = blooms = (function($, d3, console) {
             //.attr("transform", function(d) {
             //        return choice(["rotate(-65)", "rotate(-45)", "rotate(20)"]);
             //    })
+	    .on('mouseover', function(d) {
+		var _this = d3.select(this);
+	    })
+	    .on('mouseout', function(d) {
+                var _this = d3.select(this);
+            })
             .on('click', function(d) {
                 var _this = d3.select(this);
 		        window.cur_clicked_mug = _this;
