@@ -8,8 +8,140 @@ var accounts = (function($, d3, console) {
     // a function to pull up the registration prompt
 
     function showRegister() {
-        $('.register').show();
-        //$('#finishRegistration').click(function() {});
+        //accounts.hideAll();
+
+        var dialogcontinue = false;
+        if ($(this).attr('id') == 'registern')
+            dialogcontinue = true;
+
+        if(window.authenticated)
+        {
+            accounts.hideAll();
+            $('.dialog').show();
+            window.prev_state = 'grade';
+            window.cur_state = 'dialog';
+            return;
+        }
+
+        rate.logUserEvent(9,'register');
+
+        if (window.registration_in_progress) {
+            return;
+        }
+        else{
+            window.registration_in_progress = true;
+        }
+
+        $("#username-error").hide();
+        $("#password-error").hide();
+        $("#zipcode-error").hide();
+
+        /*Let us leave this to the server to handle
+        // Handle bad length zipcodes client-side
+        if ($('#regzip').val().length != 5) {
+            $("#zipcode-error").html("Please enter a 5 digit zipcode.");
+            $("#zipcode-error").show();
+            $('#registerpanel').find('.ui-btn-active').removeClass('ui-btn-active ui-focus');
+            return;
+        }*/
+        
+        var registrationData = {
+            "username": $('#regusername').val(),
+            "password": $('#regpassword1').val(),
+            "password1": $('#regpassword1').val(),
+            "password2": $('#regpassword1').val(),
+            "email": $('#regemail').val(),
+            "zipcode" : ($('#regzip').val() == '')?'-1':$('#regzip').val()
+        };
+
+        var loginData = {
+            "username": registrationData.username.toLowerCase(),
+            "password": registrationData.password,
+        };
+
+        //utils.ajaxTempOff(function() {
+            $.ajax({
+                async:false,
+                url: window.url_root + '/accountsjson/register/',
+                type: 'POST',
+                dataType: 'json',
+                data: registrationData,
+                success: function(data) {
+                    $("#username-error").hide();
+                    $("#zipcode-error").hide();
+                    //$("#email-error").hide();
+                    $("#password-error").hide();
+
+                    window.registration_in_progress = false;
+
+                    if (data.hasOwnProperty('success')) {
+                        accounts.setAuthenticated();
+
+                        var loading = "Loading"
+                        if (window.lang == "es")
+                            loading = "Cargando"
+
+                        utils.showLoading(loading, function() {
+                            accounts.loginAfterRegister(loginData,dialogcontinue);
+                            blooms.populateBlooms();
+                            //$('.register').hide();
+                            $("#regzip").attr("disabled", true);
+                            utils.hideLoading();
+                            window.conf.ZIPCODE=registrationData.zipcode;
+                            window.prev_state = 'grade';
+                            window.cur_state = 'dialog';
+
+                            //Slow TODO
+                            //accounts.getNeighborStat();
+
+                            /*setTimeout(function() { //give d3 some extra time
+                                $('.register').slideUp('fast', function() {
+                                    utils.hideLoading(500);
+                                });
+                            }, 500);*/
+                        });
+                        
+         
+
+                        //accounts.setAuthenticated();
+                    } else {
+                        accounts.showRegister();
+                        if (data.hasOwnProperty('form_errors')) {
+
+                            var errors = data['form_errors'];
+
+                            if ('username' in errors) {
+                                $("#username-error").html(errors['username']);
+                                $("#username-error").show();
+                            }
+
+                            /* if ('email' in errors) {
+                                $("#email-error").html(errors['email']);
+                                $("#email-error").show();
+                            }*/
+
+                            if ('password1' in errors) {
+                                $("#password-error").html(errors['password1']);
+                                $("#password-error").show();
+                            }
+
+                            try {
+                            //TODO: why doesn't this come up under form_errors[zip_code]
+                                if (data['form_errors']['__all__'][0]) {
+                                    $("#zipcode-error").html(data['form_errors']['__all__'][0]);
+                                    if(window.lang == 'es')
+                                        $("#zipcode-error").html('El código postal debe tener 5 dígito');
+                                    $("#zipcode-error").show();
+                                }
+                            } catch(err) { }
+
+                        }
+                    }
+                },
+                error: function() {
+                    console.log("ERROR posting registration request. Abort!");
+                },
+            });
     }
 
     function showCommentInput() {
@@ -89,6 +221,15 @@ var accounts = (function($, d3, console) {
                     for (var i = 0; i < window.num_sliders; i++) {
                         rate.sendSlider(window.sliders[i], i+1);
                         //draw line on canvas
+                       
+                        var face = document.getElementById('myFace' + (i+1));
+                        if (window.sliders[i]/10 > 0.45)
+                            face.src = window.url_root+"/media/mobile/img/cafe/happyface.png"
+                        else if (window.sliders[i]/10 > 0.25)
+                            face.src = window.url_root+"/media/mobile/img/cafe/medface.png"
+                        else
+                            face.src = window.url_root+"/media/mobile/img/cafe/sadface.png"
+
                         var canvas = document.getElementById("sparkLineCanvas"+(i+1));
                          var context = canvas.getContext('2d');
                         
@@ -348,146 +489,7 @@ var accounts = (function($, d3, console) {
 })($, d3, console);
 
 $(document).ready(function() {
-    $('.registerb').click(function(e) {
-        //$('#register').find('.ui-btn-active').removeClass('ui-btn-active ui-focus');
-        e.preventDefault();
-        e.stopPropagation();
-
-        var dialogcontinue = false;
-        if ($(this).attr('id') == 'registern')
-            dialogcontinue = true;
-
-        if(window.authenticated)
-        {
-            accounts.hideAll();
-            $('.dialog').show();
-            window.prev_state = 'register';
-            window.cur_state = 'dialog';
-            return;
-        }
-
-        rate.logUserEvent(9,'register');
-
-        if (window.registration_in_progress) {
-            return;
-        }
-        else{
-            window.registration_in_progress = true;
-        }
-
-        $("#username-error").hide();
-        $("#password-error").hide();
-        $("#zipcode-error").hide();
-
-        /*Let us leave this to the server to handle
-        // Handle bad length zipcodes client-side
-        if ($('#regzip').val().length != 5) {
-            $("#zipcode-error").html("Please enter a 5 digit zipcode.");
-            $("#zipcode-error").show();
-            $('#registerpanel').find('.ui-btn-active').removeClass('ui-btn-active ui-focus');
-            return;
-        }*/
-        
-        var registrationData = {
-            "username": $('#regusername').val(),
-            "password": $('#regpassword1').val(),
-            "password1": $('#regpassword1').val(),
-            "password2": $('#regpassword1').val(),
-            "email": $('#regemail').val(),
-            "zipcode" : ($('#regzip').val() == '')?'-1':$('#regzip').val()
-        };
-
-        var loginData = {
-            "username": registrationData.username.toLowerCase(),
-            "password": registrationData.password,
-        };
-
-        //utils.ajaxTempOff(function() {
-            $.ajax({
-                async:false,
-                url: window.url_root + '/accountsjson/register/',
-                type: 'POST',
-                dataType: 'json',
-                data: registrationData,
-                success: function(data) {
-                    $("#username-error").hide();
-                    $("#zipcode-error").hide();
-                    //$("#email-error").hide();
-                    $("#password-error").hide();
-
-                    window.registration_in_progress = false;
-
-                    if (data.hasOwnProperty('success')) {
-                        accounts.setAuthenticated();
-
-                        var loading = "Loading"
-                        if (window.lang == "es")
-                            loading = "Cargando"
-
-                        utils.showLoading(loading, function() {
-                            accounts.loginAfterRegister(loginData,dialogcontinue);
-                            blooms.populateBlooms();
-                            window.scrollTo(0,0); 
-                            //$('.register').hide();
-                            $("#regzip").attr("disabled", true);
-                            utils.hideLoading();
-                            window.conf.ZIPCODE=registrationData.zipcode;
-                            window.prev_state = 'register';
-                            window.cur_state = 'dialog';
-
-			                //Slow TODO
-			                //accounts.getNeighborStat();
-
-                            /*setTimeout(function() { //give d3 some extra time
-                                $('.register').slideUp('fast', function() {
-                                    utils.hideLoading(500);
-                                });
-                            }, 500);*/
-                        });
-                        
-         
-
-                        //accounts.setAuthenticated();
-                    } else {
-                        accounts.showRegister();
-                        if (data.hasOwnProperty('form_errors')) {
-
-                            var errors = data['form_errors'];
-
-                            if ('username' in errors) {
-                                $("#username-error").html(errors['username']);
-                                $("#username-error").show();
-                            }
-
-                            /* if ('email' in errors) {
-                                $("#email-error").html(errors['email']);
-                                $("#email-error").show();
-                            }*/
-
-                            if ('password1' in errors) {
-                                $("#password-error").html(errors['password1']);
-                                $("#password-error").show();
-                            }
-
-                            try {
-                            //TODO: why doesn't this come up under form_errors[zip_code]
-                                if (data['form_errors']['__all__'][0]) {
-                                    $("#zipcode-error").html(data['form_errors']['__all__'][0]);
-                                    if(window.lang == 'es')
-                                        $("#zipcode-error").html('El código postal debe tener 5 dígito');
-                                    $("#zipcode-error").show();
-                                }
-                            } catch(err) { }
-
-                        }
-                    }
-                },
-                error: function() {
-                    console.log("ERROR posting registration request. Abort!");
-                },
-            });
-        //});
-    });
+    
 
     $('#login_form').submit(function(e) {
         e.preventDefault();
@@ -533,18 +535,30 @@ $(document).ready(function() {
 
     $('.first-time-btn').click(function() {
 
-        /*accounts.hideAll();
+        accounts.hideAll();
+        window.scrollTo(0,0);
+        window.cur_state = 'register';
+        window.prev_state = 'home';
+        rate.logUserEvent(7,'first time');
+        window.history.pushState("", "", '#');
+        $('.register').show();
+ 
+    });
+
+
+    $('.demo-btn').click(function() {
+
+        accounts.hideAll();
         window.scrollTo(0,0);
         $('.endsliders').show();
         $('.endsliders-slide').hide();
         $('#slide-1').show();
         window.current_slider = 1;
         window.cur_state = 'grade';
-        window.prev_state = 'home';
-        rate.logUserEvent(7,'first time');
-
-        window.history.pushState("", "", '#');*/
-        $('.register').show();
+        window.prev_state = 'register';
+        rate.logUserEvent(7,'demographics');
+        window.history.pushState("", "", '#');
+        $('.endsliders').show();
  
     });
 
@@ -1047,11 +1061,14 @@ $(document).ready(function() {
     if(window.org_id != '')
 	rate.logUserEvent(10,window.org_id);
 
-    if(window.refer_language != 'en')
+    /*if(window.refer_language != 'en')
         {
             utils.translateAll();
             rate.logUserEvent(0,'translate ' + window.lang)
-        }
+        }*/
+
+    utils.translateAll();
+    $('.translate-btn').hide();
 
     /*$('.button-div-red').on("touchstart", function (e){
         $(this).css("color","#8c6239");
@@ -1059,5 +1076,7 @@ $(document).ready(function() {
     $('.button-div-red').on("mouseover", function (e){
         $(this).css("color","#8c6239");
     });*/
+
+
 
 });

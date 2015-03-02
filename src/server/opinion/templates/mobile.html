@@ -437,7 +437,7 @@
             </div>
 
 
-        <div class="button-div-red registerb responsive-btn" id="registerb" style="font-size: 18px;">Save</div>
+        <div class="button-div-red responsive-btn demo-btn" style="font-size: 18px;">Next</div>
         <br/>
         <!--<div class="button-div-wide registerb responsive-btn" id="registern">No Thanks</div>-->
     </div>
@@ -540,39 +540,31 @@
               <div style="font-size: 14px; font-weight: bolder;cursor: pointer;cursor: hand;" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();"><span>more info</span> >></div>
             </div>
 
-            <canvas id="sparkLineCanvas{{k.id}}" width="175" height="58"></canvas>
+            <canvas id="sparkLineCanvas{{k.id}}" width="175" height="58" style="display: none;"></canvas>
+
+            <table style="display: inline-block;">
+              <tr>
+                <th>Mexico</th>
+                <th>Me</th>
+              </tr>
+              <tr>
+              <td><img id="mexicoFace{{k.id}}" style="width: 40px; padding-top: 5px;"/></td>
+              <td><img id="myFace{{k.id}}" style="width: 40px; padding-top: 5px;"/></td>
+              </tr>
+            </table>
             
             <div>
         
-        <!--<script>
-        var canvas = document.getElementById('sparkLineCanvas{{k.id}}');
-        var context = canvas.getContext('2d');
+         <script>
+         var face = document.getElementById('mexicoFace{{k.id}}');
+         if (medians[{{k.id}}] > 0.60)
+             face.src = "{{url_root}}/media/mobile/img/cafe/happyface.png"
+         else if (medians[{{k.id}}] > 0.45)
+             face.src = "{{url_root}}/media/mobile/img/cafe/medface.png"
+         else
+             face.src = "{{url_root}}/media/mobile/img/cafe/sadface.png"
 
-        if ({{k.id}} % 2 == 1)
-              $('.compare-box-{{k.id}}').css("background-color","rgba(0,0,0,0.05)")
-
-        var data = {{v}};
-        var max_of_array = Math.max.apply(Math, data);
-
-        context.beginPath();
-        context.lineWidth = 2;
-        context.strokeStyle = '#442b10';
-        context.shadowColor = '#ffffff';
-              context.shadowOffsetX = 1;
-              context.shadowOffsetY = 1;
-        context.moveTo(0, 45 - data[0]/max_of_array*38);
-        for (i = 1; i <= 9; i++)
-        {
-              context.lineTo(i*16, 45 - data[i]/max_of_array*38);
-              context.stroke(); 
-        }
-
-        context.font="italic small-caps bolder 12px sans-serif";
-        context.fillStyle = '#442b10';
-        context.fillText("0",0,48);
-
-        context.fillText("9",150,50);
-        </script>-->
+        </script>
 
         <script>
          var canvas = document.getElementById('sparkLineCanvas{{k.id}}');

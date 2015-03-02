@@ -314,7 +314,7 @@ var rate = (function($, d3, console) {
                $('.dialog').show();
             }
         }
-        $('.endsliders').hide();
+        //$('.endsliders').hide();
 
 
     }
