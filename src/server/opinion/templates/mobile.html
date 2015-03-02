@@ -47,6 +47,7 @@
     <script type='text/javascript' src='{{url_root}}/media/mobile/js/rate.js?nonce={{random_password}}'></script>
     <script type='text/javascript' src='{{url_root}}/media/mobile/js/accounts.js?nonce={{random_password}}'></script>
     <script type='text/javascript' src='{{url_root}}/media/mobile/js/translations.js?nonce={{random_password}}'></script>
+    <script type='text/javascript' src='{{url_root}}/media/mobile/js/regions.js?nonce={{random_password}}'></script>
 
     {% if horizontal_slide %}
     <script type='text/javascript' src='{{url_root}}/media/mobile/js/crc-transparent-slider-horizontal.js?nonce={{random_password}}'></script>
@@ -414,16 +415,27 @@
 
     <div class= 'registerpanel'>
             <center>
-              <div class="basic-header2 responsive-body" style="max-width: 500px;">{{client_settings.ZIP_CODE_INSTRUCTIONS}}</div>
+              <div class="basic-header2 responsive-body" style="max-width: 500px;">Enter your state, municipality, and region:</div>
             
               <form id='reg_form' class='reg_form responsive-form'>
             <center>
    
-              <div data-role="fieldcontain" >
-               <input type ='tel' id='regzip' name='regzip' class='regforminput' placeholder="Zip Code">
+            <select id="state-enter">
+              <option value="-1">Enter Your State</option>
+            </select>
 
-               <div class='alert-error' id='zipcode-error' style='display:none;'></div>
-              </div>
+            <div class="mun-div" style="display: none;">
+              <select id="mun-enter">
+                <option value="-1">Enter Your Municipality</option>
+              </select>
+            </div>
+
+            <div class="nei-div" style="display: none;">
+              <select id="nei-enter">
+                <option value="-1">Enter Your Neighborhood</option>
+              </select>
+            </div>
+
 
         <div class="button-div-red registerb responsive-btn" id="registerb" style="font-size: 18px;">Save</div>
         <br/>
@@ -432,6 +444,11 @@
 
 
       <!--These are hidden dummy attributes for book-keeping-->
+                    <div data-role="fieldcontain" style="display: none;">
+               <input type ='hidder' id='regzip' name='regzip' class='regforminput' placeholder="Zip Code" value="94720">
+
+               <div class='alert-error' id='zipcode-error' style='display:none;'></div>
+              </div>
 
       <div data-role="fieldcontain" style="display: none;">
                     <input type='hidden' value='{{ topic }}' name='question'>

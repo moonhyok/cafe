@@ -532,23 +532,20 @@ $(document).ready(function() {
     });
 
     $('.first-time-btn').click(function() {
-        //accounts.firstTime();
-        accounts.hideAll();
+
+        /*accounts.hideAll();
         window.scrollTo(0,0);
         $('.endsliders').show();
         $('.endsliders-slide').hide();
         $('#slide-1').show();
         window.current_slider = 1;
-
-        /*$(".slider-progress-dot").css("background","#000000");
-        $(".slider-progress-dot-"+1).css("background","#FFFFFF");*/
         window.cur_state = 'grade';
         window.prev_state = 'home';
         rate.logUserEvent(7,'first time');
 
-        window.history.pushState("", "", '#');
-        //$('.top-bar').show();
-        //rate.initScore();
+        window.history.pushState("", "", '#');*/
+        $('.register').show();
+ 
     });
 
     $('.login-btn').click(function() {
