@@ -1,0 +1,2531 @@
+1	2	02000	Centro de Azcapotzalco
+1	3	03000	Piedad Narvarte
+1	4	04000	Villa Coyoacán
+1	5	05000	Cuajimalpa
+1	6	06000	Centro (Área 1)
+1	7	07000	Aragón la Villa
+1	8	08000	Gabriel Ramos Millán Sección Bramadero
+1	9	09000	La Asunción
+1	10	10000	Lomas Quebradas
+1	11	11000	Lomas de Chapultepec I Sección
+1	12	12000	La Luz (Villa Milpa Alta)
+1	13	13000	La Asunción
+1	14	14000	Tlalpan
+1	15	15000	General Ignacio Zaragoza
+1	16	16000	Barrio San Antonio
+2	1	20000	Zona Centro
+2	2	20300	Campestre San Carlos
+2	1	20310	Los Negritos
+2	3	20330	Pobre
+2	1	20340	Buena Vista de Peñuelas
+2	2	20350	La Biznaga
+2	1	20363	San José de La Ordeña
+2	4	20400	Rincón de Romos Centro
+2	5	20460	Cosío Centro
+2	6	20500	San José de Gracia
+2	7	20600	Tepezala Centro
+2	8	20663	El Refugio
+2	9	20700	Villa Juárez
+2	10	20800	Calvillo Centro
+2	11	20900	Maravillas
+3	1	21000	Centro Cívico
+3	2	21400	Tecate Centro
+3	1	21600	Los Manantiales Tres
+3	3	22000	Zona Este
+3	4	22700	Rosarito Centro
+3	3	22720	Valle Redondo
+3	4	22740	Primo Tapia parte Alta
+3	5	22750	Francisco Zarco
+4	1	23000	Zona Central
+4	2	23400	San José del Cabo Centro
+4	3	23600	Cerro Catedral
+4	4	23880	Zaragoza
+4	5	23900	Heroica Mulegé Centro
+5	1	24000	San Francisco de Campeche Centro
+5	2	24100	Ciudad del Carmen Centro
+5	3	24200	La Esperanza
+5	2	24300	Jabal
+5	4	24330	Candelaria Centro
+5	5	24350	Emiliano Zapata
+5	6	24400	San Patricio
+5	1	24500	Satélite
+5	7	24600	Norte
+5	8	24640	Bugambilias
+5	7	24660	Vicente Guerrero (Iturbide)
+5	9	24700	Tenabo Centro
+5	10	24800	Hecelchakan
+5	11	24900	Calkini Centro
+6	1	25000	Saltillo Zona Centro
+6	2	25350	Arteaga Centro
+6	3	25400	Juárez
+6	4	25420	Progreso
+6	5	25470	Escobedo
+6	6	25500	San Buenaventura Centro
+6	7	25540	Abasolo
+6	8	25570	Candela
+6	9	25600	Frontera Centro
+6	10	25700	Monclova Centro
+6	11	25800	8 de Enero
+6	10	25830	Santa Ana
+6	11	25870	Emiliano Zapata
+6	12	25900	Ramos Arizpe Centro
+6	13	25950	La Trinidad
+6	14	26000	Piedras Negras Centro
+6	15	26170	Nava Centro
+6	16	26200	Ciudad Acuña Centro
+6	17	26340	Melchor Múzquiz Centro
+6	18	26400	Jimenez
+6	19	26450	Zaragoza Centro
+6	20	26500	Morelos Centro
+6	21	26530	Allende Centro
+6	22	26600	Oriente
+6	23	26640	Guerrero
+6	24	26670	Hidalgo
+6	25	26700	Ciudad Sabinas Centro
+6	26	26800	Nueva Rosita Centro
+6	25	26950	Barrio 4
+6	27	27000	Jardines Reforma
+6	28	27440	San Miguel
+6	29	27480	La Ermita
+6	30	27500	La Morita Sur
+6	31	27550	Nadadores Centro
+6	32	27600	Química del Rey
+6	33	27640	Cuatrociénegas de Carranza Centro
+6	34	27700	La Madrid
+6	35	27750	Sacramento
+6	36	27800	San Pedro de las Colonias Centro
+6	37	27900	Francisco I. Madero Centro
+6	36	27940	Luchana
+6	38	27980	Estrella
+7	1	28000	Colima Centro
+7	2	28100	Tecomán Centro
+7	3	28200	Manzanillo Centro
+7	4	28300	Armería Centro
+7	5	28400	Camichines 2
+7	6	28450	Aguajitos
+7	7	28500	El Toreo
+7	1	28600	El Amarradero
+7	8	28700	Ixtlahuácan
+7	9	28750	Minatitlán
+7	3	28800	El Paraíso
+7	2	28900	Hermanos Leaños
+7	10	28950	Juluapan
+8	1	29000	El Magueyito
+8	2	29120	Benito Juárez
+8	3	29130	Emiliano Zapata
+8	4	29140	Cruz Blanca
+8	5	29150	San Esteban
+8	6	29160	Nocatili
+8	7	29190	Osumacinta
+8	8	29200	San Cristóbal de las Casas Centro
+8	9	29320	Romerillo
+8	10	29340	Francisco Romo Serrano
+8	11	29350	Zinacantan
+8	12	29370	Acalá Centro
+8	13	29390	Chiapilla
+8	14	29400	San Lucas
+8	15	29410	Guadalupe
+8	16	29430	Amatenango del Valle
+8	17	29440	Pamal Aguil
+8	18	29450	Kistolja
+8	19	29470	Adolfo Lopez Mateos
+8	20	29480	Matzam
+8	21	29490	Xoctón (Xoctoctic)
+8	22	29500	Benito Juárez
+8	23	29510	Santa Teresa 2a Secc
+8	24	29520	Cristóbal Colon
+8	25	29540	Nuevo Sunuapa
+8	26	29550	Amacoite Alto
+8	27	29560	El Naranjo
+8	28	29570	Viejo Ixtacomitán
+8	29	29580	Solosuchiapa
+8	30	29590	Ixtapangajoya
+8	31	29600	Dique I
+8	32	29620	San Miguel
+8	33	29640	Chicoasen
+8	34	29650	San Juan
+8	35	29660	San Juan
+8	36	29670	Magdalena
+8	37	29680	Ocotepec
+8	38	29690	Chapultenango
+8	39	29700	San Antonio 3 Picos
+8	40	29710	Santa Cruz
+8	41	29720	Siglo XX
+8	42	29730	Albores Guillén
+8	43	29740	Rayón
+8	44	29750	La Lomita
+8	45	29760	El Ocotal
+8	46	29770	Orizaba
+8	47	29780	Los Sabinos
+8	48	29790	San Juan Cancuc
+8	49	29800	Calvario
+8	50	29820	Altamirano
+8	51	29827	San Andrés Duraznal
+8	52	29830	Pueblo Nuevo Sitala
+8	53	29840	Chabajebal
+8	54	29850	Chalchihuitan
+8	55	29860	Shanate
+8	56	29867	Santiago El Pinar
+8	57	29870	Manuel Utrilla
+8	58	29877	Yolonhuiztic
+8	59	29880	Pantelho
+8	60	29890	Don Pedro
+8	61	29900	Ignacio Zaragoza
+8	62	29910	Chulum Juárez
+8	63	29920	Santa Bárbara
+8	64	29926	San Vicente
+8	65	29936	Ubilio García
+8	66	29940	Chilón
+8	67	29950	San Sebastián
+8	68	29955	Nuevo Chihuahua
+8	69	29957	Zamora Pico de Oro
+8	70	29960	Elmar Setzer
+8	71	29970	La Libertad
+8	72	29980	Cuyo Santa Cruz
+8	73	30000	Comitán de Domínguez Centro
+8	74	30110	Héroes de Chapultepec
+8	75	30120	Chicomuselo
+8	76	30130	Bellavista
+8	77	30140	Nueva Libertad
+8	78	30160	Álvaro Obregón
+8	79	30170	San Fermín
+8	80	30180	Maravilla Tenejapa
+8	81	30185	20 de Noviembre
+8	82	30190	Las Casitas
+8	83	30200	Del Carmen
+8	84	30232	Jerusalén
+8	85	30330	Totolapa
+8	86	30340	San José
+8	87	30350	San Miguel
+8	88	30360	La Concordia Centro
+8	89	30370	Guadalupe Victoria
+8	90	30380	Montecristo de Guerrero
+8	91	30384	La Prusia
+8	92	30390	Candelaria
+8	93	30400	Santa Cecilia
+8	94	30430	Jiquipilas Centro
+8	95	30450	Arriaga Centro
+8	96	30470	Miguel Hidalgo (Concepción)
+8	97	30500	Barrio Nuevo
+8	98	30520	Santa María
+8	99	30540	Pijijiapan Centro
+8	100	30560	San Agustín
+8	101	30580	Santa Cecilia
+8	102	30590	Barrio Morelos 3
+8	103	30600	Cristo Rey
+8	104	30620	Guadalupano
+8	105	30640	Esquipulas
+8	106	30650	Buenos Aires
+8	107	30660	Nuevo Huehuetán
+8	108	30680	Francisco Sarabia
+8	109	30700	Tapachula Centro
+8	110	30840	Vida Mejor
+8	111	30850	Frontera Hidalgo
+8	112	30860	Metapa de Domínguez
+8	113	30866	Los Encinos
+8	114	30880	Chiquihuite
+8	115	30890	FOVISSSTE Cacahoatán
+8	116	30900	Milenio I
+8	117	30920	Mazapa de Madero
+8	118	30930	Amatenango de La Frontera
+8	119	30950	Bejucal de Ocampo
+8	120	30960	La Grandeza
+8	121	30970	San Vicente
+8	122	30980	Siltepec
+9	1	31000	Colon
+9	2	31500	Ciudad Cuauhtémoc Centro
+9	1	31620	El Charco
+9	3	31640	San Andrés
+9	4	31650	San Guillermo O 9 Millas
+9	5	31660	Bachiniva Centro
+9	6	31680	Carichic
+9	7	31700	Nuevo Casas Grandes Centro
+9	8	31820	Sección Presidentes
+9	9	31840	Janos
+9	10	31850	San José
+9	11	31870	La Angostura
+9	12	31880	Ricardo Flores Magón
+9	13	31900	Gómez Farias
+9	14	31920	Abraham González
+9	15	31940	Lienzo Charro
+9	16	31960	Casas Coloradas
+9	17	31980	La Estación
+9	18	31990	Matachi
+9	19	32000	Ciudad Juárez Centro
+9	20	32740	Guadalupe
+9	21	32780	Praxedis G Guerrero
+9	22	32800	Chihuahuita
+9	23	32850	Coyame
+9	24	32880	Ciudad Ojinaga Centro
+9	25	32900	Los Álamos
+9	26	32950	Presidentes
+9	27	32980	Manuel Benavides
+9	28	33000	Sector Oriente
+9	29	33120	1ro de Mayo
+9	30	33130	Del Carmen
+9	31	33140	Vicente Guerrero O Copetes de Abajo
+9	32	33150	Satevo
+9	33	33160	San Francisco de Borja
+9	34	33170	Nonoava
+9	35	33180	Agua Zarca
+9	36	33200	Creel
+9	37	33240	Real de Abajo
+9	38	33260	Gran Morelos
+9	39	33270	Santa Isabel Centro
+9	40	33280	Carichi
+9	41	33300	Calaveras
+9	42	33320	Ocampo
+9	43	33340	Moris
+9	44	33360	Chínipas de Almada
+9	45	33370	Maguarichi
+9	46	33380	Temoris
+9	47	33400	Batopilas
+9	48	33420	Guapainala
+9	49	33450	Morelos Mineral
+9	50	33470	Presidentes
+9	51	33500	Guillermo Baca
+9	52	33530	Valle del Rosario
+9	53	33540	Huejotitán
+9	54	33550	El Tule
+9	55	33560	Mariano Balleza Centro
+9	56	33580	Santa Bárbara Centro
+9	57	33600	Colonia Flores
+9	58	33620	Saucillo Centro
+9	59	33650	Valle de Zaragoza Centro
+9	60	33670	La Cruz
+9	61	33680	San Francisco de Conchos
+9	57	33700	Ciudad Camargo Centro
+9	62	33800	Hidalgo del Parral Centro
+9	63	33920	El Puerto
+9	64	33940	Presidentes
+9	65	33960	Santa Rosalía
+9	66	33970	El Águila
+9	67	33990	Coronado
+10	1	34000	Victoria de Durango Centro
+10	2	34400	Santa Teresa de los Pinos
+10	3	34410	Nuevo Ideal (Patos) Centro
+10	2	34440	San Jerónimo de Jacales
+10	4	34470	Coneto de Comonfort
+10	5	34480	San Juan del Río del Centauro del Norte Centro
+10	6	34500	Canelas
+10	7	34540	Topía
+10	8	34570	El Aguajito
+10	9	34600	Barrazas
+10	10	34650	San Pedro de Azafranes
+10	11	34670	Cuevecillas
+10	12	34700	Ciudad Guadalupe Victoria
+10	13	34740	El Tulillo
+10	14	34770	José Librado Rivera
+10	15	34800	Villa Unión
+10	16	34840	Nombre de Dios Centro
+10	17	34890	Vicente Guerrero Centro
+10	18	34900	Suchil Centro
+10	19	34940	Benito Juárez (El Salto Centro)
+10	20	34970	San Francisco del Mezquital
+10	21	35000	Gómez Palacio Centro
+10	22	35150	15 Letras
+10	23	35200	Mapimi
+10	24	35250	Tlahualilo de Zaragoza Centro
+10	25	35300	Villa Hidalgo
+10	26	35350	Villa Ocampo Centro
+10	27	35400	Guanacevi
+10	28	35450	Cuba
+10	29	35500	Indé
+10	30	35550	Cuba
+10	31	35600	Santa Catarina de Tepehuanes
+10	32	35650	Sauces
+10	33	35700	Nazas Centro
+10	34	35740	San Luis del Cordero
+10	35	35760	Rodeo Centro
+10	36	35800	Cuencame de Ceniceros Centro
+10	37	35880	Santa Clara Centro
+10	38	35900	San Juan de Guadalupe
+10	39	35950	Gral. Simón Bolívar
+11	1	36000	Guanajuato Centro
+11	2	36100	Silao Centro
+11	3	36200	Romita Centro
+11	1	36220	Cañada de las Flores
+11	2	36270	Coecillo
+11	4	36300	San Francisco del Rincón Centro
+11	5	36400	Purísima de Bustos Centro
+11	4	36440	Jesús del Monte
+11	6	36470	Ciudad Manuel Doblado Centro
+11	7	36500	Irapuato Centro
+11	8	36700	Salamanca Centro
+11	7	36800	San Cristóbal
+11	8	36850	La Palma
+11	9	36890	La Candelaria
+11	10	36900	Pénjamo Centro
+11	11	36960	Los Arcos
+11	12	36970	Abasolo Centro
+11	13	36990	Huanimaro Centro
+11	14	37000	Centro
+11	15	37600	El Cubo
+11	16	37630	Ciudad Ocampo
+11	14	37650	Vaquerías
+11	17	37700	San Miguel de Allende Centro
+11	18	37800	Adjuntas del Río
+11	19	37850	San Diego de La Unión Centro
+11	17	37880	Los Rodriguez
+11	20	37900	El Maravillal
+11	21	37920	Ciudad Victoria
+11	22	37930	Xichu
+11	23	37940	De La Mesa
+11	24	37950	Santa Catarina
+11	25	37960	Ciudad Dr. Mora Centro
+11	26	37970	Los Aguacates
+11	27	37980	San José Iturbide Centro
+11	28	38000	Celaya Centro
+11	29	38160	Primavera
+11	30	38200	Comonfort Centro
+11	31	38240	Santa Cruz de Juventino Rosas Centro
+11	32	38260	Independencia
+11	33	38300	Cortazar Centro
+11	34	38400	Valle de Santiago Centro
+11	35	38470	Jaral del Progreso Centro
+11	34	38490	Cañada de Caracheo
+11	36	38500	Apaseo el Alto Centro
+11	37	38540	Jerécuaro Centro
+11	38	38590	Coroneo
+11	39	38600	Acámbaro Centro
+11	40	38700	El Acebuche
+11	39	38730	Parácuaro
+11	41	38790	Tarandacuao Centro
+11	42	38800	El Panteón
+11	43	38900	Providencia
+11	44	38940	Yuriria Centro
+11	45	38970	De Guadalupe
+11	46	38980	Uriangato Centro
+11	42	38990	Eduardo Zamudio
+12	1	39000	Chilpancingo de los Bravos Centro
+12	2	39130	Chichiltepec
+12	3	39150	Atlixtac
+12	4	39170	Tixtla de Guerrero Centro
+12	5	39200	La Piedra del Zopilote
+12	6	39230	San Miguel
+12	7	39250	Achigca
+12	8	39270	Huamuchapan
+12	9	39300	El Capire
+12	10	39940	Tierra Colorada Centro
+12	11	39960	Emiliano Zapata
+12	12	40000	Iguala de La Independencia Centro
+12	13	40130	Benito Juárez
+12	14	40160	Ejidal
+12	15	40180	Zumpango del Río Centro
+12	16	40200	Taxco de Alarcón Centro
+12	17	40330	Buenavista de Cuellar Centro
+12	18	40360	Coapango
+12	19	40380	Pilcaya
+12	20	40400	Benito Juárez
+12	21	40430	Barrio del Llanito
+12	22	40460	Ixcapuzalco
+12	23	40480	Acapetlahuaya
+12	24	40500	Arcelia Centro
+12	25	40531	Petlacala
+12	26	40560	Cuetzala del Progreso
+12	27	40580	El Triunfo
+12	28	40600	Nueva
+12	29	40630	Ixtapilla
+12	30	40660	Centro Poniente
+12	31	40680	Tlalchapa
+12	32	40700	Ajuno
+12	33	40730	Ajuchitlán del Progreso
+12	34	40760	Las Golondrinas
+12	35	40780	San Miguel Totolapan
+12	36	40800	Texas
+12	37	40830	El Ocote de Cadena
+12	38	40860	Coahuayutla de Guerrero
+12	39	40880	La Puerta
+12	40	40900	La Capilla
+12	41	40930	Benito Juárez
+12	42	40960	Arenal del Centro
+12	43	40970	Cuauhtémoc
+12	44	41000	Olinalá Centro
+12	45	41030	El Rincón Chiquito
+12	46	41060	Oztutla
+12	47	41080	Cualac
+12	48	41100	Chilapa de Álvarez Centro
+12	49	41120	Hueycantenango
+12	50	41130	Santa Cruz
+12	51	41160	Zitlala
+12	52	41180	Apango
+12	53	41200	Las Animas
+12	54	41240	Cacalutla
+12	55	41270	San José Buenavista
+12	56	41300	Benito Juárez
+12	57	41350	El Calvario
+12	58	41380	Igualita
+12	59	41400	Zapotitlán Tablas Centro
+12	60	41410	Acatepec
+12	61	41440	Petatlan
+12	62	41470	Ocotequila
+12	63	41500	Malinaltepec
+12	64	41530	Iliatenco
+12	65	41540	Tlacoapa
+12	66	41570	El Rosario
+12	67	41600	La Villa
+12	68	41640	Metlatonoc
+12	69	41660	Los Pinos
+12	70	41670	Alcozauca de Guerrero
+12	71	41700	El Tanque
+12	72	41740	Papaloapan
+12	73	41770	Cozoyoapan
+12	74	41800	Benito Juárez
+12	75	41840	La Dicha
+12	76	41870	Copala Centro
+12	77	41900	Azoyu Centro
+12	78	41920	Juchitán
+12	79	41930	18 de Octubre
+12	80	41940	Cuajicuinalpa Centro
+12	81	41970	Igualapa
+13	1	42000	Centro
+13	2	42120	Longinos
+13	3	42130	Mineral del Monte Centro
+13	4	42150	Ajacuba Centro
+13	5	42160	San Juan Tilcuautla
+13	6	42180	San Camilo
+13	7	42190	Las Moneras
+13	8	42200	El Sabino
+13	9	42220	Abasolo
+13	10	42240	Pacula
+13	11	42260	La Misión
+13	12	42280	Nuevo Progreso
+13	13	42300	La Huerta
+13	14	42330	Centro
+13	15	42360	Nicolás Flores
+13	16	42370	Cardonal
+13	17	42380	Bomi el Palmar
+13	18	42390	San Francisco Sacachichilco
+13	19	42400	Mamithí
+13	20	42440	Hidalgo Sur
+13	21	42470	Nopala Centro
+13	22	42500	Centro
+13	23	42620	Santiago de Anaya Centro
+13	24	42640	Nhitzi
+13	25	42660	Tepatepec Centro
+13	26	42680	San Jerónimo
+13	27	42700	Reforma
+13	28	42730	Progreso de Obregón Centro
+13	29	42750	Chilcuautla Centro
+13	30	42760	Atengo
+13	31	42780	Tlahuelilpan Centro
+13	32	42800	Centro
+13	33	42852	El Cerrito
+13	34	42900	Guadalupe
+13	35	42920	San Pedro Nextlalpan
+13	36	42940	Tetepango Centro
+13	37	42950	Centro
+13	38	42970	Cardonal
+13	39	42980	Loma Bonita
+13	40	43000	Cruz Verde
+13	41	43020	Tantima
+13	42	43040	Jaltocán Centro
+13	43	43050	Coapantla
+13	44	43060	Cochiscuatitla
+13	45	43070	San Francisco
+13	46	43080	Limontitla
+13	47	43090	Xochiatipan Centro
+13	48	43100	Los Sabinos
+13	49	43120	Tepehuacán de Guerrero Centro
+13	50	43140	Chinameca
+13	51	43150	Santa Ana
+13	52	43170	La Reforma
+13	53	43190	Juárez Centro
+13	54	43200	Chililiapa
+13	55	43230	Calnali Centro
+13	56	43250	Xochicoatlán Centro
+13	57	43270	Tlachichilco
+13	58	43300	Atotonilco el Grande Centro
+13	59	43330	Eloxochitlán Centro
+13	60	43350	Tepeyacapa
+13	61	43380	Ayacapa
+13	62	43400	La Loma Metepec
+13	63	43420	Huehuetla Centro
+13	64	43440	San Bartolo Tutotepec
+13	65	43460	Agua Blanca de Iturbide Centro
+13	66	43480	Villa Tenango de Doria Centro
+13	67	43500	Río Seco Puente de Doria
+13	68	43540	Acatlán Centro
+13	69	43560	Omitlán de Juárez Centro
+13	70	43580	Epazoyucan Centro
+13	71	43600	Tulancingo Centro
+13	72	43720	Acaxochitlán Centro
+13	73	43740	Francisco I. Madero
+13	74	43760	Santiago Tulaltepc Centro
+13	75	43780	Chabacano
+13	76	43800	Tizayuca Centro
+13	77	43830	San Antonio Oxtoyucan
+13	78	43860	Tolcayuca Centro
+13	79	43880	Villa de Tezontepec Centro
+13	80	43900	Centro
+13	81	43930	Tlanalapa Centro
+13	82	43940	Almoloya Centro
+13	83	43960	Emiliano Zapata Centro
+13	84	43970	Constitución de 1917
+14	1	44009	Palacio de Gobierno Del Estado de Jalisco
+14	2	45010	Chapalita Inn
+14	3	45250	San Cristóbal de La Barranca
+14	4	45260	Ixtlahuacan Del Rio
+14	5	45300	Tala Centro
+14	6	45350	El Arenal
+14	7	45380	Don Bosco
+14	8	45400	Comolca
+14	9	45430	Zapotlanejo
+14	10	45470	Acatic
+14	11	45480	Cuquio
+14	12	45500	Niños Heroes
+14	13	45640	Lomas de Tejeda Habitacional
+14	14	45680	Los Laureles
+14	15	45700	Acatlan de Juárez
+14	16	45730	Villa Corona Centro
+14	17	45750	Zacoalco de Torres Centro
+14	18	45790	Atemajac de Brizuela
+14	19	45800	Jocotepec Centro
+14	20	45850	Los Cedros
+14	21	45880	Juanacatlan
+14	22	45900	Chapala Centro
+14	23	45950	Poncitlán Centro
+14	24	45980	Santiago Totolimixpa
+14	25	46000	Huejuquilla El Alto Centro
+14	26	46040	Centro Mezquitic
+14	27	46100	Villa Guerrero
+14	28	46130	Bolaños
+14	29	46170	La Mezquitera
+14	30	46200	Colotlan Centro
+14	31	46240	Barrio de Tapias
+14	32	46260	Huejúcar
+14	33	46300	Chimaltitán
+14	34	46350	San Martin de Bolaños
+14	35	46400	Tequila Centro
+14	36	46440	Hostotipaquillo
+14	37	46470	Magdalena Centro
+14	38	46500	Etzatlan Centro
+14	39	46540	San Marcos
+14	40	46560	Campo Santo
+14	41	46600	Ameca Centro
+14	42	46730	Ahualulco de Mercado Centro
+14	43	46760	Teuchitlán
+14	44	46770	Ipazoltic
+14	45	46800	Guachinango
+14	46	46850	Cuyutlan
+14	47	46900	Mascota
+14	48	46960	Santiago de Pinos
+14	49	47000	San Juan de los Lagos Centro
+14	50	47120	Jalostotitlán Centro
+14	51	47140	San Miguel El Alto Centro
+14	52	47170	San Julian Centro
+14	53	47180	Arandas Centro
+14	54	47190	Cerro Gordo
+14	53	47196	Santa Maria Del Valle
+14	55	47200	Teocaltiche Centro
+14	56	47250	Villa Hidalgo Centro
+14	57	47270	El Rosario
+14	58	47300	Yahualica de Gonzalez Gallo Centro
+14	59	47340	Mexticacán
+14	60	47360	Ciudad Cañadas de Obregón
+14	61	47380	Valle de Guadalupe
+14	62	47400	Lagos de Moreno Centro
+14	63	47540	Matancillas
+14	64	47570	Union de San Antonio Centro
+14	65	47590	San Diego de Alejandría Centro
+14	66	47600	Tepatitlán de Morelos Centro
+14	67	47730	Adolfo Lopez Mateos
+14	68	47750	San Felipe
+14	69	47780	Rancho Viejo del Refugio (Rancho Viejo)
+14	70	47900	Jamay Centro
+14	71	47910	La Barca Centro
+14	72	47930	La Ladera
+14	73	47950	Jesús Maria
+14	74	47980	Buenos Aires
+14	75	48000	Unión de Tula
+14	76	48050	Tepantla
+14	77	48100	Atenguillo
+14	78	48150	Cuautla
+14	79	48160	El Trigo de Alteñas
+14	80	48200	Talpa de Allende Centro
+14	81	48260	Las Palmas de Arriba
+14	82	48400	El Tuito
+14	83	48450	Gargantillo (La Hacienda)
+14	84	48500	Cocula Centro
+14	85	48540	Las Calaveras
+14	86	48570	Tenamaxtlan
+14	87	48600	Juchitlan
+14	88	48640	Chiquilistlan
+14	89	48670	La Labor
+14	90	48700	El Limón
+14	91	48740	El Grullo Centro
+14	92	48760	Tonaya
+14	93	48770	Tuxcacuesco
+14	94	48800	2 de Febrero
+14	95	48850	El Maguey
+14	96	48900	Autlán de Navarro Centro
+14	97	48930	Casimiro Castillo Centro
+14	98	48950	Cuautitlán
+14	99	48970	Cihuatlán Centro
+14	100	49000	Ciudad Guzmán Centro
+14	101	49120	San Sebastián del Sur
+14	102	49170	Concepción de Buenos Aires
+14	103	49200	Atoyac
+14	104	49230	Techaluta
+14	105	49250	Teocuitatlan de Corona
+14	106	49300	Sayula Centro
+14	107	49340	Atacco
+14	108	49370	Amacueca
+14	109	49400	La Cañada
+14	110	49430	Tuxcueca
+14	111	49460	La Manzanilla de La Paz
+14	112	49500	Mazamitla
+14	113	49540	Paso de Piedra
+14	114	49570	Lázaro Cárdenas (San Diego)
+14	115	49600	Zapotiltic Centro
+14	116	49650	Tamazula de Gordiano Centro
+14	117	49700	San Gabriel
+14	118	49750	Toliman
+14	119	49770	Zapotitlán de Vadillo
+14	120	49800	Tuxpan Centro
+14	121	49840	Tonila
+14	122	49870	Plutarco Elías Calles
+14	123	49900	Tecalitlán Centro
+14	124	49950	Jilotlan de los Dolores
+14	125	49970	Santa Maria Del Oro
+15	1	50000	Centro
+15	2	50300	Acambay Centro
+15	3	50360	Aculco de Espinoza
+15	4	50400	Temascalcingo de José María Velazco
+15	5	50450	Centro
+15	6	50500	Timilpan
+15	7	50550	San Bartolo Morelos
+15	8	50600	El Oro de Hidalgo
+15	9	50640	San Felipe del Progreso Centro
+15	10	50660	San José del Rincón
+15	9	50680	Emilio Portes Gil
+15	11	50700	Jocotitlán
+15	12	50740	Magisterial
+15	13	50800	Jiquipilco
+15	14	50850	Temoaya
+15	15	50900	Almoloya de Juárez Centro
+15	16	50960	Villa Victoria
+15	17	51000	Villa de Allende
+15	18	51030	San Martín
+15	19	51070	Ixtapan del Oro
+15	20	51100	Nuevo Santo Tomás de los Plátanos
+15	21	51130	Otzoloapan
+15	22	51160	Zacazonapan
+15	23	51200	Santa María Ahuacatlan
+15	24	51260	San Juan
+15	25	51300	Del Temeroso
+15	26	51350	San Miguel Zinacantepec
+15	27	51400	Sanchéz
+15	28	51440	El Progreso de Luvianos
+15	29	51470	San Simón de Guerrero
+15	30	51500	Amatepec
+15	31	51550	Tlatlaya
+15	32	51600	Sultepec de Pedro Ascencio de Alquisiras
+15	33	51670	Texcaltitlán
+15	34	51700	Coatepec Harinas
+15	35	51760	San Francisco
+15	36	51800	Ayotuxco
+15	37	51860	Almoloya de Alquisiras
+15	38	51900	Ixtapan de la Sal
+15	39	51950	San Sebastián
+15	40	51980	Zumpahuacan
+15	41	52000	Lerma de Villada Centro
+15	42	52060	San Francisco Xonacatlán de Vicencio
+15	43	52080	La Huánica
+15	44	52100	San Mateo Atenco Centro
+15	45	52140	Guerrero
+15	46	52180	Mexicaltzingo
+15	47	52200	Calimaya de Diaz González
+15	48	52240	Chapultepec
+15	49	52280	Cuauhtémoc
+15	50	52300	Centro
+15	51	52360	Santa María Rayón Centro
+15	52	52370	Joquicingo
+15	53	52400	ISSEMYM
+15	54	52440	Malinalco
+15	55	52480	Ocuilán de Arteaga
+15	56	52500	Santa Cruz Atizapán
+15	57	52540	Almoloya del Río
+15	58	52570	San Mateo Texcalyacac
+15	59	52600	Isidro Fabela
+15	60	52680	Xalatlaco
+15	61	52700	Centro
+15	62	52740	Centro Ocoyoacac
+15	63	52760	San Melchor
+15	64	52900	Ciudad Adolfo López Mateos
+15	65	53000	San Bartolo Naucalpan (Naucalpan Centro)
+15	66	54000	Tlalnepantla  Centro
+15	67	54200	Polotitlán de la Ilustración
+15	68	54240	Jilotepec de Molina Enríquez
+15	69	54280	Soyaniquilpan San Francisco
+15	70	54300	Villa del Carbón
+15	71	54350	Chapa de Mota
+15	72	54400	Benito Juárez 1a. Sección (Cabecera Municipal)
+15	73	54480	Los Jarros
+15	72	54539	Guadalupe
+15	74	54570	La Cuesta
+15	75	54600	San Mateo Xoloc
+15	76	54660	Coyotepec
+15	77	54680	Huehuetoca
+15	78	54700	Cuautitlán Izcalli Centro Urbano
+15	79	54770	Tlatenco
+15	80	54800	Misiones II
+15	81	54880	Melchor Ocampo Centro
+15	82	54900	Los Reyes
+15	83	54960	El Carmen
+15	84	55000	Ecatepec Centro
+15	85	55600	Ampliación San Juan
+15	86	55650	Ex-Hacienda San Sebastián
+15	87	55660	Apaxco de Ocampo
+15	88	55670	Hueypoxtla
+15	89	55700	Hacienda Cruztitla I
+15	90	55740	Galaxias el Llano
+15	91	55780	San Andrés Jaltenco
+15	92	55785	Santa María Tonanitla
+15	93	55790	San Miguel Xaltocan
+15	94	55800	San Juan Teotihuacan de Arista
+15	95	55850	San Martín Centro
+15	96	55870	El Calvario
+15	97	55900	Otumba de Gómez Farias
+15	98	55940	Axapusco
+15	99	55970	Hidalgo A
+15	100	55980	San Bartolome Actopan
+15	101	56000	Tezoyuca
+15	102	56030	San Andrés Chiautla Centro
+15	103	56050	Papalotla
+15	104	56070	Tepetlaoxtoc de Hidalgo
+15	105	56100	Texcoco de Mora Centro
+15	106	56270	San Miguel
+15	107	56300	San Francisco Acuexcomac
+15	108	56330	Santa María Chimalhuacán
+15	109	56370	San Vicente Chicoloapan de Juárez Centro
+15	110	56400	Los Reyes Acaquilpan Centro
+15	111	56530	Capilla I
+15	112	56600	Villas de Chalco
+15	113	56610	Alfredo Baranda
+15	112	56620	San José
+15	114	56650	Xalpa
+15	115	56680	Techichilco
+15	116	56700	Tlalmanalco
+15	117	56760	La Capilla
+15	118	56780	San Mateo Tepopula
+15	119	56800	San Frncisco
+15	120	56860	Juchi
+15	121	56880	Tepetlixpa
+15	122	56900	Sector Sacromonte
+15	123	56970	San Jacinto
+15	124	56990	San Martín
+15	125	57000	Benito Juárez (La Aurora)
+16	1	58000	Morelia Centro
+16	2	58360	Barrio Alto
+16	3	58400	Coeneo de La Libertad
+16	4	58420	Cerro Azul
+16	5	58440	El Rincón
+16	6	58450	Lagunillas
+16	7	58460	Acuitzio del Canje
+16	8	58480	Los Pinos
+16	9	58500	Centro
+16	10	58540	Los Vázquez
+16	11	58550	Angamacutiro de la Unión
+16	12	58570	Lázaro Cárdenas
+16	13	58600	Zacapu Centro
+16	14	58740	Tlazazalca
+16	15	58760	Purepero de Echaiz
+16	16	58780	Lázaro Cárdenas
+16	17	58800	Loma Bonita
+16	18	58820	El Verde
+16	19	58840	El Embarcadero
+16	20	58860	Chucándiro
+16	21	58870	Copándaro de Galeana
+16	22	58880	San Marcos
+16	23	58900	Guadalupe
+16	24	58920	Loma Larga
+16	25	58930	Zinapecuaro de Figueroa Centro
+16	26	58970	12 de diciembre
+16	27	58980	Mirador del Valle
+16	28	59000	José Sánchez del Río
+16	29	59120	Briseñas de Matamoros
+16	30	59140	El Miche
+16	31	59160	México
+16	32	59180	Agua Caliente
+16	33	59200	Del Sol
+16	34	59230	Loma Bonita
+16	35	59250	Yurecuaro Centro
+16	36	59280	Lindavista
+16	37	59300	Centro
+16	38	59430	Santa Cruz
+16	39	59440	Patzimaro de Aviña
+16	40	59460	Emiliano Zapata
+16	41	59470	Colinas del Sur
+16	42	59500	Dr. Ignacio Chávez
+16	43	59510	Jiquilpan de Juárez Centro
+16	44	59550	El Hurelio
+16	45	59580	Chavinda
+16	46	59600	Zamora de Hidalgo Centro
+16	47	59730	San Francisco
+16	48	59750	El Refugio
+16	49	59780	Chilchota Centro
+16	50	59800	La Otra Banda
+16	51	59920	De San Juan
+16	52	59940	El Arenal
+16	53	59960	Pueblo Nuevo
+16	54	59980	La Purísima
+16	55	60000	Uruapan Centro
+16	56	60240	San Bartolo
+16	57	60250	Paracho de Verduzco Centro
+16	58	60270	La Salud
+16	59	60280	Los Girasoles
+16	60	60290	Fuentes del Pedregal
+16	61	60300	Centro
+16	62	60440	Camelinas
+16	63	60460	Tancitaro
+16	64	60490	Rincón del Paraiso
+16	65	60500	La Huerta
+16	66	60540	Buenos Aires
+16	67	60570	Lázaro Cárdenas
+16	68	60600	Apatzingán de La Constitución Centro
+16	69	60760	FOVISSSTE (Magisterial)
+16	70	60800	Unidad Magisterial
+16	71	60820	Villa Victoria
+16	72	60840	Las Cabañas
+16	73	60870	Aquila
+16	74	60900	Tumbiscatío de Ruiz
+16	75	60920	Emiliano Zapata
+16	76	60950	Centro
+16	77	61000	Epitacio Huerta
+16	78	61020	Pueblo nuevo (Cuartel Segundo)
+16	79	61060	La Lucha
+16	80	61100	El Pirul
+16	81	61250	Maravatío de Ocampo Centro
+16	82	61280	El Magisterio
+16	83	61290	Senguio
+16	84	61300	Charo
+16	85	61330	Tzitzio
+16	86	61370	Tiquicheo
+16	87	61400	Aserradero
+16	88	61410	Las Colonias
+16	89	61420	Tuxpan Centro
+16	90	61450	Ampliación Remedios
+16	91	61470	El Zapotal
+16	92	61500	Zitacuaro Centro
+16	93	61540	Tuzantla
+16	94	61570	Las Canchas
+16	95	61590	Susupuato de Guerrero
+16	96	61600	Pátzcuaro
+16	97	61630	La Asunción
+16	98	61640	El Gallito
+16	99	61650	Los Pinos
+16	100	61680	Turicato
+16	101	61700	El Panteón
+16	102	61710	Barrio Alto
+16	103	61730	EmilianoZapata
+16	104	61750	Enrique Ramírez
+16	105	61760	El Carriel
+16	106	61800	4 Caminos
+16	107	61830	H. Ayuntamiento
+16	108	61850	Buenos Aires
+16	109	61880	Buenos Aires
+16	110	61900	Barrio Alto
+16	111	61920	El Plan
+16	112	61940	Huetamo de Núñez Centro
+16	113	61980	Arboledas
+17	1	62000	Cuernavaca Centro
+17	2	62510	Coajomulco
+17	3	62520	Santo Domingo
+17	4	62530	San Pedro
+17	5	62540	Tlayacapan
+17	6	62550	Los Almendros
+17	7	62580	Temixco Centro
+17	8	62600	Miacatlan
+17	9	62610	Coatlán del Río
+17	10	62620	Tetecala
+17	11	62630	León Bejarano
+17	12	62640	Amacuzac
+17	13	62660	Puente de Ixtla Centro
+17	14	62700	Buenavista
+17	15	62730	Centro
+17	16	62740	Centro
+17	17	62760	El Zapote
+17	18	62770	Tlaltizapan de Pacheco
+17	19	62780	Lázaro Cárdenas
+17	20	62790	San Miguel La Unión
+17	21	62800	Tetela del Volcán
+17	22	62820	Yecapixtla
+17	23	62830	Totolapan
+17	24	62840	Los Reyes
+17	25	62850	Tecamachalco
+17	26	62870	Temoac
+17	27	62890	Zacualpan de Amilpas
+17	28	62900	El Higuerón
+17	29	62920	La Concepción
+17	30	62930	Jonacatepec
+17	31	62950	Axochiapan
+17	32	62970	Manuel Alarcón
+17	33	62980	Gabriel Tepepa
+18	1	63000	Tepic Centro
+18	2	63200	Tuxpan Centro
+18	3	63300	Los Limos
+18	4	63400	San José de Gracia
+18	5	63440	Atotonilco
+18	6	63480	Huajicori
+18	1	63500	Las Parejas
+18	7	63530	Jesús María
+18	3	63550	Santa Cecilia
+18	8	63580	La Yesca
+18	9	63600	Vado de San Pedro
+18	10	63630	Rosamorada Centro
+18	2	63660	El Tecomate
+18	11	63700	Compostela Centro
+18	12	63726	Villas Colibrí
+18	13	63740	Pescadores
+18	14	63780	Lomas Xalisco
+18	15	63800	San Pedro Lagunillas Centro
+18	16	63830	Santa María del Oro
+18	17	63880	Buenos Aires
+18	18	63900	La Ciénega
+18	19	63940	Mexpan
+18	20	63960	Ruben Martín Atalay
+19	1	64000	Monterrey Centro
+19	2	65000	Colombia
+19	3	65070	Lampazos
+19	4	65100	Mina
+19	5	65150	El Pedregal
+19	6	65200	Sonora
+19	7	65350	Villaldama
+19	8	65400	Vallecillo
+19	9	65450	Paras
+19	10	65500	León A. Flores
+19	11	65550	Ciénega de Flores Centro
+19	12	65600	Crescenciano Lozano
+19	13	65650	Abasolo Centro
+19	14	65700	Higueras
+19	15	65750	Gral. Zuazua
+19	16	65800	Prof. Jesús M. Lozano Treviño
+19	17	65850	La Laguna
+19	18	65900	Ciudad Cerralvo
+19	19	65950	Melchor Ocampo
+19	20	66000	Centro Villa de Garcia (casco)
+19	21	66050	Villa Alta
+19	22	66100	Privada La Bolita
+19	23	66200	San Pedro Garza Garcia Centro
+19	22	66350	Santa Catarina Centro
+19	24	66400	San Nicolás de los Garza Centro
+19	25	66550	Villas de los Arcos 1er Sector
+19	26	66600	Homero Sepúlveda
+19	27	66650	Pesquería
+19	28	66700	Marin
+19	29	66750	Dr. Gonzalez
+19	30	66800	Los Ramones
+19	31	66850	Los Herreras
+19	32	66900	Los Aldamas
+19	33	66950	Dr. Coss
+19	34	67000	Gral. Bravo
+19	35	67050	El Maestro
+19	36	67100	Ciudad Guadalupe Centro
+19	37	67250	Hacienda Santa Lucia
+19	38	67300	Los Rodriguez
+19	39	67350	Eduardo A Elizondo
+19	40	67400	Alegres de Terán
+19	41	67451	Lázaro Cárdenas
+19	42	67500	Montemorelos Centro
+19	43	67650	Rayones
+19	44	67700	Linares Centro
+19	45	67830	Iturbide
+19	46	67850	Jose Salazar Reyna
+19	47	67880	La Laja
+19	48	67900	Martinez Dominguez
+19	49	67940	Brownsville
+19	50	67960	General Zaragoza
+19	51	67980	Cerros Blancos
+20	1	68000	Oaxaca Centro
+20	2	68200	San José
+20	3	68204	San Juan Bautista Atatlahuca
+20	4	68207	San Mateo Sosola
+20	5	68210	San Juan Bautista Jayacatlan
+20	6	68213	Cerro de Piedra Blanca
+20	7	68217	Santiago Tenango
+20	8	68220	Centro de la Primera Sección
+20	9	68224	San Juan Del Estado
+20	10	68226	Parque Industrial Maquilador 2000
+20	11	68230	Del Atayúco
+20	12	68234	San Juan Bautista Guelache
+20	13	68237	Los Reyes
+20	14	68240	Nazareno Etla
+20	15	68244	San Andres Zautla
+20	16	68247	La Ferrería
+20	17	68250	Soledad Etla
+20	18	68254	Santo Tomas Mazaltepec
+20	19	68256	Guadalupe Etla
+20	20	68258	Morelos
+20	21	68260	San Felipe Tejalapam
+20	22	68263	Paraje Hacienda Vieja
+20	23	68266	Santa Maria Peñoles
+20	24	68268	Santiago Tlazoyaltepec
+20	25	68270	San Miguel 2a Sección
+20	1	68274	Reforestacion
+20	26	68285	Arboledas Brenamiel
+20	27	68287	San Andres Huayapam
+20	28	68290	San Agustin Yatareni
+20	29	68293	Santo Domingo Tomaltepec
+20	30	68297	El Retiro 3ra Etapa Sector Cañada
+20	31	68300	Tuxtepec Centro
+20	32	68400	Loma Bonita Centro
+20	33	68407	Cerro Chapultepec
+20	34	68410	Almolonga
+20	35	68420	La Estación
+20	36	68430	La Mazateca
+20	37	68435	Ayotzintepec
+20	38	68440	Papaloapan
+20	31	68450	San Pedro Ixcatlan
+20	39	68456	Arroyo de Choapan
+20	40	68460	Colorado 1a Sección
+20	41	68465	Vega Del Sol
+20	42	68470	Ojitlan
+20	43	68480	La Gran Lucha
+20	44	68490	San Felipe Usila
+20	45	68500	Huautla de Jimenez
+20	46	68510	Santa Maria Chilchotla
+20	47	68515	Santa Ana Ateixtlahuaca
+20	48	68518	San Lorenzo Cuaunecuiltitla
+20	49	68520	San Francisco Huehuetlan
+20	50	68524	San Pedro Ocopetatillo
+20	51	68527	Santa Cruz Acatepec
+20	52	68530	San Antonio Eloxochitlan
+20	53	68535	Santiago Texcalcingo
+20	54	68540	Emiliano Zapata
+20	55	68544	Santa Maria Teopoxco
+20	56	68547	San Martin Toxpalan
+20	57	68550	San Jerónimo Tecóatl
+20	58	68553	Llano de Agua
+20	59	68555	El Camarón
+20	60	68557	San Isidro
+20	61	68560	San Lucas Zoquiapam
+20	62	68565	San Antonio Nanahuatipam
+20	63	68570	San José Tenango
+20	64	68575	San Mateo Yoloxochitlan
+20	65	68577	La Soledad Piedra Ancha
+20	66	68580	Mazatlán Villa de Flores
+20	67	68585	San Juan de los Cues
+20	68	68590	Santa Maria Tecomavaca
+20	69	68595	Santa Maria Ixcatlan
+20	70	68600	Cuicatlan
+20	71	68610	Joya Durazno
+20	72	68614	Santa Ana Cuauhtémoc
+20	73	68617	Agua del Corral (Zacatal)
+20	74	68620	Santo Domingo Del Rio
+20	75	68624	San Miguel Santa Flor
+20	76	68627	Santa Maria Tlalixtac
+20	77	68630	Flor Batavia
+20	78	68635	San Alejo El Progreso
+20	79	68640	Concepción Papalo
+20	80	68645	Santos Reyes Papalo
+20	81	68650	Tlacoatzintepec
+20	82	68655	Santa Maria Papalo
+20	83	68660	San Juan Tepeuxila
+20	84	68665	San Juan Zapotitlan
+20	85	68670	Tomellin
+20	86	68675	San Pedro Jocotipac
+20	87	68680	Santa María Texcatitlan
+20	88	68685	Jaltepetongo
+20	89	68690	Parían
+20	90	68700	Unidad Deportiva
+20	91	68704	San Juan Quiotepec
+20	92	68707	San Pedro Yolox
+20	93	68710	Santiago Comaltepec
+20	94	68715	Abejones
+20	95	68720	San Pablo Macuiltianguis
+20	96	68725	Ixtlan de Juárez
+20	97	68730	Atepec
+20	98	68734	San Pedro Yaneri
+20	99	68737	San Miguel Aloapan
+20	100	68740	Teococuilco de Marcos Perez
+20	101	68745	Santa Ana Yareni
+20	102	68748	San Juan Evangelista Analco
+20	103	68750	Santa Maria Jaltianguis
+20	104	68754	San Miguel Del Río
+20	105	68757	San Juan Chicomezuchil
+20	106	68760	Capulálpam de Méndez
+20	107	68764	Nuevo Zoquiapan
+20	108	68767	San Andres Yatuni
+20	109	68770	Guelatao de Juárez
+20	110	68774	Santa Catarina Ixtepeji
+20	111	68778	San Miguel Yotao
+20	112	68780	Santa Catarina Lachatao
+20	113	68785	Cuajimoloyas
+20	114	68790	Santa Maria Yavesia
+20	115	68795	Laxopa
+20	116	68800	San Ildefonso Villa Alta
+20	117	68805	Santiago Camotlan
+20	118	68810	San Juan Yaee
+20	119	68814	Santiago Lalopa
+20	120	68817	San Juan Yatzona
+20	121	68820	Villa Talea de Castro
+20	122	68824	Tanetze de Zaragoza
+20	123	68827	San Juan Juquila Vijanos
+20	124	68830	San Cristóbal Lachirioag
+20	125	68834	Santa María Temaxcalapa
+20	126	68837	Santo Domingo Roayaga
+20	127	68840	Santa Maria Yalina
+20	128	68844	Santo Domingo Yojovi
+20	129	68847	San Juan Tabaa
+20	130	68850	San Melchor Betaza
+20	131	68854	San Andres Yaa
+20	132	68857	San Bartolome Zoogocho
+20	133	68860	San Baltazar Yatzachi el Bajo
+20	134	68866	Santiago Zoochila
+20	135	68870	Villa Hidalgo
+20	136	68875	San Francisco Cajonos
+20	137	68880	San Mateo Cajonos
+20	138	68885	San Pedro Cajonos
+20	139	68890	Santo Domingo Xagacia
+20	140	68895	San Pablo Yaganiza
+20	141	68900	San Juan Del Rio
+20	142	68920	Montenegro
+20	143	68940	Ignacio Zaragoza
+20	144	68960	Santiago Yaveo
+20	145	68980	San Juan Petlapa
+20	146	68990	San Juan Comaltepec
+20	147	69000	Heroica Ciudad de Huajuapan de León Centro
+20	148	69010	Lázaro Cárdenas
+20	149	69020	Cosoltepec
+20	150	69030	Tequixtepec
+20	151	69040	San Juan Bautista Suchitepec
+20	152	69045	Santa Catarina Zapoquilla
+20	153	69050	Miltepec
+20	154	69055	San Jerónimo Silacayoapilla
+20	155	69060	Zapotitlan Palmas
+20	156	69064	Santa Maria Tutla
+20	157	69065	Santiago Cacaloxtepec
+20	158	69070	Asunción Coyotepeji
+20	159	69080	Camotlan
+20	160	69090	San Sebastián Progreso
+20	161	69100	Santiago Tamazola
+20	162	69110	San Juan Cieneguilla
+20	163	69120	Zapotitlan Lagunas
+20	164	69130	San Juan Ihualtepec
+20	165	69140	San Nicolás Hidalgo
+20	166	69150	De Jesús
+20	167	69160	San Andres Tepetlapa
+20	168	69170	La Luz Tenexcalco
+20	169	69180	San Mateo Nejapam
+20	170	69190	San Juan Bautista Tlachichilco
+20	171	69200	El Refugio
+20	172	69210	Fresnillo de Trujano
+20	173	69220	Santa Catarina Estancia
+20	174	69230	San José Ayuquila
+20	175	69235	Plan Del Vergel
+20	176	69240	Amatitlan
+20	177	69250	20 de Noviembre
+20	178	69260	Santa Cruz Tacache de Mina
+20	179	69265	San Simón Zahuatlán
+20	180	69270	San Marcos Arteaga
+20	181	69280	San Jorge Nuchita
+20	182	69287	Santos Reyes Yucuna
+20	183	69290	San Juan Reyes
+20	184	69296	Santo Domingo Yodohino
+20	185	69300	Coixtlahuaca
+20	186	69310	Tepelmeme Villa de Morelos
+20	187	69320	Concepción Buenavista
+20	188	69330	Ihuitlan Plumas
+20	189	69340	Tlacotepec Plumas
+20	190	69345	San Francisco Teopan
+20	191	69350	Santa Magdalena Jicotlan
+20	192	69355	San Mateo Tlapiltepec
+20	193	69360	San Miguel Tequixtepec
+20	194	69370	Tulancingo
+20	195	69375	Santiago Tepetlapa
+20	196	69380	San Cristóbal Suchixtlahuaca
+20	197	69390	Santa María Nativitas
+20	198	69400	Silacayoapam
+20	199	69420	Santiago Yucuyachi
+20	200	69430	San Lorenzo Victoria
+20	201	69440	San Agustin Atenango
+20	202	69450	Calihuala
+20	203	69460	Santa Cruz de Bravo
+20	204	69470	Nieves Ixpantepec
+20	205	69480	San Francisco Tlapancingo
+20	206	69490	Santiago Del Río
+20	207	69500	San Francisco
+20	208	69507	La Trinidad Vista Hermosa
+20	209	69510	Tamazulapan Centro
+20	210	69516	San Pedro Nopala
+20	211	69520	Santiago Teotongo
+20	212	69526	San Antonio Acutla
+20	213	69530	Villa Tejupan de La Unión
+20	214	69536	Santo Domingo Tonaltepec
+20	215	69540	Villa Chilapa de Diaz
+20	216	69546	San Francisco Caballua
+20	217	69550	Tercera Sección
+20	218	69556	San Pedro Yucunama
+20	219	69560	San Juan Teposcolula
+20	220	69565	San Bartolo Suyaltepec
+20	221	69570	El Calvario
+20	222	69574	San Sebastián Nicananduta
+20	223	69577	Santo Domingo Tlatayapam
+20	224	69580	Santa Maria Nduayaco
+20	225	69585	San Vicente Nuñu
+20	226	69590	San Pedro Topiltepec
+20	227	69595	Santiago Nejapilla
+20	228	69600	Chocano
+20	229	69610	San Miguel Huautla
+20	230	69615	San Miguel Chicahua
+20	231	69620	Santa Maria Apazco
+20	232	69625	Santiago Apoala
+20	233	69630	Santa Maria Chachoapam
+20	234	69640	San Juan Ixtaltepec
+20	235	69651	San Juan Tlalixtlahuaca
+20	236	69660	Santo Domingo Yanhuitlan
+20	237	69665	San Andres Sinaxtla
+20	238	69670	San Juan Yucuita
+20	239	69675	San Juan Sayultepec
+20	240	69680	Santiago Tillo
+20	241	69685	San Francisco Chindua
+20	242	69690	San Mateo Etlatongo
+20	243	69695	Zaragoza
+20	244	69700	95 Batallón de Infantería
+20	245	69730	San Miguel Tlacotepec
+20	246	69740	Santa Rosa
+20	247	69760	Santos Reyes Tepejillo
+20	248	69770	Las Flores
+20	249	69780	Ahuajutla
+20	250	69790	Coicoyan de las Flores
+20	251	69800	El Mirador
+20	252	69807	Peña Colorada
+20	253	69810	San Pedro Mártir Yucuxaco
+20	254	69815	San Martin Huamelulpam
+20	255	69820	San José
+20	256	69824	Santiago Nundiche
+20	257	69827	Santa Maria Del Rosario
+20	258	69830	San Juan Achiutla
+20	259	69834	Santa Catarina Tayata
+20	260	69837	San Cristóbal Amoltepec
+20	261	69840	San Miguel Achiutla
+20	262	69845	San Martin Itunyoso
+20	263	69848	San Isidro Peñasco
+20	264	69850	San Bartolome Yucuañe
+20	265	69855	Santa Cruz Nundaco
+20	266	69860	San Agustin Tlacotepec
+20	267	69865	Santo Tomas Ocotepec
+20	268	69870	San Antonio Sinicahua
+20	269	69875	San Pedro El Alto
+20	270	69880	Santa María Tataltepec
+20	271	69885	San Pedro Molinos
+20	272	69890	Santa María Yosoyua
+20	273	69895	San Juan Teita
+20	274	69900	Magdalena Jaltepec
+20	275	69910	Magdalena Yodocono de Porfirio Diaz
+20	276	69915	San Miguel Tecomatlan
+20	277	69920	Magdalena Zahuatlan
+20	278	69925	San Francisco Nuxaño
+20	279	69930	San Pedro Tidaa
+20	280	69935	San Francisco Jaltepetongo
+20	281	69940	Santiago Tilantongo
+20	282	69946	San Juan Diuxi
+20	283	69951	Barranca Chindella
+20	284	69955	San Juan Monte Flor
+20	285	69960	Santo Domingo Nuxaa
+20	286	69970	Yutanduchi de Guerrero
+20	287	69980	San Pedro Teozacoalco
+20	288	69990	San Miguel Piedras
+20	289	69995	San Mateo Sindihui
+20	290	70000	Adolfo C. Gurrion
+20	291	70110	Infonavit
+20	292	70117	Revolución
+20	293	70120	Ingenio Santo Domingo
+20	294	70125	Segunda Sección
+20	295	70130	Cuarta Sección
+20	296	70137	San Dionisio Del Mar
+20	297	70140	1era. Sección
+20	298	70146	San Francisco Viejo
+20	299	70150	1ra Sección
+20	300	70155	San Miguel Chimalapa
+20	301	70160	Las Flores
+20	302	70170	Reforma de Pineda
+20	303	70175	Lázaro Cárdenas
+20	304	70180	Las Hormigas
+20	305	70190	Barrio Guachaco
+20	306	70200	Santiago Zacatepec
+20	307	70206	Santo Domingo Tepuxtepec
+20	308	70210	El Porvenir
+20	309	70230	San Juan Mazatlán
+20	310	70250	Totontepec Villa de Morelos
+20	311	70261	Mixistlan de La Reforma
+20	312	70265	Tejas
+20	313	70270	San Isidro Huayapan
+20	314	70276	Estancia de Morelos
+20	315	70280	Lindavista
+20	316	70283	San Pedro y San Pablo Ayutla
+20	317	70286	Mosquito Blanco
+20	318	70288	San Miguel Quetzaltepec
+20	319	70290	Asunción Cacalotepec
+20	320	70293	San Pedro Ocotepec
+20	321	70296	San Lucas Camotlan
+20	322	70298	Santiago Ixcuintepec
+20	323	70300	El Bajío
+20	324	70330	Pachiñe Encinal
+20	325	70350	Platanillo
+20	326	70360	Santa María Chimalapa
+20	327	70370	Rincón Viejo
+20	328	70380	Lagunas Centro
+20	329	70400	San Luis del Río
+20	330	70407	San Sebastián Abasolo
+20	331	70410	Santa Catarina Albarradas
+20	332	70417	Santa María Guelacé
+20	333	70420	Teotitlan Del Valle
+20	334	70424	Los Pinos
+20	335	70426	San Sebastián Teitipac
+20	336	70428	Santa Ana Del Valle
+20	337	70430	Xaaga
+20	338	70440	Pedregal
+20	339	70446	Santo Domingo Albarradas
+20	340	70450	Rojas de Cuauhtémoc
+20	341	70453	San Juan Teitipac
+20	342	70456	Santa Cruz Papalutla
+20	343	70458	Magdalena Teitipac
+20	344	70460	San Jerónimo Tlacochahuaya
+20	345	70464	San Juan Guelavia
+20	346	70467	San Lucas Quiavini
+20	347	70470	San Juan Del Río
+20	348	70474	San Bartolome Quialana
+20	349	70477	San Lorenzo Albarradas
+20	350	70480	San Pedro
+20	351	70486	Soledad las Salinas
+20	352	70490	Río Seco
+20	353	70495	San Dionisio Ocotepec
+20	354	70500	Barrio San Martín
+20	355	70520	San Juan Juquila Mixes
+20	356	70530	San Juan Lachixila
+20	357	70540	Santa Ana Tavela
+20	358	70546	San Juan Lajarcia
+20	359	70550	San Bartolo Yautepec
+20	360	70560	Santa Maria Zapotitlan
+20	361	70570	Asunción Tlacolulita
+20	362	70580	San Pedro Mártir Quiechapa
+20	363	70586	Santa Maria Quiegolani
+20	364	70590	Santa Catarina Quioquitani
+20	365	70595	Santa Catalina Quieri
+20	366	70600	Salina Cruz Centro
+20	367	70705	Guigovelaga
+20	368	70710	Aguascalientes
+20	369	70716	Santa María Totolapilla
+20	370	70720	Santiago Laollaga
+20	371	70725	Xanadani
+20	372	70730	Barrio San José
+20	373	70735	Santa Maria Guienagati
+20	374	70740	Magdalena Tequisistlan
+20	375	70746	Magdalena Tlacoltepec
+20	376	70750	San Pedro Comitancillo
+20	377	70755	Santa María Mixtequilla
+20	378	70760	El Cerrito
+20	379	70770	Santa Maria Huamelula
+20	380	70777	San José del Palmar
+20	381	70780	Huazatlan Del Rio Cerro Del Marquez
+20	382	70786	San Marcial
+20	383	70790	Santiago Astata
+20	384	70795	San Miguel Tenango
+20	385	70800	San José Llano Grande
+20	386	70806	San Nicolás
+20	387	70808	San Simón Almolongas
+20	388	70810	San Esteban Amatlan
+20	389	70813	San José Lachiguiri
+20	390	70816	Sitio de Xitlapehua
+20	391	70818	San Francisco Logueche
+20	392	70820	Santa Ana
+20	393	70823	Santa Cruz Xitla
+20	394	70826	Monjas
+20	395	70828	Santo Domingo Amatlan
+20	396	70830	Santa Catarina Cuixtla
+20	397	70833	San José Del Peñasco
+20	398	70835	San Cristóbal Amatlan
+20	399	70838	San Juan Mixtepec
+20	400	70839	San Pedro Mixtepec
+20	401	70840	Santa Lucia Miahuatlan
+20	402	70843	Soledad Piedra Larga
+20	403	70850	San Sebastián Coatlán
+20	404	70855	Santa María Coatlan
+20	405	70860	San Mateo Río Hondo
+20	406	70866	Santo Tomas Tamazulapam
+20	407	70868	San Andres Paxtlan
+20	408	70870	Santa María Ozolotepec
+20	409	70874	San Miguel Coatlan
+20	410	70877	San Sebastián Río Hondo
+20	411	70880	San Miguel Suchixtepec
+20	412	70884	Santo Domingo Ozolotepec
+20	413	70887	San Francisco Ozolotepec
+20	414	70890	San Felipe Lachillo
+20	415	70894	San Marcial Ozolotepec
+20	416	70897	San Andres Loveno
+20	417	70900	Barrio Chubasco
+20	418	70906	Cerro Hermoso
+20	419	70910	Santa Catarina Loxicha
+20	420	70920	Buenavista Loxicha
+20	421	70930	San Baltasar Loxicha
+20	422	70934	Santa Fe
+20	423	70940	San Bartolome Loxicha
+20	424	70944	La Barra del Potrero
+20	425	70950	Candelaria Loxicha
+20	426	70960	Pluma Hidalgo
+20	427	70966	San Pedro El Alto
+20	428	70970	San Mateo Piñas
+20	429	70980	Unidad Deportiva
+20	430	70990	San Miguel Del Puerto
+20	431	71000	San Juan La Laguna
+20	432	71030	Constancia Del Rosario
+20	433	71040	San José de las Flores
+20	434	71050	Santa Maria Zacatepec Centro
+20	435	71070	La Guadalupe
+20	436	71080	La Reforma
+20	437	71091	Santa María Ipalapa
+20	438	71100	Chalcatongo de Hidalgo
+20	439	71110	Santa Maria Yucuhiti
+20	440	71120	San Esteban Atatlahuca
+20	441	71125	Santa Catarina Ticua
+20	442	71130	Santiago Nuyoo
+20	443	71136	Santa Catarina Yosonotu
+20	444	71140	San Miguel el Grande Centro
+20	445	71146	Santo Domingo Ixcatlan
+20	446	71150	San Pablo Tijaltepec
+20	447	71156	Santa Cruz Tacahua
+20	448	71160	Santa Lucia Monteverde
+20	449	71170	San Andres Cabecera Nueva
+20	450	71176	Santa María Yolotepec
+20	451	71180	Primavera
+20	452	71190	Terán
+20	453	71200	El Pajarito
+20	454	71210	San Bernardo Mixtepec
+20	455	71214	Santa Cruz Mixtepec
+20	456	71218	San Isidro
+20	457	71220	Jardines de Yahuiche
+20	458	71224	Cieneguilla
+20	459	71226	Santa Cruz Amilpas
+20	460	71230	Palestina
+20	461	71240	Santa Lucia
+20	462	71246	San Pedro Ixtlahuaca
+20	463	71250	San Antonio de La Cal Centro
+20	464	71260	Infonavit
+20	465	71265	La Villa
+20	466	71270	Animas Trujano
+20	467	71275	San Jacinto Tlacotepec
+20	468	71280	Real Antequera II
+20	469	71284	Trinidad
+20	470	71290	Santa María Coyotepec
+20	471	71294	San Bartolo Coyotepec
+20	472	71297	Santa Inés Yatzeche
+20	473	71300	La Ciénega
+20	474	71305	San Antonio Huitepec
+20	475	71310	La Guadalupe
+20	476	71320	Mayorazgo
+20	477	71326	San Miguel Peras
+20	478	71330	San Pablo Cuatro Venados
+20	479	71336	Santa Inés Del Monte
+20	480	71340	La Noria
+20	481	71344	San Antonino El Alto
+20	482	71347	Magdalena Mixtepec
+20	483	71350	Santa Catarina Quiane
+20	484	71355	Coyote
+20	485	71360	Santa Ana Tlapacoyan
+20	486	71365	Santa Cruz Zenzontepec
+20	487	71370	San Francisco Cahuacua
+20	488	71375	San Mateo Yucutindo Centro
+20	489	71380	Santiago Textitlan
+20	490	71385	Santiago Amoltepec
+20	491	71390	Santa María Zaniza
+20	492	71395	Santo Domingo Teojomulco
+20	493	71400	Cuilápam de Guerrero Centro
+20	494	71410	La Purísima
+20	495	71430	Santa María Lachixio
+20	496	71440	San Vicente Lachixio
+20	497	71450	El Arador
+20	498	71460	Santa María Sola
+20	499	71470	San Francisco Sola
+20	500	71480	San Ildefonso Sola
+20	501	71490	Santiago Minas
+20	502	71500	La Loma
+20	503	71506	San Martin Tilcajete
+20	504	71507	San Pedro Guegorexe
+20	505	71508	San Juan Chilateca
+20	506	71510	Unión y Progreso 2a Etapa
+20	507	71516	Santa Ana Zegache
+20	508	71518	Santiago Apóstol
+20	509	71520	San Antonino Castillo Velasco
+20	510	71523	Asunción Ocotlan
+20	511	71525	San Pedro Mártir
+20	512	71526	San Dionisio Ocotlan
+20	513	71529	Magdalena Ocotlan
+20	514	71530	San Miguel Tilquiapam
+20	515	71534	Santa Catarina Minas
+20	516	71537	San Baltasar Chichicapam
+20	517	71540	San Pedro Apóstol
+20	518	71543	Santa Lucia Ocotlan
+20	519	71545	Praxedis G Guerrero
+20	520	71548	San Andres Zabache
+20	521	71550	San Juan Del Progreso
+20	522	71554	Yaxe
+20	523	71557	San Pedro Taviche
+20	524	71560	San Martin de los Cansecos
+20	525	71562	San Martin Lachila
+20	526	71565	La Pe
+20	527	71567	Agua Blanca
+20	528	71570	Coatecas Altas
+20	529	71575	San Andres Niño
+20	530	71580	San Agustin Amatengo
+20	531	71586	Taniche
+20	532	71588	San Miguel Ejutla
+20	533	71590	Santiago Yogana
+20	534	71595	San Vicente Coatlan
+20	535	71600	Pinotepa Nacional Centro
+20	536	71610	San Juan Cacahuatepec Centro
+20	537	71620	San Juan Bautista Lo de Soto Centro
+20	538	71630	Mártires de Tacubaya
+20	539	71640	San Sebastián Ixcapa
+20	540	71650	San Antonio Tepetlapa
+20	541	71655	El Cortijo
+20	542	71660	San Francisco Del Maguey
+20	543	71670	Tlacamama
+20	544	71680	Santiago Tapextla
+20	545	71686	San José Estancia Grande
+20	546	71690	Santo Domingo Armenta
+20	547	71700	Jamiltepec Centro
+20	548	71710	San Pedro Atoyac
+20	549	71720	San Juan Colorado
+20	550	71730	Santiago Ixtayutla
+20	551	71740	San Pedro Jicayán
+20	552	71750	Pinotepa de Don Luis
+20	553	71760	Santa María Yosocani
+20	554	71764	San Agustin Chayuco
+20	555	71770	San Andres Huaxpaltepec
+20	556	71780	Santa Catarina Michoacán
+20	557	71784	Tehuixte
+20	558	71790	Santa María Chicometepec
+20	559	71800	De La Rosalía
+20	560	71850	Tataltepec de Valdes
+20	561	71870	San Juan Quiahije
+20	562	71890	San Miguel Panixtlahuaca
+20	563	71900	La Asunción
+20	564	71920	San Pedro Juchatengo
+20	565	71930	Santiago Yaitepec
+20	566	71940	San Juan Lachao
+20	567	71950	Santa María Temaxcaltepec
+20	568	71960	El Mirador
+20	569	71970	Barrio Bustamante
+20	570	71980	Puerto Escondido Centro
+21	1	72000	Centro
+21	2	72600	Tlaltenango
+21	3	72620	San Miguel Xoxtla
+21	4	72640	San Mateo Cuanala
+21	5	72670	Santa María Coronango
+21	6	72700	Fuentes del Molino
+21	7	72750	San JuanTlautla
+21	8	72803	Los Sapos
+21	9	72850	Chalchihuapan
+21	1	72900	San Miguel Canoa
+21	10	72980	Las Animas
+21	11	73000	Huitzilac
+21	12	73020	Pantepec
+21	13	73030	Coronel Tito Hernández
+21	14	73050	Jalpan
+21	15	73060	Acalman
+21	16	73070	Cuautepec
+21	17	73080	La Chivería
+21	18	73100	Atla
+21	19	73120	Honey
+21	20	73140	Copila
+21	21	73160	Puga
+21	22	73180	Ahuazotepec
+21	23	73200	Nuevo Necaxa
+21	24	73220	Tlaola
+21	25	73240	Cerro Verde
+21	26	73260	Jopala
+21	27	73280	Tlapacoya
+21	28	73298	Acolihua
+21	29	73310	Zacatlán Centro
+21	30	73320	Tlaltenango
+21	31	73330	Tlayehualancingo
+21	32	73340	San Baltasar Xochitlaxco
+21	33	73350	Altica
+21	34	73360	Amixtlan
+21	35	73370	Tepango de Rodríguez
+21	36	73380	Zongozotla
+21	37	73390	Hermenegildo Galeana
+21	38	73400	Bibiano Hernández
+21	39	73410	Coatepec
+21	40	73420	Camocuautla
+21	41	73430	Hueytlalpan
+21	42	73440	Nanacatlán
+21	43	73450	San Antonio Taltzintán
+21	44	73460	Xochitlán de Vicente Suárez
+21	45	73470	Cinco de Mayo
+21	46	73480	Ixtepec
+21	47	73490	Atlequizayan
+21	48	73500	La Lima
+21	49	73510	Tuzamapan de Galeana
+21	50	73520	Caxhuacan
+21	51	73530	Ecatlan
+21	52	73540	Zoquiapan
+21	53	73550	Nauzontla
+21	54	73560	Cuetzalan del Progreso
+21	55	73570	Ayotoxco de Guerrero
+21	56	73580	Hueytamalco
+21	57	73590	Copales
+21	58	73600	Cuautempan
+21	59	73620	Aquixtla
+21	60	73640	Xoloxochitl
+21	61	73660	Cuauximaloyan
+21	62	73680	Santa Cruz Xaltetela
+21	63	73700	Zaragoza
+21	64	73720	Tepecoahuixco
+21	65	73740	Zautla
+21	66	73760	El Mirador
+21	67	73780	Libres Centro
+21	68	73800	Teziutlán Centro
+21	69	73900	San Pedro
+21	70	73910	Yaonahuac Centro
+21	71	73920	Hueyapan Centro
+21	72	73930	Teteles de Ávila Castillo Centro
+21	73	73940	Atempan
+21	74	73950	San Antonio
+21	68	73960	Mexcalcuautla
+21	75	73970	San Andrés
+21	76	73980	Cuyoaco
+21	77	73990	El Fuerte de la Unión
+21	78	74000	Centro
+21	79	74100	San Rafael Ixtapaluca
+21	80	74110	San Matías Tlalancaleca
+21	78	74120	La Loma (Tepatlaxco)
+21	81	74130	San Salvador el Verde
+21	82	74140	San Matías Atzala
+21	83	74150	Tlaltenco
+21	84	74160	El Manzano
+21	85	74170	Domingo Arenas
+21	86	74180	San Andrés Calpan
+21	87	74190	San Nicolás los Ranchos
+21	88	74200	Atlixco Centro
+21	89	74300	San Buenaventura Nealtican
+21	90	74310	Los Reyes Tlanechicolapan
+21	91	74320	San Gregorio Atzompa
+21	92	74330	La Magdalena Yancuitlalpan
+21	93	74340	Tianguismanalco
+21	94	74350	San Martín Tlamapa
+21	88	74360	San Agustín Ixtahuixtla
+21	95	74370	San Diego Organal
+21	96	74380	Tochimiltzingo
+21	97	74390	Independencia
+21	98	74400	Izucar de Matamoros Centro
+21	99	74500	Atzitzihuacan
+21	100	74510	San Marcos Acteopan
+21	101	74520	Cohuecan
+21	102	74530	San Felipe Tepemaxalco
+21	103	74540	Tepapayeca
+21	104	74550	Tepexco
+21	105	74560	Tilapa
+21	98	74570	La Galarza
+21	106	74580	Hacienda la Esperanza
+21	107	74590	Santiago Atzala
+21	108	74600	San Sebastián Tenango
+21	109	74610	San Martín Totoltepec
+21	110	74620	Ayotla San Miguel
+21	111	74630	San Juan Epatlán
+21	112	74640	El Calvario
+21	113	74650	Coatzingo
+21	114	74660	Santa Catarina Tlaltempan
+21	115	74670	Chigmecatitlán
+21	116	74680	Zacapala
+21	117	74690	Tepexi de Rodríguez
+21	118	74700	Santa Cruz
+21	119	74710	Huachinantla
+21	120	74720	San José Patriarca
+21	121	74730	Chiautla de Tapia
+21	122	74740	Santa Mónica
+21	123	74750	Xicotlan
+21	124	74760	Chila de la Sal
+21	125	74770	Totecamila
+21	126	74780	Acaxtlahuacan de Albino Zertuche
+21	127	74790	Los Ángeles
+21	128	74800	La Noria Hidalgo
+21	129	74810	Cuayuca
+21	130	74820	San Juan Nepomuceno
+21	131	74830	Axutla
+21	132	74840	Buenavista
+21	133	74850	Ahuehuetitla
+21	134	74860	San Juan
+21	135	74870	Independencia
+21	136	74880	Piaxtla
+21	137	74890	San Rafael
+21	138	74900	San Juan Ixcaquixtla
+21	139	74910	San Vicente Coyotepec
+21	140	74920	Primera Sección de Xalacatlán de Bravo
+21	141	74930	San Cristóbal
+21	142	74940	Amatitlán de Azueta
+21	143	74950	San Jerónimo Xayacatlán
+21	144	74960	San Isidro Labrador
+21	145	74970	Santo niño de Atocha
+21	146	74980	San Miguel Ixitlán
+21	147	74990	Chila o Chila de las Flores
+21	148	75000	Ignacio Zaragoza
+21	149	75010	San José de Chiapa
+21	150	75020	Miravalles
+21	151	75030	San Nicolás Buenos Aires
+21	152	75040	Las Juanitas
+21	153	75050	Oyamecalco el Cajón
+21	154	75060	Saltillo
+21	155	75070	La Trinidad
+21	156	75080	Buenavista
+21	157	75090	Xopanapa
+21	158	75100	Tepatlaxco de Hidalgo
+21	159	75110	Santo Entierro
+21	160	75120	Nopalucan de la Granja
+21	161	75130	Mazapiltepec de Juárez
+21	162	75140	Cuauhtémoc
+21	163	75150	Las 3 Horas
+21	164	75160	San Juan
+21	165	75170	San Pablo de las Tunas
+21	166	75180	San Miguel Tecuitlapa
+21	167	75190	San José Guerrero
+21	168	75200	San José
+21	169	75220	Cuautinchan
+21	170	75240	La Trinidad
+21	171	75260	San Francisco Mixtla
+21	172	75280	Santo Tomás Hueyotlipan
+21	173	75300	Tzicatlacoyan
+21	174	75320	Analco
+21	175	75340	La Magdalena Tlatlauquitepec
+21	176	75360	San Juan Atzompa
+21	177	75380	Huatlatlauca
+21	178	75400	Concordia de Aquiles Serdán
+21	179	75420	Cuapiaxtla de Madero
+21	180	75440	San Salvador Huixcolotla
+21	181	75460	San Lorenzo
+21	182	75480	Tecamachalco Centro
+21	183	75500	San José Bellavista de Victoria
+21	184	75520	La Gloria
+21	185	75540	Plan del Capulín
+21	186	75560	Esperanza
+21	187	75580	Villa Morelos Cañada
+21	188	75600	Tlanepantla
+21	189	75610	Tochtepec
+21	190	75620	San Salvador Atoyatempan
+21	191	75630	Tepeyahualco Cuauhtémoc
+21	192	75640	Dolores Hidalgo
+21	193	75650	Molcaxac
+21	194	75660	Xochitlan
+21	195	75670	Yehualtepec
+21	196	75680	San José
+21	197	75690	Atenayuca
+21	198	75700	Centro de la Ciudad
+21	199	75800	Tepanco de López
+21	200	75810	Chapulco
+21	201	75820	Santiago Miahuatlán
+21	202	75830	Nicolás Bravo
+21	203	75840	San Martín Atexcal
+21	198	75853	San Cristóbal Tepetiopan
+21	204	75860	San Antonio Cañada
+21	205	75870	Zapotitlan Salinas
+21	206	75880	San Gabriel Chilac
+21	207	75890	Atolotitlán
+21	208	75900	San Bernardino Lagunas
+21	209	75910	Ajalpan
+21	210	75920	Zacacoapan
+21	211	75930	Oztopulco
+21	212	75940	Tlacotepec de Díaz
+21	213	75950	San Francisco Altepexi
+21	214	75960	Francisco Villa
+21	215	75970	San José Miahuatlán
+21	216	75980	Donato Bravo Izquierdo
+21	217	75990	San Juan Cuautla
+22	1	76000	Centro
+22	2	76240	Jardín
+22	3	76270	Colón Centro
+22	4	76300	Centro
+22	5	76340	Centro
+22	6	76360	Centro
+22	7	76400	La Loma
+22	8	76450	Peñamiller Centro
+22	9	76500	Centro
+22	10	76550	La Laguna
+22	11	76600	Tolimán
+22	12	76650	La Presa
+22	13	76700	Estrella
+22	14	76750	La Magdalena
+22	15	76800	Centro
+22	16	76850	Jardines del Bosque
+22	17	76900	Rincón Colonial
+22	18	76950	Huimilpan Centro
+23	1	77000	Chetumal Centro
+23	2	77100	Laguna Kana
+23	3	77300	Kantunilkin Centro
+23	4	77400	Caridad del Cobre
+23	5	77500	Supermanzana 4 A
+23	6	77600	Cozumel Centro
+23	7	77710	Playa del Carmen Centro
+23	8	77760	Villas Huracanes
+23	9	77800	X-Cabil
+23	10	77900	Reforma
+23	1	77950	Prof. Sergio Butrón Casas
+24	1	78000	San Luis Potosí Centro
+24	2	78430	La Rivera
+24	3	78440	Cerro de San Pedro
+24	4	78450	Julián Carrillo
+24	5	78460	Valle Umbroso
+24	6	78490	Ayun
+24	7	78500	San José de La Punta
+24	8	78520	La Luz
+24	9	78540	Los Azules
+24	10	78570	Cañada Verde
+24	11	78600	Salitrillos
+24	12	78630	Santo Domingo
+24	13	78660	Dulce Grande
+24	14	78700	Lindavista
+24	15	78830	La Paz Centro
+24	16	78840	Buenavista
+24	17	78870	Guadalcázar
+24	18	78900	San Juan
+24	19	78920	Venado
+24	20	78940	Villa de Arista Centro
+24	21	78960	Villa Hidalgo Centro
+24	22	78980	Armadillo de los Infante
+24	23	79000	Ciudad Valles Centro
+24	24	79100	Centro
+24	25	79200	Tamuin Centro
+24	23	79230	San Lorenzo
+24	24	79290	La Reforma
+24	26	79300	El Naranjo Centro
+24	27	79320	Ciudad del Maíz Centro
+24	28	79360	Alaquines
+24	29	79380	Cárdenas Centro
+24	30	79400	San José Turrubiates
+24	31	79450	El Granjenal
+24	32	79480	San Nicolás Tolentino
+24	33	79500	Calvario
+24	34	79540	Zaragoza Centro
+24	35	79560	Loma Bonita
+24	36	79590	Tierranueva Centro
+24	37	79600	Palmita
+24	38	79650	Ciudad Fernández
+24	39	79680	San Ciro de Acosta Centro
+24	40	79702	El Cafetal
+24	41	79740	El Aguacate
+24	42	79760	Aquismon
+24	43	79780	Lagunillas
+24	44	79790	Santa Catarina Centro
+24	45	79800	La Cuesta
+24	46	79810	La Labor
+24	47	79820	Benito Juárez
+24	48	79830	Tanchahuil
+24	49	79840	Las Lomas
+24	50	79850	Tampamolon Corona
+24	51	79860	Zocote
+24	52	79880	Tanleab
+24	53	79900	El Naranjal
+24	54	79930	Coamila
+24	55	79940	El Hulero
+24	56	79950	Ocuilzapollo
+24	57	79960	Del Carmen
+24	58	79970	Matlapa Centro
+24	57	79980	La Providencia
+25	1	80000	Centro
+25	2	80320	Navolato Centro
+25	1	80380	Sanalona
+25	3	80500	Badiraguato
+25	4	80700	Cosala Centro
+25	5	80800	Mocorito Centro
+25	6	81000	Centro
+25	7	81200	Primer Cuadro (Centro)
+25	8	81400	Zona Centro
+25	9	81600	Angostura Centro
+25	10	81700	Choix Centro
+25	11	81800	San Blas Centro
+25	12	81900	Baburia
+25	13	82000	Los Pinos
+25	14	82400	Fovissste Buenos Aires
+25	15	82600	Emiliano Zapata
+25	16	82700	La Cruz Centro
+25	17	82800	Anonal
+25	18	82902	Ajoya
+26	1	83000	Hermosillo Centro
+26	2	83360	San Miguel de Horcasitas
+26	3	83380	Carbó
+26	4	83400	Cuauhtémoc
+26	5	83550	Puerto Peñasco Centro
+26	6	83570	Sonoyta Centro
+26	7	83600	Caborca Centro
+26	8	83750	Altar Centro
+26	9	83800	Tubutama
+26	10	83820	Atil
+26	11	83840	Oquitoa
+26	12	83860	Saric
+26	13	83900	Benjamin Hill
+26	14	83930	Trincheras
+26	15	83960	Barrio Guadalupe
+26	16	84000	Nogales Centro
+26	17	84120	Imuris Centro
+26	18	84140	Santa Cruz
+26	19	84160	INFONAVIT I
+26	20	84180	Naco Centro
+26	21	84200	Centro
+26	22	84320	Molino
+26	23	84340	Cantera 2
+26	24	84360	Bavispe
+26	25	84380	Bacerac
+26	26	84400	Huachinera
+26	27	84440	Nacori Chico
+26	28	84460	Granados
+26	29	84480	Bacadehuachi
+26	30	84500	Cumpas
+26	31	84530	Huasabas
+26	32	84560	Moctezuma
+26	33	84580	Villa Hidalgo
+26	34	84600	La Terraza
+26	35	84620	Cananea Centro
+26	36	84640	El Alamito
+26	37	84660	Cucurpe
+26	38	84680	Bacoachi
+26	39	84700	San Pedro de La Cueva
+26	40	84730	Divisaderos
+26	41	84750	Tepache
+26	42	84770	Villa Pesqueira
+26	43	84800	Opodepe
+26	44	84860	Huépac
+26	45	84880	Banamichi
+26	46	84900	Ures
+26	47	84920	Aconchi
+26	48	84940	Baviacora
+26	49	84960	San Felipe de Jesús
+26	50	84980	Rayón
+26	51	85000	Urbanizable I
+26	52	85220	Huebampo
+26	53	85240	Las Parritas (El Changuito)
+26	54	85260	Bacum
+26	55	85280	14 de Febrero
+26	56	85290	Ley Echeverría Z U
+26	57	85300	Empalme Centro
+26	58	85400	Guaymas Centro
+26	59	85514	Urbalejo
+26	57	85520	La Piedrera
+26	60	85540	La Colorada
+26	61	85560	Mazatan
+26	62	85580	Suaqui Grande
+26	63	85600	Mesita Del Guajari
+26	64	85620	San Javier
+26	65	85640	El Novillo
+26	66	85660	Bacanora
+26	67	85680	Arivechi
+26	68	85700	Rosario Tezopaco
+26	69	85720	Quiriego
+26	70	85740	Onavas
+26	71	85760	Alamos Centro
+26	72	85780	Yecora
+26	52	85800	Navojoa Centro
+26	53	85900	Huatabampo Centro
+27	1	86000	Portal Del Agua
+27	2	86200	La Candelaria
+27	3	86220	17 de Julio
+27	1	86250	Macultepec
+27	4	86300	Comalcalco Centro
+27	5	86400	Guadalupe
+27	6	86460	El Bari 2a Secc
+27	7	86600	La Unión
+27	4	86630	El Guayo 1a Secc (San José)
+27	8	86680	La Lucha
+27	9	86700	Abasolo
+27	10	86750	Nueva Frontera
+27	11	86770	Ribera Baja 1a Secc
+27	12	86800	Teapa Centro
+27	13	86830	Astapa
+27	14	86870	Lomas Alegres 1a Secc
+27	15	86900	Tenosique Centro
+27	16	86930	Monte Libano
+27	17	86980	El Pochote
+28	1	87000	Ciudad Victoria Centro
+28	2	87200	Luis Quintero
+28	3	87230	Villa de Guemez
+28	4	87250	Villa de Casas Poblado
+28	1	87260	Balconcitos
+28	5	87300	Matamoros Centro
+28	6	87500	Valle Hermoso Centro
+28	5	87540	El Refugio (Ejido)
+28	7	87600	San Fernando Centro
+28	8	87640	Cruillas
+28	9	87660	San Nicolás
+28	10	87670	Nueva Rosita
+28	11	87700	Santander
+28	12	87730	San Carlos
+28	13	87760	Abasolo
+28	14	87780	Nueva Villa de Padilla
+28	15	87800	Benito Juárez (Ejido)
+28	16	87860	Villa Mainero
+28	17	87880	Cuauhtémoc
+28	18	87900	Las Tinajas
+28	19	87930	Jaumave Centro
+28	20	87950	La Peña
+28	21	87960	Bustamante
+28	22	87970	Palmillas
+28	23	87980	Ricardo Flores Magón (Ejido)
+28	24	88000	Nuevo Laredo Centro
+28	25	88300	Ciudad Miguel Alemán Centro
+28	24	88350	Miguel Alemán O El Carrizo
+28	26	88370	Nueva Ciudad Guerrero Centro
+28	27	88390	La Paleta
+28	28	88400	Ciudad Gustavo Diaz Ordaz Centro
+28	29	88440	Lopez y Nuevo Cedillo
+28	30	88500	Ciudad Reynosa Centro
+28	31	88800	El Triunfo (Ejido)
+28	31	88850	El Porvenir
+28	32	88880	Villa de Méndez
+28	33	88890	Burgos
+28	31	88900	Rio Bravo Centro
+28	34	89000	Tampico Centro
+28	35	89400	Ciudad Madero Centro
+28	36	89600	Altamira Centro
+28	37	89670	Constitución
+28	38	89700	Santa Fe
+28	39	89750	El Azúcar
+28	40	89780	Gómez Farias
+28	41	89800	Ciudad Mante Centro
+28	42	89960	Morelos (Ejido)
+28	43	89970	Del Sol
+29	1	90000	Tlaxcala Centro
+29	2	90120	Centro
+29	3	90135	Santa Ana Nopalucan Centro
+29	4	90140	San Mateo Huexoyucan
+29	5	90160	Los Reyes Quiahuiztlan
+29	6	90180	Las Águilas
+29	7	90193	Chimalpa
+29	8	90195	San Juan Huactzinco
+29	9	90200	Calpulalpan Centro
+29	10	90230	Sanctórum
+29	11	90235	Benito Juárez
+29	12	90240	Los Hornitos
+29	13	90250	Tepatlaxco
+29	14	90280	Niños Héroes de Chapultepec
+29	15	90290	Españita
+29	16	90300	Centro
+29	17	90410	Atlangatepec
+29	18	90420	Domingo de Muñoz Arenas
+29	19	90430	1ra San Bartolomé Matlalohcan
+29	20	90440	San Simón Tlatlahuquitepec
+29	21	90445	San Lucas Tecopilco
+29	22	90450	La Corona
+29	23	90460	San Pedro Tlacotepec
+29	24	90480	San José
+29	25	90490	Jean Charlot II
+29	26	90495	4ta. Sección San José Teacalco
+29	27	90500	Huamantla Centro
+29	28	90540	Terrenate
+29	29	90545	Lázaro Cárdenas
+29	30	90547	Guadalupe
+29	31	90550	De la Concepción
+29	32	90560	San Miguel
+29	33	90570	Villa del Carmen Tequexquitla
+29	34	90580	San Juan Sección Dos
+29	35	90590	San Pablo Zitlaltepec
+29	36	90600	Petroquímica
+29	37	90620	Amaxac de Guerrero
+29	38	90640	Guadalupe Tlachco
+29	39	90660	Primera Sección
+29	40	90670	Xopantla
+29	41	90700	Las Palomas
+29	42	90710	Nativitas
+29	43	90725	El Ranchito
+29	44	90730	Santa Cruz Aquiahuac
+29	45	90735	El Alto
+29	46	90738	San Jerónimo Zacualpan
+29	47	90740	Eriberto Juárez Blancas
+29	48	90760	San Lorenzo Axocomanitla
+29	49	90770	Santa Catarina Ayometla
+29	50	90780	Techaloya
+29	51	90790	San Francisco Papalotla Centro
+29	52	90800	Lucero
+29	53	90830	La Magdalena Tlaltelulco
+29	54	90843	Jesús Xolalpan
+29	55	90850	Cuauhtla
+29	56	90860	Acuamanala
+29	57	90867	Ayometitla
+29	58	90870	Primera
+29	59	90880	San Miguel Tenancingo
+29	60	90890	San Isidro Buen Suceso
+30	1	91000	Xalapa Enríquez Centro
+30	2	91230	Tlalnelhuayocan
+30	3	91240	Emilio Fuentes Betancourt
+30	4	91250	Ixhuacan de los Reyes
+30	5	91260	La Toma O Hidalgo
+30	6	91270	Los Pescados
+30	7	91300	Banderilla Centro
+30	8	91315	Piletas
+30	9	91320	Acajete
+30	10	91330	Las Vigas de Ramirez
+30	11	91340	Libertad
+30	12	91350	Tlacolulan
+30	13	91360	Tonayan
+30	14	91370	Coacoatzintla
+30	15	91380	Paso de San Juan
+30	16	91400	Almolonga
+30	17	91410	Miahuatlan
+30	18	91420	Acatlán
+30	19	91430	Tepetlan
+30	20	91440	Juchique de Ferrer
+30	21	91460	Xomotla
+30	22	91480	Buenavista
+30	23	91500	La Purísima
+30	24	91615	Raul Martinez Oelkers
+30	25	91620	Cosautlán de Carvajal
+30	26	91630	El Cerrito
+30	27	91645	Tigrillos
+30	28	91650	El Palmar
+30	29	91660	Villa Zempoala
+30	30	91670	El Calvario
+30	31	91680	José Cardel Centro
+30	32	91690	Delfino Victoria (Santa Fe)
+30	33	92000	Tamicho y Vichinchijol
+30	34	92030	Ciudad Cuauhtémoc
+30	35	92040	Cabo Rojo (Novillos) [Ganadera]
+30	36	92060	Tempoal Centro
+30	37	92080	San Antonio Tamijui
+30	38	92100	Casitas Chila Pérez
+30	39	92130	Tepetatipa
+30	40	92150	Chiconamel
+30	41	92170	Chalma
+30	42	92200	Chontla
+30	43	92230	Citlaltepec
+30	44	92270	Ixcatepec
+30	45	92300	Naranjos Centro
+30	46	92400	Aviación
+30	45	92410	Amatlan Tuxpan
+30	47	92420	Kilómetro 22
+30	48	92430	Gutiérrez Zamora
+30	49	92470	Carmona y Valle
+30	50	92500	Piedra Labrada
+30	51	92530	Tepetzintla
+30	52	92540	Tancoco
+30	53	92560	San Marcos
+30	54	92600	El Ocotal
+30	55	92620	Chahuatlan
+30	56	92630	El Cuayo
+30	57	92640	Amaxac
+30	58	92650	Tlachichilquillo
+30	59	92660	Benito Juárez
+30	60	92670	Gómez Farias
+30	61	92680	Ixhuatlan de Madero
+30	62	92700	Coahuitze
+30	63	92730	La Unión
+30	64	92770	Ojite
+30	65	92900	El Águila
+30	66	92940	Teayo
+30	67	92970	Limón Chiquito
+30	68	93000	Zozocolco de Hidalgo
+30	69	93040	Chumatlan
+30	70	93060	Coxquihui
+30	71	93080	Mecatlan
+30	72	93100	Eleodorp Dávila
+30	73	93120	Progreso de Zaragoza
+30	74	93140	Coyutla
+30	75	93160	Escolin de Olarte
+30	76	93180	Espinal
+30	77	93210	Lomas Del Carmen
+30	78	93400	Papantla Centro
+30	79	93550	Arroyo Grande
+30	80	93570	Candido Aguilar
+30	81	93600	La Soledad
+30	82	93620	Gustavo Del Valle
+30	81	93633	Paso Largo
+30	83	93650	Vicente Guerrero
+30	84	93660	Ahuacatán
+30	85	93680	Ahuateno
+30	86	93700	Loma de Las Flores
+30	87	93740	Las Minas
+30	88	93760	Tatatila
+30	89	93780	El Colorado
+30	90	93800	La Isla de Chapachapa
+30	91	93820	Misantla Centro
+30	92	93860	Landero y Coss
+30	93	93880	Chiconquiaco
+30	94	93900	Cuautitlán del Parral
+30	95	93950	Colipa
+30	96	93960	Las Vegas
+30	33	93990	Panuco Centro
+30	97	94000	Jalcomulco
+30	98	94020	Tlaltetela
+30	99	94030	Tenampa
+30	100	94050	Zapotitla
+30	101	94060	Victoria
+30	102	94080	Tlacotepec de Mejia
+30	103	94100	Huatusco de Chicuellar Centro
+30	104	94120	Calcahualco
+30	105	94130	Alpatlahuac
+30	106	94140	México
+30	107	94150	La Ciénega
+30	108	94160	Xonoxintla
+30	109	94170	Tecama
+30	110	94180	San Pedro
+30	111	94190	Tenejapa
+30	112	94200	Comapa
+30	113	94220	Paso Tiotonche
+30	114	94230	Camarón de Tejeda
+30	115	94240	Soledad de Doblado Centro
+30	116	94250	Manlio Fabio Altamirano
+30	117	94260	Jamapa
+30	118	94270	El Rancho Del Padre
+30	119	94285	El Terraplén
+30	120	94300	Orizaba Centro
+30	121	94410	Rafael Delgado
+30	122	94420	El Recreo
+30	123	94430	Rancho de Pala
+30	124	94440	Atzacan
+30	125	94450	Potrerillo
+30	126	94466	Monte Blanco
+30	127	94480	San Rafael Calería
+30	128	94700	Maltrata
+30	129	94720	Emilio Carranza
+30	130	94730	Salvador Gonzalez Garcia
+30	131	94740	Ciudad Mendoza Centro
+30	132	94750	Aquila
+30	133	94760	Acultzingo
+30	134	94770	Atzompa
+30	135	94780	Huiloapan de Cuauhtémoc Centro
+30	136	94800	Tetlistaka
+30	137	94810	Astacinga
+30	138	94820	Xoxocotla
+30	139	94830	Atlahuilco
+30	140	94840	Tequila
+30	141	94850	La Cumbre
+30	142	94860	Tlilapan
+30	143	94870	Tepetzingo
+30	144	94880	Agrícola Úrsulo Galván
+30	145	94890	Coetzala
+30	146	94900	1o de Mayo
+30	147	94910	Mata Redonda
+30	148	94920	Cobos Garcia
+30	149	94930	Negro Yanga
+30	150	94940	Santa Cecilia
+30	151	94960	Atoyac Centro
+30	152	94970	Manlio Fabio Altamirano
+30	153	94980	Loma Acatlán
+30	154	94990	Cotaxtla
+30	155	95000	Zongolica
+30	156	95030	Tehuipango
+30	157	95040	Mixtla de Altamirano
+30	158	95060	Tlaquetzala
+30	159	95070	Texhuacan
+30	160	95080	Colonia Agrícola Independencia
+30	161	95100	Tierra Blanca Centro
+30	162	95220	Tlalixcoyan
+30	163	95240	Ignacio de La Llave
+30	164	95250	Infonavit
+30	165	95280	Lerdo de Tejada Centro
+30	166	95300	3 Valles Centro
+30	167	95330	Carlos A Carrillo Centro
+30	166	95355	Campo Nuevo
+30	168	95390	San Felipe
+30	169	95430	Mozapa
+30	170	95440	Acula
+30	171	95450	Dos Bocas
+30	172	95460	Tlacotalpan
+30	173	95480	Miramar
+30	174	95500	Otatitlan
+30	175	95520	Tlacojalpan Centro
+30	176	95540	Tuxtilla
+30	177	95560	Chacaltianguis
+30	178	95580	Tejeda
+30	179	95600	La Florida
+30	180	95630	Xochiapan
+30	181	95640	Isla Centro
+30	182	95670	Los Villas (El Penco)
+30	183	95700	San Andres Tuxtla Centro
+30	184	95830	Santiago Tuxtla Centro
+30	185	95840	Angel R. Cabada
+30	186	95850	Aarón Sáenz
+30	187	95870	Rafael Hernández Ochoa
+30	188	95900	El Tulín
+30	189	95930	Arrecifes
+30	190	95950	Tatahuicapan
+30	191	95960	Minzapan
+30	192	95980	La Bellota
+30	193	96000	Acayucan Centro
+30	194	96120	San Juan Evangelista
+30	195	96150	Belem
+30	196	96160	Tenejapa
+30	197	96170	San Pedro y San Pablo
+30	198	96180	Texistepec
+30	199	96200	Jaltipan de Morelos Centro
+30	200	96320	Zaragoza
+30	201	96330	Oteapan
+30	202	96340	Ferrocarrilera
+30	203	96360	Guadalupe Tepeyac
+30	204	96365	La Nueva Esperanza
+30	205	96370	Obrera
+30	206	96380	Génesis 2000
+30	207	96390	Gavilán Sur
+30	206	96400	Coatzacoalcos Centro
+30	207	96600	Agua Dulce Centro
+30	208	96700	Minatitlan Centro
+30	209	96930	Hidalgotitlan
+30	210	96950	Jesús Carranza
+30	211	96980	J. Mario Rosado 2a Sección
+30	212	96997	Plan de Arroyo
+31	1	97000	Privada Del Maestro
+31	2	97320	Costa Azul
+31	3	97340	Chicxulub
+31	4	97343	Ixil
+31	5	97345	Kantoyna
+31	6	97348	Yaxkukul
+31	7	97350	Papagayos
+31	8	97357	Yaxche de Peón
+31	9	97360	Kinchil
+31	10	97364	Tetiz
+31	11	97367	Xixin
+31	12	97370	Privada del Sol
+31	13	97377	Timucuy
+31	14	97380	Acanceh
+31	15	97386	Tixpehual
+31	16	97390	Uman
+31	17	97400	Centro Telchac Pueblo
+31	18	97404	Dzemul
+31	19	97407	Telchac Puerto
+31	20	97410	Cansahcab
+31	21	97420	Miguel Aleman
+31	22	97425	Yobain
+31	23	97430	Sambula
+31	24	97450	Baca
+31	25	97454	Mococha
+31	26	97457	Muxupip
+31	27	97460	Cacalchen
+31	28	97466	Bokoba
+31	29	97470	Tixkokob
+31	30	97480	Hoctun
+31	31	97490	Tahmek
+31	32	97500	Emiliano Zapata
+31	33	97510	Temax
+31	34	97520	Tekanto
+31	35	97524	Teya
+31	36	97527	San Nicolás
+31	37	97530	Tepakan
+31	38	97535	Tekal de Venegas
+31	39	97540	Real del Sol
+31	40	97560	Hocaba
+31	41	97566	Xocchel
+31	42	97570	Seyé
+31	43	97577	Cuzama
+31	44	97580	Homun
+31	45	97587	Sanahcat
+31	46	97590	Huhi
+31	47	97600	Dzilam Gonzalez
+31	48	97606	Dzilam de Bravo
+31	49	97610	Panaba
+31	50	97616	San Felipe
+31	51	97620	Buctzotz
+31	52	97630	Sucila
+31	53	97640	Cenotillo
+31	54	97646	Dzoncauich
+31	55	97650	Tunkas
+31	56	97655	Quintana Roo
+31	57	97660	Dzitas
+31	58	97670	Kantunil
+31	59	97676	Sudzal
+31	60	97680	Tekit
+31	61	97690	Sotuta
+31	62	97700	Santa Cruz
+31	63	97720	Rio Lagartos
+31	64	97730	Santa Cruz Regario
+31	65	97740	Temozon
+31	66	97745	Calotmul
+31	67	97750	Tinum
+31	68	97758	Xbojon
+31	69	97760	San Pedro
+31	70	97762	Nuevo Xjabin
+31	71	97764	Kaua
+31	72	97766	Santa Eleuteria
+31	73	97768	Suytun
+31	74	97770	Benito Juárez García
+31	75	97780	Valladolid Centro
+31	76	97796	Uayma
+31	77	97800	Guadalupe
+31	78	97810	Samahil
+31	79	97813	Opichen
+31	80	97816	San Antonio Chable
+31	81	97818	San Bernardo
+31	82	97820	Tecoh
+31	83	97825	Abala
+31	84	97830	Halacho
+31	85	97840	Santa Maria
+31	86	97845	Sacalum
+31	87	97850	Mani
+31	88	97854	Dzan
+31	89	97857	Chapab
+31	90	97860	Ticul Centro
+31	91	97880	Oxkutzcab
+31	92	97890	Santa Elena
+31	93	97900	Mama
+31	94	97904	Chumayel
+31	95	97908	Mayapan
+31	96	97910	Teabo
+31	97	97915	Cantamayec
+31	98	97920	Yaxcaba
+31	99	97930	Benito Juárez
+31	100	97940	Chikindzonot
+31	101	97945	Tahdziu
+31	102	97950	Tixmehuac
+31	103	97955	Chacsinkin
+31	104	97960	Tzucacab Centro
+31	105	97970	Padre Eterno
+31	106	97990	Akil Centro
+32	1	98000	Zacatecas Centro
+32	2	98100	Noria de Gringo
+32	3	98140	Sauceda de la Borda
+32	1	98160	Ciudad Gobierno
+32	4	98200	El Cruce
+32	5	98220	Melchor Ocampo
+32	6	98230	Mazapil
+32	7	98290	El Salvador
+32	8	98300	La Pila
+32	9	98330	Estrella
+32	10	98350	Panteón Viejo
+32	11	98400	Los Ramirez
+32	12	98430	Bañoncito
+32	13	98480	Cañitas de Felipe Pescador
+32	14	98500	Calera de Victor Rosales Centro
+32	15	98540	Pánuco Centro
+32	16	98560	Gral. Enrique Estrada
+32	17	98600	Santa Rita
+32	18	98640	El Refugio
+32	17	98650	San Jerónimo
+32	19	98660	Santa Inés
+32	20	98680	Rancho Nuevo
+32	21	98700	Palmira
+32	22	98730	El Tule
+32	23	98770	Luis Moya Centro
+32	24	98800	San Blas
+32	25	98840	Villa Gonzalez Ortega
+32	26	98880	Maravillas
+32	27	98900	El Arenal
+32	28	98920	Sierra de Pinos
+32	29	98980	La Ballena
+32	30	99000	Fresnillo Centro
+32	31	99100	Sombrerete Centro
+32	32	99130	Jose Maria Morelos
+32	30	99150	Carrillo
+32	33	99200	Cruces
+32	34	99260	Chalchihuites
+32	35	99280	Jimenez Del Teul
+32	36	99300	Barrio Nuevo
+32	37	99400	La Palma
+32	36	99440	Los Félix
+32	38	99480	Susticacán
+32	39	99500	El Tigre
+32	40	99570	Tepetongo
+32	41	99590	Gral. Joaquín Amaro
+32	42	99600	Sagrado Corazón
+32	43	99630	Tabasco
+32	44	99670	Huanusco
+32	45	99700	Brisas Del Rio
+32	46	99720	La Esperanza
+32	47	99730	Atolinga
+32	48	99750	Ocotlan Cerro Chino
+32	49	99780	Florencia de Benito Juárez
+32	50	99800	La Esperanza
+32	51	99820	El Santuario
+32	52	99830	Garcia de La Cadena
+32	53	99860	Mezquital Del Oro
+32	54	99900	Nochistlan Centro
+32	55	99920	San Pedro Apulco
+32	56	99940	De Abajo
+32	57	99960	Juchipila
+32	58	99980	Moyahua Centro
