@@ -1,12 +1,12 @@
 var translations = {
                     'California Report Card': 
-                        'Califica a California',
+                        'México Participa',
                     
                     'Español': 
                         'English',
 
                     'Join others who have contributed to California\'s collective intelligence.':
-                        'Únete a otros que ya han contribuido a la inteligencia colectiva de California.',
+                        'Únete a otros que ya han contribuido a la inteligencia colectiva de México.',
 
                     'Begin':
                         'Comenzar',
@@ -45,7 +45,7 @@ var translations = {
                         'Editar su Idea',
 
                     'How important is this issue for the next Report Card?':
-                        '¿Qué tan importante es esta cuestión en la próxima Libreta de calificaciones?',
+                        '¿Qué tan importante cree usted que este problema es México?',
 
                     'Zipcode must be 5 digits':
                     'El código postal debe tener 5 dígito',
@@ -75,7 +75,7 @@ var translations = {
                         'Acerca del mapa',
 
                     'About the CRC':
-                        'Acerca de la Libreta de calificaciones de California',
+                        'Acerca de México Participa',
 
                     'Thank You!':
                         '¡Gracias!',
@@ -90,11 +90,11 @@ var translations = {
                         'Guardar',
 
                     'Please grade the State of California on:':
-                        'Califique al Estado de California:',
+                        'Asigne Calificaciones:',
 
                     'of':
                         '/',
 
 		    'We encourage you to amplify CA\'s collective intelligence by reading and evaluating more ideas.':
-		    'Lo alentamos a incrementar la inteligencia colectiva de California al leer y evaluar más ideas.'
+		    'Lo alentamos a incrementar la inteligencia colectiva de México al leer y evaluar más ideas.'
                     }

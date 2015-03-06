@@ -15,8 +15,8 @@ for (var i=1;i<=window.num_sliders;i++)
 //$( ".slider" ).append( "<span class=\"manual-slide manual-slide-left\"><</span>" );
 $( ".slider" ).append( "<div class=\"crc-div-wrapper\"><div class=\"grade-container\"></div></div>" );
 
-grades = ['A+','B-','B','B+','C-','C','C+','D-','D','D+','F']
-gradesMap = {'A+':10,'B-':9,'B':8,'B+':7,'C-':6,'C':5,'C+':4,'D-':3,'D':2,'D+':1,'F':0}
+grades = ['B','B+','A-','C','C+','B-','D','D+','C-','F','D-']
+gradesMap = {'A-':10,'B+':9,'B':8,'B-':7,'C+':6,'C':5,'C-':4,'D+':3,'D':2,'D-':1,'F':0}
 
 grades.forEach(function(grade) { 
 
