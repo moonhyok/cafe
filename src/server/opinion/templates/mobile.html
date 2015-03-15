@@ -534,7 +534,7 @@
           <br/>
           {% for k,v in statement_hist.iteritems %}
           
-    <div class="compare-box-{{k.id}}" style="padding-bottom: 10px;max-width:620px;" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();">
+    <div class="compare-box-{{k.id}}" style="padding:0px;max-width:620px;" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();">
             <div class="compare-tag">
               <!--<div style="font-size: 12px; font-style: italic;font-weight: bolder;" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();">{{k.id}}. </div>-->
               <div style="font-size: 18px;font-weight: bolder;" class="english" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();">{{k.short_version}}</div>
@@ -544,14 +544,14 @@
 
             <canvas id="sparkLineCanvas{{k.id}}" width="175" height="58" style="display: none;"></canvas>
 
-            <table style="display: inline-block;padding-top:3px;text-shadow: none;">
+            <table style="display: inline-block;text-shadow: none;border-right: 1px solid #999;">
               <tr>
-                <th>Mexico</th>
+                <th style="border-right: 1px solid #999;">México</th>
                 <th>Me</th>
               </tr>
               <tr>
-              <td><img id="mexicoFace{{k.id}}" style="width: 40px; padding-top: 5px;"/></td>
-              <td><img id="myFace{{k.id}}" style="width: 40px; padding-top: 5px;"/></td>
+              <td style="border-right: 1px solid #999;"><center><img id="mexicoFace{{k.id}}" style="width: 60px;padding:5px;"/></center></td>
+              <td><center><img id="myFace{{k.id}}" style="width: 60px;padding:5px;"/></center></td>
               </tr>
             </table>
             
