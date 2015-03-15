@@ -230,6 +230,14 @@ var accounts = (function($, d3, console) {
                         else
                             face.src = window.url_root+"/media/mobile/img/cafe/sadface.png"
 
+                        var sface = document.getElementById('stateFace' + (i+1));
+                        if (window.sliders[i]/10 > 0.45)
+                            sface.src = window.url_root+"/media/mobile/img/cafe/happyface.png"
+                        else if (window.sliders[i]/10 > 0.25)
+                            sface.src = window.url_root+"/media/mobile/img/cafe/medface.png"
+                        else
+                            sface.src = window.url_root+"/media/mobile/img/cafe/sadface.png"
+
                         var canvas = document.getElementById("sparkLineCanvas"+(i+1));
                          var context = canvas.getContext('2d');
                         
