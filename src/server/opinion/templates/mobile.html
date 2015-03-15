@@ -366,10 +366,10 @@
 
             <center>  
               <div class="question-number responsive-body"><span>Question</span> {{ statement.id }} <span>of</span> {{ statements|length }}.</div>
-              <div class="question-number responsive-body">Please grade the State of California on:</div>
+              <div class="question-number responsive-body">En una escala de 0 al 10 como en la escuela, en donde cero significa un desacuerdo total y 10 significa un acuerdo total, califique por favor las siguientes afirmaciones:</div>
               <div class="statement-style responsive-body english">{{ statement.statement }}</div>
               <div class="statement-style responsive-body spanish" style="display:none;">{{ statement.spanish_statement }}</div>
-              <div class="statement-style responsive-body spanish">0 (muy en desacuerdo) - 10 (muy de acuerdo)</div>
+              <center> <div class="statement-style responsive-body spanish"><center>0 (muy en desacuerdo) - 10 (muy de acuerdo)</center></div>
 
 
               <!--<div class="median-grade-{{statement.id}} med-grade-box"></div>-->
@@ -417,24 +417,24 @@
 
     <div class= 'registerpanel'>
             <center>
-              <div class="basic-header2 responsive-body" style="max-width: 500px;">Enter your state, municipality, and region:</div>
+              <div class="basic-header2 responsive-body" style="max-width: 500px;">Estado, Municipio, Comunidad:</div>
             
               <form id='reg_form' class='reg_form responsive-form'>
             <center>
    
             <select id="state-enter">
-              <option value="-1">Enter Your State</option>
+              <option value="-1">Estado</option>
             </select>
 
             <div class="mun-div" style="display: none;">
               <select id="mun-enter">
-                <option value="-1">Enter Your Municipality</option>
+                <option value="-1">Municipio</option>
               </select>
             </div>
 
             <div class="nei-div" style="display: none;">
               <select id="nei-enter">
-                <option value="-1">Enter Your Neighborhood</option>
+                <option value="-1">Comunidad</option>
               </select>
             </div>
 
