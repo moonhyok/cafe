@@ -104,7 +104,7 @@ def mobile(request,entry_code=None):
     language = request.GET.get('lang','en')
     org_id = request.GET.get('orgid','')
 
-    statements = OpinionSpaceStatement.objects.all().order_by('statement_number')
+    statements = OpinionSpaceStatement.objects.all().order_by('id')
     medians = {}
     statement_labels = {};
     for s in statements:
