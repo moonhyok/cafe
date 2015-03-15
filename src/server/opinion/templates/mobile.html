@@ -534,7 +534,7 @@
           <br/>
           {% for k,v in statement_hist.iteritems %}
           
-    <div class="compare-box-{{k.id}}" style="padding:0px;max-width:620px;" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();">
+    <div class="compare-box-{{k.id}}" style="max-width:620px;" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();">
             <div class="compare-tag">
               <!--<div style="font-size: 12px; font-style: italic;font-weight: bolder;" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();">{{k.id}}. </div>-->
               <div style="font-size: 18px;font-weight: bolder;" class="english" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();">{{k.short_version}}</div>

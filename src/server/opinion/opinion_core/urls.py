@@ -27,7 +27,7 @@ urlpatterns = patterns('',
                        #(r'^contact/$', 'opinion.opinion_core.views.contact'),
                        
                        # Admin panel methods
-                       (r'^adminpanel/overview/$', 'opinion.opinion_core.views.get_overview'),
+                       (r'^adminpanel/overview/$', 'opinion.opinion_core.views.get_search'),
                        (r'^adminpanel/flaggedcomments/$', 'opinion.opinion_core.views.get_flaggedcomments'),
                        (r'^adminpanel/blacklisteduser/$', 'opinion.opinion_core.views.get_blacklisteduser'),
                        (r'^adminpanel/highvariance/$', 'opinion.opinion_core.views.get_highvariancecomments'),
