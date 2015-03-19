@@ -295,7 +295,7 @@
             </div>
 
     </div>
-          <img width="100%" src="{{url_root}}/media/mobile/img/cafe/title_image_compress.jpg" style="margin-top:3px;max-width: 620px;">
+          <img width="100%" src="{{url_root}}/media/mobile/img/cafe/title_image_compress.png" style="margin-top:3px;max-width: 620px;">
           <div class="landing-img-title responsive-body" style="display:none;">
             {{topic}}
           </div> 
@@ -313,12 +313,12 @@
           <span class="english">
           <a href="http://en.wikipedia.org/wiki/California_Report_Card" target="_blank">More Information</a>
           </span>
-          <span class="spanish">
+          <span class="spanish" style="display: none;">
           <a href="http://en.wikipedia.org/wiki/California_Report_Card" target="_blank">Más información</a>
           </span>
 
           <div class="landing-disclaimer">
-		A project by the CITRIS Data & Democracy Initiative at UC Berkeley
+		A project by the CITRIS Data & Democracy Initiative at UC Berkeley and Tec de Monterrey
 	  </div>
 
           </center>
@@ -366,7 +366,6 @@
 
             <center>  
               <div class="question-number responsive-body"><span>Question</span> {{ statement.id }} <span>of</span> {{ statements|length }}.</div>
-              <div class="question-number responsive-body">En una escala de 0 al 10 como en la escuela, califique por favor las siguientes afirmaciones:</div>
               <div class="statement-style responsive-body english">{{ statement.statement }}</div>
               <div class="statement-style responsive-body spanish" style="display:none;">{{ statement.spanish_statement }}</div>
               <center> <div class="statement-style responsive-body spanish"><center>0 (muy en desacuerdo) - 10 (muy de acuerdo)</center></div>
@@ -539,7 +538,7 @@
               <!--<div style="font-size: 12px; font-style: italic;font-weight: bolder;" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();">{{k.id}}. </div>-->
               <div style="font-size: 18px;font-weight: bolder;" class="english" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();">{{k.short_version}}</div>
               <div style="font-size: 18px;font-weight: bolder;" class="spanish" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();">{{k.spanish_short_version}}</div>
-              <div style="font-size: 14px; font-weight: bolder;cursor: pointer;cursor: hand;" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();"><span>more info</span> >></div>
+              <div style="font-size: 14px; font-weight: bolder;cursor: pointer;cursor: hand;display:none;" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();"><span>more info</span> >></div>
             </div>
 
             <canvas id="sparkLineCanvas{{k.id}}" width="175" height="58" style="display: none;"></canvas>
@@ -548,7 +547,7 @@
               <tr>
                 <th style="border-right: 1px solid #999;">México</th>
                 <th style="border-right: 1px solid #999;">Estado</th>
-                <th>Me</th>
+                <th>Yo</th>
               </tr>
               <tr>
               <td style="border-right: 1px solid #999;"><center><img id="mexicoFace{{k.id}}" style="width: 60px;padding:5px;"/></center></td>
@@ -850,7 +849,7 @@
             <a href="http://twitter.com/intent/tweet?text=%C2%BFC%C3%B3mo%20califica%20a%20California%3F%20Pruebe%20%40CalificaaCA%20desarrollado%20por%20%40Cal%20%40GavinNewsom%20%26%20%40Ken_Goldberg%20%C2%A0http%3A%2F%2Fcaliforniareportcard.org%2F2.0%2F%20%23C" target="_blank" style="color: #555555;"><img src="{{url_root}}/media/mobile/img/cafe/twitter-button-compress.png" width="102px"></a>
       <a href="https://www.facebook.com/dialog/feed?app_id=694165360698061&link=http%3A%2F%2Fcaliforniareportcard.org%2F2.0%2F%20&picture=http%3A%2F%2Fcaliforniareportcard.org%2Fcrc%2Fwp-content%2Fuploads%2FCRCv2_Facebook-Share-link_Spanish-011.jpg&name=Califica%20a%20California&caption=%20&description=%C2%BFC%C3%B3mo%20califica%20a%20California%3F%20Pruebe%20%40CalificaaCA%20desarrollado%20por%20%40Cal%20%40GavinNewsom%20%26%20%40Ken_Goldberg%20%C2%A0http%3A%2F%2Fcaliforniareportcard.org%2F2.0%2F%20%23CA%20%23Gov&redirect_uri=http%3A%2F%2Fwww.facebook.com%2F" target="_blank" style="color: #555555;"><img src="{{url_root}}/media/mobile/img/cafe/facebook-button-compress.png" width="102px"></a><br/>
 
-            Información sobre las elecciones y los votantes: <a href="http://www.sos.ca.gov/elections/new-voter/spanish/" target="_blank" style="color: #555555;">California Información al Votante</a><br/><br/>
+            <!--Información sobre las elecciones y los votantes: <a href="http://www.sos.ca.gov/elections/new-voter/spanish/" target="_blank" style="color: #555555;">California Información al Votante</a><br/><br/>-->
 
       <!--Inscripción de votante en línea de California: <a href="http://registertovote.ca.gov/es/" target="_blank" style="color: #555555;">Registro de Votantes de California</a><br/>
 
@@ -1044,24 +1043,25 @@
       <em> California Report Card </em> <br/>
       <a href='http://californiareportcard.org'> http://californiareportcard.org </a>
       {% endautoescape %}</span>
-      <span class="spanish"> <em> Información General </em> <br/>
-      La Libreta de calificaciones de California (CRC, por sus siglas en inglés) es una plataforma en línea desarrollada por CITRIS Data y Democracy Initiative de UC Berkeley y del Teniente Gobernador Gavin Newsom que explora cómo los smartphones y redes pueden mejorar la comunicación entre los líderes públicos y gubernamentales. La CRC permite a los visitantes valorar las cuestiones a las que se enfrenta California y sugerir cuestiones para próximas libretas de calificaciones. El proyecto busca aumentar la participación del público y ayudar a los líderes de todos niveles a mantenerse informados sobre las opiniones y prioridades cambiantes de sus constituyentes. Cualquiera puede participar dedicando unos minutos a valorar el Estado de California en cuestiones como: Sanidad, Educación, Igualdad de matrimonio, Derechos de los inmigrantes y Despenalización de la marihuana. Actualmente aceptamos respuestas en inglés y español. Es importante indicar que la traducción es una forma de arte. Todos los resultados de Google Translate los revisan y editan personas que hablan dichos idiomas de manera fluido, pero los errores son inevitables. Si encuentra un error grave, envíe un correo electrónico a translate@californiareportcard.org. <br/> <br/>
+      <span class="spanish"> <em>Información General</em><br/>
+México Participa es un proyecto que busca incrementar y fomentar el uso de mecanismos de participación ciudadana para la construcción de valores y prácticas democráticas. A través de un cuestionario corto que invita a la reflexión sobre temas específicos, los ciudadanos evalúan problemáticas y proponen temas relevantes para su atención por parte de los futuros gobernantes.<br/>
+ 
+Este ejercicio no busca ser una encuesta ni un sondeo de las opiniones de los ciudadanos sobre los principales problemas que les aquejan, sino un mecanismo que, junto con otros que se puedan realizar, contribuya a empoderar a la ciudadanía y a darse cuenta de la relevancia de su participación.<br/>
+ 
+Todos pueden participar al dedicar unos minutos para ponderar la seguridad pública, la corrupción, el empleo, la violencia, las condiciones de salud pública y las oportunidades de educación, así como proponer alguna acción que consideren relevante para México.<br/><br/>
+ 
+Si detecta algún error por favor comuníquelo a contacto@mxparticipa.org<p/><br/><br/>
+ 
+<em>Protección y Seguridad</em><br/>
+El acceso a la plataforma solicita al usuario elija su comunidad, delegación o municipio para identificar el estado al que pertenece. Si el participante lo desea puede dejar su correo electrónico pero éste no se compartirá con ningún tercero y podrá solicitar, incluso después de compartirlo, si no desea recibir información de México Participa. Todos los comentarios y sugerencias serán monitoreados para resguardar cualquier información privada. La plataforma está diseñada para detectar si se hace un mal uso de ésta.<p/><br/>
+ 
+<em>Relevancia</em><br/>
+Este ejercicio no busca ser una encuesta ni un sondeo aleatorio de las opiniones de los ciudadanos sobre los principales problemas que les aquejan, sino un mecanismo que, junto con otros que se puedan realizar, contribuya a empoderar a la ciudadanía y a darse cuenta de la relevancia de su participación.
+La colaboración es auto selectiva y accesible para las personas con acceso a Internet por cualquier dispositivo. Después de las valoraciones, se muestran íconos semaforizados que agrupan las siguientes calificaciones: 10-8 verde, 7-4 amarillo y 3 a 0 rojo con el objetivo de tener una visualización comparada con sus respuestas.<p/><br/>
+ 
+<em>Más</em><br/>
+Consulte nuestra sección de Preguntas Frecuentes para mayor información como Instituciones involucradas en el proyecto, estadísticas, enlaces y descargas de datos.<br/><br/>
 
-      <em> P: </em> ¿Cuál es la motivación de la CRC? <br/>
-      <em> R: </em> Estamos explorando nuevos modelos para el intercambio de información y participación en las cuestiones políticas. No afirmamos que el modelo CRC es la respuesta: es una nueva metáfora y manera de recopilar información. ¿Alentará la CRC a la gente para que piense en cuestiones políticas y cómo está representada la opinión pública? Tenemos curiosidad de ver cómo responde la gente, cómo cambian los patrones de respuesta con el tiempo, y si la valoración será un catalizador para el debate, en el que los participantes proponen nuevas cuestiones para la próxima libreta de calificaciones y evalúan las sugerencias de otros participantes. Seguiremos trabajando para desarrollar nuevas versiones y modelos basados en las respuestas y datos. <br/> <br/>
-
-
-      <em> Privacidad </em> <br/>
-     Los comentarios y sugerencias serán analizados para omitir la información identificable. Respetamos su privacidad y no compartiremos su dirección de correo electrónico con terceros.  <br/> <br/>
-
-      <em> Relevancia estadística </em> <br/>
-      La CRC es diferente de las encuestas telefónicas y sondeos aleatorios. De momento la participación es auto selectiva y accesible para las personas de habla inglesa con acceso a un smartphone o navegador. Después de introducir cada valoración, se revela una calificación media basada en las entradas de todos los participantes anteriores. El objetivo es proporcionar información instantánea a diferencia de las encuestas y sondeos tradicionales. Somos conscientes de que esto puede tener un efecto distorsionante: algunas personas pueden ajustar sus valoraciones para que se acerquen más a la media, lo que resulta en una forma de regresión hacia la media. Incluiremos información sobre el número de dichos ajustes y los valores previos y anteriores en el conjunto de datos abierto. También presentaremos los datos de la valoración como histogramas para transmitir los niveles de consenso y geográficamente para transmitir las diferencias por región. También presentaremos los datos de la valoración como histogramas para transmitir los niveles de consenso y geográficamente para transmitir las diferencias por región. <br/> <br/>
-
-      <em> Más </em> <br/>
-     Consulte el sitio web de CRC para la información de contacto, información sobre la historia del proyecto, estadísticas hasta la fecha, enlaces relacionados y para descargar datos anónimos cuando estén disponibles: <br/>
-
-      <em> Libreta de calificaciones de California</em> <br/>
-      <a href='http://californiareportcard.org'> http://californiareportcard.org </a></span>
     </div>
   </center>
       </div>
