@@ -26,6 +26,7 @@ outfile.writerow(['User ID',
 		  'Zipcode',
 		  'City, State',
 		  'Comment',
+		  'Spanish Comment',
 		  'Comment Tag',
                   'Author_Score',
                   'Participation_Score'
@@ -62,6 +63,7 @@ for u in users:
 		if len(ur) > 0:
 			statements[i] = ur[0].rating
 	c = ''
+	spanish_c = ''
 	score = 0
 	ascore = 0
 	lscore = 0
@@ -69,6 +71,7 @@ for u in users:
 	num_insight = 0
 	if len(comment) > 0:
 		c = comment[0].comment.encode('utf-8')
+		spanish_c = comment[0].spanish_comment.encode('utf-8')
 		score = comment[0].normalized_score_sum
 		num_agreement = CommentAgreement.objects.filter(is_current=True,comment = comment[0]).count()
 		num_insight = CommentRating.objects.filter(is_current=True,comment = comment[0]).count()
@@ -88,12 +91,12 @@ for u in users:
 			score = 0
 			lscrore = 0
 
-	zipcode, city_state, tag = "", "", ""
+	zipcode, city_state, comment_tag = "", "", ""
 	if z:
 		zipode = z.code
 		city_state = z.city + "," + z.state
 	if tag:
-		tag = tag.tag
+		comment_tag = tag.tag
 
 	author_score, participation_score = 0, 0
 	if c:
@@ -107,7 +110,8 @@ for u in users:
 			  zipcode,
 			  city_state,
 			  c,
-			  tag,
+			  spanish_c,
+			  comment_tag,
 			  #str(score),
 			  #str(ascore)
 			  author_score,
