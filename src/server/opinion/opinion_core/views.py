@@ -133,7 +133,7 @@ def mobile(request,entry_code=None):
                        'language':language,
                                              'statement_hist': get_statement_histograms(),
                        'client_settings': get_client_settings(True),
-                                             'horizontal_slide': settings.HORIZONTAL_SLIDE,
+                                             #'horizontal_slide': settings.HORIZONTAL_SLIDE,
                        'topic': DiscussionStatement.objects.filter(is_current=True)[0].statement,
                        'topic_spanish': DiscussionStatement.objects.filter(is_current=True)[0].spanish_statement,
                        'short_topic': DiscussionStatement.objects.filter(is_current=True)[0].short_version,

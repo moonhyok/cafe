@@ -64,6 +64,7 @@ for i in range(0,numStatements):
 for i in range(0, numStatements):
     os_election_stmts[i] = OpinionSpaceStatement(opinion_space = os_election,
                                                  statement_number = i,
+                                                 type=1,
                                                  statement = os_election_stmt_strings.get(i),
                                                  short_version = os_election_stmt_shorts.get(i))
     os_election_stmts[i].save()
