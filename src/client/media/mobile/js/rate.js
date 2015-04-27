@@ -103,9 +103,9 @@ var rate = (function($, d3, console) {
         var myDiv = document.getElementById('rate');
         myDiv.scrollTop = 0;
 
-        $("#slider-importance").children().children().children(".slider-grade-bubble").each( function(i){
-        $(this).css("background-image",$(this).css("background-image").replace("keypad-down","keypad"));
-        });
+        // $("#slider-importance").children().children().children(".slider-grade-bubble").each( function(i){
+        // $(this).css("background-image",$(this).css("background-image").replace("keypad-down","keypad"));
+        // });
 
         //$("#slider-importance").children().children().children(".slider-grade-bubble").css("background-color","transparent"); 
 

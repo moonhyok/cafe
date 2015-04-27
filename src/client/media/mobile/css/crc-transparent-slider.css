@@ -92,11 +92,12 @@ margin-right: 3px;
 		background-size: cover;
 	}
 
+	/*Now happyface.png*/
 	.bubble-A{
-		background-image: url('../img/cafe/keypad.png');
+		background-image: url('../img/uganda/happyface.png');
 		background-size: cover;
 	}
-
+	
 	.bubble-A-{
 		background-image: url('../img/cafe/keypad.png');
 		background-size: cover;
@@ -107,8 +108,9 @@ margin-right: 3px;
 		background-size: cover;
 	}
 
+	/*Now medface.png*/
 	.bubble-B{
-		background-image: url('../img/cafe/keypad.png');
+		background-image: url('../img/uganda/medface.png');
 		background-size: cover;
 	}
 
@@ -122,8 +124,9 @@ margin-right: 3px;
 		background-size: cover;
 	}
 
+	/*Now medface.png*/
 	.bubble-C{
-		background-image: url('../img/cafe/keypad.png');
+		background-image: url('../img/uganda/medface.png');
 		background-size: cover;
 	}
 
@@ -137,16 +140,19 @@ margin-right: 3px;
 		background-size: cover;
 	}
 
+	/*Now medface.png*/
 	.bubble-D{
-		background-image: url('../img/cafe/keypad.png');
+		background-image: url('../img/uganda/medface.png');
 		background-size: cover;
 	}
 	.bubble-D-{
 		background-image: url('../img/cafe/keypad.png');
 		background-size: cover;
 	}
+
+	/*Now sadface.png*/
 	.bubble-F{
-		background-image: url('../img/cafe/keypad.png');
+		background-image: url('../img/uganda/sadface.png');
 		background-size: cover;
 	}
 
@@ -211,9 +217,9 @@ margin-right: 3px;
 	}
 
 	.crc-div-wrapper{
-	max-width: 320px !important;
+	max-width: 500px !important; /*Changed to make from 320 px this wider*/
 	}
 	.slider{
-		max-width: 420px !important;
+		max-width: 420px !important; 
 	}
 	}

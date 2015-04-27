@@ -34,7 +34,7 @@
     {% else %}
     <link rel='stylesheet' type='text/css' href='{{url_root}}/media/mobile/css/crc-transparent-slider.css?nonce={{random_password}}' />
     {% endif %}
-
+    <link rel='stylesheet' type='text/css' href='{{url_root}}/media/mobile/css/uganda.css?nonce={{random_password}}' />
 
     <!-- JavaScript -->
     <script type='text/javascript' src='{{url_root}}/media/mobile/jquery-mobile/jquery-1.10.2.min.js'></script>
@@ -365,11 +365,15 @@
 
             <center>  
               <div class="question-number responsive-body"><span>Question</span> {{ statement.id }} <span>of</span> {{ statements|length }}.</div>
-              <div class="question-number responsive-body">Please grade the State of California on:</div>
+              <!-- <div class="question-number responsive-body">Please grade the State of California on:</div>
               <div class="statement-style responsive-body english">{{ statement.statement }}</div>
-              <div class="statement-style responsive-body spanish" style="display:none;">{{ statement.spanish_statement }}</div>
+              <div class="statement-style responsive-body spanish" style="display:none;">{{ statement.spanish_statement }}</div> -->
+              <div class="responsive-body listen"></div>
+
+
 
               <!--<div class="median-grade-{{statement.id}} med-grade-box"></div>-->
+
 
               <div style="width: 100%;" class="responsive-padding">
                 
@@ -384,8 +388,8 @@
 
               </div>
 
-              <div class="statement-style responsive-body english grade-feedback" style="text-align: center;">At the end you’ll have a chance to give us more feedback</div>
-              <div class="statement-style responsive-body spanish grade-feedback" style="display:none;"></div>
+<!--               <div class="statement-style responsive-body english grade-feedback" style="text-align: center;">At the end you’ll have a chance to give us more feedback</div>
+              <div class="statement-style responsive-body spanish grade-feedback" style="display:none;"></div> -->
               
               <div style="clear: both;"></div>
               <!--<a href="#" class="skip-button-{{statement.id}} skip-btn responsive-body" id="next-{{statement.id}}" style="color: #ffffff;font-size: 16px;font-weight: normal !important;position:relative;top: -40px;left: 100px;">Skip</a>-->

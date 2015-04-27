@@ -15,28 +15,29 @@ for (var i=1;i<=window.num_sliders;i++)
 //$( ".slider" ).append( "<span class=\"manual-slide manual-slide-left\"><</span>" );
 $( ".slider" ).append( "<div class=\"crc-div-wrapper\"><div class=\"grade-container\"></div></div>" );
 
-grades = ['A-','A','A+','B-','B','B+','C-','C','C+','D-','D','D+','F']
+grades = ['F', 'D', 'C','B', 'A']
 grades.forEach(function(grade) { 
 
 	if(grade.indexOf('+') >= 0)
-		$(".grade-container").append("<div class=\"slider-grade-bubble slider-grade-p bubble-" +grade.replace("+","p")+"\"><div class=\"spacer\"></div>"+grade+"</div>");
+		$(".grade-container").append("<div class=\"slider-grade-bubble slider-grade-p bubble-" +grade.replace("+","p")+"\"><div class=\"spacer\"></div>"+"</div>");
 	else if (grade.indexOf('-') >= 0 ) 
-		$(".grade-container").append("<div class=\"slider-grade-bubble slider-grade-m bubble-" +grade+"\"><div class=\"spacer\"></div>"+grade+"</div>");
+		$(".grade-container").append("<div class=\"slider-grade-bubble slider-grade-m bubble-" +grade+"\"><div class=\"spacer\"></div>"+"</div>");
 	else	
-		$(".grade-container").append("<div class=\"slider-grade-bubble slider-grade-main bubble-" +grade.replace("+","p")+"\"><div class=\"spacer\"></div>"+grade+"</div>");
+		$(".grade-container").append("<div class=\"slider-grade-bubble slider-grade-main bubble-" +grade.replace("+","p")+"\"><div class=\"spacer\"></div>"+"</div>");
 
 });
 $(".slider-grade-bubble").on("click",function(e){ 
 	//$(this).parent().children(".slider-grade-bubble").css("opacity","1.0"); 
 	//$(this).parent().children(".slider-grade-bubble").css("background-image","url()"); 
     
-    $(this).parent().children(".slider-grade-bubble").each( function(i){
-    	$(this).css("background-image",$(this).css("background-image").replace("keypad-hover","keypad"));
-    	$(this).css("background-image",$(this).css("background-image").replace("keypad-down","keypad"));
-	});
+    //commenting out changing the background image due to lack of other background image
+ //    $(this).parent().children(".slider-grade-bubble").each( function(i){
+ //    	$(this).css("background-image",$(this).css("background-image").replace("keypad-hover","keypad"));
+ //    	$(this).css("background-image",$(this).css("background-image").replace("keypad-down","keypad"));
+	// });
 
-	//$(this).css("opacity","1.0"); 
-	$(this).css("background-image",$(this).css("background-image").replace("keypad","keypad-down"));
+	// //$(this).css("opacity","1.0"); 
+	// $(this).css("background-image",$(this).css("background-image").replace("keypad","keypad-down"));
 	
 	if($(this).parent().parent().parent().attr("id").substring(7).indexOf("importance") > -1)
 	{
@@ -143,25 +144,26 @@ $(".slider-grade-bubble").on("click",function(e){
 	//$(this).parent().children(".bubble-"+median.replace("+","p")).innerHTML = "<div style=\"font-size: 10px;\">Median</font>";
 });
 
-$(".slider-grade-bubble").on("touchstart",function(e){ 
+//Commenting out mousing over code for now because we don't have the other images
+// $(".slider-grade-bubble").on("touchstart",function(e){ 
 
-	//$(this).parent().children(".slider-grade-bubble").css("opacity","1.0"); 
-	//$(this).parent().children(".slider-grade-bubble").css("background-image","url()"); 
+// 	//$(this).parent().children(".slider-grade-bubble").css("opacity","1.0"); 
+// 	//$(this).parent().children(".slider-grade-bubble").css("background-image","url()"); 
     
-    $(this).parent().children(".slider-grade-bubble").each( function(i){
-    	$(this).css("background-image",$(this).css("background-image").replace("keypad-hover","keypad"));
-    	$(this).css("background-image",$(this).css("background-image").replace("keypad-down","keypad"));
-	});
+//     $(this).parent().children(".slider-grade-bubble").each( function(i){
+//     	$(this).css("background-image",$(this).css("background-image").replace("keypad-hover","keypad"));
+//     	$(this).css("background-image",$(this).css("background-image").replace("keypad-down","keypad"));
+// 	});
 
-});
+// });
 
-    $('.slider-grade-bubble').on('mouseover',function(e){
-        $(this).css("background-image",$(this).css("background-image").replace("keypad","keypad-hover"));
-    });
+//     $('.slider-grade-bubble').on('mouseover',function(e){
+//         $(this).css("background-image",$(this).css("background-image").replace("keypad","keypad-hover"));
+//     });
 
-    $('.slider-grade-bubble').on('mouseout',function(e){
-        $(this).css("background-image",$(this).css("background-image").replace("keypad-hover","keypad"));
-    });
+//     $('.slider-grade-bubble').on('mouseout',function(e){
+//         $(this).css("background-image",$(this).css("background-image").replace("keypad-hover","keypad"));
+//     });
 //$(".slider-grade-bubble").on("mouseover",function(e){ $(this).css("opacity","0.5"); });
 
 

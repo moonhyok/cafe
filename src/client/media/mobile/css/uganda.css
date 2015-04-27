@@ -1,0 +1,11 @@
+	.listen{
+		height: 530px;
+		width: 530px;
+		margin-right: 6px;
+		margin-left: 6px;
+		margin-bottom: 6px;
+		margin-top: 6px;
+		background-image:url("../img/uganda/ear.png");
+		background-size: cover;
+	}
+

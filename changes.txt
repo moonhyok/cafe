@@ -1,0 +1,19 @@
+1. Changed the number of grades to A, B, C, D, and F in crc-transparent-slider.js (Currently
+trying to map letters to the faces to minimize coding changes while changing the displayed
+images. )
+
+2. Changed the widths of .crc-div-wrapper and .slider in crc-transparent-slider.css to make 
+all of the buttons fit one line. Will this cause problems on different sized screens?
+
+	.crc-div-wrapper{
+	max-width: 500px !important; /*Changed to make from 320 px this wider*/
+	}
+
+3. Commented out the code in crc-transparent-slider.js and doneRating function in rate.js
+that changes the background image when you place your mouse over things. We will come
+ back to this if necessary.
+
+_________________________________________________________________________________
+Things that I would like:
+1. Class "dialog dialog-style" in mobile.html is the median page. We would need to modify
+that page to add the different images. 
