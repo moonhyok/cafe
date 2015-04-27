@@ -1,6 +1,6 @@
 	.listen{
-		height: 530px;
-		width: 530px;
+		height: 300px;
+		width: 300px;
 		margin-right: 6px;
 		margin-left: 6px;
 		margin-bottom: 6px;
@@ -9,3 +9,6 @@
 		background-size: cover;
 	}
 
+.translate-btn {
+	display: none;
+}
