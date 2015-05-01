@@ -408,7 +408,19 @@ var _blooms = blooms = (function($, d3, console) {
             .attr("xlink:href", function(d) {
                 window.blooms_list.push(d.uid);
                 console.log({'uid': d.uid,'x':d.x,'y':d.y,'cx': canvasx(d.x),'cy': canvasy(d.y)});
-                return window.url_root + "/media/mobile/img/cafe/cafe6.png";
+                var ideation_images = ["cafe6.png", "cafe6_maple.png"];
+                var random_number = Math.random();
+                var index;
+                var chosen_image = ideation_images[ideation_images.length - 1];
+                for (index = 0; index < ideation_images.length - 1; index++) {
+                    var selection_range = ((index + 1) * (1 / ideation_images.length));
+                    if (random_number <= selection_range) {
+                        chosen_image = ideation_images[index];
+                        break;
+                    }
+                }
+
+                return window.url_root + "/media/mobile/img/cafe/" + chosen_image;
             })
             .attr("width", function(d) {return(mugsize*Math.random()+60)+"";}) //if this changes, change the margin above
             .attr("height", function(d) {return(mugsize*Math.random()+60)+"";})
