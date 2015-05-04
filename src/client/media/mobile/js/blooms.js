@@ -460,6 +460,7 @@ var _blooms = blooms = (function($, d3, console) {
                 var content = '"'+commentData.comment+'"';
                 var contentSpanish = '"'+commentData.spanish_comment+'"';
                 var cid = commentData.cid;
+                $('.rate .listen').attr('sound', cid);
                 window.current_cid = cid;
                 window.current_uid = d.uid;
                 //$('.rate-loading').show();
