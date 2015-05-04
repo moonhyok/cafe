@@ -743,7 +743,23 @@ Students' names will not be displayed through M-CAFE. For any questions, comment
           </div> 
 
     <center>
+
             <div class='comment-panel'>
+              <table>
+                <tr>
+                  <th>
+                    <img height="200px" class="startRecording" src="{{url_root}}/media/mobile/img/uganda/talking.png" onclick="startRecording(this);"/>
+                  </th>
+                  <th>
+                    <img height="200px" style="visibility:hidden;" class="stopRecording"  src="{{url_root}}/media/mobile/img/uganda/stop.png" onclick="stopRecording(this);"/>
+                  </th>
+                  <th>
+                    <img style="visibility:hidden; width:200px; height:200px;" class="listen listenComment" src="{{url_root}}/media/mobile/img/uganda/ear.png"/> 
+                  </th>
+                </tr>
+              </table> 
+
+              <div id="hide-wrapper" style="display:none;">
               <div class="basic-header2 responsive-body english" style="text-align:left;">{{topic}}</div>
               <div class="basic-header2 responsive-body spanish" style="text-align:left;">{{topic_spanish}}</div>
               <br/>
@@ -753,7 +769,8 @@ Students' names will not be displayed through M-CAFE. For any questions, comment
                 <span>Your email address will not be displayed and we promise not to share your email address with any third parties.</span>
                 <input type="email" id='regemail' name='regemail' class='regforminput' style="font-size: 15px; background-color: #FFFFFF;color: #000000;" placeholder="Email (Optional)" data-theme='b'></input>
               </div>
-              <div class='comment-submit-btn button-div-wide responsive-btn' style="display: inline-block;">Post</div>
+              </div>
+              <div class='comment-submit-btn button-div-wide responsive-btn' style="display: inline-block;">Continue</div>
             </div>
     </center>
   </center>
@@ -1292,6 +1309,8 @@ Students' names will not be displayed through M-CAFE. For any questions, comment
        ga('send', 'pageview');
 
       </script>
+      <script type='text/javascript' src='{{url_root}}/media/mobile/js/recorder.js'></script>
+      <script type='text/javascript' src='{{url_root}}/media/mobile/js/audio.js'></script>
 
     </div>
   </body>
