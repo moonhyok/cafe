@@ -249,7 +249,9 @@
   </head>
 
   <body>
-
+    <audio id="audio_player">
+      <source id="audio_source" src="" type="audio/wav">
+    </audio>
     <div class="full-page">
 
       <div class='landing'>
@@ -371,7 +373,7 @@ Students' names will not be displayed through M-CAFE. For any questions, comment
               <!-- <div class="question-number responsive-body">Please grade the State of California on:</div>
               <div class="statement-style responsive-body english">{{ statement.statement }}</div>
               <div class="statement-style responsive-body spanish" style="display:none;">{{ statement.spanish_statement }}</div> -->
-              <div class="responsive-body listen"></div>
+              <div class="responsive-body listen" sound="statement-{{statement.id}}"></div>
 
 
 
@@ -427,12 +429,12 @@ Students' names will not be displayed through M-CAFE. For any questions, comment
             <center>
    
               <div data-role="fieldcontain" >
-               <input type ='tel' id='regzip' name='regzip' class='regforminput' placeholder="Zip Code">
+               <input style="display:none" type ='tel' id='regzip' name='regzip' class='regforminput' placeholder="Zip Code" value="00000">
 
                <div class='alert-error' id='zipcode-error' style='display:none;'></div>
               </div>
 
-        <div class="button-div-red registerb responsive-btn" id="registerb" style="font-size: 18px;">Save</div>
+        <div class="button-div-red registerb responsive-btn" id="registerb" style="font-size: 18px;">Continue</div>
         <br/>
         <!--<div class="button-div-wide registerb responsive-btn" id="registern">No Thanks</div>-->
     </div>
@@ -698,7 +700,23 @@ Students' names will not be displayed through M-CAFE. For any questions, comment
           </div> 
 
     <center>
+
             <div class='comment-panel'>
+              <table>
+                <tr>
+                  <th>
+                    <img height="200px" class="startRecording" src="{{url_root}}/media/mobile/img/uganda/talking.png" onclick="startRecording(this);"/>
+                  </th>
+                  <th>
+                    <img height="200px" style="visibility:hidden;" class="stopRecording"  src="{{url_root}}/media/mobile/img/uganda/stop.png" onclick="stopRecording(this);"/>
+                  </th>
+                  <th>
+                    <img style="visibility:hidden; width:200px; height:200px;" class="listen listenComment" src="{{url_root}}/media/mobile/img/uganda/ear.png"/> 
+                  </th>
+                </tr>
+              </table> 
+
+              <div id="hide-wrapper" style="display:none;">
               <div class="basic-header2 responsive-body english" style="text-align:left;">{{topic}}</div>
               <div class="basic-header2 responsive-body spanish" style="text-align:left;">{{topic_spanish}}</div>
               <br/>
@@ -708,7 +726,8 @@ Students' names will not be displayed through M-CAFE. For any questions, comment
                 <span>Your email address will not be displayed and we promise not to share your email address with any third parties.</span>
                 <input type="email" id='regemail' name='regemail' class='regforminput' style="font-size: 15px; background-color: #FFFFFF;color: #000000;" placeholder="Email (Optional)" data-theme='b'></input>
               </div>
-              <div class='comment-submit-btn button-div-wide responsive-btn' style="display: inline-block;">Post</div>
+              </div>
+              <div class='comment-submit-btn button-div-wide responsive-btn' style="display: inline-block;">Continue</div>
             </div>
     </center>
   </center>
@@ -788,14 +807,14 @@ Students' names will not be displayed through M-CAFE. For any questions, comment
       </div>
       
     <center>
-      <div class="instructions-light responsive-body">
+<!--       <div class="instructions-light responsive-body">
         Each sphere represents a participant. Tap any sphere to begin. 
-      </div>
+      </div> -->
 
 
-      <div style="text-align: center;margin-top: 6px;" class="english responsive-body"><span>{{ topic }}</span></div>
+      <div style="text-align: center;margin-top: 6px; height: 100px; width: 100px;" class="english responsive-body listen" sound="instructions"><span><!--{{ topic }}--></span></div>
       <div style="text-align: center;margin-top: 6px;" class="spanish responsive-body"><span>{{ topic_spanish }}</span></div>
-      <div style="text-align: right;"><a href="#" class="map-info" style="color:#442b10;position:relative;top:5px;" onclick="accounts.hideAll();$('.dialog-help-map1').show();window.cur_state = 'faq';window.prev_state = 'map';"><img width="30px" src="{{url_root}}/media/mobile/img/cafe/info_button.png"></a></div>
+      <div style="text-align: right; display:none;"><a href="#" class="map-info" style="color:#442b10;position:relative;top:5px;" onclick="accounts.hideAll();$('.dialog-help-map1').show();window.cur_state = 'faq';window.prev_state = 'map';"><img width="30px" src="{{url_root}}/media/mobile/img/cafe/info_button.png"></a></div>
 
       <div id='d3' class="d3-canvas"></div>
     </center>
@@ -819,10 +838,12 @@ Students' names will not be displayed through M-CAFE. For any questions, comment
             <span>{{client_settings.LOGOUT_DIALOG_TEXT}}</span><br/><br/>
       <!-- <span class="english"><a href="http://hrefshare.com/9bdd3" target="_blank" style="color: #555555;"><img src="{{url_root}}/media/mobile/img/cafe/twitter-button.png" width="102px"></a> -->
       <!-- <a href="http://hrefshare.com/d3660" target="_blank" style="color: #555555;"><img src="{{url_root}}/media/mobile/img/cafe/facebook-button.png" width="102px"></a><br/> -->
-      <span class="english"><a href="http://twitter.com/intent/tweet?text=How%20do%20you%20grade%20California%3F%20Try%20%40CAReportCard%20developed%20by%20%40Cal%20%40GavinNewsom%20%26%20%40Ken_Goldberg%20http%3A%2F%2Fcaliforniareportcard.org%2F2.0%2F%20%23CA%20%23GOV" target="_blank" style="color: #555555;"><img src="{{url_root}}/media/mobile/img/cafe/twitter-button-compress.png" width="102px"></a>
-      <a href="https://www.facebook.com/dialog/feed?app_id=694165360698061&link=http%3A%2F%2Fcaliforniareportcard.org%2F2.0%2F&picture=http%3A%2F%2Fcaliforniareportcard.org%2Fcrc%2Fwp-content%2Fuploads%2FCRCv2_Facebook-Share-link_graphic-01.jpg&name=The%20California%20Report%20Card&caption=%20&description=How%20do%20you%20grade%20California%3F%20%20Try%20%40CAReportCard%20developed%20by%20%40Cal%20%40GavinNewsom%20%26%20%40Ken_Goldberg%20%20http&redirect_uri=http%3A%2F%2Fwww.facebook.com%2F" target="_blank" style="color: #555555;"><img src="{{url_root}}/media/mobile/img/cafe/facebook-button-compress.png" width="102px"></a><br/>
+      <!-- <span class="english"><a href="http://twitter.com/intent/tweet?text=How%20do%20you%20grade%20California%3F%20Try%20%40CAReportCard%20developed%20by%20%40Cal%20%40GavinNewsom%20%26%20%40Ken_Goldberg%20http%3A%2F%2Fcaliforniareportcard.org%2F2.0%2F%20%23CA%20%23GOV" target="_blank" style="color: #555555;"><img src="{{url_root}}/media/mobile/img/cafe/twitter-button-compress.png" width="102px"></a>
+      <a href="https://www.facebook.com/dialog/feed?app_id=694165360698061&link=http%3A%2F%2Fcaliforniareportcard.org%2F2.0%2F&picture=http%3A%2F%2Fcaliforniareportcard.org%2Fcrc%2Fwp-content%2Fuploads%2FCRCv2_Facebook-Share-link_graphic-01.jpg&name=The%20California%20Report%20Card&caption=%20&description=How%20do%20you%20grade%20California%3F%20%20Try%20%40CAReportCard%20developed%20by%20%40Cal%20%40GavinNewsom%20%26%20%40Ken_Goldberg%20%20http&redirect_uri=http%3A%2F%2Fwww.facebook.com%2F" target="_blank" style="color: #555555;"><img src="{{url_root}}/media/mobile/img/cafe/facebook-button-compress.png" width="102px"></a><br/> -->
 
-             Election and Voter Information: <a href="http://www.sos.ca.gov/elections/new-voter/" target="_blank" style="color: #555555;">CAVoterInformation</a><br/><br/>
+             <!-- Election and Voter Information: <a href="http://www.sos.ca.gov/elections/new-voter/" target="_blank" style="color: #555555;">CAVoterInformation</a> -->
+             Thank you!
+             <br/><br/>
 
 
       <!--California Online Voting Registration: <a href="http://registertovote.ca.gov" target="_blank" style="color: #555555;"> CAVoterRegistration </a><br/><br/></span>-->
@@ -926,7 +947,7 @@ Students' names will not be displayed through M-CAFE. For any questions, comment
       <br/><br/>
       <div class='dialog-text-style responsive-body'>
         <span>Thank You!</span>
-        <div style="font-size: 18px;margin-top: 10px;">We encourage you to amplify CA's collective intelligence by reading and evaluating more ideas.</div>
+        <div style="font-size: 18px;margin-top: 10px;">We encourage you to read and evaluate more ideas.</div>
               <!--<div class='dialog-text-style default-left-padding'>
               {{client_settings.EMAIL_ASK_TEXT}}
         </div>-->
@@ -1245,6 +1266,8 @@ Students' names will not be displayed through M-CAFE. For any questions, comment
        ga('send', 'pageview');
 
       </script>
+      <script type='text/javascript' src='{{url_root}}/media/mobile/js/recorder.js'></script>
+      <script type='text/javascript' src='{{url_root}}/media/mobile/js/audio.js'></script>
 
     </div>
   </body>
