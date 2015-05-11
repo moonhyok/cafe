@@ -195,32 +195,16 @@
      function score_to_grade(score1) {
        var score = 100 - score1;
        
-       if (score == 100)
-         return 'A+';
-       else if (score > 92)
+       if (score > 92)
        return 'A';
-       else if (score > 86)
-       return 'A-';
-       else if (score > 81)
-       return 'B+';
        else if (score > 69 )
        return 'B';
-       else if (score > 63 )
-       return 'B-';
-       else if (score > 56 )
-       return 'C+';
        else if (score > 44 )
        return 'C';
-       else if (score > 38 )
-       return 'C-';
-       else if (score > 32 )
-       return 'D+';
        else if (score > 19 )
        return 'D';
-       else if (score == 0 )
-       return 'F';
        else
-         return 'D-';
+       return 'F';
      }
 
      function grade_to_score(grade) {
@@ -228,26 +212,12 @@
          return 10;
        else if (grade == 'A')
        return 10.0 - 10.0/12;
-       else if (grade == 'A-')
-       return 10.0 - 20.0/12;
-       else if (grade == 'B+')
-       return 10.0 - 30.0/12;
        else if (grade == 'B' )
        return 10.0 - 40.0/12;
-       else if (grade == 'B-')
-       return 10.0 - 50.0/12;
-       else if (grade == 'C+')
-       return 10.0 - 60.0/12;
        else if (grade == 'C')
        return 10.0 - 70.0/12;
-       else if (grade == 'C-')
-       return 10.0 - 80.0/12;
-       else if (grade == 'D+')
-       return 10.0 - 90.0/12;
        else if (grade == 'D')
        return 10.0 - 100.0/12;
-       else if (grade == 'D-')
-       return 10.0 - 110.0/12;
        else
          return 10.0 - 120.0/12;
      }
@@ -531,7 +501,6 @@ Students' names will not be displayed through M-CAFE. For any questions, comment
 
       </div>
 
-
       <div class='dialog dialog-style'>
   <center>
     <div class="home-btn-dialog-box">
@@ -546,66 +515,55 @@ Students' names will not be displayed through M-CAFE. For any questions, comment
           </div> 
     <!--<img class="header-img-topic center" src="{{ url_root }}/media/mobile/img/cafe/CRC_join.png"/>-->
           <div class='dialog-text1 dialog-text-style'>
-            <span>The plots below show the grades of others. The pink lines indicate the grades you entered.</span>
+            <span>¿Cómo te comparas?</span>
           </div>
 
           <br/>
           {% for k,v in statement_hist.iteritems %}
           
-    <div class="compare-box-{{k.id}}" style="padding-bottom: 10px;max-width:620px;" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();">
+    <div class="compare-box-{{k.id}}" style="max-width:620px;" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();">
             <div class="compare-tag">
               <!--<div style="font-size: 12px; font-style: italic;font-weight: bolder;" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();">{{k.id}}. </div>-->
               <div style="font-size: 18px;font-weight: bolder;" class="english" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();">{{k.short_version}}</div>
               <div style="font-size: 18px;font-weight: bolder;" class="spanish" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();">{{k.spanish_short_version}}</div>
-              <div style="font-size: 14px; font-weight: bolder;cursor: pointer;cursor: hand;" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();"><span>more info</span> >></div>
+              <div style="font-size: 14px; font-weight: bolder;cursor: pointer;cursor: hand;display:none;" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();"><span>more info</span> >></div>
             </div>
 
-            <canvas id="sparkLineCanvas{{k.id}}" width="175" height="58"></canvas>
+            <canvas id="sparkLineCanvas{{k.id}}" width="175" height="58" style="display: none;"></canvas>
+
+            <table style="display: inline-block;text-shadow: none;border-right: 1px solid #999;">
+              <tr>
+                <th style="border-right: 1px solid #999;">México</th>
+                <th style="border-right: 1px solid #999;">Estado</th>
+                <th>Yo</th>
+              </tr>
+              <tr>
+              <td style="border-right: 1px solid #999;"><center><img id="mexicoFace{{k.id}}" style="width: 60px;padding:5px;"/></center></td>
+              <td style="border-right: 1px solid #999;"><center><img id="stateFace{{k.id}}" style="width: 60px;padding:5px;"/></center></td>
+              <td><center><img id="myFace{{k.id}}" style="width: 60px;padding:5px;"/></center></td>
+              </tr>
+            </table>
             
             <div>
         
-        <!--<script>
-        var canvas = document.getElementById('sparkLineCanvas{{k.id}}');
-        var context = canvas.getContext('2d');
-
-        if ({{k.id}} % 2 == 1)
-              $('.compare-box-{{k.id}}').css("background-color","rgba(0,0,0,0.05)")
-
-        var data = {{v}};
-        var max_of_array = Math.max.apply(Math, data);
-
-        context.beginPath();
-        context.lineWidth = 2;
-        context.strokeStyle = '#442b10';
-        context.shadowColor = '#ffffff';
-              context.shadowOffsetX = 1;
-              context.shadowOffsetY = 1;
-        context.moveTo(0, 45 - data[0]/max_of_array*38);
-        for (i = 1; i <= 9; i++)
-        {
-              context.lineTo(i*16, 45 - data[i]/max_of_array*38);
-              context.stroke(); 
-        }
-
-        context.font="italic small-caps bolder 12px sans-serif";
-        context.fillStyle = '#442b10';
-        context.fillText("0",0,48);
-
-        context.fillText("9",150,50);
-        </script>-->
+         <script>
+         var face = document.getElementById('mexicoFace{{k.id}}');
+         if (medians[{{k.id}}] > 0.60)
+             face.src = "{{url_root}}/media/mobile/img/uganda/happyface.png"
+         else if (medians[{{k.id}}] > 0.45)
+             face.src = "{{url_root}}/media/mobile/img/uganda/medface.png"
+         else
+             face.src = "{{url_root}}/media/mobile/img/uganda/sadface.png"
+        </script>
 
         <script>
          var canvas = document.getElementById('sparkLineCanvas{{k.id}}');
          var context = canvas.getContext('2d');
-
          if ({{k.id}} % 2 == 1)
      $('.compare-box-{{k.id}}').css("background-color","rgba(0,0,0,0.05)")
-
          var data = {{v}};
          var max_of_array = Math.max.apply(Math, data);
-
          window.statement_processed_data[({{k.id}}-1)] = data
-
          context.beginPath();
          context.lineWidth = 6;
          context.strokeStyle = '#442b10';
@@ -618,16 +576,13 @@ Students' names will not be displayed through M-CAFE. For any questions, comment
           var skipOffset = 0
           if (i == 13)
             skipOffset = 7
-
      context.moveTo(i*11+5+skipOffset, 45);
      context.lineTo(i*11+5+skipOffset, 45 - data[i]/max_of_array*38);
      context.stroke(); 
          }
-
          context.font="italic small-caps bolder 12px sans-serif";
          context.fillStyle = '#442b10';
          context.fillText("A+",0,58);
-
          context.fillText("F",133,58);
          context.fillText("Ø",149,58);
         </script>
@@ -644,6 +599,8 @@ Students' names will not be displayed through M-CAFE. For any questions, comment
           </div>
   </center>
       </div>
+
+
 
       {% for k,v in statement_hist.iteritems %}
       <div class="detail-box detail-box-{{k.id}}" style="display:none;">

@@ -89,6 +89,24 @@ var accounts = (function($, d3, console) {
                     for (var i = 0; i < window.num_sliders; i++) {
                         rate.sendSlider(window.sliders[i], i+1);
                         //draw line on canvas
+
+                        var face = document.getElementById('myFace' + (i+1));
+                        if (window.sliders[i]/10 > 0.45)
+                            face.src = window.url_root+"/media/mobile/img/uganda/happyface.png"
+                        else if (window.sliders[i]/10 > 0.25)
+                            face.src = window.url_root+"/media/mobile/img/uganda/medface.png"
+                        else
+                            face.src = window.url_root+"/media/mobile/img/uganda/sadface.png"
+
+                        var sface = document.getElementById('stateFace' + (i+1));
+                        if (window.sliders[i]/10 > 0.45)
+                            sface.src = window.url_root+"/media/mobile/img/uganda/happyface.png"
+                        else if (window.sliders[i]/10 > 0.25)
+                            sface.src = window.url_root+"/media/mobile/img/uganda/medface.png"
+                        else
+                            sface.src = window.url_root+"/media/mobile/img/uganda/sadface.png"
+                        
+
                         var canvas = document.getElementById("sparkLineCanvas"+(i+1));
                          var context = canvas.getContext('2d');
                         
