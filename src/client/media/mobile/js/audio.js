@@ -4,7 +4,7 @@ $(window).ready(function() {
 		if (blob != null) {
 			audio_source.src = blob;
 		} else {
-			audio_source.src = '/media/audio/' + this.getAttribute('sound') + '.wav';
+			audio_source.src = window.url_root + '/media/audio/' + this.getAttribute('sound') + '.wav';
 		}
 		audio_player.load();
 		audio_player.play();
@@ -22,14 +22,14 @@ $(window).ready(function() {
       window.AudioContext = window.AudioContext || window.webkitAudioContext;
       navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia;
       window.URL = window.URL || window.webkitURL;
-      
+
       audio_context = new AudioContext;
       __log('Audio context set up.');
       __log('navigator.getUserMedia ' + (navigator.getUserMedia ? 'available.' : 'not present!'));
     } catch (e) {
       alert('No web audio support in this browser!');
     }
-    
+
     navigator.getUserMedia({audio: true}, startUserMedia, function(e) {
       __log('No live audio input: ' + e);
     });
@@ -38,7 +38,7 @@ $(window).ready(function() {
     function startUserMedia(stream) {
     var input = audio_context.createMediaStreamSource(stream);
     __log('Media stream created.');
-    
+
     recorder = new Recorder(input);
     __log('Recorder initialised.');
   }
@@ -56,13 +56,13 @@ $(window).ready(function() {
   function stopRecording(button) {
     recorder && recorder.stop();
     // $(".stopRecording").button('disable');
-    // $(".startRecording").button('enable'); 
+    // $(".startRecording").button('enable');
     $(".startRecording").css('visibility', 'visible');
     $(".stopRecording").css('visibility', 'hidden');
 
     $(".listenComment").css('visibility', 'visible');
     __log('Stopped recording.');
-    
+
     // create WAV download link using audio data blob
     createDownloadLink();
 
@@ -76,7 +76,7 @@ $(window).ready(function() {
       var li = document.createElement('li');
       var au = document.createElement('audio');
       var hf = document.createElement('a');
-      
+
       au.controls = true;
       au.src = url;
       hf.href = url;
@@ -104,4 +104,4 @@ $(window).ready(function() {
         }
       }); */
     });
-  }  
+  }
