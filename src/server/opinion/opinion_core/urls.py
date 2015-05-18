@@ -58,6 +58,8 @@ urlpatterns = patterns('',
                        (r'^adminpanel/proofread/$', 'opinion.opinion_core.views.proof_read_comments'),
                        (r'^admintagcomment/(\d+)/$', 'opinion.opinion_core.views.admin_tag_comment'),
                        (r'^adminpanel/$', 'opinion.opinion_core.views.admin_panel_login'),
+                       (r'^adminpanel/audio/$', 'opinion.opinion_core.views.get_audio'),                       
+                       
 
                        # JSON pages
                        #(r'^os/list/$', 'opinion.opinion_core.views.os_list'),

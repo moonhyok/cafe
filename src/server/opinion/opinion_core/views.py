@@ -2807,3 +2807,11 @@ def getOrganizationData(request):
 	data = get_organization_data(orgid)
 	return render_to_response('organization.html', context_instance = RequestContext(request, data))
 
+@admin_required
+def get_audio(request):
+    return render_to_response('audio.html',
+                                  context_instance = RequestContext(request, {
+                                    'files': os.listdir(MEDIA_ROOT + "/audio/"),
+        }))
+
+
