@@ -59,6 +59,7 @@ except ImportError:
     import simplejson as json
 import os
 import re
+import glob
 # Add more boolean logic here if we need more custom queries
 if CUSTOM_LEADERBOARD_LISTS or HAVE_ADDITIONAL_QUESTIONS:
     try:
@@ -2809,9 +2810,34 @@ def getOrganizationData(request):
 
 @admin_required
 def get_audio(request):
+    comments = glob.glob(MEDIA_ROOT + "/audio/[0-9]*.wav")
+    statements = set(glob.glob(MEDIA_ROOT + "/audio/*.wav")) - set(comments)
+    comments = filter(lambda x: '_' not in x, comments)    
+
+
+    comments = sorted(map(lambda x: os.path.basename(x), comments), key=lambda x: int(x.split(".")[0]))
+    statements =sorted(map(lambda x: os.path.basename(x), statements))
+
     return render_to_response('audio.html',
                                   context_instance = RequestContext(request, {
-                                    'files': os.listdir(MEDIA_ROOT + "/audio/"),
+                                    'url_root' : settings.URL_ROOT,
+                                    'file_groups' : {'Comments': comments, 'Statements': statements},
         }))
+
+@auth_required
+def os_save_audio(request):
+    from django.core.files.storage import default_storage
+    from django.core.files.base import ContentFile
+    fname = request.REQUEST.get('filename')
+    if not fname:
+        fname = "%s.wav" % time.time        
+    data = request.FILES['file']
+    fname = "audio/%s" % fname
+    if default_storage.exists(fname):
+        os.rename(settings.MEDIA_ROOT + fname,
+                  settings.MEDIA_ROOT + default_storage.get_available_name(fname))
+    path = default_storage.save(fname, ContentFile(data.read()))
+    return json_result({'success': True,})
+
 
 

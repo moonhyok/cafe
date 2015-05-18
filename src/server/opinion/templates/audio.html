@@ -1,19 +1,88 @@
 {% extends "admin_base.html" %}
 
 {% block mainContent %}
+
+<script>
+  window.url_root = "{{ url_root }}";
+</script>
+
+<script type='text/javascript' src='{{url_root}}/media/mobile/js/recorder.js'></script>
+<script type='text/javascript' src='{{url_root}}/media/mobile/js/audio.js'></script>
+
+<script>
+
+function adminPlayRecording(button) {
+  var filename = $(button).parent().attr("audiofile");
+  $("#main-audio source")[0].src = "/media/audio/" + filename;
+  $("#main-audio audio")[0].load();
+  $("#main-audio audio")[0].play();
+}
+
+function adminStartRecording(button) {
+  recorder && recorder.record();
+  $(button).css("background-color", "red");
+  $(button).parent().children(".save-btn").removeAttr("disabled");
+  $(button).parent().children(".cancel-btn").removeAttr("disabled");
+
+}
+
+function adminStopRecording(button, submit) {
+  recorder && recorder.stop();
+  $(button).parent().children(".record-btn").css("background-color", "");
+  $(button).parent().children(".save-btn").attr("disabled", "disabled");
+  $(button).parent().children(".cancel-btn").attr("disabled", "disabled");
+
+  var filename = $(button).parent().attr("audiofile");
+
+  if (submit) {
+    recorder.exportWAV(function(blob) {
+      console.log(blob);
+      var data = new FormData();
+      data.append('file', blob);
+      data.append('filename', filename);
+
+      console.log(data);
+
+      /* The admin panel version of jQuery is old. */
+      xhr = new XMLHttpRequest();
+      xhr.open( 'POST', '/os/saveaudio/', true );
+      xhr.onreadystatechange = function (response) {
+        if (xhr.readyState==4 && xhr.status==200) {
+          console.log("worked");
+        }
+      };
+      xhr.send(data);
+    });
+  }
+}
+
+</script>
+
 <div style='padding:15px'>
-  <h1>Comments</h1>
-  {% for file in files %}
-  <div>
-    {{file}}</br>
-    <audio controls>
-      <source src="/media/audio/{{file}}" type="audio/wav">
+
+  <div id="main-audio">
+    <audio>
+        <source src="" type="audio/wav">
     </audio>
   </div>
-  <button>Re-record</button>
-  <button disabled>Save new recording</button>
-  <button disabled>Cancel new recording</button>
-  </br></br></br>
+  {% for group, files in file_groups.items %}
+  <h1>{{group}}</h1>
+
+    {% for file in files %}
+    <div audiofile="{{file}}">
+      {{file}}</br>
+    </br>
+    <button class="play-btn" onclick="adminPlayRecording(this)">Play</button>
+    <button class="record-btn" onclick="adminStartRecording(this)">Re-record</button>
+    <button disabled class="save-btn"   onclick="adminStopRecording(this, true)">Save new recording</button>
+    <button disabled class="cancel-btn" onclick="adminStopRecording(this, false)">Cancel new recording</button>
+    </div>
+    </br></br>
+    {% endfor %}
   {% endfor %}
 </div>
+
+
 {% endblock %}
+
+
