@@ -91,20 +91,25 @@ var accounts = (function($, d3, console) {
                         //draw line on canvas
 
                         var face = document.getElementById('myFace' + (i+1));
-                        if (window.sliders[i]/10 > 0.45)
-                            face.src = window.url_root+"/media/mobile/img/uganda/happyface.png"
-                        else if (window.sliders[i]/10 > 0.25)
-                            face.src = window.url_root+"/media/mobile/img/uganda/medface.png"
+                        var face_score = window.sliders[i]/10;
+                        if (face_score > 0.70)
+                            face.src = window.url_root+"/media/mobile/img/uganda/smiley1.png"
+                        else if (face_score > 0.55)
+                            face.src = window.url_root+"/media/mobile/img/uganda/smiley2.png"
+                        else if (face_score > 0.40)
+                            face.src = window.url_root+"/media/mobile/img/uganda/smiley3.png"
+                        else if (face_score > 0.15)
+                            face.src = window.url_root+"/media/mobile/img/uganda/smiley4.png"
                         else
-                            face.src = window.url_root+"/media/mobile/img/uganda/sadface.png"
+                            face.src = window.url_root+"/media/mobile/img/uganda/smiley5.png"
 
-                        var sface = document.getElementById('stateFace' + (i+1));
-                        if (window.sliders[i]/10 > 0.45)
-                            sface.src = window.url_root+"/media/mobile/img/uganda/happyface.png"
-                        else if (window.sliders[i]/10 > 0.25)
-                            sface.src = window.url_root+"/media/mobile/img/uganda/medface.png"
-                        else
-                            sface.src = window.url_root+"/media/mobile/img/uganda/sadface.png"
+                        // var sface = document.getElementById('stateFace' + (i+1));
+                        // if (window.sliders[i]/10 > 0.45)
+                        //     sface.src = window.url_root+"/media/mobile/img/uganda/happyface.png"
+                        // else if (window.sliders[i]/10 > 0.25)
+                        //     sface.src = window.url_root+"/media/mobile/img/uganda/medface.png"
+                        // else
+                        //     sface.src = window.url_root+"/media/mobile/img/uganda/sadface.png"
                         
 
                         var canvas = document.getElementById("sparkLineCanvas"+(i+1));

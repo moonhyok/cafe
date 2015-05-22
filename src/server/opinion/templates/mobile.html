@@ -195,13 +195,13 @@
      function score_to_grade(score1) {
        var score = 100 - score1;
        
-       if (score > 92)
+       if (score > 91)
        return 'A';
-       else if (score > 69 )
+       else if (score > 66 )
        return 'B';
-       else if (score > 44 )
+       else if (score > 41 )
        return 'C';
-       else if (score > 19 )
+       else if (score > 16 )
        return 'D';
        else
        return 'F';
@@ -516,33 +516,35 @@ Students' names will not be displayed through M-CAFE. For any questions, comment
 
           </div> 
     <!--<img class="header-img-topic center" src="{{ url_root }}/media/mobile/img/cafe/CRC_join.png"/>-->
-          <div class='dialog-text1 dialog-text-style'>
-            <span>¿Cómo te comparas?</span>
-          </div>
 
           <br/>
+          <div class="compare-box-0" style="max-width:620px;">
+            <div class="compare-tag">
+
+            </div>
+          <table style="display: inline-block;text-shadow: none;border-right: 1px solid #999;">
+              <tr>
+                <th style="border-right: 1px solid #999;"><img src="{{url_root}}/media/mobile/img/uganda/Me.png" style="width: 60px;padding:5px;"</th>
+                <th><img src="{{url_root}}/media/mobile/img/uganda/othersCompare.png" style="width: 60px;padding:5px;"</th>
+              </tr>
+          </table>
+        </div>
           {% for k,v in statement_hist.iteritems %}
           
-    <div class="compare-box-{{k.id}}" style="max-width:620px;" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();">
+    <div class="compare-box-{{k.id}}" style="max-width:620px;">
             <div class="compare-tag">
               <!--<div style="font-size: 12px; font-style: italic;font-weight: bolder;" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();">{{k.id}}. </div>-->
               <div style="font-size: 18px;font-weight: bolder;" class="english" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();">{{k.short_version}}</div>
               <div style="font-size: 18px;font-weight: bolder;" class="spanish" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();">{{k.spanish_short_version}}</div>
-              <div style="font-size: 14px; font-weight: bolder;cursor: pointer;cursor: hand;display:none;" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();"><span>more info</span> >></div>
+              <div style="font-size: 14px; font-weight: bolder;cursor: pointer;cursor: hand;display:none;" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();"><span>more info</span></div>
             </div>
 
             <canvas id="sparkLineCanvas{{k.id}}" width="175" height="58" style="display: none;"></canvas>
 
             <table style="display: inline-block;text-shadow: none;border-right: 1px solid #999;">
               <tr>
-                <th style="border-right: 1px solid #999;">México</th>
-                <th style="border-right: 1px solid #999;">Estado</th>
-                <th>Yo</th>
-              </tr>
-              <tr>
-              <td style="border-right: 1px solid #999;"><center><img id="mexicoFace{{k.id}}" style="width: 60px;padding:5px;"/></center></td>
-              <td style="border-right: 1px solid #999;"><center><img id="stateFace{{k.id}}" style="width: 60px;padding:5px;"/></center></td>
-              <td><center><img id="myFace{{k.id}}" style="width: 60px;padding:5px;"/></center></td>
+              <td style="border-right: 1px solid #999;"><center><img id="myFace{{k.id}}" style="width: 60px;padding:5px;"/></center></td>
+              <td><center><img id="mexicoFace{{k.id}}" style="width: 60px;padding:5px;"/></center></td>
               </tr>
             </table>
             
@@ -550,12 +552,16 @@ Students' names will not be displayed through M-CAFE. For any questions, comment
         
          <script>
          var face = document.getElementById('mexicoFace{{k.id}}');
-         if (medians[{{k.id}}] > 0.60)
-             face.src = "{{url_root}}/media/mobile/img/uganda/happyface.png"
-         else if (medians[{{k.id}}] > 0.45)
-             face.src = "{{url_root}}/media/mobile/img/uganda/medface.png"
+         if (medians[{{k.id}}] > 0.91)
+             face.src = "{{url_root}}/media/mobile/img/uganda/smiley1.png"
+         else if (medians[{{k.id}}] > 0.66)
+             face.src = "{{url_root}}/media/mobile/img/uganda/smiley2.png"
+         else if (medians[{{k.id}}] > 0.41)
+             face.src = "{{url_root}}/media/mobile/img/uganda/smiley3.png"
+         else if (medians[{{k.id}}] > 0.16)
+             face.src = "{{url_root}}/media/mobile/img/uganda/smiley4.png"         
          else
-             face.src = "{{url_root}}/media/mobile/img/uganda/sadface.png"
+             face.src = "{{url_root}}/media/mobile/img/uganda/smiley5.png"
         </script>
 
         <script>

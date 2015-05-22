@@ -92,9 +92,9 @@ margin-right: 3px;
 		background-size: cover;
 	}
 
-	/*Now happyface.png*/
+	/*Green Smiley!*/
 	.bubble-A{
-		background-image: url('../img/uganda/happyface.png');
+		background-image: url('../img/uganda/smiley1.png');
 		background-size: cover;
 	}
 	
@@ -108,9 +108,9 @@ margin-right: 3px;
 		background-size: cover;
 	}
 
-	/*Now medface.png*/
+	/*Yellow Smiley*/
 	.bubble-B{
-		background-image: url('../img/uganda/medface.png');
+		background-image: url('../img/uganda/smiley2.png');
 		background-size: cover;
 	}
 
@@ -124,9 +124,9 @@ margin-right: 3px;
 		background-size: cover;
 	}
 
-	/*Now medface.png*/
+	/*Yellow median Smiley*/
 	.bubble-C{
-		background-image: url('../img/uganda/medface.png');
+		background-image: url('../img/uganda/smiley3.png');
 		background-size: cover;
 	}
 
@@ -140,9 +140,9 @@ margin-right: 3px;
 		background-size: cover;
 	}
 
-	/*Now medface.png*/
+	/*Now sadder yellow smiley*/
 	.bubble-D{
-		background-image: url('../img/uganda/medface.png');
+		background-image: url('../img/uganda/smiley4.png');
 		background-size: cover;
 	}
 	.bubble-D-{
@@ -150,9 +150,9 @@ margin-right: 3px;
 		background-size: cover;
 	}
 
-	/*Now sadface.png*/
+	/*Red sad smiley*/
 	.bubble-F{
-		background-image: url('../img/uganda/sadface.png');
+		background-image: url('../img/uganda/smiley5.png');
 		background-size: cover;
 	}
 
@@ -166,9 +166,9 @@ margin-right: 3px;
 		}
 
 		.slider-grade-p{
-		height: 70px;
+		height: 90px;
 		text-align: center;
-		width: 70px;
+		width: 90px;
 		display:inline-block;
 		margin-right: 6px;
 		margin-left: 6px;
@@ -180,9 +180,9 @@ margin-right: 3px;
 		}
 
 		.slider-grade-main{
-		height: 70px;
+		height: 90px;
 		text-align: center;
-		width: 70px;
+		width: 90px;
 		display:inline-block;
 	margin-right: 6px;
 		margin-left: 6px;
@@ -194,9 +194,9 @@ margin-right: 3px;
 		}
 
 		.slider-grade-m{
-		height: 70px;
+		height: 90px;
 		text-align: center;
-		width: 70px;
+		width: 90px;
 		display:inline-block;
 	margin-right: 6px;
 		margin-left: 6px;
@@ -217,9 +217,9 @@ margin-right: 3px;
 	}
 
 	.crc-div-wrapper{
-	max-width: 500px !important; /*Changed to make from 320 px this wider*/
+	max-width: 600px !important; /*Changed to make from 320 px this wider*/
 	}
 	.slider{
-		max-width: 420px !important; 
+		max-width: 520px !important; 
 	}
 	}

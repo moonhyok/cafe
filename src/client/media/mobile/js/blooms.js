@@ -408,19 +408,19 @@ var _blooms = blooms = (function($, d3, console) {
             .attr("xlink:href", function(d) {
                 window.blooms_list.push(d.uid);
                 console.log({'uid': d.uid,'x':d.x,'y':d.y,'cx': canvasx(d.x),'cy': canvasy(d.y)});
-                var ideation_images = ["cafe6.png", "cafe6_maple.png"];
+                var num_images = 7;
                 var random_number = Math.random();
                 var index;
-                var chosen_image = ideation_images[ideation_images.length - 1];
-                for (index = 0; index < ideation_images.length - 1; index++) {
-                    var selection_range = ((index + 1) * (1 / ideation_images.length));
+                var chosen_number = num_images;
+                for (index = 1; index <= num_images; index++) {
+                    var selection_range = ((index + 1) * (1 / num_images));
                     if (random_number <= selection_range) {
-                        chosen_image = ideation_images[index];
+                        chosen_number = index;
                         break;
                     }
                 }
 
-                return window.url_root + "/media/mobile/img/cafe/" + chosen_image;
+                return window.url_root + "/media/mobile/img/uganda/mangoLeaf" + chosen_number.toString() + ".png";
             })
             .attr("width", function(d) {return(mugsize*Math.random()+60)+"";}) //if this changes, change the margin above
             .attr("height", function(d) {return(mugsize*Math.random()+60)+"";})
@@ -530,7 +530,7 @@ var _blooms = blooms = (function($, d3, console) {
             
         window.your_mug = window.coffeetable_svg.append('svg:image')
         .attr("xlink:href", function(d) {
-                    return window.url_root + "/media/mobile/img/cafe/cafe6.png";
+                    return window.url_root + "/media/mobile/img/uganda/Me.png";
 
         })
         .attr('x', function(d) {
@@ -560,7 +560,7 @@ var _blooms = blooms = (function($, d3, console) {
             }
         });
 
-        var youText = "You"
+        var youText = ""
         if(window.lang == 'es')
             youText = "Usted"
 
