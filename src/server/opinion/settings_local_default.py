@@ -29,7 +29,8 @@ SECRET_KEY = 'REPLACE_THIS_WITH_SECRET_KEY'
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = '/Users/angela/Documents/GitHub/cafe/src/client/media'
+MEDIA_ROOT = os.path.dirname(DOC_ROOT) + '/../client/' + MEDIA_DIR_NAME + '/'
+
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
@@ -614,3 +615,4 @@ CONFIGURABLES = {
 SEND_CLIENT_SETTINGS = True
 NEVER_SEEN_TIGHT_BOUND = True
 SHOW_ADVANCED_OPTIONS = True
+HORIZONTAL_SLIDE= False
