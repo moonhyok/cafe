@@ -107,7 +107,7 @@ for i in range(0, numStatements):
 						                         type = 1,
                                                  spanish_short_version = os_election_stmt_sshorts.get(i),
                                                  short_version = os_election_stmt_shorts.get(i))
-    os_election_stmts[i].image = os_election_stmt_images[i]
+    # os_election_stmts[i].image = os_election_stmt_images[i]
     os_election_stmts[i].save()
 
 disc = DiscussionStatement(opinion_space = os_election, statement = 'In what specific way can the Nutrition Education Centers by improved and why?', spanish_statement = 'Cual problema piensa debe ser incluido en la proxima Report Card, y por que cree es importante para los Californianos?', short_version='How can social media be used to benefit primary and secondary learning?', is_current = True)

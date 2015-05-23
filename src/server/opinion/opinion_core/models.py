@@ -77,8 +77,6 @@ class OpinionSpaceStatement(Model):
     type = PositiveSmallIntegerField()
     created = DateTimeField(auto_now_add = True)
     spanish_statement = CharField(max_length = 512)
-    image = ImageField(upload_to="mobile/img/uganda/")
-
     
     def __unicode__(self):
         return self.statement
