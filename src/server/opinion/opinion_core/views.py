@@ -2170,11 +2170,15 @@ def os_save_comment(request, os_id, disc_stmt_id = None):
         # Save new comment if it's not an empty string
         if new_comment != '':
             if comment_language == 'english':
+                if settings.TRANSLATE_SPANISH:
+                    spanish_comment = translate_to_spanish(new_comment)
+                else:
+                    spanish_comment = ''
                 comment = DiscussionComment(user = request.user,
                                             opinion_space_id = os_id,
                                             discussion_statement = disc_stmt,
                                             comment = new_comment,
-                                            spanish_comment = translate_to_spanish(new_comment),
+                                            spanish_comment = spanish_comment,
                                             original_language = comment_language,
                                             query_weight = -1,
                                             is_current = True)
@@ -2826,18 +2830,35 @@ def get_audio(request):
 
 @auth_required
 def os_save_audio(request):
-    from django.core.files.storage import default_storage
-    from django.core.files.base import ContentFile
-    fname = request.REQUEST.get('filename')
-    if not fname:
-        fname = "%s.wav" % time.time        
+    """
+    Used for the admin panel to (mostly) overwrite an existing wav file
+    """
+    fname = request.REQUEST.get('filename', str(time.time()))
+    save_audio(request.FILES['file'], fname)
+    return json_result({'success': True,})
+
+def os_save_audio_comment(request):
+    """
+    Each save_audio_comment call should be preceded by a call to save_comment w/ dummy text.
+    We use the id of the latest comment from this user for the file name of the audio file
+    e.g. 26.wav
+    """
+    d = DiscussionComment.objects.filter(user=request.user).latest('created')
+    if d:
+        fname = str(d.id)
+    else:
+        # TODO: shouldn't happen, but we should create dummy comment here
+        pass        
     data = request.FILES['file']
-    fname = "audio/%s" % fname
+    save_audio(data, fname)
+    return json_result({'success': True,})    
+
+def save_audio(data, fname_prefix):
+    from django.core.files.storage import default_storage
+    from django.core.files.base import ContentFile    
+    fname = "audio/%s.wav" % fname_prefix
     if default_storage.exists(fname):
         os.rename(settings.MEDIA_ROOT + fname,
                   settings.MEDIA_ROOT + default_storage.get_available_name(fname))
-    path = default_storage.save(fname, ContentFile(data.read()))
-    return json_result({'success': True,})
-
-
-
+    path = default_storage.save(fname, ContentFile(data.read()))        
+    

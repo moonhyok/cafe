@@ -437,9 +437,24 @@ var rate = (function($, d3, console) {
                 console.log("Comment didn't get sent!");
             }
         });
+	sendAudioComment();
     }
 
-
+    function sendAudioComment() {
+	var data = new FormData();
+	data.append('file', window.current_audio_blob);
+	console.log(data);
+	
+	var xhr = new XMLHttpRequest();
+	xhr.open('POST', '/os/saveaudiocomment/', true );
+	xhr.onreadystatechange = function (response) {
+	    if (xhr.readyState==4 && xhr.status==200) {
+		console.log("worked");
+	    }
+	};
+	xhr.send(data);
+    }
+    
     return {
         'updateDescriptions' : updateDescriptions,
         'updateScoreHolders' : updateScoreHolders,
@@ -462,7 +477,8 @@ var rate = (function($, d3, console) {
         'sendSlider' : sendSlider,
         'sendAgreementRating' : sendAgreementRating,
         'sendInsightRating' : sendInsightRating,
-        'sendComment' : sendComment
+        'sendComment' : sendComment,
+        'sendAudioComment' : sendAudioComment,
     };
 
 })($, d3, console);

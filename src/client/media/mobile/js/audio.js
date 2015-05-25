@@ -66,13 +66,13 @@ $(window).ready(function() {
 
     // create WAV download link using audio data blob
     createDownloadLink();
-
     recorder.clear();
   }
 
   function createDownloadLink() {
     recorder && recorder.exportWAV(function(blob) {
-      var url = URL.createObjectURL(blob);
+	var url = URL.createObjectURL(blob);
+	window.current_audio_blob = blob;
       $(".listenComment").attr("sound-blob", url);
       var li = document.createElement('li');
       var au = document.createElement('audio');
