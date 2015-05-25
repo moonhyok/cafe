@@ -446,7 +446,7 @@ var rate = (function($, d3, console) {
 	console.log(data);
 	
 	var xhr = new XMLHttpRequest();
-	xhr.open('POST', '/os/saveaudiocomment/', true );
+	xhr.open('POST', window.url_root + '/os/saveaudiocomment/', true );
 	xhr.onreadystatechange = function (response) {
 	    if (xhr.readyState==4 && xhr.status==200) {
 		console.log("worked");
