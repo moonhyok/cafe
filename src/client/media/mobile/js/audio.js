@@ -47,7 +47,7 @@ $(window).ready(function() {
     recorder && recorder.record();
     // $(".startRecording").button('disable'); //disabled = true;
     $(".stopRecording").css('visibility', 'visible');
-    $(".startRecording").css('visibility', 'hidden');
+    $(".startRecording").attr('src', window.url_root + '/media/mobile/img/uganda/talking_animated.gif'); //css('visibility', 'hidden');
     $(".listenComment").css('visibility', 'hidden');
     // button.nextElementSibling.disabled = false;
     __log('Recording...');
@@ -57,7 +57,8 @@ $(window).ready(function() {
     recorder && recorder.stop();
     // $(".stopRecording").button('disable');
     // $(".startRecording").button('enable');
-    $(".startRecording").css('visibility', 'visible');
+    //$(".startRecording").css('visibility', 'visible');
+    $(".startRecording").attr('src', window.url_root + '/media/mobile/img/uganda/talking.png');
     $(".stopRecording").css('visibility', 'hidden');
 
     $(".listenComment").css('visibility', 'visible');
