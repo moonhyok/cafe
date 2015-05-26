@@ -1,6 +1,6 @@
 (function(window){
 
-  var WORKER_PATH = window.url_root + '/media/mobile/js/recorderWorker.js';
+  var WORKER_PATH = url_root + '/media/mobile/js/recorderWorker.js';
 
   var Recorder = function(source, cfg){
     var config = cfg || {};

@@ -45,7 +45,7 @@ function adminStopRecording(button, submit) {
 
       /* The admin panel version of jQuery is old. */
       xhr = new XMLHttpRequest();
-      xhr.open( 'POST', '/os/saveaudio/', true );
+      xhr.open( 'POST', window.url_root + '/os/saveaudio/', true );
       xhr.onreadystatechange = function (response) {
         if (xhr.readyState==4 && xhr.status==200) {
           console.log("worked");
