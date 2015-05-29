@@ -3,6 +3,8 @@ $(window).ready(function() {
 		var blob = this.getAttribute('sound-blob');
 		if (blob != null) {
 			audio_source.src = blob;
+			audio_player.load();
+			audio_player.play();
 		} else {
 		    var sound_file_name = this.getAttribute('sound');
 		    var is_number = !isNaN(sound_file_name);
