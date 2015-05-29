@@ -139,8 +139,12 @@ $(".slider-grade-bubble").on("click",function(e){
 	}
 	catch(exception){}
 
-	window.rate_count = window.rate_count + 1
-	
+        window.rate_count = window.rate_count + 1
+        /** HACK for UgandaCAFE so no "zipcode" page */
+        if (window.rate_count == window.num_sliders) {
+	     $('#registerb').trigger('click');
+        }
+    
 	//$(this).parent().children(".bubble-"+median.replace("+","p")).innerHTML = "<div style=\"font-size: 10px;\">Median</font>";
 });
 

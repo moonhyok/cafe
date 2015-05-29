@@ -429,11 +429,11 @@ Students' names will not be displayed through M-CAFE. For any questions, comment
             <center>
               <div class="basic-header2 responsive-body" style="max-width: 500px;">{{client_settings.ZIP_CODE_INSTRUCTIONS}}</div>
             
-              <form id='reg_form' class='reg_form responsive-form'>
+              <form style="display:none" id='reg_form' class='reg_form responsive-form'>
             <center>
    
               <div data-role="fieldcontain" >
-               <input style="display:none" type ='tel' id='regzip' name='regzip' class='regforminput' placeholder="Zip Code" value="00000">
+               <input type ='tel' id='regzip' name='regzip' class='regforminput' placeholder="Zip Code" value="00000">
 
                <div class='alert-error' id='zipcode-error' style='display:none;'></div>
               </div>
@@ -835,7 +835,10 @@ Students' names will not be displayed through M-CAFE. For any questions, comment
   <center>
           <div class="home-btn-dialog-box">
             <div class="home-btn-title responsive-header" style="width:70%">
-              <span class="landing-page-banner-logout">{{client_settings.WELCOME_PAGE_TITLE}}</span> 
+              <span class="landing-page-banner-logout">
+		<img src="{{url_root}}/media/mobile/img/uganda/home.png"/>
+		{{client_settings.WELCOME_PAGE_TITLE}}
+	      </span> 
             </div>
             
             <div class="home-btn-wrapper" style="width:25%;display:inline-block; text-align: right;">
