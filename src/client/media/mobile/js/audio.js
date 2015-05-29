@@ -4,10 +4,29 @@ $(window).ready(function() {
 		if (blob != null) {
 			audio_source.src = blob;
 		} else {
-			audio_source.src = window.url_root + '/media/audio/' + this.getAttribute('sound') + '.wav';
+		    var sound_file_name = this.getAttribute('sound');
+		    var is_number = !isNaN(sound_file_name);
+		    var DELAY = 1; // seconds
+
+		    if (is_number) {
+			// we assume filenames with just numbers are comments, so we play the pre-comment-listen instructions before
+			audio_source.src = window.url_root + '/media/audio/pre-listen-comment-instructions.wav';
+			audio_player.load();
+			$(audio_player).bind("ended", function() {
+			    setTimeout(function() {
+				audio_source.src = window.url_root + '/media/audio/' + sound_file_name + '.wav';
+				audio_player.load();
+				audio_player.play();
+				$(audio_player).unbind("ended");
+			    }, DELAY * 1000);
+			});
+			audio_player.play();
+		    } else {
+			audio_source.src = window.url_root + '/media/audio/' + sound_file_name + '.wav';
+			audio_player.load();
+			audio_player.play();
+		    }
 		}
-		audio_player.load();
-		audio_player.play();
 	});
 });
 
