@@ -113,9 +113,11 @@ def mobile(request,entry_code=None):
         if medians[str(s.id)] <= 1e-5:
             medians[str(s.id)] = 0
         statement_labels[str(s.id)] = s.statement
-  
-    random_username = 'user'+ ''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(10))+'@example.com';
+
+    random_username_handle = ''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(10))
+    random_username = 'user'+ random_username_handle +'@example.com';
     random_password = ''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(10));
+    participant_id = random_username_handle[:3]
     num_users = len(active_users)
     su = User.objects.get(id=1)
     external_count = UserData.objects.filter(user = su, key='total_count')
@@ -143,7 +145,8 @@ def mobile(request,entry_code=None):
                        'random_username': random_username,
                        'random_password': random_password,
                        'num_users': num_users,
-                                             'statement_labels': json.dumps(statement_labels),
+                       'statement_labels': json.dumps(statement_labels),
+                       'participant_id': participant_id,
                        'medians': json.dumps(medians)}))
 
 def confirmation_mail(request):
