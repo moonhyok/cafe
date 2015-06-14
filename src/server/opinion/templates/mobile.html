@@ -385,11 +385,10 @@ Students' names will not be displayed through M-CAFE. For any questions, comment
 
 
               <!--<div class="median-grade-{{statement.id}} med-grade-box"></div>-->
-              </br></br>
 
               <div style="width: 100%;" class="responsive-padding">
                 <hr/>
-              <img style="width: 150px; height: auto; padding:5px;" src="{{url_root}}/media/mobile/img/uganda/ear.png" class="listen" sound="listen-statement-instructions"/>
+              <img style="width: 150px; height: auto; padding:5px;" src="{{url_root}}/media/mobile/img/uganda/question.png" class="listen" sound="listen-statement-instructions"/>
 
                 <div class="slider" style="margin-left: 15px;margin-right: 5px;" id="slider-{{statement.id}}"></div>
 
@@ -524,10 +523,10 @@ Students' names will not be displayed through M-CAFE. For any questions, comment
 
           </div> 
     <!--<img class="header-img-topic center" src="{{ url_root }}/media/mobile/img/cafe/CRC_join.png"/>-->
-      <div style="text-align: center;margin-top: 6px; height: 100px; width: 100px;" class="english responsive-body listen" sound="compare-instructions">    
+    <div style="text-align: center;margin-top: 6px; height: 100px; width: 100px;display:none;" class="english responsive-body">
       </div>
+    <img style="width: 80px; height: auto; padding:5px;" src="{{url_root}}/media/mobile/img/uganda/question.png" class="listen" sound="compare-instructions"/>
 
-          <br/>
           <div class="compare-box-0" style="max-width:620px;">
             <div class="compare-tag">
 
@@ -765,7 +764,8 @@ Students' names will not be displayed through M-CAFE. For any questions, comment
 
     <center>
       <div><span class="rate-username"></span></div>
-      <div class="listen userComment"></div>
+      <img style="width: 200px; height: auto; padding:5px;" src="{{url_root}}/media/mobile/img/uganda/ear.png" class="listen userComment"/>
+      <!-- <div class="listen userComment"></div> -->
       <div style="display:none" id='commentInput' class='answer responsive-answer english'></div>
       <div id='commentInputSpanish' class='answer responsive-answer spanish' style="display: none;"></div>
       
@@ -776,12 +776,11 @@ Students' names will not be displayed through M-CAFE. For any questions, comment
 
     <center>
       <div class="answerwrapper">
-        </br></br>
         <hr/>
-        <img style="width: 150px; height: auto; padding:5px;" src="{{url_root}}/media/mobile/img/uganda/ear.png" class="listen" sound="listen-comment-instructions"/>
+        <img style="width: 150px; height: auto; padding:5px;" src="{{url_root}}/media/mobile/img/uganda/question.png" class="listen" sound="listen-comment-instructions"/>
 
         <div class='sliders responsive-body' style="text-align: center;font-size: 18px; font-family: DroidSans-Bold, sans-serif;max-width: 620px;">
-    <span>{{client_settings.RATE_IMPORTANCE_QUESTION}}</span><br/><br/>
+    <span>{{client_settings.RATE_IMPORTANCE_QUESTION}}</span>
     <center>
       <!--(Not at all) 0   -  9 (Extremely)-->
       <div class="slider" id="slider-importance"></div>    
@@ -831,7 +830,9 @@ Students' names will not be displayed through M-CAFE. For any questions, comment
       </div> -->
 
 
-      <div style="text-align: center;margin-top: 6px; height: 100px; width: 100px;" class="english responsive-body listen" sound="leaves-instructions"><span><!--{{ topic }}--></span></div>
+<div style="text-align: center;margin-top: 6px; height: 100px; width: 100px;" class="english responsive-body">
+    <img style="width: 100px; height: auto; padding:5px;" src="{{url_root}}/media/mobile/img/uganda/question.png" class="listen" sound="leaves-instructions"/>
+      <span><!--{{ topic }}--></span></div>
       <div style="text-align: center;margin-top: 6px;" class="spanish responsive-body"><span>{{ topic_spanish }}</span></div>
       <div style="text-align: right; display:none;"><a href="#" class="map-info" style="color:#442b10;position:relative;top:5px;" onclick="accounts.hideAll();$('.dialog-help-map1').show();window.cur_state = 'faq';window.prev_state = 'map';"><img width="30px" src="{{url_root}}/media/mobile/img/cafe/info_button.png"></a></div>
 
