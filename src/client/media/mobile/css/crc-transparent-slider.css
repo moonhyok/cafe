@@ -13,16 +13,16 @@
 	}
 
 	.crc-div-wrapper{
-	max-width: 400px;
+	    /* max-width: 180px; */
 	}
 
 	.grade-container{
 		width: 100%; 
 	}
 		.slider-grade-main{
-		height: 50px;
+		height: 80px;
 		text-align: center;
-		width: 50px;
+		width: 80px;
 		display:inline-block;
 margin-right: 3px;
 		margin-left: 3px;
@@ -84,7 +84,7 @@ margin-right: 3px;
 	}
 
 	.slider{
-		max-width: 460px;
+	    /* max-width: 200px; */
 	}
 
 	.bubble-Ap{

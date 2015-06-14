@@ -2820,6 +2820,7 @@ def get_audio(request):
     comments = glob.glob(MEDIA_ROOT + "/audio/[0-9]*.wav")
     statements = set(glob.glob(MEDIA_ROOT + "/audio/*.wav")) - set(comments)
     comments = filter(lambda x: '_' not in x, comments)    
+    statements = filter(lambda x: '_' not in x, statements)    
 
 
     comments = sorted(map(lambda x: os.path.basename(x), comments), key=lambda x: int(x.split(".")[0]))
@@ -2858,8 +2859,11 @@ def os_save_audio_comment(request):
 
 def save_audio(data, fname_prefix):
     from django.core.files.storage import default_storage
-    from django.core.files.base import ContentFile    
-    fname = "audio/%s.wav" % fname_prefix
+    from django.core.files.base import ContentFile
+    if fname_prefix.endswith(".wav"):
+        fname = "audio/%s" % fname_prefix
+    else:
+        fname = "audio/%s.wav" % fname_prefix
     if default_storage.exists(fname):
         os.rename(settings.MEDIA_ROOT + fname,
                   settings.MEDIA_ROOT + default_storage.get_available_name(fname))

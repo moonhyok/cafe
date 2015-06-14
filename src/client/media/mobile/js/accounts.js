@@ -962,6 +962,7 @@ $(document).ready(function() {
     });
 
     $('.burger-div-logout').click(function(e) {
+        $("#unique-participant-id").hide();
         rate.logUserEvent(1,'logout');
         accounts.hideAll();
         window.cur_state = 'logout';

@@ -102,7 +102,7 @@
 		<li><a href="../statistics/">Participation Statistics</a></li>
 		<li><a href="../userdetails/">Rating Statistics</a></li>
 		<li><a href="../bannedusers/">Comment Statistics</a></li>
->
+
 		<!--<li><a href="../blacklistedcomments/">Blacklisted Comments</a></li>
 		<li><a href="../blacklisteduser/">Comments from Previously Blacklisted User</a></li>
 		<li><a href="../highvariance/">High Variance Comments</a></li>
@@ -111,6 +111,37 @@
 		
 		<!--<li><a href="../suggestion/">Suggestion Statistics</a></li>-->
 	</ul>
+
+	</br></br>
+    <ul id="menu">
+
+		<li><a id="logout">Logout</a></li>		
+    <script>
+    	$('#logout').click(function() {
+    		$.ajax({
+    			url: '../../accountsjson/logout/',
+    			type: 'POST',
+    			dataType: 'json',
+    			success: function(data) {
+    				if (data.hasOwnProperty('success')) {
+    					window.location = '../../';
+    				}
+    			},
+    			error: function() {
+    				console.log("ERROR posting login request. Abort!");
+    			}
+    		});
+    	})
+    </script>		
+		
+		<!--<li><a href="../blacklistedcomments/">Blacklisted Comments</a></li>
+		<li><a href="../blacklisteduser/">Comments from Previously Blacklisted User</a></li>
+		<li><a href="../highvariance/">High Variance Comments</a></li>
+		<li><a href="../bannedusers/">Banned Users</a></li>		
+		<li><a href="../userdetails/">New User Details</a></li>-->
+		
+		<!--<li><a href="../suggestion/">Suggestion Statistics</a></li>-->
+	</ul>	
 	<!-- end #sidebar1 -->
   </div>
 

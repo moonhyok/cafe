@@ -253,7 +253,7 @@
       <source id="audio_source" src="" type="audio/wav">
     </audio>
     <div class="full-page">
-      <div style="position:absolute; z-index:9999; font-size:32px;">{{participant_id}}</div>
+      <div id="unique-participant-id" style="position:absolute; z-index:9999; font-size:32px;margin:4px;">{{participant_id}}</div>
 
 
       <div class='landing'>
@@ -284,7 +284,7 @@ M-CAFE is a platform that facilitates student feedback and suggestions to the in
 Students will periodically be asked to spend a few minutes and enter their feedback into M-CAFE.            
           </div>-->
 
-          <div style="position: absolute; top: 20px; right: 210px;"><img src = "{{url_root}}/media/mobile/img/uganda/RH_Logo-01.png" style="border: none; max-width: 100%; width: 370px;" /></div>
+          <div style="position: absolute; top: 0px; right: 15vw;"><img src = "{{url_root}}/media/mobile/img/uganda/RH_Logo-01.png" style="border: none; max-width: 100%; width: 370px;" /></div>
           <div class='button-div-red first-time-btn responsive-btn' style="position: relative; bottom: 350px;"><span style="font-size:40px">&#10142;</span></div>
           <!--<div class='returning-btn return-btn' style="display: inline-block;"><font class="begin-font">Returning</font></div>-->
 
@@ -372,23 +372,24 @@ Students' names will not be displayed through M-CAFE. For any questions, comment
             </div>  
 
             <center>  
-              <div class="question-number responsive-body"><span>Question</span> {{ statement.id }} <span>of</span> {{ statements|length }}.</div>
+              <div class="question-number responsive-body"><span></span> {{ statement.id }} <span>of</span> {{ statements|length }}.</div>
               <!-- <div class="question-number responsive-body">Please grade the State of California on:</div>
               <div class="statement-style responsive-body english">{{ statement.statement }}</div>
               <div class="statement-style responsive-body spanish" style="display:none;">{{ statement.spanish_statement }}</div> -->
 
-              <img style="width: 300px; height: auto; padding:5px;" src="{{url_root}}/media/mobile/img/uganda/statement{{statement.id}}.png" />
-              <img style="width: 300px; height: auto; padding:5px;" src="{{url_root}}/media/mobile/img/uganda/ear.png" class="listen" sound="statement-{{statement.id}}"/> 
+              <img style="width: 250px; height: auto; padding:5px;" src="{{url_root}}/media/mobile/img/uganda/statement{{statement.id}}.png" />
+              <img style="width: 250px; height: auto; padding:5px;" src="{{url_root}}/media/mobile/img/uganda/ear.png" class="listen" sound="statement-{{statement.id}}"/> 
               <!-- <div class="responsive-body listen" sound="statement-{{statement.id}}"></div> -->
 
 
 
 
               <!--<div class="median-grade-{{statement.id}} med-grade-box"></div>-->
-
+              </br></br>
 
               <div style="width: 100%;" class="responsive-padding">
-                
+                <hr/>
+              <img style="width: 150px; height: auto; padding:5px;" src="{{url_root}}/media/mobile/img/uganda/ear.png" class="listen" sound="listen-statement-instructions"/>
 
                 <div class="slider" style="margin-left: 15px;margin-right: 5px;" id="slider-{{statement.id}}"></div>
 
@@ -523,6 +524,8 @@ Students' names will not be displayed through M-CAFE. For any questions, comment
 
           </div> 
     <!--<img class="header-img-topic center" src="{{ url_root }}/media/mobile/img/cafe/CRC_join.png"/>-->
+      <div style="text-align: center;margin-top: 6px; height: 100px; width: 100px;" class="english responsive-body listen" sound="compare-instructions">    
+      </div>
 
           <br/>
           <div class="compare-box-0" style="max-width:620px;">
@@ -762,7 +765,7 @@ Students' names will not be displayed through M-CAFE. For any questions, comment
 
     <center>
       <div><span class="rate-username"></span></div>
-      <div class="listen"></div>
+      <div class="listen userComment"></div>
       <div style="display:none" id='commentInput' class='answer responsive-answer english'></div>
       <div id='commentInputSpanish' class='answer responsive-answer spanish' style="display: none;"></div>
       
@@ -773,6 +776,10 @@ Students' names will not be displayed through M-CAFE. For any questions, comment
 
     <center>
       <div class="answerwrapper">
+        </br></br>
+        <hr/>
+        <img style="width: 150px; height: auto; padding:5px;" src="{{url_root}}/media/mobile/img/uganda/ear.png" class="listen" sound="listen-comment-instructions"/>
+
         <div class='sliders responsive-body' style="text-align: center;font-size: 18px; font-family: DroidSans-Bold, sans-serif;max-width: 620px;">
     <span>{{client_settings.RATE_IMPORTANCE_QUESTION}}</span><br/><br/>
     <center>
@@ -824,7 +831,7 @@ Students' names will not be displayed through M-CAFE. For any questions, comment
       </div> -->
 
 
-      <div style="text-align: center;margin-top: 6px; height: 100px; width: 100px;" class="english responsive-body listen" sound="instructions"><span><!--{{ topic }}--></span></div>
+      <div style="text-align: center;margin-top: 6px; height: 100px; width: 100px;" class="english responsive-body listen" sound="leaves-instructions"><span><!--{{ topic }}--></span></div>
       <div style="text-align: center;margin-top: 6px;" class="spanish responsive-body"><span>{{ topic_spanish }}</span></div>
       <div style="text-align: right; display:none;"><a href="#" class="map-info" style="color:#442b10;position:relative;top:5px;" onclick="accounts.hideAll();$('.dialog-help-map1').show();window.cur_state = 'faq';window.prev_state = 'map';"><img width="30px" src="{{url_root}}/media/mobile/img/cafe/info_button.png"></a></div>
 
@@ -1272,13 +1279,13 @@ Students' names will not be displayed through M-CAFE. For any questions, comment
       </div>
 
       <script>
-       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+   //     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+   // (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+   //      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+   //     })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-       ga('create', 'UA-34341740-14', 'citizenreportcard.org');
-       ga('send', 'pageview');
+   //     ga('create', 'UA-34341740-14', 'citizenreportcard.org');
+   //     ga('send', 'pageview');
 
       </script>
       <script type='text/javascript' src='{{url_root}}/media/mobile/js/recorder.js'></script>

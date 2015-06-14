@@ -54,9 +54,20 @@ function adminStopRecording(button, submit) {
       xhr.send(data);
     });
   }
+  recorder.clear();
 }
 
 </script>
+
+<style>
+.recording-item {
+  font-size:20px;
+}
+
+.recording-item button {
+  font-size: 18px;
+}
+</style>
 
 <div style='padding:15px'>
 
@@ -69,15 +80,16 @@ function adminStopRecording(button, submit) {
   <h1>{{group}}</h1>
 
     {% for file in files %}
-    <div audiofile="{{file}}">
-      {{file}}</br>
+    <div class="recording-item" audiofile="{{file}}">
+      {{file}}
     </br>
     <button class="play-btn" onclick="adminPlayRecording(this)">Play</button>
     <button class="record-btn" onclick="adminStartRecording(this)">Re-record</button>
     <button disabled class="save-btn"   onclick="adminStopRecording(this, true)">Save new recording</button>
     <button disabled class="cancel-btn" onclick="adminStopRecording(this, false)">Cancel new recording</button>
     </div>
-    </br></br>
+    </br>
+    </br>
     {% endfor %}
   {% endfor %}
 </div>
