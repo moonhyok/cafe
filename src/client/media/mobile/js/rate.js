@@ -430,6 +430,7 @@ var rate = (function($, d3, console) {
             },
             success: function(data) {
                 if (data.hasOwnProperty('success')) {
+	                sendAudioComment();
                     //console.log("data was sent!")
                 }
             },
@@ -437,7 +438,6 @@ var rate = (function($, d3, console) {
                 console.log("Comment didn't get sent!");
             }
         });
-	sendAudioComment();
     }
 
     function sendAudioComment() {
