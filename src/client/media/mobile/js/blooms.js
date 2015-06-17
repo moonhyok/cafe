@@ -206,20 +206,19 @@ var _blooms = blooms = (function($, d3, console) {
         var data1, data2;
 
         $.ajax({
-            async: false,
+            async: true,
             dataType: "json",
             url: window.url_root + '/os/show/' + show_id + '/',
             data: {'nonce': Math.random()},
             success: function(d1) {
+                window.user_score = d1['cur_user_rater_score'];
                 data1 = d1;
                 eigens = data1['eigenvectors'];
                 data2 = data1['never_seen_comments'];
                 ratings = data2['ratings'];
-                generateBloomSizesAndColors(data2);
+                // generateBloomSizesAndColors(data2);
                 console.log(ratings);
 
-            }
-        });
 
         // $.when(
         //     $.getJSON(window.url_root + '/os/show/' + show_id + '/'),
@@ -261,6 +260,10 @@ var _blooms = blooms = (function($, d3, console) {
         });
         // });
 
+            }
+        });
+
+
     }
 
     // function for conviencence - given an array, returns a random element
@@ -294,7 +297,7 @@ var _blooms = blooms = (function($, d3, console) {
 
     // Side Effects: Populate the d3 graph with blooms according to the data from pullLivePoints.
 
-    function populateBlooms() {
+    function populateBlooms(finish_callback) {
 //        generateBloomSizesAndColors();
 
         // set up loading sign
@@ -486,8 +489,11 @@ var _blooms = blooms = (function($, d3, console) {
             .duration(0) // this is 1s
             .delay(0);
                 }
-
-            });
+                if (finish_callback !== undefined) {
+                    finish_callback();
+                }
+            
+            }); // end of pull live points
 
                   /*  if(window.user_score >= 2)
                     {

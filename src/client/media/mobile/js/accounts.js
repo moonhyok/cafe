@@ -74,14 +74,14 @@ var accounts = (function($, d3, console) {
     //  sends the data that has been stored in the window to the server after a successful the login.
 
     function loginAfterRegister(loginData,dcontinue) {
-        $.ajax({
-            async : false,
-            url: window.url_root + '/accountsjson/login/',
-            type: 'POST',
-            dataType: 'json',
-            data: loginData,
-            success: function(data) {
-                if (data.hasOwnProperty('success')) {
+         // $.ajax({
+         //    async : false,
+         //    url: window.url_root + '/accountsjson/login/',
+         //    type: 'POST',
+         //    dataType: 'json',
+         //    data: loginData,
+         //    success: function(data) {
+         //        if (data.hasOwnProperty('success')) {
                     console.log("successful login detected!!");
                     window.authenticated = true;
                     //rate.sendComment(window.comment);
@@ -158,14 +158,14 @@ var accounts = (function($, d3, console) {
                     //rate.sendAgreementRating(window.ratings[window.ratings.length - 1]);
                     //rate.sendInsightRating(window.ratings[window.ratings.length - 1]);
                     //window.authenticated = true;
-                } else {
-                    // we should rerender the form here.
-                }
-            },
-            error: function() {
-                console.log("ERROR posting login request. Abort!");
-            }
-        });
+                // } else {
+                //     // we should rerender the form here.
+                // }
+        //     },
+        //     error: function() {
+        //         console.log("ERROR posting login request. Abort!");
+        //     }
+        // });
     }
 
 
@@ -261,16 +261,16 @@ var accounts = (function($, d3, console) {
         $('.registerb').html("Next");
         //utils.ajaxTempOff(function() {
 
-        $.ajax({
-            async:false,
-            type: "GET",
-            dataType: 'json',
-            url: window.url_root + '/os/show/1/',
-            data: {'nonce': Math.random()},
-            success: function(data) {
-                //$('.score-value').text("" + ~~(data['cur_user_rater_score'] * window.conf.SCORE_SCALE_FACTOR));
-                window.user_score = data['cur_user_rater_score'];
-                //$('.username').text(' ' + data['cur_username']);
+        // $.ajax({
+        //     async:false,
+        //     type: "GET",
+        //     dataType: 'json',
+        //     url: window.url_root + '/os/show/1/',
+        //     data: {'nonce': Math.random()},
+        //     success: function(data) {
+        //         //$('.score-value').text("" + ~~(data['cur_user_rater_score'] * window.conf.SCORE_SCALE_FACTOR));
+        //         window.user_score = data['cur_user_rater_score'];
+        //         //$('.username').text(' ' + data['cur_username']);
                 if (dcontinue){
                             accounts.hideAll();
                             $('.dialog-continue').show();
@@ -282,11 +282,11 @@ var accounts = (function($, d3, console) {
                             window.prev_state = 'dialog';
                         } 
                 
-            },
-            error: function() {
-                console.log("didn't get sent!");
-            }
-        });
+        //     },
+        //     error: function() {
+        //         console.log("didn't get sent!");
+        //     }
+        // });
     }
     
     function sendEmail(mail){
@@ -427,7 +427,7 @@ $(document).ready(function() {
 
         //utils.ajaxTempOff(function() {
             $.ajax({
-                async:false,
+                async:true,
                 url: window.url_root + '/accountsjson/register/',
                 type: 'POST',
                 dataType: 'json',
@@ -448,16 +448,17 @@ $(document).ready(function() {
                             loading = "Cargando"
 
                         utils.showLoading(loading, function() {
+                            blooms.populateBlooms(function () {
                             accounts.loginAfterRegister(loginData,dialogcontinue);
-                            blooms.populateBlooms();
+
                             window.scrollTo(0,0); 
                             //$('.register').hide();
-                            $("#regzip").attr("disabled", true);
-                            utils.hideLoading();
-                            window.conf.ZIPCODE=registrationData.zipcode;
-                            window.prev_state = 'register';
-                            window.cur_state = 'dialog';
-
+                                $("#regzip").attr("disabled", true);
+                                utils.hideLoading();
+                                window.conf.ZIPCODE=registrationData.zipcode;
+                                window.prev_state = 'register';
+                                window.cur_state = 'dialog';
+                            });
 			                //Slow TODO
 			                //accounts.getNeighborStat();
 
