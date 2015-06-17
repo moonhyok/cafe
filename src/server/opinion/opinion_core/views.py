@@ -114,10 +114,13 @@ def mobile(request,entry_code=None):
             medians[str(s.id)] = 0
         statement_labels[str(s.id)] = s.statement
 
-    random_username_handle = ''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(10))
+    random_username_handle = ''.join(random.choice(string.ascii_lowercase + string.digits) for x in range(10))
     random_username = 'user'+ random_username_handle +'@example.com';
     random_password = ''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(10));
-    participant_id = random_username_handle[:3]
+    if request.user.is_authenticated():
+        participant_id = request.user.username.replace("user", "")[:3]
+    else:
+        participant_id = random_username_handle[:3]
     num_users = len(active_users)
     su = User.objects.get(id=1)
     external_count = UserData.objects.filter(user = su, key='total_count')
