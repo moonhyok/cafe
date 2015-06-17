@@ -48,10 +48,13 @@ from django.core.validators import validate_email
 from django.core.exceptions import *
 import smtplib
 
-os.environ['MPLCONFIGDIR'] = "/tmp"
-import matplotlib
-matplotlib.use('Agg')
-import matplotlib.pyplot as plt
+try:
+    os.environ['MPLCONFIGDIR'] = "/tmp"
+    import matplotlib
+    matplotlib.use('Agg')
+    import matplotlib.pyplot as plt
+except:
+    pass
 
 try:
     import json

@@ -31,10 +31,13 @@ import hashlib
 import os
 import re
 
-os.environ['MPLCONFIGDIR'] = "/tmp"
-import matplotlib
-matplotlib.use('Agg')
-import matplotlib.pyplot as plt
+try:
+    os.environ['MPLCONFIGDIR'] = "/tmp"
+    import matplotlib
+    matplotlib.use('Agg')
+    import matplotlib.pyplot as plt
+except:
+    pass
 
 try:
     import json
