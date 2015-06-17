@@ -82,19 +82,42 @@ $(window).ready(function() {
     $(".startRecording").attr('src', window.url_root + '/media/mobile/img/uganda/talking.png');
     $(".stopRecording").css('visibility', 'hidden');
 
-    $(".listenComment").css('visibility', 'visible');
-    __log('Stopped recording.');
+    createDownloadLink(function() {
+
+      var data = new FormData();
+      data.append('file', window.current_audio_blob);
+      data.append('filename', 'tmp');
+
+      xhr = new XMLHttpRequest();
+      xhr.open( 'POST', window.url_root + '/os/saveaudio/', true );
+      xhr.onreadystatechange = function (response) {
+        if (xhr.readyState==4 && xhr.status==200) {
+          $(".listenComment").css('visibility', 'visible');
+          recorder.clear();
+          __log('Stopped recording.');
+          console.log("worked");
+        }
+      };
+      xhr.send(data);
+    });
+
+
+
+  
 
     // create WAV download link using audio data blob
-    createDownloadLink();
-    recorder.clear();
+
+  
   }
 
-  function createDownloadLink() {
+  function createDownloadLink(callback) {
     recorder && recorder.exportWAV(function(blob) {
 	var url = URL.createObjectURL(blob);
 	window.current_audio_blob = blob;
-      $(".listenComment").attr("sound-blob", url);
+  console.log("creating blob");
+      // $(".listenComment").attr("sound-blob", url);
+      $(".listenComment").attr("sound", "tmp");
+
       var li = document.createElement('li');
       var au = document.createElement('audio');
       var hf = document.createElement('a');
@@ -111,6 +134,10 @@ $(window).ready(function() {
 
       var data = new FormData();
       data.append('file', blob);
+
+      if (callback !== 'undefined') {
+        callback();
+      }
 
       /* $.ajax({
         url :  "/os/saveaudio/",
