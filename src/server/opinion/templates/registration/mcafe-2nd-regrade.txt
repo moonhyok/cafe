@@ -1,0 +1,12 @@
+Dear CS169.2x student,
+
+Congrats on completing the second week of lectures and the first Legacy assignment.  This is a friendly reminder to return using your unique link below to share your perspectives and help us understand how students are progressing so that we can improve the course!  Just click:
+
+http://opinion.berkeley.edu/mooc/mobile/{{entrycode}}/
+
+Thank you again for your valuable input!
+
+- The M-CAFE Team at UC Berkeley
+
+ps. for more on the M-CAFE project:
+http://opinion.berkeley.edu/mooc/mcafe_stats/

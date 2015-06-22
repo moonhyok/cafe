@@ -94,6 +94,44 @@ def return_zipcode(request):
     else:
        return '0'
 
+def return_visit_time(request,entrycode):
+    if entrycode==None:
+       return 1
+    else:
+       if request.user.is_authenticated():  #valid entry code user
+           user_visit=UserData.objects.filter(user=request.user,key='visitTimes')
+           if len(user_visit)>0:
+              return int(user_visit[0].value)
+           else:
+              return 1
+       else: 
+           return 1
+
+def checkemail(request):
+    username=request.REQUEST.get('username','')
+    username=username.lower()[0:30]
+    user=User.objects.filter(username__icontains=username)
+    print(str(len(user))+ " length")
+    print(user)
+    if len(user)>0:
+       entrycode=EntryCode.objects.filter(username__icontains=username)
+       print(str(entrycode)+" HIHI")
+
+       if len(entrycode)>0:
+          data={}
+          data['entrycode']=entrycode[0].code
+          data['registered']=True
+          return HttpResponse(json.dumps(data),content_type="application/json")
+       else:
+          data={} 
+          data['registered']=False
+          return HttpResponse(json.dumps(data),content_type="application/json")
+    else:
+       print("Bye")
+       data={} 
+       data['registered']=False
+       return HttpResponse(json.dumps(data),content_type="application/json")
+
 @cache_control(no_cache=True)
 def mobile(request,entry_code=None):
     create_visitor(request)
@@ -124,7 +162,8 @@ def mobile(request,entry_code=None):
     return render_to_response('mobile.html', context_instance = RequestContext(request, {'url_root' : settings.URL_ROOT,
                                                                                          'return_user_first_time':str(return_user_first_time(request,entry_code)).lower(),
                                                                                          'zipcode': str(return_zipcode(request)),
-                       'loggedIn' : str(request.user.is_authenticated()).lower(),
+                                                                                         'visit_time': str(return_visit_time(request,entry_code)),
+                       'loggedIn' : request.user.is_authenticated(),
                        'change_prompt' : str(request.user.is_authenticated()).lower(),
                        'client_data': mobile_client_data(request),
                        'entry_code': str(entry_code!=None).lower(),

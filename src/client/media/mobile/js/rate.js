@@ -565,7 +565,7 @@ $(document).ready(function() {
           $('.scorebox').hide();
           $('.menubar').hide();
           window.prev_state = 'comment';
-          window.cur_state = 'continue';
+          window.cur_state = 'map';
         //$('.scorebox').show();
     });
 

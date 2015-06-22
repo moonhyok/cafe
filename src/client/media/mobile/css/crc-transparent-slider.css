@@ -87,6 +87,11 @@ margin-right: 3px;
 		max-width: 200px;
 	}
 
+	.bubble-Num{
+		background-image: url('../img/cafe/keypad.png');
+		background-size: cover;
+	}
+
 	.bubble-Ap{
 		background-image: url('../img/cafe/keypad.png');
 		background-size: cover;

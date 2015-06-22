@@ -79,6 +79,10 @@
 		max-width: 300px;
 	}
 	
+	.bubble-Num{
+		background-color: rgba(0,250,0,1.0) !important;
+	}
+
 
 	.bubble-Ap{
 		background-color: rgba(0,250,0,1.0) !important;

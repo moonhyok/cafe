@@ -205,7 +205,7 @@ var accounts = (function($, d3, console) {
         $("#skip-img"+id).css("opacity","1.0");
         //$("#slider-"+id).css("background-color","rgba(200,200,200,0.3)");
         document.getElementById('skip-img'+id).innerHTML = "Grade";
-        rate.logUserEvent(11,'slider_set ' + id + ' ' + 'Grade');
+        rate.logUserEvent(11,window.visitTime+' visit '+'slider_set ' + id + ' ' + 'grade');
     }
     else
     {
@@ -218,7 +218,7 @@ var accounts = (function($, d3, console) {
     document.getElementById('skip-img'+id).style.width = '50px';*/
     window.skipped[id-1] = false;
     document.getElementById('skip-img'+id).innerHTML = "Skip";
-    rate.logUserEvent(11,'slider_set ' + id + ' ' + 'Skip');
+    rate.logUserEvent(11,window.visitTime+' visit '+'slider_set ' + id + ' ' + 'skip');
     }
 
     }
@@ -365,6 +365,7 @@ $(document).ready(function() {
             window.cur_state = 'dialog';
             return;
         }
+
 
         rate.logUserEvent(9,'register');
 
@@ -765,6 +766,75 @@ $(document).ready(function() {
         $('.login').hide();
     });
 
+    $('#login_form').submit(function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        var serializedFormData = $(this).serialize();
+
+            $.ajax({
+                async: false,
+                url: window.url_root + '/accountsjson/login/',
+                type: 'POST',
+                dataType: 'json',
+                data: serializedFormData,
+                success: function(data) {
+                    $("#login-error").hide();
+
+                    if (data.hasOwnProperty('success')) {
+                        accounts.setAuthenticated();
+                        utils.showLoading("Loading...", function() {
+                            blooms.populateBlooms();
+                            accounts.initLoggedInFeatures();
+                            $('.top-bar').show();
+
+                            setTimeout(function() { // d3 needs a little extra time to load
+                                $('.login').hide();
+                            }, 1000);
+                        });
+                    } else {
+                        console.log("Failed login attempt");
+                        $('#login-error').text(data['form_errors'].__all__[0]);
+                        $("#login-error").show();
+                        $('#login').find('.ui-btn-active').removeClass('ui-btn-active ui-focus');
+
+                    }
+                },
+                error: function() {
+                    console.log("ERROR posting login request. Abort!");
+                }
+            });
+        
+
+    });
+
+    $('.exec-login').click(function() {
+    window.prev_state = 'home';
+    window.cur_state = 'login';
+    $.ajax({
+            async:false,
+            type: "POST",
+            dataType: 'json',
+            url: window.url_root + "/checkemail/",
+            data: {'username':$('#login-email').val()},
+            success: function(data) {
+                console.log(data.registered);
+
+                if (data.registered==true) {
+                    
+                    console.log("data was sent!")
+                    window.location.href=window.url_root+"/mobile/"+data.entrycode+"/";
+                }
+                else
+                {
+                    $('#login-error').text("The email address you provided is not registered with M-Cafe.");
+                    $("#login-error").show();
+                }
+
+            }
+        });
+    });
+
     $('.my-comment-btn').click(function() {
         accounts.loadMyCommentDiv();
         $('.scorebox').hide();
@@ -973,6 +1043,11 @@ $(document).ready(function() {
 
     $('.logout-start-over').click(function() {
 	    window.location = window.url_root + "/mobile/";
+    });
+
+    $('.return-btn').click(function() {
+        accounts.hideAll();
+        $('.login').show();
     });
 
     $('.logout-login-again').click(function() {

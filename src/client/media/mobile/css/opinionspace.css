@@ -225,6 +225,13 @@ table.pretty caption {
 	cursor: pointer;
 	cursor: hand;
 }
+.login-form-go-back{
+	position: relative;
+	left: -7px;
+	top: 5px;
+	cursor: pointer;
+	cursor: hand;
+}
 
 /* Large desktop */
 @media (min-width: 1200px) {
@@ -1176,9 +1183,9 @@ padding-right: 7px;
 }
 
 .comment-admin-text-a{
-    font-size: 13px !important;
-    line-height: 11px;
-    color: #ffffff !important;
+    font-size: 15px !important;
+    line-height: 12px;
+    color: #000000 !important;
     font-family: "Lucida Grande", "Lucida Sans Unicode", Arial, sans-serif;
 }
 
@@ -1615,11 +1622,11 @@ padding-top: 20px;
    }
 
    .flag-style{
-    position: fixed;
+    position: relative;
     top: 180px;
-    left: 20px;
-    font-size: 14px;
+    font-size: 28px;
     color: #FF0000;
+    text-align: center
    }
 
   .avg-grades div {

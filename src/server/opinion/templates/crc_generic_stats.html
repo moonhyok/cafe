@@ -1,182 +1,471 @@
 <!DOCTYPE html>
+<html lang="en">
+
 <head>
-	<meta name='viewport' content='user-scalable=no, width=device-width,initial-scale=1, maximum-scale=1' />
-    <title>CRC Stats Page</title>
-<script src="http://d3js.org/d3.v3.min.js"></script>
-<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.css" />
-<link rel="stylesheet" href="{{url_root}}/media/mobile/css/stats.css" />
-<script src="http://cdn.leafletjs.com/leaflet-0.7.1/leaflet.js?2"></script>
-<script type='text/javascript' src='{{url_root}}/media/mobile/jquery-mobile/jquery-1.10.2.min.js'></script>
-<script type='text/javascript' src='{{url_root}}/media/mobile/js/cartogram.js'></script>
-<script type='text/javascript' src='{{url_root}}/media/mobile/js/topojson.js'></script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>IEOR 115 MCAFE SUMMARY</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="http://opinion.berkeley.edu/m-cafe-3/media/mobile/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="http://opinion.berkeley.edu/m-cafe-3/media/mobile/css/freelancer.css" rel="stylesheet" type="text/css">
+    <link href="http://opinion.berkeley.edu/m-cafe-3/media/mobile/css/mcafe_stats.css" rel="stylesheet" type="text/css">
+    <link href="http://opinion.berkeley.edu/m-cafe-3/media/mobile/css/jquery.dynatable.css" rel="stylesheet" type="text/css">
+    
+    <!-- Fonts -->
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+
+    <!-- IE8 support for HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="http://d3js.org/topojson.v1.min.js"></script>
+    <script src="http://opinion.berkeley.edu/m-cafe-3/media/mobile/js/datamaps.world.min.js"></script>
+    <script>
+        window.url_root = 'http://opinion.berkeley.edu/m-cafe-3';
+    </script>
 </head>
 
-<script>
-$( document ).ready(function() {
-    $(".spanish").hide();
-});
-</script>
+<body id="page-top" class="index">
 
-<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#page-top">IEOR 115 M-CAFE Summary</a>
+            </div>
 
-<!--<div class="home-btn-dialog-box">
-    <img width="30px;" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
-    <a href="{{url_root}}/"><img width="30px;" id="home-btn" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png"></a>
-    <img width="30px;" id="help-btn" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn.png">
-</div>-->
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#portfolio">PARTICIPATION</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#about">RATINGS</a>
+                    </li>
+                   <!-- <li class="page-scroll">
+                        <a href="#contact">TOP IDEAS</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#recent">RECENT IDEAS</a>
+                    </li> -->
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
 
-<br>
-<center>
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <!--<img class="img-responsive" src="http://opinion.berkeley.edu/m-cafe-3/media/mobile/img/cafe/cafe-title-cropped-2.png" alt="">-->
+                    <div class="intro-text">
+                        <span class="skills">Examine how your classmates have graded IEOR 115 and review the top-rated ideas on how the course can be improved</span><br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <section id="portfolio">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>PARTICIPATION</h2><br>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="intro-text">
+              <span class="skills">As of May 1, 2015 (week 15): 100 students have graded the course with 2400 quantitative analysis topic grades (Course Difficulty, Course Usefulness, Self-Enthusiasm, Self-Performance and HW Effectiveness), 271 comments and 2521 peer-to-peer ratings.</span><br>
+              </div>
+                  
+                </div>
+            </div>
+        </div>
+    </section>
 
-<div class="stats-section">
+    <section class="success" id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Rating Distribution</h2><br>
+                </div>
+            </div>
+        <div class="row">
+            <div class="col-lg-12 text-center">
+            <div class="intro-text">
+                <span class="skills">Plot based on the mean ratings each week for the entire class.</span><br>
+            </div>
+        </div>
+        </div>
+            <ul class="list-group">
+                <a class="portfolio-link">
+                    <li class="list-group-item list-group-item-info">1. How would you rate this course so far in terms of technical difficulty? </li>
+                    <div style="text-align:center"><img src="https://github.com/mozhou/Public/blob/master/img/QAT1.png?raw=true" alt="image" align="middle"></div>
+                </a>
+                <a class="portfolio-link">
+                    <li class="list-group-item list-group-item-info">2. How would you rate this course so far in terms of usefulness to your career?</li>
+                    <div style="text-align:center"><img src="https://github.com/mozhou/Public/blob/master/img/QAT2.png?raw=true" alt="image" align="middle"></div>
+                </a>
+                <a class="portfolio-link">
+                    <li class="list-group-item list-group-item-info">3. How would you rate your enthusiasm so far for this course?</li>
+                  <div style="text-align:center"><img src="https://github.com/mozhou/Public/blob/master/img/QAT3.png?raw=true" alt="image" align="middle"></div>
+                </a>
+                <a class="portfolio-link">
+                    <li class="list-group-item list-group-item-info">4. How would you rate your performance in this course so far?</li>
+                    <div style="text-align:center"><img src="https://github.com/mozhou/Public/blob/master/img/QAT4.png?raw=true" alt="image" align="middle"></div>
+                </a>
+                <a class="portfolio-link">
+                    <li class="list-group-item list-group-item-info">5. How would you rate the effectiveness of course assignments to help you develop your skills?</li>
+                  <div style="text-align:center"><img src="https://github.com/mozhou/Public/blob/master/img/QAT5.png?raw=true" alt="image" align="middle"></div>
+                </a>
+            </ul>
+            
+        </div>
+    </section>
 
-<div style="text-align: right; width: 100%;">
-<a href="#" class="english" onclick="$('.english').hide();$('.spanish').show();">Español</a>
-<a href="#" class="spanish" onclick="$('.spanish').hide();$('.english').show();">English</a>
-</div>
+    <!-- <section id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>TOP IDEAS</h2><br>
+                </div>
+            </div>
+            <div class="table-responsive">
+                                <table class="table table-bordered table-striped" id="top-ideas">
+                    <thead>
+                        <th class="col-sm-1">Ranking</th>
+                        <th class="col-sm-2">Date</th>
+                        <th class="col-sm-8">Idea</th>
+                        <th class="col-sm-1"># Peer Ratings</th>
+                    </thead>
+                    <tbody>
+                        
 
-<span class="english">Date:</span><span class="spanish">La fecha:</span>
+                      <tr>
+                         <td>1</td>
+                         <td>April 1, 2015, 4:57 p.m.</td>
+                         <td>I think it would be useful to be given a practice final before dead week so we know what to expect.</td>
+                         <td>2</td>
+                     </tr>
+                     
 
-<strong>{{date}}</strong><br>
-    <span class="english">Over <strong>10,000</strong> people from all 58 counties have visited and over <strong>30,000</strong> grades have been entered so far.</span>
-    <span class="spanish"><strong>10 000</strong> personas de los 58 condados han concedido más de <strong>30 000</strong> notas al estado de California</span></div>
+                      <tr>
+                         <td>2</td>
+                         <td>March 24, 2015, 9:33 a.m.</td>
+                         <td>Oftentimes the course material seems irrelevant to the description and some of the guest speakers are speaking too technically that most of the class isn&#39;t able to digest the information and apply it to our projects.</td>
+                         <td>4</td>
+                     </tr>
+                     
 
-<br>
-<hr>
-<div class="stats-section-title" id="geodistribution">
-    <div class="stats-label-big">
-        <span class="english">Median Grades For Each County</span>
-        <span class="spanish">Calificación media por condado</span>
-    </div><br>
+                      <tr>
+                         <td>3</td>
+                         <td>Feb. 25, 2015, 5:12 p.m.</td>
+                         <td>If possible to even have just a vocal note on bcourses for feedback on your assignment as the nature of their grading is so subjective.</td>
+                         <td>4</td>
+                     </tr>
+                     
 
-    <select id="CA_selector" class="english" onchange="changeData(this)" >
-	{% for median in medians %}
-	<option value="{{median.id}}">{{median.id}}. {{ median.statement.short_version}}</option>
-	{% endfor %}
-    </select>
+                      <tr>
+                         <td>4</td>
+                         <td>April 1, 2015, 11:39 p.m.</td>
+                         <td>I feel the essence of &quot;design&quot; often gets lost in the lectures when they become too technical.  For instance, when dealing with color, it would be nice to see successful examples of the ways color was applied in good design and the emotions they generated.  Learning about wavelengths, cones, and rods do not help guide our understanding of color in design.  The focus should be directed more at application and case studies, not theory.  We could also do exercises in using different colors to represent the same objects to figure out what works in those designs and what doesn&#39;t.  That could be more useful than memorizing equations.</td>
+                         <td>7</td>
+                     </tr>
+                     
 
-    <select id="CA_selector" class="spanish" onchange="changeData(this)" >
-    {% for median in medians %}
-    <option value="{{median.id}}">{{median.id}}. {{ median.statement.spanish_short_version}}</option>
-    {% endfor %}
-    </select>
+                      <tr>
+                         <td>5</td>
+                         <td>March 12, 2015, 9:10 a.m.</td>
+                         <td>A little bit of group meeting time during the class would be helpful, given that for most large groups it seems like class is the ONLY time where all of the people in the group are available. I liked the idea of putting us in our project groups to discuss HW assignments because we actually used a bit of the extra time to go over some things for the project.</td>
+                         <td>3</td>
+                     </tr>
+                     
 
-    <br/><br>
+                      <tr>
+                         <td>6</td>
+                         <td>Feb. 17, 2015, 11:14 a.m.</td>
+                         <td>Im finding it difficult to determine how I&#39;m doing in the class right now I think a more specific rubric or expectations for our assignments would be helpful</td>
+                         <td>10</td>
+                     </tr>
+                     
 
-    <!--<script>
-        $.get("{{url_root}}/media/mobile/js/geostat.js")
-            .fail(function() { 
-            $( "#geodistribution" ).html( "<div class='stats-label-big'>GEOGRAPHIC DISTRIBUTION <br/> OF MEDIAN GRADES ASSIGNED</div><br><br><span style=' font-size:14px;color: #f5ebde;'>We will present geographical distribution soon</span><br/><br>" );
-            document.getElementById( "#geodistribution" ).style.height="40px";
-            })
-    </script>-->
-    <center>
-        <button type="button" onclick="map_grade_update()"><span class="english">Click to transform the map to a cartogram</span><span class="spanish">Clic para transformar el mapa a un cartograma</span></button>
-        <div id="map" style="height: 370px; width:360px;"></div>
-        <span class="english">The cartogram distorts the map so that each county's area is proportional to its population.</span>
-        <span class="spanish">El cartograma distorciona el mapa de manera que el área de cada condado es proporcional a su población</span>
-</center>
-</div>
-<br>
-<hr>
-<div class="stat-section-title" id="geopercapita">
-     <div class="stats-label-big">
-        <span class="english">Participants per 10,000 County Residents</span>
-            <span class="spanish">Participantes por 10.000 residentes de los condados</span>
-    </div><br>
-    <!--<script>
-        $.get("{{url_root}}/media/mobile/js/geostat_population.js")
-            .fail(function() { 
-            $( "#geopercapita" ).html( "<div class='stats-label-big'>PARTICIPANTS PER  <br/> 10000 POPULATION</div><br><br><span style=' font-size:14px;color: #f5ebde;'>We will present geographical participantion soon</span><br/><br>" );
-            document.getElementById( "#geodistribution" ).style.height="40px";
-            })
-    </script>-->
-    <button type="button" onclick="map_capita_update()"><span class="english">Click to transform the map to a cartogram</span><span class="spanish">Clic para transformar el mapa a un cartograma</span></button>
-    <div id="map_capita" style="height: 370px; width:360px;"></div>
-    <span class="english">The cartogram distorts the map so that each county's area is proportional to its population.</span>
-        <span class="spanish">El cartograma distorciona el mapa de manera que el área de cada condado es proporcional a su población</span>
-</div>
-<br>
-<hr>
+                      <tr>
+                         <td>7</td>
+                         <td>March 10, 2015, 1:59 p.m.</td>
+                         <td>We shouldn&#39;t have quizzes (or even a final for that matter). Rather, instead we could have individual projects (that are bigger than homeworks and span multiple weeks) that test what we learned in class. I think design is best learned when applied rather than trying to memorize the ten steps or what that guest lecturer said on that slide. That&#39;s not how design is in the real world.</td>
+                         <td>4</td>
+                     </tr>
+                     
 
+                      <tr>
+                         <td>8</td>
+                         <td>April 27, 2015, 3:40 a.m.</td>
+                         <td>I really like the Field Trip, so it will be amazing for coming versions of this class if the course have more than one Field Trip..</td>
+                         <td>2</td>
+                     </tr>
+                     
 
-<div class="stats-section-title">
-    <div class="stats-label-big">
-        <span class="english">Histogram of Grades</span>
-        <span class="spanish">Histograma de calificaciones</span>
+                      <tr>
+                         <td>9</td>
+                         <td>April 19, 2015, 3:50 a.m.</td>
+                         <td>For next versions of this class please make teams no larger than 4-6 people. For me has been really frustrating to work with people who is not enough committed with the team. People who expect everyone else make the work for them: They are busy during the week, and during weekends they are not available. 
+
+The class is awesome, but I think smaller teams will show better results.</td>
+                         <td>2</td>
+                     </tr>
+                     
+
+                      <tr>
+                         <td>10</td>
+                         <td>Feb. 5, 2015, 1:58 p.m.</td>
+                         <td>Some more direction on the project would be useful. I&#39;m not entirely sure what my group is supposed to be doing at this time.</td>
+                         <td>2</td>
+                     </tr>
+                     
+
+                      <tr>
+                         <td>11</td>
+                         <td>Feb. 25, 2015, 2:31 p.m.</td>
+                         <td>Hands on group activities seem to have no sense of direction. I understand the reason behind vague prompts, but there needs to be more guidance/clarity. Take for example, the hands on that was supposed to be focused on the UI of a making a robot out of cardboard. My group was all over the place spitting out crazy ideas of making a robot without even focusing on the prompt that was given (or at least what I think the focus was supposed to be on), which leads to another issue: working in such large groups within small time frames is extremely hard i.e. you guys have 20 min to create a robot UI within your group of 8-10. 
+
+TL;DR: 1) Prompts for hands-ons need to be more emphasized and clarified
+2) Logistics during hands-on activities needs to be improved.
+3) Prompts for homework are also vague and with no feedback, I have no idea what to even improve on or critically look at. I feel very narrow-minded.</td>
+                         <td>2</td>
+                     </tr>
+                     
+
+                      <tr>
+                         <td>12</td>
+                         <td>March 11, 2015, 4:46 p.m.</td>
+                         <td>I think a lot of the assignments and design notebook aren&#39;t super clear. Also posting the notes up on bCourses sooner after the specific lecture would help me review and understand this course.</td>
+                         <td>10</td>
+                     </tr>
+                     
+
+                      <tr>
+                         <td>13</td>
+                         <td>Feb. 25, 2015, 2:31 a.m.</td>
+                         <td>Receive the grades of the assignments: At this point of the semester I have not received any feedback on how I can improve my design skills. Each class I do my part doing the required assignment, but without feed back I don&#39;t know if what I have done is good or bad.</td>
+                         <td>4</td>
+                     </tr>
+                     
+
+                      <tr>
+                         <td>14</td>
+                         <td>March 10, 2015, 11:54 a.m.</td>
+                         <td>Give more in depth descriptions of project/assignment requirements so we know how to best work towards the goal.</td>
+                         <td>10</td>
+                     </tr>
+                     
+
+                      <tr>
+                         <td>15</td>
+                         <td>March 18, 2015, 5:22 p.m.</td>
+                         <td>I don&#39;t think we should have quizzes, rather Individual projects scattered throughout the semester. This class is intuitive and not theory driven, whicheck is awesome.</td>
+                         <td>3</td>
+                     </tr>
+                     
+                 </tbody>
+             </table>
+
+                *We rank ideas by the lower bound of the 95% confidence interval of the sample mean. This score incorporates an idea's average rating, how many people have rated it, and how much raters disagreed.
+            </div>
+        </div>
+    </section>
+
+    <section id="recent">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>RECENT IDEAS</h2><br>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped" id="recent-ideas">
+                    <thead>
+                        <th class="col-sm-2">Date</th>
+                        <th class="col-sm-8">Idea</th>
+                        <th class="col-sm-1"># Peer Ratings</th>
+                    </thead>
+                    <tbody>
+                        
+
+                      <tr>
+                         <td>May 6, 2015, 2:20 a.m.</td>
+                         <td>Peer Evaluation on each iteration should be a MUST. It is really hard to work always the same people on the team while others does not show interest on the project. It is unfair that all team members get the same grade: is not about the grade, at the end the grade that other people get does not affect mine, but is about the level of commitment with the team and with the project. 
+Because the class is so amazing people relax at the point they don&#39;t do anything, and at that point, people who worked hard start feeling tired of this, and the performance of the team drains.</td>
+                         <td>0</td>
+                     </tr>
+                     
+
+                      <tr>
+                         <td>April 29, 2015, 5 p.m.</td>
+                         <td>In the future, it might be helpful to provide a more specific timeline for the project, so assignments like the video and flyer can be planned a bit further in advance!</td>
+                         <td>3</td>
+                     </tr>
+                     
+
+                      <tr>
+                         <td>April 29, 2015, 3:15 p.m.</td>
+                         <td>I would like to continue working on the project after the completion of the course, and would find it very helpful if the GSIs and Professor Goldberg could continue to be mentors throughout this process.</td>
+                         <td>2</td>
+                     </tr>
+                     
+
+                      <tr>
+                         <td>April 29, 2015, 3:15 p.m.</td>
+                         <td>Less meaningless homework. Allows us to focus on more important parts of the course</td>
+                         <td>4</td>
+                     </tr>
+                     
+
+                      <tr>
+                         <td>April 29, 2015, 2:52 p.m.</td>
+                         <td>More hands-on tasks like with the descriptions of Venice and using only square pieces of paper. These do a good job at making us actually go through the design process, especially when it relates the the professor&#39;s or guest lecturer&#39;s topic.</td>
+                         <td>0</td>
+                     </tr>
+                     
+
+                      <tr>
+                         <td>April 29, 2015, 10:44 a.m.</td>
+                         <td>Design Homework grading is super variable. would be good to have clarity on what the target grade distribution is like for the course.</td>
+                         <td>0</td>
+                     </tr>
+                     
+
+                      <tr>
+                         <td>April 28, 2015, 7:32 p.m.</td>
+                         <td>Never got feedback on any of my homeworks, still dont realize what I have done wrong on any of my assignments</td>
+                         <td>2</td>
+                     </tr>
+                     
+
+                      <tr>
+                         <td>April 28, 2015, 3:53 p.m.</td>
+                         <td>The readings should be tied into the lectures, and the lectures on human factors should go beyond technicalities, further into how to design with those factors in mind, giving examples and case studies.</td>
+                         <td>0</td>
+                     </tr>
+                     
+
+                      <tr>
+                         <td>April 28, 2015, 1:32 p.m.</td>
+                         <td>More relevant lectures on how to conduct user studies and use new tools for prototyping</td>
+                         <td>7</td>
+                     </tr>
+                     
+
+                      <tr>
+                         <td>April 28, 2015, 12:34 p.m.</td>
+                         <td>I would have liked for the project to be a semester-long project so that we could have developed our ideas/designs more thoroughly. My dream class would be a project-based class where we work in groups to design/prototype/test a product that we would eventually post on kickstarter and create (depending on the results from kickstarter). This might be better for a technical course, since there would have to be a lot of thought put into the design and manufacturing of the product but just a thought :)</td>
+                         <td>2</td>
+                     </tr>
+                     
+
+                      <tr>
+                         <td>April 28, 2015, 1:09 a.m.</td>
+                         <td>I don&#39;t think we received grades for Report II and Report III. Since the semester is coming to a close I am becoming a bit concerned about my grade and would like to know where I stand in terms of the project.</td>
+                         <td>5</td>
+                     </tr>
+                     
+
+                      <tr>
+                         <td>April 28, 2015, 12:03 a.m.</td>
+                         <td>I really enjoyed the web design and pamphlet design assignments, I feel like those are skills I will get to use in the future.  The instructions are also more clear and we were taught the basics of how to design a web/pamphlet.  In the future, perhaps before assigning design homeworks the instructors can teach the basics of designing / give the students examples and features of good designs for each assignment (eg. what makes a good Valentine&#39;s day experience or a good urban park).</td>
+                         <td>7</td>
+                     </tr>
+                     
+
+                      <tr>
+                         <td>April 28, 2015, 12:01 a.m.</td>
+                         <td>Involve case-studies of good designs and ask class about their opinion and take (like an art history class).</td>
+                         <td>0</td>
+                     </tr>
+                     
+
+                      <tr>
+                         <td>April 27, 2015, 1:45 p.m.</td>
+                         <td>Smaller groups to have more valuable brainstorms and ideas. Right now, we&#39;re given the work for eight people which about three of us bear - which makes for sub-par work.</td>
+                         <td>3</td>
+                     </tr>
+                     
+
+                      <tr>
+                         <td>April 27, 2015, 12:34 p.m.</td>
+                         <td>Each individual lecture was great, but there didn&#39;t seem to be a great way to bring everything together/tie up loose ends before we just present on our final projects.</td>
+                         <td>7</td>
+                     </tr>
+                     
+                 </tbody>
+             </table>
+         </div>
+     </div>
+ </section>-->
+
+    <footer class="text-center">
+        <div class="footer-below">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        MCAFE IEOR 115 is developed by Laboratory for Automation Science and Engineering at UC Berkeley<br>
+                        This page is based on Freelance. Freelance is a free to use, open source Bootstrap theme created by Start Bootstrap.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="scroll-top page-scroll visible-xs visble-sm">
+        <a class="btn btn-primary" href="#page-top">
+            <i class="fa fa-chevron-up"></i>
+        </a>
     </div>
 
-<div class='dialog dialog-style'>
-  <center>       
-          {% for k,v in statement_hist.iteritems %}
-          
-    <div class="compare-box-{{k.id}}" style="padding-bottom: 10px;width: 310px; margin: 20px; display: inline-block">
-            
-            <span class="english">{{k.statement}}</span>
-            <span class="spanish">{{k.spanish_statement}}</span>
+    <!-- Portfolio Modals -->
 
-            <canvas id="sparkLineCanvas{{k.id}}" width="300" height="80"></canvas>
-            
-            <div>
+    <script src="http://opinion.berkeley.edu/m-cafe-3/media/mobile/jquery-mobile/jquery-1.10.2.min.js"></script>
+    <script src="http://opinion.berkeley.edu/m-cafe-3/media/mobile/js/bootstrap.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <script src="http://opinion.berkeley.edu/m-cafe-3/media/mobile/js/classie.js"></script>
+    <script src="http://opinion.berkeley.edu/m-cafe-3/media/mobile/js/cbpAnimatedHeader.js"></script>
+    <script src="http://opinion.berkeley.edu/m-cafe-3/media/mobile/js/freelancer.js"></script>
+    <script src="http://opinion.berkeley.edu/m-cafe-3/media/mobile/js/jquery.dynatable.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#top-ideas,#recent-ideas").dynatable({
+                features: {
+                    paginate: false,
+                    search: false,
+                    sorting: true,
+                    recordCount: false,
+                }            
+            });
+        });
+    </script>
+    <!--script src="http://opinion.berkeley.edu/m-cafe-3/media/mobile/js/mcafe_stats.js"></script-->
 
-        <script>
-         var canvas = document.getElementById('sparkLineCanvas{{k.id}}');
-         var context = canvas.getContext('2d');
-
-         //if ({{k.id}} % 2 == 1)
-         //    $('.compare-box-{{k.id}}').css("background-color","rgba(0,0,0,0.05)")
-
-         var data = {{v}};
-         var max_of_array = Math.max.apply(Math, data);
-
-         //window.statement_processed_data[({{k.id}}-1)] = data
-
-         context.beginPath();
-         context.lineWidth = 10;
-         context.strokeStyle = '#442b10';
-         context.shadowColor = '#ffffff';
-               context.shadowOffsetX = 1;
-               context.shadowOffsetY = 1;
-         //context.moveTo(0, 45 - data[0]/max_of_array*38);
-         for (i = 0; i <= 13; i++)
-         {
-          var skipOffset = 0
-          if (i == 13)
-            skipOffset = 7
-
-     context.moveTo(i*21+5+skipOffset, 68);
-     context.lineTo(i*21+5+skipOffset, 68 - data[i]/max_of_array*65);
-     context.stroke(); 
-         }
-
-         context.font="italic small-caps bolder 12px sans-serif";
-         context.fillStyle = '#442b10';
-         context.fillText("A+",0,80);
-
-         context.fillText("F",255,80);
-         context.fillText("Ø",277,80);
-        </script>
-
-      </div>
-            
-          </div>
-          {% endfor %}
-
-      </div>
-
-<span class="english"><h1>Thanks for participating!</h1></span>
-<span class="spanish"><h1>¡Gracias por participar!</h1></span>
-
-</div>
-
-	</center>
-
-<script type='text/javascript' src='{{url_root}}/media/mobile/js/map_capita_carto.js'></script>
-<script type='text/javascript' src='{{url_root}}/media/mobile/js/map_grade_carto.js'></script>
-
-<!--<script type='text/javascript' src='{{url_root}}/media/mobile/js/geostat.js'></script>-->
-<!--<script type='text/javascript' src='{{url_root}}/media/mobile/js/map.js'></script>-->
-<!--<script type='text/javascript' src='{{url_root}}/media/mobile/js/geostat_population.js'></script>-->
-<!--<script type='text/javascript' src='{{url_root}}/media/mobile/js/map_capita.js'></script>-->
 </body>
+
 </html>

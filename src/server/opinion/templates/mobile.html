@@ -12,7 +12,7 @@
 
     <link rel="image_src" href="{{ url_root }}/media/mobile/img/cafe/cafe-title-cropped.png"/>
 
-    <title>{{client_settings.WELCOME_PAGE_TITLE}}</title>
+    <title>Course Assessment and Feedback Engine v1.0</title>
 
     <!-- for best viewing on mobile phones -->
     <meta name='viewport' content='user-scalable=no, width=device-width,initial-scale=1, maximum-scale=1' />
@@ -111,6 +111,8 @@
 
      window.refer = '{{ refer }}';
 
+     window.visitTime= {{ visit_time }};
+
      window.user_score = {{init_score}};
 
      window.lang = 'en'
@@ -160,12 +162,12 @@
        });
 
        // give the statement sliders some color
-       var _grades = {'A' : 5, 'B' : 25, 'C': 50, 'D': 75, 'F' : 96 };
-       $.map( _grades, function(position, letter) {
-   var span = '<span class="grade-labels" style="left:'+position+'%;">'+letter+'</span>';
-   $('.statement-slider > .noUi-base').append( span );
-   $('.rating-slider > .noUi-base').append( span );
-       });
+       var _grades = {'0' : 0, '1' : 10, '2': 20, '3': 30, '4': 40, '5': 50, '6': 60, '7': 70, '8': 80, '9': 89, '10' : 97 };
+  $.map( _grades, function(position, letter) {
+    var span = '<span class="grade-labels" style="left:'+position+'%;">'+letter+'</span>';
+    $('.statement-slider > .noUi-base').append( span );
+    $('.rating-slider > .noUi-base').append( span );
+  });
 
 
        /* var _grades = {'1' : 30, '2' : 40, '3': 50, '4': 60, '5': 70};
@@ -290,11 +292,11 @@
             </div>
 
             <div class="home-btn-wrapper" style="width:35%;display:inline-block;">
-              <a href="#" class="translate-btn">Español</a><img width="30px" class='help-btn-dialog' id="help-landing" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn_compress.png">
+              <img width="30px" class='help-btn-dialog' id="help-landing" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn_compress.png">
             </div>
 
     </div>
-          <img width="100%" src="{{url_root}}/media/mobile/img/cafe/title_image_compress.jpg" style="margin-top:3px;max-width: 620px;">
+          <img width="70%" src="{{url_root}}/media/mobile/img/cafe/cafe-title-cropped-2.png" style="margin-top:3px;max-width: 620px;">
           <div class="landing-img-title responsive-body" style="display:none;">
             {{topic}}
           </div> 
@@ -302,23 +304,32 @@
           How can technology enhance learning at NYU?
           </div> -->
 
-          <div class="landing-img-txt responsive-body">  
-            <span class="english">Join <strong>{{num_users}}</strong> others to amplify California's collective intelligence.</span>
-            <span class="spanish">Únete a los <strong>{{num_users}}</strong> otros para amplificar la inteligencia colectiva de California</span>
+          <div class="landing-img-txt" style="margin-left: 15px;margin-right: 5px;padding-bottom: 10px;max-width: 100%; padding-right: 10px;">
+
+          <center>
+
+          <a href="https://www.youtube.com/watch?v=AmCsdmKwWHo&feature=youtu.be" target="_blank">Tutorial</a>
+          </center>
+        </br>
+      </br>
+      
+          <center>
+
+M-CAFE is a platform that facilitates ongoing student feedback to the instructors on how IEOR 115 can be improved as the course progresses. Students will periodically be asked to spend a few minutes to enter their feedback into M-CAFE.         
           </div>
 
-          <div class='button-div-red first-time-btn responsive-btn' style="margin-top: 10px;">Begin</div><br/><br/><br/>
+          <div class='button-div-red first-time-btn responsive-btn' style="display: inline-block; margin-top: 10px;">New</div>
 
-          <span class="english">
-          <a href="http://en.wikipedia.org/wiki/California_Report_Card" target="_blank">More Information</a>
-          </span>
-          <span class="spanish">
-          <a href="http://en.wikipedia.org/wiki/California_Report_Card" target="_blank">Más información</a>
-          </span>
+          <div class='button-div-red return-btn responsive-btn' style="display: inline-block;">Returning</div><br/><br/><br/>
 
-          <div class="landing-disclaimer">
-		A project by the CITRIS Data & Democracy Initiative at UC Berkeley
-	  </div>
+           <font style="font-size: 18px;line-height: 18px;text-shadow:none;color: #442b10;">
+            See how your peers are rating the course on the <a target="_blank" href="{{url_root}}/stats/">Stats page</a>!
+          </font>
+          <br/><br/>
+
+
+
+          <font width="70%" style="font-size: 14px;line-height: 18px;text-shadow:none; color: #442b10 ;"> Information gathered through M-CAFE will be confidential. Student identity will not be revealed through M-CAFE. For any questions, comments, or concerns, send an email to <a href="mailto:cafe.mooc@gmail.com">cafe.mooc@gmail.com</a> (NOT the course staff) and please do not post your M-CAFE related questions to the course discussion forum. <br/> <a href="#" class="help-btn-dialog">About</a></font>
 
           </center>
 
@@ -336,7 +347,9 @@
 
       </div>
 
-      <div id='rating' class='endsliders'>        
+      <div id='rating' class='endsliders'> 
+
+
 
   {% for statement in statements %}              
         <div class="endsliders-slide" id="slide-{{statement.id}}">
@@ -347,7 +360,8 @@
               </div>
 
               <div class="home-btn-wrapper" style="width:35%;display:inline-block;">
-                <a href="#" class="translate-btn">Español</a><img width="30px" class='help-btn-dialog' id="help-endsliders" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn_compress.png">
+                
+                <img width="30px" class='help-btn-dialog' id="help-endsliders" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn_compress.png">
               </div>
 
             </div> 
@@ -358,16 +372,17 @@
                   <span class="landing-page-banner">{{client_settings.WELCOME_PAGE_TITLE}}</span> 
               </div>
               <div class="home-btn-wrapper" style="width:35%;display:inline-block;">
-                <a href="#" class="translate-btn">Español</a><img width="30px" class='help-btn-dialog' id="help-endsliders" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn_compress.png">
+                                
+                <img width="30px" class='help-btn-dialog' id="help-endsliders" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn_compress.png">
               </div>
               
             </div>  
 
             <center>  
               <div class="question-number responsive-body"><span>Question</span> {{ statement.id }} <span>of</span> {{ statements|length }}.</div>
-              <div class="question-number responsive-body">Please grade the State of California on:</div>
+              <div class="question-number responsive-body">Please grade the the following aspects of the course:</div>
               <div class="statement-style responsive-body english">{{ statement.statement }}</div>
-              <div class="statement-style responsive-body spanish" style="display:none;">{{ statement.spanish_statement }}</div>
+              
 
               <!--<div class="median-grade-{{statement.id}} med-grade-box"></div>-->
 
@@ -407,47 +422,298 @@
             </div>
             
             <div class="home-btn-wrapper" style="width:35%;display:inline-block;">
-              <a href="#" class="translate-btn">Español</a><img width="30px" class='help-btn-dialog' id="help-register" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn_compress.png">
-            </div>
+                                
+                <img width="30px" class='help-btn-dialog' id="help-endsliders" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn_compress.png">
+              </div>
 
           </div> 
+
 
     <div class= 'registerpanel'>
             <center>
               <div class="basic-header2 responsive-body" style="max-width: 500px;">{{client_settings.ZIP_CODE_INSTRUCTIONS}}</div>
             
-              <form id='reg_form' class='reg_form responsive-form'>
-            <center>
-   
-              <div data-role="fieldcontain" >
-               <input type ='tel' id='regzip' name='regzip' class='regforminput' placeholder="Zip Code">
+              <form id='reg_form' class='form-horizontal' method='post' action='{{ url_root }}/accountsjson/register/'>
+              <center>
+<div data-role="fieldcontain">
+  <label for="regmajor" class='regforminput'>Major:</label>
+              <select name="regmajor" id="regmajor" style="color: #000000 !important; font-size: 24px !important;">
+                  <option>Industrial Engineering and Operations Research</option>
+<option>African American Studies</option>
+<option>American Studies</option>
+<option>Ancient Egyptian and Near Eastern Art and Archaeology</option>
+<option>Ancient Egyptian and Near Eastern Civilizations</option>
+<option>Anthropology</option>
+<option>Arabic</option>
+<option>Architecture</option>
+<option>Art, History of</option>
+<option>Art, Practice of </option>
+<option>Asian American and Asian Diaspora Studies</option>
+<option>Asian Studies</option>
+<option>Astrophysics (includes Astronomy)</option>
+<option>Biochemistry and Molecular Biology</option>
+<option>Bioengineering</option>
+<option>Bioengineering/Materials Science and Engineering</option>
+<option>Cell and Developmental Biology</option>
+<option>Celtic Studies</option>
+<option>Chemical Biology</option>
+<option>Chemical Engineering</option>
+<option>Chemical Engineering/Materials Science and Engineering</option>
+<option>Chemical Engineering/Nuclear Engineering</option>
+<option>Chemistry</option>
+<option>Chicano Studies</option>
+<option>Chinese</option>
+<option>City and Regional Planning</option>
+<option>Civil and Environmental Engineering</option>
+<option>Classical Civilizations</option>
+<option>Classical Languages</option>
+<option>Cognitive Science</option>
+<option>Comparative Literature</option>
+<option>Computer Science</option>
+<option>Conservation and Resource Studies</option>
+<option>Creative Writing</option>
+<option>Czech, Polish, or Bosnian/Croatian/Serbian Language and Literature</option>
+<option>Dance and Performance Studies</option>
+<option>Demography</option>
+<option>Development Studies</option>
+<option>Disability Studies</option>
+<option>Dutch Studies</option>
+<option>Earth and Planetary Science</option>
+<option>Earth and Planetary Studies</option>
+<option>Economics</option>
+<option>Education</option>
+<option>Electrical Engineering and Computer Sciences</option>
+<option>Energy Engineering</option>
+<option>Energy and Resources</option>
+<option>Engineering Mathematics and Statistics</option>
+<option>Engineering Physics</option>
+<option>Engineering Undeclared: only available to freshmen</option>
+<option>English</option>
+<option>Environmental Design and Urbanism in Developing Countries</option>
+<option>Environmental Economics & Policy</option>
+<option>Environmental Economics and Policy</option>
+<option>Environmental Engineering</option>
+<option>Environmental Engineering Science</option>
+<option>Environmental Sciences</option>
+<option>Ethnic Studies</option>
+<option>European Studies</option>
+<option>Film</option>
+<option>Forestry and Natural Resources</option>
+<option>French</option>
+<option>French Civilization</option>
+<option>French Language Studies</option>
+<option>French Literature</option>
+<option>Gender and Women’s Studies</option>
+<option>Genetics and Plant Biology</option>
+<option>Genetics, Genomics & Development</option>
+<option>Geoengineering</option>
+<option>Geographic Information Science and Technology</option>
+<option>Geographic Information Science and Techology</option>
+<option>Geography</option>
+<option>German</option>
+<option>Global Poverty and Practice</option>
+<option>Greek</option>
+<option>Haas School of Business</option>
+<option>Hebrew</option>
+<option>Hispanic Languages and Bilingual Issues</option>
+<option>History</option>
+<option>History and Theory of Landscape Architecture & Environmental Planning</option>
+<option>History of the Built Environment</option>
+<option>Iberian or Latin American Literatures</option>
+<option>Immunology and Pathology</option>
+<option>Integrative Biology</option>
+<option>Interdisciplinary Human Rights</option>
+<option>Interdisciplinary Studies</option>
+<option>Italian Studies</option>
+<option>Japanese</option>
+<option>Jewish Studies</option>
+<option>Landscape Architecture</option>
+<option>Latin</option>
+<option>Latin American Studies</option>
+<option>Legal Studies</option>
+<option>Lesbian, Gay, Bisexual, and Transgender Studies</option>
+<option>Linguistics</option>
+<option>Luso-Brazilian</option>
+<option>Luso-Brazilian Language and Literature</option>
+<option>Materials Science and Engineering</option>
+<option>Materials Science and Engineering/Electrical Engineering and Computer Sciences</option>
+<option>Materials Science and Engineering/Mechanical Engineering</option>
+<option>Materials Science and Engineering/Nuclear Engineering</option>
+<option>Mathematics</option>
+<option>Mathematics, Applied</option>
+<option>Mechanical Engineering</option>
+<option>Media Studies </option>
+<option>Medieval Studies</option>
+<option>Microbial Biology</option>
+<option>Middle Eastern Studies</option>
+<option>Molecular Toxicology</option>
+<option>Molecular and Cell Biology</option>
+<option>Molecular and Environmental Biology</option>
+<option>Music</option>
+<option>Native American Studies</option>
+<option>Near Eastern Civilizations</option>
+<option>Near Eastern Languages and Literature</option>
+<option>Neurobiology</option>
+<option>Nuclear Engineering</option>
+<option>Nuclear Engineering/Electrical Engineering and Computer Sciences</option>
+<option>Nuclear Engineering/Mechanical Engineering</option>
+<option>Nutritional Science</option>
+<option>Operations Research and Management Science</option>
+<option>Peace and Conflict Studies</option>
+<option>Persian</option>
+<option>Philosophy</option>
+<option>Physics</option>
+<option>Political Economy</option>
+<option>Political Science</option>
+<option>Psychology </option>
+<option>Public Health </option>
+<option>Religious Studies</option>
+<option>Rhetoric</option>
+<option>Russian Language</option>
+<option>Russian Language, Literature and Culture</option>
+<option>Russian Literature</option>
+<option>Scandinavian</option>
+<option>Slavic Languages and Literatures</option>
+<option>Social Welfare </option>
+<option>Social and Cultural Factors in Environmental Design</option>
+<option>Society and Environment</option>
+<option>Sociology</option>
+<option>South and Southeast Asian Studies</option>
+<option>Spanish Language and Literatures</option>
+<option>Spanish Linguistics</option>
+<option>Spanish and Spanish American</option>
+<option>Statistics</option>
+<option>Structural Engineering</option>
+<option>Sustainable Environmental Design</option>
+<option>Theater and Performance Studies</option>
+<option>Toxicology</option>
+<option>Turkish</option>
+<option>Undeclared</option>
+<option>Urban Studies</option>
+</select>
+</div>
 
-               <div class='alert-error' id='zipcode-error' style='display:none;'></div>
+<div data-role="fieldcontain">
+            <!--<label for="reggender" class='regforminput'>Gender:</label>
+              <select name="reggender" id="reggender" style="color: #000000 !important; font-size: 24px !important;"> 
+                  <option value="">Select Gender</option>
+                  <option value="f">Female</option>
+                  <option value="m">Male</option>
+                </select>
+              </div>-->
+
+             <div data-role="fieldcontain">
+              <label for="regyear" class='regforminput'>Year: </label>
+              <select name="regyear" id="regyear" style="color: #000000 !important; font-size: 24px !important;">
+                  <option value="">Select Year</option>
+                  <option value="0">Freshman</option>
+                  <option value="1">Sophomore</option>
+                  <option value="2">Junior</option>
+                  <option value="3">Senior</option>
+                </select>
               </div>
 
-        <div class="button-div-red registerb responsive-btn" id="registerb" style="font-size: 18px;">Save</div>
+              <div data-role="fieldcontain">
+                <label for="regdesign" class='regforminput'>Number of Other Programming/Database Courses Taken:</label>
+                  <select name="regdesign" id="regdesign" style="color: #000000 !important; font-size: 24px !important;">
+                  <option value="">Select # Courses</option>
+                  <option value="0">0</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5+">5+</option>
+                </select>
+              </div>
+
+              <div data-role="fieldcontain">
+                <label for="reginterests" class='regforminput' style="font-size: 19px !important;">Interest in SQL/Database<br/>1 (Low) - 10 (High):</label>
+                  <select name="reginterests" id="reginterests" style="color: #000000 !important; font-size: 24px !important;">
+                  <option value="">Select Level of Interest</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+                </select>
+              </div>
+
+              <!--<div data-role="fieldcontain">
+                <label for="reginteresth" class='regforminput' style="font-size: 19px !important;">Interest in Human Factors<br/> 1 (Low) - 10 (High):</label>
+                  <select name="reginteresth" id="reginteresth" style="color: #000000 !important; font-size: 24px !important;">
+                  <option value="">Select Level of Interest</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+                </select>
+              </div>-->
+
+
+                <div data-role="fieldcontain">
+                  <label for="regreason" class='regforminput'>Primary reason for taking this course:</label>
+                  <textarea id='regreason' name='regreason' style="height: 80px !important;color: #000000 !important; font-size: 24px !important;" value='' data-theme='b'/></textarea>
+                  <div class='alert-error' id='reason-error' style='display:none;'></div>
+              </div>
+
+    <br/>
+    <!--<div data-role="fieldcontain">
+                  <div class="regforminput" style="position: relative; left: 10%; width: 80%;text-align: left;">Roughly,  what percentage of the remaining coursework (homework, quizzes, and midterms) do you intend to complete? </div>
+                  <label for="regintent" class='regforminput'>&nbsp;</label>
+      <select name="regintent" id="regintent" style="color: #000000 !important; font-size: 24px !important;">
+                  <option value="0">All of the work</option>
+                  <option value="1">Greater than 50%</option>
+                  <option value="2">Greater than 25%</option>
+                  <option value="3">Less than 25%</option>
+                </select>
+                  <div class='alert-error' id='intent-error' style='display:none;'></div>
+              </div>-->
+
+    <br/>
+
+              <div data-role="fieldcontain">
+                  <label for="regusername" class='regforminput'>Email (* Required):</label>
+                  <input type="text" id='regusername' name='regusername' class='regforminput' value='' placeholder="Email" data-theme='b' style="color: #000000 !important; font-size: 24px !important;"/>
+                  <div class='alert-error' id='username-error' style='display:none;'></div>
+              </div>
+
+
+
+
+              <!--These are hidden dummy attributes for book-keeping-->
+              <input type='hidden' value='{{ topic }}' name='question'>
+              <input type='hidden' value='{{ url_root }}' name='url'>
+
+              <div data-role="fieldcontain" style="display: none;">
+                  <input type ='tel' id='regzip' name='regzip' class='regforminput' value="00000" placeholder="Zip Code">
+                  <div class='alert-error' id='zipcode-error' style='display:none;'></div>
+              </div>
+
+              <div data-role="fieldcontain" style='display:none;'>
+                  <label for="regpassword1" class='regforminput' style="display: none;">Password:</label>
+                  <input type ='hidden' id='regpassword1' name='regpassword1' class='regforminput' value='{{ random_password }}' placeholder="Password">
+                  <div class='alert-error' id='password-error'></div>
+              </div>
+
+
+                  <!--<div class="standard-btn-div" onclick="document.getElementById('registerb').focus();">
+                      <button type='submit' data-theme='b' id="registerb"><font style="font-size: 16px;">{{client_settings.ZIP_CODE_BUTTON}}</font></button>
+                  </div>-->
+                  <div class="button-div-red registerb responsive-btn" id="registerb" style="font-size: 18px;">Save</div>
         <br/>
-        <!--<div class="button-div-wide registerb responsive-btn" id="registern">No Thanks</div>-->
-    </div>
-
-
-      <!--These are hidden dummy attributes for book-keeping-->
-
-      <div data-role="fieldcontain" style="display: none;">
-                    <input type='hidden' value='{{ topic }}' name='question'>
-        <input type='hidden' value='{{ url_root }}' name='url'>
-                    <label for="regusername" class='regforminput'>Email:</label>
-                    <input type="hidden" id='regusername' name='regusername' class='regforminput' value='{{ random_username }}' placeholder="Email" data-theme='b'/>
-                    <div class='alert-error' id='username-error' style='display:none;'></div>
-      </div>
-
-      <div data-role="fieldcontain" style='display:none;'>
-                    <label for="regpassword1" class='regforminput' style="display: none;">Password:</label>
-                    <input type ='hidden' id='regpassword1' name='regpassword1' class='regforminput' value='{{ random_password }}' placeholder="Password">
-                    <div class='alert-error' id='password-error'></div>
-      </div>
-    </center>
-  </form>
+              </center>
+          </form>
 
 
             </center>
@@ -455,6 +721,39 @@
   </center>
 
       </div>
+
+    <div class='login dialog-style'>
+      <center>
+    <div class="home-btn-dialog-box">
+            <div class="home-btn-title responsive-header">
+              <span class="landing-page-banner">{{client_settings.WELCOME_PAGE_TITLE}}</span> 
+            </div>
+            
+            <div class="home-btn-wrapper" style="width:35%;display:inline-block;">
+                                
+                <img width="30px" class='login-form-go-back' id="login-form-go-backs" src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+              </div>
+
+          </div> 
+
+      <div class="home-btn-title responsive-header">
+              <span class="landing-page-banner"></span> 
+      </div>
+
+
+       <center>
+       <div class='dialog-text-style responsive-body'>
+           If you have already registered your email with M-Cafe, please enter it here. You will be able to update your evaluations, add a new suggestion, and read/rate other participants.<br/>
+           <form id='reg_form' class='reg_form responsive-form'>
+              <center>
+                <div data-role="fieldcontain" >
+           <input type="text" class="login-email" id="login-email" value='' placeholder="Email" data-theme='b' style="color: #000000 !important; font-size: 24px !important;"/>
+           <div class='alert-error' id='login-error' style='display:none;width: 100%;'></div><br/>
+           <center><div class='button-div-wide exec-login responsive-btn' style="text-align:center;">Login</div></center>
+       </div>
+       </center>
+      </div>
+    </div>
 
       <div class='burger-page dialog-style'>
   <center>
@@ -464,7 +763,7 @@
             </div>
             
             <div class="home-btn-wrapper" style="width:35%;display:inline-block; text-align: right;">
-              <span style="font-size: 24px;font-weight:bold;padding-right: 15px;" onclick="accounts.hideAll();$('.'+window.burger_state).show();window.prev_state='help';window.cur_state=window.burger_state;">&#11013;</span>
+              <span style="font-size: 24px;font-weight:bold; padding-top:15px; padding-right: 15px;" onclick="accounts.hideAll();$('.'+window.burger_state).show();window.prev_state='help';window.cur_state=window.burger_state;">&#11013;</span>
             </div>
 
     </div> 
@@ -502,9 +801,11 @@
               <span class="landing-page-banner">{{client_settings.WELCOME_PAGE_TITLE}}</span> 
             </div>
             
-            <div class="home-btn-wrapper" style="width:35%;display:inline-block; text-align: right;">
-              <a href="#" class="translate-btn">Español</a><img width="30px" class='help-btn-dialog' id="help-dialog" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn_compress.png"> 
-            </div>
+            <div class="home-btn-wrapper" style="width:35%;display:inline-block;">
+                
+                <img width="30px" class='help-btn-dialog' id="help-endsliders" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn_compress.png">
+              </div>
+
 
           </div> 
     <!--<img class="header-img-topic center" src="{{ url_root }}/media/mobile/img/cafe/CRC_join.png"/>-->
@@ -589,9 +890,9 @@
 
          context.font="italic small-caps bolder 12px sans-serif";
          context.fillStyle = '#442b10';
-         context.fillText("A+",0,58);
+         context.fillText("12",0,58);
 
-         context.fillText("F",133,58);
+         context.fillText("0",133,58);
          context.fillText("Ø",149,58);
         </script>
 
@@ -617,7 +918,7 @@
             </div>
             
             <div class="home-btn-wrapper" style="width:35%;display:inline-block; text-align: right;">
-              <a href="#" class="translate-btn">Español</a><img width="30px" class='help-btn-dialog' id="help-detail-box-{{k.id}}" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn_compress.png"> 
+              <img width="30px" class='help-btn-dialog' id="help-detail-box-{{k.id}}" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn_compress.png"> 
             </div>
 
           </div> 
@@ -663,21 +964,16 @@
 
          context.font="italic small-caps bolder 12px sans-serif";
          context.fillStyle = '#442b10';
-         context.fillText("A+",5,104);
+         context.fillText("12",5,104);
 
-         context.fillText("F",268,104);
+         context.fillText("0",268,104);
          context.fillText("Ø",296,102);
         </script>
 
 <div id="detail-emore-info-{{k.id}}" class="dialog-text-style responsive-body english"></div>
 <div id="detail-smore-info-{{k.id}}" class="dialog-text-style responsive-body spanish"></div>
   
-  <script>
- var detail_text = ["","California was the first state to pass legislation creating a health insurance marketplace--Covered California. As of Dec 2013, Covered California had over 630,000 enrollees.", "California recently adopted the \"common core\" challenges, which emphasize critical thinking and analysis in K-12 education to better prepare students for college and the workforce.", "The 2014-15 draft California budget calls for a 10.8% increase in higher education funding, which could keep current tuition costs stable.", "Passed in 2006, California Senate Bill 1569 extends eligibility for undocumented immigrants in California for food assistance, supplemental security income, and health insurance. Passed in 2011, The California Dream Act grants undocumented immigrant access to state aid at public universities and colleges.","California was the first state to legalize the distribution of medical marijuana in 1996. Recreational use of marijuana is illegal in the State of California. However, California lawmakers are currently considering legalizing, taxing, and regulating marijuana for recreational use.", "California’s unemployment rate is currently at 7%, slightly higher than the national average."]
-  var sdetail_text = ["","California fue el primer estado aprobar una ley para crear un mercado de seguros de salud -- Covered California (California cubierta). Hasta diciembre de 2013, Covered California tenía más de 630,000 afiliados.", "Hace poco California adoptó el desafío de los «estándares», que hace hincapié en el pensamiento crítico y el análisis en la educación de K-12 (jardín de infancia hasta 12º grado) para preparar mejor a los estudiantes para la universidad y la vida laboral.", "El proyecto de presupuesto de California de 2014-15 reclama un aumento del 10.8% en la financiación de la educación superior, que podrían mantener los gastos de matrícula actuales estables.", "Adoptada en el 2006, la Ley 1569 del Senado de California amplía la elegibilidad de los inmigrantes indocumentados en California para asistencia alimentaria, seguridad de ingresos suplementarios y seguro de salud. Adoptada en el 2011, la Ley del Sueño de California otorga a los inmigrantes indocumentados acceso a ayuda estatal en los colegios y universidades públicas.","California fue el primer estado en legalizar la distribución de la marihuana en el año 1996. El uso recreativo de la marihuana es ilegal en el Estado de California. Sin embargo, los legisladores de California están actualmente considerando legalizar, gravar y regular la marihuana para su uso recreativo.", "Tasa de desempleo de California se encuentra actualmente en el 7%, ligeramente superior a la media nacional."]
-  document.getElementById("detail-emore-info-{{k.id}}").innerHTML = detail_text[{{k.id}}];
-  document.getElementById("detail-smore-info-{{k.id}}").innerHTML = sdetail_text[{{k.id}}];
-  </script>
+  
 
       </div>
             <!--<div class="discuss-btn-div">
@@ -698,23 +994,19 @@
             </div>
             
             <div class="home-btn-wrapper" style="width:35%;display:inline-block;">
-              <a href="#" class="translate-btn">Español</a><img width="30px" class='help-btn-dialog' id="help-comment-input" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn_compress.png">
+              <img width="30px" class='help-btn-dialog' id="help-comment-input" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn_compress.png">
             </div>
 
           </div> 
 
     <center>
             <div class='comment-panel'>
-              <div class="basic-header2 responsive-body english" style="text-align:left;">{{topic}}</div>
-              <div class="basic-header2 responsive-body spanish" style="text-align:left;">{{topic_spanish}}</div>
-              <br/>
+              <div class="basic-header2 responsive-body english" style="text-align:left;">Please provide a specific enhancement of the course this semester and in future semesters.</div>
 
               <textarea name='answer' id='entered-comment' maxlength="500"></textarea>
-              <div style="max-width: 400px;font-size: 14px; text-align: left; width: 95%; padding-left: 15px;">
-                <span>Your email address will not be displayed and we promise not to share your email address with any third parties.</span>
-                <input type="email" id='regemail' name='regemail' class='regforminput' style="font-size: 15px; background-color: #FFFFFF;color: #000000;" placeholder="Email (Optional)" data-theme='b'></input>
-              </div>
-              <div class='comment-submit-btn button-div-wide responsive-btn' style="display: inline-block;">Post</div>
+              
+              <div class='comment-submit-btn button-div-wide responsive-btn'>Post</div>
+              <div class='comment-cancel-btn button-div-wide responsive-btn'>Later</div>
             </div>
     </center>
   </center>
@@ -730,12 +1022,16 @@
             </div>
             
             <div class="home-btn-wrapper" style="width:35%;display:inline-block; text-align: right;">                
-              <a href="#" class="translate-btn">Español</a><img width="30px" class='help-btn-dialog' id="help-rate" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn_compress.png">
+              <img width="30px" class='help-btn-dialog' id="help-rate" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn_compress.png">
             </div>
+            <div id="flag" class="flag-style" style:"18px"></div>
 
           </div>
+              
+
 
     <center>
+
       <div><span class="rate-username"></span></div>
       <div id='commentInput' class='answer responsive-answer english'></div>
       <div id='commentInputSpanish' class='answer responsive-answer spanish' style="display: none;"></div>
@@ -743,17 +1039,19 @@
     </center>
 
 
-    <div id="flag" class="flag-style"></div>
 
     <center>
       <div class="answerwrapper">
         <div class='sliders responsive-body' style="text-align: center;font-size: 18px; font-family: DroidSans-Bold, sans-serif;max-width: 620px;">
-    <span>{{client_settings.RATE_IMPORTANCE_QUESTION}}</span><br/><br/>
+          <br/>
+
+         How valuable would it be for the instructor to adopt this suggestion?<br/>
     <center>
       <!--(Not at all) 0   -  9 (Extremely)-->
       <div class="slider" id="slider-importance"></div>    
       
-      <div id='go-back' class='button-div-wide responsive-btn' style="display: inline-block;">Skip</div>
+      <div class='button-div-red responsive-btn' id ="go-back" style="display: inline-block;">Skip</div>
+      <div class='button-div-red responsive-btn' id ="flag1" style="display: inline-block;">Inappropriate</div>
 
     </center>
     
@@ -785,7 +1083,7 @@
             </div>
 
             <div class="home-btn-wrapper" style="width:35%;display:inline-block;">
-              <a href="#" class="translate-btn">Español</a><img width="30px" class='help-btn-dialog' id="help-menubar" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn_compress.png" style="position:relative;left:-5px;">
+              <img width="30px" class='help-btn-dialog' id="help-menubar" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn_compress.png" style="position:relative;left:-5px;">
             </div>
           </div>
        </center>
@@ -798,8 +1096,7 @@
 
 
       <div style="text-align: center;margin-top: 6px;" class="english responsive-body"><span>{{ topic }}</span></div>
-      <div style="text-align: center;margin-top: 6px;" class="spanish responsive-body"><span>{{ topic_spanish }}</span></div>
-      <div style="text-align: right;"><a href="#" class="map-info" style="color:#442b10;position:relative;top:5px;" onclick="accounts.hideAll();$('.dialog-help-map1').show();window.cur_state = 'faq';window.prev_state = 'map';"><img width="30px" src="{{url_root}}/media/mobile/img/cafe/info_button.png"></a></div>
+      
 
       <div id='d3' class="d3-canvas"></div>
     </center>
@@ -815,7 +1112,7 @@
             </div>
             
             <div class="home-btn-wrapper" style="width:25%;display:inline-block; text-align: right;">
-              <a href="#" class="translate-btn">Español</a>
+            
             </div>
 
           </div>
@@ -823,10 +1120,9 @@
             <span>{{client_settings.LOGOUT_DIALOG_TEXT}}</span><br/><br/>
       <!-- <span class="english"><a href="http://hrefshare.com/9bdd3" target="_blank" style="color: #555555;"><img src="{{url_root}}/media/mobile/img/cafe/twitter-button.png" width="102px"></a> -->
       <!-- <a href="http://hrefshare.com/d3660" target="_blank" style="color: #555555;"><img src="{{url_root}}/media/mobile/img/cafe/facebook-button.png" width="102px"></a><br/> -->
-      <span class="english"><a href="http://twitter.com/intent/tweet?text=How%20do%20you%20grade%20California%3F%20Try%20%40CAReportCard%20developed%20by%20%40Cal%20%40GavinNewsom%20%26%20%40Ken_Goldberg%20http%3A%2F%2Fcaliforniareportcard.org%2F2.0%2F%20%23CA%20%23GOV" target="_blank" style="color: #555555;"><img src="{{url_root}}/media/mobile/img/cafe/twitter-button-compress.png" width="102px"></a>
-      <a href="https://www.facebook.com/dialog/feed?app_id=694165360698061&link=http%3A%2F%2Fcaliforniareportcard.org%2F2.0%2F&picture=http%3A%2F%2Fcaliforniareportcard.org%2Fcrc%2Fwp-content%2Fuploads%2FCRCv2_Facebook-Share-link_graphic-01.jpg&name=The%20California%20Report%20Card&caption=%20&description=How%20do%20you%20grade%20California%3F%20%20Try%20%40CAReportCard%20developed%20by%20%40Cal%20%40GavinNewsom%20%26%20%40Ken_Goldberg%20%20http&redirect_uri=http%3A%2F%2Fwww.facebook.com%2F" target="_blank" style="color: #555555;"><img src="{{url_root}}/media/mobile/img/cafe/facebook-button-compress.png" width="102px"></a><br/>
+      <span class="english">
 
-             Election and Voter Information: <a href="http://www.sos.ca.gov/elections/new-voter/" target="_blank" style="color: #555555;">CAVoterInformation</a><br/><br/>
+             For further questions visit the website: <a href="http://m-cafe.org/" target="_blank" style="color: #555555;">m-cafe.org</a><br/><br/>
 
 
       <!--California Online Voting Registration: <a href="http://registertovote.ca.gov" target="_blank" style="color: #555555;"> CAVoterRegistration </a><br/><br/></span>-->
@@ -922,15 +1218,15 @@
             </div>
             
             <div class="home-btn-wrapper" style="width:35%;display:inline-block; text-align: right;">
-              <a href="#" class="translate-btn">Español</a><img width="30px" class='help-btn-dialog' id='help-dialog-continue' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn_compress.png">
+              <img width="30px" class='help-btn-dialog' id='help-dialog-continue' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn_compress.png">
             </div>
 
           </div> 
     <center>
       <br/><br/>
       <div class='dialog-text-style responsive-body'>
-        <span>Thank You!</span>
-        <div style="font-size: 18px;margin-top: 10px;">We encourage you to amplify CA's collective intelligence by reading and evaluating more ideas.</div>
+        <span>Thank you for participating!</span>
+        <div style="font-size: 18px;margin-top: 10px;">Thank you for providing feedback on a way this course could be enhanced to make it more valuable for you. You can log out now and return using the unique link that will be emailed to you. Or you are welcome to continue grading other students’ ideas.</div>
               <!--<div class='dialog-text-style default-left-padding'>
               {{client_settings.EMAIL_ASK_TEXT}}
         </div>-->
@@ -950,6 +1246,7 @@
           </center>
         </center>
       </div>
+
 
       <div class='dialog-email dialog-style'>
   <div class="home-btn-dialog-box">
@@ -1001,35 +1298,28 @@
       <div class='dialog-about dialog-style'>
   <center>
     <div class="home-btn-dialog-box" style="padding-top: 5px;">
-            <a href="#" class="translate-btn">Español</a>
+            
             <span style="font-size: 24px;font-weight:bold;padding-right: 15px;" onclick="accounts.hideAll();$('.burger-page').show();">&#11013;</span>
     </div>
     <div class='dialog-text-style-noflow responsive-body'>
       <br/>
       <center>{{client_settings.ABOUT_PAGE_HEADER}}</center><br/>
       <span class="english">{% autoescape off %}<em> Overview </em> <br/>
-      The CRC is an online platform developed by the CITRIS Data and Democracy Initiative at UC Berkeley and Lt. Governor Gavin Newsom that explores how smartphones and networks can enhance communication between the public and government leaders. The CRC allows visitors to grade issues facing California and to suggest issues for future report cards. The project aims to increase public engagement and to help leaders at all levels stay informed about the changing opinions and priorities of their constituents.
+      M-CAFE (The MOOC Course Assessment and Feedback Engine) v1.0 provides student feedback to instructors at key points during the course, in contrast to existing course evaluations that only request feedback after the course is over. CAFE allows students to provide feedback on course aspects so far, and to suggest ideas for improving the course.<br/><br/>
 
-      Anyone can participate by taking a few minutes to assign grades to the State of California on issues such as: Healthcare, Education, Marriage Equality, Immigrant Rights, and Marijuana Decriminalization. We currently support responses in both English and Spanish. It is important to note that translation is an art form.  All Google Translate results are reviewed and edited by fluent speakers but flaws are inevitable. If you spot an egregious error, please email <a href="mailto: translate@californiareportcard.org">translate@californiareportcard.org</a>. <br/> <br/>
+      M-CAFE differs from standard surveys in that it is online (desktop and mobile) and ongoing (weekly updates during the course), shares median ratings with students, and allows students to consider and rate the ideas of fellow students. The peer-to-peer collaborative filtering approach aims to overcome the scale issue of large size MOOCs by ranking the ideas. <br/> <br/>
 
-      <em> Q: </em> What’s the motivation for the CRC? <br/>
-      <em> A: </em> We’re exploring new models for exchange of information and engagement with political issues. We don’t claim the CRC model is the answer: it’s one new metaphor and mode of collecting information. Will the CRC encourage people to think about public issues and how public opinion gets represented? We’re curious to see how people respond, how patterns of responses change over time, and if the grading will be a catalyst for the discussion, where participants propose new issues for the next report card and evaluate the suggestions of other participants. We’ll keep working to develop new versions and models based on the responses and data. <br/> <br/>
-
+      <em> Q: </em> What’s the motivation for M-CAFE? <br/>
+      <em> A: </em> M-CAFE (The MOOC Course Assessment and Feedback Engine) v1.0 provides student feedback to instructors at key points during the course, in contrast to existing course evaluations that only request feedback after the course is over. CAFE allows students to provide feedback on lectures and difficulty so far, and to suggest ideas for improving the course. <br/> <br/>
 
       <em> Privacy </em> <br/>
       Comments and suggestions will be scanned to omit identifiable information. We respect your privacy and will not share your email address with third parties. <br/> <br/>
 
-      <em> Statistical Significance </em> <br/>
-      The CRC differs from randomized telephone polls and surveys. Participation is self-selective and accessible so far only to English speakers with access to a smart phone or web browser. After you enter each grade, the Median Grade based on input from all previous participants is revealed. This is intended to provide instant feedback in contrast to traditional polls and surveys. We realize this may have a biasing effect: some may adjust their grade to be closer to the average resulting in a form of regression toward the mean. We will include details on the number of such adjustments and the before and after values in the open dataset. We will also present the grade data as histograms to convey levels of consensus and geographically to convey differences by region. <br/> <br/>
-      
-      We will also present the grade data as histograms to convey levels of consensus and geographically to convey differences by region.<br/> <br/>
-
       <em> More </em> <br/>
-      Please see the CRC website for contact info, details about the project history, stats to date, related links, and to download anonymized data when it is available: <br/> <br/>
+      Please see the M-Cafe website for contact info, details about the project history, stats to date, related links, and to download anonymized data when it is available: <br/> <br/>
 
-
-      <em> California Report Card </em> <br/>
-      <a href='http://californiareportcard.org'> http://californiareportcard.org </a>
+      <em> M-Cafe </em> <br/>
+      <a href='http://m-cafe.org/'> m-cafe.org </a>
       {% endautoescape %}</span>
       <span class="spanish"> <em> Información General </em> <br/>
       La Libreta de calificaciones de California (CRC, por sus siglas en inglés) es una plataforma en línea desarrollada por CITRIS Data y Democracy Initiative de UC Berkeley y del Teniente Gobernador Gavin Newsom que explora cómo los smartphones y redes pueden mejorar la comunicación entre los líderes públicos y gubernamentales. La CRC permite a los visitantes valorar las cuestiones a las que se enfrenta California y sugerir cuestiones para próximas libretas de calificaciones. El proyecto busca aumentar la participación del público y ayudar a los líderes de todos niveles a mantenerse informados sobre las opiniones y prioridades cambiantes de sus constituyentes. Cualquiera puede participar dedicando unos minutos a valorar el Estado de California en cuestiones como: Sanidad, Educación, Igualdad de matrimonio, Derechos de los inmigrantes y Despenalización de la marihuana. Actualmente aceptamos respuestas en inglés y español. Es importante indicar que la traducción es una forma de arte. Todos los resultados de Google Translate los revisan y editan personas que hablan dichos idiomas de manera fluido, pero los errores son inevitables. Si encuentra un error grave, envíe un correo electrónico a translate@californiareportcard.org. <br/> <br/>
@@ -1127,7 +1417,7 @@
       <div class='dialog-help-map1 dialog-style' style="z-index:999">
   <center>
     <div class="home-btn-dialog-box">
-            <a href="#" class="translate-btn">Español</a>
+            
             <span style="font-size: 24px;font-weight:bold;padding-right: 15px;" onclick="accounts.hideAll();$('.menubar').show();">&#11013;</span>
     </div>
     <div class='dialog-text-style-noflow responsive-body'>
@@ -1218,17 +1508,17 @@
       </div>
 
       <div class='dialog-help-logout dialog-style' style="z-index:999">
-  <div class="home-btn-dialog-box">
-          <img width="6%" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
-          
-          <img width="6%" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
-          
-          <img width="6%" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn_compress.png">
-  </div>
-  <div class='dialog-text-style-noflow small-left-padding responsive-body'>
-          <div class="basic-header">Help</div>
-          {% autoescape off %}{{client_settings.HELP_ABOUT}}{% endautoescape %}
-  </div>
+          <div class="home-btn-dialog-box">
+                  <img width="6%" class='back-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+                  
+                  <img width="6%" class='home-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_home_bttn.png">
+                  
+                  <img width="6%" class='help-btn-dialog' src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn_compress.png">
+          </div>
+          <div class='dialog-text-style-noflow small-left-padding responsive-body'>
+                  <div class="basic-header">Help</div>
+                  {% autoescape off %}{{client_settings.HELP_ABOUT}}{% endautoescape %}
+          </div>
       </div>
 
       <!--prefetch images-->
