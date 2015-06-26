@@ -40,6 +40,8 @@ import re
 import time
 import opinion.settings
 import md5
+import hashlib
+from django.http import QueryDict
 #import hashlib
 
 def connect_visitor_to_user(request, user_id):
@@ -181,13 +183,21 @@ def register(request, success_url=None,
 		request_post_copy['username'] = formatted_username.lower() # Username saved as lowercase
 
 		form = form_class(data=request_post_copy, files=request.FILES)
-		demog = UserDemographicsForm(data=request_post_copy)
+		data_demog={'username': request_post_copy['username'], 'password':request_post_copy['username'],'password1':request_post_copy['username'],'password2':request_post_copy['username'],'email':request_post_copy['username'],'zipcode':request_post_copy['username']}
+		
+		demog_qdict = QueryDict('')
+		demog_qdict = demog_qdict.copy()
+		demog_qdict.update(data_demog)
+		
+		demog = UserDemographicsForm(data=demog_qdict)
+		#demog = UserDemographicsForm(data=request_post_copy)
+
 		if form.is_valid() and demog.is_valid():
 			new_user = form.save(profile_callback=profile_callback)
 
-			ud = UserData(user = new_user, key='demographics',value=request_post_copy.urlencode())
-			ud.save()
-			print request_post_copy.urlencode()
+			#ud = UserData(user = new_user, key='demographics',value=request_post_copy.urlencode())
+			#ud.save()
+			#print request_post_copy.urlencode()
 			
 			# Save the original formatting of the username
 			username_setting = UserSettings(user = new_user, key = 'username_format', value = formatted_username)
@@ -216,7 +226,39 @@ def register(request, success_url=None,
 			if len(z) > 0:
 				c = ZipCodeLog(user=new_user, location=z[0])
 				c.save()
+
+			#save additional informaiton of this user in UserDate
+			#if the user didn't type age or reason, the value will be -1
+			if request_post_copy.has_key('country'):
+				country=UserData(user=new_user,key='country',value=request_post_copy['country'])
+				country.save()
+
+			if request_post_copy.has_key('gender'):
+				gender=UserData(user=new_user,key='gender',value=request_post_copy['gender'])
+				gender.save()
+
+			if request_post_copy.has_key('age'):
+				age=UserData(user=new_user,key='age',value=request_post_copy['age'])
+				age.save()
 			
+			if request_post_copy.has_key('trainingYears'):
+				trainingYears=UserData(user=new_user,key='trainingYears',value=request_post_copy['trainingYears'])
+				trainingYears.save()
+			if request_post_copy.has_key('reason'):
+				reason=UserData(user=new_user,key='reason',value=request_post_copy['reason'])
+				reason.save()
+			
+			# Create EntryCode
+			#print "Hamerican"
+			entrycode = hashlib.sha224(request_post_copy['username']).hexdigest()[0:7]
+			#print entrycode
+			ECobject=EntryCode(username=request_post_copy['username'],code=entrycode, first_login=False)
+			#print request_post_copy['username']
+			ECobject.save()
+			#print len(EntryCode.objects.filter(username__icontains=''))
+			# Create visit times
+			visittimes=UserData(user=new_user,key='visitTimes',value=str(1))
+			visittimes.save()
 			# If this was a visitor, connect to a user
 			connect_visitor_to_user(request, new_user.id)
 			

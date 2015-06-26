@@ -811,19 +811,25 @@ $(document).ready(function() {
     $('.exec-login').click(function() {
     window.prev_state = 'home';
     window.cur_state = 'login';
+
     $.ajax({
+
             async:false,
             type: "POST",
             dataType: 'json',
             url: window.url_root + "/checkemail/",
             data: {'username':$('#login-email').val()},
             success: function(data) {
+                console.log(data)
+
                 console.log(data.registered);
 
                 if (data.registered==true) {
                     
-                    console.log("data was sent!")
+                    console.log("data was sent!");
                     window.location.href=window.url_root+"/mobile/"+data.entrycode+"/";
+                    alert("okay");
+
                 }
                 else
                 {

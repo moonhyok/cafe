@@ -15,20 +15,18 @@ for (var i=1;i<=window.num_sliders;i++)
 //$( ".slider" ).append( "<span class=\"manual-slide manual-slide-left\"><</span>" );
 $( ".slider" ).append( "<div class=\"crc-div-wrapper\"><div class=\"grade-container\"></div></div>" );
 
-grades = ['10','11','12','7','8','9','4','5','6','1','2','3','0']
-
-//grades = ['A-','A','A+','B-','B','B+','C-','C','C+','D-','D','D+','F']
+grades = ['B','B+','A-','C','C+','B-','D','D+','C-','F','D-']
+gradesMap = {'A-':10,'B+':9,'B':8,'B-':7,'C+':6,'C':5,'C-':4,'D+':3,'D':2,'D-':1,'F':0}
 grades.forEach(function(grade) { 
 
-    $(".grade-container").append("<div class=\"slider-grade-bubble slider-grade-main bubble-Num\"><div class=\"spacer\"></div>"+grade+"</div>");
+    //$(".grade-container").append("<div class=\"slider-grade-bubble slider-grade-main bubble-Num\"><div class=\"spacer\"></div>"+grade+"</div>");
 
-	//if(grade.indexOf('+') >= 0)
-		//$(".grade-container").append("<div class=\"slider-grade-bubble slider-grade-p bubble-" +grade.replace("+","p")+"\"><div class=\"spacer\"></div>"+grade+"</div>");
-	//else if (grade.indexOf('-') >= 0 ) 
-		//$(".grade-container").append("<div class=\"slider-grade-bubble slider-grade-m bubble-" +grade+"\"><div class=\"spacer\"></div>"+grade+"</div>");
-	//else	
-		//$(".grade-container").append("<div class=\"slider-grade-bubble slider-grade-main bubble-" +grade.replace("+","p")+"\"><div class=\"spacer\"></div>"+grade+"</div>");
-
+    if(grade.indexOf('+') >= 0)
+        $(".grade-container").append("<div class=\"slider-grade-bubble slider-grade-p bubble-" +grade.replace("+","p")+"\"><div class=\"spacer\"></div>"+gradesMap[grade]+"</div>");
+    else if (grade.indexOf('-') >= 0 ) 
+        $(".grade-container").append("<div class=\"slider-grade-bubble slider-grade-m bubble-" +grade+"\"><div class=\"spacer\"></div>"+gradesMap[grade]+"</div>");
+    else    
+        $(".grade-container").append("<div class=\"slider-grade-bubble slider-grade-main bubble-" +grade.replace("+","p")+"\"><div class=\"spacer\"></div>"+gradesMap[grade]+"</div>");
 });
 $(".slider-grade-bubble").on("click",function(e){ 
 	//$(this).parent().children(".slider-grade-bubble").css("opacity","1.0"); 

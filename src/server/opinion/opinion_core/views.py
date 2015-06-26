@@ -111,13 +111,13 @@ def checkemail(request):
     username=request.REQUEST.get('username','')
     username=username.lower()[0:30]
     user=User.objects.filter(username__icontains=username)
-    print(str(len(user))+ " length")
     print(user)
+    print(username)
     if len(user)>0:
        entrycode=EntryCode.objects.filter(username__icontains=username)
-       print(str(entrycode)+" HIHI")
-
-       if len(entrycode)>0:
+       print "HIHIHIHIHIHIHI"
+       print(str(entrycode)+"Entrycode")
+       if len(entrycode)>0 and len(username)>=5:
           data={}
           data['entrycode']=entrycode[0].code
           data['registered']=True
@@ -134,6 +134,25 @@ def checkemail(request):
 
 @cache_control(no_cache=True)
 def mobile(request,entry_code=None):
+    isLoggedIn=False
+    #print str(entry_code)+" entry code"
+    if entry_code!=None:
+       user = authenticate(entrycode=entry_code)
+       print user
+       print " printing user"
+       if user is not None:
+          isLoggedIn=True
+          """login(request,user)
+          if 'refresh_times' in request.session:
+             request.session['refresh_times']=1 #entry code user refresh re-enter    
+          else:
+             request.session['refresh_times']=0 #first time entry code user return
+             user_visit=UserData.objects.filter(user=user,key='visitTimes')
+             if len(user_visit)>0:
+                user_visit[0].value=str(int(user_visit[0].value)+1)
+                user_visit[0].save()"""
+       else:
+          entry_code=None 
     create_visitor(request)
     os = get_os(1)
     disc_stmt = get_disc_stmt(os, 1)
@@ -158,21 +177,23 @@ def mobile(request,entry_code=None):
     external_count = UserData.objects.filter(user = su, key='total_count')
     if external_count.count() > 0:
        num_users = external_count[0].value
+    print str(request.user.is_authenticated()) + " authenticated"
 
-    return render_to_response('mobile.html', context_instance = RequestContext(request, {'url_root' : settings.URL_ROOT,
-                                                                                         'return_user_first_time':str(return_user_first_time(request,entry_code)).lower(),
-                                                                                         'zipcode': str(return_zipcode(request)),
-                                                                                         'visit_time': str(return_visit_time(request,entry_code)),
-                       'loggedIn' : request.user.is_authenticated(),
+    return render_to_response('mobile.html', context_instance = RequestContext(request, {
+                       'url_root' : settings.URL_ROOT,
+                       'return_user_first_time':str(return_user_first_time(request,entry_code)).lower(),
+                       'zipcode': str(return_zipcode(request)),
+                       'visit_time': str(return_visit_time(request,entry_code)),
+                       'loggedIn' : isLoggedIn,
                        'change_prompt' : str(request.user.is_authenticated()).lower(),
                        'client_data': mobile_client_data(request),
                        'entry_code': str(entry_code!=None).lower(),
                        'refer': referrallink,
-		       'org_id': org_id,
+		                   'org_id': org_id,
                        'language':language,
-                                             'statement_hist': get_statement_histograms(),
+                       'statement_hist': get_statement_histograms(),
                        'client_settings': get_client_settings(True),
-                                             'horizontal_slide': settings.HORIZONTAL_SLIDE,
+                       'horizontal_slide': settings.HORIZONTAL_SLIDE,
                        'topic': DiscussionStatement.objects.filter(is_current=True)[0].statement,
                        'topic_spanish': DiscussionStatement.objects.filter(is_current=True)[0].spanish_statement,
                        'short_topic': DiscussionStatement.objects.filter(is_current=True)[0].short_version,
@@ -181,7 +202,7 @@ def mobile(request,entry_code=None):
                        'random_username': random_username,
                        'random_password': random_password,
                        'num_users': num_users,
-                                             'statement_labels': json.dumps(statement_labels),
+                       'statement_labels': json.dumps(statement_labels),
                        'medians': json.dumps(medians)}))
 
 def confirmation_mail(request):

@@ -124,29 +124,29 @@
 
      jQuery(document).ready(function(){
        for (var i = 0; i < window.num_sliders; i++) {
-   window.sliders[i] = 4;
-   window.skipped[i] = false;
-   $(".endslider-slider"+(i+1)).noUiSlider({
-     range: [0, 100],
-     start: window.sliders[i] ,
-     step: 5,
-     handles: 1,
-     connect: false,
-     behaviour: "none",
-     slide: function() {
-       var id = $(this).data('statement');
-       $('#g' + id).html( score_to_grade( $(this).val() ) );
-     }
-   }).change(function () {
-     var id = $(this).attr('id');
-     id = parseInt(id.substring(1, id.length)); // strips the leading 's'
-     update_score(id);
-   });
+         window.sliders[i] = 4;
+         window.skipped[i] = false;
+         $(".endslider-slider"+(i+1)).noUiSlider({
+           range: [0, 100],
+           start: window.sliders[i] ,
+           step: 5,
+           handles: 1,
+           connect: false,
+           behaviour: "none",
+           slide: function() {
+             var id = $(this).data('statement');
+             $('#g' + id).html( score_to_grade( $(this).val() ) );
+           }
+         }).change(function () {
+           var id = $(this).attr('id');
+           id = parseInt(id.substring(1, id.length)); // strips the leading 's'
+           update_score(id);
+          });
 
        }
 
        $(".rating-slider").noUiSlider({
-   range: [0, 100], start: 50, step: 5, handles: 1,connect: false, behaviour: "none"
+          range: [0, 100], start: 50, step: 5, handles: 1,connect: false, behaviour: "none"
        });
 
        $(".slider-progress-dot-"+1).css("background","#FFFFFF");
@@ -308,19 +308,28 @@
 
           <center>
 
+          {% if loggedIn %}
+          <div class="basic-header">Welcome Back!</div></br>
+          {% endif %}
+
           <a href="https://www.youtube.com/watch?v=AmCsdmKwWHo&feature=youtu.be" target="_blank">Tutorial</a>
           </center>
         </br>
-      </br>
       
           <center>
 
 M-CAFE is a platform that facilitates ongoing student feedback to the instructors on how IEOR 115 can be improved as the course progresses. Students will periodically be asked to spend a few minutes to enter their feedback into M-CAFE.         
           </div>
 
+          {% if loggedIn %}
+          <div class='button-div-red first-time-btn responsive-btn' style="display: inline-block; margin-top: 10px;">Continue</div><br/><br/><br/>
+          {% else %}
+
+
           <div class='button-div-red first-time-btn responsive-btn' style="display: inline-block; margin-top: 10px;">New</div>
 
           <div class='button-div-red return-btn responsive-btn' style="display: inline-block;">Returning</div><br/><br/><br/>
+          {% endif %}
 
            <font style="font-size: 18px;line-height: 18px;text-shadow:none;color: #442b10;">
             See how your peers are rating the course on the <a target="_blank" href="{{url_root}}/stats/">Stats page</a>!
@@ -614,7 +623,7 @@ M-CAFE is a platform that facilitates ongoing student feedback to the instructor
               </div>
 
               <div data-role="fieldcontain">
-                <label for="regdesign" class='regforminput'>Number of Other Programming/Database Courses Taken:</label>
+                <label for="regdesign" class='regforminput'>Number of Other Programming / Database Courses Taken:</label>
                   <select name="regdesign" id="regdesign" style="color: #000000 !important; font-size: 24px !important;">
                   <option value="">Select # Courses</option>
                   <option value="0">0</option>
@@ -627,7 +636,7 @@ M-CAFE is a platform that facilitates ongoing student feedback to the instructor
               </div>
 
               <div data-role="fieldcontain">
-                <label for="reginterests" class='regforminput' style="font-size: 19px !important;">Interest in SQL/Database<br/>1 (Low) - 10 (High):</label>
+                <label for="reginterests" class='regforminput' style="font-size: 19px !important;">Interest in SQL / Database<br/>1 (Low) - 10 (High):</label>
                   <select name="reginterests" id="reginterests" style="color: #000000 !important; font-size: 24px !important;">
                   <option value="">Select Level of Interest</option>
                   <option value="1">1</option>
@@ -744,12 +753,11 @@ M-CAFE is a platform that facilitates ongoing student feedback to the instructor
        <center>
        <div class='dialog-text-style responsive-body'>
            If you have already registered your email with M-Cafe, please enter it here. You will be able to update your evaluations, add a new suggestion, and read/rate other participants.<br/>
-           <form id='reg_form' class='reg_form responsive-form'>
-              <center>
-                <div data-role="fieldcontain" >
-           <input type="text" class="login-email" id="login-email" value='' placeholder="Email" data-theme='b' style="color: #000000 !important; font-size: 24px !important;"/>
+           
+           <input type="text" class="login-email" id="login-email" value='' placeholder="Email" data-theme='b' style="color: #000000 !important; font-size: 24px !important;text-align:center;"/>
            <div class='alert-error' id='login-error' style='display:none;width: 100%;'></div><br/>
            <center><div class='button-div-wide exec-login responsive-btn' style="text-align:center;">Login</div></center>
+
        </div>
        </center>
       </div>
@@ -794,7 +802,7 @@ M-CAFE is a platform that facilitates ongoing student feedback to the instructor
       </div>
 
 
-      <div class='dialog dialog-style'>
+  <div class='dialog dialog-style'>
   <center>
     <div class="home-btn-dialog-box">
             <div class="home-btn-title responsive-header">
@@ -877,10 +885,10 @@ M-CAFE is a platform that facilitates ongoing student feedback to the instructor
                context.shadowOffsetX = 1;
                context.shadowOffsetY = 1;
          //context.moveTo(0, 45 - data[0]/max_of_array*38);
-         for (i = 0; i <= 13; i++)
+         for (i = 0; i <= 11; i++)
          {
           var skipOffset = 0
-          if (i == 13)
+          if (i == 11)
             skipOffset = 7
 
      context.moveTo(i*11+5+skipOffset, 45);
@@ -890,7 +898,7 @@ M-CAFE is a platform that facilitates ongoing student feedback to the instructor
 
          context.font="italic small-caps bolder 12px sans-serif";
          context.fillStyle = '#442b10';
-         context.fillText("12",0,58);
+         context.fillText("10",0,58);
 
          context.fillText("0",133,58);
          context.fillText("Ø",149,58);
@@ -951,10 +959,10 @@ M-CAFE is a platform that facilitates ongoing student feedback to the instructor
                context.shadowOffsetX = 1;
                context.shadowOffsetY = 1;
          //context.moveTo(0, 90 - data[0]/max_of_array*76);
-         for (i = 0; i <= 13; i++)
+         for (i = 0; i <= 11; i++)
          {
           var skipOffset = 0
-          if (i == 13)
+          if (i == 11)
             skipOffset = 7
 
           context.moveTo(i*22+10+skipOffset, 90);
