@@ -337,6 +337,8 @@ var rate = (function($, d3, console) {
 
     
     function sendSlider(rating, number) {
+        console.log(number + " number");
+        console.log(rating + " rating");
         $.ajax({
             type: "POST",
             url: window.url_root + "/os/saverating/1/",
@@ -476,34 +478,30 @@ $(document).ready(function() {
 
         window.skipped[window.current_slider-1] = true;
 
-        if(window.current_slider +1 > window.num_sliders)
-        {
+        if(window.current_slider +1 > window.num_sliders){
             window.prev_state = 'grade';
-        window.cur_state = 'register';
-        rate.logUserEvent(5,'sliders finished');
-        rate.storeSliders(window.num_sliders);
-        if (window.authenticated) {
-            for (var i = 1; i <= window.num_sliders; i++) {
-                rate.sendSlider(window.sliders[i], i);
-            }
-
-        }
-        }
-        else
-            {
-                window.current_slider = window.current_slider  + 1;
-                var ua = navigator.userAgent.toLowerCase();
-                var isAndroid = ua.indexOf("android") > -1; //&& ua.indexOf("mobile");
-                if(isAndroid || screen.width >= 700) {
-                    $("#slide-"+window.current_slider).fadeIn(1000);
-                }   
-                else
-                    $("#slide-"+window.current_slider).show("slide", { direction: "right" }, 500);
-
-                $("#slide-"+(window.current_slider-1)).hide();
-                /*$(".slider-progress-dot-"+(parseInt(event.target.id.substring(5),10)+1)).css("background","#FFFFFF");*/
+            window.cur_state = 'register';
+            rate.logUserEvent(5,'sliders finished');
+            rate.storeSliders(window.num_sliders);
+            if (window.authenticated) {
+                for (var i = 0; i < window.num_sliders; i++) {
+                    rate.sendSlider(window.sliders[i], i+1);
+                }
 
             }
+        } else {
+            window.current_slider = window.current_slider  + 1;
+            var ua = navigator.userAgent.toLowerCase();
+            var isAndroid = ua.indexOf("android") > -1; //&& ua.indexOf("mobile");
+            if(isAndroid || screen.width >= 700) {
+                $("#slide-"+window.current_slider).fadeIn(1000);
+            } else 
+                $("#slide-"+window.current_slider).show("slide", { direction: "right" }, 500);
+            
+            $("#slide-"+(window.current_slider-1)).hide();
+            /*$(".slider-progress-dot-"+(parseInt(event.target.id.substring(5),10)+1)).css("background","#FFFFFF");*/
+
+        }
     });
 
     $('.skip-btn').click(function(event){ 
@@ -517,9 +515,10 @@ $(document).ready(function() {
         window.cur_state = 'register';
         rate.logUserEvent(5,'sliders finished');
         rate.storeSliders(window.num_sliders);
+        alert("skip-btn");
         if (window.authenticated) {
-            for (var i = 1; i <= window.num_sliders; i++) {
-                rate.sendSlider(window.sliders[i], i);
+            for (var i = 0; i < window.num_sliders; i++) {
+                rate.sendSlider(window.sliders[i], i+1);
             }
 
         }

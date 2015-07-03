@@ -27,7 +27,7 @@ urlpatterns = patterns('',
                        #(r'^solid_nofilter/$', 'opinion.opinion_core.views.solid_nofilter'),
                        #(r'^contact/$', 'opinion.opinion_core.views.contact'),
                        
-                       # Admin panel methods
+                       # Admin panel methodsaccountsjson
                        (r'^adminpanel/overview/$', 'opinion.opinion_core.views.get_overview'),
                        (r'^adminpanel/flaggedcomments/$', 'opinion.opinion_core.views.get_flaggedcomments'),
                        (r'^adminpanel/blacklisteduser/$', 'opinion.opinion_core.views.get_blacklisteduser'),
@@ -37,7 +37,7 @@ urlpatterns = patterns('',
                        (r'^adminpanel/report/$', 'opinion.opinion_core.views.get_csv_report'),     
                        (r'^adminpanel/loginerror/$', 'opinion.opinion_core.views.get_loginerror'),
                        (r'^admincontent/(\d+)/(\d+)/$', 'opinion.opinion_core.views.get_admin_content'),
-                       (r'^admincontent/(\d+)/$', 'opinion.opinion_core.views.get_admin_content'),	
+                       (r'^admincontent/(\d+)/$', 'opinion.opinion_core.views.get_admin_content'),  
                        (r'^approvecomment/(\d+)/$', 'opinion.opinion_core.views.approve_comment'),
                        (r'^blacklist/(\d+)/$', 'opinion.opinion_core.views.blacklist_comment'),
                        (r'^unblacklist/(\d+)/$', 'opinion.opinion_core.views.unblacklist_comment'),

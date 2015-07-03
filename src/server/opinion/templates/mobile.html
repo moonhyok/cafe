@@ -99,6 +99,8 @@
 
      window.entry_code = {{ entry_code }} ;
 
+     window.repeat = {{ repeat }} ;
+
      window.registration_in_progress = false;
 
      window.landing = true;
@@ -123,9 +125,10 @@
      };
 
      jQuery(document).ready(function(){
-       for (var i = 0; i < window.num_sliders; i++) {
+       for (var i = 0; i < window.num_sliders; i++){ 
          window.sliders[i] = 4;
          window.skipped[i] = false;
+
          $(".endslider-slider"+(i+1)).noUiSlider({
            range: [0, 100],
            start: window.sliders[i] ,
@@ -162,7 +165,7 @@
        });
 
        // give the statement sliders some color
-       var _grades = {'0' : 0, '1' : 10, '2': 20, '3': 30, '4': 40, '5': 50, '6': 60, '7': 70, '8': 80, '9': 89, '10' : 97 };
+       var _grades = {'A' : 5, 'B' : 25, 'C': 50, 'D': 75, 'F' : 96 };
   $.map( _grades, function(position, letter) {
     var span = '<span class="grade-labels" style="left:'+position+'%;">'+letter+'</span>';
     $('.statement-slider > .noUi-base').append( span );
@@ -198,60 +201,60 @@
        var score = 100 - score1;
        
        if (score == 100)
-         return 'A+';
-       else if (score > 92)
-       return 'A';
-       else if (score > 86)
-       return 'A-';
-       else if (score > 81)
+         return 'A-';
+       else if (score > 90)
        return 'B+';
-       else if (score > 69 )
+       else if (score > 80)
        return 'B';
-       else if (score > 63 )
+       else if (score > 70)
        return 'B-';
-       else if (score > 56 )
+       else if (score > 60 )
        return 'C+';
-       else if (score > 44 )
+       else if (score > 50 )
        return 'C';
-       else if (score > 38 )
+       else if (score > 40 )
        return 'C-';
-       else if (score > 32 )
+       else if (score > 30 )
        return 'D+';
-       else if (score > 19 )
+       else if (score > 20 )
        return 'D';
-       else if (score == 0 )
+       else if (score > 10 )
+       return 'D-';
+       else 
        return 'F';
-       else
-         return 'D-';
+       // else if (score == 0 )
+       // return 'F';
+       // else
+       //   return 'D-';
      }
 
      function grade_to_score(grade) {
-       if (grade == 'A+')
+       if (grade == 'A-')
          return 10;
-       else if (grade == 'A')
-       return 10.0 - 10.0/12;
-       else if (grade == 'A-')
-       return 10.0 - 20.0/12;
        else if (grade == 'B+')
-       return 10.0 - 30.0/12;
-       else if (grade == 'B' )
-       return 10.0 - 40.0/12;
+       return 10.0 - 10.0/11;
+       else if (grade == 'B')
+       return 10.0 - 20.0/11;
        else if (grade == 'B-')
-       return 10.0 - 50.0/12;
-       else if (grade == 'C+')
-       return 10.0 - 60.0/12;
+       return 10.0 - 30.0/11;
+       else if (grade == 'C+' )
+       return 10.0 - 40.0/11;
        else if (grade == 'C')
-       return 10.0 - 70.0/12;
+       return 10.0 - 50.0/11;
        else if (grade == 'C-')
-       return 10.0 - 80.0/12;
+       return 10.0 - 60.0/11;
        else if (grade == 'D+')
-       return 10.0 - 90.0/12;
+       return 10.0 - 70.0/11;
        else if (grade == 'D')
-       return 10.0 - 100.0/12;
+       return 10.0 - 80.0/11;
        else if (grade == 'D-')
-       return 10.0 - 110.0/12;
+       return 10.0 - 90.0/11;
        else
-         return 10.0 - 120.0/12;
+       return 10.0 - 100.0/11;
+       // else if (grade == 'D-')
+       // return 10.0 - 110.0/11;
+       // else
+       //   return 10.0 - 120.0/11;
      }
 
      function statementsComplete() {
@@ -265,13 +268,13 @@
 
      /** Updates statement number STATEMENT (which is of type number). */
      function update_score(statement) {
-       /* $('#g' + statement).css('opacity', 1);
-    console.log(medians[statement]);
-    $('#o' + statement).html(score_to_grade(medians[statement]*100))
-    window.sliders[statement] = $('#s' + statement).val();
-    document.getElementById('tr'+statement).style.backgroundColor = "rgba(255, 255, 0, 0.8)";
-    finishedStatements[statement-1]= 1;
-    rate.logUserEvent(11,'slider_set ' + statement + ' ' + window.sliders[statement]/100);*/
+      $('#g' + statement).css('opacity', 1);
+      console.log(medians[statement]);
+      $('#o' + statement).html(score_to_grade(medians[statement]*100))
+      window.sliders[statement] = $('#s' + statement).val();
+      document.getElementById('tr'+statement).style.backgroundColor = "rgba(255, 255, 0, 0.8)";
+      finishedStatements[statement-1]= 1;
+      rate.logUserEvent(11,window.visitTime+' visit '+'slider_set ' + statement + ' ' + window.sliders[statement]/100);
      }
 
     </script>
@@ -900,8 +903,8 @@ M-CAFE is a platform that facilitates ongoing student feedback to the instructor
          context.fillStyle = '#442b10';
          context.fillText("10",0,58);
 
-         context.fillText("0",133,58);
-         context.fillText("Ø",149,58);
+         context.fillText("0",108,58);
+         context.fillText("Ø",126,58);
         </script>
 
       </div>
@@ -972,10 +975,10 @@ M-CAFE is a platform that facilitates ongoing student feedback to the instructor
 
          context.font="italic small-caps bolder 12px sans-serif";
          context.fillStyle = '#442b10';
-         context.fillText("12",5,104);
+         context.fillText("10",5,104);
 
-         context.fillText("0",268,104);
-         context.fillText("Ø",296,102);
+         context.fillText("0",225,104);
+         context.fillText("Ø",253,102);
         </script>
 
 <div id="detail-emore-info-{{k.id}}" class="dialog-text-style responsive-body english"></div>
@@ -1104,7 +1107,8 @@ M-CAFE is a platform that facilitates ongoing student feedback to the instructor
 
 
       <div style="text-align: center;margin-top: 6px;" class="english responsive-body"><span>{{ topic }}</span></div>
-      
+      <div style="text-align: right;"><a href="#" class="map-info" style="color:#442b10;position:relative;top:5px;" onclick="accounts.hideAll();$('.dialog-help-map1').show();window.cur_state = 'faq';window.prev_state = 'map';"><img width="30px" src="{{url_root}}/media/mobile/img/cafe/info_button.png"></a></div>
+
 
       <div id='d3' class="d3-canvas"></div>
     </center>

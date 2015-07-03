@@ -111,12 +111,8 @@ def checkemail(request):
     username=request.REQUEST.get('username','')
     username=username.lower()[0:30]
     user=User.objects.filter(username__icontains=username)
-    print(user)
-    print(username)
     if len(user)>0:
        entrycode=EntryCode.objects.filter(username__icontains=username)
-       print "HIHIHIHIHIHIHI"
-       print(str(entrycode)+"Entrycode")
        if len(entrycode)>0 and len(username)>=5:
           data={}
           data['entrycode']=entrycode[0].code
@@ -127,22 +123,22 @@ def checkemail(request):
           data['registered']=False
           return HttpResponse(json.dumps(data),content_type="application/json")
     else:
-       print("Bye")
        data={} 
        data['registered']=False
        return HttpResponse(json.dumps(data),content_type="application/json")
 
+
 @cache_control(no_cache=True)
 def mobile(request,entry_code=None):
-    isLoggedIn=False
+    # isLoggedIn=False
     #print str(entry_code)+" entry code"
     if entry_code!=None:
        user = authenticate(entrycode=entry_code)
-       print user
-       print " printing user"
+       # print user
+       # print " printing user"
        if user is not None:
-          isLoggedIn=True
-          """login(request,user)
+          # isLoggedIn=True
+          login(request,user)
           if 'refresh_times' in request.session:
              request.session['refresh_times']=1 #entry code user refresh re-enter    
           else:
@@ -150,7 +146,7 @@ def mobile(request,entry_code=None):
              user_visit=UserData.objects.filter(user=user,key='visitTimes')
              if len(user_visit)>0:
                 user_visit[0].value=str(int(user_visit[0].value)+1)
-                user_visit[0].save()"""
+                user_visit[0].save()
        else:
           entry_code=None 
     create_visitor(request)
@@ -158,6 +154,7 @@ def mobile(request,entry_code=None):
     disc_stmt = get_disc_stmt(os, 1)
     active_users = list(User.objects.filter(is_active=True)) #forces eval so lazy eval doesn't act too smart!!!
     referrallink = request.GET.get('refer','')
+    repeatuser = request.GET.get('repeat','false')
     language = request.GET.get('lang','en')
     org_id = request.GET.get('orgid','')
 
@@ -177,14 +174,14 @@ def mobile(request,entry_code=None):
     external_count = UserData.objects.filter(user = su, key='total_count')
     if external_count.count() > 0:
        num_users = external_count[0].value
-    print str(request.user.is_authenticated()) + " authenticated"
+    # print str(request.user.is_authenticated()) + " authenticated"
 
     return render_to_response('mobile.html', context_instance = RequestContext(request, {
                        'url_root' : settings.URL_ROOT,
                        'return_user_first_time':str(return_user_first_time(request,entry_code)).lower(),
                        'zipcode': str(return_zipcode(request)),
                        'visit_time': str(return_visit_time(request,entry_code)),
-                       'loggedIn' : isLoggedIn,
+                       'loggedIn' : request.user.is_authenticated(),
                        'change_prompt' : str(request.user.is_authenticated()).lower(),
                        'client_data': mobile_client_data(request),
                        'entry_code': str(entry_code!=None).lower(),
@@ -202,6 +199,7 @@ def mobile(request,entry_code=None):
                        'random_username': random_username,
                        'random_password': random_password,
                        'num_users': num_users,
+                       'repeat': repeatuser,
                        'statement_labels': json.dumps(statement_labels),
                        'medians': json.dumps(medians)}))
 

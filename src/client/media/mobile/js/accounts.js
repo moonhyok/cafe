@@ -9,7 +9,7 @@ var accounts = (function($, d3, console) {
 
     function showRegister() {
         $('.register').show();
-        //$('#finishRegistration').click(function() {});
+        $('#finishRegistration').click(function() {});
     }
 
     function showCommentInput() {
@@ -53,6 +53,7 @@ var accounts = (function($, d3, console) {
     // that have logged in. (Mostly to send data to server immediately)
 
     function setAuthenticated() {
+        console.log("authentication");
         $.ajax({
             async:false,
             type: "GET",
@@ -90,7 +91,7 @@ var accounts = (function($, d3, console) {
                         rate.sendSlider(window.sliders[i], i+1);
                         //draw line on canvas
                         var canvas = document.getElementById("sparkLineCanvas"+(i+1));
-                         var context = canvas.getContext('2d');
+                        var context = canvas.getContext('2d');
                         
                         context.beginPath();
                         context.lineWidth = 3;
@@ -110,14 +111,14 @@ var accounts = (function($, d3, console) {
                         context.moveTo(convertedSlider*11+5+skipOffset-6, 5);
                         context.lineTo(convertedSlider*11+5+skipOffset, 10);
                         context.lineTo(convertedSlider*11+5+skipOffset+6, 5);
-			context.stroke();
+			            context.stroke();
 
                         var canvas = document.getElementById("sparkLineCanvasDetail"+(i+1));
-                         var context = canvas.getContext('2d');
-                           context.beginPath();
+                        var context = canvas.getContext('2d');
+                        context.beginPath();
                         context.lineWidth = 5;
                         context.strokeStyle = '#FF00FF';
-			context.moveTo(convertedSlider*22+10+skipOffset-9, 5);
+			            context.moveTo(convertedSlider*22+10+skipOffset-9, 5);
                         context.lineTo(convertedSlider*22+10+skipOffset, 10);
                         context.lineTo(convertedSlider*22+10+skipOffset+9, 5);
                         context.stroke();  
@@ -245,11 +246,12 @@ var accounts = (function($, d3, console) {
             url: window.url_root + '/os/show/1/',
             data: {'nonce': Math.random()},
             success: function(data) {
-                //$('.score-value').text("" + ~~(data['cur_user_rater_score'] * window.conf.SCORE_SCALE_FACTOR));
+                $('.score-value').text("" + ~~(data['cur_user_rater_score'] * window.conf.SCORE_SCALE_FACTOR));
                 window.user_score = data['cur_user_rater_score'];
-                //$('.username').text(' ' + data['cur_username']);
+                $('.username').text(' ' + data['cur_username']);
                 if (dcontinue){
                             accounts.hideAll();
+                            // $('.dialog').show();
                             $('.dialog-continue').show();
                         }
                 else {
@@ -349,7 +351,7 @@ var accounts = (function($, d3, console) {
 
 $(document).ready(function() {
     $('.registerb').click(function(e) {
-        //$('#register').find('.ui-btn-active').removeClass('ui-btn-active ui-focus');
+        $('#register').find('.ui-btn-active').removeClass('ui-btn-active ui-focus');
         e.preventDefault();
         e.stopPropagation();
 
@@ -365,6 +367,20 @@ $(document).ready(function() {
             window.cur_state = 'dialog';
             return;
         }
+
+        // $.ajax({
+        //     async:false,
+        //     type: "POST",
+        //     dataType: 'json',
+        //     url: window.url_root + "/checkemail/",
+        //     data: {'username':$('#regusername').val()},
+        //     success: function(data) {
+        //         if (data.registered==true) {
+                    
+        //             //console.log("data was sent!")
+        //             window.location.href=window.url_root+"/mobile/"+data.entrycode+"/?repeat=true";
+        //         }
+        //         else{
 
 
         rate.logUserEvent(9,'register');
@@ -395,13 +411,20 @@ $(document).ready(function() {
             "password1": $('#regpassword1').val(),
             "password2": $('#regpassword1').val(),
             "email": $('#regemail').val(),
-            "zipcode" : ($('#regzip').val() == '')?'-1':$('#regzip').val()
+            "zipcode" : ($('#regzip').val() == '')?'-1':$('#regzip').val(),
+            "major": ($('#regmajor').val()=='')?'-1':$('#regmajor').val(),
+            "year": ($('#regyear').val()=='')?'-1':$('#regyear').val(),
+            "regdesign" : ($('#redesign').val()== '')?'-1':$('#regdesign').val(),
+            "interests" : ($('#reginterests').val()=='')?'-1':$('#reginterests').val(),
+            "interesth" : ($('#reginteresth').val()=='')?'-1':$('#reginteresth').val(),
+            "reason": ($('#regreason').val()=='')?'-1':$('#regreason').val()
         };
 
         var loginData = {
             "username": registrationData.username.toLowerCase(),
             "password": registrationData.password,
         };
+        console.log(registrationData);
 
         //utils.ajaxTempOff(function() {
             $.ajax({
@@ -412,7 +435,7 @@ $(document).ready(function() {
                 data: registrationData,
                 success: function(data) {
                     $("#username-error").hide();
-                    $("#zipcode-error").hide();
+                    // $("#zipcode-error").hide();
                     //$("#email-error").hide();
                     $("#password-error").hide();
 
@@ -422,14 +445,13 @@ $(document).ready(function() {
                         accounts.setAuthenticated();
 
                         var loading = "Loading"
-                        if (window.lang == "es")
-                            loading = "Cargando"
 
                         utils.showLoading(loading, function() {
+                            console.log(loginData + "logindata")
                             accounts.loginAfterRegister(loginData,dialogcontinue);
                             blooms.populateBlooms();
                             window.scrollTo(0,0); 
-                            //$('.register').hide();
+                            $('.register').hide();
                             $("#regzip").attr("disabled", true);
                             utils.hideLoading();
                             window.conf.ZIPCODE=registrationData.zipcode;
@@ -570,6 +592,7 @@ $(document).ready(function() {
            window.prev_state = window.cur_state;
            window.cur_state = 'home';
            if (window.authenticated){
+
               $('.landing').show();
               $('.menubar').hide();
               $('.scorebox').hide();
@@ -820,16 +843,10 @@ $(document).ready(function() {
             url: window.url_root + "/checkemail/",
             data: {'username':$('#login-email').val()},
             success: function(data) {
-                console.log(data)
-
-                console.log(data.registered);
-
                 if (data.registered==true) {
                     
                     console.log("data was sent!");
                     window.location.href=window.url_root+"/mobile/"+data.entrycode+"/";
-                    alert("okay");
-
                 }
                 else
                 {
@@ -909,6 +926,8 @@ $(document).ready(function() {
         rate.logUserEvent(8,'dialog 1');
         rate.initMenubar();
         $('.map-info').show();
+        console.log(window.mugs)
+        console.log("mugs")
 
         window.mugs.transition()
             .attr("x",function(d) {
@@ -1023,7 +1042,7 @@ $(document).ready(function() {
         $('.logout').show();
         e.preventDefault();
         e.stopPropagation();
-	// window.history.pushState("", "", '/mobile');
+	    window.history.pushState("", "", '/mobile');
 
         $.ajax({
             url: window.url_root + '/accountsjson/logout/',

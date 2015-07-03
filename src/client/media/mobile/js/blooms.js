@@ -582,8 +582,8 @@ var _blooms = blooms = (function($, d3, console) {
 
     function alreadyAuthenticated() {
         //TOFIX utils.showLoading("Loading...");
-        populateBlooms();
-        accounts.initLoggedInFeatures(false, true);
+        // populateBlooms();
+        // accounts.initLoggedInFeatures(false, true);
         //TOFIX utils.hideLoading();
         //accounts.getNeighborStat();
         /*if(window.conf.RETURN_USER_FIRST_TIME){
@@ -592,14 +592,42 @@ var _blooms = blooms = (function($, d3, console) {
 		else{
 		$('.welcome-back').hide();
 		}*/
-        
-    }
+        if (window.entry_code){
+            accounts.hideAll();
+            if (window.repeat){
+                $('.dialog').show();
+                window.cur_state = 'dialog';
+                window.prev_state = 'grade';
+            }else{
+                $('.landing').show();
+                //$('.entry-logout').show();
+                window.cur_state = 'grade';
+                window.prev_state = 'home';
+            }
 
-    return {
-        'populateBlooms': populateBlooms,
-        'alreadyAuthenticated': alreadyAuthenticated,
-        'addYourMug' : addYourMug
-    };
+            populateBlooms();
+            $('.top-bar').show();
+        }
+        else{
+            populateBlooms();
+            accounts.initLoggedInFeatures();
+        }
+            //TOFIX utils.hideLoading();
+            //accounts.getNeighborStat();
+            /*if(window.conf.RETURN_USER_FIRST_TIME){
+            $('.welcome-back').slideDown();
+            }
+            else{
+            $('.welcome-back').hide();
+            }*/
+            
+        }
+
+        return {
+            'populateBlooms': populateBlooms,
+            'alreadyAuthenticated': alreadyAuthenticated,
+            'addYourMug' : addYourMug
+        };
 })($, d3, console);
 
 $(document).ready(function() {

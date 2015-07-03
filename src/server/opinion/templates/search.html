@@ -20,6 +20,7 @@
 			handleAs: "json",
 			load: function(response, ioArgs) {
 				$('#loading').fadeOut()
+				console.log(response);
 				if (response.success) {
 					for (var i = 0; i < response.data.length; i += 1) {
 						var searchResult = response.data[i];
@@ -60,6 +61,7 @@
 	}
 
 	function populateTable(searchResult) {
+		console.log(searchResult);
 		dojo.byId('tableBodyWrapper').innerHTML = "";
 		if (searchResult != "") {
 			// display the comments
