@@ -2231,7 +2231,6 @@ def os_save_comment(request, os_id, disc_stmt_id = None):
                                             opinion_space_id = os_id,
                                             discussion_statement = disc_stmt,
                                             comment = new_comment,
-                                            spanish_comment = translate_to_spanish(new_comment),
                                             original_language = comment_language,
                                             query_weight = -1,
                                             is_current = True)
@@ -2239,7 +2238,6 @@ def os_save_comment(request, os_id, disc_stmt_id = None):
                 comment = DiscussionComment(user = request.user,
                                             opinion_space_id = os_id,
                                             discussion_statement = disc_stmt,
-                                            comment = translate_to_english(new_comment),
                                             spanish_comment =  new_comment,
                                             original_language = comment_language,
                                             query_weight = -1,

@@ -425,7 +425,7 @@ Or you are welcome to continue grading participants\' suggestions for the next r
     'EMAIL_ASK_TEXT' : "Please provide your email to receive a customized link where you can see how others rate your idea.",
     'LOGOUT_DIALOG_TEXT' : """Thank you for participating!""",
     'REPORT_CARD_INST' : "Drag the handle to grade from A to F how well you feel California's elected officials are working to address the following 6 subjects:",
-    'ZIP_CODE_INSTRUCTIONS' : "Enter your zip code to save your grades and join the discussion",
+    'ZIP_CODE_INSTRUCTIONS' : "Enter your email to save your grades and join the discussion",
     'DISCUSSION_DIALOG_TEXT1' : "Thank you for grading these issues.  We now invite you to consider and propose additional issues you feel should have priority for attention at the state level.", 
     'DISCUSSION_DIALOG_TEXT2' : '',
     'AVG_EXPLAIN_TEXT' : "The Median Grade is based on the grades from all participants thusfar."

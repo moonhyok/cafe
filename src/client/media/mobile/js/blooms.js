@@ -410,9 +410,11 @@ var _blooms = blooms = (function($, d3, console) {
                 console.log({'uid': d.uid,'x':d.x,'y':d.y,'cx': canvasx(d.x),'cy': canvasy(d.y)});
                 return window.url_root + "/media/mobile/img/cafe/cafe6.png";
             })
-            .attr("width", function(d) {return(mugsize*Math.random()+60)+"";}) //if this changes, change the margin above
-            .attr("height", function(d) {return(mugsize*Math.random()+60)+"";})
-	    .attr("opacity", 1.0)
+            // .attr("width", function(d) {return(mugsize*Math.random()+60)+"";}) //if this changes, change the margin above
+            // .attr("height", function(d) {return(mugsize*Math.random()+60)+"";})
+            .attr("width", function(d) {return(mugsize)+"";})
+            .attr("height", function(d) {return(mugsize)+"";})
+	        .attr("opacity", 1.0)
             .attr("x",function(d) {
                 return (width)/2;
                 //return canvasx(d.x);
@@ -459,6 +461,35 @@ var _blooms = blooms = (function($, d3, console) {
                     $('.rate').data('cid', cid);
                 });*/
                 //utils.hideLoading(0);
+            });
+
+            window.tag = window.coffeetable_svg.selectAll(".bloom")
+            .data(data)
+            .enter()
+            .append("svg:text")
+            //         ;
+
+            // var textLabels = text
+            .text( function (d) { 
+                    // window.blooms_list.push(d.uid);
+                    var commentData = rate.pullComment(d.uid, 'uid', comments);
+                    // console.log(tag+" froggy");
+                    return d.uid; })
+            .attr("x", function(d) { return canvasx(d.x)+mugsize/2; })
+            .attr("y", function(d) { return canvasy(d.y)+mugsize/2; })
+
+            .attr("font-family", "sans-serif")
+            .attr("font-size", "20px")
+
+            .attr("opacity",1.0)
+             // .attr("filter", function(d){return "url(#blur"+(Math.floor(Math.random()*4)+1)+")";})
+            .style("cursor","pointer")
+            .style("cursor","hand")
+             .on('mouseover', function(d) {
+                var _this = d3.select(this);
+            })
+            .on('mouseout', function(d) {
+                var _this = d3.select(this);
             });
 
             if(window.user_score >= 2)

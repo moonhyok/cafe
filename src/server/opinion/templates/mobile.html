@@ -73,6 +73,8 @@
 
      window.skipped = [];
 
+     window.suspicious = false;
+
      window.email_saved = false;
 
      window.translation_lock = false;
@@ -315,7 +317,7 @@
           <div class="basic-header">Welcome Back!</div></br>
           {% endif %}
 
-          <a href="https://www.youtube.com/watch?v=AmCsdmKwWHo&feature=youtu.be" target="_blank">Tutorial</a>
+          <!--<a href="https://www.youtube.com/watch?v=AmCsdmKwWHo&feature=youtu.be" target="_blank">Tutorial</a>-->
           </center>
         </br>
       
@@ -341,7 +343,8 @@ M-CAFE is a platform that facilitates ongoing student feedback to the instructor
 
 
 
-          <font width="70%" style="font-size: 14px;line-height: 18px;text-shadow:none; color: #442b10 ;"> Information gathered through M-CAFE will be confidential. Student identity will not be revealed through M-CAFE. For any questions, comments, or concerns, send an email to <a href="mailto:cafe.mooc@gmail.com">cafe.mooc@gmail.com</a> (NOT the course staff) and please do not post your M-CAFE related questions to the course discussion forum. <br/> <a href="#" class="help-btn-dialog">About</a></font>
+          <font width="70%" style="font-size: 14px;line-height: 18px;text-shadow:none; color: #442b10 ;"> Information gathered through M-CAFE will be confidential. Student identity will not be revealed through M-CAFE. For any questions, comments, or concerns, send an email to <a href="mailto:cafe.mooc@gmail.com">cafe.mooc@gmail.com</a> (NOT the course staff) and please do not post your M-CAFE related questions to the course discussion forum. <br/> 
+            <a href="http://m-cafe.org/?page_id=5" target="_blank">About</a>
 
           </center>
 
@@ -392,7 +395,7 @@ M-CAFE is a platform that facilitates ongoing student feedback to the instructor
 
             <center>  
               <div class="question-number responsive-body"><span>Question</span> {{ statement.id }} <span>of</span> {{ statements|length }}.</div>
-              <div class="question-number responsive-body">Please grade the the following aspects of the course:</div>
+              <div class="question-number responsive-body">Please grade the following aspects of the course:</div>
               <div class="statement-style responsive-body english">{{ statement.statement }}</div>
               
 
@@ -755,7 +758,7 @@ M-CAFE is a platform that facilitates ongoing student feedback to the instructor
 
        <center>
        <div class='dialog-text-style responsive-body'>
-           If you have already registered your email with M-Cafe, please enter it here. You will be able to update your evaluations, add a new suggestion, and read/rate other participants.<br/>
+           If you have already registered your email with M-Cafe, please enter it here. You will be able to update your evaluations, add a new suggestion, and read/rate other students.<br/>
            
            <input type="text" class="login-email" id="login-email" value='' placeholder="Email" data-theme='b' style="color: #000000 !important; font-size: 24px !important;text-align:center;"/>
            <div class='alert-error' id='login-error' style='display:none;width: 100%;'></div><br/>
@@ -805,18 +808,16 @@ M-CAFE is a platform that facilitates ongoing student feedback to the instructor
       </div>
 
 
-  <div class='dialog dialog-style'>
+   <div class='dialog dialog-style'>
   <center>
     <div class="home-btn-dialog-box">
             <div class="home-btn-title responsive-header">
               <span class="landing-page-banner">{{client_settings.WELCOME_PAGE_TITLE}}</span> 
             </div>
             
-            <div class="home-btn-wrapper" style="width:35%;display:inline-block;">
-                
-                <img width="30px" class='help-btn-dialog' id="help-endsliders" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn_compress.png">
-              </div>
-
+            <div class="home-btn-wrapper" style="width:35%;display:inline-block; text-align: right;">
+              <img width="30px" class='help-btn-dialog' id="help-dialog" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn_compress.png"> 
+            </div>
 
           </div> 
     <!--<img class="header-img-topic center" src="{{ url_root }}/media/mobile/img/cafe/CRC_join.png"/>-->
@@ -842,13 +843,10 @@ M-CAFE is a platform that facilitates ongoing student feedback to the instructor
         <!--<script>
         var canvas = document.getElementById('sparkLineCanvas{{k.id}}');
         var context = canvas.getContext('2d');
-
         if ({{k.id}} % 2 == 1)
               $('.compare-box-{{k.id}}').css("background-color","rgba(0,0,0,0.05)")
-
         var data = {{v}};
         var max_of_array = Math.max.apply(Math, data);
-
         context.beginPath();
         context.lineWidth = 2;
         context.strokeStyle = '#442b10';
@@ -861,26 +859,21 @@ M-CAFE is a platform that facilitates ongoing student feedback to the instructor
               context.lineTo(i*16, 45 - data[i]/max_of_array*38);
               context.stroke(); 
         }
-
         context.font="italic small-caps bolder 12px sans-serif";
         context.fillStyle = '#442b10';
         context.fillText("0",0,48);
-
         context.fillText("9",150,50);
         </script>-->
 
         <script>
+        console.log(window.sliders[0]+" HIHIHI");
          var canvas = document.getElementById('sparkLineCanvas{{k.id}}');
          var context = canvas.getContext('2d');
-
          if ({{k.id}} % 2 == 1)
      $('.compare-box-{{k.id}}').css("background-color","rgba(0,0,0,0.05)")
-
          var data = {{v}};
          var max_of_array = Math.max.apply(Math, data);
-
          window.statement_processed_data[({{k.id}}-1)] = data
-
          context.beginPath();
          context.lineWidth = 6;
          context.strokeStyle = '#442b10';
@@ -892,19 +885,16 @@ M-CAFE is a platform that facilitates ongoing student feedback to the instructor
          {
           var skipOffset = 0
           if (i == 11)
-            skipOffset = 7
-
-     context.moveTo(i*11+5+skipOffset, 45);
-     context.lineTo(i*11+5+skipOffset, 45 - data[i]/max_of_array*38);
-     context.stroke(); 
+            skipOffset = 28
+         context.moveTo(i*11+5+skipOffset, 45);
+         context.lineTo(i*11+5+skipOffset, 45 - data[i]/max_of_array*38);
+         context.stroke(); 
          }
-
          context.font="italic small-caps bolder 12px sans-serif";
          context.fillStyle = '#442b10';
          context.fillText("10",0,58);
-
-         context.fillText("0",108,58);
-         context.fillText("Ø",126,58);
+         context.fillText("0",133,58);
+         context.fillText("Ø",149,58);
         </script>
 
       </div>
@@ -928,8 +918,7 @@ M-CAFE is a platform that facilitates ongoing student feedback to the instructor
               <span class="landing-page-banner">{{client_settings.WELCOME_PAGE_TITLE}}</span> 
             </div>
             
-            <div class="home-btn-wrapper" style="width:35%;display:inline-block; text-align: right;">
-              <img width="30px" class='help-btn-dialog' id="help-detail-box-{{k.id}}" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn_compress.png"> 
+            <div class="home-btn-wrapper" style="width:35%;display:inline-block; text-align: right;"><img width="30px" class='help-btn-dialog' id="help-detail-box-{{k.id}}" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn_compress.png"> 
             </div>
 
           </div> 
@@ -954,7 +943,6 @@ M-CAFE is a platform that facilitates ongoing student feedback to the instructor
          var context = canvas.getContext('2d');
          var data = {{v}};
          var max_of_array = Math.max.apply(Math, data);
-
          context.beginPath();
          context.lineWidth = 10;
          context.strokeStyle = '#442b10';
@@ -966,20 +954,18 @@ M-CAFE is a platform that facilitates ongoing student feedback to the instructor
          {
           var skipOffset = 0
           if (i == 11)
-            skipOffset = 7
-
+            skipOffset = 49
           context.moveTo(i*22+10+skipOffset, 90);
           context.lineTo(i*22+10+skipOffset, 90 - data[i]/max_of_array*76);
           context.stroke(); 
          }
-
          context.font="italic small-caps bolder 12px sans-serif";
          context.fillStyle = '#442b10';
          context.fillText("10",5,104);
-
-         context.fillText("0",225,104);
-         context.fillText("Ø",253,102);
+         context.fillText("0",268,104);
+         context.fillText("Ø",296,103);
         </script>
+
 
 <div id="detail-emore-info-{{k.id}}" class="dialog-text-style responsive-body english"></div>
 <div id="detail-smore-info-{{k.id}}" class="dialog-text-style responsive-body spanish"></div>
@@ -1012,7 +998,7 @@ M-CAFE is a platform that facilitates ongoing student feedback to the instructor
 
     <center>
             <div class='comment-panel'>
-              <div class="basic-header2 responsive-body english" style="text-align:left;">Please provide a specific enhancement of the course this semester and in future semesters.</div>
+              <div class="basic-header2 responsive-body english" style="text-align:left;">Please suggest a specific way to enhance the course this semester or in the future.</div>
 
               <textarea name='answer' id='entered-comment' maxlength="500"></textarea>
               
@@ -1051,11 +1037,27 @@ M-CAFE is a platform that facilitates ongoing student feedback to the instructor
 
 
 
+          <!-- <center> -->
+          <div data-role="fieldcontain">
+            <label for="studentTag" class='regforminputtag' style="font-size: 12px !important;"></label>
+              <select name="studentTag" id="studentTag" style="color: #000000 !important; font-size: 16px !important;">
+              <option data-placeholder="">Select Appropriate Tag</option>
+              <option value="Homework">Homework</option>
+              <option value="Exam and Quiz">Exam and Quiz</option>
+              <option value="Lecture Material">Lecture Material</option>
+              <option value="Logistics">Logistics</option>
+              <option value="Project">Project</option>
+              <option value="Additional Material Suggestion">Additional Material Suggestion</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <!-- </center> -->
+<!--           <br/>
+ -->
     <center>
       <div class="answerwrapper">
         <div class='sliders responsive-body' style="text-align: center;font-size: 18px; font-family: DroidSans-Bold, sans-serif;max-width: 620px;">
-          <br/>
-
+         
          How valuable would it be for the instructor to adopt this suggestion?<br/>
     <center>
       <!--(Not at all) 0   -  9 (Extremely)-->
@@ -1102,7 +1104,7 @@ M-CAFE is a platform that facilitates ongoing student feedback to the instructor
       
     <center>
       <div class="instructions-light responsive-body">
-        Each sphere represents a participant. Tap any sphere to begin. 
+        Each sphere represents a student. Tap any sphere to begin. 
       </div>
 
 
@@ -1237,8 +1239,8 @@ M-CAFE is a platform that facilitates ongoing student feedback to the instructor
     <center>
       <br/><br/>
       <div class='dialog-text-style responsive-body'>
-        <span>Thank you for participating!</span>
-        <div style="font-size: 18px;margin-top: 10px;">Thank you for providing feedback on a way this course could be enhanced to make it more valuable for you. You can log out now and return using the unique link that will be emailed to you. Or you are welcome to continue grading other students’ ideas.</div>
+        <span>We appreciate your valuable input on how to improve the course! </span>
+        <div style="font-size: 18px;margin-top: 10px;"> Please consider and rate a few more suggestions from other students or edit your own suggestion before exiting, thank you!</div>
               <!--<div class='dialog-text-style default-left-padding'>
               {{client_settings.EMAIL_ASK_TEXT}}
         </div>-->
@@ -1248,8 +1250,8 @@ M-CAFE is a platform that facilitates ongoing student feedback to the instructor
                 <!--<input type="email" id='regemail' name='regemail' class='regforminput' style="font-size: 15px; background-color: #FFFFFF;color: #000000;" placeholder="Email" data-theme='b'></input>
     <div class="comment-admin-text-b">{{client_settings.DEMOGRAPHICS_DISCLAIMER}}.</div>
     <br/>-->
-                <div class='button-div-wide responsive-btn' onclick="$('.burger-div-others').click();">Continue</div>
-                <div class='button-div-wide responsive-btn' onclick="$('.burger-div-yours').click();">Edit Your Idea</div>
+                <div class='button-div-wide responsive-btn' onclick="$('.burger-div-others').click();">Consider more suggestions</div>
+                <div class='button-div-wide responsive-btn' onclick="$('.burger-div-yours').click();">Add/Edit your own suggestion</div>
                 <div class='button-div-wide responsive-btn' onclick="$('.burger-div-logout').click();">Exit</div>
     <div class='alert-error' id='email-error' style='display:none;width: 250px;'></div>
               </center>
@@ -1303,7 +1305,7 @@ M-CAFE is a platform that facilitates ongoing student feedback to the instructor
     <center>
       <img src="{{ url_root }}/media/mobile/img/cafe/avggrade-compress.png" class="center" style="width:300px;padding-top:3px;"><br>
     </center>
-          Based on the grades from {{num_users}} participants so far, {{client_settings.AVG_EXPLAIN_TEXT}}
+          Based on the grades from {{num_users}} students so far, {{client_settings.AVG_EXPLAIN_TEXT}}
   </div>
       </div>
 
@@ -1337,14 +1339,14 @@ M-CAFE is a platform that facilitates ongoing student feedback to the instructor
       La Libreta de calificaciones de California (CRC, por sus siglas en inglés) es una plataforma en línea desarrollada por CITRIS Data y Democracy Initiative de UC Berkeley y del Teniente Gobernador Gavin Newsom que explora cómo los smartphones y redes pueden mejorar la comunicación entre los líderes públicos y gubernamentales. La CRC permite a los visitantes valorar las cuestiones a las que se enfrenta California y sugerir cuestiones para próximas libretas de calificaciones. El proyecto busca aumentar la participación del público y ayudar a los líderes de todos niveles a mantenerse informados sobre las opiniones y prioridades cambiantes de sus constituyentes. Cualquiera puede participar dedicando unos minutos a valorar el Estado de California en cuestiones como: Sanidad, Educación, Igualdad de matrimonio, Derechos de los inmigrantes y Despenalización de la marihuana. Actualmente aceptamos respuestas en inglés y español. Es importante indicar que la traducción es una forma de arte. Todos los resultados de Google Translate los revisan y editan personas que hablan dichos idiomas de manera fluido, pero los errores son inevitables. Si encuentra un error grave, envíe un correo electrónico a translate@californiareportcard.org. <br/> <br/>
 
       <em> P: </em> ¿Cuál es la motivación de la CRC? <br/>
-      <em> R: </em> Estamos explorando nuevos modelos para el intercambio de información y participación en las cuestiones políticas. No afirmamos que el modelo CRC es la respuesta: es una nueva metáfora y manera de recopilar información. ¿Alentará la CRC a la gente para que piense en cuestiones políticas y cómo está representada la opinión pública? Tenemos curiosidad de ver cómo responde la gente, cómo cambian los patrones de respuesta con el tiempo, y si la valoración será un catalizador para el debate, en el que los participantes proponen nuevas cuestiones para la próxima libreta de calificaciones y evalúan las sugerencias de otros participantes. Seguiremos trabajando para desarrollar nuevas versiones y modelos basados en las respuestas y datos. <br/> <br/>
+      <em> R: </em> Estamos explorando nuevos modelos para el intercambio de información y participación en las cuestiones políticas. No afirmamos que el modelo CRC es la respuesta: es una nueva metáfora y manera de recopilar información. ¿Alentará la CRC a la gente para que piense en cuestiones políticas y cómo está representada la opinión pública? Tenemos curiosidad de ver cómo responde la gente, cómo cambian los patrones de respuesta con el tiempo, y si la valoración será un catalizador para el debate, en el que los studentes proponen nuevas cuestiones para la próxima libreta de calificaciones y evalúan las sugerencias de otros studentes. Seguiremos trabajando para desarrollar nuevas versiones y modelos basados en las respuestas y datos. <br/> <br/>
 
 
       <em> Privacidad </em> <br/>
      Los comentarios y sugerencias serán analizados para omitir la información identificable. Respetamos su privacidad y no compartiremos su dirección de correo electrónico con terceros.  <br/> <br/>
 
       <em> Relevancia estadística </em> <br/>
-      La CRC es diferente de las encuestas telefónicas y sondeos aleatorios. De momento la participación es auto selectiva y accesible para las personas de habla inglesa con acceso a un smartphone o navegador. Después de introducir cada valoración, se revela una calificación media basada en las entradas de todos los participantes anteriores. El objetivo es proporcionar información instantánea a diferencia de las encuestas y sondeos tradicionales. Somos conscientes de que esto puede tener un efecto distorsionante: algunas personas pueden ajustar sus valoraciones para que se acerquen más a la media, lo que resulta en una forma de regresión hacia la media. Incluiremos información sobre el número de dichos ajustes y los valores previos y anteriores en el conjunto de datos abierto. También presentaremos los datos de la valoración como histogramas para transmitir los niveles de consenso y geográficamente para transmitir las diferencias por región. También presentaremos los datos de la valoración como histogramas para transmitir los niveles de consenso y geográficamente para transmitir las diferencias por región. <br/> <br/>
+      La CRC es diferente de las encuestas telefónicas y sondeos aleatorios. De momento la participación es auto selectiva y accesible para las personas de habla inglesa con acceso a un smartphone o navegador. Después de introducir cada valoración, se revela una calificación media basada en las entradas de todos los studentes anteriores. El objetivo es proporcionar información instantánea a diferencia de las encuestas y sondeos tradicionales. Somos conscientes de que esto puede tener un efecto distorsionante: algunas personas pueden ajustar sus valoraciones para que se acerquen más a la media, lo que resulta en una forma de regresión hacia la media. Incluiremos información sobre el número de dichos ajustes y los valores previos y anteriores en el conjunto de datos abierto. También presentaremos los datos de la valoración como histogramas para transmitir los niveles de consenso y geográficamente para transmitir las diferencias por región. También presentaremos los datos de la valoración como histogramas para transmitir los niveles de consenso y geográficamente para transmitir las diferencias por región. <br/> <br/>
 
       <em> Más </em> <br/>
      Consulte el sitio web de CRC para la información de contacto, información sobre la historia del proyecto, estadísticas hasta la fecha, enlaces relacionados y para descargar datos anónimos cuando estén disponibles: <br/>
@@ -1436,13 +1438,13 @@ M-CAFE is a platform that facilitates ongoing student feedback to the instructor
             <div style="padding-top: 5px;">About the Map</div>
       <span class="english">{% autoescape off %}{{client_settings.HELP_CAFE_ABOUT}}{% endautoescape %}</span>
       <span class="spanish"><em>P:</em>¿Cómo funcional las esferas?<br/>
-          <em>R:</em> Haga clic en cualquier esfera (cada esfera individual representa la respuesta de un participante). Sólo mostramos una a la vez. <br/><br/>
+          <em>R:</em> Haga clic en cualquier esfera (cada esfera individual representa la respuesta de un studente). Sólo mostramos una a la vez. <br/><br/>
 
           <em>P:</em>¿Cómo están organizadas las esferas?<br/>
-          <em>R:</em> La colocación de la esfera de cada participante se basa en cómo valoró las 3 primeras cuestiones. Cada cuestión representa una dimensión de un espacio tridimensional. Las valoraciones que asigne definen un punto en este espacio. Usamos la reducción dimensional (actualmente, Análisis del componente principal) para proyectar ese espacio en un plano bidimensional. Si usted u otro participante asignan puntos muy similares, sus esferas estarán muy próximas entre sí. Las esferas que estén lejos de la suya pertenecen a participantes que valoraron de forma diferente las tres primeras preguntas.  <br/><br/>
+          <em>R:</em> La colocación de la esfera de cada studente se basa en cómo valoró las 3 primeras cuestiones. Cada cuestión representa una dimensión de un espacio tridimensional. Las valoraciones que asigne definen un punto en este espacio. Usamos la reducción dimensional (actualmente, Análisis del componente principal) para proyectar ese espacio en un plano bidimensional. Si usted u otro studente asignan puntos muy similares, sus esferas estarán muy próximas entre sí. Las esferas que estén lejos de la suya pertenecen a studentes que valoraron de forma diferente las tres primeras preguntas.  <br/><br/>
 
           <em>P:</em> ¿Por qué sólo veo entre 8 y 10 esferas? <br/>
-          <em>R:</em> Para evitar la saturación, mostramos sólo unas cuantas esferas a la vez para valorar. Elegimos mostrar la esfera de cada participante aleatoriamente, pero está sesgado hacia las esferas más recientes, aquellas que han recibido menos valoraciones.<br/><br/> </span>
+          <em>R:</em> Para evitar la saturación, mostramos sólo unas cuantas esferas a la vez para valorar. Elegimos mostrar la esfera de cada studente aleatoriamente, pero está sesgado hacia las esferas más recientes, aquellas que han recibido menos valoraciones.<br/><br/> </span>
     </div>
   </center>
       </div>

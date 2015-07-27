@@ -70,6 +70,12 @@ $(".slider-grade-bubble").on("click",function(e){
 
         try {
             window.cur_clicked_mug.transition().duration(2000).style("opacity", "0").remove();
+            for (var i = 0; i < window.tag[0].length; i++){
+                if (window.tag[0][i]["innerHTML"] == current_uid){
+                    window.tag[0][i].remove();
+                    // window.tag[0][i].transition().duration(2000).style("opacity", "0").remove();
+                }
+            }
         } catch (err) {
             console.log(err);
         }

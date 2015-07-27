@@ -48,6 +48,9 @@ var rate = (function($, d3, console) {
         setTimeout(function() {
             document.getElementById('flag').innerHTML='';
         }, 500);
+        setTimeout(function() {
+            $("#studentTag").val('Select Appropriate Tag').selectmenu('refresh'); //.slider("refresh");
+        }, 500);
     }
 
     function resetEndSliders() {
@@ -107,6 +110,8 @@ var rate = (function($, d3, console) {
         $(this).css("background-image",$(this).css("background-image").replace("keypad-down","keypad"));
         });
 
+        var studentTag = document.getElementById('studentTag').value;
+
         //$("#slider-importance").children().children().children(".slider-grade-bubble").css("background-color","transparent"); 
 
             sendAgreementRating({
@@ -152,7 +157,7 @@ var rate = (function($, d3, console) {
                 // ui has changed!
                 $('.top-bar').trigger('height');
                 //$('.instructions-light').hide();
-		if(window.lang == 'en'){
+		    if(window.lang == 'en'){
                     $('.instructions-light').show();
                     $('.instructions-light').html("You're halfway done!")
                 }
