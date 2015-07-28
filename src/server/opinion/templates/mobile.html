@@ -1001,6 +1001,26 @@ M-CAFE is a platform that facilitates ongoing student feedback to the instructor
               <div class="basic-header2 responsive-body english" style="text-align:left;">Please suggest a specific way to enhance the course this semester or in the future.</div>
 
               <textarea name='answer' id='entered-comment' maxlength="500"></textarea>
+
+              <div data-role="fieldcontain">
+                <label for="studentTag" class='regforminputtag' style="font-size: 12px !important;"></label>
+                  <select name="studentTag" id="studentTag" style="color: #000000 !important; font-size: 16px !important;">
+                  <option data-placeholder="">Select Appropriate Tag</option>
+                  <option value="Exams">Exams</option>
+                  <option value="Homework">Homework</option>
+                  <option value="Labs">Labs</option>
+                  <option value="Lectures">Lectures</option>
+                  <option value="Logistics">Logistics</option>
+                  <option value="New Topics">New Topics</option>
+                  <option value="Projects">Projects</option>
+                  <option value="Policies">Policies</option>
+                  <option value="Other">Other</option>
+                  <input type="text" name="otherTag" id="otherTag" placeholder="Please Specify If Other" value="">
+                </select>
+              </div>
+
+
+
               
               <div class='comment-submit-btn button-div-wide responsive-btn'>Post</div>
               <div class='comment-cancel-btn button-div-wide responsive-btn'>Later</div>
@@ -1038,19 +1058,7 @@ M-CAFE is a platform that facilitates ongoing student feedback to the instructor
 
 
           <!-- <center> -->
-          <div data-role="fieldcontain">
-            <label for="studentTag" class='regforminputtag' style="font-size: 12px !important;"></label>
-              <select name="studentTag" id="studentTag" style="color: #000000 !important; font-size: 16px !important;">
-              <option data-placeholder="">Select Appropriate Tag</option>
-              <option value="Homework">Homework</option>
-              <option value="Exam and Quiz">Exam and Quiz</option>
-              <option value="Lecture Material">Lecture Material</option>
-              <option value="Logistics">Logistics</option>
-              <option value="Project">Project</option>
-              <option value="Additional Material Suggestion">Additional Material Suggestion</option>
-              <option value="Other">Other</option>
-            </select>
-          </div>
+          
           <!-- </center> -->
 <!--           <br/>
  -->

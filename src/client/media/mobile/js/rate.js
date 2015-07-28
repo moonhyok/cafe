@@ -48,9 +48,9 @@ var rate = (function($, d3, console) {
         setTimeout(function() {
             document.getElementById('flag').innerHTML='';
         }, 500);
-        setTimeout(function() {
-            $("#studentTag").val('Select Appropriate Tag').selectmenu('refresh'); //.slider("refresh");
-        }, 500);
+        // setTimeout(function() {
+        //     $("#studentTag").val('Select Appropriate Tag').selectmenu('refresh'); //.slider("refresh");
+        // }, 500);
     }
 
     function resetEndSliders() {
@@ -110,7 +110,8 @@ var rate = (function($, d3, console) {
         $(this).css("background-image",$(this).css("background-image").replace("keypad-down","keypad"));
         });
 
-        var studentTag = document.getElementById('studentTag').value;
+        // var studentTag = document.getElementById('studentTag').value;
+        // console.log(studentTag+" jinjihae");
 
         //$("#slider-importance").children().children().children(".slider-grade-bubble").css("background-color","transparent"); 
 
@@ -422,7 +423,7 @@ var rate = (function($, d3, console) {
         });
     }
 
-    function sendComment(comment) {
+    function sendComment(comment,tag) {
         var language = 'english'
         if(window.lang == 'es')
             language = 'spanish'
@@ -433,7 +434,8 @@ var rate = (function($, d3, console) {
             url: window.url_root + "/os/savecomment/1/",
             data: {
                 "comment": comment,
-                "commentLanguage" : language
+                "commentLanguage" : language,
+                "tag":tag
             },
             success: function(data) {
                 if (data.hasOwnProperty('success')) {
@@ -539,6 +541,11 @@ $(document).ready(function() {
 
     $('.comment-submit-btn').click(function() {
         window.comment = $('#entered-comment').val();
+        window.tag = $('#studentTag').val();
+        if ($('#studentTag').val() == "Other"){
+            window.tag = $('#otherTag').val();
+        }
+        console.log(window.tag+" jiguey");
         $('.comment-input').hide();
         $('.dialog-continue').show();
         $('.scorebox').hide();
@@ -550,7 +557,7 @@ $(document).ready(function() {
         window.cur_state = 'continue';
         utils.showLoading('');
         rate.logUserEvent(6,'comment submitted');
-        rate.sendComment($('#entered-comment').val());
+        rate.sendComment($('#entered-comment').val(),window.tag);
 
         if ($('#regemail').val()){
                 accounts.sendEmail($('#regemail').val());

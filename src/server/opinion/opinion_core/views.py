@@ -1546,9 +1546,9 @@ def os_show(request, os_id, disc_stmt_id = None):
               'finished_additional_questions': finished_additional_questions,
               'num_fully_rated': num_fully_rated,
               'adminpanel_uids': adminpanel_uids,
-          'never_seen_comments': os_never_seen_comments_json(request,os_id,disc_stmt_id),
+              'never_seen_comments': os_never_seen_comments_json(request,os_id,disc_stmt_id),
               'cur_comment_id': cur_comment_id,
-			  'date' : date_dict}
+			       'date' : date_dict}
 
 
     return json_result(result)
@@ -2191,6 +2191,8 @@ def os_save_comment(request, os_id, disc_stmt_id = None):
 
     new_comment = params.get('comment', False)
     new_comment = decode_to_unicode(new_comment)
+    new_tag = params.get('tag', False)
+    new_tag = decode_to_unicode(new_tag)
     comment_language = params.get("commentLanguage", "english")
     #comment_language = decode_to_unicode(comment_language) # What does decode to unicode do?
     
@@ -2255,6 +2257,9 @@ def os_save_comment(request, os_id, disc_stmt_id = None):
                 comment.query_weight = old_comment_recent.query_weight
 
             comment.save()
+            tag = AdminCommentTag(comment = comment,
+                                  tag = new_tag)
+            tag.save()
             update_query_weight(comment)
             
             # Check the comment for profanity
