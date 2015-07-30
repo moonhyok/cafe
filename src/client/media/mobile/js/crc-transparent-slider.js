@@ -43,8 +43,8 @@ $(".slider-grade-bubble").on("click",function(e){
     try {
     statement_id = parseInt($(this).parent().parent().parent().attr("id").substring(7));
     var classList =$(this).attr('class').split(/\s+/);
-    console.log(statement_id-1+" statement_id");
-    console.log(grade_to_score(classList[2].substring(7).replace("p","+"))+" grade");
+    // console.log(statement_id-1+" statement_id");
+    // console.log(grade_to_score(classList[2].substring(7).replace("p","+"))+" grade");
     window.sliders[statement_id-1] = grade_to_score(classList[2].substring(7).replace("p","+"));
     median = score_to_grade(100*medians[statement_id]);
     rate.logUserEvent(11,'slider_set ' + statement_id + ' ' + window.sliders[statement_id-1]/10);
@@ -65,13 +65,17 @@ $(".slider-grade-bubble").on("click",function(e){
     {
         var classList = $(this).attr('class').split(/\s+/);
         window.current_rating = grade_to_score(classList[2].substring(7).replace("p","+"));
-                $('.menubar').show();
+        $('.menubar').show();
         rate.doneRating();
 
         try {
-            window.cur_clicked_mug.transition().duration(2000).style("opacity", "0").remove();
+            window.cur_clicked_mug[0].transition().duration(2000).style("opacity", "0").remove();
+            // window.cur_clicked_tag.remove();
+
+            // console.log(window.tag[0][current_uid]["innerHTML"]+" removing");
             for (var i = 0; i < window.tag[0].length; i++){
-                if (window.tag[0][i]["innerHTML"] == current_uid){
+                // console.log(window.tag[0][i].getAttribute("id"));
+                if (window.tag[0][i].getAttribute("id")== current_uid){
                     window.tag[0][i].remove();
                     // window.tag[0][i].transition().duration(2000).style("opacity", "0").remove();
                 }
@@ -88,7 +92,8 @@ $(".slider-grade-bubble").on("click",function(e){
         /* Load more blooms if none left */
         try {
             if (window.blooms_list.length <= 2) {
-                console.log("here");
+                // console.log("here");
+                window.reload=true;
                 var loading = "Loading More Spheres..."
                 if(window.lang == 'es')
                     loading = "Cargando más esferas..."

@@ -203,7 +203,7 @@ var _blooms = blooms = (function($, d3, console) {
 
         var eigens, ratings, result; //these are undefined by default
 
-        var data1, data2;
+        var data1, data2, tags;
 
         $.ajax({
             async: false,
@@ -215,8 +215,9 @@ var _blooms = blooms = (function($, d3, console) {
                 eigens = data1['eigenvectors'];
                 data2 = data1['never_seen_comments'];
                 ratings = data2['ratings'];
+                tags = data1['tags'];
                 generateBloomSizesAndColors(data2);
-                console.log(ratings);
+                // console.log(tags);
 
             }
         });
@@ -257,7 +258,8 @@ var _blooms = blooms = (function($, d3, console) {
             points: result[0],
             normx: result[1],
             normy: result[2],
-            comments: data2.comments
+            comments: data2.comments,
+            student_tags: tags
         });
         // });
 
@@ -314,6 +316,7 @@ var _blooms = blooms = (function($, d3, console) {
             var normx = object.normx;
             var normy = object.normy;
             var comments = object.comments;
+            var tags = object.student_tags;
             
             // Since the cup image is about 100px, margin is about 100
             // if that changes, change this too
@@ -321,6 +324,7 @@ var _blooms = blooms = (function($, d3, console) {
         var margin = 0;
         var marginVal = 0;//$(window).width() < 500 ? 40 : 100;
 
+        // console.log(tags+" comecomecome");
         margin = {
             top: 0,
             left: 10,
@@ -339,6 +343,7 @@ var _blooms = blooms = (function($, d3, console) {
 
             var height = $('.map-frame').height()*.8- margin.bottom - margin.top - topBarHeight;
 
+
             // Stashing away your_mug_data so it can be added after 2 mugs have been rated
             window.your_mug_data = data.splice(data.length-1, 1)[0];
             window.your_mug_data.ox = window.your_mug_data.x; //keep the original untransformed values
@@ -346,7 +351,7 @@ var _blooms = blooms = (function($, d3, console) {
             window.your_mug_data.x = (width)/2;//canvasx(window.your_mug_data.x);
             window.your_mug_data.y = (height)/2;//canvasy(window.your_mug_data.y);
 
-
+            // console.log(mugsize+" mugsize");
 
             //center the scaling appropriately
             //var max_x_dev = d3.max(data, function(d) {return Math.abs(d.x-window.your_mug_data.ox);});
@@ -407,7 +412,7 @@ var _blooms = blooms = (function($, d3, console) {
             .append("svg:image")
             .attr("xlink:href", function(d) {
                 window.blooms_list.push(d.uid);
-                console.log({'uid': d.uid,'x':d.x,'y':d.y,'cx': canvasx(d.x),'cy': canvasy(d.y)});
+                // console.log({'uid': d.uid,'x':d.x,'y':d.y,'cx': canvasx(d.x),'cy': canvasy(d.y)});
                 return window.url_root + "/media/mobile/img/cafe/cafe6.png";
             })
             // .attr("width", function(d) {return(mugsize*Math.random()+60)+"";}) //if this changes, change the margin above
@@ -437,7 +442,7 @@ var _blooms = blooms = (function($, d3, console) {
             })
             .on('click', function(d) {
                 var _this = d3.select(this);
-		        window.cur_clicked_mug = _this;
+		        window.cur_clicked_mug = [_this,d.uid];
                 window.prev_state = 'map';
                 //utils.showLoading("Loading Suggestion...");
                     $('.instructions-light').hide();
@@ -463,7 +468,11 @@ var _blooms = blooms = (function($, d3, console) {
                 //utils.hideLoading(0);
             });
             
-            setTimeout(tagBlooms,3400);
+            if (window.reload){
+                setTimeout(tagBlooms,0);
+            }else{
+                setTimeout(tagBlooms,3400);
+            }
 
 
             function tagBlooms() {
@@ -476,16 +485,29 @@ var _blooms = blooms = (function($, d3, console) {
 
                 // var textLabels = text
                 .text( function (d) { 
+                        var commentData = rate.pullComment(d.uid, 'uid', comments);
+                        var content = '"'+commentData.comment+'"';
+                        var student_tag = "";
+                        var _this = d3.select(this);
+                        window.cur_clicked_tag = _this;
+                        for (var i = 0; i < tags.length; i++) {
+                            if (tags[i][0] == d.uid){
+                                student_tag = "#"+tags[i][1];
+                            }
+                        }
                         // window.blooms_list.push(d.uid);
                         // var commentData = rate.pullComment(d.uid, 'uid', comments);
                         // console.log(tag+" froggy");
-                        return d.uid; })
+                        return student_tag; })
 
-                .attr("x", function(d) { return canvasx(d.x)+mugsize/2; })
+                .attr("x", function(d) { return canvasx(d.x)+mugsize/8; })
                 .attr("y", function(d) { return canvasy(d.y)+mugsize/2; })
+                // .attr("x", function(d) { return canvasx(d.x); })
+                // .attr("y", function(d) { return canvasy(d.y); })
 
                 .attr("font-family", "sans-serif")
-                .attr("font-size", "20px")
+                .attr("font-size", mugsize/8+"px")
+                .attr("id",function(d) {return d.uid;})
 
                 .attr("opacity",1.0)
                  // .attr("filter", function(d){return "url(#blur"+(Math.floor(Math.random()*4)+1)+")";})

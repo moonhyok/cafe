@@ -343,8 +343,8 @@ var rate = (function($, d3, console) {
 
     
     function sendSlider(rating, number) {
-        console.log(number + " number");
-        console.log(rating + " rating");
+        // console.log(number + " number");
+        // console.log(rating + " rating");
         $.ajax({
             type: "POST",
             url: window.url_root + "/os/saverating/1/",
@@ -545,7 +545,6 @@ $(document).ready(function() {
         if ($('#studentTag').val() == "Other"){
             window.tag = $('#otherTag').val();
         }
-        console.log(window.tag+" jiguey");
         $('.comment-input').hide();
         $('.dialog-continue').show();
         $('.scorebox').hide();

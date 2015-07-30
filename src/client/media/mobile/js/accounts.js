@@ -53,7 +53,6 @@ var accounts = (function($, d3, console) {
     // that have logged in. (Mostly to send data to server immediately)
 
     function setAuthenticated() {
-        console.log("authentication");
         $.ajax({
             async:false,
             type: "GET",
@@ -424,7 +423,6 @@ $(document).ready(function() {
             "username": registrationData.username.toLowerCase(),
             "password": registrationData.password,
         };
-        console.log(registrationData);
 
         //utils.ajaxTempOff(function() {
             $.ajax({
@@ -447,7 +445,6 @@ $(document).ready(function() {
                         var loading = "Loading"
 
                         utils.showLoading(loading, function() {
-                            console.log(loginData + "logindata")
                             accounts.loginAfterRegister(loginData,dialogcontinue);
                             blooms.populateBlooms();
                             window.scrollTo(0,0); 
@@ -760,7 +757,7 @@ $(document).ready(function() {
                                       else
                                         $('.dialog-help-map3').show();
 
-                                      console.log(window.user_score)
+                                      // console.log(window.user_score)
                                  }
                                  else if (window.cur_state == 'help-rate')
                                  {
@@ -926,8 +923,6 @@ $(document).ready(function() {
         rate.logUserEvent(8,'dialog 1');
         rate.initMenubar();
         $('.map-info').show();
-        console.log(window.mugs)
-        console.log("mugs")
 
         window.mugs.transition()
             .attr("x",function(d) {

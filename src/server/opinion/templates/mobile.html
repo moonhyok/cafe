@@ -119,7 +119,7 @@
 
      window.user_score = {{init_score}};
 
-     window.lang = 'en'
+     window.lang = 'en';
 
      window.conf = { 
        'RETURN_USER_FIRST_TIME': {{return_user_first_time}},
@@ -271,7 +271,7 @@
      /** Updates statement number STATEMENT (which is of type number). */
      function update_score(statement) {
       $('#g' + statement).css('opacity', 1);
-      console.log(medians[statement]);
+      // console.log(medians[statement]);
       $('#o' + statement).html(score_to_grade(medians[statement]*100))
       window.sliders[statement] = $('#s' + statement).val();
       document.getElementById('tr'+statement).style.backgroundColor = "rgba(255, 255, 0, 0.8)";
@@ -866,7 +866,7 @@ M-CAFE is a platform that facilitates ongoing student feedback to the instructor
         </script>-->
 
         <script>
-        console.log(window.sliders[0]+" HIHIHI");
+        // console.log(window.sliders[0]+" HIHIHI");
          var canvas = document.getElementById('sparkLineCanvas{{k.id}}');
          var context = canvas.getContext('2d');
          if ({{k.id}} % 2 == 1)

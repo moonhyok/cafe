@@ -1521,7 +1521,19 @@ def os_show(request, os_id, disc_stmt_id = None):
             cur_comment_id = -1 
     else:
             cur_comment_id = -1    
+
+
+    tag_objects = AdminCommentTag.objects.all()
+    tags = []
+    #.values_list('id', 'statement', 'short_version'))
     
+    for t in tag_objects:
+        tags.append((t.comment.user.id,t.tag))
+    print "printing"
+    print statements
+    # print "orintung"
+    # print tags
+
     result = {'name': name,
               'statements': statements,
               'discussion_statements': disc_stmt_objs,
@@ -1548,7 +1560,8 @@ def os_show(request, os_id, disc_stmt_id = None):
               'adminpanel_uids': adminpanel_uids,
               'never_seen_comments': os_never_seen_comments_json(request,os_id,disc_stmt_id),
               'cur_comment_id': cur_comment_id,
-			       'date' : date_dict}
+			        'date' : date_dict,
+              'tags':tags}
 
 
     return json_result(result)

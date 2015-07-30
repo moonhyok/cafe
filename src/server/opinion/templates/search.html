@@ -205,7 +205,7 @@
 	function allowCommentEditing() {
 		$(".comment").click(function() {
 			var cid = $(this).parent().attr('id').split("-")[1];
-			console.log(cid);
+			// console.log(cid);
 			var url = "{{url_root}}/adminpanel/proofread/" + "?cid=" + cid + '&' + 'language=english';
 			var url = newwindow=window.open(url,'Edit Comment');
 			if (window.focus) {newwindow.focus()}
