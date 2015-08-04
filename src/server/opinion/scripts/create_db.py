@@ -43,11 +43,11 @@ os_election.save()
 # Create the OS statements
 os_election_stmts = {}
 os_election_stmt_strings = {}
-os_election_stmt_strings[0] = 'Implementation of the Affordable Care Act ("Obamacare")'
-os_election_stmt_strings[1] = 'Quality of K-12 public education'
-os_election_stmt_strings[2] = 'Affordability of state colleges and universities'
-os_election_stmt_strings[3] = 'Access to state services for undocumented immigrants'
-os_election_stmt_strings[4] = 'Laws and regulations regarding recreational marijuana'
+os_election_stmt_strings[0] = "1. How would you rate this course so far in terms of technical difficulty? (if you haven't started the course yet, how difficult technically do you think this course will be?)"
+os_election_stmt_strings[1] = "2. How would you rate this course so far in terms of usefulness to your career? (if you haven't started the course yet, how useful do you think this course will be?)"
+os_election_stmt_strings[2] = "3. How would you rate your enthusiasm so far for this course?"
+os_election_stmt_strings[3] = "4. How would you rate your performance so far in this course? (Please press the skip button if you haven't started the course yet.)"
+os_election_stmt_strings[4] = "5. How would you rate the effectiveness of course assignments so far to help you develop your skills? (Please press the skip button if you haven't started the course yet.)"
 os_election_stmt_strings[5] = 'Marriage rights for same-sex partners'
 os_election_stmt_strings[6] = 'Facebook causes distraction for primary and secondary students.'
 os_election_stmt_strings[7] = 'Video lectures are better than traditional lectures as they free up class time for group discussions.'
@@ -67,11 +67,11 @@ os_election_stmt_sstrings[7] = 'Video lectures are better than traditional lectu
 #		os_election_stmt_strings[i]=('Statement ' + str(i) + ' is a dummy statement created for the purposes of testing')
 
 os_election_stmt_shorts = {}
-os_election_stmt_shorts[0] = 'Obamacare'
-os_election_stmt_shorts[1] = 'K12'
-os_election_stmt_shorts[2] = 'College'
-os_election_stmt_shorts[3] = 'Immigration'
-os_election_stmt_shorts[4] = 'Marijuana'
+os_election_stmt_shorts[0] = 'Technical Difficulty'
+os_election_stmt_shorts[1] = 'Usefulness'
+os_election_stmt_shorts[2] = 'Enthusiasm'
+os_election_stmt_shorts[3] = 'Performance in Course'
+os_election_stmt_shorts[4] = 'Effectiveness'
 os_election_stmt_shorts[5] = 'Marriage Rights'
 os_election_stmt_shorts[6] = 'Facebook Distraction'
 os_election_stmt_shorts[7] = 'Video Lectures'

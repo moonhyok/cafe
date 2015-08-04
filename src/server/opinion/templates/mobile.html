@@ -12,7 +12,7 @@
 
     <link rel="image_src" href="{{ url_root }}/media/mobile/img/cafe/cafe-title-cropped.png"/>
 
-    <title>Course Assessment and Feedback Engine v1.0</title>
+    <title>Course Assessment and Feedback Engine v2.0</title>
 
     <!-- for best viewing on mobile phones -->
     <meta name='viewport' content='user-scalable=no, width=device-width,initial-scale=1, maximum-scale=1' />
@@ -323,7 +323,7 @@
       
           <center>
 
-M-CAFE is a platform that facilitates ongoing student feedback to the instructors on how IEOR 115 can be improved as the course progresses. Students will periodically be asked to spend a few minutes to enter their feedback into M-CAFE.         
+<div class="question-number responsive-body" style="margin-left: 15px;margin-right: 5px;">M-CAFE is a platform that facilitates ongoing student feedback to the instructors on how IEOR 115 can be improved as the course progresses. Students will periodically be asked to spend a few minutes to enter their feedback into M-CAFE.</div>        
           </div>
 
           {% if loggedIn %}
@@ -341,9 +341,8 @@ M-CAFE is a platform that facilitates ongoing student feedback to the instructor
           </font>
           <br/><br/>
 
-
-
-          <font width="70%" style="font-size: 14px;line-height: 18px;text-shadow:none; color: #442b10 ;"> Information gathered through M-CAFE will be confidential. Student identity will not be revealed through M-CAFE. For any questions, comments, or concerns, send an email to <a href="mailto:cafe.mooc@gmail.com">cafe.mooc@gmail.com</a> (NOT the course staff) and please do not post your M-CAFE related questions to the course discussion forum. <br/> 
+          <font width="70%" style="font-size: 14px;line-height: 18px;text-shadow:none; color: #442b10 ;"> Information gathered through M-CAFE will be confidential. Student identity will not be revealed through M-CAFE. For any questions, comments, or concerns, send an email to <a href="mailto:cafe.mooc@gmail.com">cafe.mooc@gmail.com</a> (NOT the course staff) and please do not post your M-CAFE related questions to the course discussion forum. 
+        <br/> 
             <a href="http://m-cafe.org/?page_id=5" target="_blank">About</a>
 
           </center>
@@ -397,6 +396,8 @@ M-CAFE is a platform that facilitates ongoing student feedback to the instructor
               <div class="question-number responsive-body"><span>Question</span> {{ statement.id }} <span>of</span> {{ statements|length }}.</div>
               <div class="question-number responsive-body">Please grade the following aspects of the course:</div>
               <div class="statement-style responsive-body english">{{ statement.statement }}</div>
+              <div class="question-number responsive-body">(10 - Very High, 0 - Very Low) </div>
+              
               
 
               <!--<div class="median-grade-{{statement.id}} med-grade-box"></div>-->
@@ -414,7 +415,7 @@ M-CAFE is a platform that facilitates ongoing student feedback to the instructor
 
               </div>
 
-              <div class="statement-style responsive-body english grade-feedback" style="text-align: center;">At the end you’ll have a chance to give us more feedback</div>
+              <div class="statement-style responsive-body english grade-feedback" style="text-align: center;">Afterwards, you can enter suggestions.</div>
               <div class="statement-style responsive-body spanish grade-feedback" style="display:none;"></div>
               
               <div style="clear: both;"></div>
@@ -698,7 +699,7 @@ M-CAFE is a platform that facilitates ongoing student feedback to the instructor
     <br/>
 
               <div data-role="fieldcontain">
-                  <label for="regusername" class='regforminput'>Email (* Required):</label>
+                  <label for="regusername" class='regforminput'>Berkeley Email (* Required):</label>
                   <input type="text" id='regusername' name='regusername' class='regforminput' value='' placeholder="Email" data-theme='b' style="color: #000000 !important; font-size: 24px !important;"/>
                   <div class='alert-error' id='username-error' style='display:none;'></div>
               </div>
@@ -998,23 +999,23 @@ M-CAFE is a platform that facilitates ongoing student feedback to the instructor
 
     <center>
             <div class='comment-panel'>
-              <div class="basic-header2 responsive-body english" style="text-align:left;">Please suggest a specific way to enhance the course this semester or in the future.</div>
+              <div class="basic-header2 responsive-body english" style="text-align:left;">Please suggest a specific way to improve the course this semester or in the future.</div>
 
               <textarea name='answer' id='entered-comment' maxlength="500"></textarea>
 
               <div data-role="fieldcontain">
                 <label for="studentTag" class='regforminputtag' style="font-size: 12px !important;"></label>
                   <select name="studentTag" id="studentTag" style="color: #000000 !important; font-size: 16px !important;">
-                  <option data-placeholder="">Select Appropriate Tag</option>
-                  <option value="Exams">Exams</option>
-                  <option value="Homework">Homework</option>
-                  <option value="Labs">Labs</option>
-                  <option value="Lectures">Lectures</option>
-                  <option value="Logistics">Logistics</option>
-                  <option value="New Topics">New Topics</option>
-                  <option value="Projects">Projects</option>
-                  <option value="Policies">Policies</option>
-                  <option value="Other">Other</option>
+                  <option data-placeholder="">Choose a topic tag for the suggestion...</option>
+                  <option value="Exams">#Exams</option>
+                  <option value="Homework">#Homework</option>
+                  <option value="Labs">#Labs</option>
+                  <option value="Lectures">#Lectures</option>
+                  <option value="Logistics">#Logistics</option>
+                  <option value="New Topics">#New Topics</option>
+                  <option value="Projects">#Projects</option>
+                  <option value="Policies">#Policies</option>
+                  <option value="Other">#Other</option>
                   <input type="text" name="otherTag" id="otherTag" placeholder="Please Specify If Other" value="">
                 </select>
               </div>
@@ -1327,12 +1328,12 @@ M-CAFE is a platform that facilitates ongoing student feedback to the instructor
       <br/>
       <center>{{client_settings.ABOUT_PAGE_HEADER}}</center><br/>
       <span class="english">{% autoescape off %}<em> Overview </em> <br/>
-      M-CAFE (The MOOC Course Assessment and Feedback Engine) v1.0 provides student feedback to instructors at key points during the course, in contrast to existing course evaluations that only request feedback after the course is over. CAFE allows students to provide feedback on course aspects so far, and to suggest ideas for improving the course.<br/><br/>
+      M-CAFE (The MOOC Course Assessment and Feedback Engine) v2.0 provides student feedback to instructors at key points during the course, in contrast to existing course evaluations that only request feedback after the course is over. CAFE allows students to provide feedback on course aspects so far, and to suggest ideas for improving the course.<br/><br/>
 
       M-CAFE differs from standard surveys in that it is online (desktop and mobile) and ongoing (weekly updates during the course), shares median ratings with students, and allows students to consider and rate the ideas of fellow students. The peer-to-peer collaborative filtering approach aims to overcome the scale issue of large size MOOCs by ranking the ideas. <br/> <br/>
 
       <em> Q: </em> What’s the motivation for M-CAFE? <br/>
-      <em> A: </em> M-CAFE (The MOOC Course Assessment and Feedback Engine) v1.0 provides student feedback to instructors at key points during the course, in contrast to existing course evaluations that only request feedback after the course is over. CAFE allows students to provide feedback on lectures and difficulty so far, and to suggest ideas for improving the course. <br/> <br/>
+      <em> A: </em> M-CAFE (The MOOC Course Assessment and Feedback Engine) v2.0 provides student feedback to instructors at key points during the course, in contrast to existing course evaluations that only request feedback after the course is over. CAFE allows students to provide feedback on lectures and difficulty so far, and to suggest ideas for improving the course. <br/> <br/>
 
       <em> Privacy </em> <br/>
       Comments and suggestions will be scanned to omit identifiable information. We respect your privacy and will not share your email address with third parties. <br/> <br/>
