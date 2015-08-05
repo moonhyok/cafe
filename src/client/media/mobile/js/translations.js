@@ -62,7 +62,7 @@ var translations = {
                     'The plots below show the grades of others. The blue lines indicate the grades you entered.':
                         '¿Cómo se comparan mis respuestas con las de los demás encuestados? Su valoración está marcada en azul.',
 
-                    'Please join the conversation by clicking your sphere to add your own suggestion for the next report card.':
+                    'Please join the conversation by clicking your sphere to add your own suggestion for improving the course.':
                         'Ahora es su turno. Presione sobre su esfera para introducir su sugerencia',
 
                     'more info':
