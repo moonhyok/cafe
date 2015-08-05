@@ -365,6 +365,8 @@ var _blooms = blooms = (function($, d3, console) {
             $('svg').remove();
             // clear anything that's in the div already (e.g. loading button)
             $('#d3 .loading').hide();
+            $('#otherBox').hide();
+
 
             window.coffeetable_svg = d3.select('#d3')
             .append('svg')
@@ -448,6 +450,7 @@ var _blooms = blooms = (function($, d3, console) {
                     $('.instructions-light').hide();
                     $('.scorebox').hide();
                     $('.menubar').hide();
+
                     window.cur_state = 'rate';
                 
                 $('.rate-username').html('Suggested by Participant #'+d.uid);

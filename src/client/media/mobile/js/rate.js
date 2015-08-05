@@ -474,10 +474,17 @@ var rate = (function($, d3, console) {
         'sendComment' : sendComment
     };
 
+
+
 })($, d3, console);
 
 $(document).ready(function() {
     //$('.score-label').text(utils.toTitleCase(window.conf['YOUR_SCORE_LANGUAGE']).trim().replace(':', '') + ' is ');
+
+    $('#otherOption').click(function(event){
+        console.log("meeee");
+        $('#otherBox').show();
+    });
 
     $('.endsliders-next-btn').click(function(event){         
         $('.first-dialog-nav').hide();

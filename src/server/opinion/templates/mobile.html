@@ -1005,8 +1005,8 @@
 
               <div data-role="fieldcontain">
                 <label for="studentTag" class='regforminputtag' style="font-size: 12px !important;"></label>
-                  <select name="studentTag" id="studentTag" style="color: #000000 !important; font-size: 16px !important;">
-                  <option data-placeholder="">Choose a topic tag for the suggestion...</option>
+                  <select name="studentTag" id="studentTag" style="color: #000000 !important; font-size: 16px !important;"onchange="showOther()">
+                  <option value="">Choose a topic tag for the suggestion...</option>
                   <option value="Exams">#Exams</option>
                   <option value="Homework">#Homework</option>
                   <option value="Labs">#Labs</option>
@@ -1015,12 +1015,23 @@
                   <option value="New Topics">#New Topics</option>
                   <option value="Projects">#Projects</option>
                   <option value="Policies">#Policies</option>
-                  <option value="Other">#Other</option>
-                  <input type="text" name="otherTag" id="otherTag" placeholder="Please Specify If Other" value="">
+                  <option id="otherOption" value="Other">#Other</option>
                 </select>
               </div>
+              <div id="otherBox">
+              <input type="text" name="otherTag" id="otherTag" placeholder="Please Specify If Other (Do not include #)">
+              </div>
 
-
+              <script>
+              function showOther() {
+                  var x = document.getElementById("studentTag").value;
+                  if (x=="Other"){
+                    $("#otherBox").show();
+                  }else{
+                    $("#otherBox").hide();
+                  }
+              }
+              </script>
 
               
               <div class='comment-submit-btn button-div-wide responsive-btn'>Post</div>
