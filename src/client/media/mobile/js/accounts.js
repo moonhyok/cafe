@@ -829,6 +829,7 @@ $(document).ready(function() {
     });
 
     $('.exec-login').click(function() {
+    // console.log(window.org_id+" IDID");
     window.prev_state = 'home';
     window.cur_state = 'login';
 

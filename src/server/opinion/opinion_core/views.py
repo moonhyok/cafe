@@ -110,6 +110,8 @@ def return_visit_time(request,entrycode):
 def checkemail(request):
     username=request.REQUEST.get('username','')
     username=username.lower()[0:30]
+    print "printint"
+    print username
     user=User.objects.filter(username__icontains=username)
     if len(user)>0:
        entrycode=EntryCode.objects.filter(username__icontains=username)
@@ -2200,7 +2202,9 @@ def os_save_rating(request, os_id):
 @auth_required
 def os_save_comment(request, os_id, disc_stmt_id = None):
     params = request.REQUEST
-    
+    print "getting"
+    print request.user
+    print DiscussionStatement.objects.filter(opinion_space = os_id, is_current = True)[0]
 
     new_comment = params.get('comment', False)
     new_comment = decode_to_unicode(new_comment)
