@@ -337,9 +337,9 @@ var _blooms = blooms = (function($, d3, console) {
 
             var topBarHeight = $('.top-bar').height();
 
-            var mugsize = 50;
+            window.mugsize = 50;
             if($(window).width() > 768)
-                mugsize=150;
+                window.mugsize=150;
 
             var height = $('.map-frame').height()*.8- margin.bottom - margin.top - topBarHeight;
 
@@ -471,14 +471,14 @@ var _blooms = blooms = (function($, d3, console) {
                 //utils.hideLoading(0);
             });
             
-            if (window.reload){
-                setTimeout(tagBlooms,0);
-            }else{
-                setTimeout(tagBlooms,3400);
-            }
+            // if (window.reload){
+            //     setTimeout(tagBlooms,0);
+            // }else{
+            //     setTimeout(tagBlooms,3400);
+            // }
 
 
-            function tagBlooms() {
+            // function tagBlooms() {
                 window.tag = window.coffeetable_svg.selectAll(".bloom")
                 .data(data)
                 .enter()
@@ -502,11 +502,11 @@ var _blooms = blooms = (function($, d3, console) {
                         // var commentData = rate.pullComment(d.uid, 'uid', comments);
                         // console.log(tag+" froggy");
                         return student_tag; })
-
-                .attr("x", function(d) { return canvasx(d.x)+mugsize/8; })
-                .attr("y", function(d) { return canvasy(d.y)+mugsize/2; })
-                // .attr("x", function(d) { return canvasx(d.x); })
-                // .attr("y", function(d) { return canvasy(d.y); })
+                // .attr("filter", function(d){return "url(#blur"+(Math.floor(Math.random()*4)+1)+")";})
+                // .attr("x", function(d) { return canvasx(d.x)+mugsize/8; })
+                // .attr("y", function(d) { return canvasy(d.y)+mugsize/2; })
+                .attr("x", function(d) { return (width)/2; })
+                .attr("y", function(d) { return (height)/2; })
 
                 .attr("font-family", "sans-serif")
                 .attr("font-size", mugsize/8+"px")
@@ -523,7 +523,7 @@ var _blooms = blooms = (function($, d3, console) {
                     var _this = d3.select(this);
                 })            
                 ;
-            }
+            // }
 
 
 
