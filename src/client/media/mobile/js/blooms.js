@@ -538,7 +538,16 @@ var _blooms = blooms = (function($, d3, console) {
                     })
                     .duration(0) // this is 1s
                     .delay(0);
-                }
+                    window.tag.transition()
+                    .attr("x",function(d) {
+                        return window.canvasx(d.x)+window.mugsize/8;
+                    })
+                    .attr("y",function(d) {
+                        return window.canvasy(d.y)+window.mugsize/2;
+                    })
+                    .duration(0) // this is 1s
+                    .delay(0);
+                        }
 
             });
 
