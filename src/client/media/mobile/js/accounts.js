@@ -719,6 +719,22 @@ $(document).ready(function() {
         window.burger_state = $(this).attr('id').substring(5);
     })
 
+    $('.about-btn').click(
+        function(){accounts.hideAll();
+        $('.'+window.burger_state).show();
+        window.prev_state='help';
+        window.cur_state=window.burger_state;});
+
+    $('.about-btn-2').click(
+        function(){accounts.hideAll();
+            $('.burger-page').show();});    
+
+    $('.about-btn-3').click(
+        function(){accounts.hideAll();
+            $('.menubar').show();});
+    
+    
+
 
     $('.help2-btn-dialog').click(function() {
                                  if (window.cur_state.indexOf('help') != -1)
@@ -938,7 +954,25 @@ $(document).ready(function() {
 
         window.tag.transition()
             .attr("x",function(d) {
-                return window.canvasx(d.x)+window.mugsize/8;
+                var student_tag = "";
+                for (var i = 0; i < window.tagList.length; i++) {
+                    if (window.tagList[i][0] == d.uid){
+                        student_tag = window.tagList[i][1];
+                    }
+                }
+                console.log(student_tag + student_tag.length);
+                if (student_tag.length>=5 & student_tag.length<=7){
+                    return window.canvasx(d.x)+window.mugsize/4;
+                } else if(student_tag.length<=4){
+                    return window.canvasx(d.x)+window.mugsize/3;
+                } else{
+                    slimCharacters=(student_tag.match(new RegExp("i", "g")) || []).length+(student_tag.match(new RegExp("l", "g")) || []).length
+                    if (slimCharacters>=2){
+                        return window.canvasx(d.x)+window.mugsize/(8-slimCharacters*1.1);
+                    }else{
+                        return window.canvasx(d.x)+window.mugsize/8;
+                    }
+                }
             })
             .attr("y",function(d) {
                 return window.canvasy(d.y)+window.mugsize/2;
