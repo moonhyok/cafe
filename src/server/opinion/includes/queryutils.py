@@ -1873,7 +1873,11 @@ def format_pretty_nightly_statistics_table():
 		#10 : '9+ rates'
 	}
 
-
+        def zipcode_count(u):
+                if ZipCodeLog.objects.filter(user=u).exists():
+                        return ZipCodeLog.objects.filter(user = u)[0].location.state == 'CA'
+                else:
+                        return False
 
 	entrycodes = []
 	for u in users:
@@ -1883,7 +1887,7 @@ def format_pretty_nightly_statistics_table():
 		1 : LogUserEvents.objects.filter(details='first time',log_type=7, created__gte=TIME_FRAME).count(),
 		2 : LogUserEvents.objects.filter(details='sliders finished',log_type=5, created__gte=TIME_FRAME).count(),
 		3 : len(users),
-		4 : sum([ZipCodeLog.objects.filter(user = u)[0].location.state == 'CA' if ZipCodeLog.objects.filter(user=u).exists() else False for u in users]),
+		4 : sum([zipcode_count(u) for u in users]),
 		5 : sum([CommentRating.objects.filter(rater = u).count() >= 2 for u in users]),
 		6 : sum([DiscussionComment.objects.filter(user = u).exists() for u in users]),
 		7 : sum([bool(u.email) for u in users]),
