@@ -225,6 +225,27 @@ table.pretty caption {
 	cursor: pointer;
 	cursor: hand;
 }
+.about-btn{
+	position: relative;
+	left: -7px;
+	top: 5px;
+	cursor: pointer;
+	cursor: hand;
+}
+.about-btn-2{
+	position: relative;
+	left: -7px;
+	top: 5px;
+	cursor: pointer;
+	cursor: hand;
+}
+.about-btn-3{
+	position: relative;
+	left: -7px;
+	top: 5px;
+	cursor: pointer;
+	cursor: hand;
+}
 .login-form-go-back{
 	position: relative;
 	left: -7px;
@@ -1502,6 +1523,13 @@ padding-top: 20px;
 	text-shadow: 1px 1px 1px #F7F4DD;
 	display: inline-block;
 	width: 140px;
+}
+.compare-tag-2{
+    	color: #442b10;
+	text-shadow: 1px 1px 1px #F7F4DD;
+	display: inline-block;
+	width: 500px;
+
 }
 
 .dialog-text-style {

@@ -88,7 +88,7 @@ var accounts = (function($, d3, console) {
                     rate.logUserEvent(0,'login');
                     for (var i = 0; i < window.num_sliders; i++) {
                         rate.sendSlider(window.sliders[i], i+1);
-                        //draw line on canvas
+                        /*draw line on canvas
                         var canvas = document.getElementById("sparkLineCanvas"+(i+1));
                         var context = canvas.getContext('2d');
                         
@@ -123,7 +123,7 @@ var accounts = (function($, d3, console) {
                         context.stroke();  
 
                         //blooms will be populated at the end of this! see callback
-                        //there are two calls!!
+                        //there are two calls!!*/
                     }
                     accounts.initLoggedInFeatures(true,dcontinue);
                     
@@ -256,8 +256,8 @@ var accounts = (function($, d3, console) {
                 else {
                             accounts.hideAll();
                             $('.dialog').show();
-                            window.cur_state = 'register';
-                            window.prev_state = 'dialog';
+                            window.cur_state = 'dialog';
+                            window.prev_state = 'register';
                         } 
                 
             },
@@ -306,6 +306,7 @@ var accounts = (function($, d3, console) {
         $('.demographics').hide();
         $('.endsliders').hide();
         $('.dialog').hide();
+	$('.prev-comment').hide();
         $('.dialog-avggrade').hide();
         $('.dialog-about').hide();
         $('.burger-page').hide();
@@ -633,6 +634,11 @@ $(document).ready(function() {
                   $('.register').show();
                   window.prev_state = 'grade';
                 }
+	        else if (window.prev_state == 'prev-comment')
+		{
+		  $('.prev-comment').show();
+		  window.prev_state = 'dialog';  
+	        }
                 else if (window.prev_state == 'dialog')
                 {
                   $('.dialog').show();
@@ -651,7 +657,7 @@ $(document).ready(function() {
 
                 else if (window.prev_state == 'map')
                 {
-                    window.prev_state = 'dialog';
+                    window.prev_state = 'prev-comment';
                     $('.menubar').show();
                     //$('.scorebox').show();
                 }
@@ -697,6 +703,7 @@ $(document).ready(function() {
 
     $('.burger-div-others').click(function(){
         accounts.hideAll();
+	$('.map-frame').show();
         $('.menubar').show();
             window.mugs.transition()
             .attr("x",function(d) {
@@ -706,8 +713,37 @@ $(document).ready(function() {
                 return window.canvasy(d.y);
             })
 	    .ease(d3.ease("bounce"))
-            .duration(3500) // this is 1s
-            .delay(300);
+            .duration(2000) // this is 1s
+            .delay(100);
+	
+       window.tag.transition()
+            .attr("x",function(d) {
+                var student_tag = "";
+                for (var i = 0; i < window.tagList.length; i++) {
+                    if (window.tagList[i][0] == d.uid){
+                        student_tag = window.tagList[i][1];
+                    }
+                }
+                console.log(student_tag + student_tag.length);
+                if (student_tag.length>=5 & student_tag.length<=7){
+                    return window.canvasx(d.x)+window.mugsize/4;
+                } else if(student_tag.length<=4){
+                    return window.canvasx(d.x)+window.mugsize/3;
+                } else{
+                    slimCharacters=(student_tag.match(new RegExp("i", "g")) || []).length+(student_tag.match(new RegExp("l", "g")) || []).length
+                    if (slimCharacters>=2){
+                        return window.canvasx(d.x)+window.mugsize/(8-slimCharacters*1.1);
+                    }else{
+                        return window.canvasx(d.x)+window.mugsize/8;
+                    }
+                }
+            })
+            .attr("y",function(d) {
+                return window.canvasy(d.y)+window.mugsize/2;
+            })
+        .ease(d3.ease("bounce"))
+            .duration(2000) // this is 1s
+            .delay(100);
     });
 
     $('.burger-div-yours').click(function(){accounts.hideAll();$('.comment-input').show(); });
@@ -719,6 +755,27 @@ $(document).ready(function() {
         window.burger_state = $(this).attr('id').substring(5);
     })
 
+    $('.help-btn-dialog2').click(
+        function(){accounts.hideAll(); $('.burger-page').show();
+        window.prev_state = window.cur_state;
+        window.cur_state = 'help';
+        window.burger_state = $(this).attr('id').substring(5);
+	window.burger_state = 'prev-comment';
+    })
+
+   $('.about-btn').click(
+        function(){accounts.hideAll();
+        $('.'+window.burger_state).show();
+        window.prev_state='help';
+        window.cur_state=window.burger_state;});
+
+    $('.about-btn-2').click(
+        function(){accounts.hideAll();
+            $('.burger-page').show();});    
+
+    $('.about-btn-3').click(
+        function(){accounts.hideAll();
+            $('.menubar').show();});
 
     $('.help2-btn-dialog').click(function() {
                                  if (window.cur_state.indexOf('help') != -1)
@@ -748,6 +805,10 @@ $(document).ready(function() {
                                   {
                                       $('.dialog-help-dialog').show();
                                   }
+	                         else if (window.cur_state == 'help-dialog2')
+				 {
+				      $('.dialog-help-dialog2').show();
+				 }
                                  else if (window.cur_state == 'help-map')
                                  {
                                       if(window.user_score < 2)
@@ -845,6 +906,7 @@ $(document).ready(function() {
                     
                     console.log("data was sent!");
                     window.location.href=window.url_root+"/mobile/"+data.entrycode+"/";
+
                 }
                 else
                 {
@@ -920,10 +982,26 @@ $(document).ready(function() {
             });
         });
 
-    $('.dialog-ready').click(function() {
-        rate.logUserEvent(8,'dialog 1');
+    $('.dialog-ready').click(function(){
+       // e.preventDefault();
+       // e.stopPropagation();
+
+	rate.logUserEvent(8,'dialog 1');
+	//rate.initMenubar();
+	accounts.hideAll();
+	//$('.dialog').hide();
+	//$('.menubar').hide();
+	$('.map-frame').hide();
+	$('.prev-comment').show();
+        window.prev_state = 'dialog';
+        window.cur_state = 'prev-comment';
+	});
+
+
+    $('.map-ready').click(function() {
+       // rate.logUserEvent(8,'dialog 1');
         rate.initMenubar();
-        $('.map-info').show();
+        $('.map-frame').show();
 
         window.mugs.transition()
             .attr("x",function(d) {
@@ -936,9 +1014,37 @@ $(document).ready(function() {
             .duration(2000) // this is 1s
             .delay(100);
 
-        window.tag.transition()
+    /*    window.tag.transition()
             .attr("x",function(d) {
                 return window.canvasx(d.x)+window.mugsize/8;
+            })
+            .attr("y",function(d) {
+                return window.canvasy(d.y)+window.mugsize/2;
+            })
+        .ease(d3.ease("bounce"))
+            .duration(2000) // this is 1s
+            .delay(100); */
+	        window.tag.transition()
+            .attr("x",function(d) {
+                var student_tag = "";
+                for (var i = 0; i < window.tagList.length; i++) {
+                    if (window.tagList[i][0] == d.uid){
+                        student_tag = window.tagList[i][1];
+                    }
+                }
+                console.log(student_tag + student_tag.length);
+                if (student_tag.length>=5 & student_tag.length<=7){
+                    return window.canvasx(d.x)+window.mugsize/4;
+                } else if(student_tag.length<=4){
+                    return window.canvasx(d.x)+window.mugsize/3;
+                } else{
+                    slimCharacters=(student_tag.match(new RegExp("i", "g")) || []).length+(student_tag.match(new RegExp("l", "g")) || []).length
+                    if (slimCharacters>=2){
+                        return window.canvasx(d.x)+window.mugsize/(8-slimCharacters*1.1);
+                    }else{
+                        return window.canvasx(d.x)+window.mugsize/8;
+                    }
+                }
             })
             .attr("y",function(d) {
                 return window.canvasy(d.y)+window.mugsize/2;
@@ -954,8 +1060,8 @@ $(document).ready(function() {
             $('.instructions-light').show();
         }
 
-        $('.dialog').hide();
-        window.prev_state = 'dialog';
+        $('.prev-comment').hide();
+        window.prev_state = 'prev-comment';
         window.cur_state = 'map';
     });
 

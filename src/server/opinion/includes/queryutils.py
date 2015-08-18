@@ -2,6 +2,11 @@ from opinion.opinion_core.models import *
 from opinion.includes.jsonutils import *
 from opinion.includes.mathutils import *
 from opinion.settings import *
+from opinion.settings_local import DATABASE_ENGINE
+from opinion.settings_local import ASSETS_LOCAL
+from opinion.settings_local import URL_ROOT
+from opinion.settings_local import CONFIGURABLES
+from opinion.settings_local import CATEGORIES
 from operator import itemgetter
 import random
 import numpy
@@ -9,6 +14,7 @@ import math
 import time
 from django.utils.dateformat import DateFormat
 from prettytable import *
+from pandas import DataFrame
 
 """
 
@@ -355,6 +361,133 @@ def get_new_responses(user,os,disc_stmt,num_responses=0):
 	responses.sort(key= lambda n: n['created'], reverse = True)
 	return responses[:num_responses]
 
+def get_self_trend(user, start_date):
+    result = []
+    result.append([])
+    result.append([])
+    result.append([])
+    result.append([])
+    result.append([])
+    result[0].append([])
+    result[0].append([])
+    result[1].append([])
+    result[1].append([])
+    result[2].append([])
+    result[2].append([])
+    result[3].append([])
+    result[3].append([])
+    result[4].append([])
+    result[4].append([])
+#    start_date = datetime.datetime(2015, 1, 5, 10, 35, 21)
+#    end_date = datetime.datetime(2015, 6, 5, 10, 35, 21)
+
+#    try:
+#        user = User.objects.get(id = user_id)
+#    except User.DoesNotExist:
+#        return result
+
+    statements = OpinionSpaceStatement.objects.all().order_by('id')
+    for sid in statements:
+        user_past = UserRating.objects.filter(user = user, opinion_space_statement = sid.id).order_by('-created')
+        raw_vals = []
+        week_vals = []
+
+        for r in user_past:
+            week_num = ((r.created - start_date).days / 7) + 1
+            val = str(getattr(r, 'rating'))
+            result[sid.id-1][0].append(float(val))
+            result[sid.id-1][1].append(week_num)
+    #        raw_time.append(r.created)
+   #     week_num = ((raw_time - start_date).days / 7) + 1
+
+       # result[sid.id] = {}
+     #   result[sid.id][1] = raw_vals
+      #  result[sid.id][2] = week_vals
+       # result[sid.id]['week'] = raw_time
+    return result
+
+def get_course_trend(user_set, start_date, is_self):
+    result =[]
+    end_date = start_date + datetime.timedelta(weeks=17)
+    as_of_date = min(datetime.datetime.today(), end_date)
+    num_weeks = ((as_of_date - start_date).days /7)+1
+
+    if is_self == 1:
+        weekly_data =  [UserRating.objects.filter(user=user_set, created__lt=(start_date+datetime.timedelta(days=7)))]
+    else:
+        weekly_data = [UserRating.objects.filter(user__in=user_set, created__lt=(start_date+datetime.timedelta(days=7)))]
+
+    less_than = 7
+    greater_than = 14
+    for i in range(num_weeks-1):
+        if is_self == 1:
+            weekly_data.append(UserRating.objects.filter(user=user_set, created__gte=(start_date+datetime.timedelta(days=less_than)),created__lt=(start_date+datetime.timedelta(days=greater_than))).exclude(rating='0.4')) # doesnot seem to work!
+        else:
+            weekly_data.append(UserRating.objects.filter(user__in=user_set, created__gte=(start_date+datetime.timedelta(days=less_than)),created__lt=(start_date+datetime.timedelta(days=greater_than))).exclude(rating='0.4')) # doesnot seem to work!
+
+        less_than += 7
+        greater_than +=7
+
+    names = ['user', 'opinion_space', 'opinion_space_statement', 'rating', 'is_current', 'created']
+    weekly_array =[]
+    for i in range(num_weeks):
+        weekly_array.append(models_to_array(weekly_data[i], names))
+
+    os_statements = OpinionSpaceStatement.objects.count()
+    for k in range(os_statements):
+        result.append([])
+        temps = []
+        for i in range(num_weeks):
+            if weekly_array[i].size == 0:
+                to_append = ([0] * os_statements)[k]
+            else: 
+                df = DataFrame(weekly_array[i], columns=names)
+                df.rating = df.rating.astype(float)
+                to_append =df.groupby('opinion_space_statement')['rating'].mean()[k]
+            temps.append(to_append)
+        result[k].append(temps)
+    return result
+
+def models_to_array(qs, names):
+    """
+    Takes in a QuerySet of Django models and desired fields
+    and returns them in the form of a numpy array.
+    """
+    array = []
+    for model in qs:
+        row = []
+        for field in model._meta.fields:
+            if field.name in names:
+                val = str(getattr(model, field.name))
+                if val == 'True' or val == 'False':
+                    val = '1' if val == 'True' else '0'
+                row.append(val)
+        array.append(row)
+    return numpy.array(array)
+
+def get_score(comments):
+        score = []
+        for c in comments:
+                ca = CommentAgreement.objects.filter(comment=c)
+                if ca.count() > 1:
+                        ca_vl = ca.values_list('agreement')
+                        result = numpy.median(ca_vl)
+                        score.append(result)
+                else:
+                        score.append(0)
+        # score.sort(reverse=True)
+        return score
+
+def get_self_suggestion_score(user):
+    suggestions = DiscussionComment.objects.filter(user=user).order_by('created')
+    comments = []
+    if len(suggestions) == 0:
+          comments = []
+          score = []
+    else:
+        score = get_score(suggestions)
+        
+    return  score
 
 def get_statement_histograms():
 	output = {}

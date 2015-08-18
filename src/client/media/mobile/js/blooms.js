@@ -316,7 +316,7 @@ var _blooms = blooms = (function($, d3, console) {
             var normx = object.normx;
             var normy = object.normy;
             var comments = object.comments;
-            var tags = object.student_tags;
+            window.tagList = object.student_tags;
             
             // Since the cup image is about 100px, margin is about 100
             // if that changes, change this too
@@ -493,9 +493,9 @@ var _blooms = blooms = (function($, d3, console) {
                         var student_tag = "";
                         var _this = d3.select(this);
                         window.cur_clicked_tag = _this;
-                        for (var i = 0; i < tags.length; i++) {
-                            if (tags[i][0] == d.uid){
-                                student_tag = "#"+tags[i][1];
+                        for (var i = 0; i < window.tagList.length; i++) {
+                            if (window.tagList[i][0] == d.uid){
+                                student_tag = "#"+window.tagList[i][1];
                             }
                         }
                         // window.blooms_list.push(d.uid);
@@ -505,8 +505,10 @@ var _blooms = blooms = (function($, d3, console) {
                 // .attr("filter", function(d){return "url(#blur"+(Math.floor(Math.random()*4)+1)+")";})
                 // .attr("x", function(d) { return canvasx(d.x)+mugsize/8; })
                 // .attr("y", function(d) { return canvasy(d.y)+mugsize/2; })
-                .attr("x", function(d) { return (width)/2; })
-                .attr("y", function(d) { return (height)/2; })
+                .attr("x", function(d) {
+                    return (width)/2; })
+                .attr("y", function(d) { 
+                    return (height)/2; })
 
                 .attr("font-family", "sans-serif")
                 .attr("font-size", mugsize/8+"px")
@@ -524,7 +526,7 @@ var _blooms = blooms = (function($, d3, console) {
                 })            
                 ;
             // }
-
+ 
 
 
             if(window.user_score >= 2)
@@ -540,7 +542,25 @@ var _blooms = blooms = (function($, d3, console) {
                     .delay(0);
                     window.tag.transition()
                     .attr("x",function(d) {
-                        return window.canvasx(d.x)+window.mugsize/8;
+                        var student_tag = "";
+                        for (var i = 0; i < window.tagList.length; i++) {
+                            if (window.tagList[i][0] == d.uid){
+                                student_tag = window.tagList[i][1];
+                            }
+                        }
+                        console.log(student_tag + student_tag.length);
+                        if (student_tag.length>=5 & student_tag.length<=7){
+                            return window.canvasx(d.x)+window.mugsize/4;
+                        } else if(student_tag.length<=4){
+                            return window.canvasx(d.x)+window.mugsize/3;
+                        } else{
+
+                            if ((student_tag.match(new RegExp("i", "g")) || []).length+(student_tag.match(new RegExp("l", "g")) || []).length>=2){
+                                return window.canvasx(d.x)+window.mugsize/6;
+                            }else{
+                                return window.canvasx(d.x)+window.mugsize/8;
+                            }
+                        }
                     })
                     .attr("y",function(d) {
                         return window.canvasy(d.y)+window.mugsize/2;
@@ -555,7 +575,6 @@ var _blooms = blooms = (function($, d3, console) {
                     {
                          try{
                              blooms.addYourMug();
-
                              if(window.refer == "")
                                 {
                                     window.your_mug.transition().duration(100).style("opacity", "1");
@@ -564,7 +583,6 @@ var _blooms = blooms = (function($, d3, console) {
                                 {
                                     window.your_mug.transition().duration(100).style("opacity", ".3");
                                 }
-
                             }catch(err){
                               console.log(err);
                            }
@@ -682,6 +700,16 @@ var _blooms = blooms = (function($, d3, console) {
 
             populateBlooms();
             $('.top-bar').show();
+	    //$('.burger-page').show();
+           $('.burger-div-compare').show();
+           $('.burger-div-others').show();
+           $('.burger-div-yours').show();
+	   //accounts.hideAll();
+           //$('.dialog').show();
+          // window.cur_state = 'dialog';
+          // window.prev_state = 'grade';
+   
+    
         }
         else{
             populateBlooms();
