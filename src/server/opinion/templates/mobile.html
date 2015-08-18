@@ -30,7 +30,7 @@
     <link rel='stylesheet' type='text/css' href='{{url_root}}/media/mobile/css/opinionspace.css?nonce={{random_password}}' />
 
     {% if horizontal_slide %}
-    <link rel='stylesheet' type='text/css' href='{{url_root}}/media/mobile/css/crc-transparent-slider-horizontal.css?nonce={{random_password}}' />
+    <link rel='stylesheet' type='text/css' href='{{url_root}}/media/mobile/css/crc-transparent-slider-horizsontal.css?nonce={{random_password}}' />
     {% else %}
     <link rel='stylesheet' type='text/css' href='{{url_root}}/media/mobile/css/crc-transparent-slider.css?nonce={{random_password}}' />
     {% endif %}
@@ -850,8 +850,8 @@
         if ({{k.id}} % 2 == 1)
               $('.compare-box-{{k.id}}').css("background-color","rgba(0,0,0,0.05)")
 	var graph_num = {{k.id}};
-	var data = {{self_trend}};
-	var data_course = {{course_trend}};
+	var data = []//{{self_trend}};
+	var data_course = []//{{course_trend}};
 
 	function indexing(a, obj) {
 	    var dataX_course = [];
@@ -1123,8 +1123,8 @@
         if ({{k.id}} % 2 == 1)
               $('.compare-box-{{k.id}}').css("background-color","rgba(0,0,0,0.05)")
 
-	var data = {{self_trend}};
-	var data_course = {{course_trend}};
+	var data = [];//{{self_trend}};
+	var data_course =[]// {{course_trend}};
 	var graph_num = {{k.id}};
 
 	function indexing(a, obj) {
