@@ -377,7 +377,7 @@ def crc_generic_stats(request):
 def mcafe_stats(request):
     os = get_os(1)
     disc_stmt = get_disc_stmt(os, 1)
-    active_users = list(User.objects.filter(is_active = True))
+    #active_users = list(User.objects.filter(is_active = True))
     
     statements = OpinionSpaceStatement.objects.all().order_by('id')
     medians = []
@@ -419,7 +419,7 @@ def mcafe_stats(request):
 #    'wilson' : wilson,
     'as_of_date': as_of_date,
     #'week_num': 1,
-    'num_participants': len(active_users),
+    #'num_participants': len(active_users),
     'num_comments': DiscussionComment.objects.all().count(),
     'num_peer_ratings': CommentAgreement.objects.all().count(),
     'num_qat_ratings': UserRating.objects.all().count(),
