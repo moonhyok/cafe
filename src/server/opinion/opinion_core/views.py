@@ -374,18 +374,18 @@ def crc_generic_stats(request):
                                                                                             'medians': medians,
                                                                                             }))
 
-def mcafe_stats(request):
-    os = get_os(1)
-    disc_stmt = get_disc_stmt(os, 1)
-    #active_users = list(User.objects.filter(is_active = True))
+#def mcafe_stats(request):
+#    os = get_os(1)
+#    disc_stmt = get_disc_stmt(os, 1)
+#    #active_users = list(User.objects.filter(is_active = True))
     
-    statements = OpinionSpaceStatement.objects.all().order_by('id')
-    medians = []
-    for s in statements:
-        medians.append({'statement': s.statement, 'id':s.id})
+#    statements = OpinionSpaceStatement.objects.all().order_by('id')
+#    medians = []
+#    for s in statements:
+#        medians.append({'statement': s.statement, 'id':s.id})
 
-    limit = 15
-    recent_comments = DiscussionComment.objects.filter(user__in=active_users, is_current=True).order_by('-created')[:limit]
+#    limit = 15
+#    recent_comments = DiscussionComment.objects.filter(user__in=active_users, is_current=True).order_by('-created')[:limit]
 
 #    try:
 #      start_date = opinion.settings_local.START_DATE
@@ -407,29 +407,29 @@ def mcafe_stats(request):
 #    as_of_date = min(datetime.datetime.today().date(), end_date.date())
 #    week_num = ((as_of_date - start_date.date()).days / 7) - 1
 
-    date_threshold = datetime.datetime.today() - datetime.timedelta(days=10)
-    comments = DiscussionComment.objects.filter(discussion_statement=disc_stmt, created__gte=date_threshold)
+#    date_threshold = datetime.datetime.today() - datetime.timedelta(days=10)
+#    comments = DiscussionComment.objects.filter(discussion_statement=disc_stmt, created__gte=date_threshold)
 #    wilson = wilson_scores(comments)
 #    if len(wilson) < limit:
 #      comments = DiscussionComment.objects.filter(discussion_statement=disc_stmt)
 #      wilson = wilson_scores(comments)
 #    wilson = wilson[:limit]
 
-    context = {
+#    context = {
 #    'wilson' : wilson,
-    'as_of_date': as_of_date,
-    #'week_num': 1,
-    #'num_participants': len(active_users),
-    'num_comments': DiscussionComment.objects.all().count(),
-    'num_peer_ratings': CommentAgreement.objects.all().count(),
-    'num_qat_ratings': UserRating.objects.all().count(),
-    'date':datetime.date.today(),
-    'num_ratings': CommentAgreement.objects.filter(rater__in = active_users, is_current=True).count()*2,
-    'url_root' : settings.URL_ROOT,
-    'medians': medians,
-    'recent_comments': recent_comments,
-    }
-    return render_to_response('mcafe-stats.html', context_instance = RequestContext(request, context))
+#    'as_of_date': as_of_date,
+#    'week_num': week_num,
+#    'num_participants': len(active_users),
+#    'num_comments': DiscussionComment.objects.all().count(),
+#    'num_peer_ratings': CommentAgreement.objects.all().count(),
+#    'num_qat_ratings': UserRating.objects.all().count(),
+#    'date':datetime.date.today(),
+#    'num_ratings': CommentAgreement.objects.filter(rater__in = active_users, is_current=True).count()*2,
+#    'url_root' : settings.URL_ROOT,
+#    'medians': medians,
+#    'recent_comments': recent_comments,
+#    }
+ #   return render_to_response('mcafe-stats.html', context_instance = RequestContext(request, context))
 
 
 def app(request, username=None):
