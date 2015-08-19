@@ -999,11 +999,83 @@ $(document).ready(function() {
 	accounts.hideAll();
 	//$('.dialog').hide();
 	//$('.menubar').hide();
-	$('.map-frame').hide();
-	$('.prev-comment').show();
-        window.prev_state = 'dialog';
-        window.cur_state = 'prev-comment';
-	});
+        $.ajax({
+            async:false,
+            type: "GET",
+            dataType: 'json',
+            url: window.url_root + '/os/show/1/',
+            data: {'nonce': Math.random()},
+            success: function(data) {
+                var comment_len = data['cur_user_comment_len'];
+		if (comment_len != 0) {
+                    $('.map-frame').hide();
+		    $('.prev-comment').show();
+		    window.prev_state = 'dialog';
+		    window.cur_state = 'prev-comment';
+                } else {
+                    // probably an admin user or something. they didn't have a comment
+		     rate.initMenubar();
+		    $('.map-frame').show();
+
+		    window.mugs.transition()
+			.attr("x",function(d) {
+			    return window.canvasx(d.x);
+			})
+			.attr("y",function(d) {
+			    return window.canvasy(d.y);
+			})
+			.ease(d3.ease("bounce"))
+			.duration(2000) // this is 1s
+			.delay(100);
+		    
+	            window.tag.transition()
+			.attr("x",function(d) {
+			    var student_tag = "";
+			    for (var i = 0; i < window.tagList.length; i++) {
+				if (window.tagList[i][0] == d.uid){
+				    student_tag = window.tagList[i][1];
+				}
+			    }
+			    console.log(student_tag + student_tag.length);
+			    if (student_tag.length>=5 & student_tag.length<=7){
+				return window.canvasx(d.x)+window.mugsize/4;
+			    } else if(student_tag.length<=4){
+				return window.canvasx(d.x)+window.mugsize/3;
+			    } else{
+				slimCharacters=(student_tag.match(new RegExp("i", "g")) || []).length+(student_tag.match(new RegExp("l", "g")) || []).length
+				if (slimCharacters>=2){
+				    return window.canvasx(d.x)+window.mugsize/(8-slimCharacters*1.1);
+				}else{
+				    return window.canvasx(d.x)+window.mugsize/8;
+				}
+			    }
+			})
+			.attr("y",function(d) {
+			    return window.canvasy(d.y)+window.mugsize/2;
+			})
+			.ease(d3.ease("bounce"))
+			.duration(2000) // this is 1s
+			.delay(100);
+
+		    //$('.scorebox').show();
+		    
+		    if(window.user_score == 0)
+		    {
+			$('.instructions-light').show();
+		    }
+		    
+		    $('.dialog').hide();
+		    window.prev_state = 'dialog';
+		    window.cur_state = 'map';
+		    //   $('.my-comment').show();
+		    // $('.menubar').find('.ui-btn-active').removeClass('ui-btn-active ui-focus');
+		}
+		},
+		error: function() {
+                    console.log("didn't get sent!");
+		}
+            });
+    });
 
 
     $('.map-ready').click(function() {
@@ -1022,34 +1094,6 @@ $(document).ready(function() {
             .duration(2000) // this is 1s
             .delay(100);
 
-    /*    window.tag.transition()
-            .attr("x",function(d) {
-                var student_tag = "";
-                for (var i = 0; i < window.tagList.length; i++) {
-                    if (window.tagList[i][0] == d.uid){
-                        student_tag = window.tagList[i][1];
-                    }
-                }
-                console.log(student_tag + student_tag.length);
-                if (student_tag.length>=5 & student_tag.length<=7){
-                    return window.canvasx(d.x)+window.mugsize/4;
-                } else if(student_tag.length<=4){
-                    return window.canvasx(d.x)+window.mugsize/3;
-                } else{
-                    slimCharacters=(student_tag.match(new RegExp("i", "g")) || []).length+(student_tag.match(new RegExp("l", "g")) || []).length
-                    if (slimCharacters>=2){
-                        return window.canvasx(d.x)+window.mugsize/(8-slimCharacters*1.1);
-                    }else{
-                        return window.canvasx(d.x)+window.mugsize/8;
-                    }
-                }
-            })
-            .attr("y",function(d) {
-                return window.canvasy(d.y)+window.mugsize/2;
-            })
-        .ease(d3.ease("bounce"))
-            .duration(2000) // this is 1s
-            .delay(100); */
 	        window.tag.transition()
             .attr("x",function(d) {
                 var student_tag = "";

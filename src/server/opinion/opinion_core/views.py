@@ -1496,9 +1496,11 @@ def os_show(request, os_id, disc_stmt_id = None):
     if request.user.is_authenticated():
         ratings = tuple(os.ratings.filter(user = request.user, is_current = True).values_list('opinion_space_statement', 'rating')[:len(statements)])
 
-    comment_filter = os.comments.filter(user = request.user, is_current = True, discussion_statement = current_disc_stmt)
-    comment_filter_nc = os.comments.filter(user = request.user,discussion_statement = current_disc_stmt)
-    comment = tuple(comment_filter.values_list('comment')[:1])
+    comment_filter = DiscussionComment.objects.filter(user = request.user, is_current = True, discussion_statement = current_disc_stmt)
+    comment_filter_nc = DiscussionComment.objects.filter(user = request.user,discussion_statement = current_disc_stmt)
+    comment_filter_len = len(comment_filter_nc)
+
+    comment = tuple(comment_filter.values_list('comment'))
     comment_score = tuple([[0]])
     
     if len(comment_filter) > 0:
@@ -1619,6 +1621,7 @@ def os_show(request, os_id, disc_stmt_id = None):
               'eigenvectors': eigenvectors,
               'cur_user_ratings': ratings,
               'cur_user_comment': comment,
+              'cur_user_comment_len': comment_filter_len,
               'prev_comments': prev_comments,
               'cur_user_settings': settings_dict,
               'cur_user_comment_score': comment_score,
