@@ -184,8 +184,8 @@ def mobile(request,entry_code=None):
    #   start_date = os.created
    #   end_date = os.created + datetime.timedelta(weeks=17)
 
-    #as_of_date = min(datetime.datetime.today(), end_date)
-    week_num = 1 #((as_of_date - start_date).days / 7) + 1
+   # as_of_date = min(datetime.datetime.today(), end_date)
+    #week_num = 1 #((as_of_date - start_date).days / 7) + 1
 
     last_rating = UserRating.objects.filter(is_current = True).order_by('-created')[1]
     current_user = user
@@ -204,7 +204,7 @@ def mobile(request,entry_code=None):
                        'refer': referrallink,
                        'org_id': org_id,
                        'language':language,
-                       'week_num': week_num,
+                       'week_num': 1,
                        #'self_trend': get_course_trend(current_user, start_date,1),
                        #'course_trend': get_course_trend(active_users, start_date,0),
                        'self_suggestion': self_suggestion,
