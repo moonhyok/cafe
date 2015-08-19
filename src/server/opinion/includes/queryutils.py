@@ -482,8 +482,8 @@ def get_self_suggestion_score(user):
     suggestions = DiscussionComment.objects.filter(user=user).order_by('created')
     comments = []
     if len(suggestions) == 0:
-          comments = []
-          score = []
+        comments = []
+        score = []
     else:
         score = get_score(suggestions)
         
