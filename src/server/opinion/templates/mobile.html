@@ -439,7 +439,7 @@
             
             <div class="home-btn-wrapper" style="width:35%;display:inline-block;">
                                 
-                <img width="30px" class='help-btn-dialog' id="help-endsliders" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn_compress.png">
+                <img width="30px" class='help-btn-dialog3' id="help-endsliders" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn_compress.png">
               </div>
 
           </div> 
@@ -850,8 +850,8 @@
         if ({{k.id}} % 2 == 1)
               $('.compare-box-{{k.id}}').css("background-color","rgba(0,0,0,0.05)")
 	var graph_num = {{k.id}};
-	var data = []//{{self_trend}};
-	var data_course =[]// {{course_trend}};
+	var data = {{self_trend}};
+	var data_course ={{course_trend}};
 
 	function indexing(a, obj) {
 	    var dataX_course = [];
@@ -877,7 +877,7 @@
 	var dataY_course = valuing(data_course[graph_num-1][0], 0);
 	var dataX = indexing(data[graph_num-1][0], 0);
 	var dataY = valuing(data[graph_num-1][0], 0);
-	var N = 1;//{{week_num}};
+	var N = {{week_num}};
 
 	//var dataX = [1,3,4,7];
 	//var dataY = [0.6,0.8,0.5,0.7];
@@ -1123,8 +1123,8 @@
         if ({{k.id}} % 2 == 1)
               $('.compare-box-{{k.id}}').css("background-color","rgba(0,0,0,0.05)")
 
-	var data = []//{{self_trend}};
-	var data_course =[]// {{course_trend}};
+	var data = {{self_trend}};
+	var data_course ={{course_trend}};
 	var graph_num = {{k.id}};
 
 	function indexing(a, obj) {
@@ -1151,7 +1151,7 @@
 	var dataY_course = valuing(data_course[graph_num-1][0], 0);
 	var dataX = indexing(data[graph_num-1][0], 0);
 	var dataY = valuing(data[graph_num-1][0], 0);
-	var N = 1;//{{week_num}};
+	var N = {{week_num}};
 
 	//var dataX = [1,3,4,7];
 	//var dataY = [0.6,0.8,0.5,0.7];

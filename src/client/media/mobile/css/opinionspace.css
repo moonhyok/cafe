@@ -225,6 +225,20 @@ table.pretty caption {
 	cursor: pointer;
 	cursor: hand;
 }
+.help-btn-dialog2{
+	position: relative;
+	left: -7px;
+	top: 5px;
+	cursor: pointer;
+	cursor: hand;
+}
+.help-btn-dialog3{
+	position: relative;
+	left: -7px;
+	top: 5px;
+	cursor: pointer;
+	cursor: hand;
+}
 .about-btn{
 	position: relative;
 	left: -7px;

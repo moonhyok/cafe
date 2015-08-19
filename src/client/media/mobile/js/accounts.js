@@ -755,6 +755,19 @@ $(document).ready(function() {
         window.burger_state = $(this).attr('id').substring(5);
     })
 
+    $('.help-btn-dialog2').click(
+        function(){accounts.hideAll(); $('.burger-page').show();
+        window.prev_state = window.cur_state;
+        window.cur_state = 'help';
+	window.burger_state = 'prev-comment';
+    })
+    $('.help-btn-dialog3').click(
+        function(){accounts.hideAll(); $('.burger-page').show();
+        window.prev_state = window.cur_state;
+        window.cur_state = 'help';
+	window.burger_state = 'register';
+    })
+
     $('.about-btn').click(
         function(){accounts.hideAll();
         $('.'+window.burger_state).show();
