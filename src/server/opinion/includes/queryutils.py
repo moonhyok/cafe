@@ -14,7 +14,7 @@ import math
 import time
 from django.utils.dateformat import DateFormat
 from prettytable import *
-from pandas import DataFrame
+#from pandas import DataFrame
 
 """
 
@@ -443,7 +443,7 @@ def get_course_trend(user_set, start_date, is_self):
             else: 
                 df = DataFrame(weekly_array[i], columns=names)
                 df.rating = df.rating.astype(float)
-                to_append =df.groupby('opinion_space_statement')['rating'].mean()[k]
+               # to_append =df.groupby('opinion_space_statement')['rating'].mean()[k]
             temps.append(to_append)
         result[k].append(temps)
     return result
