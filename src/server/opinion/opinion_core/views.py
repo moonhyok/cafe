@@ -418,7 +418,7 @@ def mcafe_stats(request):
     context = {
 #    'wilson' : wilson,
     'as_of_date': as_of_date,
-    'week_num': week_num,
+    'week_num': 1,
     'num_participants': len(active_users),
     'num_comments': DiscussionComment.objects.all().count(),
     'num_peer_ratings': CommentAgreement.objects.all().count(),
