@@ -418,7 +418,6 @@ def mcafe_stats(request):
     context = {
 #    'wilson' : wilson,
     'as_of_date': as_of_date,
-#    'self_trend': get_self_trend(1, start_date),
     'week_num': week_num,
     'num_participants': len(active_users),
     'num_comments': DiscussionComment.objects.all().count(),
