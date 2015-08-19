@@ -377,7 +377,7 @@ def crc_generic_stats(request):
 def mcafe_stats(request):
     os = get_os(1)
     disc_stmt = get_disc_stmt(os, 1)
-    #active_users = list(User.objects.filter(is_active = True))
+    active_users = list(User.objects.filter(is_active = True))
     
     statements = OpinionSpaceStatement.objects.all().order_by('id')
     medians = []
@@ -409,14 +409,14 @@ def mcafe_stats(request):
 
     date_threshold = datetime.datetime.today() - datetime.timedelta(days=10)
     comments = DiscussionComment.objects.filter(discussion_statement=disc_stmt, created__gte=date_threshold)
-    wilson = wilson_scores(comments)
-    if len(wilson) < limit:
-      comments = DiscussionComment.objects.filter(discussion_statement=disc_stmt)
-      wilson = wilson_scores(comments)
-    wilson = wilson[:limit]
+  #  wilson = wilson_scores(comments)
+  #  if len(wilson) < limit:
+   #   comments = DiscussionComment.objects.filter(discussion_statement=disc_stmt)
+    #  wilson = wilson_scores(comments)
+   # wilson = wilson[:limit]
 
     context = {
-    'wilson' : wilson,
+#    'wilson' : wilson,
     'as_of_date': as_of_date,
     'week_num': week_num,
     'num_participants': len(active_users),
