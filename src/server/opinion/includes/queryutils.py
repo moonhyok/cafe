@@ -468,29 +468,21 @@ def models_to_array(qs, names):
         array.append(row)
     return numpy.array(array)
 
-def get_score(comments):
-        score = []
-        for c in comments:
-                ca = CommentAgreement.objects.filter(comment=c)
-                if ca.count() > 1:
-                        ca_vl = ca.values_list('agreement')
-                        result = numpy.median(ca_vl)
-                        score.append(result)
-                else:
-                        score.append(0)
-        # score.sort(reverse=True)
-        return score
-
 def get_self_suggestion_score(user):
     suggestions = DiscussionComment.objects.filter(user=user).order_by('created')
     comments = []
-    if len(suggestions) == 0:
-        comments = []
-        score = []
-    else:
-        score = get_score(suggestions)
+    score = []
+    if len(suggestions) != 0:
+        for c in suggestions:
+                ca = CommentAgreement.objects.filter(comment=c)
+                if ca.count() >= 1:
+                        ca_vl = ca.values_list('agreement')
+                        result = round(10*numpy.median(ca_vl))
+                        score.append(result)
+                else:
+                        score.append(0)
         
-    return  score
+    return score
 
 def get_statement_histograms():
 	output = {}

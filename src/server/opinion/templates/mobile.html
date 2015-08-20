@@ -301,7 +301,7 @@
             </div>
 
     </div>
-          <img width="70%" src="{{url_root}}/media/mobile/img/cafe/cafe-title-cropped-2.png" style="margin-top:3px;max-width: 620px;">
+          <img width="70%" src="{{url_root}}/media/mobile/img/cafe/cafe-title-cropped-2.png" style="margin-top:3px;max-width: 500px;">
           <div class="landing-img-title responsive-body" style="display:none;">
             {{topic}}
           </div> 
@@ -323,7 +323,7 @@
       
           <center>
 
-<div class="question-number responsive-body" style="margin-left: 15px;margin-right: 5px;">M-CAFE is a platform that facilitates ongoing student feedback to the instructors on how IEOR 115 can be improved as the course progresses. Students will periodically be asked to spend a few minutes to enter their feedback into M-CAFE.</div>        
+<div class="question-number1 responsive-body" style="text-align:center;max-width:620px;">M-CAFE is a platform that facilitates ongoing student feedback to the instructors on how IEOR 115 can be improved as the course progresses. Students will periodically be asked to spend a few minutes to enter their feedback into M-CAFE.</div>        
           </div>
 
           {% if loggedIn %}
@@ -341,10 +341,8 @@
           </font>
           <br/><br/>
 
-          <font width="70%" style="font-size: 14px;line-height: 18px;text-shadow:none; color: #442b10 ;"> Information gathered through M-CAFE will be confidential. Student identity will not be revealed through M-CAFE. For any questions, comments, or concerns, send an email to <a href="mailto:cafe.mooc@gmail.com">cafe.mooc@gmail.com</a> (NOT the course staff) and please do not post your M-CAFE related questions to the course discussion forum. 
-        <br/> 
-            <a href="http://m-cafe.org/?page_id=5" target="_blank">About</a>
-
+          <font style="font-size: 14px;line-height: 18px;text-shadow:none; color: #442b10 ;"> Information gathered through M-CAFE will be confidential. Student identity will not be revealed through M-CAFE.</br> For any questions, comments, or concerns, send an email to <a href="mailto:cafe.mooc@gmail.com">cafe.mooc@gmail.com</a> or visit <a href="http://m-cafe.org/?page_id=5" target="_blank">M-CAFE.ORG</a>
+	     </font>
           </center>
 
     
@@ -405,7 +403,7 @@
               <div style="width: 100%;" class="responsive-padding">
                 
 
-                <div class="slider" style="margin-left: 15px;margin-right: 5px;" id="slider-{{statement.id}}"></div>
+                <div class="slider" style="padding-top:10px;padding-bottom:10px;margin-left: 15px;margin-right: 5px;" id="slider-{{statement.id}}"></div>
 
                 <center>
                   <!--<img class='endsliders-back-btn endsliders-back-btn-size' style="display: inline-block; width: 10px;position:relative;top:5px;" id="back-{{statement.id}}" src="{{url_root}}/media/mobile/img/cafe/Skip_V1.png">
@@ -415,7 +413,7 @@
 
               </div>
 
-              <div class="statement-style responsive-body english grade-feedback" style="text-align: center;">Afterwards, you can enter suggestions.</div>
+              <div class="statement-style responsive-body english grade-feedback" style="margin-left:10px;margin-right:10px;text-align: center;">Afterwards, you can enter suggestions.</div>
               <div class="statement-style responsive-body spanish grade-feedback" style="display:none;"></div>
               
               <div style="clear: both;"></div>
@@ -841,7 +839,7 @@
               <div style="font-size: 14px; font-weight: bolder;cursor: pointer;cursor: hand;" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();"><span>more info</span> >></div>
             </div>
 
-            <canvas id="sparkLineCanvas{{k.id}}" width="320" height="58"></canvas>
+            <canvas style="cursor: pointer;cursor: hand;" id="sparkLineCanvas{{k.id}}" width="320" height="58"></canvas>
             </br>
             <div>
         
@@ -1021,7 +1019,7 @@
           <div class='dialog-text dialog-text-style'>
 	    </br>
             <span>The suggestions you have previously provided and their scores: </span></br></br>
-	      <span id="comment-set"> It seems that you have not provided any suggestions. Please provide a suggestion and log back to check how your peers are rating it.</span>
+	    
 	     </br>
 </div>
           {% for k in self_suggestion %}
@@ -1058,11 +1056,6 @@
 	 context.fillText(current_score, 34, 28);
 	 context.stroke();
 	  
-	    document.getElementById('comment-set').innerHTML="";
-
-
-					
-
 	    </script>
 	{% endfor %}
 
@@ -1267,7 +1260,7 @@
                 </select>
               </div>
               <div id="otherBox">
-              <input type="text" name="otherTag" id="otherTag" placeholder="Please Specify If Other (Do not include #)">
+              <input type="text" name="otherTag" id="otherTag" placeholder="Please Specify If Other">
               </div>
 
               <script>
@@ -1329,6 +1322,8 @@
          How valuable would it be for the instructor to adopt this suggestion?<br/>
     <center>
       <!--(Not at all) 0   -  9 (Extremely)-->
+ <div class="question-number responsive-body" style="text-align:center">(10 - Very High, 0 - Very Low) </div>
+</br>
       <div class="slider" id="slider-importance"></div>    
       
       <div class='button-div-red responsive-btn' id ="go-back" style="display: inline-block;">Skip</div>
@@ -1405,7 +1400,7 @@
       <!-- <a href="http://hrefshare.com/d3660" target="_blank" style="color: #555555;"><img src="{{url_root}}/media/mobile/img/cafe/facebook-button.png" width="102px"></a><br/> -->
       <span class="english">
 
-             For further questions visit the website: <a href="http://m-cafe.org/" target="_blank" style="color: #555555;">m-cafe.org</a><br/><br/>
+             For more information, visit the website: <a href="http://m-cafe.org/" target="_blank" style="color: #555555;">m-cafe.org</a><br/><br/>
 
 
       <!--California Online Voting Registration: <a href="http://registertovote.ca.gov" target="_blank" style="color: #555555;"> CAVoterRegistration </a><br/><br/></span>-->
@@ -1414,7 +1409,7 @@
           <span class="spanish"> 
 
             <a href="http://twitter.com/intent/tweet?text=%C2%BFC%C3%B3mo%20califica%20a%20California%3F%20Pruebe%20%40CalificaaCA%20desarrollado%20por%20%40Cal%20%40GavinNewsom%20%26%20%40Ken_Goldberg%20%C2%A0http%3A%2F%2Fcaliforniareportcard.org%2F2.0%2F%20%23C" target="_blank" style="color: #555555;"><img src="{{url_root}}/media/mobile/img/cafe/twitter-button-compress.png" width="102px"></a>
-      <a href="https://www.facebook.com/dialog/feed?app_id=694165360698061&link=http%3A%2F%2Fcaliforniareportcard.org%2F2.0%2F%20&picture=http%3A%2F%2Fcaliforniareportcard.org%2Fcrc%2Fwp-content%2Fuploads%2FCRCv2_Facebook-Share-link_Spanish-011.jpg&name=Califica%20a%20California&caption=%20&description=%C2%BFC%C3%B3mo%20califica%20a%20California%3F%20Pruebe%20%40CalificaaCA%20desarrollado%20por%20%40Cal%20%40GavinNewsom%20%26%20%40Ken_Goldberg%20%C2%A0http%3A%2F%2Fcaliforniareportcard.org%2F2.0%2F%20%23CA%20%23Gov&redirect_uri=http%3A%2F%2Fwww.facebook.com%2F" target="_blank" style="color: #555555;"><img src="{{url_root}}/media/mobile/img/cafe/facebook-button-compress.png" width="102px"></a><br/>
+      <a href="https://www.facebook.com/dialog/feed?app_id=694165360698061&link=http%3A%2F%2Fcaliforniareportcard.org%2F2.0%2F%20&picture=http%3A%2F%2Fcaliforniareportcard.org%2Fcrc%2Fwp-content%2Fuploads%2FCRCv2_Facebook-Share-link_Spanish-011.jpg&name=Califica%20a%20California&caption=%20&description=%C2%BFC%C3%B3mo%20califica%20a%20California%3F%20Pruebe%20%40CalificaaCA%20desarrollado%20por%20%40Cal%20%40GavinNewsom%20%26%20%40Ken_Goldberg%20%C2%A0http%3A%2F%2Fcaliforniareportcard.org%2F2.0%2F%20%23CA%20%23Gov&redirect_uri=http%3A%2F%2Fwww.facebook.com%2F" target="_blank" style="color: #555555;"><img src="{{url_root}}/media/mobilex/img/cafe/facebook-button-compress.png" width="102px"></a><br/>
 
             Información sobre las elecciones y los votantes: <a href="http://www.sos.ca.gov/elections/new-voter/spanish/" target="_blank" style="color: #555555;">California Información al Votante</a><br/><br/>
 
@@ -1509,7 +1504,7 @@
       <br/><br/>
       <div class='dialog-text-style responsive-body'>
         <span>We appreciate your valuable input on how to improve the course! </span>
-        <div style="font-size: 18px;margin-top: 10px;"> Please rate a few more suggestions from other students or edit your own suggestion before exiting, see you next week!</div>
+        <div style="font-size: 18px;margin-top: 10px;"> Please rate a few more suggestions from other students or edit your own suggestion before exiting. See you next week!</div>
               <!--<div class='dialog-text-style default-left-padding'>
               {{client_settings.EMAIL_ASK_TEXT}}
         </div>-->
@@ -1582,7 +1577,7 @@
   <center>
     <div class="home-btn-dialog-box" style="padding-top: 5px;">
             
-            <span style="font-size: 24px;font-weight:bold;padding-right: 15px;" onclick="accounts.hideAll();$('.burger-page').show();">&#11013;</span>
+            <span style="font-size: 24px;font-weight:bold;padding-right: 15px;padding-top:20px;" onclick="accounts.hideAll();$('.burger-page').show();">&#11013;</span>
     </div>
     <div class='dialog-text-style-noflow responsive-body'>
       <br/>
@@ -1694,8 +1689,7 @@
       <div class='dialog-help-map1 dialog-style' style="z-index:999">
   <center>
     <div class="home-btn-dialog-box">
-            
-            <span style="font-size: 24px;font-weight:bold;padding-right: 15px;" onclick="accounts.hideAll();$('.menubar').show();">&#11013;</span>
+            <span style="font-size: 24px;font-weight:bold;padding-right: 15px;padding-top:20px;margin-top:10px;" onclick="accounts.hideAll();$('.menubar').show();">&#11013;</span>
     </div>
     <div class='dialog-text-style-noflow responsive-body'>
             <div style="padding-top: 5px;">About the Map</div><br/>
