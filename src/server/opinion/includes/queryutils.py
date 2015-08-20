@@ -460,7 +460,10 @@ def models_to_array(qs, names):
             if field.name in names:
                 val = str(getattr(model, field.name))
                 if val == 'True' or val == 'False':
-                    val = '1' if val == 'True' else '0'
+                    if val == 'True':
+                            val = '1'
+                    else:
+                            val = '0'
                 row.append(val)
         array.append(row)
     return numpy.array(array)
