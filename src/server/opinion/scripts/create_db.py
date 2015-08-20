@@ -43,9 +43,9 @@ os_election.save()
 # Create the OS statements
 os_election_stmts = {}
 os_election_stmt_strings = {}
-os_election_stmt_strings[0] = "1. How would you rate this course so far in terms of technical difficulty? (If you haven't started the course yet, how difficult technically do you think this course will be?)"
-os_election_stmt_strings[1] = "2. How would you rate this course so far in terms of usefulness to your career? (If you haven't started the course yet, how useful do you think this course will be?)"
-os_election_stmt_strings[2] = "3. How would you rate your enthusiasm so far in this course?"
+os_election_stmt_strings[0] = "1. How would you rate this course so far in terms of technical difficulty? (if you haven't started the course yet, how difficult technically do you think this course will be?)"
+os_election_stmt_strings[1] = "2. How would you rate this course so far in terms of usefulness to your career? (if you haven't started the course yet, how useful do you think this course will be?)"
+os_election_stmt_strings[2] = "3. How would you rate your enthusiasm so far for this course?"
 os_election_stmt_strings[3] = "4. How would you rate your performance so far in this course? (Please press the skip button if you haven't started the course yet.)"
 os_election_stmt_strings[4] = "5. How would you rate the effectiveness of course assignments so far to help you develop your skills? (Please press the skip button if you haven't started the course yet.)"
 os_election_stmt_strings[5] = 'Marriage rights for same-sex partners'
