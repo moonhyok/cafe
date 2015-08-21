@@ -14,7 +14,7 @@ import math
 import time
 from django.utils.dateformat import DateFormat
 from prettytable import *
-#from pandas import DataFrame
+from pandas import DataFrame
 
 """
 
