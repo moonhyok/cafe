@@ -1225,7 +1225,7 @@ $(document).ready(function() {
         $('.logout').show();
         e.preventDefault();
         e.stopPropagation();
-	    window.history.pushState("", "", '/mobile');
+	    window.history.pushState("", "", '/ieor115');
 
         $.ajax({
             url: window.url_root + '/accountsjson/logout/',
