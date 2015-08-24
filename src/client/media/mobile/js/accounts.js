@@ -415,7 +415,7 @@ $(document).ready(function() {
             "year": ($('#regyear').val()=='')?'-1':$('#regyear').val(),
             "regdesign" : ($('#redesign').val()== '')?'-1':$('#regdesign').val(),
             "interests" : ($('#reginterests').val()=='')?'-1':$('#reginterests').val(),
-            "interesth" : ($('#reginteresth').val()=='')?'-1':$('#reginteresth').val(),
+            // "interesth" : ($('#reginteresth').val()=='')?'-1':$('#reginteresth').val(),
             "reason": ($('#regreason').val()=='')?'-1':$('#regreason').val()
         };
 
@@ -949,7 +949,7 @@ $(document).ready(function() {
                 return window.canvasy(d.y);
             })
 	    .ease(d3.ease("bounce"))
-            .duration(2000) // this is 1s
+            .duration(5000) // this is 1s
             .delay(100);
 
         window.tag.transition()
@@ -978,7 +978,7 @@ $(document).ready(function() {
                 return window.canvasy(d.y)+window.mugsize/2;
             })
         .ease(d3.ease("bounce"))
-            .duration(2000) // this is 1s
+            .duration(5000) // this is 1s
             .delay(100);
 
         //$('.scorebox').show();

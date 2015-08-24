@@ -183,7 +183,19 @@ def register(request, success_url=None,
 		request_post_copy['username'] = formatted_username.lower() # Username saved as lowercase
 
 		form = form_class(data=request_post_copy, files=request.FILES)
+		print "printing"
+		print request_post_copy['username']
+		print request_post_copy['year']
+		print request_post_copy['regdesign']
+
 		data_demog={'username': request_post_copy['username'], 'password':request_post_copy['username'],'password1':request_post_copy['username'],'password2':request_post_copy['username'],'email':request_post_copy['username'],'zipcode':request_post_copy['username']}
+
+					# 'year':request_post_copy['year'],
+					# 'numCoursesTaken':request_post_copy['regdesign'],
+					# 'interest':request_post_copy['interests'],
+					# 'reason':request_post_copy['reason'],
+					# 'major':request_post_copy['major']
+					
 		
 		demog_qdict = QueryDict('')
 		demog_qdict = demog_qdict.copy()
@@ -195,9 +207,9 @@ def register(request, success_url=None,
 		if form.is_valid() and demog.is_valid():
 			new_user = form.save(profile_callback=profile_callback)
 
-			#ud = UserData(user = new_user, key='demographics',value=request_post_copy.urlencode())
-			#ud.save()
-			#print request_post_copy.urlencode()
+			ud = UserData(user = new_user, key='demographics',value=request_post_copy.urlencode())
+			ud.save()
+			print request_post_copy.urlencode()
 			
 			# Save the original formatting of the username
 			username_setting = UserSettings(user = new_user, key = 'username_format', value = formatted_username)
@@ -229,21 +241,22 @@ def register(request, success_url=None,
 
 			#save additional informaiton of this user in UserDate
 			#if the user didn't type age or reason, the value will be -1
-			if request_post_copy.has_key('country'):
-				country=UserData(user=new_user,key='country',value=request_post_copy['country'])
+			if request_post_copy.has_key('major'):
+				country=UserData(user=new_user,key='major',value=request_post_copy['major'])
 				country.save()
 
-			if request_post_copy.has_key('gender'):
-				gender=UserData(user=new_user,key='gender',value=request_post_copy['gender'])
+			if request_post_copy.has_key('year'):
+				gender=UserData(user=new_user,key='year',value=request_post_copy['year'])
 				gender.save()
 
-			if request_post_copy.has_key('age'):
-				age=UserData(user=new_user,key='age',value=request_post_copy['age'])
+			if request_post_copy.has_key('regdesign'):
+				age=UserData(user=new_user,key='regdesign',value=request_post_copy['regdesign'])
 				age.save()
 			
-			if request_post_copy.has_key('trainingYears'):
-				trainingYears=UserData(user=new_user,key='trainingYears',value=request_post_copy['trainingYears'])
+			if request_post_copy.has_key('interests'):
+				trainingYears=UserData(user=new_user,key='interests',value=request_post_copy['interests'])
 				trainingYears.save()
+
 			if request_post_copy.has_key('reason'):
 				reason=UserData(user=new_user,key='reason',value=request_post_copy['reason'])
 				reason.save()

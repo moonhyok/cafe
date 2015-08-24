@@ -1581,8 +1581,8 @@ def os_show(request, os_id, disc_stmt_id = None):
     
     for t in tag_objects:
         tags.append((t.comment.user.id,t.tag))
-    print "printing"
-    print statements
+    # print "printing"
+    # print statements
     # print "orintung"
     # print tags
 
