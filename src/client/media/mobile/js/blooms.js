@@ -575,7 +575,6 @@ var _blooms = blooms = (function($, d3, console) {
                     {
                          try{
                              blooms.addYourMug();
-
                              if(window.refer == "")
                                 {
                                     window.your_mug.transition().duration(100).style("opacity", "1");
@@ -584,7 +583,6 @@ var _blooms = blooms = (function($, d3, console) {
                                 {
                                     window.your_mug.transition().duration(100).style("opacity", ".3");
                                 }
-
                             }catch(err){
                               console.log(err);
                            }
@@ -702,6 +700,16 @@ var _blooms = blooms = (function($, d3, console) {
 
             populateBlooms();
             $('.top-bar').show();
+	    //$('.burger-page').show();
+           $('.burger-div-compare').show();
+           $('.burger-div-others').show();
+           $('.burger-div-yours').show();
+	   //accounts.hideAll();
+           //$('.dialog').show();
+          // window.cur_state = 'dialog';
+          // window.prev_state = 'grade';
+   
+    
         }
         else{
             populateBlooms();

@@ -140,6 +140,7 @@ var rate = (function($, d3, console) {
                     $('.instructions-light').html("Ahora es su turno. Presione sobre su esfera para introducir su sugerencia.")
                 }
                     
+		
                 //$('.instructions2').hide();
                 //$('.instructions3').show();
                 try{
@@ -151,7 +152,7 @@ var rate = (function($, d3, console) {
                 //hideMenubar();
                 //$('.dialog-yourmug').show();
                 //$('.comment-input').slideDown();
-            }
+            } 
             else if (window.user_score == 1)
             {
                 $('.rate').hide();
@@ -274,7 +275,7 @@ var rate = (function($, d3, console) {
     // This function saves the rating of the slider until the user moves
     // back to the main OS page. This function is used so that that the values
     // are not constantly sent every time a slider is moved and will only be sent
-    // once once the user is ocmpletely finished.
+    // once once the user is completely finished.
 
     function saveRating(value1, value2, cid) {
         if (window.currentRating === undefined) {
@@ -315,10 +316,10 @@ var rate = (function($, d3, console) {
         }
         else
         {
-            if(window.user_score <= 2)
-            {
+            //if(window.user_score <= 2)
+            //{
                $('.dialog').show();
-            }
+            //}
         }
         $('.endsliders').hide();
 

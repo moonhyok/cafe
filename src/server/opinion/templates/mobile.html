@@ -30,7 +30,7 @@
     <link rel='stylesheet' type='text/css' href='{{url_root}}/media/mobile/css/opinionspace.css?nonce={{random_password}}' />
 
     {% if horizontal_slide %}
-    <link rel='stylesheet' type='text/css' href='{{url_root}}/media/mobile/css/crc-transparent-slider-horizontal.css?nonce={{random_password}}' />
+    <link rel='stylesheet' type='text/css' href='{{url_root}}/media/mobile/css/crc-transparent-slider-horizsontal.css?nonce={{random_password}}' />
     {% else %}
     <link rel='stylesheet' type='text/css' href='{{url_root}}/media/mobile/css/crc-transparent-slider.css?nonce={{random_password}}' />
     {% endif %}
@@ -293,7 +293,7 @@
   <center>
     <div class="home-btn-dialog-box landing-navigation">
             <div class="home-btn-title responsive-header">
-              <span class="landing-page-banner">{{client_settings.WELCOME_PAGE_TITLE}}</span> 
+              <span class="landing-page-banner">Week {{week_num}}</span> 
             </div>
 
             <div class="home-btn-wrapper" style="width:35%;display:inline-block;">
@@ -301,7 +301,7 @@
             </div>
 
     </div>
-          <img width="70%" src="{{url_root}}/media/mobile/img/cafe/cafe-title-cropped-2.png" style="margin-top:3px;max-width: 620px;">
+          <img width="70%" src="{{url_root}}/media/mobile/img/cafe/cafe-title-cropped-2.png" style="margin-top:3px;max-width: 500px;">
           <div class="landing-img-title responsive-body" style="display:none;">
             {{topic}}
           </div> 
@@ -323,7 +323,7 @@
       
           <center>
 
-<div class="question-number responsive-body" style="margin-left: 15px;margin-right: 5px;">M-CAFE is a platform that facilitates ongoing student feedback to the instructors on how IEOR 115 can be improved as the course progresses. Students will periodically be asked to spend a few minutes to enter their feedback into M-CAFE.</div>        
+<div class="question-number1 responsive-body" style="text-align:center;max-width:620px;">M-CAFE is a platform that facilitates ongoing student feedback to the instructors on how IEOR 115 can be improved as the course progresses. Students will periodically be asked to spend a few minutes to enter their feedback into M-CAFE.</div>        
           </div>
 
           {% if loggedIn %}
@@ -331,9 +331,9 @@
           {% else %}
 
 
-          <div class='button-div-red first-time-btn responsive-btn' style="display: inline-block; margin-top: 10px;">New</div>
+          <div class='button-div-red first-time-btn responsive-btn' style="display: inline-block; margin-top: 10px;">Register</div>
 
-          <div class='button-div-red return-btn responsive-btn' style="display: inline-block;">Returning</div><br/><br/><br/>
+          <div class='button-div-red return-btn responsive-btn' style="display: inline-block;">Login</div><br/><br/><br/>
           {% endif %}
 
            <font style="font-size: 18px;line-height: 18px;text-shadow:none;color: #442b10;">
@@ -341,10 +341,8 @@
           </font>
           <br/><br/>
 
-          <font width="70%" style="font-size: 14px;line-height: 18px;text-shadow:none; color: #442b10 ;"> Information gathered through M-CAFE will be confidential. Student identity will not be revealed through M-CAFE. For any questions, comments, or concerns, send an email to <a href="mailto:cafe.mooc@gmail.com">cafe.mooc@gmail.com</a> (NOT the course staff) and please do not post your M-CAFE related questions to the course discussion forum. 
-        <br/> 
-            <a href="http://m-cafe.org/?page_id=5" target="_blank">About</a>
-
+          <font style="font-size: 14px;line-height: 18px;text-shadow:none; color: #442b10 ;"> Information gathered through M-CAFE will be confidential. Student identity will not be revealed through M-CAFE.</br> For any questions, comments, or concerns, send an email to <a href="mailto:cafe.mooc@gmail.com">cafe.mooc@gmail.com</a> or visit <a href="http://m-cafe.org/?page_id=5" target="_blank">M-CAFE.ORG</a>
+	     </font>
           </center>
 
     
@@ -370,7 +368,7 @@
           <center>
             <div class="home-btn-dialog-box first-dialog-nav">
               <div class="home-btn-title responsive-header">
-                <span class="landing-page-banner">{{client_settings.WELCOME_PAGE_TITLE}}</span> 
+                <span class="landing-page-banner">Week {{week_num}}</span> 
               </div>
 
               <div class="home-btn-wrapper" style="width:35%;display:inline-block;">
@@ -383,7 +381,7 @@
             <div class="home-btn-dialog-box slider-nav-box" style="display: none;">
               
               <div class="home-btn-title responsive-header">
-                  <span class="landing-page-banner">{{client_settings.WELCOME_PAGE_TITLE}}</span> 
+                  <span class="landing-page-banner">Week {{week_num}}</span> 
               </div>
               <div class="home-btn-wrapper" style="width:35%;display:inline-block;">
                                 
@@ -405,7 +403,7 @@
               <div style="width: 100%;" class="responsive-padding">
                 
 
-                <div class="slider" style="margin-left: 15px;margin-right: 5px;" id="slider-{{statement.id}}"></div>
+                <div class="slider" style="padding-top:10px;padding-bottom:10px;margin-left: 15px;margin-right: 5px;" id="slider-{{statement.id}}"></div>
 
                 <center>
                   <!--<img class='endsliders-back-btn endsliders-back-btn-size' style="display: inline-block; width: 10px;position:relative;top:5px;" id="back-{{statement.id}}" src="{{url_root}}/media/mobile/img/cafe/Skip_V1.png">
@@ -415,7 +413,7 @@
 
               </div>
 
-              <div class="statement-style responsive-body english grade-feedback" style="text-align: center;">Afterwards, you can enter suggestions.</div>
+              <div class="statement-style responsive-body english grade-feedback" style="margin-left:10px;margin-right:10px;text-align: center;">Afterwards, you can enter suggestions.</div>
               <div class="statement-style responsive-body spanish grade-feedback" style="display:none;"></div>
               
               <div style="clear: both;"></div>
@@ -434,12 +432,12 @@
   <center>
     <div class="home-btn-dialog-box">
             <div class="home-btn-title responsive-header">
-              <span class="landing-page-banner">{{client_settings.WELCOME_PAGE_TITLE}}</span> 
+              <span class="landing-page-banner">Week {{week_num}}</span> 
             </div>
             
             <div class="home-btn-wrapper" style="width:35%;display:inline-block;">
                                 
-                <img width="30px" class='help-btn-dialog' id="help-endsliders" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn_compress.png">
+                <img width="30px" class='help-btn-dialog3' id="help-endsliders" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn_compress.png">
               </div>
 
           </div> 
@@ -630,7 +628,7 @@
               </div>
 
               <div data-role="fieldcontain">
-                <label for="regdesign" class='regforminput'>Number of Other Programming / Database Courses Taken:</label>
+                <label for="regdesign" class='regforminput'>Number of Other Database Courses Taken:</label>
                   <select name="regdesign" id="regdesign" style="color: #000000 !important; font-size: 24px !important;">
                   <option value="">Select # Courses</option>
                   <option value="0">0</option>
@@ -742,7 +740,7 @@
       <center>
     <div class="home-btn-dialog-box">
             <div class="home-btn-title responsive-header">
-              <span class="landing-page-banner">{{client_settings.WELCOME_PAGE_TITLE}}</span> 
+              <span class="landing-page-banner">Week {{week_num}}</span> 
             </div>
             
             <div class="home-btn-wrapper" style="width:35%;display:inline-block;">
@@ -759,9 +757,9 @@
 
        <center>
        <div class='dialog-text-style responsive-body'>
-           If you have already registered your email with M-CAFE, please enter it here. You will be able to update your evaluations, add a new suggestion, and read/rate other students' suggestions.<br/>
+           If you have already registered your email with M-CAFE, please enter it here. You will be able to update your evaluations, visualize your evaluation history, add a new suggestion, read/rate other students' suggestions and see how your peers are rating your suggestions.<br/>
            
-           <input type="text" class="login-email" id="login-email" value='' placeholder="Email" data-theme='b' style="color: #000000 !important; font-size: 24px !important;text-align:center;"/>
+           <input type="text" class="login-email" id="login-email" value='' placeholder="Berkeley Email" data-theme='b' style="color: #000000 !important; font-size: 24px !important;text-align:center;"/>
            <div class='alert-error' id='login-error' style='display:none;width: 100%;'></div><br/>
            <center><div class='button-div-wide exec-login responsive-btn' style="text-align:center;">Login</div></center>
 
@@ -774,12 +772,12 @@
   <center>
     <div class="home-btn-dialog-box">
             <div class="home-btn-title responsive-header">
-              <span class="landing-page-banner">{{client_settings.WELCOME_PAGE_TITLE}}</span> 
+              <span class="landing-page-banner">Week {{week_num}}</span> 
             </div>
             
             <div class="home-btn-wrapper" style="width:35%;display:inline-block; text-align: right;">
-              <!-- <span style="font-size: 24px;font-weight:bold; padding-top:15px; padding-right: 15px;" onclick="accounts.hideAll();$('.'+window.burger_state).show();window.prev_state='help';window.cur_state=window.burger_state;">&#11013;</span> -->
-              <img width="30px" class='about-btn' id="about-btn" src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+              <span style="font-size: 24px;font-weight:bold; padding-top:20px; padding-right: 15px;" onclick="accounts.hideAll();$('.'+window.burger_state).show();window.prev_state='help';window.cur_state=window.burger_state;">&#11013;</span>
+	    
             </div>
 
     </div> 
@@ -814,7 +812,7 @@
   <center>
     <div class="home-btn-dialog-box">
             <div class="home-btn-title responsive-header">
-              <span class="landing-page-banner">{{client_settings.WELCOME_PAGE_TITLE}}</span> 
+              <span class="landing-page-banner">Week {{week_num}}</span> 
             </div>
             
             <div class="home-btn-wrapper" style="width:35%;display:inline-block; text-align: right;">
@@ -824,7 +822,10 @@
           </div> 
     <!--<img class="header-img-topic center" src="{{ url_root }}/media/mobile/img/cafe/CRC_join.png"/>-->
           <div class='dialog-text1 dialog-text-style'>
-            <span>The histograms below show the ratings provided by your peers. The pink ticks indicate the ratings you entered.</span>
+            <span>The plots below show the ratings you have previously provided and the weekly course averages. Click on the plots to see the details.</br> (Gold is your trend and blue is the course average)</br></br>
+*This is empty now but you'll be able to see your responses and the average class responses as the course progresses...
+
+</span>
           </div>
 
           <br/>
@@ -838,36 +839,98 @@
               <div style="font-size: 14px; font-weight: bolder;cursor: pointer;cursor: hand;" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();"><span>more info</span> >></div>
             </div>
 
-            <canvas id="sparkLineCanvas{{k.id}}" width="175" height="58"></canvas>
-            
+            <canvas style="cursor: pointer;cursor: hand;" id="sparkLineCanvas{{k.id}}" width="320" height="58"></canvas>
+            </br>
             <div>
         
-        <!--<script>
+        <script>
         var canvas = document.getElementById('sparkLineCanvas{{k.id}}');
         var context = canvas.getContext('2d');
         if ({{k.id}} % 2 == 1)
               $('.compare-box-{{k.id}}').css("background-color","rgba(0,0,0,0.05)")
-        var data = {{v}};
-        var max_of_array = Math.max.apply(Math, data);
-        context.beginPath();
-        context.lineWidth = 2;
-        context.strokeStyle = '#442b10';
+	var graph_num = {{k.id}};
+	var data ={{self_trend}};
+	var data_course ={{course_trend}};
+
+	function indexing(a, obj) {
+	    var dataX_course = [];
+	    for (var i = 0; i < a.length; i++) {
+			if (a[i] !== obj) {
+				dataX_course.push(i+1);
+			}
+	    }
+	    return dataX_course;
+        }
+
+	function valuing(a, obj) {
+	    var dataY_course = [];
+	    for (var i = 0; i < a.length; i++) {
+			if (a[i] !== obj) {
+				dataY_course.push(a[i]);
+			}
+	    }
+	    return dataY_course;
+        }
+
+	var dataX_course = indexing(data_course[graph_num-1][0], 0);
+	var dataY_course = valuing(data_course[graph_num-1][0], 0);
+	var dataX = indexing(data[graph_num-1][0], 0);
+	var dataY = valuing(data[graph_num-1][0], 0);
+	var N = {{week_num}};
+
+	//var dataX = [1,3,4,7];
+	//var dataY = [0.6,0.8,0.5,0.7];
+        var max_of_array = 10;
+	var leng = dataX.length;
+	var leng_course = dataX_course.length;
+
+       context.beginPath();
+        context.lineWidth = 1;
+        context.strokeStyle = '#0000CD';
         context.shadowColor = '#ffffff';
               context.shadowOffsetX = 1;
               context.shadowOffsetY = 1;
-        context.moveTo(0, 45 - data[0]/max_of_array*38);
-        for (i = 1; i <= 9; i++)
-        {
-              context.lineTo(i*16, 45 - data[i]/max_of_array*38);
+        context.moveTo(dataX_course[0]*20, 45 - dataY_course[0]*10/max_of_array*38);
+	if (leng_course > 0) {
+          for (i = 1; i < leng_course; i++)
+          {
+              context.lineTo(dataX_course[i]*20, 45 - dataY_course[i] * 10 /max_of_array*38);
               context.stroke(); 
+          }
+	} 
+
+        context.beginPath();
+        context.lineWidth = 1;
+        context.strokeStyle = '#CD853F';
+        context.shadowColor = '#ffffff';
+              context.shadowOffsetX = 1;
+              context.shadowOffsetY = 1;
+        context.moveTo(dataX[0]*20, 45 - dataY[0]*10/max_of_array*38);
+	if (leng > 0) {
+          for (i = 1; i < leng; i++)
+          {
+              context.lineTo(dataX[i]*20, 45 - dataY[i] * 10 /max_of_array*38);
+              context.stroke(); 
+          }
+	} 
+       /*  context.fillStyle = '#020dds';
+	for (var i = 0; i < leng; i++){
+	     context.beginPath();
+	      context.arc(dataX[i]*20, 45 - dataY[i] * 10 /max_of_array*38, 2, 0, Math.PI * 2, true);
+	      context.fill();
         }
+	*/
         context.font="italic small-caps bolder 12px sans-serif";
         context.fillStyle = '#442b10';
-        context.fillText("0",0,48);
-        context.fillText("9",150,50);
-        </script>-->
+	for (var i = 1; i < 16; i++) {
+	    context.fillText(i,20*(i)-5,58);
 
-        <script>
+	}
+
+
+        </script>
+
+        <!--<script>
         // console.log(window.sliders[0]+" HIHIHI");
          var canvas = document.getElementById('sparkLineCanvas{{k.id}}');
          var context = canvas.getContext('2d');
@@ -897,31 +960,135 @@
          context.fillText("10",0,58);
          context.fillText("0",133,58);
          context.fillText("Ø",149,58);
-        </script>
+        </script>-->
 
+	<!--<script>
+	 var canvas = document.getElementById('sparkLineCanvas{{k.id}}');
+         var c = canvas.getContext('2d');
+         if ({{k.id}} % 2 == 1)
+     $('.compare-box-{{k.id}}').css("background-color","rgba(0,0,0,0.05)")
+	 var graph_num = {{k.id}};
+	 var xPadding = 0;
+	 var yPadding = 0;
+	 var data = {{self_trend.1.week}};
+	 
+	 function getXPixel(val) {
+	   return ((graph.width() - xPadding) / 15 * val + (xPadding * 1.5));
+	 }
+	 function getYPixel(val) {
+	   return graph.height() - (((graph.height() - yPadding) / * val) - yPadding;
+	 }
+	 
+	 c.beginPath();
+	 c.lineWidth = 2;
+	 c.strokeStyle = '#442b10';
+	 c.font = 'italic 8pt sans-serif';
+
+
+	 c.moveTo(0, 0);
+	 c.lineTo(50, 40);
+	 c.stroke();
+
+	</script>-->
+	  
       </div>
             
           </div>
           {% endfor %}
+<div class="discuss-btn-div">
+            <div class='dialog-ready button-div-red responsive-btn' style="display: inline-block;">Next</div>
+</div>
+</center>
+</div>
+
+
+         <div class='prev-comment dialog-style'>
+	   <center>
+
+	      <div class="home-btn-dialog-box">
+            <div class="home-btn-title responsive-header">
+              <span class="landing-page-banner">Week {{week_num}}</span> 
+            </div>
+            
+            <div class="home-btn-wrapper" style="width:35%;display:inline-block; text-align: right;">
+              <img width="30px" class='help-btn-dialog2' id="help-dialog2" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn_compress.png"> 
+            </div>
+</div>
+
+          
+          <div class='dialog-text dialog-text-style'>
+	    </br>
+            <span>The suggestions you have previously provided and their scores: </span></br></br>
+	    
+	     </br>
+</div>
+          {% for k in self_suggestion %}
+          
+	      <div class="compare-text-{{k.id}}" style="padding-bottom: 10px;padding-top: 10px;max-width:620px;">
+		<div class="compare-tag-2">
+              <!--<div style="font-size: 12px; font-style: italic;font-weight: bolder;" onclick="accounts.hideAll();$('.detail-box-{{k.id}}').show();">{{k.id}}. </div>-->
+	   <div style="font-size: 18px;font-weight: bolder;width: 500px;text-align: left;" class="english">{{k.comment}} </div>
+             </div>
+   <canvas id="sparkLineCanvasText{{k.id}}" style="left: 800px"  width="68" height="30" ></canvas>
+           </div>
+         
+	      <script>
+	 var canvas = document.getElementById('sparkLineCanvasText{{k.id}}');
+        var context = canvas.getContext('2d');
+	 var counter = {{forloop.counter}};
+	 var addHeight = (counter - 1)*70;
+
+        if ({{forloop.counter}} % 2 == 1)
+              $('.compare-text-{{k.id}}').css("background-color","rgba(0,0,0,0.05)")
+
+
+	          var scores = {{self_suggestion_score}};
+		  var current_score = scores[counter-1];
+			var canvasID = 'sparkLineCanvasText{{k.id}}';
+		         var canvas = document.getElementById(canvasID);
+                         var context = canvas.getContext('2d');
+
+			 context.font="italic small-caps bolder 28px sans-serif";
+	 if (current_score == 0){
+	     current_score = "-";
+	 }
+	 context.beginPath;
+	 context.fillText(current_score, 34, 28);
+	 context.stroke();
+	  
+	    </script>
+	{% endfor %}
+
+</br>
+</br>
+
+
 
           <div class="discuss-btn-div">
-            <div class='dialog-ready button-div-red responsive-btn' style="display: inline-block;">Next</div><br/><br/>
+            <div class='map-ready button-div-red responsive-btn' style="display: inline-block; background-image: url(http://localhost:8000/media/mobile/img/cafe/button-default.png);">Next</div>
+</div>
+<br/><br/>
  <font style="font-size: 18px;line-height: 18px;text-shadow:none;color: #442b10;">
-            See detailed ratings of the course on the <a target="_blank" href="{{url_root}}/stats/">Stats page</a>!
+            See how your classmates are rating the course on the <a target="_blank" href="{{url_root}}/stats/">Stats page</a>!
+          </font>
+</br>
+</br>
+ <font style="font-size: 18px;line-height: 18px;text-shadow:none;color: #442b10;">
+            '-' indicates that the score is not yet available.
           </font>
 
             <!--<div class='dialog-ready2 button-div responsive-btn' style="display: inline-block;">Tell Us Your Idea</div>-->
             <!--<button type='submit' data-theme='b' class='dialog-next'  onclick="$('.dialog-text1').hide();$('.dialog-text2').show();"><font style="font-size: 16px;">Next</font></button>-->
-          </div>
+      
   </center>
-      </div>
-
+      
+</div>
       {% for k,v in statement_hist.iteritems %}
       <div class="detail-box detail-box-{{k.id}}" style="display:none;">
         <center>
           <div class="home-btn-dialog-box">
             <div class="home-btn-title responsive-header">
-              <span class="landing-page-banner">{{client_settings.WELCOME_PAGE_TITLE}}</span> 
+              <span class="landing-page-banner">Week {{week_num}}</span> 
             </div>
             
             <div class="home-btn-wrapper" style="width:35%;display:inline-block; text-align: right;"><img width="30px" class='help-btn-dialog' id="help-detail-box-{{k.id}}" src="{{url_root}}/media/mobile/img/cafe/CRC_help_bttn_compress.png"> 
@@ -943,33 +1110,102 @@
 
     <center>     
             <div style="margin-left: 15px;">
-              <canvas id="sparkLineCanvasDetail{{k.id}}" width="315" height="105" style="background-color: rgba(255,255,255,0.4)"></canvas>
-              <script>
-         var canvas = document.getElementById('sparkLineCanvasDetail{{k.id}}');
-         var context = canvas.getContext('2d');
-         var data = {{v}};
-         var max_of_array = Math.max.apply(Math, data);
-         context.beginPath();
-         context.lineWidth = 10;
-         context.strokeStyle = '#442b10';
-         context.shadowColor = '#ffffff';
-               context.shadowOffsetX = 1;
-               context.shadowOffsetY = 1;
-         //context.moveTo(0, 90 - data[0]/max_of_array*76);
-         for (i = 0; i <= 11; i++)
-         {
-          var skipOffset = 0
-          if (i == 11)
-            skipOffset = 49
-          context.moveTo(i*22+10+skipOffset, 90);
-          context.lineTo(i*22+10+skipOffset, 90 - data[i]/max_of_array*76);
-          context.stroke(); 
-         }
-         context.font="italic small-caps bolder 12px sans-serif";
-         context.fillStyle = '#442b10';
-         context.fillText("10",5,104);
-         context.fillText("0",268,104);
-         context.fillText("Ø",296,103);
+              <canvas id="sparkLineCanvasDetail{{k.id}}" width="500" height="270" style="background-color: rgba(255,255,255,0.4)"></canvas>
+               <script>
+        var canvas = document.getElementById('sparkLineCanvasDetail{{k.id}}');
+        var context = canvas.getContext('2d');
+        if ({{k.id}} % 2 == 1)
+              $('.compare-box-{{k.id}}').css("background-color","rgba(0,0,0,0.05)")
+
+	var data = {{self_trend}};
+	var data_course = {{course_trend}};
+	var graph_num = {{k.id}};
+
+	function indexing(a, obj) {
+	    var dataX_course = [];
+	    for (var i = 0; i < a.length; i++) {
+			if (a[i] !== obj) {
+				dataX_course.push(i+1);
+			}
+	    }
+	    return dataX_course;
+        }
+
+	function valuing(a, obj) {
+	    var dataY_course = [];
+	    for (var i = 0; i < a.length; i++) {
+			if (a[i] !== obj) {
+				dataY_course.push(a[i]);
+			}
+	    }
+	    return dataY_course;
+        }
+
+	var dataX_course = indexing(data_course[graph_num-1][0], 0);
+	var dataY_course = valuing(data_course[graph_num-1][0], 0);
+	var dataX = indexing(data[graph_num-1][0], 0);
+	var dataY = valuing(data[graph_num-1][0], 0);
+	var N = {{week_num}};
+
+	//var dataX = [1,3,4,7];
+	//var dataY = [0.6,0.8,0.5,0.7];
+        var max_of_array = 10;
+	var leng = dataX.length;
+	var leng_course = dataX_course.length;
+
+       context.beginPath();
+        context.lineWidth = 1;
+        context.strokeStyle = '#0000CD';
+        context.shadowColor = '#ffffff';
+              context.shadowOffsetX = 1;
+              context.shadowOffsetY = 1;
+        context.moveTo(dataX_course[0]*30, 220 - dataY_course[0]*10/max_of_array*200);
+	if (leng_course > 0) {
+          for (i = 1; i < leng_course; i++)
+          {
+              context.lineTo(dataX_course[i]*30, 220 - dataY_course[i] * 10 /max_of_array*200);
+              context.stroke(); 
+          }
+	} 
+
+
+        context.beginPath();
+        context.lineWidth = 2;
+        context.strokeStyle = '#CD853F';
+        context.shadowColor = '#ffffff';
+              context.shadowOffsetX = 1;
+              context.shadowOffsetY = 1;
+        context.moveTo(dataX[0]*30, 220 - dataY[0]*10/max_of_array*200);
+	if (leng > 0) {
+          for (i = 1; i < leng; i++)
+          {
+              context.lineTo(dataX[i]*30, 220 - dataY[i] * 10 /max_of_array*200);
+              context.stroke(); 
+          }
+	} 
+        context.fillStyle = '#CD853F';
+	for (var i = 0; i < leng; i++){
+	     context.beginPath();
+	      context.arc(dataX[i]*30, 220 - dataY[i] * 10 /max_of_array*200, 4, 0, Math.PI * 2, true);
+	      context.fill();
+        }
+
+	context.fillStyle = '#0000CD';
+	for (var i = 0; i < leng_course; i++){
+	     context.beginPath();
+	      context.arc(dataX_course[i]*30, 220 - dataY_course[i] * 10 /max_of_array*200, 4, 0, Math.PI * 2, true);
+	      context.fill();
+        }
+        context.font="italic small-caps bolder 12px sans-serif";
+        context.fillStyle = '#442b10';
+	for (var i = 1; i < 16; i++) {
+	    context.fillText(i,30*(i)-5,250);
+
+	}
+	for (var i = 0; i < 11; i++) {
+	   context.fillText(10-i, 10, i / max_of_array*200+28);
+	}
+	context.fillText('WEEK', 230, 263);
         </script>
 
 
@@ -993,7 +1229,7 @@
   <center>
     <div class="home-btn-dialog-box">
             <div class="home-btn-title responsive-header">
-              <span class="landing-page-banner">{{client_settings.WELCOME_PAGE_TITLE}}</span> 
+              <span class="landing-page-banner">Week {{week_num}}</span> 
             </div>
             
             <div class="home-btn-wrapper" style="width:35%;display:inline-block;">
@@ -1017,14 +1253,14 @@
                   <option value="Labs">#Labs</option>
                   <option value="Lectures">#Lectures</option>
                   <option value="Logistics">#Logistics</option>
-                  <option value="New Topics">#New Topics</option>
+                  <option value="New Topics">#CourseContent</option>
                   <option value="Projects">#Projects</option>
                   <option value="Policies">#Policies</option>
                   <option id="otherOption" value="Other">#Other</option>
                 </select>
               </div>
               <div id="otherBox">
-              <input type="text" name="otherTag" id="otherTag" placeholder="Please Specify If Other (Do not include #)">
+              <input type="text" name="otherTag" id="otherTag" placeholder="Please Specify If Other">
               </div>
 
               <script>
@@ -1052,7 +1288,7 @@
   <center>
     <div class="home-btn-dialog-box">
             <div class="home-btn-title responsive-header">
-              <span class="landing-page-banner">{{client_settings.WELCOME_PAGE_TITLE}}</span> 
+              <span class="landing-page-banner">Week {{week_num}}</span> 
             </div>
             
             <div class="home-btn-wrapper" style="width:35%;display:inline-block; text-align: right;">                
@@ -1086,6 +1322,8 @@
          How valuable would it be for the instructor to adopt this suggestion?<br/>
     <center>
       <!--(Not at all) 0   -  9 (Extremely)-->
+ <div class="question-number responsive-body" style="text-align:center">(10 - Very High, 0 - Very Low) </div>
+</br>
       <div class="slider" id="slider-importance"></div>    
       
       <div class='button-div-red responsive-btn' id ="go-back" style="display: inline-block;">Skip</div>
@@ -1112,12 +1350,13 @@
 
       </div>
 
+
       <div class="map-frame">
          <div class="top-bar">
         <center>
           <div class='menubar'>
             <div class="home-btn-title responsive-header" style="width:62%;font-size: 16px;">
-              <span class="landing-page-banner">{{client_settings.WELCOME_PAGE_TITLE}}</span> 
+              <span class="landing-page-banner">Week {{week_num}}</span> 
             </div>
 
             <div class="home-btn-wrapper" style="width:35%;display:inline-block;">
@@ -1147,7 +1386,7 @@
   <center>
           <div class="home-btn-dialog-box">
             <div class="home-btn-title responsive-header" style="width:70%">
-              <span class="landing-page-banner-logout">{{client_settings.WELCOME_PAGE_TITLE}}</span> 
+              <span class="landing-page-banner-logout">Week {{week_num}}</span> 
             </div>
             
             <div class="home-btn-wrapper" style="width:25%;display:inline-block; text-align: right;">
@@ -1161,7 +1400,7 @@
       <!-- <a href="http://hrefshare.com/d3660" target="_blank" style="color: #555555;"><img src="{{url_root}}/media/mobile/img/cafe/facebook-button.png" width="102px"></a><br/> -->
       <span class="english">
 
-             For further questions visit the website: <a href="http://m-cafe.org/" target="_blank" style="color: #555555;">m-cafe.org</a><br/><br/>
+             For more information, visit the website: <a href="http://m-cafe.org/" target="_blank" style="color: #555555;">m-cafe.org</a><br/><br/>
 
 
       <!--California Online Voting Registration: <a href="http://registertovote.ca.gov" target="_blank" style="color: #555555;"> CAVoterRegistration </a><br/><br/></span>-->
@@ -1170,7 +1409,7 @@
           <span class="spanish"> 
 
             <a href="http://twitter.com/intent/tweet?text=%C2%BFC%C3%B3mo%20califica%20a%20California%3F%20Pruebe%20%40CalificaaCA%20desarrollado%20por%20%40Cal%20%40GavinNewsom%20%26%20%40Ken_Goldberg%20%C2%A0http%3A%2F%2Fcaliforniareportcard.org%2F2.0%2F%20%23C" target="_blank" style="color: #555555;"><img src="{{url_root}}/media/mobile/img/cafe/twitter-button-compress.png" width="102px"></a>
-      <a href="https://www.facebook.com/dialog/feed?app_id=694165360698061&link=http%3A%2F%2Fcaliforniareportcard.org%2F2.0%2F%20&picture=http%3A%2F%2Fcaliforniareportcard.org%2Fcrc%2Fwp-content%2Fuploads%2FCRCv2_Facebook-Share-link_Spanish-011.jpg&name=Califica%20a%20California&caption=%20&description=%C2%BFC%C3%B3mo%20califica%20a%20California%3F%20Pruebe%20%40CalificaaCA%20desarrollado%20por%20%40Cal%20%40GavinNewsom%20%26%20%40Ken_Goldberg%20%C2%A0http%3A%2F%2Fcaliforniareportcard.org%2F2.0%2F%20%23CA%20%23Gov&redirect_uri=http%3A%2F%2Fwww.facebook.com%2F" target="_blank" style="color: #555555;"><img src="{{url_root}}/media/mobile/img/cafe/facebook-button-compress.png" width="102px"></a><br/>
+      <a href="https://www.facebook.com/dialog/feed?app_id=694165360698061&link=http%3A%2F%2Fcaliforniareportcard.org%2F2.0%2F%20&picture=http%3A%2F%2Fcaliforniareportcard.org%2Fcrc%2Fwp-content%2Fuploads%2FCRCv2_Facebook-Share-link_Spanish-011.jpg&name=Califica%20a%20California&caption=%20&description=%C2%BFC%C3%B3mo%20califica%20a%20California%3F%20Pruebe%20%40CalificaaCA%20desarrollado%20por%20%40Cal%20%40GavinNewsom%20%26%20%40Ken_Goldberg%20%C2%A0http%3A%2F%2Fcaliforniareportcard.org%2F2.0%2F%20%23CA%20%23Gov&redirect_uri=http%3A%2F%2Fwww.facebook.com%2F" target="_blank" style="color: #555555;"><img src="{{url_root}}/media/mobilex/img/cafe/facebook-button-compress.png" width="102px"></a><br/>
 
             Información sobre las elecciones y los votantes: <a href="http://www.sos.ca.gov/elections/new-voter/spanish/" target="_blank" style="color: #555555;">California Información al Votante</a><br/><br/>
 
@@ -1195,7 +1434,7 @@
   <div class='landing-desc default-left-padding responsive-body'>
           <center>
             <div class="standard-btn-div">
-              <button type='submit' data-theme='b' id='regrade-btn' ><font style="font-size: 16px;">Change grades</font></button>
+              <button type='submit' data-theme='b' id='regrade-btn' ><font style="font-size: 16px;">Change ratings</font></button>
               <button type='cancel' data-theme='b' id='garden-btn' ><font style="font-size: 16px;">Discussion</font></button>
             </div>
           </center>
@@ -1253,7 +1492,7 @@
   <center>
     <div class="home-btn-dialog-box">
             <div class="home-btn-title responsive-header">
-              <span class="landing-page-banner">{{client_settings.WELCOME_PAGE_TITLE}}</span> 
+              <span class="landing-page-banner">Week {{week_num}}</span> 
             </div>
             
             <div class="home-btn-wrapper" style="width:35%;display:inline-block; text-align: right;">
@@ -1265,7 +1504,7 @@
       <br/><br/>
       <div class='dialog-text-style responsive-body'>
         <span>We appreciate your valuable input on how to improve the course! </span>
-        <div style="font-size: 18px;margin-top: 10px;"> Please consider and rate a few more suggestions from other students or edit your own suggestion before exiting, thank you!</div>
+        <div style="font-size: 18px;margin-top: 10px;"> Please rate a few more suggestions from other students or edit your own suggestion before exiting. See you next week!</div>
               <!--<div class='dialog-text-style default-left-padding'>
               {{client_settings.EMAIL_ASK_TEXT}}
         </div>-->
@@ -1275,8 +1514,8 @@
                 <!--<input type="email" id='regemail' name='regemail' class='regforminput' style="font-size: 15px; background-color: #FFFFFF;color: #000000;" placeholder="Email" data-theme='b'></input>
     <div class="comment-admin-text-b">{{client_settings.DEMOGRAPHICS_DISCLAIMER}}.</div>
     <br/>-->
-                <div class='button-div-wide responsive-btn' onclick="$('.burger-div-others').click();">Consider more suggestions</div>
-                <div class='button-div-wide responsive-btn' onclick="$('.burger-div-yours').click();">Add/Edit your own suggestion</div>
+                <div class='button-div-wide responsive-btn' onclick="$('.burger-div-others').click();">Rate more suggestions</div>
+                <div class='button-div-wide responsive-btn' onclick="$('.burger-div-yours').click();">Edit your own suggestion</div>
                 <div class='button-div-wide responsive-btn' onclick="$('.burger-div-logout').click();">Exit</div>
     <div class='alert-error' id='email-error' style='display:none;width: 250px;'></div>
               </center>
@@ -1338,8 +1577,7 @@
   <center>
     <div class="home-btn-dialog-box" style="padding-top: 5px;">
             
-            <!-- <span style="font-size: 24px;font-weight:bold;padding-right: 15px;" onclick="accounts.hideAll();$('.burger-page').show();">&#11013;</span> -->
-            <img width="30px" class='about-btn-2' id="about-btn-2" src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+            <span style="font-size: 24px;font-weight:bold;padding-right: 15px;padding-top:20px;" onclick="accounts.hideAll();$('.burger-page').show();">&#11013;</span>
     </div>
     <div class='dialog-text-style-noflow responsive-body'>
       <br/>
@@ -1451,9 +1689,7 @@
       <div class='dialog-help-map1 dialog-style' style="z-index:999">
   <center>
     <div class="home-btn-dialog-box">
-            
-            <!-- <span style="font-size: 24px;font-weight:bold;padding-right: 15px;" onclick="accounts.hideAll();$('.menubar').show();">&#11013;</span> -->
-            <img width="30px" class='about-btn-3' id="about-btn-3" src="{{url_root}}/media/mobile/img/cafe/CRC_back_bttn.png">
+            <span style="font-size: 24px;font-weight:bold;padding-right: 15px;padding-top:20px;margin-top:10px;" onclick="accounts.hideAll();$('.menubar').show();">&#11013;</span>
     </div>
     <div class='dialog-text-style-noflow responsive-body'>
             <div style="padding-top: 5px;">About the Map</div><br/>
@@ -1461,7 +1697,7 @@
 	<em>A:</em> Each sphere represents a participant. Clicking any sphere brings up the corresponding idea/issue that was suggested for the course.<br/></br/>
 
 <em>Q:</em> How are the spheres arranged in the space?<br/>
-<em>A:</em> The position of each sphere is based on how the participant rated the five quantitative issues. We use dimensionality reduction to project the space into 3 dimensions. If you and another participant assigned very similar points, your spheres will be close together. Spheres that are distant from yours belong to participants who gave different ratings to the questions. <br/><br/>
+<em>A:</em> The position of each sphere is based on how the participant rated the five quantitative issues. We use dimensionality reduction to project the space into 2 dimensions. If you and another participant assigned very similar points, your spheres will be close together. Spheres that are distant from yours belong to participants who gave different ratings to the questions. <br/><br/>
 
 <em>Q:</em> Why do I only see 6-7 spheres arranged in the space?<br/>
 <em>A:</em> To avoid overcrowding, we display only a few spheres at a time, biased toward more recent responses that have not yet received many ratings.<br/><br/>

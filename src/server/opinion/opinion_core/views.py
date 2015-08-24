@@ -29,7 +29,6 @@ from opinion.decorators import *
 
 from django.contrib.auth import authenticate, login
 from django.views.decorators.cache import cache_control
-
 import math
 import numpy
 import operator
@@ -151,6 +150,8 @@ def mobile(request,entry_code=None):
                 user_visit[0].save()
        else:
           entry_code=None 
+    else:
+       user = '0'
     create_visitor(request)
     os = get_os(1)
     disc_stmt = get_disc_stmt(os, 1)
@@ -177,6 +178,19 @@ def mobile(request,entry_code=None):
     if external_count.count() > 0:
        num_users = external_count[0].value
     # print str(request.user.is_authenticated()) + " authenticated"
+    start_date = datetime.datetime(year=2015, month=8, day=17,hour=0, minute=0, second=0, microsecond=0)
+    end_date = start_date + datetime.timedelta(weeks=17)
+   # except:
+   #   start_date = os.created
+   #   end_date = os.created + datetime.timedelta(weeks=17)
+
+    as_of_date = min(datetime.datetime.today(), end_date)
+    week_num = ((as_of_date - start_date).days / 7) + 1
+
+    last_rating = UserRating.objects.filter(is_current = True).order_by('-created')[1]
+    current_user = user
+    self_suggestion = DiscussionComment.objects.filter(user=current_user).order_by('created')
+
 
     return render_to_response('mobile.html', context_instance = RequestContext(request, {
                        'url_root' : settings.URL_ROOT,
@@ -188,8 +202,13 @@ def mobile(request,entry_code=None):
                        'client_data': mobile_client_data(request),
                        'entry_code': str(entry_code!=None).lower(),
                        'refer': referrallink,
-		                   'org_id': org_id,
-                       'language':language,
+                       'org_id': org_id,
+                       'language': language,
+                       'week_num': week_num,
+                       'self_trend': get_course_trend(current_user, start_date,1),
+                       'course_trend': get_course_trend(active_users, start_date,0),
+                       'self_suggestion': self_suggestion,
+                       'self_suggestion_score': get_self_suggestion_score(current_user),
                        'statement_hist': get_statement_histograms(),
                        'client_settings': get_client_settings(True),
                        'horizontal_slide': settings.HORIZONTAL_SLIDE,
@@ -368,25 +387,33 @@ def mcafe_stats(request):
     limit = 15
     recent_comments = DiscussionComment.objects.filter(user__in=active_users, is_current=True).order_by('-created')[:limit]
 
-#    try:
-#      start_date = opinion.settings_local.START_DATE
-#      end_date = opinion.settings_local.END_DATE
-#    except:
-#      start_date = os.created
-#      end_date = os.created + datetime.timedelta(weeks=17)
-    start_date = datetime.date(year=2015, month=8, day=1)
+  #  try:
+  #    start_date = opinion.settings_local.START_DATE
+  #    end_date = opinion.settings_local.END_DATE
+  #  except:
+  #    start_date = os.created
+  #    end_date = os.created + datetime.timedelta(weeks=17)
+ #   start_date = datetime.date(year=2015, month=8, day=1)
+ #   end_date = start_date + datetime.timedelta(weeks=17)
+    start_date = datetime.datetime(2015,8,17,0,0)
     end_date = start_date + datetime.timedelta(weeks=17)
+  #  except:
+  #    start_date = os.created
+  #    end_date = os.created + datetime.timedelta(weeks=17)
 
-    as_of_date = min(datetime.datetime.today().date(), end_date)
-    week_num = ((as_of_date - start_date).days / 7) + 1
+    as_of_date = min(datetime.datetime.today().date(), end_date.date())
+    week_num = ((as_of_date - start_date.date()).days / 7) + 1
+
+#    as_of_date = min(datetime.datetime.today().date(), end_date.date())
+#    week_num = ((as_of_date - start_date.date()).days / 7) - 1
 
     date_threshold = datetime.datetime.today() - datetime.timedelta(days=10)
     comments = DiscussionComment.objects.filter(discussion_statement=disc_stmt, created__gte=date_threshold)
-#    wilson = wilson_scores(comments)
-#    if len(wilson) < limit:
-#      comments = DiscussionComment.objects.filter(discussion_statement=disc_stmt)
-#      wilson = wilson_scores(comments)
-#    wilson = wilson[:limit]
+  #  wilson = wilson_scores(comments)
+  #  if len(wilson) < limit:
+   #   comments = DiscussionComment.objects.filter(discussion_statement=disc_stmt)
+    #  wilson = wilson_scores(comments)
+   # wilson = wilson[:limit]
 
     context = {
 #    'wilson' : wilson,
@@ -1469,9 +1496,11 @@ def os_show(request, os_id, disc_stmt_id = None):
     if request.user.is_authenticated():
         ratings = tuple(os.ratings.filter(user = request.user, is_current = True).values_list('opinion_space_statement', 'rating')[:len(statements)])
 
-    comment_filter = os.comments.filter(user = request.user, is_current = True, discussion_statement = current_disc_stmt)
-    comment_filter_nc = os.comments.filter(user = request.user,discussion_statement = current_disc_stmt)
-    comment = tuple(comment_filter.values_list('comment')[:1])
+    comment_filter = DiscussionComment.objects.filter(user = request.user, is_current = True, discussion_statement = current_disc_stmt)
+    comment_filter_nc = DiscussionComment.objects.filter(user = request.user,discussion_statement = current_disc_stmt)
+    comment_filter_len = len(comment_filter_nc)
+
+    comment = tuple(comment_filter.values_list('comment'))
     comment_score = tuple([[0]])
     
     if len(comment_filter) > 0:
@@ -1592,6 +1621,7 @@ def os_show(request, os_id, disc_stmt_id = None):
               'eigenvectors': eigenvectors,
               'cur_user_ratings': ratings,
               'cur_user_comment': comment,
+              'cur_user_comment_len': comment_filter_len,
               'prev_comments': prev_comments,
               'cur_user_settings': settings_dict,
               'cur_user_comment_score': comment_score,
