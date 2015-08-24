@@ -437,13 +437,13 @@ def get_course_trend(user_set, start_date, is_self):
     for k in range(os_statements):
         result.append([])
         temps = []
-        for i in range(num_weeks):
+        for i in range(num_weeks-1):
             if weekly_array[i].size == 0:
                 to_append = ([0] * os_statements)[k]
             else: 
                 df = DataFrame(weekly_array[i], columns=names)
                 df.rating = df.rating.astype(float)
-                to_append =df.groupby('opinion_space_statement')['rating'].mean()[k]
+                to_append = df.groupby('opinion_space_statement')['rating'].mean()[k]
             temps.append(to_append)
         result[k].append(temps)
     return result
