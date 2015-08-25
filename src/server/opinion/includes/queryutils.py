@@ -437,7 +437,7 @@ def get_course_trend(user_set, start_date, is_self):
     for k in range(os_statements):
         result.append([])
         temps = []
-        for i in range(num_weeks-1):
+        for i in range(num_weeks):
             if weekly_array[i].size == 0:
                 to_append = ([0] * os_statements)[k]
             else: 
