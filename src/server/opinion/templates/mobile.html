@@ -331,7 +331,7 @@
           {% else %}
 
 
-          <div class='button-div-red first-time-btn responsive-btn' style="display: inline-block; margin-top: 10px;">Register</div>
+          <div class='button-div-red first-time-btn responsive-btn' style="display: inline-block; margin-top: 10px;">New</div>
 
           <div class='button-div-red return-btn responsive-btn' style="display: inline-block;">Login</div><br/><br/><br/>
           {% endif %}
@@ -823,7 +823,6 @@
     <!--<img class="header-img-topic center" src="{{ url_root }}/media/mobile/img/cafe/CRC_join.png"/>-->
           <div class='dialog-text1 dialog-text-style'>
             <span>The plots below show the ratings you have previously provided and the weekly course averages. Click on the plots to see the details.</br> (Gold is your trend and blue is the course average)</br></br>
-*This is empty now but you'll be able to see your responses and the average class responses as the course progresses...
 
 </span>
           </div>
@@ -913,13 +912,13 @@
               context.stroke(); 
           }
 	} 
-       /*  context.fillStyle = '#020dds';
-	for (var i = 0; i < leng; i++){
+        /* context.fillStyle = '#0000CD';
+
 	     context.beginPath();
-	      context.arc(dataX[i]*20, 45 - dataY[i] * 10 /max_of_array*38, 2, 0, Math.PI * 2, true);
+	      context.arc(dataX_course[0]*20, 45 - dataY_course[0]*10/max_of_array*38, 2, 0, Math.PI * 2, true);
 	      context.fill();
-        }
-	*/
+        */
+	
         context.font="italic small-caps bolder 12px sans-serif";
         context.fillStyle = '#442b10';
 	for (var i = 1; i < 16; i++) {

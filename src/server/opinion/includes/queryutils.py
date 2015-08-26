@@ -411,11 +411,11 @@ def get_course_trend(user_set, start_date, is_self):
     end_date = start_date + datetime.timedelta(weeks=17)
     as_of_date = min(datetime.datetime.today(), end_date)
     num_weeks = ((as_of_date - start_date).days /7)+1
-
+    test_date = datetime.datetime(2015,8,21,23,0,0)
     if is_self == 1:
         weekly_data =  [UserRating.objects.filter(user=user_set, created__gte=start_date,created__lt=(start_date+datetime.timedelta(days=7)))]
     else:
-        weekly_data = [UserRating.objects.filter(user__in=user_set, created__gte=start_date,created__lt=(start_date+datetime.timedelta(days=7)))]
+        weekly_data = [UserRating.objects.filter(user__in=user_set, created__gte=test_date,created__lt=(start_date+datetime.timedelta(days=7)))]
 
     less_than = 7
     greater_than = 14
@@ -443,7 +443,7 @@ def get_course_trend(user_set, start_date, is_self):
             else: 
                 df = DataFrame(weekly_array[i], columns=names)
                 df.rating = df.rating.astype(float)
-                to_append =df.groupby('opinion_space_statement')['rating'].mean()[k]
+                to_append = df.groupby('opinion_space_statement')['rating'].mean()[k]
             temps.append(to_append)
         result[k].append(temps)
     return result
