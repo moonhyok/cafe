@@ -712,8 +712,8 @@ $(document).ready(function() {
             .attr("y",function(d) {
                 return window.canvasy(d.y);
             })
-	    .ease(d3.ease("bounce"))
-            .duration(2000) // this is 1s
+	    .ease(d3.ease("back"))
+            .duration(8000) // this is 1s
             .delay(100);
 	
        window.tag.transition()
@@ -741,8 +741,8 @@ $(document).ready(function() {
             .attr("y",function(d) {
                 return window.canvasy(d.y)+window.mugsize/2;
             })
-        .ease(d3.ease("bounce"))
-            .duration(2000) // this is 1s
+        .ease(d3.ease("back"))
+            .duration(8000) // this is 1s
             .delay(100);
     });
 
@@ -1025,7 +1025,7 @@ $(document).ready(function() {
 			    return window.canvasy(d.y);
 			})
 			.ease(d3.ease("bounce"))
-			.duration(2000) // this is 1s
+			.duration(5000) // this is 1s
 			.delay(100);
 		    
 	            window.tag.transition()
@@ -1054,7 +1054,7 @@ $(document).ready(function() {
 			    return window.canvasy(d.y)+window.mugsize/2;
 			})
 			.ease(d3.ease("bounce"))
-			.duration(2000) // this is 1s
+			.duration(5000) // this is 1s
 			.delay(100);
 
 		    //$('.scorebox').show();
@@ -1091,7 +1091,7 @@ $(document).ready(function() {
                 return window.canvasy(d.y);
             })
 	    .ease(d3.ease("bounce"))
-            .duration(5000) // this is 1s
+            .duration(2000) // this is 1s
             .delay(100);
 
 	        window.tag.transition()
@@ -1120,7 +1120,7 @@ $(document).ready(function() {
                 return window.canvasy(d.y)+window.mugsize/2;
             })
         .ease(d3.ease("bounce"))
-            .duration(5000) // this is 1s
+            .duration(4000) // this is 1s
             .delay(100);
 
         //$('.scorebox').show();

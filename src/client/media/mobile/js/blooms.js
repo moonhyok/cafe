@@ -426,6 +426,7 @@ var _blooms = blooms = (function($, d3, console) {
                 return (width)/2;
                 //return canvasx(d.x);
             })
+            .attr("id",function(d) {return d.uid;})
             .attr("y",function(d) {
                 return (height)/2;
                 //return canvasy(d.y);
@@ -442,7 +443,7 @@ var _blooms = blooms = (function($, d3, console) {
     	    .on('mouseout', function(d) {
                 var _this = d3.select(this);
             })
-            .on('click', function(d) {
+            .on('click', function(d) {  
                 var _this = d3.select(this);
 		        window.cur_clicked_mug = [_this,d.uid];
                 window.prev_state = 'map';
@@ -523,6 +524,34 @@ var _blooms = blooms = (function($, d3, console) {
                 })
                 .on('mouseout', function(d) {
                     var _this = d3.select(this);
+                })
+                .on('click', function(d) {
+                    var _this = d3.select(this);
+                window.cur_clicked_mug = [_this,d.uid];
+                window.prev_state = 'map';
+                //utils.showLoading("Loading Suggestion...");
+                    $('.instructions-light').hide();
+                    $('.scorebox').hide();
+                    $('.menubar').hide();
+
+                    window.cur_state = 'rate';
+                
+                $('.rate-username').html('Suggested by Participant #'+d.uid);
+                var commentData = rate.pullComment(d.uid, 'uid', comments);
+                var content = '"'+commentData.comment+'"';
+                var contentSpanish = '"'+commentData.spanish_comment+'"';
+                var cid = commentData.cid;
+                window.current_cid = cid;
+                window.current_uid = d.uid;
+                //$('.rate-loading').show();
+                rate.updateDescriptions(document.getElementById('commentInput'), content);
+                rate.updateDescriptionsSpanish(document.getElementById('commentInputSpanish'), contentSpanish);
+                $('.rate').show();
+                /*$('.rate').slideDown(function() {
+                    $('.rate-loading').hide();
+                    $('.rate').data('cid', cid);
+                });*/
+                //utils.hideLoading(0);
                 })            
                 ;
             // }

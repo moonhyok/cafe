@@ -76,8 +76,13 @@ $(".slider-grade-bubble").on("click",function(e){
             for (var i = 0; i < window.tag[0].length; i++){
                 // console.log(window.tag[0][i].getAttribute("id"));
                 if (window.tag[0][i].getAttribute("id")== current_uid){
-                    window.tag[0][i].remove();
+                    d3.select(window.tag[0][i]).transition().duration(2000).style("opacity", "0").remove();
                     // window.tag[0][i].transition().duration(2000).style("opacity", "0").remove();
+                }
+            }
+            for (var i = 0; i < window.mugs[0].length;i++){
+                if (window.mugs[0][i].getAttribute("id")==current_uid){
+                    d3.select(window.mugs[0][i]).transition().duration(2000).style("opacity", "0").remove();
                 }
             }
         } catch (err) {
