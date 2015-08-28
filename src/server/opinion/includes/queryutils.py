@@ -421,9 +421,9 @@ def get_course_trend(user_set, start_date, is_self):
     greater_than = 14
     for i in range(num_weeks-1):
         if is_self == 1:
-            weekly_data.append(UserRating.objects.filter(user=user_set, created__gte=(start_date+datetime.timedelta(days=less_than)),created__lt=(start_date+datetime.timedelta(days=greater_than))).exclude(rating='0.4')) # doesnot seem to work!
+            weekly_data.append(UserRating.objects.filter(user=user_set, created__gte=(start_date+datetime.timedelta(days=less_than)),created__lt=(start_date+datetime.timedelta(days=greater_than)))) # doesnot seem to work!
         else:
-            weekly_data.append(UserRating.objects.filter(user__in=user_set, created__gte=(start_date+datetime.timedelta(days=less_than)),created__lt=(start_date+datetime.timedelta(days=greater_than))).exclude(rating='0.4')) # doesnot seem to work!
+            weekly_data.append(UserRating.objects.filter(user__in=user_set, created__gte=(start_date+datetime.timedelta(days=less_than)),created__lt=(start_date+datetime.timedelta(days=greater_than)))) # doesnot seem to work!
 
         less_than += 7
         greater_than +=7
@@ -439,7 +439,7 @@ def get_course_trend(user_set, start_date, is_self):
         temps = []
         for i in range(num_weeks):
             if weekly_array[i].size == 0:
-                to_append = ([0] * os_statements)[k]
+                to_append = ([0.4] * os_statements)[k]
             else: 
                 df = DataFrame(weekly_array[i], columns=names)
                 df.rating = df.rating.astype(float)
