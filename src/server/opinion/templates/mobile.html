@@ -871,10 +871,10 @@
 	    return dataY_course;
         }
 
-	var dataX_course = indexing(data_course[graph_num-1][0], 0);
-	var dataY_course = valuing(data_course[graph_num-1][0], 0);
-	var dataX = indexing(data[graph_num-1][0], 0);
-	var dataY = valuing(data[graph_num-1][0], 0);
+	var dataX_course = indexing(data_course[graph_num-1][0], 0.4);
+	var dataY_course = valuing(data_course[graph_num-1][0], 0.4);
+	var dataX = indexing(data[graph_num-1][0], 0.4);
+	var dataY = valuing(data[graph_num-1][0], 0.4);
 	var N = {{week_num}};
 
 	//var dataX = [1,3,4,7];
@@ -1140,10 +1140,10 @@
 	    return dataY_course;
         }
 
-	var dataX_course = indexing(data_course[graph_num-1][0], 0);
-	var dataY_course = valuing(data_course[graph_num-1][0], 0);
-	var dataX = indexing(data[graph_num-1][0], 0);
-	var dataY = valuing(data[graph_num-1][0], 0);
+	var dataX_course = indexing(data_course[graph_num-1][0], 0.4);
+	var dataY_course = valuing(data_course[graph_num-1][0], 0.4);
+	var dataX = indexing(data[graph_num-1][0], 0.4);
+	var dataY = valuing(data[graph_num-1][0], 0.4);
 	var N = {{week_num}};
 
 	//var dataX = [1,3,4,7];
@@ -1158,11 +1158,11 @@
         context.shadowColor = '#ffffff';
               context.shadowOffsetX = 1;
               context.shadowOffsetY = 1;
-        context.moveTo(dataX_course[0]*30, 220 - dataY_course[0]*10/max_of_array*200);
+        context.moveTo(dataX_course[0]*30, 245 - dataY_course[0]*11/max_of_array*200);
 	if (leng_course > 0) {
           for (i = 1; i < leng_course; i++)
           {
-              context.lineTo(dataX_course[i]*30, 220 - dataY_course[i] * 10 /max_of_array*200);
+              context.lineTo(dataX_course[i]*30, 245 - dataY_course[i] * 11 /max_of_array*200);
               context.stroke(); 
           }
 	} 
@@ -1174,25 +1174,25 @@
         context.shadowColor = '#ffffff';
               context.shadowOffsetX = 1;
               context.shadowOffsetY = 1;
-        context.moveTo(dataX[0]*30, 220 - dataY[0]*10/max_of_array*200);
+        context.moveTo(dataX[0]*30, 245 - dataY[0]*11/max_of_array*200);
 	if (leng > 0) {
           for (i = 1; i < leng; i++)
           {
-              context.lineTo(dataX[i]*30, 220 - dataY[i] * 10 /max_of_array*200);
+              context.lineTo(dataX[i]*30, 245 - dataY[i] * 11 /max_of_array*200);
               context.stroke(); 
           }
 	} 
         context.fillStyle = '#CD853F';
 	for (var i = 0; i < leng; i++){
 	     context.beginPath();
-	      context.arc(dataX[i]*30, 220 - dataY[i] * 10 /max_of_array*200, 4, 0, Math.PI * 2, true);
+	      context.arc(dataX[i]*30, 245 - dataY[i] * 11 /max_of_array*200, 4, 0, Math.PI * 2, true);
 	      context.fill();
         }
 
 	context.fillStyle = '#0000CD';
 	for (var i = 0; i < leng_course; i++){
 	     context.beginPath();
-	      context.arc(dataX_course[i]*30, 220 - dataY_course[i] * 10 /max_of_array*200, 4, 0, Math.PI * 2, true);
+	      context.arc(dataX_course[i]*30, 245 - dataY_course[i] * 11 /max_of_array*200, 4, 0, Math.PI * 2, true);
 	      context.fill();
         }
         context.font="italic small-caps bolder 12px sans-serif";
