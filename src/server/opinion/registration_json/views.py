@@ -241,21 +241,24 @@ def register(request, success_url=None,
 
 			#save additional informaiton of this user in UserDate
 			#if the user didn't type age or reason, the value will be -1
+			# print "I'm Here"
 			if request_post_copy.has_key('major'):
-				country=UserData(user=new_user,key='major',value=request_post_copy['major'])
-				country.save()
+				# print "saving"
+				major=UserData(user=new_user,key='major',value=request_post_copy['major'])
+				major.save()
+				print major
 
 			if request_post_copy.has_key('year'):
-				gender=UserData(user=new_user,key='year',value=request_post_copy['year'])
-				gender.save()
+				year=UserData(user=new_user,key='year',value=request_post_copy['year'])
+				year.save()
 
 			if request_post_copy.has_key('regdesign'):
-				age=UserData(user=new_user,key='regdesign',value=request_post_copy['regdesign'])
-				age.save()
+				regdesign=UserData(user=new_user,key='regdesign',value=request_post_copy['regdesign'])
+				regdesign.save()
 			
 			if request_post_copy.has_key('interests'):
-				trainingYears=UserData(user=new_user,key='interests',value=request_post_copy['interests'])
-				trainingYears.save()
+				interests=UserData(user=new_user,key='interests',value=request_post_copy['interests'])
+				interests.save()
 
 			if request_post_copy.has_key('reason'):
 				reason=UserData(user=new_user,key='reason',value=request_post_copy['reason'])
