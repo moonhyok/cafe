@@ -712,8 +712,8 @@ $(document).ready(function() {
             .attr("y",function(d) {
                 return window.canvasy(d.y);
             })
-	    .ease(d3.ease("back"))
-            .duration(8000) // this is 1s
+	    .ease(d3.ease("elastic"))
+            .duration(4000) // this is 1s
             .delay(100);
 	
        window.tag.transition()
@@ -741,8 +741,8 @@ $(document).ready(function() {
             .attr("y",function(d) {
                 return window.canvasy(d.y)+window.mugsize/2;
             })
-        .ease(d3.ease("back"))
-            .duration(8000) // this is 1s
+        .ease(d3.ease("elastic"))
+            .duration(4000) // this is 1s
             .delay(100);
     });
 

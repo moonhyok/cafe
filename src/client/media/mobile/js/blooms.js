@@ -497,6 +497,10 @@ var _blooms = blooms = (function($, d3, console) {
                         for (var i = 0; i < window.tagList.length; i++) {
                             if (window.tagList[i][0] == d.uid){
                                 student_tag = "#"+window.tagList[i][1];
+
+                                if (student_tag=="#"){
+                                    student_tag = "#Other";
+                                }
                             }
                         }
                         // window.blooms_list.push(d.uid);
@@ -567,6 +571,7 @@ var _blooms = blooms = (function($, d3, console) {
                     .attr("y",function(d) {
                         return window.canvasy(d.y);
                     })
+
                     .duration(0) // this is 1s
                     .delay(0);
                     window.tag.transition()
