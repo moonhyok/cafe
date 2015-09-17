@@ -716,34 +716,52 @@ $(document).ready(function() {
             .duration(4000) // this is 1s
             .delay(100);
 	
-       window.tag.transition()
-            .attr("x",function(d) {
-                var student_tag = "";
-                for (var i = 0; i < window.tagList.length; i++) {
-                    if (window.tagList[i][0] == d.uid){
-                        student_tag = window.tagList[i][1];
-                    }
-                }
-                console.log(student_tag + student_tag.length);
-                if (student_tag.length>=5 & student_tag.length<=7){
-                    return window.canvasx(d.x)+window.mugsize/4;
-                } else if(student_tag.length<=4){
-                    return window.canvasx(d.x)+window.mugsize/3;
-                } else{
-                    slimCharacters=(student_tag.match(new RegExp("i", "g")) || []).length+(student_tag.match(new RegExp("l", "g")) || []).length
-                    if (slimCharacters>=2){
-                        return window.canvasx(d.x)+window.mugsize/(8-slimCharacters*1.1);
-                    }else{
-                        return window.canvasx(d.x)+window.mugsize/8;
-                    }
-                }
-            })
-            .attr("y",function(d) {
-                return window.canvasy(d.y)+window.mugsize/2;
-            })
-        .ease(d3.ease("elastic"))
-            .duration(4000) // this is 1s
-            .delay(100);
+       // window.tag.transition()
+       //      .attr("x",function(d) {
+       //          var student_tag = "";
+       //          for (var i = 0; i < window.tagList.length; i++) {
+       //              if (window.tagList[i][0] == d.uid){
+       //                  student_tag = window.tagList[i][1];
+       //              }
+       //          }
+       //          // console.log(student_tag + student_tag.length);
+       //          if (student_tag.length>=5 & student_tag.length<=7){
+       //              return window.canvasx(d.x)+window.mugsize/4;
+       //          } else if(student_tag.length<=4){
+       //              return window.canvasx(d.x)+window.mugsize/3;
+       //          } else{
+       //              slimCharacters=(student_tag.match(new RegExp("i", "g")) || []).length+(student_tag.match(new RegExp("l", "g")) || []).length
+       //              if (slimCharacters>=2){
+       //                  return window.canvasx(d.x)+window.mugsize/(8-slimCharacters*1.1);
+       //              }else{
+       //                  return window.canvasx(d.x)+window.mugsize/8;
+       //              }
+       //          }
+       //      })
+       //      .attr("y",function(d) {
+       //          var local_mugsize=0;
+       //          for (var i = 0; i < window.tag[0].length; i++){
+       //          // console.log(window.tag[0][i].getAttribute("id"));
+       //              if (window.tag[0][i].getAttribute("id")== d.uid){
+       //                  local_mugsize=window.tag[0][i].getAttribute("size")+" "+window.mugsize;
+       //                  // window.tag[0][i].transition().duration(2000).style("opacity", "0").remove();
+       //              }
+       //          }
+       //          local_mugsize= parseInt(local_mugsize,10);
+       //          // console.log(local_mugsize+" mugsize");
+       //          if (local_mugsize == window.mugsize*1.3){
+       //              console.log("HIHI");
+       //              return window.canvasy(d.y)+window.mugsize/1.5;
+       //          } else if (local_mugsize == window.mugsize*0.7 ){
+       //              return window.canvasy(d.y)+window.mugsize/2.7;
+       //          } else{
+       //              return window.canvasy(d.y)+window.mugsize/2;
+       //          }
+
+       //      })
+       //  .ease(d3.ease("elastic"))
+       //      .duration(4000) // this is 1s
+       //      .delay(100);
     });
 
     $('.burger-div-yours').click(function(){accounts.hideAll();$('.comment-input').show(); });
@@ -1028,34 +1046,52 @@ $(document).ready(function() {
 			.duration(4000) // this is 1s
 			.delay(100);
 		    
-	            window.tag.transition()
-			.attr("x",function(d) {
-			    var student_tag = "";
-			    for (var i = 0; i < window.tagList.length; i++) {
-				if (window.tagList[i][0] == d.uid){
-				    student_tag = window.tagList[i][1];
-				}
-			    }
-			    console.log(student_tag + student_tag.length);
-			    if (student_tag.length>=5 & student_tag.length<=7){
-				return window.canvasx(d.x)+window.mugsize/4;
-			    } else if(student_tag.length<=4){
-				return window.canvasx(d.x)+window.mugsize/3;
-			    } else{
-				slimCharacters=(student_tag.match(new RegExp("i", "g")) || []).length+(student_tag.match(new RegExp("l", "g")) || []).length
-				if (slimCharacters>=2){
-				    return window.canvasx(d.x)+window.mugsize/(8-slimCharacters*1.1);
-				}else{
-				    return window.canvasx(d.x)+window.mugsize/8;
-				}
-			    }
-			})
-			.attr("y",function(d) {
-			    return window.canvasy(d.y)+window.mugsize/2;
-			})
-			.ease(d3.ease("elastic"))
-			.duration(4000) // this is 1s
-			.delay(100);
+	  //          window.tag.transition()
+			// .attr("x",function(d) {
+			//     var student_tag = "";
+			//     for (var i = 0; i < window.tagList.length; i++) {
+			// 	if (window.tagList[i][0] == d.uid){
+			// 	    student_tag = window.tagList[i][1];
+			// 	}
+			//     }
+			//     console.log(student_tag + student_tag.length);
+			//     if (student_tag.length>=5 & student_tag.length<=7){
+			// 	return window.canvasx(d.x)+window.mugsize/4;
+			//     } else if(student_tag.length<=4){
+			// 	return window.canvasx(d.x)+window.mugsize/3;
+			//     } else{
+			// 	slimCharacters=(student_tag.match(new RegExp("i", "g")) || []).length+(student_tag.match(new RegExp("l", "g")) || []).length
+			// 	if (slimCharacters>=2){
+			// 	    return window.canvasx(d.x)+window.mugsize/(8-slimCharacters*1.1);
+			// 	}else{
+			// 	    return window.canvasx(d.x)+window.mugsize/8;
+			// 	}
+			//     }
+			// })
+			// .attr("y",function(d) {
+   //              var local_mugsize=0;
+   //              for (var i = 0; i < window.tag[0].length; i++){
+   //              // console.log(window.tag[0][i].getAttribute("id"));
+   //                  if (window.tag[0][i].getAttribute("id")== d.uid){
+   //                      local_mugsize=window.tag[0][i].getAttribute("size")+" "+window.mugsize;
+   //                      // window.tag[0][i].transition().duration(2000).style("opacity", "0").remove();
+   //                  }
+   //              }
+   //              local_mugsize= parseInt(local_mugsize,10);
+   //              // console.log(local_mugsize+" mugsize");
+   //              if (local_mugsize == window.mugsize*1.3){
+   //                  console.log("HIHI");
+   //                  return window.canvasy(d.y)+window.mugsize/1.5;
+   //              } else if (local_mugsize == window.mugsize*0.7 ){
+   //                  return window.canvasy(d.y)+window.mugsize/2.7;
+   //              } else{
+   //                  return window.canvasy(d.y)+window.mugsize/2;
+   //              }
+
+			// })
+			// .ease(d3.ease("elastic"))
+			// .duration(4000) // this is 1s
+			// .delay(100);
 
 		    //$('.scorebox').show();
 		    
@@ -1094,34 +1130,52 @@ $(document).ready(function() {
             .duration(4000) // this is 1s
             .delay(100);
 
-	        window.tag.transition()
-            .attr("x",function(d) {
-                var student_tag = "";
-                for (var i = 0; i < window.tagList.length; i++) {
-                    if (window.tagList[i][0] == d.uid){
-                        student_tag = window.tagList[i][1];
-                    }
-                }
-                console.log(student_tag + student_tag.length);
-                if (student_tag.length>=5 & student_tag.length<=7){
-                    return window.canvasx(d.x)+window.mugsize/4;
-                } else if(student_tag.length<=4){
-                    return window.canvasx(d.x)+window.mugsize/3;
-                } else{
-                    slimCharacters=(student_tag.match(new RegExp("i", "g")) || []).length+(student_tag.match(new RegExp("l", "g")) || []).length
-                    if (slimCharacters>=2){
-                        return window.canvasx(d.x)+window.mugsize/(8-slimCharacters*1.1);
-                    }else{
-                        return window.canvasx(d.x)+window.mugsize/8;
-                    }
-                }
-            })
-            .attr("y",function(d) {
-                return window.canvasy(d.y)+window.mugsize/2;
-            })
-        .ease(d3.ease("elastic"))
-            .duration(4000) // this is 1s
-            .delay(100);
+	       //  window.tag.transition()
+        //     .attr("x",function(d) {
+        //         var student_tag = "";
+        //         for (var i = 0; i < window.tagList.length; i++) {
+        //             if (window.tagList[i][0] == d.uid){
+        //                 student_tag = window.tagList[i][1];
+        //             }
+        //         }
+        //         console.log(student_tag + student_tag.length);
+        //         if (student_tag.length>=5 & student_tag.length<=7){
+        //             return window.canvasx(d.x)+window.mugsize/4;
+        //         } else if(student_tag.length<=4){
+        //             return window.canvasx(d.x)+window.mugsize/3;
+        //         } else{
+        //             slimCharacters=(student_tag.match(new RegExp("i", "g")) || []).length+(student_tag.match(new RegExp("l", "g")) || []).length
+        //             if (slimCharacters>=2){
+        //                 return window.canvasx(d.x)+window.mugsize/(8-slimCharacters*1.1);
+        //             }else{
+        //                 return window.canvasx(d.x)+window.mugsize/8;
+        //             }
+        //         }
+        //     })
+        //     .attr("y",function(d) {
+        //         var local_mugsize=0;
+        //         for (var i = 0; i < window.tag[0].length; i++){
+        //         // console.log(window.tag[0][i].getAttribute("id"));
+        //             if (window.tag[0][i].getAttribute("id")== d.uid){
+        //                 local_mugsize=window.tag[0][i].getAttribute("size")+" "+window.mugsize;
+        //                 // window.tag[0][i].transition().duration(2000).style("opacity", "0").remove();
+        //             }
+        //         }
+        //         local_mugsize= parseInt(local_mugsize,10);
+        //         // console.log(local_mugsize+" mugsize");
+        //         if (local_mugsize == window.mugsize*1.3){
+        //             console.log("HIHI");
+        //             return window.canvasy(d.y)+window.mugsize/1.5;
+        //         } else if (local_mugsize == window.mugsize*0.7 ){
+        //             return window.canvasy(d.y)+window.mugsize/2.7;
+        //         } else{
+        //             return window.canvasy(d.y)+window.mugsize/2;
+        //         }
+
+        //     })
+        // .ease(d3.ease("elastic"))
+        //     .duration(4000) // this is 1s
+        //     .delay(100);
 
         //$('.scorebox').show();
 
