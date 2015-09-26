@@ -1121,23 +1121,23 @@
 	var graph_num = {{k.id}};
 
 	function indexing(a, obj) {
-	    var dataX_course = [];
+	    var X = [];
 	    for (var i = 0; i < a.length; i++) {
 			if (a[i] !== obj) {
-				dataX_course.push(i+1);
+				X.push(i+1);
 			}
 	    }
-	    return dataX_course;
+	    return X;
         }
 
 	function valuing(a, obj) {
-	    var dataY_course = [];
+	    var Y = [];
 	    for (var i = 0; i < a.length; i++) {
 			if (a[i] !== obj) {
-				dataY_course.push(a[i]);
+				Y.push(a[i]);
 			}
 	    }
-	    return dataY_course;
+	    return Y;
         }
 
 	var dataX_course = indexing(data_course[graph_num-1][0], 0.4);
@@ -1146,8 +1146,6 @@
 	var dataY = valuing(data[graph_num-1][0], 0.4);
 	var N = {{week_num}};
 
-	//var dataX = [1,3,4,7];
-	//var dataY = [0.6,0.8,0.5,0.7];
         var max_of_array = 10;
 	var leng = dataX.length;
 	var leng_course = dataX_course.length;
