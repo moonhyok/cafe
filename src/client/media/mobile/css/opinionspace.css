@@ -1463,7 +1463,7 @@ padding-right: 7px;
   background-size: cover;
 	/*background-size:cover;*/
 	width: 100%;
-	max-width: 620px;
+	max-width: 1000px;
 	height: 70%;
 	/*z-index: 999; */
 
@@ -1486,7 +1486,7 @@ padding-right: 7px;
 	font-family: DroidSans, sans-serif;
 	width: 90%;
 	height: 100%;
-	max-width: 768px;
+	max-width: 780px;
 	position: absolute;
 	top:0px;
 	left:0;
