@@ -27,8 +27,8 @@ a {
 }
 
 body{
-  background-image:url('../img/cafe/capitol-landing.png');
-  background-size: cover;
+  background-image:url('../img/cafe/capitol-landing-tile.png');
+  /*background-size: cover;*/
 }
 
 .landing {
@@ -38,8 +38,8 @@ body{
 		width: 100%;
 		min-height: 100%;
 		overflow:auto;
-		background-image: url('../img/cafe/capitol-landing.png');
-		background-size: cover;
+		background-image: url('../img/cafe/capitol-landing-tile.png');
+		/*background-size: cover;*/
 		/*background-image:url('../img/cafe/cafe_bg.jpg');*/
 		background-color: #442b10;
 		/*background: #76b9b6; Old browsers */
@@ -701,13 +701,13 @@ table.pretty caption {
 			/*background-color: #0b1d2a;*/
 		color: #442b10;
 		/*background: #76b9b6;*/
-		background-image:url('../img/cafe/capitol-landing.png');
+		background-image:url('../img/cafe/capitol-landing-tile.png');
 		z-index: 999;
 		/*overflow-y: auto;*/
 		overflow-x: hidden;
 		text-align: center;
 		text-shadow: none;
-		background-size: cover;
+		/*background-size: cover;*/
 
 	}
 
@@ -732,8 +732,8 @@ table.pretty caption {
 		left: 0px;
 		min-height: 100%;
 		width: 100%;
-		background-image:url('../img/cafe/capitol-landing.png');
-		background-size: cover;
+		background-image:url('../img/cafe/capitol-landing-tile.png');
+		/*background-size: cover;*/
 		z-index: 999;
 
 	}
@@ -747,8 +747,8 @@ table.pretty caption {
     		width: 100%;
     		height: 100%;
     		color: #442b10;
-    		background-image:url('../img/cafe/capitol-landing.png');
-    		background-size: cover;
+    		background-image:url('../img/cafe/capitol-landing-tile.png');
+    		/*background-size: cover;*/
     		/*background-image:url('../img/cafe/capitol_clean.jpg');*/
     		z-index: 999;
     		overflow-y: auto;
@@ -761,8 +761,8 @@ table.pretty caption {
 
     .demographics{
 
-    	background-image:url('../img/cafe/capitol-landing.png');
-    	background-size: cover;
+    	background-image:url('../img/cafe/capitol-landing-tile.png');
+    	/*background-size: cover;*/
     }
 
 	.slider-padding{
@@ -912,7 +912,7 @@ table.pretty caption {
 	}
 
 	.landing-disclaimer{
-	clear: both;
+	clear: both
 	position: relative;
 	top: -35px;
 	font-size: 12px;
@@ -1023,8 +1023,8 @@ table.pretty caption {
 		right: 0;
 		width: 100%;
 		height: 100%;
-		background-image:url('../img/cafe/capitol-landing.png');
-    	background-size: cover;
+		background-image:url('../img/cafe/capitol-landing-tile.png');
+    	/*background-size: cover;*/
 		font-family: DroidSans-Bold , sans-serif;
 		line-height: 26px;
 		font-size: 22px;
@@ -1406,8 +1406,8 @@ padding-right: 7px;
 
 #d3 {
 	display: block;
-	background-image:url('../img/cafe/capitol-landing.png');
-  background-size: cover;
+	background-image:url('../img/cafe/capitol-landing-tile.png');
+  /*background-size: cover;*/
 	/*background-size:cover;*/
 	width: 100%;
 	max-width: 620px;
@@ -1417,8 +1417,8 @@ padding-right: 7px;
 }
 
 .full-page{
-		background-image:url('../img/cafe/capitol-landing.png');
-  background-size: cover;
+		background-image:url('../img/cafe/capitol-landing-tile.png');
+  /*background-size: cover;*/
 	position: absolute;
 	top: 0px;
 	left: 0px;
@@ -1427,8 +1427,8 @@ padding-right: 7px;
 }
 
 .map-frame{
-	background-image:url('../img/cafe/capitol-landing.png');
-  background-size: cover;
+	background-image:url('../img/cafe/capitol-landing-tile.png');
+  /*background-size: cover;*/
 	/*background-size:cover;*/
 	font-family: DroidSans, sans-serif;
 	width: 90%;
@@ -1462,8 +1462,8 @@ padding-right: 7px;
     position: absolute;
 	top:0;
 	left: 0;
-	background-image:url('../img/cafe/capitol-landing.png');
-  background-size: cover;
+	background-image:url('../img/cafe/capitol-landing-tile.png');
+  /*background-size: cover;*/
 	width: 100%;
 	overflow: none;
 	display: none;
