@@ -36,6 +36,7 @@
     {% else %}
     <link rel='stylesheet' type='text/css' href='{{url_root}}/media/mobile/css/crc-transparent-slider.css?nonce={{random_password}}' />
     {% endif %}
+    <link rel='stylesheet' type='text/css' href='{{url_root}}/media/mobile/css/animate.css' />
 
 
     <!-- JavaScript -->
@@ -906,7 +907,7 @@ Take 2 minutes to see how prepared you are, and join the <strong>{{num_users}}</
       </div>
 
 
-      <div style="text-align: right; position:absolute; right:0;"><a href="#" class="map-info" style="color:#442b10;position:relative;top:5px;" onclick="accounts.hideAll();$('.dialog-help-map1').show();window.cur_state = 'faq';window.prev_state = 'map';"><img width="30px" src="{{url_root}}/media/mobile/img/cafe/info_button.png"></a></div>
+      <div style="text-align: right; position: absolute; right: 0;"><a href="#" class="map-info" style="color:#442b10;position:relative;top:5px;" onclick="accounts.hideAll();$('.dialog-help-map1').show();window.cur_state = 'faq';window.prev_state = 'map';"><img width="30px" src="{{url_root}}/media/mobile/img/cafe/info_button.png"></a></div>
 
       <div id='d3' class="d3-canvas"></div>
     </center>
@@ -1422,6 +1423,30 @@ Comments and suggestions will be scanned to omit identifiable information. We re
   ga('send', 'pageview');
 
 </script>
+
+      <script>
+       Array.prototype.random = function () {
+            return this[Math.floor((Math.random()*this.length))];
+      }
+      var bloomAnimation = setInterval(function(){
+         $("#d3 image").attr('class', '');
+          var items = $("#d3 image");
+          var rand_item = items[Math.floor(Math.random()*items.length)];
+          var animate = rand_item;
+          var effects = ['pulse', 'shake']
+          $(animate).attr('class', 'animated ' + effects.random());
+        }, 1500);
+
+      var bloomAnimation = setInterval(function(){
+          if ($('#landing-img').attr('class')) {
+            $('#landing-img').attr('class', '');
+          } else {
+            $('#landing-img').attr('class', 'animated shake');
+          }
+        }, 1500);
+       // });
+      </script>
+
     </div>
   </body>
 </html>
