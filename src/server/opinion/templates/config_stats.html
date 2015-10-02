@@ -1,0 +1,38 @@
+{% extends "instructor_base.html" %}
+
+{% block mainContent %}
+<div style='padding:15px'>
+  <h1>Configure Public Statistics Page Display</h1>
+  <a href="http://opinion.berkeley.edu/m-cafe-3/mcafe_stats/">Visit statistics page</a>
+   <table id="todo1" class="overviewTable" style="padding-top:4px;">
+        	<thead>
+            	<tr>
+                <th>Choose modules to include</th>
+                </tr>
+            </thead>
+		</table>
+   <table id="todo2" class="overviewTable" style="padding-top:4px;">
+     <tbody>
+       <td class="col-sm-8">Module</td>
+       <td class="col-sm-8">Include?</td>
+     <tr>
+       <td>Participation</td>
+       <td>Yes</td>
+       </tr>
+     <tr>
+       <td>QAT weekly plots</td>
+       <td>Yes</td>
+       </tr>
+     <tr>
+       <td>Top-rated comments</td>
+       <td>Yes</td>
+       </tr>
+     <tr>
+       <td>New comments</td>
+       <td>Yes</td>
+      </tr>
+</tbody>
+</table>
+
+</div>
+{% endblock %}

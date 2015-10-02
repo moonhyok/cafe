@@ -1,0 +1,91 @@
+{% extends "instructor_base.html" %}
+
+{% block mainContent %}
+<div style='padding:15px'>
+
+    <h1>Quantitative Analysis Topic Rating Statistics</h1>
+*Plots are based on the mean ratings each week for the entire class.
+    <p>
+    <span id='disc_block'></span>
+    <table id="todo" class="overviewTable">
+        	<thead>
+            	<tr>
+                <!-- <th>1. How would you rate this course so far in terms of technical difficulty?</th> -->
+                <th>{{q1}}</th>
+                </tr>
+            </thead>
+		</table>
+ <a class="portfolio-link">
+		  <!-- <div style="text-align:left"><img src="https://github.com/mozhou/Public/blob/master/img/QAT1_1.png?raw=true" alt="image" align="middle"></div> -->
+          <div style="text-align:left"><img src="{{url_root}}/media/images/graph1.png"
+            alt="image" align="middle" height="400" width="500">
+          </div>
+                </a>
+
+    <table id="todo" class="overviewTable">
+        	<thead>
+            	<tr>
+                <!-- <th>2. How would you rate this course so far in terms of usefulness to your career?</th> -->
+                <th>{{q2}}</th>
+                </tr>
+            </thead>
+		</table>
+ <a class="portfolio-link">
+		  <!-- <div style="text-align:left"><img src="https://github.com/mozhou/Public/blob/master/img/QAT2.png?raw=true" alt="image" align="middle"></div> -->
+          <div style="text-align:left"><img src="{{url_root}}/media/images/graph2.png"
+            alt="image" align="middle" height="400" width="500">
+          </div>
+                </a>
+
+    <table id="todo" class="overviewTable">
+        	<thead>
+            	<tr>
+                <!-- <th>3. How would you rate your enthusiasm so far for this course?</th> -->
+                <th>{{q3}}</th>
+                </tr>
+            </thead>
+		</table>
+ <a class="portfolio-link">
+		  <!-- <div style="text-align:left"><img src="https://github.com/mozhou/Public/blob/master/img/QAT3.png?raw=true" alt="image" align="middle"></div> -->
+          <div style="text-align:left"><img src="{{url_root}}/media/images/graph3.png"
+            alt="image" align="middle" height="400" width="500">
+          </div>
+                </a>
+
+    <table id="todo" class="overviewTable">
+        	<thead>
+            	<tr>
+                <!-- <th>4. How would you rate your performance in this course so far?</th> -->
+                <th>{{q4}}</th>
+                </tr>
+            </thead>
+		</table>
+ <a class="portfolio-link">
+		  <!-- <div style="text-align:left"><img src="https://github.com/mozhou/Public/blob/master/img/QAT4.png?raw=true" alt="image" align="middle"></div> -->
+          <div style="text-align:left"><img src="{{url_root}}/media/images/graph4.png"
+            alt="image" align="middle" height="400" width="500">
+          </div>
+                </a>
+
+    <table id="todo" class="overviewTable">
+        	<thead>
+            	<tr>
+                <!-- <th>5. How would you rate the effectiveness of course assignments to help you develop your skills?</th> -->
+                <th>{{q5}}</th>
+                </tr>
+            </thead>
+		</table>
+ <a class="portfolio-link">
+		  <!-- <div style="text-align:left"><img src="https://github.com/mozhou/Public/blob/master/img/QAT5.png?raw=true" alt="image" align="left"></div> -->
+          <div style="text-align:left"><img src="{{url_root}}/media/images/graph5.png"
+            alt="image" align="middle" height="400" width="500">
+          </div>
+                </a>
+
+</p>
+</div>
+
+
+
+
+{% endblock %}

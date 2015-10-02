@@ -1,0 +1,200 @@
+{% extends "instructor_base.html" %}
+
+{% block scripts %}
+<script type="text/javascript">
+	required_data = ["all"]
+	$(document).ready(function()
+	{
+		$("#disc_block").html(output_disc_header())
+	});
+	// Get  Admin Dashboard Overview Data
+	retrieve_admin_content(function(data)
+	{	
+		if(data.success)
+		{
+			populateDashboard(data.data);
+			populate_disc_header(data.data.discussion_statements, function(data)
+			{
+				populateDashboard(data.data);
+			})
+		}
+	}, discussion_id)
+	
+	/*
+	dojo.xhrGet({
+			url: "{{url_root}}/admincontent/1/",
+			handleAs: "json",
+			load:function(response, ioArgs)
+			{
+				if (response.success)
+				{
+					populateDashboard(response.data);
+					//console.log(response.data[5]);
+				}	
+			},
+			error:function(data)
+			{ // This happens on a 500 error or alikes.
+				alert('Error: failed sending data');
+			}
+		});
+	*/
+	function populateDashboard(arr) 
+	{
+		var topAuthors = (arr.unapproved != null)?arr.unapproved.length:"0";
+		var flaggedComments = (arr.flagged_comments != null)?arr.flagged_comments.length:"0";
+		var highVariance = (arr.high_variance_comments != null)?arr.high_variance_comments.length:"0";
+		var prevBlacklisted = (arr.new_comments_prev_bl != null)?arr.new_comments_prev_bl.length:"0";
+		var feedbackData = arr.feedback;
+		var stats = arr.statistics;
+		var blacklisted = (arr.blacklisted_comments != null)?arr.blacklisted_comments.length:"0";
+		var bannedusers = (arr.banned_users != null)?arr.banned_users.length:"0";
+		var statement_stats = arr.statements;
+		
+		// Displaying various comments data
+		/*dojo.byId('topAuthors').innerHTML = "New additions to top authors: " + topAuthors;
+		dojo.byId('flaggedComments').innerHTML = "Flagged comments: " + flaggedComments;
+		dojo.byId('highVariance').innerHTML = "High variance comments: " + highVariance;
+		dojo.byId('prevBlacklisted').innerHTML = "New comments from the user with a previously blacklisted response: " + prevBlacklisted;
+		dojo.byId('blacklisted').innerHTML = "Blacklisted comments: " + blacklisted;
+		dojo.byId('bannedusers').innerHTML = "Banned users: " + bannedusers;*/
+		
+		/*dojo.byId('statementStatistics').innerHTML = "";
+        // Display statement statistics
+		for (var key in statement_stats)
+		{
+		    dojo.byId('statementStatistics').innerHTML += "<tr><td><strong>Statement" + key + "</strong>: " + 
+		    "mean = " + statement_stats[key]['mean'] + 
+		    ", stdev = " + statement_stats[key]['std'] + "</td></tr>";
+		}*/
+		
+		dojo.byId('feedback').innerHTML = "<thead><tr><th>Feedback</th></tr></thead>"
+		//Displaying feedback
+		var feedbackBody = document.createElement('tbody');
+		if(feedbackData.length != "")
+		{
+			for (var i=0; i<feedbackData.length; i++) 
+			{
+				var feedbackRow = document.createElement('tr');
+				var feedbackCol = document.createElement('td');
+				$(feedbackCol).text(feedbackData[i].response);	
+
+				feedbackRow.appendChild(feedbackCol);
+				feedbackBody.appendChild(feedbackRow);
+				
+				//Separating each feedback comment with sigle line
+				var feedbackDiv = document.createElement('div');
+				feedbackDiv.setAttribute("class", "liner");
+								
+				var linerRow = document.createElement('tr');
+				var linerCol = document.createElement('td');
+				$(linerCol).append(feedbackDiv);
+				linerRow.appendChild(linerCol);
+				feedbackBody.appendChild(linerRow);			
+			}			
+		}
+		else
+		{
+			var feedbackRow = document.createElement('tr');
+			var feedbackCol = document.createElement('td');
+			feedbackCol.innerHTML = "No new entries found";
+			feedbackRow.appendChild(feedbackCol);
+			feedbackBody.appendChild(feedbackRow);		
+		}
+		dojo.byId('feedback').appendChild(feedbackBody);		
+	}
+	
+</script>
+
+{% endblock %}
+
+{% block mainContent %}
+    <h1>Summary</h1>
+    <p>
+    <span id='disc_block'></span>
+        <table id="users" class="overviewTable" style="padding-top:4px;">
+        	<thead>
+            	<tr>
+                <th>Participation</th>
+                </tr>
+            </thead>
+            <tbody id="overviewbody">
+                <tr><td id="totalActiveUsers">Total Users : {{total_users}}</td></tr>  
+				<tr><td>New Users in Past 24 Hours : {{new_users}}</td></tr>
+				<tr><td>Logins in the Past 24 Hours : {{new_logins_users}}</td></tr>
+		                <tr><td>Logins in the Past 7 days : {{week_logins_users}}</td></tr>
+				<tr><td>First Time Clicks : {{total_visitors}}</td></tr>
+					
+            </tbody>
+			<tbody id="overviewcontent">
+			</tbody>
+        </table>
+
+
+        <table id="statements" class="overviewTable" style="padding-top:4px;">
+        	<thead>
+            	<tr>
+                <th>Quantitative Analysis Topic Ratings from Last Week</th>
+                </tr>
+            </thead>
+            <tbody id="Quantitative Analysis Topic Ratings from Last Week">
+	      
+            </tbody>
+        </table>
+	       <a class="portfolio-link">
+		  <!-- <div style="text-align:left"><img src="https://github.com/mozhou/Public/blob/master/img/summ_bar.png?raw=true" alt="image" align="middle"></div> -->
+		  <div style="text-align:left"><img src="{{url_root}}/media/images/qat.png"
+		  	alt="image" align="middle" height="400" width="500"></div>
+                </a>
+
+	        <table id="todo" class="overviewTable">
+        	<thead>
+            	<tr>
+                <th>Comments</th>
+                </tr>
+            </thead>
+            <tbody>
+				<tr>
+                	<td>Total comments : {{total_comments}}</td>
+                </tr>
+				
+            	<tr>
+                	<td>New comments in the past 7 days: {{new_comments}} </a></td>
+                </tr>
+				
+				<tr>
+                	<td>Total comment ratings: {{total_agreement}} </a></td>
+                </tr>
+
+            </tbody>
+        </table>
+
+         <table id="New Comment" class="overviewTable" style="padding-top:4px;">
+                	<thead>
+            	<tr>
+                <th>New Comments</th>
+                </tr>
+		</thead>
+	</table>
+
+	 <table id="New Comments" class="overviewTable" style="padding-top:4px;">
+		    <tbody>
+                        <td class="col-sm-8" width = "10%">Date</td>
+                        <td class="col-sm-8" width = "5%"># Peer Ratings</td>
+			<td class="col-sm-8" width = "85%">Idea</td>
+    
+                        {% for c in recent_comments %}
+                      <tr>
+                         <td>{{c.created}}</td>
+                         <td>{{c.ratings.count}}</td>
+			 <td>{{c.comment}}</td>
+                     </tr>
+                     {% endfor %}
+                 </tbody>
+             </table>
+         </div>
+     </div>
+ </section>
+            </thead>
+        </table>       
+    </p>
+{% endblock %}

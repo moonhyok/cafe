@@ -1,0 +1,44 @@
+{% extends "instructor_base.html" %}
+
+{% block mainContent %}
+<div style='padding:15px'>
+  <h1>Download Weekly Report</h1>
+
+   <table id="todo1" class="overviewTable" style="padding-top:4px;">
+        	<thead>
+            	<tr>
+                <th>Choose a weekly report to download</th>
+                </tr>
+            </thead>
+		</table>
+   <table id="todo2" class="overviewTable" style="padding-top:4px;">
+     <tbody>
+       <td class="col-sm-8">Week</td>
+       <td class="col-sm-8">Link</td>
+       {%for i in weeks%}
+        <tr>
+          <td>{{i}}</td>
+          <td><a href="../M-CAFEWeek{{i}}Update.pdf">Download</a></td>
+        </tr>
+        {%endfor%}
+     <!-- <tr>
+       <td>1</td>
+       <td>Download</td>
+       </tr>
+     <tr>
+       <td>2</td>
+       <td>Download</td>
+       </tr>
+     <tr>
+       <td>3</td>
+       <td>Download</td>
+       </tr>
+     <tr>
+       <td>4</td>
+       <td>Download</td>
+      </tr> -->
+</tbody>
+</table>
+
+</div>
+{% endblock %}

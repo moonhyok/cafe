@@ -16,11 +16,141 @@ from django.utils.dateformat import DateFormat
 from prettytable import *
 from pandas import DataFrame
 
+# Added imports
+import datetime
+from django.template.loader import render_to_string
+from django.core.mail import send_mail
+
+""" Helper Functions for scripts from R"""
+def order(arr, n):
+    """
+    Returns a copy of array arr, ordered by its nth
+    column. The equivalent of order in R.
+    """
+    return arr[numpy.argsort(arr[:,n])]
+
+
+def tapply(data, ind, func):
+    """
+    The equivalent of tapply function in R. Additionally,
+    returns a count of how many values are in each index.
+    """
+    # if func == numpy.mean:
+    #     print "START"
+    temp = {}                            # temp = {index from ind : [data[ind] vals]}
+    for i in range(len(data)):
+        if ind[i] in temp:
+            #temp[ind[i]].append(float(data[i][1:-1]))
+            temp[ind[i]].append(float(data[i]))
+        else:
+            #temp[ind[i]] = [float(data[i][1:-1])]
+            temp[ind[i]] = [float(data[i])]        
+    # Apply func to the collected data
+    # and count number of data points per bucket
+    ret = []
+    count = []
+    for k in temp.keys():
+        ret.append(func(temp[k]))
+        count.append(len(temp[k]))
+    return ret, count
+
+def cbind(tup):
+    """
+    Equivalent to cbind in R, where tup is a tuple
+    of the arrays.
+    """
+    return numpy.dstack(tup)[0]
+
 """
 
 Helper methods for common queries
 
 """
+def calculate_week(user_set):
+	"""
+	Calulates how many weeks have elapsed from
+	the start of the semester.
+	Returns: (# elapsed weeks, start date of semester)
+	"""
+	start_date = datetime.datetime.max
+	for user in user_set:
+		if user.date_joined < start_date:
+			start_date = user.date_joined
+	today = datetime.datetime.today()
+
+	delta = today.date() - start_date.date()
+	num_weeks = delta.days/7
+	return num_weeks, start_date
+
+
+def models_to_array(qs, names):
+    """
+    Takes in a QuerySet of Django models and desired fields
+    and returns them in the form of a numpy array.
+    """
+    array = []
+    for model in qs:
+        row = []
+        for field in model._meta.fields:
+            if field.name in names:
+                val = str(getattr(model, field.name))
+                if val == 'True' or val == 'False':
+                    val = '1' if val == 'True' else '0'
+                row.append(val)
+        array.append(row)
+    return numpy.array(array)
+
+
+def send_message(user, entrycode, subject, recieved=None, launch_day=None):
+    """
+    Sends an email update about entrycode to user with the string subject
+    as the subject of the email.
+
+    The following parameters are only necessary for certain emails:
+    recieved: number of ratings user's comment has recieved
+    launch_day: day that user joined 
+    """
+    # determine which special case this is
+    if subject == "Your grades are ready to view at the California Report Card!":
+        case = 1
+    elif subject == "Your unique link to the California Report Card v1.0":
+        case = 2
+    else:
+        case = 3
+
+    email_list = [user.email]
+    comment = DiscussionComment.objects.filter(user = user, is_current=True)
+
+    # Create text file and content for message depending on case
+    content = {'entrycode': entrycode}
+    if case == 2:
+        filename = 'registration/confirmation_email.txt'
+        content['user_id'] = user.id
+    elif case == 3:
+        filename = 'registration/crc_event_invitation.txt'
+        content['received'] = received
+        content['comment'] = comment[0].comment
+    else:
+        filename = 'registration/crc_grade_ready.txt'
+        content['received'] = received/2
+        content['comment'] = comment[0].comment
+        content['newParticipant'] = User.objects.filter(date_joined__gte=launch_day).count()
+
+    message = render_to_string(filename, content)
+
+    if case == 3:
+        print subject
+        print message
+
+    try:
+        if case != 1:
+            send_mail(subject, message, Settings.objects.string('DEFAULT_FROM_EMAIL'), email_list)
+        if case == 2:
+            print user.email
+        time.sleep(0.3)
+    except:
+        pass
+
 
 #
 # General Exception class for all queries that may result in an exception
@@ -449,26 +579,6 @@ def get_course_trend(user_set, start_date, is_self):
     if is_self == 1:
         print(result)
     return result
-
-def models_to_array(qs, names):
-    """
-    Takes in a QuerySet of Django models and desired fields
-    and returns them in the form of a numpy array.
-    """
-    array = []
-    for model in qs:
-        row = []
-        for field in model._meta.fields:
-            if field.name in names:
-                val = str(getattr(model, field.name))
-                if val == 'True' or val == 'False':
-                    if val == 'True':
-                            val = '1'
-                    else:
-                            val = '0'
-                row.append(val)
-        array.append(row)
-    return numpy.array(array)
 
 def get_self_suggestion_score(user):
     suggestions = DiscussionComment.objects.filter(user=user).order_by('created')
