@@ -1,0 +1,49 @@
+{% extends "instructor_base.html" %}
+
+{% block mainContent %}
+    <h1> My Account </h1>
+    <p>
+    <span id='disc_block'></span>
+        <table id="users" class="overviewTable" style="padding-top:4px;">
+        	<thead>
+            	<tr>
+                <th>Change Password</th>
+                </tr>
+            </thead>
+            <tbody id="overviewbody">
+                <tr>
+                	<td>
+                		<form action="/instructor/password">Enter new password: <input type="password" name="pswd"><input type="submit" value="Submit"></form>
+                	</td>
+                </tr>
+                <!-- <tr>
+                	<td>
+                		<form>Confirm password: <input type="password"></form>
+                </tr> -->
+            </tbody>
+			<tbody id="overviewcontent">
+			</tbody>
+        </table>
+
+        <table id="users" class="overviewTable" style="padding-top:4px;">
+        	<thead>
+            	<tr>
+                <th>My Courses</th>
+                </tr>
+            </thead>
+            <tbody id="overviewbody">
+            	{%for course in courses%}
+                <tr>
+                	<td>
+                		<ul>
+                			<li>{{course}}</li>
+                		</ul>
+                	</td>
+                </tr>
+                {%endfor%}
+            </tbody>
+			<tbody id="overviewcontent">
+			</tbody>
+        </table>
+
+{%endblock%}

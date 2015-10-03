@@ -23,6 +23,10 @@ from opinion.settings_local import ASSETS_LOCAL
 from opinion.settings_local import URL_ROOT
 from opinion.settings_local import CONFIGURABLES
 
+from opinion.scripts.week_comparison import compare_weeks
+from opinion.scripts.participation_stats import participation
+from opinion.scripts.demographics import demographics
+
 from opinion.settings_local import CATEGORIES
 from opinion.includes.plotutils import *
 from opinion.decorators import *
@@ -431,6 +435,27 @@ def mcafe_stats(request):
     }
     return render_to_response('mcafe-stats.html', context_instance = RequestContext(request, context))
 
+def instructor(request):
+		os = get_os(1)
+		disc_stmt = get_disc_stmt(os, 1)
+		active_users = list(User.objects.filter(is_active = True))
+		
+		context = {
+		'wilson' : 1,
+		'as_of_date': 1,
+		'week_num': 1,
+		'num_participants': 1,
+		'num_comments': 1,
+		'num_peer_ratings': 1,
+		'num_qat_ratings': 1,
+		'date':1,
+		'num_ratings':1,
+		'url_root' : settings.URL_ROOT,
+		'medians': 1,
+		'recent_comments': 1,
+		}
+		return render_to_response('instructor_base.html', context_instance = RequestContext(request, context))
+
 
 def app(request, username=None):
 	#if request.mobile:
@@ -499,6 +524,191 @@ def get_csv_report(request):
     response = HttpResponse(FileWrapper(f), content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename=report.csv'
     return response
+
+def get_participation(request):
+		total_users = User.objects.all().count()#total number of users
+		context_dict = {'total_users':total_users}
+		participation()
+		return render_to_response('participation.html', context_instance = RequestContext(request,context_dict))
+
+def get_rating(request):
+	total_users = User.objects.all().count()#total number of users
+	context_dict = {'total_users':total_users}
+	# user_set = User.objects.filter(is_active=True)
+	context_dict['q1'] = OpinionSpaceStatement.objects.filter(statement_number=0)[0].statement
+	context_dict['q2'] = OpinionSpaceStatement.objects.filter(statement_number=1)[0].statement
+	context_dict['q3'] = OpinionSpaceStatement.objects.filter(statement_number=2)[0].statement
+	context_dict['q4'] = OpinionSpaceStatement.objects.filter(statement_number=3)[0].statement
+	context_dict['q5'] = OpinionSpaceStatement.objects.filter(statement_number=4)[0].statement
+	# stats(user_set, 1)
+	# stats(user_set, 2)
+	# stats(user_set, 3)
+	# stats(user_set, 4)
+	# stats(user_set, 5)
+
+	return render_to_response('rating.html', context_instance = RequestContext(request,context_dict))
+
+def get_summary(request):
+	active_users = list(User.objects.filter(is_active = True))
+	total_users = User.objects.all().count()#total number of users
+	new_users = User.objects.filter(date_joined__gte=datetime.date.today()).count() #new users
+	new_logins_users = User.objects.filter(last_login__gte=datetime.date.today()).count() #activity
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	today = datetime.date.today()
+	start_of_week = today - datetime.timedelta(days=7)
+	start_of_week = datetime.datetime.combine(start_of_week, datetime.time())
+	week_logins_users = User.objects.filter(last_login__gte=start_of_week, last_login__lte=datetime.datetime.today()).count()
+	total_visitors = LogUserEvents.objects.filter(details='welcome_first-time',log_type=5).count() #all site visitors
+	
+	total_comments = DiscussionComment.objects.all().count()
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	new_comments = DiscussionComment.objects.filter(created__gte=start_of_week, created__lte=datetime.datetime.today()).count()
+#	total_insight = CommentRating.objects.all().count()
+	total_agreement = CommentAgreement.objects.all().count()
+	
+	statements = OpinionSpaceStatement.objects.all()
+	limit = 10
+	recent_comments = DiscussionComment.objects.filter(user__in=active_users, is_current=True).order_by('-created')[:limit]
+	result = []
+	titles = []
+	for sid in statements:
+		# get user ratings
+		ratings = UserRating.objects.filter(opinion_space_statement = sid, is_current = True)
+		raw_vals = [r.rating for r in ratings]
+		if len(raw_vals) == 0:
+			result.append(0)
+		else:
+			result.append(numpy.mean(raw_vals))
+		titles.append(sid.short_version)
+		#result[sid.id]['std'] = numpy.std(raw_vals)
+
+	ud_objects = UserDemographics.objects.all()
+	locations = {}
+	for u in ud_objects:
+		if u.location != '':
+			if locations.has_key(u.location):
+				locations[u.location] = locations[u.location] + 1
+			else:
+				locations[u.location] = 1
+	locations_pie = []
+	location_titles = []
+	for k in locations.keys():
+		locations_pie.append(locations[k])
+		if k == 'United States of America':
+			k = 'USA'
+		location_titles.append(k)
+	
+	age_objects = UserData.objects.filter(key='age')
+	ages = {}
+	for a in age_objects:
+		if ages.has_key(a.value):
+			ages[a.value] = ages[a.value] + 1
+		else:
+			ages[a.value] = 1
+	
+	age_pie = []
+	age_titles = []
+	for k in ages.keys():
+		age_pie.append(ages[k])
+		age_titles.append(k)
+
+	compare_weeks()
+	
+	context_dict = {'total_users':total_users,
+					'new_users': new_users,
+					'new_logins_users': new_logins_users,
+					'week_logins_users': week_logins_users,
+					'total_visitors': total_visitors,
+					'total_comments': total_comments,
+					'new_comments': new_comments,
+					'recent_comments': recent_comments,
+				#	'total_insight': total_insight,
+					'total_agreement': total_agreement,
+					'statements': result,
+					'statement_titles': json.dumps(titles),
+					'locations':locations_pie,
+					'location_titles':json.dumps(location_titles),
+					'ages': age_pie,
+					'age_titles': json.dumps(age_titles),
+					'statements_count': len(result)
+					}
+	
+	return render_to_response('summary.html', context_instance = RequestContext(request,context_dict))
+
+def get_comment(request):
+	return render_to_response('comment.html', context_instance = RequestContext(request))
+
+def get_report(request):
+	user_set = User.objects.filter(is_active=True)
+	num_weeks = calculate_week(user_set)[0]
+	context_dict = {'weeks': range(1, num_weeks+1)}
+	return render_to_response('get_report.html', context_instance = RequestContext(request, context_dict))
+
+def open_report(request, week_num):
+	path = "../../client/media/mobile/weeklyreports" + 'M-CAFEWeek' + str(week_num) + 'Update.pdf'
+	pdf = open(path, 'r')
+	response = HttpResponse(pdf.read(),  mimetype='aplication/pdf')
+	return response
+
+def account(request):
+	context_dict = {}
+	superuser = User.objects.filter(is_superuser=True)
+	#courses = [os.name for os in OpinionSpace.objects.filter(created_by=superuser[0])]
+	courses = ["IEOR 115"]
+	context_dict['courses'] = courses
+	return render_to_response('account.html', context_instance = RequestContext(request, context_dict))
+
+def change_password(request):
+	user = User.objects.filter(is_superuser=True)
+	new_password = request.GET.get('pswd', '0')
+	print(new_password)
+	user[0].set_password(new_password)
+	print(user[0].check_password("test"))
+	return render_to_response('password_change.html', context_instance = RequestContext(request))
+
+def get_help(request):
+	return render_to_response('get_help.html', context_instance = RequestContext(request))
+
+def get_demographic(request):
+	reasons = []
+	for data in UserData.objects.filter(key="reason"):
+		if data.value != '-1':
+			reasons.append(data.value)
+	context_dict = {"reasons": reasons}
+	demographics()
+	return render_to_response('get_demographic.html', context_instance = RequestContext(request, context_dict))
+
+def config_stats(request):
+				return render_to_response('config_stats.html', context_instance = RequestContext(request))
+
+def config_cafe(request):
+	if not SHOW_ADVANCED_OPTIONS:
+		return HttpResponse("Access Denied By Server Configuration", status = 403)
+	updated = None
+	if request.method == 'POST':
+		for key in request.POST:
+			if key == 'Discussion Question':
+				question = DiscussionStatement.objects.filter(is_current=True)[0]
+				question.statement = request.POST[key]
+				question.save()
+			elif key == 'Discussion Question Short':
+				question = DiscussionStatement.objects.filter(is_current=True)[0]
+				question.short_version = request.POST[key]
+				question.save()
+			else:
+				statement = OpinionSpaceStatement.objects.filter(id=key)
+				if len(statement) > 0:
+					statement[0].statement = request.POST[key]
+					statement[0].save()
+		updated = True
+	data = []
+	data.append({'type': 'question','text':DiscussionStatement.objects.filter(is_current=True)[0].statement})
+	data.append({'type': 'squestion','text':DiscussionStatement.objects.filter(is_current=True)[0].short_version})
+	statements = OpinionSpaceStatement.objects.all()
+	for s in statements:
+		data.append({'type': 'statement','text':s.statement,'id': s.id})
+	form = InstallForm().create_form(data)	
+	return render_to_response('config_cafe.html', context_instance = RequestContext(request, {'form':form, 'saved':updated, 'categories':CATEGORIES}))
 
 def connect_visitor_to_user(request, user_id):
     visitor_id = request.session.get('visitor_id', False)
