@@ -4,7 +4,6 @@ from opinion.includes.queryutils import *
 import numpy as np
 import datetime
 import matplotlib.pyplot as plt
-import prettyplotlib as ppl
 from pylab import *
 
 def participation():
@@ -57,10 +56,10 @@ def participation():
 	ax.set_ylabel('Weekly Participation')
 	ax.set_title('Weekly User Participation')
 	x = range(1, num_weeks+1)
-	plot(x, login_data)
-	plot(x, rating_data)
-	plot(x, comment_data)
-	#legend(ax, loc='lower right')
+	ax.plot(x, login_data)
+	ax.plot(x, rating_data)
+	ax.plot(x, comment_data)
+	ax.legend(["# Weekly Users", "# QAT Ratings", "# Comments"], loc='upper right')
 	plt.show()
 
 	fig.savefig('../../client/media/images/participation.png')

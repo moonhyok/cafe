@@ -127,8 +127,8 @@ tbl.setStyle(tbl_style)
 story.append(tbl)
 
 
-
-doc.build(story)
+filename = "../../client/media/mobile/weeklyreports/M-CAFEWeek{0}Update.pdf".format(str(num_weeks))
+doc.build(story, filename=filename)
 
 
 

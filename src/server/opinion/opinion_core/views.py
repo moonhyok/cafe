@@ -645,7 +645,7 @@ def get_report(request):
 	return render_to_response('get_report.html', context_instance = RequestContext(request, context_dict))
 
 def open_report(request, week_num):
-	path = 'M-CAFEWeek' + str(week_num) + 'Update.pdf'
+	path = "../../client/media/mobile/weeklyreports" + 'M-CAFEWeek' + str(week_num) + 'Update.pdf'
 	pdf = open(path, 'r')
 	response = HttpResponse(pdf.read(),  mimetype='aplication/pdf')
 	return response
