@@ -131,7 +131,6 @@ urlpatterns = patterns('',
                        #Close
                        #(r'^os/applicationclose/$', 'opinion.opinion_core.views.application_close'),
                        )
-=======
 from django.conf.urls.defaults import *
 import settings
 

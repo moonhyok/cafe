@@ -2162,7 +2162,7 @@ def getTopic(comment):
         else:
                 return 'None'
 
-=======
+#=======
 from opinion.opinion_core.models import *
 from opinion.includes.jsonutils import *
 from opinion.includes.mathutils import *

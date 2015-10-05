@@ -80,7 +80,7 @@ class SeedForm(Form):
         self.fields['Idea 4'] = CharField(initial=initial[3],widget=Textarea(attrs={'style':'width:350px; height:100px;'}))
         return self
         
-=======
+#=======
 from django.forms import ModelForm, CharField, Form, ChoiceField, DateField, Textarea, TextInput,PasswordInput, Select, HiddenInput
 from opinion_core.models import UserDemographics
 from opinion.settings import CATEGORIES
