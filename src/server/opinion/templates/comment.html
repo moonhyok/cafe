@@ -1,0 +1,195 @@
+{% extends "instructor_base.html" %}
+
+
+{% block scripts %}
+<script type="text/javascript">
+	var required_data = ['flagged_comments']
+	$(document).ready(function()
+	{
+		$("#osTable").hide();
+		$("button").hide();
+		$("#message").hide();
+		$("#disc_block").html(output_disc_header())
+	});
+	
+	retrieve_admin_content(function(data)
+	{
+		if(data.success)
+		{
+			var flaggedComments = data.data.flagged_comments;
+			populateTable(flaggedComments);
+			populate_disc_header(data.data.discussion_statements, function(data)
+			{
+				var flaggedComments = data.data.flagged_comments
+				populateTable(flaggedComments);
+			})
+			allowTagEditing();
+
+		}
+	}, discussion_id)
+
+
+	/*
+	// Get  Feedback Comments Data
+	dojo.xhrGet({
+			url: "{{url_root}}/search/1/",
+			handleAs: "json",
+			load:function(response, ioArgs)
+			{
+				if (response.success)
+				{
+					var flaggedComments = response.data[1];
+					populateTable(flaggedComments);					
+				}	
+			},
+			error:function(data)
+			{ // This happens on a 500 error or alikes.
+				alert('Error: failed sending data');
+			}
+		});
+	*/
+	
+	function populateTable(flaggedCommentsData) 
+	{
+		if(flaggedCommentsData == "")
+		{
+			$("#message").show();
+		}
+		else
+		{
+			$("#osTable").show();
+			$("button").show();
+			// display the comments
+			$("#tableBody").html("")
+
+			flaggedCommentsData.sort(function(x, y)
+			{
+				return new Date(x.date) - new Date(y.date);
+			});
+
+			for (var i=0; i<flaggedCommentsData.length; i++) 
+			{
+				var row = document.createElement('tr');
+				var id = flaggedCommentsData[i].uid + "-" + flaggedCommentsData[i].cid; 
+				row.setAttribute("id", id);
+								
+				var inputTd = document.createElement('td');
+				var checkBox = document.createElement('input');
+				checkBox.setAttribute("type", "checkbox");
+				inputTd.appendChild(checkBox);
+				
+				// var user = document.createElement('td');
+				// user.innerHTML = flaggedCommentsData[i].uid;
+				var number = document.createElement('td');
+				number.innerHTML = i + 1;
+
+				var date = document.createElement('td');
+				date.innerHTML = flaggedCommentsData[i].date;
+
+				var score = document.createElement('td');
+				score.innerHTML = flaggedCommentsData[i].score;
+
+				var sd = document.createElement('td');
+				sd.innerHTML = flaggedCommentsData[i].sd;
+
+				var comment = document.createElement('td');
+				comment.innerHTML = flaggedCommentsData[i].comment;
+
+				var tag = document.createElement('td');
+				//tag.className = "tag"
+				//tag.id = "tag-" + flaggedCommentsData[i].cid.toString();
+				tag.innerHTML = flaggedCommentsData[i].tag;
+				
+				row.appendChild(inputTd);
+				row.appendChild(number);
+				row.appendChild(date);
+				row.appendChild(score);
+				row.appendChild(sd);
+				row.appendChild(comment);
+				row.appendChild(tag);
+
+				dojo.byId('tableBody').appendChild(row);
+			}
+			$("#osTable:has(tbody tr)").tablesorter({headers: { 0:{sorter: false}}, widgets: ['zebra']});
+		}
+	}
+
+	function allowTagEditing() {
+
+		$(".tag").click(function() {
+			var new_tag = prompt("Tag this comment", $(this).html());
+			$(this).html(new_tag);
+			var cid = $(this).attr('id').replace('tag-', '');
+
+			dojo.xhrPost({
+				url: "{{url_root}}/admintagcomment/" + cid + "/",
+				content: {
+					tag: new_tag
+				},
+				handleAs: "json",
+				load: function(response) {
+					if (!response.success) {
+						alert("Error");
+					}
+				},
+				error: function(error, ioArgs) { // This happens on a 500 error or alikes.
+					alert('Error: failed sending data');
+
+					switch (ioArgs.xhr.status) {
+						case 404: //page not found error
+							alert('404');
+							break;
+						case 500: // server side error
+							alert('500');
+							break;
+						case 407: // proxy authentication
+							alert('407');
+							break;
+						default: // default action
+							alert('default');
+					};
+
+					alert("HTTP Error code:" + ioArgs.xhr.status);
+					alert("Error Condition:" + error.responseText);
+					alert("Error Message:  " + error.message);
+				}
+			});
+		});
+	}
+</script>
+{% endblock %}
+
+{% block mainContent %}
+    <h1> Discussion Comments </h1>
+    
+   <div class="buttons">
+    <button type="submit" class="positive" onClick="processComment('{{url_root}}/approvecomment/');history.go(0)" VALUE="Refresh">
+        <img src="../../media/images/yes.png" alt=""/> 
+        Mark As Resolved
+    </button>
+    
+    <button type="submit" class="negative" onClick="processComment('{{url_root}}/blacklist/');history.go(0)" VALUE="Refresh">
+        <img src="../../media/images/no.png" alt=""/>
+        Blacklist Response
+    </button>
+</div>
+	<p id="message">There are no discussion comments</p>
+   <table id="osTable" class="tablesorter"> 
+    <thead>
+    <tr> 
+        <th width="5%"><input type="checkbox" id="checkAll"/></th>
+        <th width="10%">Number</th> 
+		<th width="15%">Date</th>
+		<th width="10%">Score</th> 
+        <th width="10%">SD</th> 
+        <th width="35%">Response</th>
+        <th width="20%">Tag (click to edit)</th> 
+    </tr>
+    </thead> 
+    <tbody id="tableBody"> 
+    </tbody> 
+</table>
+    </p>
+{% endblock %}
+
+
