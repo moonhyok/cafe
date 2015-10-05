@@ -1,0 +1,5 @@
+AddHandler wsgi-script .wsgi
+
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ django.wsgi/$1 [QSA,PT,L]

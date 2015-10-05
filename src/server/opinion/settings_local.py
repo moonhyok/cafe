@@ -6,21 +6,31 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 DOC_ROOT = os.path.dirname(os.path.abspath(__file__))
-URL_ROOT = 'http://localhost:8000'
+URL_ROOT = 'http://opinion.berkeley.edu/m-cafe/ieor115-fa15'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'os.sqlite'
+        'ENGINE': 'django.db.backends.mysql',
+	'NAME': 'cafe_mooc_ieor115_fa15',
+        'USER': 'root',
+        'PASSWORD': '31b1ha32'
     }
 }
-DATABASE_ENGINE = 'sqlite3'                     # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+
+
+DATABASE_ENGINE = 'mysql'
+# DATABASE_NAME = 'cafe_mooc_ieor115_fa15'
+# DATABASE_USER = 'root'
+# DATABASE_PASSWORD = 'root'
+# DATABASE_HOST = ''
+# DATABASE_PORT = ''
 
 EMAIL_HOST = 'localhost'
 EMAIL_HOST_PASSWORD = ''
 EMAIL_HOST_USER = ''
 EMAIL_PORT = 25
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 MEDIA_DIR_NAME = "media"
 
@@ -29,7 +39,7 @@ SECRET_KEY = 'REPLACE_THIS_WITH_SECRET_KEY'
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = os.path.dirname(DOC_ROOT) + '/../client/' + MEDIA_DIR_NAME + '/'
+MEDIA_ROOT = '/var/www/opinion/opinion.berkeley.edu/landing/m-cafe/ieor115-fa15/src/client/media/'
 
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
