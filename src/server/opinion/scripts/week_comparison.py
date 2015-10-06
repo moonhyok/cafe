@@ -49,4 +49,3 @@ def compare_weeks():
 	ax.set_xlabel('QAT Number')
 	ax.set_ylabel('Mean Rating')
 	ppl.legend(ax, loc="upper right")
-	fig.savefig('qat.png')
