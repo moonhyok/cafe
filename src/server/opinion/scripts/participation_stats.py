@@ -34,7 +34,7 @@ def participation():
 		rating_count = UserRating.objects.filter(user__in=user_set, \
 			created__gte=(start_date+datetime.timedelta(days=lower_bound)), \
 			created__lt=(start_date+datetime.timedelta(days=upper_bound))).count()
-		rating_data.append(rating_count)
+		rating_data.append(rating_count/5)
 		lower_bound += 7
 		upper_bound += 7
 
@@ -47,7 +47,7 @@ def participation():
 		login_count = LogUserEvents.objects.filter(log_type=0, \
 			created__gte=(start_date+datetime.timedelta(days=lower_bound)), \
 			created__lt=(start_date+datetime.timedelta(days=upper_bound))).count()
-		login_data.append(rating_count)
+		login_data.append(login_count)
 		lower_bound += 7
 		upper_bound += 7
 
