@@ -62,7 +62,7 @@ def participation():
 	ax.legend(["# Weekly Users", "# QAT Ratings", "# Comments"], loc='upper right')
 	plt.show()
 
-	fig.savefig('../../../client/media/images/participation.png')
+	fig.savefig('/var/www/opinion/opinion.berkeley.edu/landing/m-cafe/ieor115-fa15/src/client/media/images/participation.png')
 
 
 participation()
