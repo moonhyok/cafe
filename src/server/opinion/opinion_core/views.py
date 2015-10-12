@@ -666,12 +666,20 @@ def account(request):
 
 @instructor_required
 def change_password(request):
-	user = User.objects.filter(is_superuser=True)
-	new_password = request.GET.get('pswd', '0')
-	print(new_password)
-	user[0].set_password(new_password)
-	print(user[0].check_password("test"))
-	return render_to_response('password_change.html', context_instance = RequestContext(request))
+#   user = User.objects.filter(username = username)
+
+  user = User.objects.filter(username=str(request.user.get_username()))[0]
+  new_password = request.REQUEST.get('pswd', '')
+  new_password2 = request.REQUEST.get('pswd2','')
+  noMatch=False
+  if new_password != new_password2 or len(new_password) == 0 or len(new_password2) == 0:
+    noMatch=True
+    form = AdminPanelLoginForm().create_form(None)  
+    return render_to_response('account.html', context_instance = RequestContext(request, {'form':form,'noMatch':noMatch}))
+  else:
+    user.set_password(new_password)
+    user.save()
+    return render_to_response('password_change.html', context_instance = RequestContext(request))
 
 @instructor_required
 def get_help(request):

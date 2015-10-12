@@ -11,11 +11,53 @@
                 </tr>
             </thead>
             <tbody id="overviewbody">
-                <tr>
+                <!-- <center><form method="POST" action="."> -->
+
+                  
+                    
+                    
+                    <form action="/instructor/password">
+                     
+                    
+
+                    <table>
+                            <tr>
+                                <td style="padding-left:82px">New Password: <input type="password" name="pswd"></td>
+                                
+                            </tr>
+                            <tr>
+                                <td style="padding-left:40px">Retype new password: <input type="password" name="pswd2"></td>
+                            </tr>
+                    </table>
+                    <br>
+                    <div style="margin-left:150px;">
+                        {% if noMatch   %}
+                        The two passwords do not match.
+                        {% endif %}
+                    </div>
+                    <br>
+                    <input type=submit style="margin-left:200px;" value='Submit'>
+                    </form>
+
+                    
+                <!-- <tr>
                 	<td>
-                		<form action="/instructor/password">Enter new password: <input type="password" name="pswd"><input type="submit" value="Submit"></form>
+                        <center>
+                		<form action="/instructor/password" style="padding-left:6px"> Enter new password:    <input type="password" name="pswd">
+                            </center>
+                            <br>
+                            <center>
+                        <form action="/instructor/password" >Retype new password: <input type="password" name="pswd">
+                            </center>
+
+                            <center>
+                            <br>
+                            <input type="submit" value="Submit"></form>
+                            
+                            </center>
                 	</td>
-                </tr>
+                </tr> -->
+                
                 <!-- <tr>
                 	<td>
                 		<form>Confirm password: <input type="password"></form>
