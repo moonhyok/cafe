@@ -2,5 +2,9 @@
 import environ
 from opinion.opinion_core.models import *
 
-for u in UserData.objects.filter(key="year"):
+
+
+print InstructorUser.objects.all()
+for u in AdminPanelUser.objects.all():
+	print "I "
 	print u.value

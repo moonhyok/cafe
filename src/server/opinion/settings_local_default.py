@@ -126,7 +126,7 @@ TEMP_DEBUG_LOGGING = False
 TEMP_DEBUG_FILENAME = "/tmp/os-debug.log"
 
 #Example Server Config
-#ASSETS_LOCAL = '/var/www/opinion.berkeley.edu/assets/'
+# ASSETS_LOCAL = '/var/www/opinion.berkeley.edu/assets/'
 #Assets for local dev make sure you make this folder
 
 ASSETS_LOCAL = MEDIA_ROOT+'assets/'
