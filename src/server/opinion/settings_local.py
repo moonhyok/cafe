@@ -11,10 +11,9 @@ URL_ROOT = 'http://opinion.berkeley.edu/m-cafe/ieor115-fa15'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-	'NAME': 'cafe_mooc_ieor115_fa15',
+  'NAME': 'cafe_mooc_ieor115_fa15',
         'USER': 'root',
         'PASSWORD': '31b1ha32'
-  
     }
 }
 
@@ -50,7 +49,7 @@ MEDIA_URL = '/' + MEDIA_DIR_NAME + '/'
 
 STATIC_MEDIA_PATTERN = patterns('',
     (r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root':  MEDIA_ROOT}),
-	(r'^html5/(?P<path>.*)$', 'django.views.static.serve', {'document_root': '/path/to/html5/code/'}),
+  (r'^html5/(?P<path>.*)$', 'django.views.static.serve', {'document_root': '/path/to/html5/code/'}),
 )
 
 # Methods that allow unauthenticated access
@@ -64,13 +63,13 @@ ALLOW_UNAUTH_ACCESS_METHODS = ['os_unrated_comments', 'os_get_user_info']
 # 'subgroup_analysis' means that the field should be included in the analysis of subgroups
 # 'possible_values' should be encoded in order if the data is ordinal
 USER_DATA_KEYS = { # Example:
-				  'age': {'filterable': True, 'subgroup_analysis' : False, 'type' : 'ordinal', 'possible_values': ('01-19','20-29','30-39','40-49','50-59','60+')},
-				  'firstname' : { 'filterable' : False, 'subgroup_analysis' : False, 'type' : 'nominal', 'possible_values': ()},
-				  'lastname'  : { 'filterable' : False, 'subgroup_analysis' : False, 'type' : 'nominal', 'possible_values': ()},
-				  'picture'  : { 'filterable' : False,'subgroup_analysis' : False, 'type' : 'nominal', 'possible_values': ()},
-				
-				  # Append configuration specific UserData keys here:
-				  }
+          'age': {'filterable': True, 'subgroup_analysis' : False, 'type' : 'ordinal', 'possible_values': ('01-19','20-29','30-39','40-49','50-59','60+')},
+          'firstname' : { 'filterable' : False, 'subgroup_analysis' : False, 'type' : 'nominal', 'possible_values': ()},
+          'lastname'  : { 'filterable' : False, 'subgroup_analysis' : False, 'type' : 'nominal', 'possible_values': ()},
+          'picture'  : { 'filterable' : False,'subgroup_analysis' : False, 'type' : 'nominal', 'possible_values': ()},
+        
+          # Append configuration specific UserData keys here:
+          }
 
 
 # Subgroup Analysis
@@ -87,23 +86,23 @@ ADMINPANEL_END_DATE = datetime.datetime(year=2011, month=1, day=15)
 """
 Registration Fields for the registration form
 
-	Note: Some registration fields are not listed here, i.e. Location,
+  Note: Some registration fields are not listed here, i.e. Location,
 
-	UserDemographics holds gender, year_born, location, political_party, heard_about
-	UserData holds the rest
+  UserDemographics holds gender, year_born, location, political_party, heard_about
+  UserData holds the rest
 
-	Use this dictionary to set which fields are required for registration
-	To change required fields for UserDemographics, change the model, as the form is based off the model
-	No fields are "required" for UserData. 
+  Use this dictionary to set which fields are required for registration
+  To change required fields for UserDemographics, change the model, as the form is based off the model
+  No fields are "required" for UserData. 
 """
 REGISTRATION_FIELD_TABLE = {'username': {'required':True},
-							'email': {'required':False},
-							'first_name': {'required':False},
-							'url': {'required':False},
-							'question': {'required':False}, 
-							'answer': {'required':False}
-							}
-							
+              'email': {'required':False},
+              'first_name': {'required':False},
+              'url': {'required':False},
+              'question': {'required':False}, 
+              'answer': {'required':False}
+              }
+              
 # Point settings
 NUM_TOP_RESPONSES = 10
 NUM_TOP_REVIEWERS = 10
@@ -521,7 +520,7 @@ CONFIGURABLES = {
     
     'SHOW_SCORE':{'default':'true', 'choices':CHOICE_TF,'name':'Show user score in the bottom left?'},
     'FUN_COLORS':{'default':'true', 'choices':CHOICE_TF,'name':'Use new CDE color scheme?'},
-    'LEADERBOARD_ENABLED':{'default':'true', 'choices':CHOICE_TF,'name':'Show the leaderboard?'},  					
+    'LEADERBOARD_ENABLED':{'default':'true', 'choices':CHOICE_TF,'name':'Show the leaderboard?'},           
     'SCORE_SCALE_FACTOR':{'default':'1.0', 'name':'Scale score by this number'},
     'YOUR_SCORE_LANGUAGE': {'default':'SCORE', 'name':'Language for scoring system, note that this is not just number of ratings.'},
     'NO_SKIP': {'default':'false', 'choices':CHOICE_TF,'name':'No Skipping Comment'},
