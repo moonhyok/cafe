@@ -668,7 +668,7 @@ def account(request):
 def change_password(request):
 #   user = User.objects.filter(username = username)
 
-  user = User.objects.filter(username=str(request.user.get_username()))[0]
+  user = User.objects.filter(username=str(request.user.username))[0]
   new_password = request.REQUEST.get('pswd', '')
   new_password2 = request.REQUEST.get('pswd2','')
   noMatch=False
