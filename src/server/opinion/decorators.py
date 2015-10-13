@@ -71,7 +71,7 @@ def instructor_required(view_func):
     def login_check(request, *args, **kwargs):
         if request.user.is_authenticated():
 			instructor = InstructorUser.objects.filter(user = request.user.id)
-			if len(instructor) == 0 and not request.user.username == "instructor":
+			if len(instructor) == 0 and request.user not in User.objects.filter(is_superuser = True):
 				return HttpResponseRedirect(URL_ROOT+'/instructor/loginerror/')				
 			else:
 				return view_func(request, *args, **kwargs)
