@@ -39,14 +39,14 @@ def participation():
 		upper_bound += 7
 
 	# Weekly login data
-	login_data = [LogUserEvents.objects.filter(log_type=0, \
+	login_data = [LogUserEvents.objects.filter(log_type=11, \
 			created__lt=(start_date+datetime.timedelta(days=7))).count()]
 	lower_bound = 7
 	upper_bound = 14
 	for i in range(num_weeks - 1):
-		login_count = LogUserEvents.objects.filter(log_type=0, \
+		login_count = (LogUserEvents.objects.filter(log_type=11, \
 			created__gte=(start_date+datetime.timedelta(days=lower_bound)), \
-			created__lt=(start_date+datetime.timedelta(days=upper_bound))).count()
+			created__lt=(start_date+datetime.timedelta(days=upper_bound))).count())/5
 		login_data.append(login_count)
 		lower_bound += 7
 		upper_bound += 7
@@ -59,10 +59,9 @@ def participation():
 	ax.plot(x, login_data)
 	ax.plot(x, rating_data)
 	ax.plot(x, comment_data)
+        print(login_data)
+        print(rating_data)
 	ax.legend(["# Weekly Users", "# QAT Ratings", "# Comments"], loc='upper right')
 	plt.show()
+	fig.savefig('../../client/media/images/participation.png')
 
-	fig.savefig('/var/www/opinion/opinion.berkeley.edu/landing/m-cafe/ieor115-fa15/src/client/media/images/participation.png')
-
-
-participation()

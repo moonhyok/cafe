@@ -19,11 +19,12 @@ def compare_weeks():
 	# Calculate this week's average rating for each Opinion Space
 	# Statement
 	avg_this_week = []
-	for i in range(1, 6):
+	for i in range(5):
 		filtered = UserRating.objects.filter(user__in=users, created__gte=start_of_week,
 										created__lt=start_of_week + datetime.timedelta(days=7),
 										opinion_space_statement__statement_number=i)
-		avg = filtered.aggregate(avg=Avg('rating'))['avg']
+                print(filtered)
+                avg = filtered.aggregate(avg=Avg('rating'))['avg']
 		if not avg:
 			avg = 0.0
 		avg_this_week.append(avg)
@@ -31,7 +32,7 @@ def compare_weeks():
 	# Calculate last week's average rating for each Opinion Space
 	# Statement
 	avg_last_week = []
-	for i in range(1, 6):
+	for i in range(5):
 		filtered = UserRating.objects.filter(user__in=users, created__gte=last_week,
 										created__lt=start_of_week,
 										opinion_space_statement__statement_number=i)
@@ -49,4 +50,5 @@ def compare_weeks():
 	ax.set_xlabel('QAT Number')
 	ax.set_ylabel('Mean Rating')
 	ppl.legend(ax, loc="upper right")
-	fig.savefig('/var/www/opinion/opinion.berkeley.edu/landing/m-cafe/ieor115-fa15/src/client/media/images/qat.png')
+	fig.savefig('../../client/media/images/qat.png')
+

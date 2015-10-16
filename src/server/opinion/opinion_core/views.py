@@ -26,6 +26,7 @@ from opinion.settings_local import CONFIGURABLES
 from opinion.scripts.week_comparison import compare_weeks
 from opinion.scripts.participation_stats import participation
 from opinion.scripts.demographics import demographics
+from opinion.scripts.user_stats import stats
 
 from opinion.settings_local import CATEGORIES
 from opinion.includes.plotutils import *
@@ -527,6 +528,7 @@ def get_csv_report(request):
 
 @instructor_required
 def get_participation(request):
+                participation()
 		total_users = User.objects.all().count()#total number of users
 		context_dict = {'total_users':total_users}
 		participation()
@@ -550,9 +552,15 @@ def get_rating(request):
 
 	return render_to_response('rating.html', context_instance = RequestContext(request,context_dict))
 
-@instructor_required
+#@instructor_required
 def get_summary(request):
+        compare_weeks()
 	active_users = list(User.objects.filter(is_active = True))
+        stats(user_set, 1)
+        stats(user_set, 2)
+        stats(user_set, 3)
+        stats(user_set, 4)
+        stats(user_set, 5)
 	total_users = User.objects.all().count()#total number of users
 	new_users = User.objects.filter(date_joined__gte=datetime.date.today()).count() #new users
 	new_logins_users = User.objects.filter(last_login__gte=datetime.date.today()).count() #activity
@@ -679,6 +687,7 @@ def change_password(request):
   else:
     user.set_password(new_password)
     user.save()
+    print("i got here")
     return render_to_response('password_change.html', context_instance = RequestContext(request))
 
 @instructor_required
@@ -1149,7 +1158,7 @@ def instructor_login(request):
     if request.method == 'POST':
         username = request.POST.get('Username','')
         password = request.POST.get('Password','')
-        user = User.objects.filter(username = username)
+        user = User.objects.filter(username = str(username))
         if len(user) > 0:
             if user[0].check_password(password):
                 manual_login(request,user[0])
