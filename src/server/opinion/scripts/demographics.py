@@ -77,7 +77,7 @@ def demographics():
 		t.set_size("small")
 		t.set_color("white")
 	ax.set_aspect('equal')
-	fig.savefig('../../client/media/images/majors.png')
+	fig.savefig('/var/www/opinion/opinion.berkeley.edu/landing/m-cafe/ieor115-fa15/src/client/media/images/majors.png')
 
 
 	labels, counts = count_occurences(years)
@@ -91,7 +91,7 @@ def demographics():
 		t.set_size("small")
 		t.set_color("white")
 	ax.set_aspect('equal')
-	fig.savefig('../../client/media/images/years.png')
+	fig.savefig('/var/www/opinion/opinion.berkeley.edu/landing/m-cafe/ieor115-fa15/src/client/media/images/years.png')
 
 
 	labels, counts = count_occurences(courses_taken)
@@ -105,7 +105,7 @@ def demographics():
 		t.set_size("small")
 		t.set_color("white")
 	ax.set_aspect('equal')
-	fig.savefig('../../client/media/images/courses.png')
+	fig.savefig('/var/www/opinion/opinion.berkeley.edu/landing/m-cafe/ieor115-fa15/src/client/media/images/courses.png')
 
 
 	labels, counts = count_occurences(interest)
@@ -119,7 +119,7 @@ def demographics():
 		t.set_size("small")
 		t.set_color("white")
 	ax.set_aspect('equal')
-	fig.savefig('../../client/media/images/interests.png')
+	fig.savefig('/var/www/opinion/opinion.berkeley.edu/landing/m-cafe/ieor115-fa15/src/client/media/images/interests.png')
 
 demographics()
 
