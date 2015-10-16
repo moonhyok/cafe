@@ -26,7 +26,7 @@ from opinion.settings_local import CONFIGURABLES
 from opinion.scripts.week_comparison import compare_weeks
 from opinion.scripts.participation_stats import participation
 from opinion.scripts.demographics import demographics
-from opinion.scripts.user_stats import stats
+#from opinion.scripts.user_stats import stats
 
 from opinion.settings_local import CATEGORIES
 from opinion.includes.plotutils import *
@@ -556,11 +556,12 @@ def get_rating(request):
 def get_summary(request):
         compare_weeks()
 	active_users = list(User.objects.filter(is_active = True))
-        stats(user_set, 1)
-        stats(user_set, 2)
-        stats(user_set, 3)
-        stats(user_set, 4)
-        stats(user_set, 5)
+        #user_set = active_users
+        #stats(user_set, 1)
+        #stats(user_set, 2)
+        #stats(user_set, 3)
+        #stats(user_set, 4)
+        #stats(user_set, 5)
 	total_users = User.objects.all().count()#total number of users
 	new_users = User.objects.filter(date_joined__gte=datetime.date.today()).count() #new users
 	new_logins_users = User.objects.filter(last_login__gte=datetime.date.today()).count() #activity
