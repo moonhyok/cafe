@@ -26,7 +26,7 @@ from opinion.settings_local import CONFIGURABLES
 from opinion.scripts.week_comparison import compare_weeks
 from opinion.scripts.participation_stats import participation
 from opinion.scripts.demographics import demographics
-
+from opinion.scripts.user_stats import stats
 
 from opinion.settings_local import CATEGORIES
 from opinion.includes.plotutils import *
@@ -538,17 +538,17 @@ def get_participation(request):
 def get_rating(request):
 	total_users = User.objects.all().count()#total number of users
 	context_dict = {'total_users':total_users}
-	# user_set = User.objects.filter(is_active=True)
+        user_set = User.objects.filter(is_active=True)
 	context_dict['q1'] = OpinionSpaceStatement.objects.filter(statement_number=0)[0].statement
 	context_dict['q2'] = OpinionSpaceStatement.objects.filter(statement_number=1)[0].statement
 	context_dict['q3'] = OpinionSpaceStatement.objects.filter(statement_number=2)[0].statement
 	context_dict['q4'] = OpinionSpaceStatement.objects.filter(statement_number=3)[0].statement
 	context_dict['q5'] = OpinionSpaceStatement.objects.filter(statement_number=4)[0].statement
-	# stats(user_set, 1)
-	# stats(user_set, 2)
-	# stats(user_set, 3)
-	# stats(user_set, 4)
-	# stats(user_set, 5)
+        stats(user_set, 1)
+        stats(user_set, 2)
+	stats(user_set, 3)
+	stats(user_set, 4)
+	stats(user_set, 5)
 
 	return render_to_response('rating.html', context_instance = RequestContext(request,context_dict))
 
