@@ -12,7 +12,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql'
         'NAME': 'cafe_mooc_ieor115_fa15'
-        'USER': 'root',		
+        'USER': 'root'	
         'PASSWORD': '31b1ha32'
     }
 }
