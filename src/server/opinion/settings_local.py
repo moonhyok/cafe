@@ -10,8 +10,10 @@ URL_ROOT = 'http://opinion.berkeley.edu/m-cafe/ieor115-fa15'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'os.sqlite'
+        'ENGINE': 'django.db.backends.mysql'
+        'NAME': 'cafe_mooc_ieor115_fa15'
+        'USER': 'root',		
+        'PASSWORD': '31b1ha32'
     }
 }
 
