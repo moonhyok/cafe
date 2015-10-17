@@ -31,6 +31,8 @@ urlpatterns = patterns('',
                        (r'^instructor/help/$','opinion.opinion_core.views.get_help'),
                        (r'^instructor/M-CAFEWeek(\d+)Update.pdf/$', 'opinion.opinion_core.views.open_report'),
                        (r'^instructor/password/$', 'opinion.opinion_core.views.change_password'),
+                       (r'^instructor/loginerror/$', 'opinion.opinion_core.views.get_loginerror'),
+                       (r'^instructor/$', 'opinion.opinion_core.views.instructor_login'),
 
                        #(r'^about/$', 'opinion.opinion_core.views.about'),
                        #(r'^feedback/$', 'opinion.opinion_core.views.feedback'),

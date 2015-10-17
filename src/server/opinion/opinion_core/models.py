@@ -356,6 +356,13 @@ class AdminPanelUser(Model):
 	class Meta:
 		db_table = 'adminpanel_users'
 
+class InstructorUser(Model):
+    user = ForeignKey(User, db_index = True)
+    created = DateTimeField(auto_now_add = True)
+    
+    class Meta:
+        db_table = 'instructor_users'
+
 class ProfanityFlaggedComment(Model):
     comment = ForeignKey(DiscussionComment, db_index = True)
     profanity = CharField(max_length = 512)

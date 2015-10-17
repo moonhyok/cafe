@@ -26,6 +26,7 @@ from opinion.settings_local import CONFIGURABLES
 from opinion.scripts.week_comparison import compare_weeks
 from opinion.scripts.participation_stats import participation
 from opinion.scripts.demographics import demographics
+from opinion.scripts.user_stats import stats
 
 from opinion.settings_local import CATEGORIES
 from opinion.includes.plotutils import *
@@ -525,31 +526,37 @@ def get_csv_report(request):
     response['Content-Disposition'] = 'attachment; filename=report.csv'
     return response
 
+#instructor_required
 def get_participation(request):
+                participation()
 		total_users = User.objects.all().count()#total number of users
 		context_dict = {'total_users':total_users}
 		participation()
 		return render_to_response('participation.html', context_instance = RequestContext(request,context_dict))
 
+#instructor_required
 def get_rating(request):
 	total_users = User.objects.all().count()#total number of users
 	context_dict = {'total_users':total_users}
-	# user_set = User.objects.filter(is_active=True)
+        # user_set = User.objects.filter(is_active=True)
 	context_dict['q1'] = OpinionSpaceStatement.objects.filter(statement_number=0)[0].statement
 	context_dict['q2'] = OpinionSpaceStatement.objects.filter(statement_number=1)[0].statement
 	context_dict['q3'] = OpinionSpaceStatement.objects.filter(statement_number=2)[0].statement
 	context_dict['q4'] = OpinionSpaceStatement.objects.filter(statement_number=3)[0].statement
 	context_dict['q5'] = OpinionSpaceStatement.objects.filter(statement_number=4)[0].statement
-	# stats(user_set, 1)
-	# stats(user_set, 2)
+        # stats(user_set, 1)
+        # stats(user_set, 2)
 	# stats(user_set, 3)
 	# stats(user_set, 4)
 	# stats(user_set, 5)
 
 	return render_to_response('rating.html', context_instance = RequestContext(request,context_dict))
 
+#@instructor_required
 def get_summary(request):
+        compare_weeks()
 	active_users = list(User.objects.filter(is_active = True))
+
 	total_users = User.objects.all().count()#total number of users
 	new_users = User.objects.filter(date_joined__gte=datetime.date.today()).count() #new users
 	new_logins_users = User.objects.filter(last_login__gte=datetime.date.today()).count() #activity
@@ -632,24 +639,27 @@ def get_summary(request):
 					'age_titles': json.dumps(age_titles),
 					'statements_count': len(result)
 					}
-	
 	return render_to_response('summary.html', context_instance = RequestContext(request,context_dict))
 
+#@instructor_required
 def get_comment(request):
 	return render_to_response('comment.html', context_instance = RequestContext(request))
 
+#@instructor_required
 def get_report(request):
 	user_set = User.objects.filter(is_active=True)
 	num_weeks = calculate_week(user_set)[0]
 	context_dict = {'weeks': range(1, num_weeks+1)}
 	return render_to_response('get_report.html', context_instance = RequestContext(request, context_dict))
 
+#@instructor_required
 def open_report(request, week_num):
 	path = "../../client/media/mobile/weeklyreports" + 'M-CAFEWeek' + str(week_num) + 'Update.pdf'
 	pdf = open(path, 'r')
 	response = HttpResponse(pdf.read(),  mimetype='aplication/pdf')
 	return response
 
+#@instructor_required
 def account(request):
 	context_dict = {}
 	superuser = User.objects.filter(is_superuser=True)
@@ -658,17 +668,29 @@ def account(request):
 	context_dict['courses'] = courses
 	return render_to_response('account.html', context_instance = RequestContext(request, context_dict))
 
+#@instructor_required
 def change_password(request):
-	user = User.objects.filter(is_superuser=True)
-	new_password = request.GET.get('pswd', '0')
-	print(new_password)
-	user[0].set_password(new_password)
-	print(user[0].check_password("test"))
-	return render_to_response('password_change.html', context_instance = RequestContext(request))
+#   user = User.objects.filter(username = username)
 
+  user = User.objects.filter(username=str(request.user.username))[0]
+  new_password = request.REQUEST.get('pswd', '')
+  new_password2 = request.REQUEST.get('pswd2','')
+  noMatch=False
+  if new_password != new_password2 or len(new_password) == 0 or len(new_password2) == 0:
+    noMatch=True
+    form = AdminPanelLoginForm().create_form(None)  
+    return render_to_response('account.html', context_instance = RequestContext(request, {'form':form,'noMatch':noMatch}))
+  else:
+    user.set_password(new_password)
+    user.save()
+    print("i got here")
+    return render_to_response('password_change.html', context_instance = RequestContext(request))
+
+#@instructor_required
 def get_help(request):
 	return render_to_response('get_help.html', context_instance = RequestContext(request))
 
+#@instructor_required
 def get_demographic(request):
 	reasons = []
 	for data in UserData.objects.filter(key="reason"):
@@ -678,9 +700,11 @@ def get_demographic(request):
 	demographics()
 	return render_to_response('get_demographic.html', context_instance = RequestContext(request, context_dict))
 
+#@instructor_required
 def config_stats(request):
 				return render_to_response('config_stats.html', context_instance = RequestContext(request))
 
+#@instructor_required
 def config_cafe(request):
 	if not SHOW_ADVANCED_OPTIONS:
 		return HttpResponse("Access Denied By Server Configuration", status = 403)
@@ -1120,6 +1144,27 @@ def connect_visitor_to_user(request, user_id):
     visitor_id = request.session.get('visitor_id', False)
     if visitor_id:
         Visitor.objects.filter(id = visitor_id).update(user = user_id)
+
+def instructor_login(request):
+    if request.user.is_authenticated():
+        instructor = InstructorUser.objects.filter(user = request.user.id)
+        if len(instructor) > 0 or request.user.id == 1:
+            return HttpResponseRedirect(URL_ROOT+'/instructor/summary/')
+    fail = None
+    if request.method == 'POST':
+        username = request.POST.get('Username','')
+        password = request.POST.get('Password','')
+        user = User.objects.filter(username = str(username))
+        if len(user) > 0:
+            if user[0].check_password(password):
+                manual_login(request,user[0])
+                return HttpResponseRedirect(URL_ROOT+'/instructor/summary/')
+            else:
+                fail = True
+        else:
+            fail = True
+    form = AdminPanelLoginForm().create_form(None)  
+    return render_to_response('instructorlogin.html', context_instance = RequestContext(request, {'form':form,'fail':fail}))
 
 def admin_panel_login(request):
     if request.user.is_authenticated():
