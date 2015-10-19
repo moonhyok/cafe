@@ -59,17 +59,13 @@
 			load: function(response, ioArgs) {
 				$('#loading').fadeOut()
 				if (response.success) {
-					for (var i = 0; i < response.data.length; i += 1) {
-						var searchResult = response.data[i];
+						var searchResult = response.data;
 						$("#osTable").show();
 						$("button").show();
 						populateTable(searchResult);
 					}
 					allowTagEditing();
-					allowCommentEditing();
-					allowSpanishCommentEditing();
 				} else {
-					//alert("Your search did not match any users");
 					$("#message").show();
 				}
 			},
@@ -110,10 +106,10 @@
 			// display the comments
 			$("#tableBody").html("")
 
-			flaggedCommentsData.sort(function(x, y)
-			{
-				return new Date(x.date) - new Date(y.date);
-			});
+			//flaggedCommentsData.sort(function(x, y)
+			//{
+			//	return new Date(x.date) - new Date(y.date);
+			//});
 
 			for (var i=0; i<flaggedCommentsData.length; i++) 
 			{
