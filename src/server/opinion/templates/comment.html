@@ -10,6 +10,7 @@
 		$("button").hide();
 		$("#message").hide();
 		$("#disc_block").html(output_disc_header())
+	        get_Search_Results();
 	});
 	
 	retrieve_admin_content(function(data)
@@ -38,7 +39,7 @@
 			{
 				if (response.success){
 	                            for (var i = 0; i < response.data.length; i += 1){
-					var flaggedComments = response.data[1];
+					var flaggedComments = response.data[i];
 					populateTable(flaggedComments);		
                                      }			
 				}	
@@ -49,7 +50,57 @@
 			}
 		});
 	*/
-	
+		function getSearchResults() {
+		var userid = dojo.byId("searchBar").value;
+		$("#message").hide();
+		$("#osTable").hide();
+		$("button").hide();
+
+		// Get  Feedback Comments Data
+		dojo.xhrGet({
+			url: "{{url_root}}/search/1/" + userid + "/",
+			handleAs: "json",
+			load: function(response, ioArgs) {
+				$('#loading').fadeOut()
+				if (response.success) {
+					for (var i = 0; i < response.data.length; i += 1) {
+						var searchResult = response.data[i];
+						$("#osTable").show();
+						$("button").show();
+						populateTable(searchResult);
+					}
+					allowTagEditing();
+					allowCommentEditing();
+					allowSpanishCommentEditing();
+				} else {
+					//alert("Your search did not match any users");
+					$("#message").show();
+				}
+			},
+			error: function(error, ioArgs) { // This happens on a 500 error or alikes.
+				alert('Error: failed sending data');
+
+				switch (ioArgs.xhr.status) {
+					case 404: //page not found error
+						alert('404');
+						break;
+					case 500: // server side error
+						alert('500');
+						break;
+					case 407: // proxy authentication
+						alert('407');
+						break;
+					default: // default action
+						alert('default')
+				};
+
+				alert("HTTP Error code:" + ioArgs.xhr.status);
+				alert("Error Condition:" + error.responseText);
+				alert("Error Message:  " + error.message);
+			}
+		});
+	}
+
 	function populateTable(flaggedCommentsData) 
 	{
 		if(flaggedCommentsData == "")
