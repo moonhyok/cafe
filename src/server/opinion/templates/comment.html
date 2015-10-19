@@ -3,7 +3,7 @@
 
 {% block scripts %}
 <script type="text/javascript">
-	var required_data = ['flagged_comments']
+	var required_data = ['Comments']
 	$(document).ready(function()
 	{
 		$("#osTable").hide();
@@ -16,11 +16,11 @@
 	{
 		if(data.success)
 		{
-			var flaggedComments = data.data.flagged_comments;
+			var flaggedComments = data.data;
 			populateTable(flaggedComments);
 			populate_disc_header(data.data.discussion_statements, function(data)
 			{
-				var flaggedComments = data.data.flagged_comments
+				var flaggedComments = data.data
 				populateTable(flaggedComments);
 			})
 			allowTagEditing();
@@ -36,10 +36,11 @@
 			handleAs: "json",
 			load:function(response, ioArgs)
 			{
-				if (response.success)
-				{
+				if (response.success){
+	                            for (var i = 0; i < response.data.length; i += 1){
 					var flaggedComments = response.data[1];
-					populateTable(flaggedComments);					
+					populateTable(flaggedComments);		
+                                     }			
 				}	
 			},
 			error:function(data)
