@@ -10,7 +10,7 @@
 		$("button").hide();
 		$("#message").hide();
 		$("#disc_block").html(output_disc_header())
-	        get_Search_Results();
+	        getSearchResults();
 	});
 	
 	retrieve_admin_content(function(data)
@@ -58,7 +58,7 @@
 
 		// Get  Feedback Comments Data
 		dojo.xhrGet({
-			url: "{{url_root}}/search/1/" + userid + "/",
+			url: "{{url_root}}/search/1/",
 			handleAs: "json",
 			load: function(response, ioArgs) {
 				$('#loading').fadeOut()
