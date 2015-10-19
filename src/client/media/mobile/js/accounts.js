@@ -29,7 +29,6 @@ var accounts = (function($, d3, console) {
     function readyToLogin() {
         return window.ratings && window.ratings.length >= 2;
     }
-
     // function that determines if the user should register to continue
     // it returns true when both the registration sliders have been saved.
 
@@ -1115,9 +1114,18 @@ $(document).ready(function() {
 
 
     $('.map-ready').click(function() {
-       // rate.logUserEvent(8,'dialog 1');
+        rate.logUserEvent(8,'dialog 1');
         rate.initMenubar();
+        if(window.user_score == 0)
+        {
+            $('.instructions-light').show();
+        }
+
+        $('.prev-comment').hide();
         $('.map-frame').show();
+        window.prev_state = 'prev-comment';
+        window.cur_state = 'map';
+	blooms.populateBlooms();
 
         window.mugs.transition()
             .attr("x",function(d) {
@@ -1179,14 +1187,7 @@ $(document).ready(function() {
 
         //$('.scorebox').show();
 
-        if(window.user_score == 0)
-        {
-            $('.instructions-light').show();
-        }
 
-        $('.prev-comment').hide();
-        window.prev_state = 'prev-comment';
-        window.cur_state = 'map';
     });
 
         $('.dialog-ready2').click(function() {
@@ -1279,7 +1280,7 @@ $(document).ready(function() {
         $('.logout').show();
         e.preventDefault();
         e.stopPropagation();
-	    window.history.pushState("", "", '/ieor115');
+	    window.history.pushState("", "", '/ieor115/');
 
         $.ajax({
             url: window.url_root + '/accountsjson/logout/',
