@@ -1125,7 +1125,6 @@ $(document).ready(function() {
         $('.map-frame').show();
         window.prev_state = 'prev-comment';
         window.cur_state = 'map';
-	blooms.populateBlooms();
 
         window.mugs.transition()
             .attr("x",function(d) {

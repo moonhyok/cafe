@@ -26,7 +26,6 @@ from opinion.settings_local import CONFIGURABLES
 from opinion.scripts.week_comparison import compare_weeks
 from opinion.scripts.participation_stats import participation
 from opinion.scripts.demographics import demographics
-from opinion.scripts.user_stats import stats
 
 from opinion.settings_local import CATEGORIES
 from opinion.includes.plotutils import *
@@ -683,7 +682,6 @@ def change_password(request):
   else:
     user.set_password(new_password)
     user.save()
-    print("i got here")
     return render_to_response('password_change.html', context_instance = RequestContext(request))
 
 #@instructor_required
