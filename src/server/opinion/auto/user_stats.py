@@ -22,13 +22,14 @@ def stats(user_set, question):
 	os_statements = OpinionSpaceStatement.objects.count()
 
 	#Stats page plots
-	weekly_data = [UserRating.objects.filter(user__in=user_set, created__lt=(start_date+datetime.timedelta(days=7)))]
+	weekly_data = [UserRating.objects.filter(user__in=user_set, created__lt=(start_date+datetime.timedelta(days=7))).exclude(rating=0.4)]
 	lower_bound = 7
 	upper_bound = 14
 	for i in range(num_weeks):
 		weekly_data.append(UserRating.objects.filter(user__in=user_set, \
 			created__gte=(start_date+datetime.timedelta(days=lower_bound)), \
-			created__lt=(start_date+datetime.timedelta(days=upper_bound))))
+			created__lt=(start_date+datetime.timedelta(days=upper_bound)))) \
+			.exclude(rating=0.4)
 		lower_bound += 7
 		upper_bound += 7
 

@@ -2237,11 +2237,13 @@ def calculate_week(user_set):
 	the start of the semester.
 	Returns: (# elapsed weeks, start date of semester)
 	"""
-	start_date = datetime.datetime.max
-	for user in user_set:
-		if user.date_joined < start_date:
-			start_date = user.date_joined
-	today = datetime.datetime.today()
+	# start_date = datetime.datetime.max
+	# for user in user_set:
+	# 	if user.date_joined < start_date:
+	# 		start_date = user.date_joined
+	# today = datetime.datetime.today()
+
+	start_date = datetime.dateime(2015, 8, 20, 0, 0, 0)
 
 	delta = today.date() - start_date.date()
 	num_weeks = delta.days/7
@@ -3630,6 +3632,9 @@ def format_general_discussion_comment(response, topic_map = None):
 
 	return {'uid': response.user.id,
 		'username': get_formatted_username(response.user),
+		'date' : str(response.created),
+		'score' : str("{0:.3f}".format(get_score(response)[0])),
+		'sd' : str("{0:.3f}".format(get_score(response)[1])),
 		'email' : response.user.email,
 		'location': get_location(response.user),
 		'cid': response.id,

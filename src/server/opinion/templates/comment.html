@@ -20,7 +20,7 @@
 			populateTable(flaggedComments);
 			populate_disc_header(data.data.discussion_statements, function(data)
 			{
-				var flaggedComments = data.data.flagged_comments
+				var flaggedComments = data.data.flagged_comments;
 				populateTable(flaggedComments);
 			})
 			allowTagEditing();
@@ -29,25 +29,26 @@
 	}, discussion_id)
 
 
-	/*
+	
 	// Get  Feedback Comments Data
-	dojo.xhrGet({
-			url: "{{url_root}}/search/1/",
-			handleAs: "json",
-			load:function(response, ioArgs)
-			{
-				if (response.success)
-				{
-					var flaggedComments = response.data[1];
-					populateTable(flaggedComments);					
-				}	
-			},
-			error:function(data)
-			{ // This happens on a 500 error or alikes.
-				alert('Error: failed sending data');
-			}
-		});
-	*/
+	// dojo.xhrGet({
+	// 		url: "{{url_root}}/instructor/comments/",
+	// 		handleAs: "json",
+	// 		load:function(response, ioArgs)
+	// 		{
+	// 			if (response.success)
+	// 			{
+	// 				var comments = response.data;
+	// 				populateTable(comments);					
+	// 			}	
+	// 		},
+	// 		error:function(data)
+	// 		{ // This happens on a 500 error or alikes.
+	// 			alert(data);
+	// 			alert('Error: failed sending data');
+	// 		}
+	// 	});
+	
 	
 	function populateTable(flaggedCommentsData) 
 	{
@@ -69,6 +70,7 @@
 
 			for (var i=0; i<flaggedCommentsData.length; i++) 
 			{
+				alert("hello?");
 				var row = document.createElement('tr');
 				var id = flaggedCommentsData[i].uid + "-" + flaggedCommentsData[i].cid; 
 				row.setAttribute("id", id);
@@ -78,8 +80,6 @@
 				checkBox.setAttribute("type", "checkbox");
 				inputTd.appendChild(checkBox);
 				
-				// var user = document.createElement('td');
-				// user.innerHTML = flaggedCommentsData[i].uid;
 				var number = document.createElement('td');
 				number.innerHTML = i + 1;
 
