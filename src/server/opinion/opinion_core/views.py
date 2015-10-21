@@ -26,7 +26,6 @@ from opinion.settings_local import CONFIGURABLES
 from opinion.scripts.week_comparison import compare_weeks
 from opinion.scripts.participation_stats import participation
 from opinion.scripts.demographics import demographics
-from opinion.scripts.user_stats import stats
 
 from opinion.settings_local import CATEGORIES
 from opinion.includes.plotutils import *
@@ -526,7 +525,7 @@ def get_csv_report(request):
     response['Content-Disposition'] = 'attachment; filename=report.csv'
     return response
 
-#instructor_required
+@instructor_required
 def get_participation(request):
                 participation()
 		total_users = User.objects.all().count()#total number of users
@@ -534,7 +533,7 @@ def get_participation(request):
 		participation()
 		return render_to_response('participation.html', context_instance = RequestContext(request,context_dict))
 
-#instructor_required
+@instructor_required
 def get_rating(request):
 	total_users = User.objects.all().count()#total number of users
 	context_dict = {'total_users':total_users}
@@ -552,7 +551,7 @@ def get_rating(request):
 
 	return render_to_response('rating.html', context_instance = RequestContext(request,context_dict))
 
-#@instructor_required
+@instructor_required
 def get_summary(request):
         compare_weeks()
 	active_users = list(User.objects.filter(is_active = True))
@@ -644,7 +643,7 @@ def get_summary(request):
 					}
 	return render_to_response('summary.html', context_instance = RequestContext(request,context_dict))
 
-#@instructor_required
+@instructor_required
 def get_comment(request):
 	return render_to_response('comment.html', context_instance = RequestContext(request))
 
@@ -654,20 +653,22 @@ def comments(request):
  	#l = getTopicFrequencyMap()
  	return json_result({'success': True, 'data':[format_general_discussion_comment(c) for c in comments]})
 
+
+@instructor_required
 def get_report(request):
 	user_set = User.objects.filter(is_active=True)
 	num_weeks = calculate_week(user_set)[0]
 	context_dict = {'weeks': range(1, num_weeks+1)}
 	return render_to_response('get_report.html', context_instance = RequestContext(request, context_dict))
 
-#@instructor_required
+@instructor_required
 def open_report(request, week_num):
 	path = "../../client/media/mobile/weeklyreports" + 'M-CAFEWeek' + str(week_num) + 'Update.pdf'
 	pdf = open(path, 'r')
 	response = HttpResponse(pdf.read(),  mimetype='application/pdf')
 	return response
 
-#@instructor_required
+@instructor_required
 def account(request):
 	context_dict = {}
 	superuser = User.objects.filter(is_superuser=True)
@@ -676,7 +677,7 @@ def account(request):
 	context_dict['courses'] = courses
 	return render_to_response('account.html', context_instance = RequestContext(request, context_dict))
 
-#@instructor_required
+@instructor_required
 def change_password(request):
 #   user = User.objects.filter(username = username)
 
@@ -693,11 +694,11 @@ def change_password(request):
     user.save()
     return render_to_response('password_change.html', context_instance = RequestContext(request))
 
-#@instructor_required
+@instructor_required
 def get_help(request):
 	return render_to_response('get_help.html', context_instance = RequestContext(request))
 
-#@instructor_required
+@instructor_required
 def get_demographic(request):
 	reasons = []
 	for data in UserData.objects.filter(key="reason"):
@@ -707,11 +708,11 @@ def get_demographic(request):
 	demographics()
 	return render_to_response('get_demographic.html', context_instance = RequestContext(request, context_dict))
 
-#@instructor_required
+@instructor_required
 def config_stats(request):
 				return render_to_response('config_stats.html', context_instance = RequestContext(request))
 
-#@instructor_required
+@instructor_required
 def config_cafe(request):
 	if not SHOW_ADVANCED_OPTIONS:
 		return HttpResponse("Access Denied By Server Configuration", status = 403)

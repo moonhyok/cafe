@@ -22,7 +22,8 @@ def compare_weeks():
 	for i in range(5):
 		filtered = UserRating.objects.filter(user__in=users, created__gte=start_of_week,
 										created__lt=start_of_week + datetime.timedelta(days=7),
-										opinion_space_statement__statement_number=i)
+										opinion_space_statement__statement_number=i) \
+										.exclude(rating=0.4)
                 print(filtered)
                 avg = filtered.aggregate(avg=Avg('rating'))['avg']
 		if not avg:
@@ -35,7 +36,8 @@ def compare_weeks():
 	for i in range(5):
 		filtered = UserRating.objects.filter(user__in=users, created__gte=last_week,
 										created__lt=start_of_week,
-										opinion_space_statement__statement_number=i)
+										opinion_space_statement__statement_number=i) \
+										.exclude(rating=0.4)
 		avg = filtered.aggregate(avg=Avg('rating'))['avg']
 		if not avg:
 			avg = 0.5
@@ -43,12 +45,11 @@ def compare_weeks():
 
 	labels = ['1', '2', '3', '4', '5']
 	fig, ax = plt.subplots()
-	ind = np.arange(5)
+	ind = np.arange(-1, 4)
 	ppl.bar(ax, ind, avg_last_week, width=0.3, annotate=True, xticklabels=labels, color='r', label='Last week')
-	ppl.bar(ax, ind+0.4, avg_this_week, width=0.3, annotate=True, xticklabels=labels, color='b', label='This week')
+	ppl.bar(ax, ind+0.3, avg_this_week, width=0.3, annotate=True, xticklabels=labels, color='b', label='This week')
 	plt.ylim(0.0, 1.1)
 	ax.set_xlabel('QAT Number')
 	ax.set_ylabel('Mean Rating')
 	ppl.legend(ax, loc="upper right")
 	fig.savefig('/var/www/opinion/opinion.berkeley.edu/landing/m-cafe/ieor115-fa15/src/client/media/images/qat.png')
-
