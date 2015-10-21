@@ -562,14 +562,17 @@ def get_summary(request):
 	new_logins_users = User.objects.filter(last_login__gte=datetime.date.today()).count() #activity
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	today = datetime.date.today()
-	start_of_week = today - datetime.timedelta(days=7)
-	start_of_week = datetime.datetime.combine(start_of_week, datetime.time())
-	week_logins_users = User.objects.filter(last_login__gte=start_of_week, last_login__lte=datetime.datetime.today()).count()
+	time = datetime.time()
+ 	today = datetime.datetime.combine(today, time)
+ 	weekday = today.weekday()
+	start_of_week = today - datetime.timedelta(days=weekday)
+	start_of_week = datetime.datetime.combine(start_of_week, time)
+	week_logins_users = User.objects.filter(last_login__gte=start_of_week, last_login__lte=today).count()
 	total_visitors = LogUserEvents.objects.filter(details='welcome_first-time',log_type=5).count() #all site visitors
 	
-	total_comments = DiscussionComment.objects.all().count()
+	total_comments = DiscussionComment.objects.filter(is_current=True).count()
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	new_comments = DiscussionComment.objects.filter(created__gte=start_of_week, created__lte=datetime.datetime.today()).count()
+	new_comments = DiscussionComment.objects.filter(created__gte=start_of_week, created__lte=today).count()
 #	total_insight = CommentRating.objects.all().count()
 	total_agreement = CommentAgreement.objects.all().count()
 	
@@ -646,6 +649,11 @@ def get_comment(request):
 	return render_to_response('comment.html', context_instance = RequestContext(request))
 
 #@instructor_required
+def comments(request):
+	comments = DiscussionComment.objects.filter(is_current=True, blacklisted=False)
+ 	#l = getTopicFrequencyMap()
+ 	return json_result({'success': True, 'data':[format_general_discussion_comment(c) for c in comments]})
+
 def get_report(request):
 	user_set = User.objects.filter(is_active=True)
 	num_weeks = calculate_week(user_set)[0]
@@ -656,7 +664,7 @@ def get_report(request):
 def open_report(request, week_num):
 	path = "../../client/media/mobile/weeklyreports" + 'M-CAFEWeek' + str(week_num) + 'Update.pdf'
 	pdf = open(path, 'r')
-	response = HttpResponse(pdf.read(),  mimetype='aplication/pdf')
+	response = HttpResponse(pdf.read(),  mimetype='application/pdf')
 	return response
 
 #@instructor_required
@@ -683,7 +691,6 @@ def change_password(request):
   else:
     user.set_password(new_password)
     user.save()
-    print("i got here")
     return render_to_response('password_change.html', context_instance = RequestContext(request))
 
 #@instructor_required
