@@ -1,6 +1,7 @@
 from opinion.opinion_core.models import *
 from opinion.includes.jsonutils import *
 from opinion.includes.mathutils import *
+from opinion.includes.calculate_score import get_score
 from opinion.settings import *
 from opinion.settings_local import DATABASE_ENGINE
 from opinion.settings_local import ASSETS_LOCAL
@@ -1356,6 +1357,9 @@ def format_general_discussion_comment(response, topic_map = None):
 	return {'uid': response.user.id,
 		'username': get_formatted_username(response.user),
 		'email' : response.user.email,
+		'date' : str(response.created),
+		'score' : str("{0:.3f}".format(get_score(response)[0])),
+		'sd' : str("{0:.3f}".format(get_score(response)[1])),
 		'location': get_location(response.user),
 		'cid': response.id,
 		'is_novel': is_novel,
