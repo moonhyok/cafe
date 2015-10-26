@@ -45,11 +45,22 @@ def compare_weeks():
 
 	labels = ['1', '2', '3', '4', '5']
 	fig, ax = plt.subplots()
-	ind = np.arange(-1, 4)
-	ppl.bar(ax, ind, avg_last_week, width=0.3, annotate=True, xticklabels=labels, color='r', label='Last week')
-	ppl.bar(ax, ind+0.3, avg_this_week, width=0.3, annotate=True, xticklabels=labels, color='b', label='This week')
+	ind = np.array([0.1, 1.1, 2.1, 3.1, 4.1])
+	bar1 = ax.bar(ind, avg_last_week, width=0.3, color='r', label='Last week')
+	bar2 = ax.bar(ind+0.35, avg_this_week, width=0.3, color='b', label='This week')
+	label_mean(ax, bar1)
+	label_mean(ax, bar2)
+	ax.set_xticks(ind+0.3)
+	ax.set_xticklabels(labels)
 	plt.ylim(0.0, 1.1)
 	ax.set_xlabel('QAT Number')
 	ax.set_ylabel('Mean Rating')
 	ppl.legend(ax, loc="upper right")
 	fig.savefig('/var/www/opinion/opinion.berkeley.edu/landing/m-cafe/ieor115-fa15/src/client/media/images/qat.png')
+
+
+def label_mean(ax, bars):
+    for bar in bars:
+        height = bar.get_height()
+        ax.text(bar.get_x()+bar.get_width()/2., 1.05*height, '%0.3f'%height, \
+                ha='center', va='bottom')
