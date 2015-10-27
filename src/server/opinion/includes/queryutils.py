@@ -2245,7 +2245,7 @@ def calculate_week(user_set):
 	# for user in user_set:
 	# 	if user.date_joined < start_date:
 	# 		start_date = user.date_joined
-	# today = datetime.datetime.today()
+        today = datetime.datetime.today()
 
 	start_date = datetime.datetime(2015, 8, 20, 0, 0, 0)
 
