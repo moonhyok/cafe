@@ -19,7 +19,7 @@
 		{
 			var flaggedComments = data.data;
 			populateTable(flaggedComments);
-			populate_disc_header(data.data.discussion_statements, function(data)
+			populate_disc_header(data.data, function(data)
 			{
 				var flaggedComments = data.data.flagged_comments;
 				populateTable(flaggedComments);
@@ -74,7 +74,7 @@
 
 		// Get  Feedback Comments Data
 		dojo.xhrGet({
-			url: "{{url_root}}/instructor/comment/",
+			url: "{{url_root}}/search/1/",
 			handleAs: "json",
 			load: function(response, ioArgs) {
 				$('#loading').fadeOut()
