@@ -8,7 +8,9 @@ def get_score(comment):
 	of comment, and the SD
 	"""
         ca = CommentAgreement.objects.filter(comment=comment)
-        if ca.count() > 1:
+        result = (np.nan,)
+        rating_se = np.nan
+        if ca.count() > 0:
                 ca_vl = ca.values_list('agreement')
                 rating_mean = np.mean(ca_vl)
                 rating_se = 1.96*np.std(ca_vl)/np.sqrt(ca.count())
