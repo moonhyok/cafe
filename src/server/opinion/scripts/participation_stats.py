@@ -30,7 +30,7 @@ def participation():
 	rating_data = [UserRating.objects.filter(user__in=user_set, \
                                                    created__gte=start_date,\
 			created__lt=(start_date+datetime.timedelta(days=7))).count()]
-        rating_data = rating_data/5
+        rating_data = rating_data[0]/5
 	lower_bound = 7
 	upper_bound = 14
 	for i in range(num_weeks - 1):
