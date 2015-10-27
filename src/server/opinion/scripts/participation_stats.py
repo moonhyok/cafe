@@ -13,6 +13,7 @@ def participation():
 
 	# Weekly comment data
 	comment_data = [DiscussionComment.objects.filter(user__in=user_set, \
+                                                         created__gte=start_date,\
 			created__lt=(start_date+datetime.timedelta(days=7))).count()]
 	lower_bound = 7
 	upper_bound = 14
@@ -27,6 +28,7 @@ def participation():
 
 	# Weekly QAT rating data
 	rating_data = [UserRating.objects.filter(user__in=user_set, \
+                                                   created__gte=start_date,\
 			created__lt=(start_date+datetime.timedelta(days=7))).count()]
 	lower_bound = 7
 	upper_bound = 14
@@ -39,12 +41,13 @@ def participation():
 		upper_bound += 7
 
 	# Weekly login data
-	login_data = [LogUserEvents.objects.filter(log_type=11, \
+	login_data = [LogUserEvents.objects.filter(log_type=0, \
+                                                     created__gte=start_date,\
 			created__lt=(start_date+datetime.timedelta(days=7))).count()]
 	lower_bound = 7
 	upper_bound = 14
 	for i in range(num_weeks - 1):
-		login_count = (LogUserEvents.objects.filter(log_type=11, \
+		login_count = (LogUserEvents.objects.filter(log_type=0, \
 			created__gte=(start_date+datetime.timedelta(days=lower_bound)), \
 			created__lt=(start_date+datetime.timedelta(days=upper_bound))).count())/5
 		login_data.append(login_count)
