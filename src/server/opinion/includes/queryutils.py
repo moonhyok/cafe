@@ -2247,7 +2247,7 @@ def calculate_week(user_set):
 	# 		start_date = user.date_joined
 	# today = datetime.datetime.today()
 
-	start_date = datetime.dateime(2015, 8, 20, 0, 0, 0)
+	start_date = datetime.datetime(2015, 8, 20, 0, 0, 0)
 
 	delta = today.date() - start_date.date()
 	num_weeks = delta.days/7
