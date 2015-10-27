@@ -42,13 +42,13 @@ def participation():
 		upper_bound += 7
 
 	# Weekly login data
-	login_data = [LogUserEvents.objects.filter(log_type=0, \
+	login_data = [LogUserEvents.objects.filter(log_type=11, \
                                                      created__gte=start_date,\
 			created__lt=(start_date+datetime.timedelta(days=7))).count()]
 	lower_bound = 7
 	upper_bound = 14
 	for i in range(num_weeks - 1):
-		login_count = (LogUserEvents.objects.filter(log_type=0, \
+		login_count = (LogUserEvents.objects.filter(log_type=11, \
 			created__gte=(start_date+datetime.timedelta(days=lower_bound)), \
 			created__lt=(start_date+datetime.timedelta(days=upper_bound))).count())/5
 		login_data.append(login_count)
