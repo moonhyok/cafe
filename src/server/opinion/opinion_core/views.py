@@ -554,9 +554,10 @@ def get_rating(request):
 @instructor_required
 def get_summary(request):
         compare_weeks()
-	active_users = list(User.objects.filter(is_active = True))
 
-	total_users = User.objects.all().count()#total number of users
+	active_users = list(User.objects.filter(is_active = True))
+        num_weeks, start_date = calculate_week(active_users)
+	total_users = User.objects.filter(date_joined__gte=start_date).count()#total number of users
 	new_users = User.objects.filter(date_joined__gte=datetime.date.today()).count() #new users
 	new_logins_users = User.objects.filter(last_login__gte=datetime.date.today()).count() #activity
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -569,7 +570,7 @@ def get_summary(request):
 	week_logins_users = User.objects.filter(last_login__gte=start_of_week, last_login__lte=today).count()
 	total_visitors = LogUserEvents.objects.filter(details='welcome_first-time',log_type=5).count() #all site visitors
 	
-	total_comments = DiscussionComment.objects.filter(is_current=True).count()
+	total_comments = DiscussionComment.objects.all().count()
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	new_comments = DiscussionComment.objects.filter(created__gte=start_of_week, created__lte=today).count()
 #	total_insight = CommentRating.objects.all().count()
