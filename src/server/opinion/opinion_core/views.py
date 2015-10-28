@@ -209,7 +209,7 @@ def mobile(request,entry_code=None):
                        'org_id': org_id,
                        'language': language,
                        'week_num': week_num,
-                       'self_trend': get_course_trend(current_user, start_date,1),
+                       'self_trend': get_course_trend(active_users, start_date,0),
                        'course_trend': get_course_trend(active_users, start_date,0),
                        'self_suggestion': self_suggestion,
                        'self_suggestion_score': get_self_suggestion_score(current_user),
