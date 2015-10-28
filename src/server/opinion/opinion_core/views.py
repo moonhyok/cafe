@@ -182,7 +182,7 @@ def mobile(request,entry_code=None):
     if external_count.count() > 0:
        num_users = external_count[0].value
     # print str(request.user.is_authenticated()) + " authenticated"
-    start_date = datetime.datetime(year=2015, month=8, day=17,hour=0, minute=0, second=0, microsecond=0)
+    start_date = datetime.datetime(year=2015, month=8, day=16,hour=0, minute=0, second=0, microsecond=0)
     end_date = start_date + datetime.timedelta(weeks=17)
    # except:
    #   start_date = os.created
