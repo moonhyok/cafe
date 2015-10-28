@@ -2673,7 +2673,7 @@ def get_course_trend(user_set, start_date, is_self):
     if is_self == 1:
         weekly_data =  [UserRating.objects.filter(user=user_set, created__gte=start_date,created__lt=(start_date+datetime.timedelta(days=7)))]
     else:
-        weekly_data = [UserRating.objects.filter(created__gte=test_date,created__lt=(start_date+datetime.timedelta(days=7))).exclude(rating=0.4)]
+        weekly_data = [UserRating.objects.filter(created__gte=test_date,created__lt=(start_date+datetime.timedelta(days=7)))]
 
     less_than = 7
     greater_than = 14
@@ -2702,7 +2702,7 @@ def get_course_trend(user_set, start_date, is_self):
                 df = DataFrame(weekly_array[i], columns=names)
                 df.rating = df.rating.astype(float)
                 to_append =  tapply(weekly_array[i][:,3], weekly_array[i][:,2], numpy.mean)[0]
-            temps.append(to_append)
+            temps.append(to_append[k])
         result[k].append(temps)
     if is_self == 1:
         print(result)
