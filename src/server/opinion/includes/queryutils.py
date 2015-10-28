@@ -2706,7 +2706,7 @@ def get_course_trend(user_set, start_date, is_self):
         result[k].append(temps)
     if is_self == 1:
         print(result)
-    return results
+    return result
 
 def get_self_suggestion_score(user):
     suggestions = DiscussionComment.objects.filter(user=user).order_by('created')
