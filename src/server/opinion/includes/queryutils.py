@@ -2696,7 +2696,7 @@ def get_course_trend(user_set, start_date, is_self):
         result.append([])
         temps = []
         for i in range(num_weeks):
-            if (weekly_array[i].size == 0):
+            if (weekly_array[i].size == 0) or (is_self ==1 and ((weekly_array[i].size % 5) != 0)):
                 to_append = ([0.4] * os_statements)[k]
             else: 
                 df = DataFrame(weekly_array[i], columns=names)
