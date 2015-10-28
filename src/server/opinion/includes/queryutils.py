@@ -2701,8 +2701,8 @@ def get_course_trend(user_set, start_date, is_self):
             else: 
                 df = DataFrame(weekly_array[i], columns=names)
                 df.rating = df.rating.astype(float)
-                to_append =  tapply(weekly_array[i][:,3], weekly_array[i][:,2], numpy.mean)
-            temps.append(to_append[k])
+                to_append =  df.groupby('opinion_space_statement')['rating'].mean()[k]
+            temps.append(to_append)
         result[k].append(temps)
     if is_self == 1:
         print(result)
