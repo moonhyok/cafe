@@ -447,8 +447,7 @@ def get_course_trend(user_set, start_date, is_self):
                 to_append = df.groupby('opinion_space_statement')['rating'].mean()[k]
             temps.append(to_append)
         result[k].append(temps)
-    results
-    return result
+    return results
 
 def models_to_array(qs, names):
     """
