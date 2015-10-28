@@ -434,8 +434,7 @@ def get_course_trend(user_set, start_date, is_self):
     for i in range(num_weeks):
         weekly_array.append(models_to_array(weekly_data[i], names))
 
-    os_statements = OpinionSpaceStatement.objects.count()
-    os_stat
+    os_statements = OpinionSpaceStatement.objects.counts()
     for k in range(os_statements):
         result.append([])
         temps = []
