@@ -1,3 +1,5 @@
+import matplotlib
+matplotlib.use('Agg') 
 import os
 import environ
 from opinion.includes.queryutils import *
