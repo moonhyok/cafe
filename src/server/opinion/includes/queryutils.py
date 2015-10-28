@@ -407,47 +407,6 @@ def get_self_trend(user, start_date):
        # result[sid.id]['week'] = raw_time
     return result
 
-def get_course_trend(user_set, start_date, is_self):
-    result =[]
-    end_date = start_date + datetime.timedelta(weeks=17)
-    as_of_date = min(datetime.datetime.today(), end_date)
-    num_weeks = ((as_of_date - start_date).days /7)+1
-    test_date = datetime.datetime(2015,8,21,0,0,0)
-    if is_self == 1:
-        weekly_data =  [UserRating.objects.filter(user=user_set, created__gte=start_date,created__lt=(start_date+datetime.timedelta(days=7)))]
-    else:
-        weekly_data = [UserRating.objects.filter(user__in=user_set, created__gte=test_date,created__lt=(start_date+datetime.timedelta(days=7))).exclude(rating=0.4)]
-
-    less_than = 7
-    greater_than = 14
-    for i in range(num_weeks):
-        if is_self == 1:
-            weekly_data.append(UserRating.objects.filter(user=user_set, created__gte=(start_date+datetime.timedelta(days=less_than)),created__lt=(start_date+datetime.timedelta(days=greater_than)))) # doesnot seem to work!
-        else:
-            weekly_data.append(UserRating.objects.filter(user__in=user_set, created__gte=(start_date+datetime.timedelta(days=less_than)),created__lt=(start_date+datetime.timedelta(days=greater_than))).exclude(rating=0.4)) # doesnot seem to work!
-
-        less_than += 7
-        greater_than +=7
-
-    names = ['user', 'opinion_space', 'opinion_space_statement', 'rating', 'is_current', 'created']
-    weekly_array =[]
-    for i in range(num_weeks):
-        weekly_array.append(models_to_array(weekly_data[i], names))
-
-    os_statements = OpinionSpaceStatement.objects.count()
-    for k in range(os_statements):
-        result.append([])
-        temps = []
-        for i in range(num_weeks):
-            if (weekly_array[i].size == 0):
-                to_append = ([0.4] * os_statements)[k]
-            else: 
-                df = DataFrame(weekly_array[i], columns=names)
-                df.rating = df.rating.astype(float)
-                to_append = df.groupby('opinion_space_statement')['rating'].mean()[k]
-            temps.append(to_append)
-        result[k].append(temps)
-    return results
 
 def models_to_array(qs, names):
     """
@@ -2737,7 +2696,7 @@ def get_course_trend(user_set, start_date, is_self):
         result.append([])
         temps = []
         for i in range(num_weeks):
-            if (weekly_array[i].size == 0) or ((weekly_array[i].size % 5) != 0):
+            if (weekly_array[i].size == 0):
                 to_append = ([0.4] * os_statements)[k]
             else: 
                 df = DataFrame(weekly_array[i], columns=names)
@@ -2747,7 +2706,7 @@ def get_course_trend(user_set, start_date, is_self):
         result[k].append(temps)
     if is_self == 1:
         print(result)
-    return result
+    return results
 
 def get_self_suggestion_score(user):
     suggestions = DiscussionComment.objects.filter(user=user).order_by('created')
