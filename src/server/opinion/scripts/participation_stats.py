@@ -13,8 +13,7 @@ def participation():
 
 	# Weekly comment data
 	comment_data = [DiscussionComment.objects.filter(user__in=user_set, \
-                                                         created__gte=start_date,\
-			created__lt=(start_date+datetime.timedelta(days=7))).count()]
+                created__gte=start_date, created__lt=(start_date+datetime.timedelta(days=7))).count()]
 	lower_bound = 7
 	upper_bound = 14
 	for i in range(num_weeks - 1):
@@ -26,32 +25,29 @@ def participation():
 		upper_bound += 7
 
 
-	# Weekly QAT rating data
-	rating_data = [UserRating.objects.filter(user__in=user_set, \
-                                                   created__gte=start_date,\
-			created__lt=(start_date+datetime.timedelta(days=7))).count()]
-        rating_data = [rating_data[0]/5]
+	# Weekly user data
+	user_data = [UserRating.objects.filter(user__in=user_set, \
+            created__gte=start_date, created__lt=(start_date+datetime.timedelta(days=7))).count()]
+    user_data = [user_data[0]/5]
 	lower_bound = 7
 	upper_bound = 14
 	for i in range(num_weeks - 1):
-		rating_count = UserRating.objects.filter(user__in=user_set, \
+		user_count = UserRating.objects.filter(user__in=user_set, \
 			created__gte=(start_date+datetime.timedelta(days=lower_bound)), \
 			created__lt=(start_date+datetime.timedelta(days=upper_bound))).count()
-		rating_data.append(rating_count/5)
+		user_data.append(user_count/5)
 		lower_bound += 7
 		upper_bound += 7
 
-	# Weekly login data
-	login_data = [LogUserEvents.objects.filter(log_type=11, \
-                                                     created__gte=start_date,\
+	# Weekly CF rating data
+	cf_data = [CommentAgreement.objects.filter(created__gte=start_date,\
 			created__lt=(start_date+datetime.timedelta(days=7))).count()]
 	lower_bound = 7
 	upper_bound = 14
 	for i in range(num_weeks - 1):
-		login_count = (LogUserEvents.objects.filter(log_type=11, \
-			created__gte=(start_date+datetime.timedelta(days=lower_bound)), \
+		cf_count = (CommentAgreement.objects.filter(created__gte=(start_date+datetime.timedelta(days=lower_bound)), \
 			created__lt=(start_date+datetime.timedelta(days=upper_bound))).count())/5
-		login_data.append(login_count)
+		cf_data.append(cf_count)
 		lower_bound += 7
 		upper_bound += 7
 
@@ -60,12 +56,10 @@ def participation():
 	ax.set_ylabel('Weekly Participation')
 	ax.set_title('Weekly User Participation')
 	x = range(1, num_weeks+1)
-	ax.plot(x, login_data)
-	ax.plot(x, rating_data)
+	ax.plot(x, user_data)
+	ax.plot(x, cf_data)
 	ax.plot(x, comment_data)
-        print(login_data)
-        print(rating_data)
-	ax.legend(["# Weekly Users", "# QAT Ratings", "# Comments"], loc='upper right')
+	ax.legend(["# Weekly Users", "# CF Ratings", "# Comments"], loc='upper right')
 	plt.show()
 	fig.savefig('/var/www/opinion/opinion.berkeley.edu/landing/m-cafe/ieor115-fa15/src/client/media/images/participation.png')
 
