@@ -228,6 +228,7 @@ table.pretty caption {
 
 /* Large desktop */
 @media (min-width: 1200px) {
+	.exit-text {width: 45%;}
 }
 
 /* Portrait tablet to landscape and desktop */
@@ -236,7 +237,9 @@ table.pretty caption {
 		width: 50%;
 		height: auto;
 		padding-top: 30px ;
-	} 
+	}
+
+	.exit-text {width: 45%;}
 }
 
 .back-btn-dialog{

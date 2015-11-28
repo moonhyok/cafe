@@ -850,12 +850,12 @@ Take 2 minutes to see how prepared you are, and join the <strong>{{num_users}}</
 	         <div style="text-align: center;margin-top: 6px;" class="english responsive-body"><span>{{ topic }}</span></div>
       <div style="text-align: center;margin-top: 6px;" class="spanish responsive-body"><span>{{ topic_spanish }}</span></div>
 </br>
-      <div class="instructions-light responsive-body" style="font-size: 10px; width:100%">
+      <div class="instructions-light responsive-body" style="width:100%">
         <!-- Each sphere represents another participant's suggestion to the topic question. <!-- Spheres are arranged based on how similar participants are in their level of preparedness. Users who were more similar in preparedness level to each other have spheres that are closer together. Tap a sphere to read and respond to a suggestion. --> Inside each white ball is an idea.  Click any ball to reveal and rate the idea.
       </div>
 
 
-      <div style="text-align: right;"><a href="#" class="map-info" style="color:#442b10;position:relative;top:5px;" onclick="accounts.hideAll();$('.dialog-help-map1').show();window.cur_state = 'faq';window.prev_state = 'map';"><img width="30px" src="{{url_root}}/media/mobile/img/cafe/info_button.png"></a></div>
+      <div style="text-align: right; position:absolute; right:0;"><a href="#" class="map-info" style="color:#442b10;position:relative;top:5px;" onclick="accounts.hideAll();$('.dialog-help-map1').show();window.cur_state = 'faq';window.prev_state = 'map';"><img width="30px" src="{{url_root}}/media/mobile/img/cafe/info_button.png"></a></div>
 
       <div id='d3' class="d3-canvas"></div>
     </center>
@@ -875,7 +875,7 @@ Take 2 minutes to see how prepared you are, and join the <strong>{{num_users}}</
             </div>
 
           </div>
-          <div class="responsive-body" style="text-align:center;padding-top: 15px;">
+          <div class="responsive-body exit-text" style="text-align:center;padding-top: 15px; margin: 10px 10px;">
             <span>{{client_settings.LOGOUT_DIALOG_TEXT}}</span><br/><br/>
       <!-- <span class="english"><a href="http://hrefshare.com/9bdd3" target="_blank" style="color: #555555;"><img src="{{url_root}}/media/mobile/img/cafe/twitter-button.png" width="102px"></a> -->
       <!-- <a href="http://hrefshare.com/d3660" target="_blank" style="color: #555555;"><img src="{{url_root}}/media/mobile/img/cafe/facebook-button.png" width="102px"></a><br/> -->
