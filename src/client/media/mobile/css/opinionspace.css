@@ -257,7 +257,7 @@ table.pretty caption {
 .instructions-light{
 	font-size: 15px;
 	line-height: 17px;
-	height: 40px !important;
+	/* height: 40px !important;*/
 	margin-top: 0px;
 	padding-top: 10px;
 	padding-bottom: 5px;
