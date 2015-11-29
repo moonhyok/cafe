@@ -338,7 +338,7 @@ var _blooms = blooms = (function($, d3, console) {
 
             var topBarHeight = $('.top-bar').height();
 
-            var mugsize = 50;
+            var mugsize = 100;
             if($(window).width() > 768)
                 mugsize=150;
 
