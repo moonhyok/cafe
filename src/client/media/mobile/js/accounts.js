@@ -546,7 +546,7 @@ $(document).ready(function() {
         window.prev_state = 'home';
         rate.logUserEvent(7,'first time');
 
-        window.history.pushState("", "", '#');
+        window.history.pushState(1, "", '#');
         //$('.top-bar').show();
         //rate.initScore();
     });
@@ -591,7 +591,7 @@ $(document).ready(function() {
                     $('.endsliders').show();
                     $("#slide-"+window.current_slider).show();
                     window.scrollTo(0,0);
-                    window.history.pushState("", "", '#');
+                    window.history.pushState(1, "", '#');
                     return;
                   }
 
@@ -662,7 +662,7 @@ $(document).ready(function() {
                 }
 
                window.scrollTo(0,0);
-               window.history.pushState("", "", '#');
+               window.history.pushState(1, "", '#');
                window.cur_state = window.prev_state;
 
 
@@ -1042,6 +1042,10 @@ $(document).ready(function() {
     $('.landing-page-banner-logout').click(function(){location.reload();})
 
     window.onpopstate = function(event) {
+        // Some browsers emit onpopstate when the page first loads. But since event.state is null, we can ignore them.
+        if (!event.state) {
+            return;
+        }
         backButtonHandler();
     };
 
