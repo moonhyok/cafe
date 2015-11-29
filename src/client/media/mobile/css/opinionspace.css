@@ -228,7 +228,7 @@ table.pretty caption {
 
 /* Large desktop */
 @media (min-width: 1200px) {
-	.exit-text {width: 45%;}
+	.exit-text {width: 40%;}
 }
 
 /* Portrait tablet to landscape and desktop */
