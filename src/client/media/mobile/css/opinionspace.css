@@ -755,7 +755,7 @@ table.pretty caption {
     		overflow-x: hidden;
     		text-align: center;
     		text-shadow: none;
-    		background-size: cover;
+    		/*background-size: cover;*/
 
     	}
 

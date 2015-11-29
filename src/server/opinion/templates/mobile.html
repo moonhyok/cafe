@@ -762,11 +762,58 @@ Take 2 minutes to see how prepared you are, and join the <strong>{{num_users}}</
               <div class="basic-header2 responsive-body spanish" style="text-align:left;">{{topic_spanish}}</div>
               <br/>
 
+              <script>
+              function showOther() {
+                  var x = document.getElementById("studentTag").value;
+                  if (x=="Other"){
+                    $("#otherBox").show();
+                  }else{
+                    $("#otherBox").hide();
+                  }
+              }
+              </script>
+
               <textarea name='answer' id='entered-comment' maxlength="500"></textarea>
-              <div style="max-width: 400px;font-size: 14px; text-align: left; width: 95%; padding-left: 15px;">
+
+              <style>
+              #topictag .ui-select {
+                width: 100%;
+              }
+              </style>
+                <div data-role="fieldcontain" id="topictag">
+                <label for="studentTag" class='regforminputtag' style="font-size: 12px !important;"></label>
+                  <select name="studentTag" id="studentTag" style="color: #000000 !important; font-size: 16px !important;"onchange="showOther()">
+                  <option value="">Choose a topic tag for the suggestion...</option>
+                  <option value="Communication">#Communication</option>
+                  <option value="Resilience">#Resilience</option>
+                  <option value="Education">#Education</option>
+                  <option value="Supplies">#Supplies</option>
+<!--                   <option value="Logistics">#Logistics</option>
+                  <option value="New Topics">#CourseContent</option>
+                  <option value="Projects">#Projects</option>
+                  <option value="Policies">#Policies</option> -->
+                  <option id="otherOption" value="Other">#Other</option>
+                </select>
+              </div>
+              <div id="otherBox" style="display:none;">
+              <input type="text" name="otherTag" id="otherTag" placeholder="Please Specify The Tag">
+              </div>
+
+              <script>
+              function showOther() {
+                  var x = document.getElementById("studentTag").value;
+                  if (x=="Other"){
+                    $("#otherBox").show();
+                  }else{
+                    $("#otherBox").hide();
+                  }
+              }
+              </script>
+
+<!--               <div style="max-width: 400px;font-size: 14px; text-align: left; width: 95%; padding-left: 15px;">
                 <span>Your email address will not be displayed and we promise not to share your email address with any third parties.</span>
                 <input type="email" id='regemail' name='regemail' class='regforminput' style="font-size: 15px; background-color: #FFFFFF;color: #000000;" placeholder="Email (Optional)" data-theme='b'></input>
-              </div>
+              </div> -->
               <div class='comment-submit-btn button-div-wide responsive-btn' style="display: inline-block;">Post</div>
             </div>
     </center>

@@ -1997,8 +1997,11 @@ def translate_to_english(comment):
 
 def translate_to_spanish(comment):
 	import goslate
-	googleTranslate = goslate.Goslate()
-	return googleTranslate.translate(comment,'es')
+	try:
+		googleTranslate = goslate.Goslate()
+		return googleTranslate.translate(comment,'es')
+	except:
+		return ''
 
 def translate_all_comments():
 	import goslate

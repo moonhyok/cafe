@@ -2131,6 +2131,8 @@ def os_save_comment(request, os_id, disc_stmt_id = None):
 
     new_comment = params.get('comment', False)
     new_comment = decode_to_unicode(new_comment)
+    new_tag = params.get('tag', '')
+    new_tag = decode_to_unicode(new_tag)
     comment_language = params.get("commentLanguage", "english")
     #comment_language = decode_to_unicode(comment_language) # What does decode to unicode do?
     
@@ -2197,6 +2199,8 @@ def os_save_comment(request, os_id, disc_stmt_id = None):
                 comment.query_weight = old_comment_recent.query_weight
 
             comment.save()
+            tag = AdminCommentTag(comment = comment, tag = new_tag)
+            tag.save()
             update_query_weight(comment)
             
             # Check the comment for profanity
@@ -2705,11 +2709,23 @@ def os_never_seen_comments_json(request,os_id,disc_stmt_id=None):
 		data = get_user_data(tup[0])
 		if len(data) > 0:
 			user_data[tup[0]] = data	
+
+	tag_mapping = {}
+	print never_seen_comments
+	for c in never_seen_comments:
+		tag = AdminCommentTag.objects.filter(comment=c['cid'])
+		if tag:
+			tag_mapping[c['uid']] = tag[0].tag
+		else:
+			tag_mapping[c['uid']] = 'Other'
+
 	result = {'comments': never_seen_comments,
 						'ratings': user_ratings,
 						'user_data': user_data,
 						'sorted_comments_ids': sort_by_response_score(never_seen_comments),
-						'sorted_avg_agreement':sort_by_avg_agreement(never_seen_comments)}
+						'sorted_avg_agreement':sort_by_avg_agreement(never_seen_comments),
+                        'tag_mapping': tag_mapping,
+                        }
 	nc = NeverSeenCache(value=json.dumps(result))
 	nc.save()
 	return result

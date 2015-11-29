@@ -215,6 +215,7 @@ var _blooms = blooms = (function($, d3, console) {
                 eigens = data1['eigenvectors'];
                 data2 = data1['never_seen_comments'];
                 ratings = data2['ratings'];
+                window.tag_mapping = data2['tag_mapping'];
                 generateBloomSizesAndColors(data2);
                 console.log(ratings);
 
@@ -323,9 +324,9 @@ var _blooms = blooms = (function($, d3, console) {
 
         margin = {
             top: 0,
-            left: 10,
-            right: 80,
-            bottom: 80
+            left: 20,
+            right: 100,
+            bottom: 100
             };
 
 
@@ -379,20 +380,20 @@ var _blooms = blooms = (function($, d3, console) {
   .append("filter")
     .attr("id", "blur2")
   .append("feGaussianBlur")
-    .attr("stdDeviation", 1.2);
+    .attr("stdDeviation", 0.4);
 
 
                 var filter = window.coffeetable_svg.append("defs")
   .append("filter")
     .attr("id", "blur3")
   .append("feGaussianBlur")
-    .attr("stdDeviation", 1.8);
+    .attr("stdDeviation", 0.8);
 
                 var filter = window.coffeetable_svg.append("defs")
   .append("filter")
     .attr("id", "blur4")
   .append("feGaussianBlur")
-    .attr("stdDeviation", 2.4);
+    .attr("stdDeviation", 1.0);
 
             //var rescale = generateRescalingFactor();
 
@@ -407,12 +408,20 @@ var _blooms = blooms = (function($, d3, console) {
             .enter()
             .append("svg:image")
             .attr("xlink:href", function(d) {
+                var tag = window.tag_mapping[d.uid];
+                var url = window.url_root + "/media/mobile/img/cafe/cafe6.png";
+
+                if (tag){
+                    url = window.url_root + "/media/mobile/img/cafe/cafe_ball_" + tag.toLowerCase() + ".png";
+                }
                 window.blooms_list.push(d.uid);
                 console.log({'uid': d.uid,'x':d.x,'y':d.y,'cx': canvasx(d.x),'cy': canvasy(d.y)});
-                return window.url_root + "/media/mobile/img/cafe/cafe6.png";
+                return url;
             })
-            .attr("width", function(d) {return(mugsize*Math.random()+60)+"";}) //if this changes, change the margin above
-            .attr("height", function(d) {return(mugsize*Math.random()+60)+"";})
+            .attr("width", function(d) {return(mugsize*[0.7,1,1.3][Math.floor(Math.random() * 3)])+"";}) //if this changes, change the margin above
+            .attr("height", function(d) {return(mugsize*[0.7,1,1.3][Math.floor(Math.random() * 3)])+"";})
+            // .attr("width", function(d) {return(mugsize*Math.random()+60)+"";}) //if this changes, change the margin above
+            // .attr("height", function(d) {return(mugsize*Math.random()+60)+"";})
             .attr("x",function(d) {
                 return (width)/2;
                 //return canvasx(d.x);

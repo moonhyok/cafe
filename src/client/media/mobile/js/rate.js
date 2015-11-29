@@ -413,13 +413,19 @@ var rate = (function($, d3, console) {
         if(window.lang == 'es')
             language = 'spanish'
 
+        var tag = $("#studentTag").val();
+        // if (tag == "Other") {
+        //     tag = $("#otherTag").val();
+        // }
+
         $.ajax({
             type: "POST",
             dataType: 'json',
             url: window.url_root + "/os/savecomment/1/",
             data: {
                 "comment": comment,
-                "commentLanguage" : language
+                "commentLanguage" : language,
+                "tag": $("#studentTag").val(),
             },
             success: function(data) {
                 if (data.hasOwnProperty('success')) {
