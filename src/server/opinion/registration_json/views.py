@@ -227,6 +227,8 @@ def register(request, success_url=None,
 				pfu.save()
 			
 			#return json_result({'success':True, 'username': user_name_arg})
+                        request.POST = request_post_copy                        
+                        login(request)
 			return json_success()
 		else:
 			# Combine errors from the user form and demographics form and send back as JSON

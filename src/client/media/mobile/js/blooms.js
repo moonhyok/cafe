@@ -206,21 +206,21 @@ var _blooms = blooms = (function($, d3, console) {
         var data1, data2;
 
         $.ajax({
-            async: false,
+            async: true,
             dataType: "json",
             url: window.url_root + '/os/show/' + show_id + '/',
             data: {'nonce': Math.random()},
             success: function(d1) {
+                window.user_score = d1['cur_user_rater_score'];
                 data1 = d1;
                 eigens = data1['eigenvectors'];
                 data2 = data1['never_seen_comments'];
                 ratings = data2['ratings'];
                 window.tag_mapping = data2['tag_mapping'];
                 generateBloomSizesAndColors(data2);
+                // generateBloomSizesAndColors(data2);
                 console.log(ratings);
 
-            }
-        });
 
         // $.when(
         //     $.getJSON(window.url_root + '/os/show/' + show_id + '/'),
@@ -261,6 +261,10 @@ var _blooms = blooms = (function($, d3, console) {
             comments: data2.comments
         });
         // });
+
+            }
+        });
+
 
     }
 
