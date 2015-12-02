@@ -5,6 +5,10 @@ White- f5ebdf
 Brown- 4e300f
 */
 
+.dialog-about em {
+	font-weight: bold;
+}
+
 @font-face {
     font-family: DroidSans;
     src: url('../css/Droid_Sans/DroidSans.ttf');
