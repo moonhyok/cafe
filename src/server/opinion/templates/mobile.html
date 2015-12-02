@@ -295,7 +295,7 @@
             </div>
 
     </div>
-          <img width="100%" src="{{url_root}}/media/mobile/img/cafe/title_image3.jpg" style="margin-top:3px;max-width: 620px;max-height:300px;">
+          <img width="100%" id="landing-img" src="{{url_root}}/media/mobile/img/cafe/title_image3.jpg" style="margin-top:3px;max-width: 620px;max-height:300px;">
           <div class="landing-img-title responsive-body" style="display:none;">
             {{topic}}
           </div> 
@@ -1425,17 +1425,17 @@ Comments and suggestions will be scanned to omit identifiable information. We re
 </script>
 
       <script>
-       Array.prototype.random = function () {
-            return this[Math.floor((Math.random()*this.length))];
-      }
-      var bloomAnimation = setInterval(function(){
-         $("#d3 image").attr('class', '');
-          var items = $("#d3 image");
-          var rand_item = items[Math.floor(Math.random()*items.length)];
-          var animate = rand_item;
-          var effects = ['pulse', 'shake']
-          $(animate).attr('class', 'animated ' + effects.random());
-        }, 1500);
+      //  Array.prototype.random = function () {
+      //       return this[Math.floor((Math.random()*this.length))];
+      // }
+      // var bloomAnimation = setInterval(function(){
+      //    $("#d3 image").attr('class', '');
+      //     var items = $("#d3 image");
+      //     var rand_item = items[Math.floor(Math.random()*items.length)];
+      //     var animate = rand_item;
+      //     var effects = ['pulse', 'shake']
+      //     $(animate).attr('class', 'animated ' + effects.random());
+      //   }, 1500);
 
       var bloomAnimation = setInterval(function(){
           if ($('#landing-img').attr('class')) {
