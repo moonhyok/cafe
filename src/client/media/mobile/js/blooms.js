@@ -524,7 +524,7 @@ var _blooms = blooms = (function($, d3, console) {
             
         window.your_mug = window.coffeetable_svg.append('svg:image')
         .attr("xlink:href", function(d) {
-                    return window.url_root + "/media/mobile/img/cafe/cafe6.png";
+                    return window.url_root + "/media/mobile/img/cafe/cafe_ball_you.png";
 
         })
         .attr('x', function(d) {
@@ -554,30 +554,30 @@ var _blooms = blooms = (function($, d3, console) {
             }
         });
 
-        var youText = "You"
-        if(window.lang == 'es')
-            youText = "Usted"
+        // var youText = "You"
+        // if(window.lang == 'es')
+        //     youText = "Usted"
 
-        window.coffeetable_svg.append('svg:text')
-        .text(youText)
-        .attr('x', function(d) {
-            return window.your_mug_data.x-20;
-        })
-        .attr('y', function(d) {
-            return window.your_mug_data.y;
-        })
-        .attr("font-size",25)
-        .attr("opacity",1.0)
-        .on('click', function(d) {
-            if(window.refer == ""){
-                accounts.hideAll();
-                $('.comment-input').show();
-                $('.menubar').hide();
-                $('.instructions-light').hide();
-                window.cur_state = 'comment';
-                window.prev_state = 'map';
-            }
-        });
+        // window.coffeetable_svg.append('svg:text')
+        // .text(youText)
+        // .attr('x', function(d) {
+        //     return window.your_mug_data.x-20;
+        // })
+        // .attr('y', function(d) {
+        //     return window.your_mug_data.y;
+        // })
+        // .attr("font-size",25)
+        // .attr("opacity",1.0)
+        // .on('click', function(d) {
+        //     if(window.refer == ""){
+        //         accounts.hideAll();
+        //         $('.comment-input').show();
+        //         $('.menubar').hide();
+        //         $('.instructions-light').hide();
+        //         window.cur_state = 'comment';
+        //         window.prev_state = 'map';
+        //     }
+        // });
         //.transition()
         //.attr("opacity",0.0)
         //.duration(10000);

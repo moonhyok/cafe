@@ -289,7 +289,7 @@ table.pretty caption {
 
 	.responsive-answer{
 		font-size: 28px !important;	
-		min-height: 300px !important;
+		min-height: 150px !important;
 	}
 
 	.responsive-body{
@@ -1025,7 +1025,7 @@ table.pretty caption {
 		height: 100%;
 		background-image:url('../img/cafe/capitol-landing-tile.png');
     	/*background-size: cover;*/
-		font-family: DroidSans-Bold , sans-serif;
+		font-family: DroidSans , sans-serif;
 		line-height: 26px;
 		font-size: 22px;
 		overflow: auto;
@@ -1197,7 +1197,7 @@ padding-right: 7px;
 	width: 90% !important;
 
 	max-width: 700px;
-	font-size: 16px !important;
+	font-size: 18px !important;
 	font-family: DroidSans, sans-serif;
 	text-align: left;
 	margin-bottom: 5px;
