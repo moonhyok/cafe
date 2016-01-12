@@ -8,22 +8,22 @@ TEMPLATE_DEBUG = DEBUG
 DOC_ROOT = os.path.dirname(os.path.abspath(__file__))
 URL_ROOT = 'http://opinion.berkeley.edu/m-cafe/ieor170-sp16'
 
+DATABASE_ENGINE = 'mysql'
+DATABASE_NAME = 'cafe_mooc_ieor170_sp16'
+DATABASE_USER = 'cafe_mooc3'
+DATABASE_PASSWORD = 'rhXQc47hNLzHdTwP'
+DATABASE_HOST = ''
+DATABASE_PORT = ''
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'cafe_mooc_ieor115_fa15',
-        'USER': 'root',	
-        'PASSWORD': '31b1ha32'
+        'ENGINE': 'django.db.backends.' + DATABASE_ENGINE,
+        'NAME': DATABASE_NAME,
+        'USER': DATABASE_USER,
+        'PASSWORD': DATABASE_PASSWORD,
     }
 }
 
-
-DATABASE_ENGINE = 'mysql'
-# DATABASE_NAME = 'cafe_mooc_ieor170-sp16'
-# DATABASE_USER = 'root'
-# DATABASE_PASSWORD = 'root'
-# DATABASE_HOST = ''
-# DATABASE_PORT = ''
 
 EMAIL_HOST = 'localhost'
 EMAIL_HOST_PASSWORD = ''
