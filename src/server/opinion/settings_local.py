@@ -11,7 +11,7 @@ URL_ROOT = 'http://opinion.berkeley.edu/m-cafe/ieor170-sp16'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'cafe_mooc_ieor170_sp16',
+        'NAME': 'cafe_mooc_ieor115_fa15',
         'USER': 'root',	
         'PASSWORD': '31b1ha32'
     }
