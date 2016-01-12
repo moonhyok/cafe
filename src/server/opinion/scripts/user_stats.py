@@ -92,7 +92,7 @@ def stats(user_set, question):
 	  	xlab('Week') + \
 	  	ylab('Mean Rating') + \
 	  	ggtitle(title)
-	  	ggsave(p, "/var/www/opinion/opinion.berkeley.edu/landing/m-cafe/ieor115-fa15/src/client/media/images/graph1.png", scale=0.75)
+	  	ggsave(p, "/var/www/opinion/opinion.berkeley.edu/landing/m-cafe/ieor170-sp16/src/client/media/images/graph1.png", scale=0.75)
 	elif question == 2:
 		useful = []
 		for i in range(num_weeks):
@@ -112,7 +112,7 @@ def stats(user_set, question):
 	  	xlab('Week') + \
 	  	ylab('Mean Rating') + \
 	  	ggtitle(title)
-	  	ggsave(p, "/var/www/opinion/opinion.berkeley.edu/landing/m-cafe/ieor115-fa15/src/client/media/images/graph2.png", scale=0.75)
+	  	ggsave(p, "/var/www/opinion/opinion.berkeley.edu/landing/m-cafe/ieor170-sp16/src/client/media/images/graph2.png", scale=0.75)
 	elif question == 3:
 		enthus = []
 		for i in range(num_weeks):
@@ -132,7 +132,7 @@ def stats(user_set, question):
 	  	xlab('Week') + \
 	  	ylab('Mean Rating') + \
 	  	ggtitle(title)
-	  	ggsave(p, "/var/www/opinion/opinion.berkeley.edu/landing/m-cafe/ieor115-fa15/src/client/media/images/graph3.png", scale=0.75)
+	  	ggsave(p, "/var/www/opinion/opinion.berkeley.edu/landing/m-cafe/ieor170-sp16/src/client/media/images/graph3.png", scale=0.75)
 	elif question == 4:
 		perf = []
 		for i in range(num_weeks):
@@ -152,7 +152,7 @@ def stats(user_set, question):
 	  	xlab('Week') + \
 	  	ylab('Mean Rating') + \
 	  	ggtitle(title)
-	  	ggsave(p, "/var/www/opinion/opinion.berkeley.edu/landing/m-cafe/ieor115-fa15/src/client/media/images/graph4.png", scale=0.75)
+	  	ggsave(p, "/var/www/opinion/opinion.berkeley.edu/landing/m-cafe/ieor170-sp16/src/client/media/images/graph4.png", scale=0.75)
 	else:
 		hw = []
 		for i in range(num_weeks):
@@ -172,7 +172,7 @@ def stats(user_set, question):
 	  	xlab('Week') + \
 	  	ylab('Mean Rating') + \
 	  	ggtitle(title)
-	  	ggsave(p, "/var/www/opinion/opinion.berkeley.edu/landing/m-cafe/ieor115-fa15/src/client/media/images/graph5.png", scale=0.75)
+	  	ggsave(p, "/var/www/opinion/opinion.berkeley.edu/landing/m-cafe/ieor170-sp16/src/client/media/images/graph5.png", scale=0.75)
 
 user_set = User.objects.filter(is_active=True)
 stats(user_set, 1)

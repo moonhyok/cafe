@@ -56,7 +56,7 @@ def compare_weeks():
 	ax.set_xlabel('QAT Number')
 	ax.set_ylabel('Mean Rating')
 	ppl.legend(ax, loc="upper right")
-	fig.savefig('/var/www/opinion/opinion.berkeley.edu/landing/m-cafe/ieor115-fa15/src/client/media/images/qat.png')
+	fig.savefig('/var/www/opinion/opinion.berkeley.edu/landing/m-cafe/ieor170-sp16/src/client/media/images/qat.png')
 
 
 def label_mean(ax, bars):

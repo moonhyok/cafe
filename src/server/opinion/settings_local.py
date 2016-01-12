@@ -6,12 +6,12 @@ DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 DOC_ROOT = os.path.dirname(os.path.abspath(__file__))
-URL_ROOT = 'http://opinion.berkeley.edu/m-cafe/ieor115-fa15'
+URL_ROOT = 'http://opinion.berkeley.edu/m-cafe/ieor170-sp16'
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'cafe_mooc_ieor115_fa15',
+        'NAME': 'cafe_mooc_ieor170_sp16',
         'USER': 'root',	
         'PASSWORD': '31b1ha32'
     }
@@ -19,7 +19,7 @@ DATABASES = {
 
 
 DATABASE_ENGINE = 'mysql'
-# DATABASE_NAME = 'cafe_mooc_ieor115_fa15'
+# DATABASE_NAME = 'cafe_mooc_ieor170-sp16'
 # DATABASE_USER = 'root'
 # DATABASE_PASSWORD = 'root'
 # DATABASE_HOST = ''
@@ -39,7 +39,7 @@ SECRET_KEY = 'REPLACE_THIS_WITH_SECRET_KEY'
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = '/var/www/opinion/opinion.berkeley.edu/landing/m-cafe/ieor115-fa15/src/client/media/'
+MEDIA_ROOT = '/var/www/opinion/opinion.berkeley.edu/landing/m-cafe/ieor170-sp16/src/client/media/'
 
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
