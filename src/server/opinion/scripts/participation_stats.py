@@ -1,6 +1,7 @@
 import environ
 from opinion.opinion_core.models import *
 from opinion.includes.queryutils import *
+from opinion.settings_local import URL_ROOT
 import numpy as np
 import datetime
 import matplotlib.pyplot as plt
@@ -61,5 +62,6 @@ def participation():
 	ax.plot(x, comment_data)
 	ax.legend(["# Weekly Users", "# CF Ratings", "# Comments"], loc='upper right')
 	plt.show()
-	fig.savefig('../../../participation.png')
+        url_root = settings.URL_ROOT
+	fig.savefig(url_root+'client/media/images/participation.png')
 
