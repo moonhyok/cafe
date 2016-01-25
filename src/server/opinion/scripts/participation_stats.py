@@ -61,5 +61,5 @@ def participation():
 	ax.plot(x, comment_data)
 	ax.legend(["# Weekly Users", "# CF Ratings", "# Comments"], loc='upper right')
 	plt.show()
-	fig.savefig('participation.png')
+	fig.savefig('../../participation.png')
 
