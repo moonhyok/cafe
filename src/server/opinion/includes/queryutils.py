@@ -2204,7 +2204,7 @@ def calculate_week(user_set):
 	# 		start_date = user.date_joined
         today = datetime.datetime.today()
 
-	start_date = datetime.datetime(2015, 8, 21, 0, 0, 0)
+	start_date = datetime.datetime(2016, 1, 17, 0, 0, 0)
 
 	delta = today.date() - start_date.date()
 	num_weeks = delta.days/7 + 1
@@ -2704,7 +2704,7 @@ def get_course_trend(user_set, start_date, is_self):
                 try:
                         to_append =  df.groupby('opinion_space_statement')['rating'].mean()[k]
                 except:
-                        to_append = 0.5
+                        to_append = 0.4
             temps.append(to_append)
         result[k].append(temps)
     if is_self == 1:
