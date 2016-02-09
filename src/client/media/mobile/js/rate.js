@@ -128,7 +128,7 @@ var rate = (function($, d3, console) {
 
 
                 if(window.lang == 'en'){
-                    $('.instructions-light').html("Please join the conversation by clicking your ball to add your own suggestion.")
+                    $('.instructions-light').html("Please join the conversation by clicking your sphere to add your own suggestion.")
                 }
                 else{
                     $('.instructions-light').html("Ahora es su turno. Presione sobre su esfera para introducir su sugerencia.")
@@ -534,7 +534,8 @@ $(document).ready(function() {
 
     $('.comment-submit-btn').click(function() {
         window.comment = $('#entered-comment').val();
-        $('.comment-input').hide();
+        $('.new-comment').hide();
+        $('.hybrid-comment').hide();
         $('.dialog-continue').show();
         $('.scorebox').hide();
         $('.menubar').hide();

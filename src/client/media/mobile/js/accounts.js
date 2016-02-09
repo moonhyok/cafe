@@ -325,6 +325,10 @@ var accounts = (function($, d3, console) {
         $('.dialog-help-comment').hide();
         $('.dialog-help-continue').hide();
         $('.dialog-help-logout').hide();
+        $('.new-comment').hide();
+        $('.hybrid-comment').hide();
+
+
 	}
 
     return {
@@ -551,6 +555,22 @@ $(document).ready(function() {
         //rate.initScore();
     });
 
+    $('.new-comment-btn').click(function(){
+        window.cur_state = 'new-comment'
+        window.prev_state = 'comment'
+        accounts.hideAll();
+        window.scrollTo(0,0);
+        $('.new-comment').show();
+    });
+
+    $('.hybrid-comment-btn').click(function(){
+        window.cur_state = 'hybrid-comment'
+        window.prev_state = 'comment'
+        accounts.hideAll();
+        window.scrollTo(0,0);
+        $('.hybrid-comment').show();
+    });
+
     $('.login-btn').click(function() {
         accounts.showLogin();
     });
@@ -659,6 +679,8 @@ $(document).ready(function() {
 
                     //window.location = window.url_root.substring(0,window.url_root.length)+'/crcstats/' + window.refer;
                     //$('.scorebox').show();
+                }
+                else if (window.prev_state == 'new-comment'){
                 }
 
                window.scrollTo(0,0);
@@ -993,6 +1015,24 @@ $(document).ready(function() {
     $('.button-div-red').on('touchend',function(e){
         $(this).css("background-image",$(this).css("background-image").replace("default-down","default"));
     });
+
+    //Moonhyok
+    $('.button-div-red2').on('mouseover',function(e){
+        $(this).css("background-image",$(this).css("background-image").replace("default","default-down"));
+    });
+
+    $('.button-div-red2').on('mouseout',function(e){
+        $(this).css("background-image",$(this).css("background-image").replace("default-down","default"));
+    });
+
+    $('.button-div-red2').on('touchstart',function(e){
+        $(this).css("background-image",$(this).css("background-image").replace("default","default-down"));
+    });
+
+    $('.button-div-red2').on('touchend',function(e){
+        $(this).css("background-image",$(this).css("background-image").replace("default-down","default"));
+    });
+    // Moonhyok 
 
         $('.button-div-wide').on('mouseover',function(e){
         $(this).css("background-image",$(this).css("background-image").replace("wide","wide-down"));
