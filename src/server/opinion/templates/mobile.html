@@ -68,87 +68,89 @@
   <!--JavaScript that needs to be run on init-->
   <script type='text/javascript'>
 
-  window.url_root = '{{ url_root }}';
+    window.url_root = '{{ url_root }}';
 
-  window.sliders = [];
+    window.sliders = [];
 
-  window.skipped = [];
+    window.skipped = [];
 
-  window.email_saved = false;
+    window.email_saved = false;
 
-  window.translation_lock = false;
+    window.translation_lock = false;
 
-  window.prev_state = 'home';
+    window.prev_state = 'home';
 
-  window.burger_state = null;
+    window.burger_state = null;
 
-  window.mousedown = 0;
+    window.mousedown = 0;
 
-  window.rate_count = 0;
+    window.rate_count = 0;
 
-  window.current_rating = 50;
+    window.current_rating = 50;
 
-  window.cur_state = 'home';
+    window.cur_state = 'home';
 
-  window.toggle_flag1 = false;
+    window.toggle_flag1 = false;
 
-  window.toggle_flag2 = false;
+    window.toggle_flag2 = false;
 
-  window.refer_language = '{{language}}';
+    window.refer_language = '{{language}}';
 
-  window.current_slider = 1;
+    window.current_slider = 1;
 
-  window.entry_code = {{ entry_code }} ;
+    window.entry_code = {{ entry_code }} ;
 
-  window.registration_in_progress = false;
+    window.registration_in_progress = false;
 
-  window.landing = true;
+    window.landing = true;
 
-  window.slider_shift = 6.15;
+    window.slider_shift = 6.15;
 
-  window.statement_processed_data = {};
+    window.statement_processed_data = {};
 
-  window.num_sliders = {{ statements|length }};
+    window.num_sliders = {{ statements|length }};
 
-  window.refer = '{{ refer }}';
+    window.refer = '{{ refer }}';
 
-  window.user_score = {{init_score}};
+    window.user_score = {{init_score}};
 
-  window.lang = 'en'
+    window.lang = 'en'
 
-  window.conf = { 
-   'RETURN_USER_FIRST_TIME': {{return_user_first_time}},
-   'ZIPCODE': {{ zipcode }},
- };
+    window.find_another = 0;
 
- jQuery(document).ready(function(){
-   for (var i = 0; i < window.num_sliders; i++) {
-     window.sliders[i] = 4.5;
-     window.skipped[i] = false;
-     $(".endslider-slider"+(i+1)).noUiSlider({
-       range: [0, 100],
-       start: window.sliders[i] ,
-       step: 5,
-       handles: 1,
-       connect: false,
-       behaviour: "none",
-       slide: function() {
-         var id = $(this).data('statement');
-         $('#g' + id).html( score_to_grade( $(this).val() ) );
-       }
-     }).change(function () {
-       var id = $(this).attr('id');
+    window.conf = { 
+     'RETURN_USER_FIRST_TIME': {{return_user_first_time}},
+     'ZIPCODE': {{ zipcode }},
+   };
+
+   jQuery(document).ready(function(){
+     for (var i = 0; i < window.num_sliders; i++) {
+       window.sliders[i] = 4.5;
+       window.skipped[i] = false;
+       $(".endslider-slider"+(i+1)).noUiSlider({
+         range: [0, 100],
+         start: window.sliders[i] ,
+         step: 5,
+         handles: 1,
+         connect: false,
+         behaviour: "none",
+         slide: function() {
+           var id = $(this).data('statement');
+           $('#g' + id).html( score_to_grade( $(this).val() ) );
+         }
+       }).change(function () {
+         var id = $(this).attr('id');
      id = parseInt(id.substring(1, id.length)); // strips the leading 's'
      update_score(id);
    });
 
-   }
+     }
 
-   $(".rating-slider").noUiSlider({
-     range: [0, 100], start: 50, step: 5, handles: 1,connect: false, behaviour: "none"
-   });
+     $(".rating-slider").noUiSlider({
+       range: [0, 100], start: 50, step: 5, handles: 1,connect: false, behaviour: "none"
+     });
 
-   $(".slider-progress-dot-"+1).css("background","#FFFFFF");
+     $(".slider-progress-dot-"+1).css("background","#FFFFFF");
 
        /*var html_label ="<div class='slider-range-labels'><div class='alignleft'>{{client_settings.SLIDER1_LEFT}}</div><div class='alignright'>{{client_settings.SLIDER1_RIGHT}}</div></div>";
     $('.rating-slider1 > .noUi-base').append( html_label );
@@ -185,85 +187,85 @@
         "{{ client_settings.LEGEND_INSIGHT_RIGHT }}"
         );*/
 
-var finishedStatements=[];
+        var finishedStatements=[];
 
-for(var l = 0; l < window.num_sliders; l++) {
- finishedStatements.push(0);
-}
+        for(var l = 0; l < window.num_sliders; l++) {
+         finishedStatements.push(0);
+       }
 
-var medians = {{ medians|safe }};
+       var medians = {{ medians|safe }};
 
-function score_to_grade(score1) {
- var score = 100 - score1;
+       function score_to_grade(score1) {
+         var score = 100 - score1;
 
- if (score == 100)
-   return 'A+';
- else if (score > 92)
-   return 'A';
- else if (score > 86)
-   return 'A-';
- else if (score > 81)
-   return 'B+';
- else if (score > 69 )
-   return 'B';
- else if (score > 63 )
-   return 'B-';
- else if (score > 56 )
-   return 'C+';
- else if (score > 44 )
-   return 'C';
- else if (score > 38 )
-   return 'C-';
- else if (score > 32 )
-   return 'D+';
- else if (score > 19 )
-   return 'D';
- else if (score == 0 )
-   return 'F';
- else
-   return 'D-';
-}
+         if (score == 100)
+           return 'A+';
+         else if (score > 92)
+           return 'A';
+         else if (score > 86)
+           return 'A-';
+         else if (score > 81)
+           return 'B+';
+         else if (score > 69 )
+           return 'B';
+         else if (score > 63 )
+           return 'B-';
+         else if (score > 56 )
+           return 'C+';
+         else if (score > 44 )
+           return 'C';
+         else if (score > 38 )
+           return 'C-';
+         else if (score > 32 )
+           return 'D+';
+         else if (score > 19 )
+           return 'D';
+         else if (score == 0 )
+           return 'F';
+         else
+           return 'D-';
+       }
 
-function grade_to_score(grade) {
- if (grade == 'A+')
-   return 10;
- else if (grade == 'A')
-   return 10.0 - 10.0/12;
- else if (grade == 'A-')
-   return 10.0 - 20.0/12;
- else if (grade == 'B+')
-   return 10.0 - 30.0/12;
- else if (grade == 'B' )
-   return 10.0 - 40.0/12;
- else if (grade == 'B-')
-   return 10.0 - 50.0/12;
- else if (grade == 'C+')
-   return 10.0 - 60.0/12;
- else if (grade == 'C')
-   return 10.0 - 70.0/12;
- else if (grade == 'C-')
-   return 10.0 - 80.0/12;
- else if (grade == 'D+')
-   return 10.0 - 90.0/12;
- else if (grade == 'D')
-   return 10.0 - 100.0/12;
- else if (grade == 'D-')
-   return 10.0 - 110.0/12;
- else
-   return 10.0 - 120.0/12;
-}
+       function grade_to_score(grade) {
+         if (grade == 'A+')
+           return 10;
+         else if (grade == 'A')
+           return 10.0 - 10.0/12;
+         else if (grade == 'A-')
+           return 10.0 - 20.0/12;
+         else if (grade == 'B+')
+           return 10.0 - 30.0/12;
+         else if (grade == 'B' )
+           return 10.0 - 40.0/12;
+         else if (grade == 'B-')
+           return 10.0 - 50.0/12;
+         else if (grade == 'C+')
+           return 10.0 - 60.0/12;
+         else if (grade == 'C')
+           return 10.0 - 70.0/12;
+         else if (grade == 'C-')
+           return 10.0 - 80.0/12;
+         else if (grade == 'D+')
+           return 10.0 - 90.0/12;
+         else if (grade == 'D')
+           return 10.0 - 100.0/12;
+         else if (grade == 'D-')
+           return 10.0 - 110.0/12;
+         else
+           return 10.0 - 120.0/12;
+       }
 
-function statementsComplete() {
- for(var i = 0; i < window.num_sliders; i++) {
-   if (finishedStatements[i]==0) {
-     return false;
-   }
- }
- return true;
-}
+       function statementsComplete() {
+         for(var i = 0; i < window.num_sliders; i++) {
+           if (finishedStatements[i]==0) {
+             return false;
+           }
+         }
+         return true;
+       }
 
-/** Updates statement number STATEMENT (which is of type number). */
-function update_score(statement) {
+       /** Updates statement number STATEMENT (which is of type number). */
+       function update_score(statement) {
        /* $('#g' + statement).css('opacity', 1);
     console.log(medians[statement]);
     $('#o' + statement).html(score_to_grade(medians[statement]*100))
@@ -273,10 +275,10 @@ function update_score(statement) {
     rate.logUserEvent(11,'slider_set ' + statement + ' ' + window.sliders[statement]/100);*/
   }
 
-  </script>
+</script>
 
-  <meta name="google-translate-customization" content="eafde824bc8e224d-e21501ea7ec3fcff-g772450b68a5f36d7-1d"></meta>
-  <style>.translate-btn { display: none; }</style>
+<meta name="google-translate-customization" content="eafde824bc8e224d-e21501ea7ec3fcff-g772450b68a5f36d7-1d"></meta>
+<style>.translate-btn { display: none; }</style>
 </head>
 
 <body>
@@ -599,23 +601,23 @@ function update_score(statement) {
       </script>-->
 
       <script>
-      var canvas = document.getElementById('sparkLineCanvas{{k.id}}');
-      var context = canvas.getContext('2d');
+        var canvas = document.getElementById('sparkLineCanvas{{k.id}}');
+        var context = canvas.getContext('2d');
 
-      if ({{k.id}} % 2 == 1)
-       $('.compare-box-{{k.id}}').css("background-color","rgba(0,0,0,0.05)")
+        if ({{k.id}} % 2 == 1)
+         $('.compare-box-{{k.id}}').css("background-color","rgba(0,0,0,0.05)")
 
-     var data = {{v}};
-     var max_of_array = Math.max.apply(Math, data);
+       var data = {{v}};
+       var max_of_array = Math.max.apply(Math, data);
 
-     window.statement_processed_data[({{k.id}}-1)] = data
+       window.statement_processed_data[({{k.id}}-1)] = data
 
-     context.beginPath();
-     context.lineWidth = 6;
-     context.strokeStyle = '#442b10';
-     context.shadowColor = '#ffffff';
-     context.shadowOffsetX = 1;
-     context.shadowOffsetY = 1;
+       context.beginPath();
+       context.lineWidth = 6;
+       context.strokeStyle = '#442b10';
+       context.shadowColor = '#ffffff';
+       context.shadowOffsetX = 1;
+       context.shadowOffsetY = 1;
          //context.moveTo(0, 45 - data[0]/max_of_array*38);
          for (i = 0; i <= 10; i++)
          {
@@ -634,19 +636,19 @@ function update_score(statement) {
 
         context.fillText("9",137,58);
         context.fillText("Ø",156,58);
-        </script>
-
-      </div>
+      </script>
 
     </div>
-    {% endfor %}
 
-    <div class="discuss-btn-div">
-      <div class='dialog-ready button-div-red responsive-btn' style="display: inline-block;">Next</div><br/><br/>
-      <!--<div class='dialog-ready2 button-div responsive-btn' style="display: inline-block;">Tell Us Your Idea</div>-->
-      <!--<button type='submit' data-theme='b' class='dialog-next'  onclick="$('.dialog-text1').hide();$('.dialog-text2').show();"><font style="font-size: 16px;">Next</font></button>-->
-    </div>
-  </center>
+  </div>
+  {% endfor %}
+
+  <div class="discuss-btn-div">
+    <div class='dialog-ready button-div-red responsive-btn' style="display: inline-block;">Next</div><br/><br/>
+    <!--<div class='dialog-ready2 button-div responsive-btn' style="display: inline-block;">Tell Us Your Idea</div>-->
+    <!--<button type='submit' data-theme='b' class='dialog-next'  onclick="$('.dialog-text1').hide();$('.dialog-text2').show();"><font style="font-size: 16px;">Next</font></button>-->
+  </div>
+</center>
 </div>
 
 {% for k,v in statement_hist.iteritems %}
@@ -679,17 +681,17 @@ function update_score(statement) {
       <div style="margin-left: 15px;">
         <canvas id="sparkLineCanvasDetail{{k.id}}" width="315" height="105" style="background-color: rgba(255,255,255,0.4)"></canvas>
         <script>
-        var canvas = document.getElementById('sparkLineCanvasDetail{{k.id}}');
-        var context = canvas.getContext('2d');
-        var data = {{v}};
-        var max_of_array = Math.max.apply(Math, data);
+          var canvas = document.getElementById('sparkLineCanvasDetail{{k.id}}');
+          var context = canvas.getContext('2d');
+          var data = {{v}};
+          var max_of_array = Math.max.apply(Math, data);
 
-        context.beginPath();
-        context.lineWidth = 10;
-        context.strokeStyle = '#442b10';
-        context.shadowColor = '#ffffff';
-        context.shadowOffsetX = 1;
-        context.shadowOffsetY = 1;
+          context.beginPath();
+          context.lineWidth = 10;
+          context.strokeStyle = '#442b10';
+          context.shadowColor = '#ffffff';
+          context.shadowOffsetX = 1;
+          context.shadowOffsetY = 1;
          //context.moveTo(0, 90 - data[0]/max_of_array*76);
          for (i = 0; i <= 10; i++)
          {
@@ -708,12 +710,12 @@ function update_score(statement) {
 
         context.fillText("9",258,104);
         context.fillText("Ø",292,102);
-        </script>
+      </script>
 
-        <div id="detail-emore-info-{{k.id}}" class="dialog-text-style responsive-body english"></div>
-        <div id="detail-smore-info-{{k.id}}" class="dialog-text-style responsive-body spanish"></div>
+      <div id="detail-emore-info-{{k.id}}" class="dialog-text-style responsive-body english"></div>
+      <div id="detail-smore-info-{{k.id}}" class="dialog-text-style responsive-body spanish"></div>
 
-        <script>
+      <script>
         var detail_text = ["",
         "When it comes to disaster, there are simple things you can do to make yourself safer. The information contained on this survey is designed to give you some details on what to do before, during, and after an earthquake. <br><br> Start with the simple tips within each step so that you can build on your accomplishments.<br><br>The information in the other questions will help you learn how to better prepare to survive and recover, wherever you live, work, or travel.<br><br>For more information, read the other 'learn more' pages for the other five questions, or visit the Earthquake Country Alliance website on the <a href = 'http://earthquakecountry.org/sevensteps/' target = '_blank'>Seven Steps to Earthquake Safety</a>.<br><br>",
         "The earthquake early warning systems use earthquake science and the technology of monitoring systems to alert devices and people when shaking waves generated by an earthquake are expected to arrive at their location. The seconds to minutes of advance warning can allow people and systems to take actions to protect life and property from destructive shaking. <br/><br/>More information on the ShakeAlert earthquake early warning system is available at <a href='http://earthquake.usgs.gov/research/earlywarning/' target='_blank'>USGS Earthquake Early Warning</a> page.<br><br>For more information, read the other 'learn more' pages for the other five questions, or visit the Earthquake Country Alliance website on the <a href = 'http://earthquakecountry.org/sevensteps/' target = '_blank'>Seven Steps to Earthquake Safety</a>.<br><br>",
@@ -725,13 +727,13 @@ function update_score(statement) {
         var sdetail_text = ["","California fue el primer estado aprobar una ley para crear un mercado de seguros de salud -- Covered California (California cubierta). Hasta diciembre de 2013, Covered California tenía más de 630,000 afiliados.", "Hace poco California adoptó el desafío de los «estándares», que hace hincapié en el pensamiento crítico y el análisis en la educación de K-12 (jardín de infancia hasta 12º grado) para preparar mejor a los estudiantes para la universidad y la vida laboral.", "El proyecto de presupuesto de California de 2014-15 reclama un aumento del 10.8% en la financiación de la educación superior, que podrían mantener los gastos de matrícula actuales estables.", "Adoptada en el 2006, la Ley 1569 del Senado de California amplía la elegibilidad de los inmigrantes indocumentados en California para asistencia alimentaria, seguridad de ingresos suplementarios y seguro de salud. Adoptada en el 2011, la Ley del Sueño de California otorga a los inmigrantes indocumentados acceso a ayuda estatal en los colegios y universidades públicas.","California fue el primer estado en legalizar la distribución de la marihuana en el año 1996. El uso recreativo de la marihuana es ilegal en el Estado de California. Sin embargo, los legisladores de California están actualmente considerando legalizar, gravar y regular la marihuana para su uso recreativo.", "California legalizó el matrimonio entre parejas del mismo sexo en 2008. Sin embargo, la Proposición 8, que recovó los derechos de contraer matrimonio de las parejas del mismo sexo, también fue aprobada en 2008. La Proposición 8 fue revocada en 2013."]
         document.getElementById("detail-emore-info-{{k.id}}").innerHTML = detail_text[{{k.id}}];
         document.getElementById("detail-smore-info-{{k.id}}").innerHTML = sdetail_text[{{k.id}}];
-        </script>
+      </script>
 
-      </div>
+    </div>
 
 
-      <div class="button-div responsive-btn" onclick="accounts.hideAll();$('.dialog').show();window.prev_state='register';" style="height: 40px; padding-top:10px;"><font style="font-size: 16px;">Back</font></div>
-    </br>
+    <div class="button-div responsive-btn" onclick="accounts.hideAll();$('.dialog').show();window.prev_state='register';" style="height: 40px; padding-top:10px;"><font style="font-size: 16px;">Back</font></div>
+  </br>
 
             <!--<div class="discuss-btn-div">
             <div class='dialog-ready button-div responsive-btn' style="display: inline-block;">Next</div>
@@ -780,17 +782,15 @@ function update_score(statement) {
         </div> 
         <center>
           <div class='new-panel'>
-            <div class="basic-header2 responsive-body english" style="text-align:left;">"Tax breaks for proper earthquake retrofits of housing. One of the most important factors affecting recovery of individuals and communities is whether they can safely stay in their homes and get back to normal as soon as possible."</div>
-            <div id='comment2' class="basic-header2 responsive-body english" style="text-align:left;">"By educating the public with advertisements and info sessions, the state government could help the public be better prepared for a major earthquake and many lives could be saved."</div>
+            <div id='comment1' class="basic-header2 responsive-body english" style="text-align:left;"></div>
+            <div id='comment2' class="basic-header2 responsive-body english" style="text-align:left;"></div>
 
-            <div class="basic-header3 responsive-body english" style="text-align:left;">Please write a comment that expands on both ideas</div>
+            <div class="basic-header2 responsive-body english" style="text-align:left;">Please write an idea that expands on both ideas</div>
 
 
-            <textarea name='answer' id='entered-comment' maxlength="500"></textarea>
+            <textarea id='comment-textbox' name='answer' id='entered-comment' maxlength="500"></textarea>
             <div class='comment-submit-btn button-div-wide responsive-btn' style="display: inline-block;">Post</div>
-            <div class='find-another-btn button-div-wide responsive-btn' style="display: inline-block;">Find Another</div>
-
-
+            <div id='find-btn' class='find-another-btn button-div-wide responsive-btn' style="display: inline-block;">Find Another</div>
           </div>
         </center>
       </center>
@@ -818,14 +818,14 @@ function update_score(statement) {
             <br/>
 
             <script>
-            function showOther() {
-              var x = document.getElementById("studentTag").value;
-              if (x=="Other"){
-                $("#otherBox").show();
-              }else{
-                $("#otherBox").hide();
+              function showOther() {
+                var x = document.getElementById("studentTag").value;
+                if (x=="Other"){
+                  $("#otherBox").show();
+                }else{
+                  $("#otherBox").hide();
+                }
               }
-            }
             </script>
 
             <div class='button-div-red2 new-comment-btn responsive-btn' style="display: inline-table;margin-top: 10px;">New Comment</div>
@@ -863,14 +863,14 @@ function update_score(statement) {
             </div> -->
 
             <script>
-            function showOther() {
-              var x = document.getElementById("studentTag").value;
-              if (x=="Other"){
-                $("#otherBox").show();
-              }else{
-                $("#otherBox").hide();
+              function showOther() {
+                var x = document.getElementById("studentTag").value;
+                if (x=="Other"){
+                  $("#otherBox").show();
+                }else{
+                  $("#otherBox").hide();
+                }
               }
-            }
             </script>
 
 <!--               <div style="max-width: 400px;font-size: 14px; text-align: left; width: 95%; padding-left: 15px;">
@@ -1025,28 +1025,28 @@ function update_score(statement) {
           </div>
 
           <script>
-          jQuery(document).ready(function(){
-           $("#reevaluate-email-btn").click(function() {
-             rate.logUserEvent(99, $("#reevaluate-email-input").val());
-             $("#reevaluate-email-input").hide();
-             $("#reevaluate-email-btn").hide();
-             $("#reevaluate-ty-msg").fadeIn();
-           });
-         })
-          </script>
-          <!--           Election and Voter Information: <a href="http://www.sos.ca.gov/elections/new-voter/" target="_blank" style="color: #555555;">CAVoterInformation</a>-->
-          <br/><br/>
+            jQuery(document).ready(function(){
+             $("#reevaluate-email-btn").click(function() {
+               rate.logUserEvent(99, $("#reevaluate-email-input").val());
+               $("#reevaluate-email-input").hide();
+               $("#reevaluate-email-btn").hide();
+               $("#reevaluate-ty-msg").fadeIn();
+             });
+           })
+         </script>
+         <!--           Election and Voter Information: <a href="http://www.sos.ca.gov/elections/new-voter/" target="_blank" style="color: #555555;">CAVoterInformation</a>-->
+         <br/><br/>
 
 
-          <!--California Online Voting Registration: <a href="http://registertovote.ca.gov" target="_blank" style="color: #555555;"> CAVoterRegistration </a><br/><br/></span>-->
-        </span>
+         <!--California Online Voting Registration: <a href="http://registertovote.ca.gov" target="_blank" style="color: #555555;"> CAVoterRegistration </a><br/><br/></span>-->
+       </span>
 
-        <span class="spanish"> 
+       <span class="spanish"> 
 
-          <a href="http://twitter.com/intent/tweet?text=How+prepared+are+you+for+a+major+%23quake%3F+Try+QuakeCAFE+developed+by+%40GavinNewsom+%26+%40ken_goldberg+http%3A%2F%2Fquakecafe.org+%40citrisnews" target="_blank" style="color: #555555;"><img src="{{url_root}}/media/mobile/img/cafe/twitter-button.png" width="102px"></a>
-          <a href="https://www.facebook.com/dialog/feed?app_id=694165360698061&link=http%3A%2F%2Fquakecafe.org&picture=http%3A%2F%2Fcaliforniareportcard.org%2Fcrc%2Fwp-content%2Fuploads%2FQuakeCAFE_How-Prepared-Are-You_Version1_SM-01.jpg&name=QuakeCAFE&caption=%20&description=How%20prepared%20are%20you%20for%20a%20major%20quake%3F%20Try%20QuakeCAFE%20http%3A%2F%2Fquakecafe.org%20developed%20by%20%40Cal%20%40GavinNewsom%20%26%20%40Ken_Goldberg%20&redirect_uri=http%3A%2F%2Fwww.facebook.com%2F" target="_blank" style="color: #555555;"><img src="{{url_root}}/media/mobile/img/cafe/facebook-button.png" width="102px"></a><br/>
+        <a href="http://twitter.com/intent/tweet?text=How+prepared+are+you+for+a+major+%23quake%3F+Try+QuakeCAFE+developed+by+%40GavinNewsom+%26+%40ken_goldberg+http%3A%2F%2Fquakecafe.org+%40citrisnews" target="_blank" style="color: #555555;"><img src="{{url_root}}/media/mobile/img/cafe/twitter-button.png" width="102px"></a>
+        <a href="https://www.facebook.com/dialog/feed?app_id=694165360698061&link=http%3A%2F%2Fquakecafe.org&picture=http%3A%2F%2Fcaliforniareportcard.org%2Fcrc%2Fwp-content%2Fuploads%2FQuakeCAFE_How-Prepared-Are-You_Version1_SM-01.jpg&name=QuakeCAFE&caption=%20&description=How%20prepared%20are%20you%20for%20a%20major%20quake%3F%20Try%20QuakeCAFE%20http%3A%2F%2Fquakecafe.org%20developed%20by%20%40Cal%20%40GavinNewsom%20%26%20%40Ken_Goldberg%20&redirect_uri=http%3A%2F%2Fwww.facebook.com%2F" target="_blank" style="color: #555555;"><img src="{{url_root}}/media/mobile/img/cafe/facebook-button.png" width="102px"></a><br/>
 
-          Información sobre las elecciones y los votantes: <a href="http://www.sos.ca.gov/elections/new-voter/spanish/" target="_blank" style="color: #555555;">California Información al Votante</a><br/><br/>
+        Información sobre las elecciones y los votantes: <a href="http://www.sos.ca.gov/elections/new-voter/spanish/" target="_blank" style="color: #555555;">California Información al Votante</a><br/><br/>
 
       <!--Inscripción de votante en línea de California: <a href="http://registertovote.ca.gov/es/" target="_blank" style="color: #555555;">Registro de Votantes de California</a><br/>
 
@@ -1478,13 +1478,13 @@ function update_score(statement) {
   </div>
 
   <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-34341740-16', 'auto');
-  ga('send', 'pageview');
+    ga('create', 'UA-34341740-16', 'auto');
+    ga('send', 'pageview');
 
   </script>
 
@@ -1501,16 +1501,16 @@ function update_score(statement) {
       //     $(animate).attr('class', 'animated ' + effects.random());
       //   }, 1500);
 
-var bloomAnimation = setInterval(function(){
-  if ($('#landing-img').attr('class')) {
-    $('#landing-img').attr('class', '');
-  } else {
-    $('#landing-img').attr('class', 'animated shake');
-  }
-}, 1500);
+      var bloomAnimation = setInterval(function(){
+        if ($('#landing-img').attr('class')) {
+          $('#landing-img').attr('class', '');
+        } else {
+          $('#landing-img').attr('class', 'animated shake');
+        }
+      }, 1500);
        // });
-</script>
+     </script>
 
-</div>
-</body>
-</html>
+   </div>
+ </body>
+ </html>

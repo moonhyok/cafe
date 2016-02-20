@@ -104,23 +104,23 @@ var rate = (function($, d3, console) {
         myDiv.scrollTop = 0;
 
         $("#slider-importance").children().children().children(".slider-grade-bubble").each( function(i){
-        $(this).css("background-image",$(this).css("background-image").replace("keypad-down","keypad"));
+            $(this).css("background-image",$(this).css("background-image").replace("keypad-down","keypad"));
         });
 
         //$("#slider-importance").children().children().children(".slider-grade-bubble").css("background-color","transparent"); 
 
-            sendAgreementRating({
-                'r1': window.current_rating,
-                'r2': window.current_rating,
-                'cid': window.current_uid
-            });
-            window.current_rating = 0.5;
-            sendInsightRating({
-                'r1': window.current_rating,
-                'r2': window.current_rating,
-                'cid': window.current_uid
-            });
-            
+        sendAgreementRating({
+            'r1': window.current_rating,
+            'r2': window.current_rating,
+            'cid': window.current_uid
+        });
+        window.current_rating = 0.5;
+        sendInsightRating({
+            'r1': window.current_rating,
+            'r2': window.current_rating,
+            'cid': window.current_uid
+        });
+
             //TODO FIX!!!
             if (window.user_score == 2) {
                 $('.rate').hide();
@@ -133,15 +133,15 @@ var rate = (function($, d3, console) {
                 else{
                     $('.instructions-light').html("Ahora es su turno. Presione sobre su esfera para introducir su sugerencia.")
                 }
-                    
+
                 //$('.instructions2').hide();
                 //$('.instructions3').show();
                 try{
-                            blooms.addYourMug();
-                            window.your_mug.transition().duration(1500).style("opacity", "1");
-                   }catch(err){
-                            console.log(err);
-                   }
+                    blooms.addYourMug();
+                    window.your_mug.transition().duration(1500).style("opacity", "1");
+                }catch(err){
+                    console.log(err);
+                }
                 //hideMenubar();
                 //$('.dialog-yourmug').show();
                 //$('.comment-input').slideDown();
@@ -161,39 +161,41 @@ var rate = (function($, d3, console) {
             }
             //utils.hideLoading();
             //utils.hideLoading();
-    }
-    
-    function doneRatingNoSave() {
+        }
+
+        function doneRatingNoSave() {
         //note: this done-rating button is mapped twice, see below in populateBlooms #go-back.
         resetRatingSliders();
         logUserEvent(4,'rated');
         try {
-               window.cur_clicked_mug.transition().duration(2000).style("opacity", "0").remove();
-               var index = window.blooms_list.indexOf(window.current_uid);
-               console.log(index);
-               if (index >= 0) {
-                   window.blooms_list.splice(index, 1);
-               }
+         window.cur_clicked_mug.transition().duration(2000).style("opacity", "0").remove();
+         var index = window.blooms_list.indexOf(window.current_uid);
+         console.log(index);
+         if (index >= 0) {
+             window.blooms_list.splice(index, 1);
+         }
 
-               if (window.blooms_list.length <= 2) {
-               utils.showLoading("Loading More Spheres...");
+         if (window.blooms_list.length <= 2) {
+            console.log("rate.js");
+             utils.showLoading("Loading More Spheres...");
                window.blooms_list = undefined; //needed to avoid infinite recursing
                setTimeout(blooms.populateBlooms, 500);
-               }
+           }
 
-            } catch (err) {
-                    console.log(err);
-            }
-
-                $('.rate').hide();
-                $('.menubar').show();
+       } catch (err) {
+        console.log(err);
     }
+
+    $('.rate').hide();
+    $('.menubar').show();
+}
 
     // pulls a live comment text from the database. id is either the cid or the uid,
     // and type is "cid" if you want to search through the comments by comment id or
     // "uid" if you want to search via uid.
 
     function pullComment(id, type, comments, neverseen_id) {
+        console.log(comments)
         neverseen_id = neverseen_id === undefined ? 1 : neverseen_id;
         type = type === undefined || (type !== 'cid' && type !== 'uid') ? 'cid' : type;
 
@@ -298,19 +300,19 @@ var rate = (function($, d3, console) {
         window.sliders.push(slider_values);*/
         //$('.endsliders').slideUp();
         if(!window.entry_code){// if user enter with valid entry code, no need to show Register
-        accounts.showRegister();
+            accounts.showRegister();
         }
         else
         {
             if(window.user_score <= 2)
             {
-               $('.dialog').show();
-            }
-        }
-        $('.endsliders').hide();
+             $('.dialog').show();
+         }
+     }
+     $('.endsliders').hide();
 
 
-    }
+ }
     //This function just pulls up the registration sliders form, right before prompting the 
     //  user to register. Once sliders are filled, once done will only cause the registration prompt
     //  to frame will slide up.
@@ -399,7 +401,7 @@ var rate = (function($, d3, console) {
             },
             success: function(data) {
                 if (data.hasOwnProperty('success')) {
-                    
+
                 }
             },
             error: function() {
@@ -478,20 +480,20 @@ $(document).ready(function() {
         if(window.current_slider +1 > window.num_sliders)
         {
             window.prev_state = 'grade';
-        window.cur_state = 'register';
-        rate.logUserEvent(5,'sliders finished');
-        rate.storeSliders(window.num_sliders);
-        if (window.authenticated) {
-            for (var i = 1; i <= window.num_sliders; i++) {
-                rate.sendSlider(window.sliders[i], i);
-            }
+            window.cur_state = 'register';
+            rate.logUserEvent(5,'sliders finished');
+            rate.storeSliders(window.num_sliders);
+            if (window.authenticated) {
+                for (var i = 1; i <= window.num_sliders; i++) {
+                    rate.sendSlider(window.sliders[i], i);
+                }
 
-        }
+            }
         }
         else
-            {
-                window.current_slider = window.current_slider  + 1;
-                var ua = navigator.userAgent.toLowerCase();
+        {
+            window.current_slider = window.current_slider  + 1;
+            var ua = navigator.userAgent.toLowerCase();
                 var isAndroid = ua.indexOf("android") > -1; //&& ua.indexOf("mobile");
                 if(isAndroid || screen.width >= 700) {
                     $("#slide-"+window.current_slider).fadeIn(1000);
@@ -503,33 +505,33 @@ $(document).ready(function() {
                 /*$(".slider-progress-dot-"+(parseInt(event.target.id.substring(5),10)+1)).css("background","#FFFFFF");*/
 
             }
-    });
+        });
 
     $('.skip-btn').click(function(event){ 
-        
+
         $('.first-dialog-nav').hide();
         $('.slider-nav-box').show();
 
         if(parseInt(event.target.id.substring(5),10)+1 > window.num_sliders)
         {
             window.prev_state = 'grade';
-        window.cur_state = 'register';
-        rate.logUserEvent(5,'sliders finished');
-        rate.storeSliders(window.num_sliders);
-        if (window.authenticated) {
-            for (var i = 1; i <= window.num_sliders; i++) {
-                rate.sendSlider(window.sliders[i], i);
-            }
+            window.cur_state = 'register';
+            rate.logUserEvent(5,'sliders finished');
+            rate.storeSliders(window.num_sliders);
+            if (window.authenticated) {
+                for (var i = 1; i <= window.num_sliders; i++) {
+                    rate.sendSlider(window.sliders[i], i);
+                }
 
-        }
+            }
         }
         else
-            {
-                $("#slide-"+event.target.id.substring(5)).hide();
-                $("#slide-"+(parseInt(event.target.id.substring(5),10)+1)).show("slide", { direction: "right" }, 500);
-                /*$(".slider-progress-dot-"+(parseInt(event.target.id.substring(5),10)+1)).css("background","#FFFFFF");*/
+        {
+            $("#slide-"+event.target.id.substring(5)).hide();
+            $("#slide-"+(parseInt(event.target.id.substring(5),10)+1)).show("slide", { direction: "right" }, 500);
+            /*$(".slider-progress-dot-"+(parseInt(event.target.id.substring(5),10)+1)).css("background","#FFFFFF");*/
 
-            }
+        }
     });
 
     $('.comment-submit-btn').click(function() {
@@ -549,58 +551,92 @@ $(document).ready(function() {
         rate.sendComment($('#entered-comment').val());
 
         if ($('#regemail').val()){
-                accounts.sendEmail($('#regemail').val());
-            }
-            
+            accounts.sendEmail($('#regemail').val());
+        }
+
         utils.hideLoading('');
         //if ($('#regemail').val()){
 	//		accounts.sendEmail($('#regemail').val());
 	//	}
         //accounts.showRegister();
     });
-    $('.find-another-btn').click(function() {
-        // window.comment = $('#entered-comment').val();
-        // $('.new-comment').hide();
-        // $('.hybrid-comment').hide();
-        // $('.scorebox').hide();
-        // $('.menubar').hide();
-        // $('.instructions-light').hide();
-        // window.your_mug.transition().duration(2000).style("opacity", "0.4");
+    $('.find-another-btn').click(function(e) {
+
+        if (window.find_another >= 3){
+            document.getElementById("find-btn").innerHTML="New Comment";
+            document.getElementById("find-btn").setAttribute('class', 'new-comment-btn button-div-wide responsive-btn');
+
+        }
+
+        window.find_another = window.find_another + 1;
+        console.log(window.find_another);
+        console.log(document.getElementById("find-btn"));
+
+        utils.showLoading('Finding New Comment to Hybridize');
+        e.preventDefault();
+        e.stopPropagation();
+        var data1, comments,index=Math.floor(Math.random() * 7);
+
+        $.ajax({
+            async: true,
+            dataType: "json",
+            url: window.url_root + '/os/show/' + 1 + '/',
+            data: {'nonce': Math.random()},
+            success: function(d1) {
+                data1 = d1;
+                comments = data1['never_seen_comments'].comments;
+                // console.log(d1)
+                // for (var i = 0; i <= 6; i++) {
+                //     console.log(comments[i]['username'])
+                // }
+                while (document.getElementById("comment1").innerHTML==comments[index]['comment'] || document.getElementById("comment2").innerHTML==comments[index]['comment']){
+                    // console.log("HIHIHI");
+                    index= (index+1)%7
+                }
+                console.log("index: "+index);
+                document.getElementById("comment2").innerHTML=comments[index]['comment'];
+
+                document.getElementById("comment-textbox").value=document.getElementById("comment1").innerHTML+ " " + comments[index]['comment'];
+
+
+            }
+        });
+
+        // var content = '"'+commentData.comment+'"';
         window.prev_state = 'comment';
         //todo fix
         window.cur_state = 'hybrid-comment';
-        utils.showLoading('');
-        utils.hideLoading('');
+        utils.hideLoading(500);
         accounts.hideAll();
         window.scrollTo(0,0);
         $('.hybrid-comment').show();
-    
+
     });
     
     $('.comment-cancel-btn').click(function() {
-          $('.comment-input').hide();
-          $('.dialog-continue').show();
-          $('.scorebox').hide();
-          $('.menubar').hide();
-          window.prev_state = 'comment';
-          window.cur_state = 'continue';
+      $('.comment-input').hide();
+      $('.dialog-continue').show();
+      $('.scorebox').hide();
+      $('.menubar').hide();
+      window.prev_state = 'comment';
+      window.cur_state = 'continue';
         //$('.scorebox').show();
     });
 
     $('.button-div').on("touchstart",function(e){  
-    $(this).css("border","2px solid #FFFF99");
+        $(this).css("border","2px solid #FFFF99");
     });
 
     $('.button-div').on("touchend",function(e){  
-    $(this).css("border","1px solid #FFFFFF");
+        $(this).css("border","1px solid #FFFFFF");
     });
 
     $('.button-div').on("mousedown",function(e){  
-    $(this).css("border","2px solid #FFFF99");
+        $(this).css("border","2px solid #FFFF99");
     });
 
     $('.button-div').on("mouseup",function(e){  
-    $(this).css("border","1px solid #FFFFFF");
+        $(this).css("border","1px solid #FFFFFF");
     });
 
 

@@ -63,7 +63,8 @@ $(".slider-grade-bubble").on("click",function(e){
         /* Load more blooms if none left */
         try {
             if (window.blooms_list.length <= 2) {
-                console.log("here");
+                console.log("crc-transparent");
+                
                 var loading = "Loading More Spheres..."
                 if(window.lang == 'es')
                     loading = "Cargando más esferas..."

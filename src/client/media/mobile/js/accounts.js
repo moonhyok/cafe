@@ -563,7 +563,26 @@ $(document).ready(function() {
         $('.new-comment').show();
     });
 
-    $('.hybrid-comment-btn').click(function(){
+    $('.hybrid-comment-btn').click(function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        var data1, comments;
+
+        $.ajax({
+            async: true,
+            dataType: "json",
+            url: window.url_root + '/os/show/' + 1 + '/',
+            data: {'nonce': Math.random()},
+            success: function(d1) {
+                data1 = d1;
+                comments = data1['never_seen_comments'].comments;
+                document.getElementById("comment1").innerHTML=comments[0]['comment']
+                document.getElementById("comment2").innerHTML=comments[1]['comment']
+                document.getElementById("comment-textbox").innerHTML=comments[0]['comment']+ " " + comments[1]['comment']
+
+            }
+        });
+
         window.cur_state = 'hybrid-comment'
         window.prev_state = 'comment'
         accounts.hideAll();
