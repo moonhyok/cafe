@@ -576,15 +576,17 @@ $(document).ready(function() {
             success: function(d1) {
                 data1 = d1;
                 comments = data1['never_seen_comments'].comments;
-                document.getElementById("comment1").innerHTML=comments[0]['comment']
-                document.getElementById("comment2").innerHTML=comments[1]['comment']
-                document.getElementById("comment-textbox").innerHTML=comments[0]['comment']+ " " + comments[1]['comment']
+                // window.already_seen[0] = comments[0]['comment'];
+                // window.already_seen[1] = comments[1]['uid'];
+                document.getElementById("comment1").innerHTML=comments[0]['comment'];
+                document.getElementById("comment2").innerHTML=comments[1]['comment'];
+                document.getElementById("comment-textbox").innerHTML=comments[0]['comment']+ " \n\n" + comments[1]['comment'];
 
             }
         });
 
-        window.cur_state = 'hybrid-comment'
-        window.prev_state = 'comment'
+        window.cur_state = 'hybrid-comment';
+        window.prev_state = 'comment';
         accounts.hideAll();
         window.scrollTo(0,0);
         $('.hybrid-comment').show();

@@ -22,7 +22,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
   <link rel="icon" type="image/png" href="{{url_root}}/media/mobile/img/cafe/cafe6.png">
-
+ 
   <!-- CSS stylesheets -->
   <link rel='stylesheet' type='text/css' href='{{url_root}}/media/mobile/css/reset.css?nonce={{random_password}}' />
   <!--<link rel='stylesheet' type='text/css' href='{{url_root}}/media/mobile/bootstrap/css/bootstrap-responsive.min.css?nonce={{random_password}}' />-->
@@ -117,6 +117,8 @@
     window.lang = 'en'
 
     window.find_another = 0;
+
+    window.already_seen = [];
 
     window.conf = { 
      'RETURN_USER_FIRST_TIME': {{return_user_first_time}},

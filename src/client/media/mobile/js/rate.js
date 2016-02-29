@@ -562,15 +562,15 @@ $(document).ready(function() {
     });
     $('.find-another-btn').click(function(e) {
 
-        if (window.find_another >= 3){
-            document.getElementById("find-btn").innerHTML="New Comment";
-            document.getElementById("find-btn").setAttribute('class', 'new-comment-btn button-div-wide responsive-btn');
+        // if (window.find_another >= 3){
+        //     document.getElementById("find-btn").innerHTML="New Comment";
+        //     document.getElementById("find-btn").setAttribute('class', 'new-comment-btn button-div-wide responsive-btn');
 
-        }
+        // }
 
         window.find_another = window.find_another + 1;
-        console.log(window.find_another);
-        console.log(document.getElementById("find-btn"));
+        // console.log(window.find_another);
+        // console.log(document.getElementById("find-btn"));
 
         utils.showLoading('Finding New Comment to Hybridize');
         e.preventDefault();
@@ -590,13 +590,17 @@ $(document).ready(function() {
                 //     console.log(comments[i]['username'])
                 // }
                 while (document.getElementById("comment1").innerHTML==comments[index]['comment'] || document.getElementById("comment2").innerHTML==comments[index]['comment']){
-                    // console.log("HIHIHI");
                     index= (index+1)%7
                 }
+
                 console.log("index: "+index);
+                console.log(comments);
+                // if (window.find_another>3){
+                //     document.getElementById("find-btn").style.visibility = "hidden";
+                // }
                 document.getElementById("comment2").innerHTML=comments[index]['comment'];
 
-                document.getElementById("comment-textbox").value=document.getElementById("comment1").innerHTML+ " " + comments[index]['comment'];
+                document.getElementById("comment-textbox").value=document.getElementById("comment1").innerHTML+ " \n\n" + comments[index]['comment'];
 
 
             }

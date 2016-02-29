@@ -1486,7 +1486,7 @@ def os_show(request, os_id, disc_stmt_id = None):
               'finished_additional_questions': finished_additional_questions,
               'num_fully_rated': num_fully_rated,
               'adminpanel_uids': adminpanel_uids,
-          'never_seen_comments': os_never_seen_comments_json(request,os_id,disc_stmt_id),
+            'never_seen_comments': os_never_seen_comments_json(request,os_id,disc_stmt_id),
               'cur_comment_id': cur_comment_id,
 			  'date' : date_dict}
 
