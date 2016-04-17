@@ -1865,7 +1865,7 @@ def os_show(request, os_id, disc_stmt_id = None):
         else:
             cur_comment_id = -1 
     else:
-            cur_comment_id = -1    
+        cur_comment_id = -1    
 
 
     tag_objects = AdminCommentTag.objects.all()
@@ -1906,7 +1906,7 @@ def os_show(request, os_id, disc_stmt_id = None):
               'adminpanel_uids': adminpanel_uids,
               'never_seen_comments': os_never_seen_comments_json(request,os_id,disc_stmt_id),
               'cur_comment_id': cur_comment_id,
-			        'date' : date_dict,
+			  'date' : date_dict,
               'tags':tags}
 
 
