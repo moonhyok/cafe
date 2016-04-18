@@ -1718,7 +1718,7 @@ def os_show(request, os_id, disc_stmt_id = None):
     a system refresh of the space.
     
     """
-    result = {}
+  
 
     # Obtain a reference to the os
     try:
@@ -1821,95 +1821,95 @@ def os_show(request, os_id, disc_stmt_id = None):
             # Get num fully rated comments for current disc question
             num_fully_rated = 0
             num_fully_rated += len(get_fully_rated_responses(request, current_disc_stmt))
+    else:
+        ratings, comment, comment_score, normalized_score, settings_dict, reviewer_score, rated_by_ids, user_name, user_location, user_id, finished_additional_questions, num_fully_rated, prev_comments, suggestion_score_sum, comment_filter_len = [], [], [], [], {}, 0, [], "", "", 0, False, 0, [], 0, 0
+
+        user_data = {}          
+
+    # Get the filterable keys
+    filterable_keys = {}
+    for key in USER_DATA_KEYS:
+        if USER_DATA_KEYS[key]['filterable']:
+            filterable_keys[key] = USER_DATA_KEYS[key]['possible_values']
+    bg_points = []  
+    bg = request.REQUEST.get('background_points', False)
+    if bg:
+        bg_points = get_background_points(request, os, Settings.objects.int('NUM_BACKGROUND_POINTS'))
+
+    # Get adminpanel users
+    adminpanel_uids = []
+    for apu in AdminPanelUser.objects.all():
+        adminpanel_uids.append(apu.user.id)
+
+    # Total number of users
+    if Settings.objects.boolean('USE_ENTRY_CODES'):
+        num_users_total = EntryCode.objects.filter(first_login = False)
+        num_users_total = len(num_users_total)
+    else:
+        num_users_total = User.objects.count()
+
+    # Total number of responses (across all discussion statements)
+    total_ideas = User.objects.all().count()#DiscussionComment.objects.filter(is_current = True, opinion_space = os, blacklisted = False).count()
+    
+    # Log the user's loading of the space if logged in
+    # - For notifications, to track the last time the user was present
+    # - TODO: Save state of the user to enable replaying the space
+    if request.user.is_authenticated():
+        create_user_event_log(request, {"log_type": LogUserEvents.sys_load})
+
+    now = datetime.datetime.utcnow()
+    date_dict = {'month': now.month, 'day': now.day, 'year': now.year, 'hour': now.hour, 'minute': now.minute}
+    
+    if request.user.is_authenticated():
+        cur_comment_id = DiscussionComment.objects.filter(user = request.user, is_current = True).order_by('-created')
+        if len(cur_comment_id) > 0:
+            cur_comment_id = cur_comment_id[0].id
         else:
-            ratings, comment, comment_score, normalized_score, settings_dict, reviewer_score, rated_by_ids, user_name, user_location, user_id, finished_additional_questions, num_fully_rated, prev_comments, suggestion_score_sum = [], [], [], [], {}, 0, [], "", "", 0, False, 0, [], 0
-
-            user_data = {}          
-
-        # Get the filterable keys
-        filterable_keys = {}
-        for key in USER_DATA_KEYS:
-            if USER_DATA_KEYS[key]['filterable']:
-                filterable_keys[key] = USER_DATA_KEYS[key]['possible_values']
-        bg_points = []  
-        bg = request.REQUEST.get('background_points', False)
-        if bg:
-            bg_points = get_background_points(request, os, Settings.objects.int('NUM_BACKGROUND_POINTS'))
-
-        # Get adminpanel users
-        adminpanel_uids = []
-        for apu in AdminPanelUser.objects.all():
-            adminpanel_uids.append(apu.user.id)
-
-        # Total number of users
-        if Settings.objects.boolean('USE_ENTRY_CODES'):
-            num_users_total = EntryCode.objects.filter(first_login = False)
-            num_users_total = len(num_users_total)
-        else:
-            num_users_total = User.objects.count()
-
-        # Total number of responses (across all discussion statements)
-        total_ideas = User.objects.all().count()#DiscussionComment.objects.filter(is_current = True, opinion_space = os, blacklisted = False).count()
-        
-        # Log the user's loading of the space if logged in
-        # - For notifications, to track the last time the user was present
-        # - TODO: Save state of the user to enable replaying the space
-        if request.user.is_authenticated():
-            create_user_event_log(request, {"log_type": LogUserEvents.sys_load})
-
-        now = datetime.datetime.utcnow()
-        date_dict = {'month': now.month, 'day': now.day, 'year': now.year, 'hour': now.hour, 'minute': now.minute}
-        
-        if request.user.is_authenticated():
-            cur_comment_id = DiscussionComment.objects.filter(user = request.user, is_current = True).order_by('-created')
-            if len(cur_comment_id) > 0:
-                cur_comment_id = cur_comment_id[0].id
-            else:
-                cur_comment_id = -1 
-        else:
-            cur_comment_id = -1    
+            cur_comment_id = -1 
+    else:
+        cur_comment_id = -1    
 
 
-        tag_objects = AdminCommentTag.objects.all()
-        tags = []
-        #.values_list('id', 'statement', 'short_version'))
-        
-        for t in tag_objects:
-            tags.append((t.comment.user.id,t.tag))
-        # print "printing"
-        # print statements
-        # print "orintung"
-        # print tags
+    tag_objects = AdminCommentTag.objects.all()
+    tags = []
+    #.values_list('id', 'statement', 'short_version'))
+    
+    for t in tag_objects:
+        tags.append((t.comment.user.id,t.tag))
+    # print "printing"
+    # print statements
+    # print "orintung"
+    # print tags
 
-        result = {'name': name,
-                  'statements': statements,
-                  'discussion_statements': disc_stmt_objs,
-                  'eigenvectors': eigenvectors,
-                  'cur_user_ratings': ratings,
-                  'cur_user_comment': comment,
-                  'cur_user_comment_len': comment_filter_len,
-                  'prev_comments': prev_comments,
-                  'cur_user_settings': settings_dict,
-                  'cur_user_comment_score': comment_score,
-                  'cur_user_normalized_score': normalized_score,
-                  'cur_user_rater_score': reviewer_score,
-                  'cur_user_suggester_score':suggestion_score_sum,
-                  'cur_username':user_name,
-                  'cur_user_id':user_id,
-                  'cur_user_location': user_location,
-                  'is_user_authenticated': request.user.is_authenticated(),
-                  'num_users_total': num_users_total,
-                  'total_ideas': total_ideas,
-                  'user_data': user_data,
-                  'filterable_keys': filterable_keys,
-                  'background_points': bg_points,
-                  'finished_additional_questions': finished_additional_questions,
-                  'num_fully_rated': num_fully_rated,
-                  'adminpanel_uids': adminpanel_uids,
-                  'never_seen_comments': os_never_seen_comments_json(request,os_id,disc_stmt_id),
-                  'cur_comment_id': cur_comment_id,
-    			  'date' : date_dict,
-                  'tags':tags}
+    result = {'name': name,
+              'statements': statements,
+              'discussion_statements': disc_stmt_objs,
+              'eigenvectors': eigenvectors,
+              'cur_user_ratings': ratings,
+              'cur_user_comment': comment,
+              'cur_user_comment_len': comment_filter_len,
+              'prev_comments': prev_comments,
+              'cur_user_settings': settings_dict,
+              'cur_user_comment_score': comment_score,
+              'cur_user_normalized_score': normalized_score,
+              'cur_user_rater_score': reviewer_score,
+              'cur_user_suggester_score':suggestion_score_sum,
+              'cur_username':user_name,
+              'cur_user_id':user_id,
+              'cur_user_location': user_location,
+              'is_user_authenticated': request.user.is_authenticated(),
+              'num_users_total': num_users_total,
+              'total_ideas': total_ideas,
+              'user_data': user_data,
+              'filterable_keys': filterable_keys,
+              'background_points': bg_points,
+              'finished_additional_questions': finished_additional_questions,
+              'num_fully_rated': num_fully_rated,
+              'adminpanel_uids': adminpanel_uids,
+              'never_seen_comments': os_never_seen_comments_json(request,os_id,disc_stmt_id),
+              'cur_comment_id': cur_comment_id,
+			  'date' : date_dict,
+              'tags':tags}
 
 
     return json_result(result)
