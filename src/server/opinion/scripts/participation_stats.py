@@ -1,6 +1,7 @@
 import environ
 from opinion.opinion_core.models import *
 from opinion.includes.queryutils import *
+from opinion.settings_local import URL_ROOT
 import numpy as np
 import datetime
 import matplotlib.pyplot as plt
@@ -61,5 +62,5 @@ def participation():
 	ax.plot(x, comment_data)
 	ax.legend(["# Weekly Users", "# CF Ratings", "# Comments"], loc='upper right')
 	plt.show()
-	fig.savefig('/var/www/opinion/opinion.berkeley.edu/landing/m-cafe/ieor115-fa15/src/client/media/images/participation.png')
+	fig.savefig('/var/www/opinion/opinion.berkeley.edu/landing/m-cafe/ieor170-sp16/src/client/media/images/participation.png')
 

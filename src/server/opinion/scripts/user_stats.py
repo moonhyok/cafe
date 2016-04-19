@@ -1,3 +1,5 @@
+import matplotlib
+matplotlib.use('Agg') 
 import os
 import environ
 from opinion.includes.queryutils import *
@@ -22,13 +24,13 @@ def stats(user_set, question):
 	os_statements = OpinionSpaceStatement.objects.count()
 
 	#Stats page plots
-	weekly_data = [UserRating.objects.filter(user__in=user_set, created__lt=(start_date+datetime.timedelta(days=7)))]
+	weekly_data = [UserRating.objects.filter(user__in=user_set, created__lt=(start_date+datetime.timedelta(days=7))).exclude(rating=0.4)]
 	lower_bound = 7
 	upper_bound = 14
 	for i in range(num_weeks):
 		weekly_data.append(UserRating.objects.filter(user__in=user_set, \
 			created__gte=(start_date+datetime.timedelta(days=lower_bound)), \
-			created__lt=(start_date+datetime.timedelta(days=upper_bound))))
+			                                     created__lt=(start_date+datetime.timedelta(days=upper_bound))).exclude(rating=0.4))
 		lower_bound += 7
 		upper_bound += 7
 
@@ -90,7 +92,7 @@ def stats(user_set, question):
 	  	xlab('Week') + \
 	  	ylab('Mean Rating') + \
 	  	ggtitle(title)
-	  	ggsave(p, "/var/www/opinion/opinion.berkeley.edu/landing/m-cafe/ieor115-fa15/src/client/media/images/graph1.png", scale=0.75)
+	  	ggsave(p, "/var/www/opinion/opinion.berkeley.edu/landing/m-cafe/ieor170-sp16/src/client/media/images/graph1.png", scale=0.75)
 	elif question == 2:
 		useful = []
 		for i in range(num_weeks):
@@ -110,7 +112,7 @@ def stats(user_set, question):
 	  	xlab('Week') + \
 	  	ylab('Mean Rating') + \
 	  	ggtitle(title)
-	  	ggsave(p, "/var/www/opinion/opinion.berkeley.edu/landing/m-cafe/ieor115-fa15/src/client/media/images/graph2.png", scale=0.75)
+	  	ggsave(p, "/var/www/opinion/opinion.berkeley.edu/landing/m-cafe/ieor170-sp16/src/client/media/images/graph2.png", scale=0.75)
 	elif question == 3:
 		enthus = []
 		for i in range(num_weeks):
@@ -130,7 +132,7 @@ def stats(user_set, question):
 	  	xlab('Week') + \
 	  	ylab('Mean Rating') + \
 	  	ggtitle(title)
-	  	ggsave(p, "/var/www/opinion/opinion.berkeley.edu/landing/m-cafe/ieor115-fa15/src/client/media/images/graph3.png", scale=0.75)
+	  	ggsave(p, "/var/www/opinion/opinion.berkeley.edu/landing/m-cafe/ieor170-sp16/src/client/media/images/graph3.png", scale=0.75)
 	elif question == 4:
 		perf = []
 		for i in range(num_weeks):
@@ -150,7 +152,7 @@ def stats(user_set, question):
 	  	xlab('Week') + \
 	  	ylab('Mean Rating') + \
 	  	ggtitle(title)
-	  	ggsave(p, "/var/www/opinion/opinion.berkeley.edu/landing/m-cafe/ieor115-fa15/src/client/media/images/graph4.png", scale=0.75)
+	  	ggsave(p, "/var/www/opinion/opinion.berkeley.edu/landing/m-cafe/ieor170-sp16/src/client/media/images/graph4.png", scale=0.75)
 	else:
 		hw = []
 		for i in range(num_weeks):
@@ -170,7 +172,7 @@ def stats(user_set, question):
 	  	xlab('Week') + \
 	  	ylab('Mean Rating') + \
 	  	ggtitle(title)
-	  	ggsave(p, "/var/www/opinion/opinion.berkeley.edu/landing/m-cafe/ieor115-fa15/src/client/media/images/graph5.png", scale=0.75)
+	  	ggsave(p, "/var/www/opinion/opinion.berkeley.edu/landing/m-cafe/ieor170-sp16/src/client/media/images/graph5.png", scale=0.75)
 
 user_set = User.objects.filter(is_active=True)
 stats(user_set, 1)

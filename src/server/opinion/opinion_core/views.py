@@ -182,7 +182,7 @@ def mobile(request,entry_code=None):
     if external_count.count() > 0:
        num_users = external_count[0].value
     # print str(request.user.is_authenticated()) + " authenticated"
-    start_date = datetime.datetime(year=2015, month=8, day=17,hour=0, minute=0, second=0, microsecond=0)
+    start_date = datetime.datetime(year=2016, month=1, day=11,hour=0, minute=0, second=0, microsecond=0)
     end_date = start_date + datetime.timedelta(weeks=17)
    # except:
    #   start_date = os.created
@@ -399,7 +399,7 @@ def mcafe_stats(request):
   #    end_date = os.created + datetime.timedelta(weeks=17)
  #   start_date = datetime.date(year=2015, month=8, day=1)
  #   end_date = start_date + datetime.timedelta(weeks=17)
-    start_date = datetime.datetime(2015,8,17,0,0)
+    start_date = datetime.datetime(2016,1,11,0,0)
     end_date = start_date + datetime.timedelta(weeks=17)
   #  except:
   #    start_date = os.created
@@ -554,9 +554,10 @@ def get_rating(request):
 @instructor_required
 def get_summary(request):
         compare_weeks()
-	active_users = list(User.objects.filter(is_active = True))
 
-	total_users = User.objects.all().count()#total number of users
+	active_users = list(User.objects.filter(is_active = True))
+        num_weeks, start_date = calculate_week(active_users)
+	total_users = User.objects.filter(date_joined__gte=start_date).count()#total number of users
 	new_users = User.objects.filter(date_joined__gte=datetime.date.today()).count() #new users
 	new_logins_users = User.objects.filter(last_login__gte=datetime.date.today()).count() #activity
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -569,7 +570,7 @@ def get_summary(request):
 	week_logins_users = User.objects.filter(last_login__gte=start_of_week, last_login__lte=today).count()
 	total_visitors = LogUserEvents.objects.filter(details='welcome_first-time',log_type=5).count() #all site visitors
 	
-	total_comments = DiscussionComment.objects.filter(is_current=True).count()
+	total_comments = DiscussionComment.objects.all().count()
 #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	new_comments = DiscussionComment.objects.filter(created__gte=start_of_week, created__lte=today).count()
 #	total_insight = CommentRating.objects.all().count()
@@ -647,7 +648,7 @@ def get_summary(request):
 def get_comment(request):
 	return render_to_response('comment.html', context_instance = RequestContext(request))
 
-#@instructor_required
+@instructor_required
 def comments(request):
 	comments = DiscussionComment.objects.filter(is_current=True, blacklisted=False)
  	#l = getTopicFrequencyMap()
@@ -673,7 +674,7 @@ def account(request):
 	context_dict = {}
 	superuser = User.objects.filter(is_superuser=True)
 	#courses = [os.name for os in OpinionSpace.objects.filter(created_by=superuser[0])]
-	courses = ["IEOR 115"]
+	courses = ["IEOR 170"]
 	context_dict['courses'] = courses
 	return render_to_response('account.html', context_instance = RequestContext(request, context_dict))
 
@@ -1717,6 +1718,7 @@ def os_show(request, os_id, disc_stmt_id = None):
     a system refresh of the space.
     
     """
+  
 
     # Obtain a reference to the os
     try:
@@ -1756,70 +1758,71 @@ def os_show(request, os_id, disc_stmt_id = None):
 
     eigenvectors = tuple(os.eigenvectors.filter(is_current = True).values_list('eigenvector_number', 'coordinate_number', 'value')[:2*len(statements)])
     
+    
     if request.user.is_authenticated():
         ratings = tuple(os.ratings.filter(user = request.user, is_current = True).values_list('opinion_space_statement', 'rating')[:len(statements)])
 
-    comment_filter = DiscussionComment.objects.filter(user = request.user, is_current = True, discussion_statement = current_disc_stmt)
-    comment_filter_nc = DiscussionComment.objects.filter(user = request.user,discussion_statement = current_disc_stmt)
-    comment_filter_len = len(comment_filter_nc)
+        comment_filter = DiscussionComment.objects.filter(user = request.user, is_current = True, discussion_statement = current_disc_stmt)
+        comment_filter_nc = DiscussionComment.objects.filter(user = request.user,discussion_statement = current_disc_stmt)
+        comment_filter_len = len(comment_filter_nc)
 
-    comment = tuple(comment_filter.values_list('comment'))
-    comment_score = tuple([[0]])
-    
-    if len(comment_filter) > 0:
-        comment_score = tuple([[numpy.sum(CommentRating.objects.filter(comment__in=comment_filter_nc,is_current=True).values_list('rating'))]])
+        comment = tuple(comment_filter.values_list('comment'))
+        comment_score = tuple([[0]])
         
-    normalized_score = tuple(comment_filter.values_list('normalized_score_sum')[:1])
-    
-    # Get suggestion score
-    suggestion_score_object = SuggesterScore.objects.filter(user = request.user)
-    if suggestion_score_object.count() > 0:
-        suggestion_score_sum = suggestion_score_object[0].score_sum
-    else:
-        suggestion_score_sum = 0
-    
-    # Get previous revisions
-    prev_comments = get_revisions_and_suggestions(request.user, os, current_disc_stmt)
-    
-    # Get user settings
-    db_settings = UserSettings.objects.filter(user = request.user)
-    
-    settings_dict = {}
-    for setting in db_settings:
-        settings_dict[setting.key] = setting.value
-    
-    for key in USER_SETTINGS_META:
-        if not settings_dict.has_key(key):
-            settings_dict[key] = USER_SETTINGS_META[key]['default']
-    
-    # Get the reviewer score for the user
-    reviewer_score = ReviewerScore.objects.filter(user = request.user)
-    if len(reviewer_score) != 0:
-        reviewer_score = reviewer_score[0].reviewer_score
-    else:
-        reviewer_score = 0
-    
-    # Return the username, location, and id
-    user_name = request.user.username
-
-    try: #empty OS
-        user_location = UserDemographics.objects.filter(user = request.user).values_list('location')[:1][0][0]
-    except IndexError:
-        user_location = None
+        if len(comment_filter) > 0:
+            comment_score = tuple([[numpy.sum(CommentRating.objects.filter(comment__in=comment_filter_nc,is_current=True).values_list('rating'))]])
+            
+        normalized_score = tuple(comment_filter.values_list('normalized_score_sum')[:1])
         
-    user_id = request.user.id
-    user_data = get_user_data(request.user)
+        # Get suggestion score
+        suggestion_score_object = SuggesterScore.objects.filter(user = request.user)
+        if suggestion_score_object.count() > 0:
+            suggestion_score_sum = suggestion_score_object[0].score_sum
+        else:
+            suggestion_score_sum = 0
+        
+        # Get previous revisions
+        prev_comments = get_revisions_and_suggestions(request.user, os, current_disc_stmt)
+        
+        # Get user settings
+        db_settings = UserSettings.objects.filter(user = request.user)
+        
+        settings_dict = {}
+        for setting in db_settings:
+            settings_dict[setting.key] = setting.value
+        
+        for key in USER_SETTINGS_META:
+            if not settings_dict.has_key(key):
+                settings_dict[key] = USER_SETTINGS_META[key]['default']
+        
+        # Get the reviewer score for the user
+        reviewer_score = ReviewerScore.objects.filter(user = request.user)
+        if len(reviewer_score) != 0:
+            reviewer_score = reviewer_score[0].reviewer_score
+        else:
+            reviewer_score = 0
+        
+        # Return the username, location, and id
+        user_name = request.user.username
 
-    # Return if additional questions are finished
-    finished_additional_questions = False
-    if HAVE_ADDITIONAL_QUESTIONS:
-        finished_additional_questions = additional_questions_finished(request.user)
+        try: #empty OS
+            user_location = UserDemographics.objects.filter(user = request.user).values_list('location')[:1][0][0]
+        except IndexError:
+            user_location = None
+            
+        user_id = request.user.id
+        user_data = get_user_data(request.user)
 
-        # Get num fully rated comments for current disc question
-        num_fully_rated = 0
-        num_fully_rated += len(get_fully_rated_responses(request, current_disc_stmt))
+        # Return if additional questions are finished
+        finished_additional_questions = False
+        if HAVE_ADDITIONAL_QUESTIONS:
+            finished_additional_questions = additional_questions_finished(request.user)
+
+            # Get num fully rated comments for current disc question
+            num_fully_rated = 0
+            num_fully_rated += len(get_fully_rated_responses(request, current_disc_stmt))
     else:
-        ratings, comment, comment_score, normalized_score, settings_dict, reviewer_score, rated_by_ids, user_name, user_location, user_id, finished_additional_questions, num_fully_rated, prev_comments, suggestion_score_sum = [], [], [], [], {}, 0, [], "", "", 0, False, 0, [], 0
+        ratings, comment, comment_score, normalized_score, settings_dict, reviewer_score, rated_by_ids, user_name, user_location, user_id, finished_additional_questions, num_fully_rated, prev_comments, suggestion_score_sum, comment_filter_len = [], [], [], [], {}, 0, [], "", "", 0, False, 0, [], 0, 0
 
         user_data = {}          
 
@@ -1864,7 +1867,7 @@ def os_show(request, os_id, disc_stmt_id = None):
         else:
             cur_comment_id = -1 
     else:
-            cur_comment_id = -1    
+        cur_comment_id = -1    
 
 
     tag_objects = AdminCommentTag.objects.all()
@@ -1905,7 +1908,7 @@ def os_show(request, os_id, disc_stmt_id = None):
               'adminpanel_uids': adminpanel_uids,
               'never_seen_comments': os_never_seen_comments_json(request,os_id,disc_stmt_id),
               'cur_comment_id': cur_comment_id,
-			        'date' : date_dict,
+			  'date' : date_dict,
               'tags':tags}
 
 

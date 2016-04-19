@@ -1279,7 +1279,7 @@ $(document).ready(function() {
         $('.logout').show();
         e.preventDefault();
         e.stopPropagation();
-	    window.history.pushState("", "", '/ieor115/');
+	    window.history.pushState("", "", '/m-cafe/ieor170-sp16/');
 
         $.ajax({
             url: window.url_root + '/accountsjson/logout/',

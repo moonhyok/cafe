@@ -8,19 +8,19 @@ from django.template.loader import render_to_string
 from django.core.mail import send_mail
 import time
 
-user_date = datetime.date(2015,8,26)
-subject = "Thank you for signing up on M-CAFE for IEOR 115!"
+user_date = datetime.date(2016,1,11)
+subject = "Thank you for signing up on M-CAFE for IEOR 170!"
 mcafe_from = 'MCAFE+noreply@heidegger.ieor.berkeley.edu'
 
 text="""
-Dear IEOR 115 student,
+Dear IEOR 170 student,
 
 Thank you for signing up on M-CAFE, a novel platform that provides timely feedback to the instructors on how your course can be improved! 
 
 We encourage you to check in weekly to leave feedback on course aspects and propose ideas on how to improve IEOR 115. Your weekly feedback is valuable to your instructors and classmates!
 
 Just visit:  
-http://opinion.berkeley.edu/ieor115/
+http://opinion.berkeley.edu/m-cafe/ieor170-sp16/
 
 For more information, please visit:
 m-cafe.org

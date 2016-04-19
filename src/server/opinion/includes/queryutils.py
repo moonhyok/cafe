@@ -2284,7 +2284,7 @@ def calculate_week(user_set):
 	# 		start_date = user.date_joined
         today = datetime.datetime.today()
 
-	start_date = datetime.datetime(2015, 8, 21, 0, 0, 0)
+	start_date = datetime.datetime(2016, 1, 17, 0, 0, 0)
 
 	delta = today.date() - start_date.date()
 	num_weeks = delta.days/7 + 1
@@ -2753,11 +2753,11 @@ def get_course_trend(user_set, start_date, is_self):
     if is_self == 1:
         weekly_data =  [UserRating.objects.filter(user=user_set, created__gte=start_date,created__lt=(start_date+datetime.timedelta(days=7)))]
     else:
-        weekly_data = [UserRating.objects.filter(created__gte=test_date,created__lt=(start_date+datetime.timedelta(days=7))).exclude(rating=0.4)]
+        weekly_data = [UserRating.objects.filter(created__gte=test_date,created__lt=(start_date+datetime.timedelta(days=7)))]
 
     less_than = 7
     greater_than = 14
-    for i in range(num_weeks-1):
+    for i in range(num_weeks):
         if is_self == 1:
             weekly_data.append(UserRating.objects.filter(user=user_set, created__gte=(start_date+datetime.timedelta(days=less_than)),created__lt=(start_date+datetime.timedelta(days=greater_than)))) # doesnot seem to work!
         else:
@@ -2776,12 +2776,15 @@ def get_course_trend(user_set, start_date, is_self):
         result.append([])
         temps = []
         for i in range(num_weeks):
-            if (weekly_array[i].size == 0) or ((weekly_array[i].size % 5) != 0):
+            if (weekly_array[i].size == 0) or (is_self ==1 and ((weekly_array[i].size % 5) != 0)):
                 to_append = ([0.4] * os_statements)[k]
             else: 
                 df = DataFrame(weekly_array[i], columns=names)
                 df.rating = df.rating.astype(float)
-                to_append = df.groupby('opinion_space_statement')['rating'].mean()[k]
+                try:
+                        to_append =  df.groupby('opinion_space_statement')['rating'].mean()[k]
+                except:
+                        to_append = 0.4
             temps.append(to_append)
         result[k].append(temps)
     if is_self == 1:
