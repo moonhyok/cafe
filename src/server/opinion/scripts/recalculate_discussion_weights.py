@@ -4,6 +4,7 @@ import environ
 import numpy
 from opinion.opinion_core.models import *
 from opinion.includes.queryutils import *
+from opinion.scripts.moderator_assist import comment_corr
 from math import *
 
 
@@ -44,14 +45,18 @@ def main():
 		if num_ratings > max_weight:
 			max_weight = num_ratings
 
+	corr_dict = comment_corr(comments)
 	for comment in comments:
-	    disaster_boost = 0
+	    # disaster_boost = 0
 
-	    if 'earthquake' in comment.comment or 'safety' in comment.comment or 'nuclear' in comment.comment or 'sea level' in comment.comment or 'climate' in comment.comment:
-	        disaster_boost = 0
+	    # if 'earthquake' in comment.comment or 'safety' in comment.comment or 'nuclear' in comment.comment or 'sea level' in comment.comment or 'climate' in comment.comment:
+	    #     disaster_boost = 0
+	    comment_tag = AdminCommentTag.objects.filter(comment=c).tag
+	    corr = corr_dict[comment_tag]
 
 		num_ratings = comment_id_to_num_ratings_map[comment.id]
-		weight = max_weight - num_ratings + disaster_boost
+		#weight = max_weight - num_ratings + disaster_boost
+		weight = corr
 		print "Comment %s has %s ratings => query_weight = %s" % (comment.id,num_ratings, weight)
 		comment.query_weight = weight
 		comment.save()
