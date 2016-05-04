@@ -568,36 +568,37 @@ $(document).ready(function() {
 
         // }
 
-        window.find_another = window.find_another + 1;
+        
         // console.log(window.find_another);
         // console.log(document.getElementById("find-btn"));
 
         utils.showLoading('Finding New Comment to Hybridize');
         e.preventDefault();
         e.stopPropagation();
-        var data1, comments,index=Math.floor(Math.random() * 7);
+        var data1, comments, index = Math.floor(Math.random() * 7);
 
         $.ajax({
             async: true,
             dataType: "json",
-            url: window.url_root + '/os/show/' + 1 + '/',
+            url: window.url_root + '/os/all/' + 1 + '/',
             data: {'nonce': Math.random()},
             success: function(d1) {
                 data1 = d1;
-                comments = data1['never_seen_comments'].comments;
+                comments = data1['comments'];
                 // console.log(d1)
                 // for (var i = 0; i <= 6; i++) {
                 //     console.log(comments[i]['username'])
                 // }
-                while (document.getElementById("comment1").innerHTML==comments[index]['comment'] || document.getElementById("comment2").innerHTML==comments[index]['comment']){
-                    index= (index+1)%7
-                }
+                // while (document.getElementById("comment1").innerHTML==comments[index]['comment'] || document.getElementById("comment2").innerHTML==comments[index]['comment']){
+                //     index= (index+1);
+                // }
+                index = window.find_another;
 
                 console.log("index: "+index);
                 console.log(comments);
-                // if (window.find_another>3){
-                //     document.getElementById("find-btn").style.visibility = "hidden";
-                // }
+                if (window.find_another>=5){
+                    document.getElementById("rebute-btn").style.visibility = "visible";
+                }
                 document.getElementById("comment2").innerHTML=comments[index]['comment'];
 
                 document.getElementById("comment-textbox").value=document.getElementById("comment1").innerHTML+ " \n\n" + comments[index]['comment'];
@@ -605,6 +606,7 @@ $(document).ready(function() {
 
             }
         });
+        window.find_another = window.find_another + 1;
 
         // var content = '"'+commentData.comment+'"';
         window.prev_state = 'comment';

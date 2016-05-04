@@ -742,7 +742,7 @@ table.pretty caption {
 
 	}
 
-	.my-comment, .stats, .help, .leaderboard, .comment-input, .new-comment, .hybrid-comment{
+	.my-comment, .stats, .help, .leaderboard, .comment-input, .new-comment, .hybrid-comment, .rebute-comment{
     	 /* piggy backing the the new divs here for now,  .stats, .help*/
     		display: none;
     		position: fixed;

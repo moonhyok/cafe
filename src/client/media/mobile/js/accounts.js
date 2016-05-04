@@ -567,29 +567,64 @@ $(document).ready(function() {
         e.preventDefault();
         e.stopPropagation();
         var data1, comments;
+        document.getElementById("rebute-btn").style.visibility = "hidden";
 
         $.ajax({
             async: true,
             dataType: "json",
-            url: window.url_root + '/os/show/' + 1 + '/',
+            url: window.url_root + '/os/all/' + 1 + '/',
             data: {'nonce': Math.random()},
             success: function(d1) {
                 data1 = d1;
-                comments = data1['never_seen_comments'].comments;
+                comments = data1['comments'];
                 // window.already_seen[0] = comments[0]['comment'];
                 // window.already_seen[1] = comments[1]['uid'];
                 document.getElementById("comment1").innerHTML=comments[0]['comment'];
-                document.getElementById("comment2").innerHTML=comments[1]['comment'];
+                document.getElementById("comment2").innerHTML=comments[window.find_another]['comment'];
                 document.getElementById("comment-textbox").innerHTML=comments[0]['comment']+ " \n\n" + comments[1]['comment'];
+                // window.find_another += 1;
 
             }
         });
+
 
         window.cur_state = 'hybrid-comment';
         window.prev_state = 'comment';
         accounts.hideAll();
         window.scrollTo(0,0);
         $('.hybrid-comment').show();
+    });
+
+    $('.rebute-comment-btn').click(function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        var data1, comments;
+
+        $.ajax({
+            async: true,
+            dataType: "json",
+            url: window.url_root + '/os/all/' + 1 + '/',
+            data: {'nonce': Math.random()},
+            success: function(d1) {
+                data1 = d1;
+                comments = data1['comments'];
+                // window.already_seen[0] = comments[0]['comment'];
+                // window.already_seen[1] = comments[1]['uid'];
+                length = comments.length;
+                i = Math.round(Math.random()*100);
+                document.getElementById("rebute-comment").innerHTML=comments[i%length]['comment'];
+                document.getElementById("rebute-comment-textbox").innerHTML=comments[i%length]['comment'];
+                // window.find_another += 1;
+
+            }
+        });
+
+
+        window.cur_state = 'rebute-comment';
+        window.prev_state = 'hybrid-comment';
+        accounts.hideAll();
+        window.scrollTo(0,0);
+        $('.rebute-comment').show();
     });
 
     $('.login-btn').click(function() {
